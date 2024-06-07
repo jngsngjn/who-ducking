@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'hello'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Framework
+    implementation 'org.springframework:spring-webmvc:6.1.6'
+    implementation 'org.springframework:spring-context-support:6.1.6'
+    implementation 'org.springframework.data:spring-data-jpa:3.2.4'
+
+    // Servlet
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+    // Thymeleaf
+    implementation 'org.thymeleaf:thymeleaf-spring6:3.1.1.RELEASE'
+    implementation 'org.thymeleaf:thymeleaf:3.1.1.RELEASE'
+
+    // Thymeleaf Security
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
+
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'ch.qos.logback:logback-classic:1.4.7'
+
+    // JPA and Hibernate
+    implementation 'org.springframework:spring-orm:6.1.6'
+    implementation 'org.hibernate:hibernate-core:6.2.2.Final'
+
+    // HikariCP
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+
+    // MySQL
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // Jakarta Bean Validation API
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+    // Hibernate Validator (Bean Validation 구현체)
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+
+    // Spring Security
+    implementation 'org.springframework.security:spring-security-web:6.2.4'
+    implementation 'org.springframework.security:spring-security-config:6.2.4'
+
+    // Spring Security OAuth2
+    implementation 'org.springframework.security:spring-security-oauth2-core:6.2.4'
+    implementation 'org.springframework.security:spring-security-oauth2-client:6.2.4'
+    implementation 'org.springframework.security:spring-security-oauth2-jose:6.2.4'
+
+    // Jackson 의존성 추가
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.1'
+
+    // Test
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}

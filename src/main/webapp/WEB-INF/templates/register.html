@@ -1,0 +1,134 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/register.css">
+  <title>회원가입</title>
+</head>
+
+<body>
+  <div class="signup-container">
+    <div class="header">
+      <img class="logo" src="/png/whoduck1.png" />
+      <div class="menu">
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="검색" />
+          <img class="search-icon" src="/png/Vector.png" />
+        </div>
+        <nav class="header-bar">
+          <p>장르</p>
+          <p>커뮤니티</p>
+          <p>소식</p>
+          <p>놀이터</p>
+          <p>알림</p>
+        </nav>
+        <div class="alarm-check">5</div>
+      </div>
+      <img class="profile" src="/png/mini.png" />
+    </div>
+
+    <form action="/register" method="post">
+    <div class="form-background">
+      <div class="form-wrapper">
+        <div class="form-content">
+          <div class="form-header">회원가입</div>
+          <div class="form-group">
+            <label for="email" class="form-label">이메일</label>
+            <div class="input-wrapper">
+              <label id="email" th:text="${email}"></label>
+              <img class="icon" src="/png/lock.png" />
+            </div>
+            <div class="form-check">
+              <label for="email-subscription" class="form-check-label">이메일 수신 여부</label>
+              <input type="checkbox" id="email-subscription" name="emailConsent" class="form-check-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nickname" class="form-label">닉네임</label>
+            <div class="input-wrapper">
+              <input type="text" id="nickname" class="form-input" name="nickname" placeholder="닉네임을 입력해주세요" />
+            </div>
+            <div class="form-help-text">(2~12 글자 이내)</div>
+            <button class="form-btn">중복확인</button>
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">전화번호</label>
+            <div class="input-wrapper">
+              <input type="text" id="phone" class="form-input" name="phone" placeholder="전화번호를 입력해주세요" />
+            </div>
+            <button class="form-btn">인증하기</button>
+          </div>
+          <div class="form-group">
+            <label for="verification-code" class="form-label">인증번호</label>
+            <div class="input-wrapper">
+              <input type="text" id="verification-code" class="form-input" placeholder="인증번호를 입력해주세요" />
+            </div>
+            <button class="form-btn">인증확인</button>
+          </div>
+          <div class="form-group">
+            <label for="referrer" class="form-label">추천인 닉네임</label>
+            <div class="input-wrapper">
+              <input type="text" id="referrer" class="form-input" placeholder="추천인 닉네임을 입력해주세요" />
+            </div>
+            <div class="form-help-text">(선택)</div>
+            <button class="form-btn">추천인 확인</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label">성별</label>
+            <div class="form-radio-group">
+              <label for="male" class="form-radio-label">
+                <input type="radio" id="male" name="gender" value="MALE" class="form-radio-input" /> 남
+              </label>
+              <label for="female" class="form-radio-label">
+                <input type="radio" id="female" name="gender" value="FEMALE" class="form-radio-input" /> 여
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" id="terms" class="form-check-input" />
+              <label for="terms" class="form-check-label">페이지 이용약관</label>
+              <a href="#" class="form-link">자세히 보기</a>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" id="privacy" class="form-check-input" />
+              <label for="privacy" class="form-check-label">개인정보 수집 및 이용</label>
+              <a href="#" class="form-link">자세히 보기</a>
+            </div>
+          </div>
+        </div>
+        <div class="form-footer">
+          <button class="submit-button">다음</button>
+        </div>
+      </div>
+    </div>
+    </form>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <img class="footer-logo" src="/png/logoblack1.png" />
+        <div class="footer-links">
+          <a href="#" class="footer-link">이용약관</a>
+          <a href="#" class="footer-link">개인정보처리방침</a>
+          <a href="#" class="footer-link">공지사항</a>
+          <a href="#" class="footer-link">자주 묻는 질문</a>
+        </div>
+        <div class="footer-copyright">
+          COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
+        </div>
+        <div class="footer-team">
+          <span>정성진</span>
+          <span>노승빈</span>
+          <span>김승민</span>
+          <span>서준명</span>
+          <span>김수정</span>
+          <span>안성민</span>
+        </div>
+        <img class="github-icon" src="/png/github1.png" />
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
