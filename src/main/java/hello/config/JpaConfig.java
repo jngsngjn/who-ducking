@@ -61,6 +61,7 @@ public class JpaConfig {
         return transactionManager;
     }
 
+    // 절대 수정 금지!
     private Properties jpaProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
