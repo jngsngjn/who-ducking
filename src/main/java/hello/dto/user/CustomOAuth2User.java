@@ -1,5 +1,6 @@
-package hello.dto.oauth2;
+package hello.dto.user;
 
+import hello.dto.oauth2.OAuth2Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;

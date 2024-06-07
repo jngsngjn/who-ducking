@@ -1,6 +1,6 @@
 package hello.controller;
 
-import hello.dto.oauth2.CustomOAuth2User;
+import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.RegisterDTO;
 import hello.service.RegisterService;
 import lombok.RequiredArgsConstructor;

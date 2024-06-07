@@ -1,6 +1,6 @@
 package hello.service;
 
-import hello.dto.oauth2.CustomOAuth2User;
+import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.RegisterDTO;
 import hello.entity.user.User;
 import hello.repository.UserRepository;
