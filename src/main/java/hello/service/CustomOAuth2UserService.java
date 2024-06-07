@@ -1,6 +1,7 @@
 package hello.service;
 
 import hello.dto.oauth2.*;
+import hello.dto.user.CustomOAuth2User;
 import hello.entity.user.User;
 import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
