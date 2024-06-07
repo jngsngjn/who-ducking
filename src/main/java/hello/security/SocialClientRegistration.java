@@ -1,4 +1,4 @@
-package hello.oauth2;
+package hello.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;

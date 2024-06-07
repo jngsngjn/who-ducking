@@ -1,8 +1,11 @@
 package hello.service;
 
-import hello.dto.oauth2.*;
+import hello.dto.oauth2.GoogleResponse;
+import hello.dto.oauth2.KakaoResponse;
+import hello.dto.oauth2.NaverResponse;
+import hello.dto.oauth2.OAuth2Response;
 import hello.dto.user.CustomOAuth2User;
-import hello.entity.user.User;
+import hello.security.exception.AdditionalInfoRequiredException;
 import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,31 +38,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         } else if (registrationId.equals("kakao")){
             oAuth2Response = new KakaoResponse(oAuth2User.getAttributes());
-
         } else {
             return null;
         }
 
         String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
-        String role = "ROLE_GUEST";
-        User existData = userRepository.findByUsername(username);
-
-        if (existData == null) {
-            User user = new User();
-
-            user.setUsername(username);
-            user.setEmail(oAuth2Response.getEmail());
-            user.setRole(role);
-
-            userRepository.save(user);
-        } else {
-            existData.setUsername(username);
-            existData.setEmail(oAuth2Response.getEmail());
-            role = existData.getRole();
-
-            userRepository.save(existData);
+        // 처음 로그인한 회원 -> 회원가입 폼으로 리다이렉트
+        if (userRepository.findByUsername(username) == null) {
+            throw new AdditionalInfoRequiredException(oAuth2Response);
         }
 
+        String role = oAuth2User.getAuthorities().iterator().next().getAuthority();
         return new CustomOAuth2User(oAuth2Response, role);
     }
 }
