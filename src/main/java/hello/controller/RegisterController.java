@@ -34,7 +34,7 @@ public class RegisterController {
     // AJAX
     @ResponseBody
     @PostMapping("/check-duplicate-nickname")
-    public boolean checkDuplicateId(@RequestParam("nickname") String nickname) {
+    public boolean checkDuplicateNickname(@RequestParam("nickname") String nickname) {
         return !registerService.isDuplicateNickname(nickname);
     }
 
@@ -49,11 +49,14 @@ public class RegisterController {
     @PostMapping("/verify-code")
     public ResponseEntity<Boolean> verifyCode(@RequestBody SmsCodeVerificationRequest request) {
         boolean isValid = codeStore.verifyCode(request.getPhone(), request.getCode());
+        if (isValid) {
+            codeStore.removeCode(request.getPhone());
+        }
         return new ResponseEntity<>(isValid, HttpStatus.OK);
     }
 
     @PostMapping
-    public String register(HttpSession session, @ModelAttribute RegisterDTO registerDTO) {
+    public String registerBasic(HttpSession session, @ModelAttribute RegisterDTO registerDTO) {
         OAuth2Response oauth2Response = (OAuth2Response) session.getAttribute("oauth2Response");
         registerService.registerProcess(oauth2Response, registerDTO);
         return "redirect:/";

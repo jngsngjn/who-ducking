@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
-    private final CustomClientRegistration clientRegistrationRepo;
+    private final CustomClientRegistration clientRegistration;
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Bean
@@ -34,7 +34,7 @@ public class SecurityConfig {
 
         http.oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
-                        .clientRegistrationRepository(clientRegistrationRepo.clientRegistrationRepository())
+                        .clientRegistrationRepository(clientRegistration.clientRegistrationRepository())
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService))
                         .failureHandler(customAuthenticationFailureHandler))
