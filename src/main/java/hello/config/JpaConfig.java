@@ -2,6 +2,7 @@ package hello.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,15 @@ import java.util.Properties;
 @ComponentScan(basePackages = "hello")
 public class JpaConfig {
 
+    @Value("${mysqlUrl}")
+    private String mysqlUrl;
+
+    @Value("${username}")
+    private String username;
+
+    @Value("${password}")
+    private String password;
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -38,9 +48,9 @@ public class JpaConfig {
     public DataSource dataSource() {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/who_ducking");
-        hikariConfig.setUsername("root");
-        hikariConfig.setPassword("1030");
+        hikariConfig.setJdbcUrl(mysqlUrl);
+        hikariConfig.setUsername(username);
+        hikariConfig.setPassword(password);
         return new HikariDataSource(hikariConfig);
     }
 
