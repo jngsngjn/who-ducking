@@ -64,6 +64,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.1'
 
+    // sms service
+    implementation 'net.nurigo:sdk:4.3.0'
+
     // Test
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

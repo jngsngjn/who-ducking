@@ -1,4 +1,4 @@
-package hello.oauth2;
+package hello.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -7,15 +7,15 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 
 @Configuration
 @RequiredArgsConstructor
-public class CustomClientRegistrationRepo {
+public class CustomClientRegistration {
 
     private final SocialClientRegistration socialClientRegistration;
 
     public ClientRegistrationRepository clientRegistrationRepository() {
 
         return new InMemoryClientRegistrationRepository(
-                socialClientRegistration.naverClientRegistration(),
                 socialClientRegistration.googleClientRegistration(),
+                socialClientRegistration.naverClientRegistration(),
                 socialClientRegistration.kakaoClientRegistration());
     }
 }

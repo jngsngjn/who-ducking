@@ -1,7 +1,7 @@
 package hello.config;
 
-import hello.oauth2.CustomClientRegistrationRepo;
-import hello.oauth2.CustomSuccessHandler;
+import hello.security.handler.CustomAuthenticationFailureHandler;
+import hello.security.CustomClientRegistration;
 import hello.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,14 +17,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
-    private final CustomClientRegistrationRepo clientRegistrationRepo;
-    private final CustomSuccessHandler customSuccessHandler;
+    private final CustomClientRegistration clientRegistrationRepo;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/oauth2/**", "/login", "/register").permitAll()
-                .requestMatchers("/css/**", "/jpg/**", "/png/**").permitAll()
+                .requestMatchers("/", "/oauth2/**", "/login", "/register/**").permitAll()
+                .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
         );
 
@@ -37,7 +37,7 @@ public class SecurityConfig {
                         .clientRegistrationRepository(clientRegistrationRepo.clientRegistrationRepository())
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService))
-                        .successHandler(customSuccessHandler))
+                        .failureHandler(customAuthenticationFailureHandler))
                 .logout(logout -> logout.logoutSuccessUrl("/"));
 
         return http.build();

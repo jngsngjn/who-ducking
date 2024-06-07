@@ -10,4 +10,5 @@ public class RegisterDTO {
     private String nickname;
     private String phone;
     private Gender gender;
+    private String recommender;
 }
