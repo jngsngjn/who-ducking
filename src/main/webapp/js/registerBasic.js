@@ -47,6 +47,7 @@ function changeNickname() {
 
 // 문자 인증 시작
 let verifyPhone = false;
+
 function sendCode() {
     const phone = $('#phone').val();
     console.log("Phone number to send:", phone);
@@ -56,13 +57,16 @@ function sendCode() {
         url: "/register/send-code",
         contentType: "text/plain;charset=UTF-8",
         data: phone,
-        success: function() {
-            alert("인증 코드가 발송되었습니다.");
-            verifyPhone = false;
+        success: function(result) {
+            if (result.isDuplicate) {
+                const socialType = result.socialType;
+                alert("이미 " + socialType + " 계정으로 가입되어 있습니다.");
+            } else {
+                alert("인증 코드가 발송되었습니다.");
+            }
         },
         error: function() {
             alert("인증 코드 발송에 실패했습니다.");
-            verifyPhone = false;
         }
     });
 }
@@ -79,6 +83,10 @@ function checkCode() {
         success: function(response) {
             if (response === true) {
                 alert("인증 성공!");
+                $("#phone").prop("readonly", true);
+                $("#verification-code").prop("readonly", true);
+                $("#sendCodeButton").hide();
+                $("#checkCodeButton").hide();
                 verifyPhone = true;
             } else {
                 alert("인증 실패. 다시 시도해 주세요.");

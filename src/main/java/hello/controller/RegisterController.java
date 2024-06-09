@@ -1,7 +1,7 @@
 package hello.controller;
 
 import hello.dto.oauth2.OAuth2Response;
-import hello.dto.user.RegisterDTO;
+import hello.dto.user.RegisterBasicDTO;
 import hello.dto.user.SmsCodeVerificationRequest;
 import hello.repository.CodeStore;
 import hello.service.RegisterService;
@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/register")
@@ -39,10 +42,16 @@ public class RegisterController {
     }
 
     // AJAX
+    @ResponseBody
     @PostMapping("/send-code")
-    public ResponseEntity<Void> sendCode(@RequestBody String phone) {
-        smsService.sendCode(phone);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Map<String, Object> sendCode(@RequestBody String phone) {
+        Map<String, Object> result = registerService.isDuplicatePhone(phone);
+
+        if (!((boolean) result.get("isDuplicate"))) {
+            smsService.sendCode(phone);
+        }
+
+        return result;
     }
 
     // AJAX
@@ -55,10 +64,28 @@ public class RegisterController {
         return new ResponseEntity<>(isValid, HttpStatus.OK);
     }
 
+    @PostMapping("/genre")
+    public String genrePage(HttpSession session, @ModelAttribute RegisterBasicDTO registerBasicDTO) {
+        session.setAttribute("registerBasicDTO", registerBasicDTO);
+        return "redirect:/register/genre";
+    }
+
+    @GetMapping("/genre")
+    public String genrePage() {
+        return "registerGenre";
+    }
+
     @PostMapping
-    public String registerBasic(HttpSession session, @ModelAttribute RegisterDTO registerDTO) {
+    public String registerGenre(HttpSession session, @RequestParam("genres") List<String> genres) {
+
         OAuth2Response oauth2Response = (OAuth2Response) session.getAttribute("oauth2Response");
-        registerService.registerProcess(oauth2Response, registerDTO);
+        RegisterBasicDTO registerBasicDTO = (RegisterBasicDTO) session.getAttribute("registerBasicDTO");
+
+        registerService.registerProcess(oauth2Response, registerBasicDTO, genres);
+
+        // 세션 삭제
+        session.removeAttribute("oauth2Response");
+        session.removeAttribute("registerBasicDTO");
         return "redirect:/";
     }
 }

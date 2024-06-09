@@ -4,7 +4,7 @@ import hello.entity.user.Gender;
 import lombok.Data;
 
 @Data
-public class RegisterDTO {
+public class RegisterBasicDTO {
 
     private boolean emailConsent;
     private String nickname;

@@ -1,6 +1,7 @@
 package hello.config;
 
 import hello.entity.genre.Genre;
+import hello.entity.user.Level;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,20 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private final LevelRepository levelRepository;
     private final GenreRepository genreRepository;
 
-    // 초기 데이터 삽입 시 활용
+    private boolean initialized = false;
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        synchronized (this) {
+            if (!initialized) {
+                initializeData();
+                initialized = true;
+            }
+        }
+    }
+
+    private void initializeData() {
         if (genreRepository.count() == 0) {
             List<Genre> genres = new ArrayList<>();
             genres.add(new Genre("액션"));
@@ -53,9 +64,24 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
             genres.add(new Genre("메카"));
             genres.add(new Genre("능력자"));
             genres.add(new Genre("쇼타"));
-            genres.add(new Genre("이세계"));
 
             genreRepository.saveAll(genres);
+        }
+
+        if (levelRepository.count() == 0) {
+            List<Level> levels = new ArrayList<>();
+            levels.add(new Level(0, ""));
+            levels.add(new Level(20, ""));
+            levels.add(new Level(40, ""));
+            levels.add(new Level(100, ""));
+            levels.add(new Level(240, ""));
+            levels.add(new Level(580, ""));
+            levels.add(new Level(1300, ""));
+            levels.add(new Level(3200, ""));
+            levels.add(new Level(8700, ""));
+            levels.add(new Level(20000, ""));
+
+            levelRepository.saveAll(levels);
         }
     }
 }
