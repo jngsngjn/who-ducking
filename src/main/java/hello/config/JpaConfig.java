@@ -31,6 +31,9 @@ public class JpaConfig {
     @Value("${password}")
     private String password;
 
+    @Value("${ddl-auto}")
+    private String ddlAuto;
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -64,8 +67,7 @@ public class JpaConfig {
     // 절대 수정 금지!
     private Properties jpaProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", ddlAuto);
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");
         return properties;

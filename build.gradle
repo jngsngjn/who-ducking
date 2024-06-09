@@ -13,9 +13,8 @@ repositories {
 
 dependencies {
     // Spring Framework
-    implementation 'org.springframework:spring-webmvc:6.1.6'
-    implementation 'org.springframework:spring-context-support:6.1.6'
-    implementation 'org.springframework.data:spring-data-jpa:3.2.4'
+    implementation 'org.springframework:spring-webmvc:6.1.8'
+    implementation 'org.springframework:spring-context-support:6.1.8'
 
     // Servlet
     implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
@@ -31,8 +30,11 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.4.7'
 
     // JPA and Hibernate
-    implementation 'org.springframework:spring-orm:6.1.6'
-    implementation 'org.hibernate:hibernate-core:6.2.2.Final'
+//    implementation 'org.hibernate:hibernate-core:6.2.2.Final'
+    implementation 'org.hibernate:hibernate-core:6.5.2.Final'
+//    implementation 'org.springframework:spring-orm:6.1.6'
+    implementation 'org.springframework:spring-orm:6.1.8'
+    implementation 'org.springframework.data:spring-data-jpa:3.2.4'
 
     // HikariCP
     implementation 'com.zaxxer:HikariCP:5.0.1'
@@ -50,14 +52,13 @@ dependencies {
     // Hibernate Validator (Bean Validation 구현체)
     implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
 
-    // Spring Security
-    implementation 'org.springframework.security:spring-security-web:6.2.4'
-    implementation 'org.springframework.security:spring-security-config:6.2.4'
+    implementation 'org.springframework.security:spring-security-web:6.3.0'
+    implementation 'org.springframework.security:spring-security-config:6.3.0'
 
     // Spring Security OAuth2
-    implementation 'org.springframework.security:spring-security-oauth2-core:6.2.4'
-    implementation 'org.springframework.security:spring-security-oauth2-client:6.2.4'
-    implementation 'org.springframework.security:spring-security-oauth2-jose:6.2.4'
+    implementation 'org.springframework.security:spring-security-oauth2-core:6.3.0'
+    implementation 'org.springframework.security:spring-security-oauth2-client:6.3.0'
+    implementation 'org.springframework.security:spring-security-oauth2-jose:6.3.0'
 
     // Jackson 의존성 추가
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'

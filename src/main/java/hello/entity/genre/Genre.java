@@ -18,4 +18,11 @@ public class Genre {
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserGenre> userGenres = new HashSet<>();
+
+    public Genre() {
+    }
+
+    public Genre(String name) {
+        this.name = name;
+    }
 }
