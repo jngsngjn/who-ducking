@@ -27,6 +27,12 @@ public class Board {
     @Lob
     private String content;
 
+    @Column(name = "image_name")
+    private String imageName;
+
+    @Column(name = "image_path")
+    private String imagePath;
+
     @CreationTimestamp
     @Column(name = "write_date")
     private LocalDateTime writeDate;
