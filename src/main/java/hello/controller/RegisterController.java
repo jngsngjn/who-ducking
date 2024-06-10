@@ -28,6 +28,8 @@ public class RegisterController {
     private final RegisterService registerService;
     private final CodeStore codeStore;
 
+    private static final int MAX_GENRES = 5;
+
     @GetMapping("/basic")
     public String registerBasicForm(HttpSession session, Model model) {
         OAuth2Response oauth2Response = (OAuth2Response) session.getAttribute("oauth2Response");
@@ -83,17 +85,20 @@ public class RegisterController {
     public String genrePage(HttpSession session, @Validated @ModelAttribute RegisterBasicDTO registerBasicDTO,
                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> System.out.println(error.toString()));
             return "registerBasic";
         }
 
         session.setAttribute("registerBasicDTO", registerBasicDTO);
+        session.setAttribute("registerBasic", true);
         return "redirect:/register/genre";
     }
 
     @GetMapping("/genre")
     public String genrePage(HttpSession session) {
         Boolean registering = (Boolean) session.getAttribute("registering");
-        if (registering == null || !registering) {
+        Boolean registerBasic = (Boolean) session.getAttribute("registerBasic");
+        if (registering == null || !registering || registerBasic == null || !registerBasic) {
             return "redirect:/";
         }
 
@@ -103,7 +108,7 @@ public class RegisterController {
     @PostMapping
     public String registerGenre(HttpSession session, @RequestParam("genres") List<String> genres) {
 
-        if (genres.size() > 5) {
+        if (genres.size() > MAX_GENRES) {
             return "registerGenre";
         }
 
@@ -116,6 +121,7 @@ public class RegisterController {
         session.removeAttribute("oauth2Response");
         session.removeAttribute("registerBasicDTO");
         session.removeAttribute("registering");
+        session.removeAttribute("registerBasic");
         return "redirect:/";
     }
 }
