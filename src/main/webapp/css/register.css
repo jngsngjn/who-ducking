@@ -275,3 +275,15 @@ body {
   width: 20px;
   margin-top: 5px;
 }
+
+/* 스핀 버튼 숨기기 (웹킷 브라우저) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 스핀 버튼 숨기기 (IE 브라우저) */
+input[type=number] {
+  -moz-appearance: textfield;
+}

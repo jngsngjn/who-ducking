@@ -10,7 +10,18 @@ function checkDuplicate() {
         return;
     }
 
-    // 정규식 검사 추가해야 함
+    if (nickname.length < 2 || nickname.length > 12) {
+        alert("닉네임은 2자에서 12자 사이여야 합니다.");
+        duplicateChecked = false;
+        return;
+    }
+
+    const regex = /^[가-힣a-zA-Z0-9]+$/;
+    if (!regex.test(nickname)) {
+        alert("닉네임은 한글, 영어, 숫자만 사용할 수 있습니다.");
+        duplicateChecked = false;
+        return;
+    }
 
     $.ajax({
         url: "/register/check-duplicate-nickname",
@@ -48,9 +59,26 @@ function changeNickname() {
 // 문자 인증 시작
 let verifyPhone = false;
 
+$(document).ready(function() {
+    $("#phone").on("input", function() {
+        let currentValue = $(this).val();
+
+        // 값이 12자를 초과하면 초과된 부분을 잘라냄
+        if (currentValue.length > 11) {
+            $(this).val(currentValue.slice(0, 11));
+        }
+    });
+});
+
 function sendCode() {
-    const phone = $('#phone').val();
-    console.log("Phone number to send:", phone);
+    const phone = $('#phone').val().trim();
+
+    const regex = /^010\d{8}$/;
+    if (!regex.test(phone)) {
+        alert("전화번호 형식이 올바르지 않습니다.");
+        verifyPhone = false;
+        return;
+    }
 
     $.ajax({
         type: "POST",
@@ -61,12 +89,15 @@ function sendCode() {
             if (result.isDuplicate) {
                 const socialType = result.socialType;
                 alert("이미 " + socialType + " 계정으로 가입되어 있습니다.");
+                verifyPhone = false;
             } else {
                 alert("인증 코드가 발송되었습니다.");
+                verifyPhone = false;
             }
         },
         error: function() {
             alert("인증 코드 발송에 실패했습니다.");
+            verifyPhone = false;
         }
     });
 }
@@ -102,6 +133,36 @@ function checkCode() {
 }
 // 문자 인증 끝
 
+// 추천인 검증 시작
+let recommenderChecked = false;
+
+function checkRecommender() {
+    const referrer = $('#referrer').val().trim();
+
+    if (referrer === "") {
+        alert("추천인의 닉네임을 입력해 주세요.");
+        return;
+    }
+
+    $.ajax({
+        url: '/register/check-recommender',
+        type: 'POST',
+        contentType: "text/plain;charset=UTF-8",
+        data: referrer,
+        success: function(response) {
+            if (response) {
+                alert("추천인 닉네임이 확인되었습니다.");
+                recommenderChecked = true;
+            } else {
+                alert("존재하지 않는 회원입니다.");
+                recommenderChecked = false;
+            }
+        }
+    });
+}
+
+// 추천인 검증 끝
+
 // 폼 제출 검증
 function validateForm() {
     if (!duplicateChecked) {
@@ -111,6 +172,12 @@ function validateForm() {
 
     if (!verifyPhone) {
         alert("전화번호 인증을 완료해 주세요.");
+        return false;
+    }
+
+    const referrer = $('#referrer').val().trim();
+    if (referrer !== "" && !recommenderChecked) {
+        alert("추천인 확인을 완료해 주세요.");
         return false;
     }
 

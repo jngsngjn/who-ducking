@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -64,8 +66,19 @@ public class RegisterController {
         return new ResponseEntity<>(isValid, HttpStatus.OK);
     }
 
+    @PostMapping("/check-recommender")
+    public ResponseEntity<Boolean> checkRecommender(@RequestBody String referrer) {
+        boolean result = registerService.recommenderCheck(referrer);
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping("/genre")
-    public String genrePage(HttpSession session, @ModelAttribute RegisterBasicDTO registerBasicDTO) {
+    public String genrePage(HttpSession session, @Validated @ModelAttribute RegisterBasicDTO registerBasicDTO,
+                            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "registerBasic";
+        }
+
         session.setAttribute("registerBasicDTO", registerBasicDTO);
         return "redirect:/register/genre";
     }

@@ -90,4 +90,8 @@ public class RegisterService {
         result.put("isDuplicate", false);
         return result;
     }
+
+    public boolean recommenderCheck(String nickname) {
+        return userRepository.existsByNickname(nickname);
+    }
 }
