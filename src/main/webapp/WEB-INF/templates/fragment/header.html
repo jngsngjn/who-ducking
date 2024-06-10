@@ -1,0 +1,27 @@
+<!-- templates/fragment/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="header">
+    <img class="logo" src="/png/whoduck1.png" />
+    <div class="menu">
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="검색" />
+            <img class="search-icon" src="/png/Vector.png" />
+        </div>
+        <nav class="header-bar">
+            <p>장르</p>
+            <p>커뮤니티</p>
+            <p>소식</p>
+            <p>놀이터</p>
+            <p>알림</p>
+        </nav>
+        <div class="alarm-check">5</div>
+    </div>
+    <img class="profile" src="/png/mini.png" />
+</div>
+</body>
+</html>

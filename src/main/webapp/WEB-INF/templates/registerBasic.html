@@ -9,24 +9,7 @@
 
 <body>
   <div class="signup-container">
-    <div class="header">
-      <img class="logo" src="/png/whoduck1.png" />
-      <div class="menu">
-        <div class="search-bar">
-          <input type="text" class="search-input" placeholder="검색" />
-          <img class="search-icon" src="/png/Vector.png" />
-        </div>
-        <nav class="header-bar">
-          <p>장르</p>
-          <p>커뮤니티</p>
-          <p>소식</p>
-          <p>놀이터</p>
-          <p>알림</p>
-        </nav>
-        <div class="alarm-check">5</div>
-      </div>
-      <img class="profile" src="/png/mini.png" />
-    </div>
+    <div th:insert="~{fragment/header :: header}"></div>
 
     <form action="/register/genre" method="post" onsubmit="return validateForm()">
     <div class="form-background">
@@ -108,29 +91,7 @@
     </div>
     </form>
 
-    <footer class="footer">
-      <div class="footer-content">
-        <img class="footer-logo" src="/png/logoblack1.png" />
-        <div class="footer-links">
-          <a href="#" class="footer-link">이용약관</a>
-          <a href="#" class="footer-link">개인정보처리방침</a>
-          <a href="#" class="footer-link">공지사항</a>
-          <a href="#" class="footer-link">자주 묻는 질문</a>
-        </div>
-        <div class="footer-copyright">
-          COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
-        </div>
-        <div class="footer-team">
-          <span>정성진</span>
-          <span>노승빈</span>
-          <span>김승민</span>
-          <span>서준명</span>
-          <span>김수정</span>
-          <span>안성민</span>
-        </div>
-        <img class="github-icon" src="/png/github1.png" />
-      </div>
-    </footer>
+    <div th:insert="~{fragment/footer :: footer}"></div>
   </div>
 </body>
 
