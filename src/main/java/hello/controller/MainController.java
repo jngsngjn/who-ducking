@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class MainController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
 
     @GetMapping("/")

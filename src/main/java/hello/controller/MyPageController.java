@@ -1,6 +1,7 @@
 package hello.controller;
 
 import hello.dto.user.CustomOAuth2User;
+import hello.entity.genre.UserGenre;
 import hello.entity.user.User;
 import hello.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.Set;
 
 @Controller
 @RequestMapping("/myPage")
@@ -26,15 +29,17 @@ public class MyPageController {
     }
 
     @GetMapping
-    public String myPage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
-        User loginUser = userService.getLoginUserDetail(user);
+    public String myPage(@ModelAttribute("loginUser") User loginUser, Model model) {
         model.addAttribute("loginUser", loginUser);
         return "myPage";
     }
 
     @GetMapping("/{userId}/edit")
-    public String editPage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
-        User loginUser = userService.getLoginUserDetail(user);
+    public String editPage(@ModelAttribute("loginUser") User loginUser, Model model) {
+        Set<UserGenre> userGenres = loginUser.getUserGenres();
+        for (UserGenre userGenre : userGenres) {
+            System.out.println("userGenre = " + userGenre.getGenre().getName());
+        }
         model.addAttribute("loginUser", loginUser);
         return "editPage";
     }

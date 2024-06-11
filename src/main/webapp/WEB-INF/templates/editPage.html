@@ -9,13 +9,30 @@
 <h2>프로필 수정</h2>
 <form action="/edit" method="post">
     <div>
+        <label th:text="${loginUser.getNickname()}">닉네임</label> <br>
+    </div>
+
+    <div>
         <label th:text="${loginUser.getEmail()}">이메일</label> <br>
         <label for="email-subscription">이메일 수신 여부</label>
         <input type="checkbox" id="email-subscription" name="emailConsent" th:checked="${loginUser.emailConsent}"/>
     </div>
+
     <div>
         <label th:text="${loginUser.phone}"></label>
     </div>
+
+    <div>
+        <label for="male">
+            <input type="radio" id="male" name="gender" value="MALE"
+                   th:checked="${loginUser.gender == T(hello.entity.user.Gender).MALE}"/> 남
+        </label>
+        <label for="female">
+            <input type="radio" id="female" name="gender" value="FEMALE"
+                   th:checked="${loginUser.gender == T(hello.entity.user.Gender).FEMALE}"/> 여
+        </label>
+    </div>
+
 </form>
 
 <div th:insert="~{fragment/footer :: footer}"></div>
