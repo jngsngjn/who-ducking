@@ -13,7 +13,7 @@ public class ImageController {
 
     private static final String IMAGE_BASE_PATH = "/Users/jeongseongjin/server/level/"; // 기본 경로
 
-    @GetMapping("/images/{levelImagePath}")
+    @GetMapping("/image/{levelImagePath}")
     public Resource downloadImage(@PathVariable("levelImagePath") String levelImagePath) throws MalformedURLException {
         System.out.println("fileName = " + levelImagePath);
         return new UrlResource("file:" + IMAGE_BASE_PATH + levelImagePath);
