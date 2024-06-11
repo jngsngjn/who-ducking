@@ -24,7 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/oauth2/**", "/login", "/register/**").permitAll()
-                .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**").permitAll()
+                .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
         );
 
@@ -34,6 +34,7 @@ public class SecurityConfig {
 
         http.oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
+                        .defaultSuccessUrl("/")
                         .clientRegistrationRepository(clientRegistration.clientRegistrationRepository())
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService))

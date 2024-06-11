@@ -5,7 +5,11 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<h1>메인</h1>
+
+<th:block th:if="${nickname != null}">
+    <p>안녕하세요, <span th:text="${nickname}"></span>님!</p>
+</th:block>
+
 <a href="/login">로그인</a>
 <div th:insert="~{fragment/footer :: footer}"></div>
 </body>
