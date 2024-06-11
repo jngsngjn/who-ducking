@@ -15,7 +15,7 @@
     <p th:text="|레벨 : ${loginUser.getLevel().getId()}|"></p>
     <p th:text="|현재 경험치 : ${loginUser.getCurrentExp()}|"></p>
     <p th:text="|총 경험치 : ${loginUser.getLevel().getMaxExp()}|"></p>
-    <a th:href="@{/{userId}/edit(userId=${loginUser.getId()})}">프로필 수정</a>
+    <a th:href="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}">프로필 수정</a>
 </div>
 
 <div>

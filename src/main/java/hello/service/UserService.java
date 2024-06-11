@@ -17,4 +17,5 @@ public class UserService {
     public User getLoginUserDetail(CustomOAuth2User user) {
         return userRepository.findByUsername(user.getUsername());
     }
+
 }
