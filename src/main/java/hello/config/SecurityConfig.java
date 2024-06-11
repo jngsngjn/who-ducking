@@ -25,6 +25,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/oauth2/**", "/login", "/register/**").permitAll()
                 .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**").permitAll()
+                .requestMatchers("/board").hasRole("ROLE_USER")
                 .anyRequest().authenticated()
         );
 

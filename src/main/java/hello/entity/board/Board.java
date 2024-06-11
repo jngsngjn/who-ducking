@@ -49,4 +49,10 @@ public class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
+
+    @Column(name = "image_name")
+    private String imageName;
+
+    @Column(name = "image_path")
+    private String imagePath;
 }
