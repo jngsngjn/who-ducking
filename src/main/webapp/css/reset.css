@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%; /*10px*/
+    scroll-behavior: smooth;
+}
+body {
+    background: #fff;
+}
+ol,
+ul,
+li {
+    list-style: none;
+}
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
