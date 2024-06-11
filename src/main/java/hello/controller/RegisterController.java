@@ -31,8 +31,15 @@ public class RegisterController {
     @GetMapping("/basic")
     public String registerBasicForm(HttpSession session, Model model) {
         OAuth2Response oauth2Response = (OAuth2Response) session.getAttribute("oauth2Response");
+
+        if (oauth2Response == null) {
+            return "redirect:/";
+        }
+
         String email = oauth2Response.getEmail();
         model.addAttribute("email", email);
+
+        session.setAttribute("registering", true);
         return "registerBasic";
     }
 
@@ -84,12 +91,21 @@ public class RegisterController {
     }
 
     @GetMapping("/genre")
-    public String genrePage() {
+    public String genrePage(HttpSession session) {
+        Boolean registering = (Boolean) session.getAttribute("registering");
+        if (registering == null || !registering) {
+            return "redirect:/";
+        }
+
         return "registerGenre";
     }
 
     @PostMapping
     public String registerGenre(HttpSession session, @RequestParam("genres") List<String> genres) {
+
+        if (genres.size() > 5) {
+            return "registerGenre";
+        }
 
         OAuth2Response oauth2Response = (OAuth2Response) session.getAttribute("oauth2Response");
         RegisterBasicDTO registerBasicDTO = (RegisterBasicDTO) session.getAttribute("registerBasicDTO");
@@ -99,6 +115,7 @@ public class RegisterController {
         // 세션 삭제
         session.removeAttribute("oauth2Response");
         session.removeAttribute("registerBasicDTO");
+        session.removeAttribute("registering");
         return "redirect:/";
     }
 }
