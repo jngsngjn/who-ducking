@@ -1,0 +1,116 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Review Board</title>
+    <link rel="stylesheet" href="/css/reviewWrite.css">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+<div class="review-body">
+    <h1 class="page-title">리뷰 게시판</h1>
+    <div class="ani-container">
+        <img src="/images/ani-poster.png" alt="애니 포스터" class="ani-img" />
+        <div class="ani-info-box">
+            <div class="title-bar">
+                <h3 class="ani-title-box">
+                    <span class="ani-title">나의 히어로 아카데미아</span>
+                    <span class="is-complete">완결</span>
+                </h3>
+                <img src="/images/age-15.png" alt="age" class="grade" />
+            </div>
+            <ul class="tag-list">
+                <li class="tag-name">개그</li>
+                <li class="tag-name">일상</li>
+            </ul>
+            <div class="ani-info-box2">
+                <p class="author-name"><b>호리코시 코헤이</b></p>
+                <p class="broad-date">2014.07.21</p>
+            </div>
+            <div class="synopsis">
+                무개성은 무조건적으로 차별대우를 받거나 아니면 비밀리에 죽이는
+                시대에 무개성으로 태어나는 비극을 겪는 미도리야는 자신이 동경하는
+                히어로 올마이트를 만나지만 그에게 "히어로의 삶은 현실과 맞물리지
+                않아."라고 충고를 듣지만 친구를 구하기 위해 달려든 것에 감명받은
+                올마이트에게서 힘을 전수받으며 이야기가 시작된다.
+            </div>
+            <div class="score-box">
+                <i class="fa-solid fa-star"></i>
+                <div class="score"><span class="ani-score"> 4.7 / 5.0</span></div>
+            </div>
+        </div>
+    </div>
+    <p class="review-count"><i class="fa-solid fa-comment"></i> 1,580</p>
+    <form action="#" method="post" class="write-box">
+        <div class="row-box">
+            <h3 class="review-user" readonly>오덕이는 애니덕후</h3>
+            <div class="row-box">
+                <p>스포일러 포함</p>
+                <input type="checkbox" id="check-spoiler" class="check-spoiler" />
+                <label for="check-spoiler" class="check-switch">
+                    <span class="change-check-btn"></span>
+                </label>
+            </div>
+        </div>
+        <textarea
+                id="review-content"
+                placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징게 대상이 될 수 있습니다."
+                rows="5"
+                cols="50"
+        ></textarea>
+        <span class="letter-count">0/500</span>
+        <div class="row-box review-write-box">
+            <div>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i><span class="score">5 </span>
+            </div>
+            <input type="submit" value="등록" class="submit-btn" />
+        </div>
+    </form>
+
+    <div class="order-box">
+        <div class="row-box">
+            <button id="recent" class="order-btn">최신 순</button>
+            <button id="like" class="order-btn">좋아요 순</button>
+        </div>
+        <div class="row-box">
+            <p>스포일러 포함</p>
+            <input type="checkbox" id="show-spoiler" class="check-spoiler" />
+            <label for="show-spoiler" class="check-switch">
+                <span class="change-check-btn"></span>
+            </label>
+        </div>
+    </div>
+    <div class="review-list">
+        <div class="row-box">
+            <p class="review-writer">
+                유저이름 <span class="best-icon">BEST</span>
+            </p>
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        <p class="review-comment">
+            최고의 스포츠 애니! 하이큐 벌써 4번째 정주행 중 아직 못 본 사람은 꼭
+            보세요! 후회하지 않아요!
+        </p>
+        <div class="row-box">
+            <p class="write-date">2024.06.10 15:30:18</p>
+            <div>
+                <button id="recommend-like" class="recommend-btn">
+                    <i class="fa-regular fa-thumbs-up"></i> 3,000
+                </button>
+                <button id="recommend-dislike" class="recommend-btn">
+                    <i class="fa-regular fa-thumbs-down"></i> 7
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="/images/r-saotome.png" alt="left-img" class="left-img" />
+<img src="/images/l-umeco.png" alt="right-img" class="right-img" />
+<div th:insert="~{fragment/footer :: footer}"></div>
+</body>
+</html>
