@@ -3,9 +3,7 @@ package hello.entity.user;
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
 import hello.entity.board.Comment;
-import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
-import hello.entity.genre.UserGenreId;
 import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
 import hello.entity.review.Review;
@@ -30,19 +28,23 @@ public class User {
     @Column(name = "social_type")
     private String socialType;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String nickname;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Gender gender;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String phone;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(name = "email_consent")
+    @Column(name = "email_consent", nullable = false)
     private Boolean emailConsent;
 
     @Embedded
@@ -64,10 +66,11 @@ public class User {
     @Column(name = "last_draw_date")
     private LocalDate lastDrawDate;
 
+    @Column(nullable = false)
     private String role;
 
     @ManyToOne
-    @JoinColumn(name = "level_id")
+    @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
     @Column(name = "current_exp")
@@ -93,16 +96,4 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
-
-    public void addGenre(Genre genre) {
-        UserGenre userGenre = new UserGenre(this, genre);
-        this.userGenres.add(userGenre);
-        genre.getUserGenres().add(userGenre);
-    }
-
-    public void removeGenre(Genre genre) {
-        UserGenreId userGenreId = new UserGenreId(this.getId(), genre.getId());
-        userGenres.removeIf(userGenre -> userGenre.getId().equals(userGenreId));
-        genre.getUserGenres().removeIf(userGenre -> userGenre.getId().equals(userGenreId));
-    }
 }
