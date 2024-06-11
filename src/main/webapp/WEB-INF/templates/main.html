@@ -8,9 +8,13 @@
 
 <th:block th:if="${nickname != null}">
     <p>안녕하세요, <span th:text="${nickname}"></span>님!</p>
+    <a href="/logout">로그아웃</a>
 </th:block>
 
-<a href="/login">로그인</a>
+<th:block th:if="${nickname == null}">
+    <a href="/login">로그인</a>
+</th:block>
+
 <div th:insert="~{fragment/footer :: footer}"></div>
 </body>
 </html>

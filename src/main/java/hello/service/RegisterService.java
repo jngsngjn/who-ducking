@@ -7,24 +7,23 @@ import hello.entity.genre.UserGenre;
 import hello.entity.user.User;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
-import hello.repository.UserGenreRepository;
 import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RegisterService {
 
     private final UserRepository userRepository;
     private final GenreRepository genreRepository;
-    private final UserGenreRepository userGenreRepository;
     private final LevelRepository levelRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
@@ -50,16 +49,14 @@ public class RegisterService {
         String recommender = registerBasicDTO.getRecommender();
         recommenderProcess(user, recommender);
 
-        userRepository.save(user);
-
         // 선택한 장르 저장
         List<Genre> allGenres = genreRepository.findByNameIn(genres);
+        allGenres.forEach(genre -> {
+            UserGenre userGenre = new UserGenre(user, genre);
+            user.getUserGenres().add(userGenre);
+        });
 
-        List<UserGenre> userGenres = allGenres.stream()
-                .map(genre -> new UserGenre(user, genre))
-                .collect(Collectors.toList());
-
-        userGenreRepository.saveAll(userGenres);
+        userRepository.save(user);
     }
 
     public boolean isDuplicateNickname(String nickname) {

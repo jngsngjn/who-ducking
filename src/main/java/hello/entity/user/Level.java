@@ -14,14 +14,14 @@ public class Level {
     @Column(name = "max_exp")
     private int maxExp;
 
-    @Column(name = "image_path")
-    private String imagePath;
+    @Column(name = "image_name")
+    private String imageName;
 
     public Level() {
     }
 
-    public Level(int maxExp, String imagePath) {
+    public Level(int maxExp, String imageName) {
         this.maxExp = maxExp;
-        this.imagePath = imagePath;
+        this.imageName = imageName;
     }
 }
