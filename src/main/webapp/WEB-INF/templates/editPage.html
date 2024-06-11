@@ -1,0 +1,18 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+
+<h2>프로필 수정</h2>
+<form action="/edit" method="post">
+    <div>
+        <img th:src="|/image/${loginUser.getLevel().getImageName()}|"/> <br>
+    </div>
+</form>
+
+<div th:insert="~{fragment/footer :: footer}"></div>
+</body>
+</html>

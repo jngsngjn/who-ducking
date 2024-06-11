@@ -1,0 +1,44 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+
+<div>
+    <h2>내 프로필</h2>
+    <img th:src="|/image/${loginUser.getLevel().getImageName()}|"/> <br>
+    <p th:text="|닉네임 : ${loginUser.getNickname()}|"></p>
+    <p th:text="|포인트 : ${loginUser.getPoint()}|"></p>
+    <p th:text="|레벨 : ${loginUser.getLevel().getId()}|"></p>
+    <p th:text="|현재 경험치 : ${loginUser.getCurrentExp()}|"></p>
+    <p th:text="|총 경험치 : ${loginUser.getLevel().getMaxExp()}|"></p>
+    <a th:href="@{/{userId}/edit(userId=${loginUser.getId()})}">프로필 수정</a>
+</div>
+
+<div>
+    <h2>나의 글 목록</h2>
+    <a href="#">나의 리뷰</a> <br>
+    <a href="#">나의 게시글</a> <br>
+    <a href="#">나의 건의 내역</a> <br>
+    <a href="#">나의 북마크</a>
+</div>
+
+<div>
+    <h2>이벤트</h2>
+    <a href="#">럭키 드로우 응모 내역</a> <br>
+    <a href="#">팝업 스토어 북마크</a>
+</div>
+
+<div>
+    <h2>고객센터</h2>
+    <a href="#">공지사항</a> <br>
+    <a href="#">자주 묻는 질문</a> <br>
+    <a href="#">회원 탈퇴</a>
+</div>
+
+<div th:insert="~{fragment/footer :: footer}"></div>
+</body>
+</html>
