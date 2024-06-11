@@ -25,11 +25,11 @@
 
 
 
-        <img class="logo" src="../png/logo.png" />
+        <img class="logo" src="../images/logo.png" />
         <div class="menu">
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="검색" />
-                <img class="search-icon" src="../png/search-icon.png" />
+                <img class="search-icon" src="../images/search-icon.png" />
             </div>
             <nav class="header-bar">
                 <p>장르</p>
@@ -40,7 +40,9 @@
             </nav>
             <div class="alarm-check">5</div>
         </div>
-        <img class="profile" src="/png/10duck.png" />
+        <div th:if="${imageName != null}">
+            <img class="profile" th:src="@{/image/{imageName}(imageName=${imageName})}"/>
+        </div>
     </header>
 </body>
 

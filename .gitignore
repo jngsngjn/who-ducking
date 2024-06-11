@@ -8,6 +8,7 @@ application.properties
 logback.xml
 src/test
 memo.txt
+conf
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
