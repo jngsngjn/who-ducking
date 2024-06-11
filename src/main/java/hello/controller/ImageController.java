@@ -1,5 +1,6 @@
 package hello.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +12,11 @@ import java.net.MalformedURLException;
 @RestController
 public class ImageController {
 
-    private static final String IMAGE_BASE_PATH = "/Users/jeongseongjin/server/level/"; // 기본 경로
+    @Value("${levelPath}")
+    private String path;
 
-    @GetMapping("/image/{levelImagePath}")
-    public Resource downloadImage(@PathVariable("levelImagePath") String levelImagePath) throws MalformedURLException {
-        System.out.println("fileName = " + levelImagePath);
-        return new UrlResource("file:" + IMAGE_BASE_PATH + levelImagePath);
+    @GetMapping("/image/{imageName}")
+    public Resource renderImage(@PathVariable("imageName") String imageName) throws MalformedURLException {
+        return new UrlResource("file:" + path + imageName);
     }
 }

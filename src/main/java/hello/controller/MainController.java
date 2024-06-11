@@ -23,7 +23,9 @@ public class MainController {
 
             if (findUser != null) {
                 String nickname = findUser.getNickname();
+                String imageName = findUser.getLevel().getImageName();
                 model.addAttribute("nickname", nickname);
+                model.addAttribute("imageName", imageName);
             }
         }
         return "main";

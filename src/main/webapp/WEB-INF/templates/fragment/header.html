@@ -40,7 +40,9 @@
             </nav>
             <div class="alarm-check">5</div>
         </div>
-        <img class="profile" src="/images/10duck.png" />
+        <div th:if="${imageName != null}">
+            <img class="profile" th:src="@{/image/{imageName}(imageName=${imageName})}"/>
+        </div>
     </header>
 </body>
 
