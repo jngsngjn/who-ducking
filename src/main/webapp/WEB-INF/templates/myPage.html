@@ -15,7 +15,14 @@
             <div class="profile-box">
                 <div class="profile-info">
                     <div class="profile-image">
-                        <img class="profile-img" th:src="@{/image/{imageName}(imageName=${loginUser.getLevel().getImageName()})}" alt="Profile Image"/>
+                        <img class="profile-img"
+                             th:if="${loginUser.profileImage != null}"
+                             th:src="@{'/image/profile/' + ${loginUser.profileImage.storeImageName}}"
+                             alt="Profile Image"/>
+                        <img class="profile-img"
+                             th:unless="${loginUser.profileImage != null}"
+                             th:src="@{'/image/level/' + ${loginUser.level.imageName}}"
+                             alt="Level Image"/>
                     </div>
                     <div class="nickname" th:text="${loginUser.getNickname()}"></div>
                 </div>

@@ -13,10 +13,23 @@ import java.net.MalformedURLException;
 public class ImageController {
 
     @Value("${levelPath}")
-    private String path;
+    private String levelPath;
+
+    @Value("${imagePath}")
+    private String imagePath;
+
+    @GetMapping("/image/{type}/{imageName}")
+    public Resource renderImage(@PathVariable("type") String type, @PathVariable("imageName") String imageName) throws MalformedURLException {
+        String basePath = type.equals("level") ? levelPath : imagePath;
+        return new UrlResource("file:" + basePath + imageName);
+    }
 
     @GetMapping("/image/{imageName}")
-    public Resource renderImage(@PathVariable("imageName") String imageName) throws MalformedURLException {
-        return new UrlResource("file:" + path + imageName);
+    public Resource renderImageHeader(@PathVariable("imageName") String imageName) throws MalformedURLException {
+        if (imageName.contains("level")) {
+            return new UrlResource("file:" + levelPath + imageName);
+        } else {
+            return new UrlResource("file:" + imagePath + imageName);
+        }
     }
 }

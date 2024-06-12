@@ -1,39 +1,48 @@
 package hello.controller;
 
 import hello.dto.user.CustomOAuth2User;
+import hello.dto.user.EditDTO;
 import hello.entity.user.User;
 import hello.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/myPage")
 @RequiredArgsConstructor
-@SessionAttributes("loginUser")
 public class MyPageController {
 
     private final UserService userService;
 
-    @ModelAttribute("loginUser")
-    public User getLoginUser(@AuthenticationPrincipal CustomOAuth2User user) {
-        return userService.getLoginUserDetail(user);
-    }
-
+    // 내 정보 페이지 보여주기
     @GetMapping
-    public String myPage(@ModelAttribute("loginUser") User loginUser, Model model) {
+    public String myPage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
+        User loginUser = userService.getLoginUserDetail(user);
         model.addAttribute("loginUser", loginUser);
         return "myPage";
     }
 
+    // 수정 페이지 보여주기
     @GetMapping("/{userId}/edit")
-    public String editPage(@ModelAttribute("loginUser") User loginUser, Model model) {
-        model.addAttribute("loginUser", loginUser);
-        return "editPage";
+    public String editPage(@AuthenticationPrincipal CustomOAuth2User user, @PathVariable("userId") Long userId, Model model) {
+        // 사용자 검증
+        User loginUser = userService.validateUser(user, userId);
+        if (loginUser != null) {
+            model.addAttribute("loginUser", loginUser);
+            return "editPage";
+        }
+        return "redirect:/";
+    }
+
+    // 내 정보 수정
+    @PostMapping("/{userId}/edit")
+    public String editUserInfo(@PathVariable("userId") Long userId, @ModelAttribute EditDTO editDTO) throws IOException {
+        userService.editUserProcess(userId, editDTO);
+        return "redirect:/myPage";
     }
 }

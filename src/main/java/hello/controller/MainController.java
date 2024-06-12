@@ -1,8 +1,8 @@
 package hello.controller;
 
 import hello.dto.user.CustomOAuth2User;
+import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
-import hello.repository.UserRepository;
 import hello.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,9 +24,16 @@ public class MainController {
 
             if (loginUser != null) {
                 String nickname = loginUser.getNickname();
-                String imageName = loginUser.getLevel().getImageName();
+                String levelImageName = loginUser.getLevel().getImageName();
+                ProfileImage profileImage = loginUser.getProfileImage();
+                String profileImageName = null;
+                if (profileImage != null) {
+                    profileImageName = profileImage.getStoreImageName();
+                }
+
                 model.addAttribute("nickname", nickname);
-                model.addAttribute("imageName", imageName);
+                model.addAttribute("levelImageName", levelImageName);
+                model.addAttribute("profileImageName", profileImageName);
             }
         }
         return "main";

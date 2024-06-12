@@ -2,17 +2,21 @@ package hello.dto.user;
 
 import hello.entity.user.Gender;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class EditDTO {
 
-    private String nickname;
 
+    private MultipartFile profileImage;
     private boolean emailConsent;
-
-    private String phone;
-
     private Gender gender;
+
+//    private String nickname;
+//    private String phone;
+
+
+
 //
 //    private List<Genre> genres;
 //

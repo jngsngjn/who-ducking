@@ -7,19 +7,32 @@
 <div th:insert="~{fragment/header :: header}"></div>
 
 <h2>프로필 수정</h2>
-<form action="/edit" method="post">
-    <div>
-        <label th:text="${loginUser.getNickname()}">닉네임</label> <br>
+<form th:action="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}" method="post" enctype="multipart/form-data">
+
+    <div class="profile-image">
+        <img class="profile-img"
+             th:if="${loginUser.profileImage != null}"
+             th:src="@{'/image/profile/' + ${loginUser.profileImage.storeImageName}}"
+             alt="Profile Image"/>
+        <img class="profile-img"
+             th:unless="${loginUser.profileImage != null}"
+             th:src="@{'/image/level/' + ${loginUser.level.imageName}}"
+             alt="Level Image"/>
     </div>
+    <input type="file" name="profileImage" accept="image/*">
+
+<!--    <div>-->
+<!--        <label th:text="${loginUser.getNickname()}">닉네임</label> <br>-->
+<!--    </div>-->
 
     <div>
-        <label th:text="${loginUser.getEmail()}">이메일</label> <br>
+<!--        <label th:text="${loginUser.getEmail()}">이메일</label> <br>-->
         <label for="email-subscription">이메일 수신 여부</label>
         <input type="checkbox" id="email-subscription" name="emailConsent" th:checked="${loginUser.emailConsent}"/>
     </div>
 
     <div>
-        <label th:text="${loginUser.phone}"></label>
+<!--        <label th:text="${loginUser.phone}"></label>-->
     </div>
 
     <div>
@@ -34,20 +47,20 @@
     </div>
 
     <div>
-        <h3>선호 장르</h3>
-        <a href="#">장르 변경</a>
-        <ul>
-            <li th:each="userGenre : ${loginUser.userGenres}">
-                <label th:text="${userGenre.genre.name}"></label>
-            </li>
-        </ul>
+<!--        <h3>선호 장르</h3>-->
+<!--        <a href="#">장르 변경</a>-->
+<!--        <ul>-->
+<!--            <li th:each="userGenre : ${loginUser.userGenres}">-->
+<!--                <label th:text="${userGenre.genre.name}"></label>-->
+<!--            </li>-->
+<!--        </ul>-->
     </div>
 
     <div>
-        <a href="#">주소 찾기</a>
-        <label>우편번호</label>
-        <label>도로명 주소</label>
-        <input type="text" name="detailAddress" placeholder="상세 주소">
+<!--        <a href="#">주소 찾기</a>-->
+<!--        <label>우편번호</label>-->
+<!--        <label>도로명 주소</label>-->
+<!--        <input type="text" placeholder="상세 주소">-->
     </div>
     <input type="submit" value="정보 수정">
 </form>
