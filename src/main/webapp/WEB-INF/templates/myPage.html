@@ -1,44 +1,97 @@
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/myPage.css">
+    <title>마이 페이지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-
-<div>
-    <h2>내 프로필</h2>
-    <img th:src="|/image/${loginUser.getLevel().getImageName()}|"/> <br>
-    <p th:text="|닉네임 : ${loginUser.getNickname()}|"></p>
-    <p th:text="|포인트 : ${loginUser.getPoint()}|"></p>
-    <p th:text="|레벨 : ${loginUser.getLevel().getId()}|"></p>
-    <p th:text="|현재 경험치 : ${loginUser.getCurrentExp()}|"></p>
-    <p th:text="|총 경험치 : ${loginUser.getLevel().getMaxExp()}|"></p>
-    <a th:href="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}">프로필 수정</a>
+<div class="my-page">
+    <div class="content-section">
+        <div class="section-title">내 프로필</div>
+        <div class="profile-section">
+            <div class="profile-box">
+                <div class="profile-info">
+                    <div class="profile-image">
+                        <img class="profile-img" th:src="@{/image/{imageName}(imageName=${loginUser.getLevel().getImageName()})}" alt="Profile Image"/>
+                    </div>
+                    <div class="nickname" th:text="${loginUser.getNickname()}"></div>
+                </div>
+                <a class="modify-button" th:href="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}">프로필 수정</a>
+            </div>
+            <div class="profile-details">
+                <div class="points-exp">
+                    <div class="level" th:text="'Lv.' + ${loginUser.getLevel().getId()}"></div>
+                    <div class="points">
+                        <i class="fa-solid fa-coins icon"></i>
+                        <span th:text="${loginUser.getPoint()} + 'P'"></span>
+                        <div class="exp" th:text="${loginUser.getCurrentExp()} + ' / ' + ${loginUser.getLevel().getMaxExp()} + 'XP'">
+                        </div>
+                    </div>
+                </div>
+                <div class="exp-bar">
+                    <div class="exp-bar-inner" th:style="'width:' + (${loginUser.getLevel().getMaxExp()} > 0 ? (${loginUser.getCurrentExp()} / ${loginUser.getLevel().getMaxExp()} * 100) : 0) + '%;'"></div>
+                </div>
+            </div>
+        </div>
+        <hr class="line"/>
+        <div class="section">
+            <div class="section-title">📝 나의 글 목록</div>
+            <ul class="section-content">
+                <li class="content-item">
+                    <i class="fa-regular fa-comment icon"></i>
+                    <div>나의 리뷰</div>
+                </li>
+                <li class="content-item">
+                    <i class="fa-regular fa-clipboard icon"></i>
+                    <div>나의 게시글</div>
+                </li>
+                <li class="content-item">
+                    <i class="fa-regular fa-flag icon"></i>
+                    <div>나의 건의 내역</div>
+                </li>
+                <li class="content-item">
+                    <i class="fa-regular fa-bookmark icon"></i>
+                    <div>나의 북마크</div>
+                </li>
+            </ul>
+        </div>
+        <hr class="line"/>
+        <div class="section">
+            <div class="section-title">📝 이벤트</div>
+            <ul class="section-content">
+                <li class="content-item">
+                    <i class="fa-solid fa-clover icon"></i>
+                    <div>럭키 드로우 응모내역</div>
+                </li>
+                <li class="content-item">
+                    <i class="fa-solid fa-store icon"></i>
+                    <div>팝업 스토어 북마크</div>
+                </li>
+            </ul>
+        </div>
+        <hr class="line"/>
+        <div class="section">
+            <div class="section-title">📝 고객센터</div>
+            <ul class="section-content">
+                <li class="content-item">
+                    <i class="fa-solid fa-bullhorn icon"></i>
+                    <div>공지사항</div>
+                </li>
+                <li class="content-item">
+                    <i class="fa-regular fa-comments icon"></i>
+                    <div>자주 묻는 질문</div>
+                </li>
+                <li class="content-item">
+                    <i class="fa-solid fa-user-slash icon"></i>
+                    <div>회원 탈퇴</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div th:insert="~{fragment/footer :: footer}"></div>
 </div>
-
-<div>
-    <h2>나의 글 목록</h2>
-    <a href="#">나의 리뷰</a> <br>
-    <a href="#">나의 게시글</a> <br>
-    <a href="#">나의 건의 내역</a> <br>
-    <a href="#">나의 북마크</a>
-</div>
-
-<div>
-    <h2>이벤트</h2>
-    <a href="#">럭키 드로우 응모 내역</a> <br>
-    <a href="#">팝업 스토어 북마크</a>
-</div>
-
-<div>
-    <h2>고객센터</h2>
-    <a href="#">공지사항</a> <br>
-    <a href="#">자주 묻는 질문</a> <br>
-    <a href="#">회원 탈퇴</a>
-</div>
-
-<div th:insert="~{fragment/footer :: footer}"></div>
 </body>
 </html>

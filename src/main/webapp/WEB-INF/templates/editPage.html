@@ -33,6 +33,23 @@
         </label>
     </div>
 
+    <div>
+        <h3>선호 장르</h3>
+        <a href="#">장르 변경</a>
+        <ul>
+            <li th:each="userGenre : ${loginUser.userGenres}">
+                <label th:text="${userGenre.genre.name}"></label>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <a href="#">주소 찾기</a>
+        <label>우편번호</label>
+        <label>도로명 주소</label>
+        <input type="text" name="detailAddress" placeholder="상세 주소">
+    </div>
+    <input type="submit" value="정보 수정">
 </form>
 
 <div th:insert="~{fragment/footer :: footer}"></div>

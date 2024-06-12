@@ -17,7 +17,7 @@ public class UserService {
 
     public User getLoginUserDetail(CustomOAuth2User user) {
         User loginUser = userRepository.findByUsername(user.getUsername());
-        Hibernate.initialize(loginUser.getUserGenres()); // userGenres 컬렉션을 초기화
+        Hibernate.initialize(loginUser.getUserGenres());
         return loginUser;
     }
 }
