@@ -7,10 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class EditDTO {
 
-
     private MultipartFile profileImage;
     private boolean emailConsent;
     private Gender gender;
+    private boolean useDefaultImage;
 
 //    private String nickname;
 //    private String phone;

@@ -5,6 +5,8 @@ import hello.dto.user.EditDTO;
 import hello.entity.user.User;
 import hello.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +39,18 @@ public class MyPageController {
             return "editPage";
         }
         return "redirect:/";
+    }
+
+    @PostMapping("/user/level-image")
+    public ResponseEntity<String> getUserLevelImage(@AuthenticationPrincipal CustomOAuth2User user) {
+        if (user != null) {
+            User loginUser = userService.getLoginUserDetail(user);
+            if (loginUser != null) {
+                String levelImageName = loginUser.getLevel().getImageName();
+                return ResponseEntity.ok(levelImageName);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     // 내 정보 수정

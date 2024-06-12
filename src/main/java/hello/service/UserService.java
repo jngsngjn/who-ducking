@@ -26,7 +26,7 @@ public class UserService {
     private final ProfileImageRepository profileImageRepository;
     private final FileStore fileStore;
 
-    public User findUserServiceById(Long id) {
+    public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
 
@@ -36,28 +36,39 @@ public class UserService {
         return loginUser;
     }
 
+    // 사용자 정보 업데이트
     public void editUserProcess(Long id, EditDTO editDTO) throws IOException {
-        User findUser = findUserServiceById(id);
+        User findUser = findUserById(id);
         findUser.setEmailConsent(editDTO.isEmailConsent());
         findUser.setGender(editDTO.getGender());
 
-        MultipartFile profileImage = editDTO.getProfileImage();
+        MultipartFile uploadImage = editDTO.getProfileImage();
+        ProfileImage currentImage = findUser.getProfileImage();
 
         // 사용자가 사진을 업로드한 경우
-        if (profileImage != null && !profileImage.isEmpty()) {
+        if (uploadImage != null && !uploadImage.isEmpty()) {
             // 이미 기존 사진이 있다면 삭제
-            ProfileImage currentImage = findUser.getProfileImage();
             if (currentImage != null) {
-                findUser.setProfileImage(null);
-                profileImageRepository.deleteByUserId(id);
-                fileStore.deleteFile(currentImage.getStoreImageName());
+                clearProfileImage(id, findUser, currentImage);
             }
 
-            Image image = fileStore.storeFile(profileImage); // 서버에 이미지 저장
+            Image image = fileStore.storeFile(uploadImage); // 서버에 이미지 저장
 
             ProfileImage newProfileImage = new ProfileImage(image.getStoreImageName(), image.getImagePath(), findUser);
             findUser.setProfileImage(newProfileImage);
         }
+
+        // 기본 이미지 사용 버튼을 클릭한 경우
+        boolean useDefaultImage = editDTO.isUseDefaultImage();
+        if (useDefaultImage && currentImage != null) {
+            clearProfileImage(id, findUser, currentImage);
+        }
+    }
+
+    private void clearProfileImage(Long id, User findUser, ProfileImage currentImage) {
+        findUser.setProfileImage(null);
+        profileImageRepository.deleteByUserId(id);
+        fileStore.deleteFile(currentImage.getStoreImageName());
     }
 
     public User validateUser(CustomOAuth2User user, Long id) {

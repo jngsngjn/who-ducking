@@ -2,6 +2,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/editPage.js"></script>
+    <style>
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
@@ -10,18 +20,21 @@
 <form th:action="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}" method="post" enctype="multipart/form-data">
 
     <div class="profile-image">
-        <img class="profile-img"
-             th:if="${loginUser.profileImage != null}"
-             th:src="@{'/image/profile/' + ${loginUser.profileImage.storeImageName}}"
-             alt="Profile Image"/>
-        <img class="profile-img"
-             th:unless="${loginUser.profileImage != null}"
+        <img class="profile-img" id="profileImagePreview"
+             th:src="${loginUser.profileImage != null ? '/image/profile/' + loginUser.profileImage.storeImageName : ''}"
+             alt="Profile Image"
+             style="display: none;"/>
+        <img class="profile-img" id="levelImagePreview"
              th:src="@{'/image/level/' + ${loginUser.level.imageName}}"
-             alt="Level Image"/>
+             alt="Level Image"
+             style="display: none;"/>
     </div>
-    <input type="file" name="profileImage" accept="image/*">
+    <input type="file" id="profileImageInput" name="profileImage" accept="image/*">
+    <button type="button" id="useDefaultImage" style="display: none;">기본 이미지 사용</button>
+    <input type="hidden" id="useDefaultImageFlag" name="useDefaultImage"
+           th:value="${loginUser.profileImage == null ? 'true' : 'false'}">
 
-<!--    <div>-->
+    <!--    <div>-->
 <!--        <label th:text="${loginUser.getNickname()}">닉네임</label> <br>-->
 <!--    </div>-->
 
