@@ -21,52 +21,62 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+    @GetMapping
+    public String freeBoard(Model model) {
+        List<Board> boardList = boardService.getAllBoards();
+        model.addAttribute("boardList", boardList);
 
-
-    @GetMapping("/boardList")
-    public String boardList(Model model) {
-        List<Board> boards = boardService.getAllBoards();
-        model.addAttribute("boards", boards);
-        return "board/boardList";
+        return "board/freeBoard";
     }
 
-    @GetMapping("/write")
-    public String writeBoardPage(Model model) {
+    //freeBoard -> 작성 폼을 띄워주는 역할
+    @GetMapping("/new")
+    public String showCreateBoard(Model model) {
         model.addAttribute("board", new Board());
-        return "board/write";
+        return "board/create";
     }
 
-    @PostMapping("/write")
-    public String writeBoard(@ModelAttribute("board") Board board) {
+    //작성된 폼을 가지고 새로운 게시글 작성
+    @PostMapping("/create")
+    public String createBoard(@ModelAttribute("board") Board board) {
         boardService.createBoard(board);
-        return "redirect:/board/boardList";
+        return "redirect:/board";
     }
 
+    //목록에서 해당 id에 맞는 게시글 상세보기
     @GetMapping("/{boardId}")
-    public String viewBoard(@PathVariable Long boardId, Model model) {
-        Board board = boardService.getBoardById(boardId);
+    public String showBoard(@PathVariable Long boardId, Model model) {
+        Board board = boardService.getBoardById(boardId).orElse(null);
+
+        //null일경우 페이지 이동안함
+        if(board == null) {
+            return "redirect:/board";
+        }
         model.addAttribute("board", board);
-        return "board/view";
+        return "board/show";
     }
 
+    //게시글 수정 폼
     @GetMapping("/{boardId}/edit")
-    public String editBoardPage(@PathVariable Long boardId, Model model) {
-        Board board = boardService.getBoardById(boardId);
+    public String showEditBoard(@PathVariable Long boardId, Model model) {
+        Board board = boardService.getBoardById(boardId).orElse(null);
+        if(board == null) {
+            return "redirect:/board";
+        }
         model.addAttribute("board", board);
         return "board/edit";
     }
 
     @PostMapping("/{boardId}/edit")
-    public String editBoard(@PathVariable Long boardId, @ModelAttribute("board") Board updatedBoard) throws NotFoundException {
-        boardService.updateBoard(boardId, updatedBoard);
-        return "redirect:/board/" + boardId;
+    public String editBoard(@PathVariable Long boardId, @ModelAttribute("updatedBoard") Board updatedBoard) throws NotFoundException {
+        boardService.updateBoard(boardId,updatedBoard);
+        return "redirect:/board";
     }
 
-    @PostMapping("/{boardId}/delete")
-    public String deleteBoard(@PathVariable Long boardId) throws NotFoundException {
-        boardService.deleteBoard(boardId);
-        return "redirect:/board/boardList";
+    @PostMapping("/{id}/delete")
+    public String deleteBoard(@PathVariable Long id) throws NotFoundException {
+        boardService.deleteBoard(id);
+        return "redirect:/board";
     }
-
 
 }

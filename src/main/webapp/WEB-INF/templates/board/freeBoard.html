@@ -1,0 +1,80 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/boardList.css">
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+
+<main id="container">
+    <div class="free-board">
+        <section class="subCommon">
+            <h2 class="sub_title">커뮤니티</h2>
+            <div class="sort-option-box">
+                <ul class="sort-options">
+                    <!--타임리프 필요-->
+                    <li class="sort-option selected"><a href="">최신순</a></li>
+                    <li class="sort-option"><a href="">조회수순</a></li>
+                </ul>
+            </div>
+        </section>
+        <div class="main_section">
+            <section class="free-board-snb">
+                <div class="free-board-category-box">
+                    <ul class="free-board-category-box-fnr ">
+                        <!--타임리프 필요-->
+                        <li class="free-board-category-box-fnr-title selected"><a href="">자유 게시판</a></li>
+                        <div class="free-board-category-box-fnr-separator"></div>
+                        <li class="free-board-category-box-fnr-title"><a href="">리뷰 게시판</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="free-board-board-list">
+                <div class="board-list-top">
+                    <span class="board-list-top_num">번호</span>
+                    <span class="board-list-top_title">제목</span>
+                    <span class="board-list-top_writer">작성자</span>
+                    <span class="board-list-top_date">작성일</span>
+                    <span class="board-list-top_view-cnt">조회수</span>
+                </div>
+
+                <div class="board-list-separator"></div>
+
+                <!--타임리프 적용 필요-->
+                <div class="board-list-bot">
+                    <ul class="board-list-bot-items">
+                        <li>
+                            <span class="board-list-top_num">번호</span>
+                            <span class="board-list-top_title">제목</span>
+                            <span class="board-list-top_writer">작성자</span>
+                            <span class="board-list-top_date">작성일</span>
+                            <span class="board-list-top_view-cnt">조회수</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <section class="pagination">
+            <div class="pagination-wrap">
+                <ul class="pagination-wrap-elements">
+                    <li th:if="${boardList.hasPrevious()}">
+                        <!--이전 화살표 아이콘 나오게-->
+                        <a th:href="@{/board(page=${boardList.number})}">이전</a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(1, boardList.totalPages)}" th:class="${page == boardList.number + 1} ? 'active'">
+                        <a th:href="@{board(page=${page})}" th:text="${page}"></a>
+                    </li>
+                    <li th:if="${boardList.hasNext()}">
+                        <!--다음 화살표 아이콘 나오게-->
+                        <a th:href="@{/board(page=${boardList.number + 2})}">다음</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <img class="background-image" src="/images/freeBoard-eren.png" />
+</main>
+
+<div th:insert="~{fragment/footer :: footer}"></div>
+</body>
+</html>

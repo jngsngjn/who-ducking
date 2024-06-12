@@ -19,14 +19,19 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
+    //글작성
+    public Board createBoard(Board board) {
+        return boardRepository.save(board);
+    }
+
     //게시판 목록
     public List<Board> getAllBoards() {
         return boardRepository.findAll();
     }
 
-    //글작성
-    public void createBoard(Board board) {
-        boardRepository.save(board);
+    //상세보기
+    public Optional<Board> getBoardById(Long id) {
+        return boardRepository.findById(id);
     }
 
     //글 수정
@@ -37,10 +42,13 @@ public class BoardService {
 
             board.setTitle(updateboard.getTitle());
             board.setContent(updateboard.getContent());
+            board.setImageName(updateboard.getImageName());
+            board.setImagePath(updateboard.getImagePath());
+
             return boardRepository.save(board);
         }
         else{
-            throw new NotFoundException("Board not found");
+            throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
         }
     }
 
@@ -55,9 +63,4 @@ public class BoardService {
         }
     }
 
-    //게시판 아이디 가져오기
-    public Board getBoardById(Long boardId) {
-        return boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 게시판 :" + boardId));
-    }
 }
