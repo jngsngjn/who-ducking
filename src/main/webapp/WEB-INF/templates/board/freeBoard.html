@@ -43,32 +43,35 @@
                 <!--타임리프 적용 필요-->
                 <div class="board-list-bot">
                     <ul class="board-list-bot-items">
-                        <li>
-                            <span class="board-list-top_num">번호</span>
-                            <span class="board-list-top_title">제목</span>
-                            <span class="board-list-top_writer">작성자</span>
-                            <span class="board-list-top_date">작성일</span>
-                            <span class="board-list-top_view-cnt">조회수</span>
+                        <li th:each="board, iterStat : ${boardList}">
+                            <span class="board-list-num" th:text="${iterStat.count}"></span>
+                            <span class="board-list-title"><a th:href="@{/board/{boardId}(boardId=${board.id})}" th:text="${board.title}"></a></span>
+                            <span class="board-list-writer" th:text="${board.user.nickname}"></span>
+                            <span class="board-list-date" th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}"></span>
+                            <span class="board-list-view-cnt" th:text="${board.viewCount}"></span>
                         </li>
                     </ul>
                 </div>
             </section>
         </div>
+        <div class="free-board-write-button">
+            <a href="/board/new">글쓰기</a>
+        </div>
         <section class="pagination">
             <div class="pagination-wrap">
-                <ul class="pagination-wrap-elements">
-                    <li th:if="${boardList.hasPrevious()}">
-                        <!--이전 화살표 아이콘 나오게-->
-                        <a th:href="@{/board(page=${boardList.number})}">이전</a>
-                    </li>
-                    <li th:each="page : ${#numbers.sequence(1, boardList.totalPages)}" th:class="${page == boardList.number + 1} ? 'active'">
-                        <a th:href="@{board(page=${page})}" th:text="${page}"></a>
-                    </li>
-                    <li th:if="${boardList.hasNext()}">
-                        <!--다음 화살표 아이콘 나오게-->
-                        <a th:href="@{/board(page=${boardList.number + 2})}">다음</a>
-                    </li>
-                </ul>
+<!--                <ul class="pagination-wrap-elements">-->
+<!--                    <li th:if="${boardList.hasPrevious()}">-->
+<!--                        &lt;!&ndash;이전 화살표 아이콘 나오게&ndash;&gt;-->
+<!--                        <a th:href="@{/board(page=${boardList.number})}">이전</a>-->
+<!--                    </li>-->
+<!--                    <li th:each="page : ${#numbers.sequence(1, boardList.totalPages)}" th:class="${page == boardList.number + 1} ? 'active'">-->
+<!--                        <a th:href="@{board(page=${page})}" th:text="${page}"></a>-->
+<!--                    </li>-->
+<!--                    <li th:if="${boardList.hasNext()}">-->
+<!--                        &lt;!&ndash;다음 화살표 아이콘 나오게&ndash;&gt;-->
+<!--                        <a th:href="@{/board(page=${boardList.number + 2})}">다음</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
             </div>
         </section>
     </div>

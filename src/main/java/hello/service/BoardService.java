@@ -5,6 +5,7 @@ import hello.repository.BoardRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +21,12 @@ public class BoardService {
     }
 
     //글작성
-    public Board createBoard(Board board) {
-        return boardRepository.save(board);
+    public void createBoard(Board board)  {
+        Board createdBoard = new Board();
+        createdBoard.setTitle(board.getTitle());
+        createdBoard.setContent(board.getContent());
+
+        boardRepository.save(createdBoard);
     }
 
     //게시판 목록

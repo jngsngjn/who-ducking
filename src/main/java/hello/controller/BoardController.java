@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class BoardController {
 
     //목록에서 해당 id에 맞는 게시글 상세보기
     @GetMapping("/{boardId}")
-    public String showBoard(@PathVariable Long boardId, Model model) {
+    public String showBoard(@PathVariable("boardId") Long boardId, Model model) {
         Board board = boardService.getBoardById(boardId).orElse(null);
 
         //null일경우 페이지 이동안함
@@ -58,7 +59,7 @@ public class BoardController {
 
     //게시글 수정 폼
     @GetMapping("/{boardId}/edit")
-    public String showEditBoard(@PathVariable Long boardId, Model model) {
+    public String showEditBoard(@PathVariable("boardId") Long boardId, Model model) {
         Board board = boardService.getBoardById(boardId).orElse(null);
         if(board == null) {
             return "redirect:/board";
@@ -73,9 +74,9 @@ public class BoardController {
         return "redirect:/board";
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteBoard(@PathVariable Long id) throws NotFoundException {
-        boardService.deleteBoard(id);
+    @PostMapping("/{boardId}/delete")
+    public String deleteBoard(@PathVariable Long boardId) throws NotFoundException {
+        boardService.deleteBoard(boardId);
         return "redirect:/board";
     }
 
