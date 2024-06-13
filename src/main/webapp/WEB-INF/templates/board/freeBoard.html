@@ -11,9 +11,12 @@
             <h2 class="sub_title">커뮤니티</h2>
             <div class="sort-option-box">
                 <ul class="sort-options">
-                    <!--타임리프 필요-->
-                    <li class="sort-option selected"><a href="">최신순</a></li>
-                    <li class="sort-option"><a href="">조회수순</a></li>
+                    <li th:class="${sort == 'latest'} ? 'sort-option selected' : 'sort-option'">
+                        <a th:href="@{/board(sort='latest')}">최신순</a>
+                    </li>
+                    <li th:class="${sort == 'views'} ? 'sort-option selected' : 'sort-option'">
+                        <a th:href="@{/board(sort='views')}">조회수순</a>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -22,9 +25,9 @@
                 <div class="free-board-category-box">
                     <ul class="free-board-category-box-fnr ">
                         <!--타임리프 필요-->
-                        <li class="free-board-category-box-fnr-title selected"><a href="">자유 게시판</a></li>
-                        <div class="free-board-category-box-fnr-separator"></div>
                         <li class="free-board-category-box-fnr-title"><a href="">리뷰 게시판</a></li>
+                        <div class="free-board-category-box-fnr-separator"></div>
+                        <li class="free-board-category-box-fnr-title selected"><a href="">자유 게시판</a></li>
                     </ul>
                 </div>
             </section>

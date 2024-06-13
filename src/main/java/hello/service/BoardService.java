@@ -2,6 +2,7 @@ package hello.service;
 
 import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
+import hello.entity.user.User;
 import hello.repository.BoardRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,14 @@ public class BoardService {
     }
 
     //글작성
-    public void createBoard(BoardDTO writeboard)  {
+    public void createBoard(BoardDTO writeboard, User loginUser)  {
         Board board = new Board();
 
         board.setTitle(writeboard.getTitle());
         board.setContent(writeboard.getContent());
         board.setImageName(writeboard.getImageName());
         board.setImagePath(writeboard.getImagePath());
+        board.setUser(loginUser);
 
         boardRepository.save(board);
     }
@@ -40,11 +42,13 @@ public class BoardService {
 
     //상세보기
     public Optional<Board> getBoardById(Long id) {
+        //조회수 업데이트
+        boardRepository.incrementViewCount(id);
         return boardRepository.findById(id);
     }
 
     //글 수정
-    public void updateBoard(Long boardId, BoardDTO updateboard) throws NotFoundException {
+    public void updateBoard(Long boardId, BoardDTO updateboard, User loginUser) throws NotFoundException {
         Optional<Board> optionalBoard = boardRepository.findById(boardId);
         if (optionalBoard.isPresent()) {
             Board board = optionalBoard.get();
@@ -53,6 +57,7 @@ public class BoardService {
             board.setContent(updateboard.getContent());
             board.setImageName(updateboard.getImageName());
             board.setImagePath(updateboard.getImagePath());
+            board.setUser(loginUser);
 
 
             boardRepository.save(board);
@@ -72,5 +77,16 @@ public class BoardService {
             throw new NotFoundException("게시물을 찾을 수 없습니다.");
         }
     }
+
+    //최신순
+    public List<Board> getBoardsSortedByLatest(){
+        return boardRepository.findAllByOrderByWriteDate();
+    }
+
+    //조회순
+    public List<Board> getBoardsSortedByViewCount(){
+        return boardRepository.findAllByOrderByViewCountDesc();
+    }
+
 
 }

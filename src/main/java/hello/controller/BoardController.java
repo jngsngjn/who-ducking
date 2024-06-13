@@ -1,10 +1,15 @@
 package hello.controller;
 
 import hello.dto.board.BoardDTO;
+import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
+import hello.entity.user.User;
 import hello.service.BoardService;
+import hello.service.UserService;
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,19 +19,24 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
 
     private final BoardService boardService;
-
-    @Autowired
-    public BoardController(BoardService boardService) {
-        this.boardService = boardService;
-    }
+    private final UserService userService;
 
     @GetMapping
-    public String freeBoard(Model model) {
-        List<Board> boardList = boardService.getAllBoards();
+    public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "latest") String sort,Model model) {
+        List<Board> boardList;
+        if ("views".equals(sort)) {
+            boardList = boardService.getBoardsSortedByViewCount();
+        } else {
+            boardList = boardService.getBoardsSortedByLatest();
+        }
+
         model.addAttribute("boardList", boardList);
+
+        model.addAttribute("sort", sort);
 
         return "board/freeBoard";
     }
@@ -40,8 +50,9 @@ public class BoardController {
 
     //작성된 폼을 가지고 새로운 게시글 작성
     @PostMapping("/create")
-    public String createBoard(@ModelAttribute("board") BoardDTO board) {
-        boardService.createBoard(board);
+    public String createBoard(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("board") BoardDTO board) {
+        User loginUser = userService.getLoginUserDetail(user);
+        boardService.createBoard(board,loginUser);
         return "redirect:/board";
     }
 
@@ -70,8 +81,9 @@ public class BoardController {
     }
 
     @PostMapping("/{boardId}/edit")
-    public String editBoard(@PathVariable("boardId") Long boardId, @ModelAttribute("updatedBoard") BoardDTO updatedBoard) throws NotFoundException {
-        boardService.updateBoard(boardId,updatedBoard);
+    public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard) throws NotFoundException {
+        User loginUser = userService.getLoginUserDetail(user);
+        boardService.updateBoard(boardId,updatedBoard,loginUser);
         return "redirect:/board";
     }
 

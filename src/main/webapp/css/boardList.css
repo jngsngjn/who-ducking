@@ -2,12 +2,13 @@
     padding-top: 80px;
 }
 .free-board {
-    background: #ffffff;
+    background: transparent;
     position: relative;
     overflow: hidden;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
+
 
 }
 /* 게시판 제목 스타일 */
@@ -126,7 +127,7 @@
 }
 .board-list-top {
     display: flex;
-    background-color: #ffffff;
+    background-color: transparent;
     padding: 10px;
     font-weight: bold;
 }
@@ -193,4 +194,5 @@
     right: 0;
     max-width: 30%;
     height: auto;
+    z-index: -100;
 }
