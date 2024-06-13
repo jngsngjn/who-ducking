@@ -15,7 +15,7 @@
         <div class="board-content">
             <p th:text="${board.content}">내용</p>
         </div>
-        <div class="board-actions" th:if="${#authentication.name == board.user.username}">
+        <div class="board-actions">
             <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="btn btn-primary">수정</a>
             <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
                 <button type="submit" class="btn btn-danger">삭제</button>

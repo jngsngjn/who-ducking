@@ -1,5 +1,6 @@
 package hello.controller;
 
+import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
 import hello.service.BoardService;
 import javassist.NotFoundException;
@@ -33,13 +34,13 @@ public class BoardController {
     //freeBoard -> 작성 폼을 띄워주는 역할
     @GetMapping("/new")
     public String showCreateBoard(Model model) {
-        model.addAttribute("board", new Board());
+        model.addAttribute("board", new BoardDTO());
         return "board/create";
     }
 
     //작성된 폼을 가지고 새로운 게시글 작성
     @PostMapping("/create")
-    public String createBoard(@ModelAttribute("board") Board board) {
+    public String createBoard(@ModelAttribute("board") BoardDTO board) {
         boardService.createBoard(board);
         return "redirect:/board";
     }
@@ -69,13 +70,13 @@ public class BoardController {
     }
 
     @PostMapping("/{boardId}/edit")
-    public String editBoard(@PathVariable Long boardId, @ModelAttribute("updatedBoard") Board updatedBoard) throws NotFoundException {
+    public String editBoard(@PathVariable("boardId") Long boardId, @ModelAttribute("updatedBoard") BoardDTO updatedBoard) throws NotFoundException {
         boardService.updateBoard(boardId,updatedBoard);
         return "redirect:/board";
     }
 
     @PostMapping("/{boardId}/delete")
-    public String deleteBoard(@PathVariable Long boardId) throws NotFoundException {
+    public String deleteBoard(@PathVariable("boardId") Long boardId) throws NotFoundException {
         boardService.deleteBoard(boardId);
         return "redirect:/board";
     }

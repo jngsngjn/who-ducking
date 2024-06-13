@@ -1,5 +1,6 @@
 package hello.service;
 
+import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
 import hello.repository.BoardRepository;
 import javassist.NotFoundException;
@@ -21,12 +22,15 @@ public class BoardService {
     }
 
     //글작성
-    public void createBoard(Board board)  {
-        Board createdBoard = new Board();
-        createdBoard.setTitle(board.getTitle());
-        createdBoard.setContent(board.getContent());
+    public void createBoard(BoardDTO writeboard)  {
+        Board board = new Board();
 
-        boardRepository.save(createdBoard);
+        board.setTitle(writeboard.getTitle());
+        board.setContent(writeboard.getContent());
+        board.setImageName(writeboard.getImageName());
+        board.setImagePath(writeboard.getImagePath());
+
+        boardRepository.save(board);
     }
 
     //게시판 목록
@@ -40,7 +44,7 @@ public class BoardService {
     }
 
     //글 수정
-    public Board updateBoard(Long boardId, Board updateboard) throws NotFoundException {
+    public void updateBoard(Long boardId, BoardDTO updateboard) throws NotFoundException {
         Optional<Board> optionalBoard = boardRepository.findById(boardId);
         if (optionalBoard.isPresent()) {
             Board board = optionalBoard.get();
@@ -50,7 +54,8 @@ public class BoardService {
             board.setImageName(updateboard.getImageName());
             board.setImagePath(updateboard.getImagePath());
 
-            return boardRepository.save(board);
+
+            boardRepository.save(board);
         }
         else{
             throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
