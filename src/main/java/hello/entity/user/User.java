@@ -76,6 +76,9 @@ public class User {
     @Column(name = "current_exp")
     private int currentExp;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ProfileImage profileImage;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserGenre> userGenres = new HashSet<>();
 

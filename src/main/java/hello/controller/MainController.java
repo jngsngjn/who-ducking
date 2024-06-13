@@ -1,8 +1,9 @@
 package hello.controller;
 
 import hello.dto.user.CustomOAuth2User;
+import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
-import hello.repository.UserRepository;
+import hello.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,19 +14,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class MainController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/")
     public String mainPage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
         if (user != null) {
-            String username = user.getUsername();
-            User findUser = userRepository.findByUsername(username);
 
-            if (findUser != null) {
-                String nickname = findUser.getNickname();
-                String imageName = findUser.getLevel().getImageName();
+            User loginUser = userService.getLoginUserDetail(user);
+
+            if (loginUser != null) {
+                String nickname = loginUser.getNickname();
+                String levelImageName = loginUser.getLevel().getImageName();
+                ProfileImage profileImage = loginUser.getProfileImage();
+                String profileImageName = null;
+                if (profileImage != null) {
+                    profileImageName = profileImage.getStoreImageName();
+                }
+
                 model.addAttribute("nickname", nickname);
-                model.addAttribute("imageName", imageName);
+                model.addAttribute("levelImageName", levelImageName);
+                model.addAttribute("profileImageName", profileImageName);
             }
         }
         return "main";

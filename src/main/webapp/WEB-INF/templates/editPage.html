@@ -1,0 +1,83 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/editPage.js"></script>
+    <style>
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+
+<h2>프로필 수정</h2>
+<form th:action="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}" method="post" enctype="multipart/form-data">
+
+    <div class="profile-image">
+        <img class="profile-img" id="profileImagePreview"
+             th:src="${loginUser.profileImage != null ? '/image/profile/' + loginUser.profileImage.storeImageName : ''}"
+             alt="Profile Image"
+             style="display: none;"/>
+        <img class="profile-img" id="levelImagePreview"
+             th:src="@{'/image/level/' + ${loginUser.level.imageName}}"
+             alt="Level Image"
+             style="display: none;"/>
+    </div>
+    <input type="file" id="profileImageInput" name="profileImage" accept="image/*">
+    <button type="button" id="useDefaultImage" style="display: none;">기본 이미지 사용</button>
+    <input type="hidden" id="useDefaultImageFlag" name="useDefaultImage"
+           th:value="${loginUser.profileImage == null ? 'true' : 'false'}">
+
+    <!--    <div>-->
+<!--        <label th:text="${loginUser.getNickname()}">닉네임</label> <br>-->
+<!--    </div>-->
+
+    <div>
+<!--        <label th:text="${loginUser.getEmail()}">이메일</label> <br>-->
+        <label for="email-subscription">이메일 수신 여부</label>
+        <input type="checkbox" id="email-subscription" name="emailConsent" th:checked="${loginUser.emailConsent}"/>
+    </div>
+
+    <div>
+<!--        <label th:text="${loginUser.phone}"></label>-->
+    </div>
+
+    <div>
+        <label for="male">
+            <input type="radio" id="male" name="gender" value="MALE"
+                   th:checked="${loginUser.gender == T(hello.entity.user.Gender).MALE}"/> 남
+        </label>
+        <label for="female">
+            <input type="radio" id="female" name="gender" value="FEMALE"
+                   th:checked="${loginUser.gender == T(hello.entity.user.Gender).FEMALE}"/> 여
+        </label>
+    </div>
+
+    <div>
+<!--        <h3>선호 장르</h3>-->
+<!--        <a href="#">장르 변경</a>-->
+<!--        <ul>-->
+<!--            <li th:each="userGenre : ${loginUser.userGenres}">-->
+<!--                <label th:text="${userGenre.genre.name}"></label>-->
+<!--            </li>-->
+<!--        </ul>-->
+    </div>
+
+    <div>
+<!--        <a href="#">주소 찾기</a>-->
+<!--        <label>우편번호</label>-->
+<!--        <label>도로명 주소</label>-->
+<!--        <input type="text" placeholder="상세 주소">-->
+    </div>
+    <input type="submit" value="정보 수정">
+</form>
+
+<div th:insert="~{fragment/footer :: footer}"></div>
+</body>
+</html>
