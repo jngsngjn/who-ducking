@@ -9,24 +9,24 @@
     <title>Who's DucKing Header</title>
 
     <!-- Swiper -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/vendor/aos/aos.css">
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
     <!-- Animate -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/vendor/animate/animate.min.css">
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/css/common.css" />
+    <link rel="stylesheet" href="/css/common.css" />
 
     <!-- jQuery -->
-    <script src="/who-ducking/src/main/webapp/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
     <!-- swiper -->
-    <script src="/who-ducking/src/main/webapp/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
     <!-- AOS -->
-    <script src="/who-ducking/src/main/webapp/vendor/aos/aos.js"></script>
+    <script src="/vendor/aos/aos.js"></script>
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
-    <script type="text/javascript" src="/who-ducking/src/main/webapp/js/common.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
 </head>
 
 <body>
@@ -38,7 +38,7 @@
                 <!-- Logo -->
                 <h1 class="h-logo">
                     <a class="navbar-brand" href="/">
-                        <img src="/who-ducking/src/main/webapp/images/logo.png" alt="로고">
+                        <img src="/images/logo.png" alt="로고">
                     </a>
                 </h1>
                 <!-- Search Box -->
@@ -110,8 +110,8 @@
                 <div class="h-profile_box">
                     <!-- Profile Btn -->
                     <div class="h-profile">
-                        <div th:if="${imageName != null}">
-                            <img class="h-profile_img" th:src="@{/image/{imageName}(imageName=${imageName})}" />
+                        <div th:if="${nickname != null}">
+                            <img class="h-mobile_profile-img" th:src="${profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${profileImageName})} : @{/image/{levelImageName}(levelImageName=${levelImageName})}"/>
                         </div>
                         <i class="fa-solid fa-caret-down"></i>
                     </div>
@@ -143,7 +143,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/mypage">마이페이지</a>
+                        <a href="/myPage">마이페이지</a>
                     </li>
                     <li>
                         <a href="/logout">로그아웃</a>
@@ -168,7 +168,7 @@
                     <!-- Logo -->
                     <div class="h-logo mobile-logo">
                         <a href="/">
-                            <img src="/who-ducking/src/main/webapp/images/logo.png" alt="로고">
+                            <img src="/images/logo.png" alt="로고">
                         </a>
                     </div>
                     <!-- Mobile Profile (비로그인 시, 주석) -->
@@ -176,11 +176,10 @@
                         <li>
                             <div class="h-mobile_profile-box">
                                 <div class="h-mobile_profile">
-                                    <div th:if="${imageName != null}">
-                                        <img class="h-mobile_profile-img"
-                                            th:src="@{/image/{imageName}(imageName=${imageName})}" />
+                                    <div th:if="${nickname != null}">
+                                        <img class="h-mobile_profile-img" th:src="${profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${profileImageName})} : @{/image/{levelImageName}(levelImageName=${levelImageName})}"/>
                                     </div>
-                                    <strong href="/mypage" class="h-mobile_profile-nickname">UserNickname</strong>
+                                    <strong href="/myPage" class="h-mobile_profile-nickname">UserNickname</strong>
                                 </div>
                                 <div class="h-mobile_profile_exp_box">
                                     <div class="h-mobile_profile_level-point">

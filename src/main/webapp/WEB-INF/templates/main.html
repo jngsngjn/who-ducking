@@ -4,7 +4,7 @@
     <title>Document</title>
 </head>
 <body>
-<div th:insert="~{fragment/header :: header}"></div>
+<div th:insert="~{fragments/header :: header}"></div>
 
 <th:block th:if="${nickname != null}">
     <p>안녕하세요, <span th:text="${nickname}"></span>님!</p>
@@ -17,6 +17,6 @@
 </th:block>
 <a href="/review-write">리뷰작성페이지</a>
 
-<div th:insert="~{fragment/footer :: footer}"></div>
+<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

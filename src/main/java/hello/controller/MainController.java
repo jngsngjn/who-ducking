@@ -36,6 +36,6 @@ public class MainController {
                 model.addAttribute("profileImageName", profileImageName);
             }
         }
-        return "main";
+        return "index";
     }
 }

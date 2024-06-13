@@ -114,5 +114,6 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
             levelRepository.saveAll(levels);
         }
+
     }
 }
