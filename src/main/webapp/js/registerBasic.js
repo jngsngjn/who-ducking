@@ -111,6 +111,11 @@ function checkCode() {
     const verificationCode = $('#verification-code').val();
     const phone = $('#phone').val();
 
+    if (verificationCode === "") {
+        alert("인증번호를 입력해 주세요.");
+        return;
+    }
+
     $.ajax({
         type: "POST",
         url: "/register/verify-code",

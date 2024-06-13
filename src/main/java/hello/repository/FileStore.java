@@ -12,8 +12,8 @@ import java.util.UUID;
 @Component
 public class FileStore {
 
-    @Value("${imagePath}")
-    private String imagePath; // 실제 파일 데이터가 저장될 서버 위치
+    @Value("${profilePath}")
+    private String profilePath; // 실제 파일 데이터가 저장될 서버 위치
 
     // 서버에 파일을 저장 후 Image 반환
     public Image storeFile(MultipartFile multipartFile) throws IOException {
@@ -41,7 +41,7 @@ public class FileStore {
 
     // 파일명과 함께 파일이 저장될 전체 경로를 만들어 반환한다.
     public String getFullPath(String filename) {
-        return imagePath + filename;
+        return profilePath + filename;
     }
 
     // 서버에서도 확장자를 확인하기 위해 파일명에서 확장자를 추출하여 반환한다.

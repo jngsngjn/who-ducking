@@ -15,12 +15,12 @@ public class ImageController {
     @Value("${levelPath}")
     private String levelPath;
 
-    @Value("${imagePath}")
-    private String imagePath;
+    @Value("${profilePath}")
+    private String profilePath;
 
     @GetMapping("/image/{type}/{imageName}")
     public Resource renderImage(@PathVariable("type") String type, @PathVariable("imageName") String imageName) throws MalformedURLException {
-        String basePath = type.equals("level") ? levelPath : imagePath;
+        String basePath = type.equals("level") ? levelPath : profilePath;
         return new UrlResource("file:" + basePath + imageName);
     }
 
@@ -29,7 +29,7 @@ public class ImageController {
         if (imageName.contains("level")) {
             return new UrlResource("file:" + levelPath + imageName);
         } else {
-            return new UrlResource("file:" + imagePath + imageName);
+            return new UrlResource("file:" + profilePath + imageName);
         }
     }
 }
