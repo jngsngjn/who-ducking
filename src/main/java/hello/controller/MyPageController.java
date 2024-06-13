@@ -4,6 +4,7 @@ import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.EditDTO;
 import hello.entity.user.User;
 import hello.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,8 +56,8 @@ public class MyPageController {
 
     // 내 정보 수정
     @PostMapping("/{userId}/edit")
-    public String editUserInfo(@PathVariable("userId") Long userId, @ModelAttribute EditDTO editDTO) throws IOException {
-        userService.editUserProcess(userId, editDTO);
+    public String editUserInfo(@PathVariable("userId") Long userId, @ModelAttribute EditDTO editDTO, HttpSession session) throws IOException {
+        userService.editUserProcess(userId, editDTO, session);
         return "redirect:/myPage";
     }
 }

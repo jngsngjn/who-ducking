@@ -4,10 +4,10 @@ import hello.dto.user.CustomOAuth2User;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
 import hello.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -17,7 +17,7 @@ public class MainController {
     private final UserService userService;
 
     @GetMapping("/")
-    public String mainPage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
+    public String mainPage(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session) {
         if (user != null) {
 
             User loginUser = userService.getLoginUserDetail(user);
@@ -31,9 +31,13 @@ public class MainController {
                     profileImageName = profileImage.getStoreImageName();
                 }
 
-                model.addAttribute("nickname", nickname);
-                model.addAttribute("levelImageName", levelImageName);
-                model.addAttribute("profileImageName", profileImageName);
+                session.setAttribute("nickname", nickname);
+                session.setAttribute("levelImageName", levelImageName);
+                session.setAttribute("profileImageName", profileImageName);
+                session.setAttribute("level", loginUser.getLevel().getId());
+                session.setAttribute("point", loginUser.getPoint());
+                session.setAttribute("currentExp", loginUser.getCurrentExp());
+                session.setAttribute("maxExp", loginUser.getLevel().getMaxExp());
             }
         }
         return "index";

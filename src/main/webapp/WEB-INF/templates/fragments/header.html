@@ -1,6 +1,7 @@
 <!-- templates/fragment/header.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6">
 
 <head>
     <meta charset="UTF-8">
@@ -67,7 +68,7 @@
                     </li>
                     <!-- Alarm Dropdown -->
                     <div class="h-alarm">
-                        <div class="h-alarm_btn">
+                        <div class="h-alarm_btn" sec:authorize="isAuthenticated()">
                             <li>
                                 <a href="#none">
                                     알림
@@ -75,6 +76,16 @@
                                 </a>
                             </li>
                         </div>
+
+                        <div class="h-alarm_btn" sec:authorize="!isAuthenticated()">
+                            <li>
+                                <a href="/login" style="color: #ff8b00">
+                                    로그인
+                                    <!-- <span class="h-alarm_count">12</span> -->
+                                </a>
+                            </li>
+                        </div>
+
                         <!-- Alarm List -->
                         <ul class="h-alarm_list">
                             <!-- Before Login -->
@@ -109,37 +120,33 @@
                 <!-- Profile -->
                 <div class="h-profile_box">
                     <!-- Profile Btn -->
-                    <div class="h-profile">
-                        <div th:if="${nickname != null}">
-                            <img class="h-mobile_profile-img" th:src="${profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${profileImageName})} : @{/image/{levelImageName}(levelImageName=${levelImageName})}"/>
+                    <div class="h-profile" sec:authorize="isAuthenticated()">
+                        <div>
+                            <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}"/>
                         </div>
                         <i class="fa-solid fa-caret-down"></i>
                     </div>
                 </div>
                 <!-- Profile Menu -->
-                <ul class="h-profile_menu">
+                <ul class="h-profile_menu" sec:authorize="isAuthenticated()">
                     <!-- Before Login -->
-                    <li>
-                        <a class="h-profile_login" href="/login">로그인 & 회원가입</a>
-                    </li>
                     <!-- After Login -->
                     <li>
-                        <strong class="h-profile_menu_nickname">UserNickname</strong>
+                        <strong class="h-profile_menu_nickname" th:text="${session.nickname}"></strong>
                     </li>
                     <li class="h-profile_menu_exp_box">
                         <div class="h-profile_menu_level-point">
-                            <span class="h-proflie_menu_level">Lv.일덕</span>
+                            <span class="h-proflie_menu_level" th:text="Lv. + ${session.level}"></span>
                             <div class="h-profile_menu_point">
                                 <i class="fa-solid fa-coins"></i>
-                                <span>200P</span>
+                                <span th:text="${session.point}"></span>
                             </div>
                         </div>
                         <div>
-                            <span class="h-profile_menu_exp_point">16 / 20 EXP</span>
+                            <span class="h-profile_menu_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'XP'"></span>
                         </div>
-                        <div class="h-profile_menu_exp">
-                            <span class="h-profile_exp_track"></span>
-                            <span class="h-profile_exp_thumb" style="width: 80%;"></span>
+                        <div class="exp-bar">
+                            <div class="exp-bar-inner" th:style="'width:' + (${session.currentExp} > 0 ? (${session.maxExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
                         </div>
                     </li>
                     <li>
@@ -174,19 +181,19 @@
                     <!-- Mobile Profile (비로그인 시, 주석) -->
                     <ul class="h-mobile_profile-gnb">
                         <li>
-                            <div class="h-mobile_profile-box">
+                            <div class="h-mobile_profile-box" sec:authorize="isAuthenticated()">
                                 <div class="h-mobile_profile">
-                                    <div th:if="${nickname != null}">
-                                        <img class="h-mobile_profile-img" th:src="${profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${profileImageName})} : @{/image/{levelImageName}(levelImageName=${levelImageName})}"/>
+                                    <div>
+                                        <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}"/>
                                     </div>
-                                    <strong href="/myPage" class="h-mobile_profile-nickname">UserNickname</strong>
+                                    <strong href="/myPage" class="h-mobile_profile-nickname" th:value="${session.nickname}">UserNickname</strong>
                                 </div>
                                 <div class="h-mobile_profile_exp_box">
                                     <div class="h-mobile_profile_level-point">
-                                        <span class="h-mobile_profile_level">Lv.일덕</span>
+                                        <span class="h-mobile_profile_level" th:text="Lv. + ${session.level}"></span>
                                         <div class="h-mobile_profile_point">
                                             <i class="fa-solid fa-coins"></i>
-                                            <span>200P</span>
+                                            <span th:text="${session.point}"></span>
                                         </div>
                                     </div>
                                     <div>
@@ -199,7 +206,7 @@
                                 </div>
                                 <i class="fa-solid fa-caret-down"></i>
                             </div>
-                            <ul class="h-mobile_profile-lnb">
+                            <ul class="h-mobile_profile-lnb" sec:authorize="isAuthenticated()">
                                 <div class="h-mobile_alarm">
                                     <div class="h-mobile_alarm-btn">
                                         <li>
@@ -258,7 +265,7 @@
                             <!-- Before Login Menu -->
                             <ul class="h-mobile_sign">
                                 <li>
-                                    <a class="nav-link" href="/login">로그인 & 회원가입</a>
+                                    <a class="nav-link" href="/login">로그인</a>
                                 </li>
                             </ul>
                         </li>

@@ -9,6 +9,7 @@ import hello.repository.FileStore;
 import hello.repository.ProfileImageRepository;
 import hello.repository.UserRepository;
 import hello.service.exception.UserNotFoundException;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class UserService {
     }
 
     // 사용자 정보 업데이트
-    public void editUserProcess(Long id, EditDTO editDTO) throws IOException {
+    public void editUserProcess(Long id, EditDTO editDTO, HttpSession session) throws IOException {
         User findUser = findUserById(id);
         findUser.setEmailConsent(editDTO.isEmailConsent());
         findUser.setGender(editDTO.getGender());
@@ -56,12 +57,15 @@ public class UserService {
 
             ProfileImage newProfileImage = new ProfileImage(image.getStoreImageName(), image.getImagePath(), findUser);
             findUser.setProfileImage(newProfileImage);
+
+            session.setAttribute("profileImageName", newProfileImage.getStoreImageName());
         }
 
         // 기본 이미지 사용 버튼을 클릭한 경우
         boolean useDefaultImage = editDTO.isUseDefaultImage();
         if (useDefaultImage && currentImage != null) {
             clearProfileImage(id, findUser, currentImage);
+            session.setAttribute("profileImageName", null);
         }
     }
 

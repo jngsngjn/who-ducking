@@ -4,6 +4,7 @@ import hello.entity.genre.Genre;
 import hello.entity.user.Level;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
+import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
@@ -20,6 +21,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
     private final LevelRepository levelRepository;
     private final GenreRepository genreRepository;
+    private final UserRepository userRepository;
 
     private boolean initialized = false;
 
@@ -65,6 +67,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     }
 
     private void initializeData() {
+
         if (genreRepository.count() == 0) {
             List<Genre> genres = new ArrayList<>();
             genres.add(new Genre("액션"));
