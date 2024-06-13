@@ -7,27 +7,24 @@ import hello.entity.genre.UserGenre;
 import hello.entity.user.User;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
-import hello.repository.UserGenreRepository;
 import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RegisterService {
 
     private final UserRepository userRepository;
     private final GenreRepository genreRepository;
-    private final UserGenreRepository userGenreRepository;
     private final LevelRepository levelRepository;
 
-    private final BCryptPasswordEncoder passwordEncoder;
     private final SmsService smsService;
     private final PointService pointService;
 
@@ -40,7 +37,7 @@ public class RegisterService {
         user.setNickname(registerBasicDTO.getNickname());
         user.setGender(registerBasicDTO.getGender());
         smsService.sendCode(registerBasicDTO.getPhone());
-        user.setPhone(passwordEncoder.encode(registerBasicDTO.getPhone()));
+        user.setPhone(registerBasicDTO.getPhone());
         user.setEmail(oauth2Response.getEmail());
         user.setEmailConsent(registerBasicDTO.isEmailConsent());
         user.setRole("ROLE_USER");
@@ -50,16 +47,14 @@ public class RegisterService {
         String recommender = registerBasicDTO.getRecommender();
         recommenderProcess(user, recommender);
 
-        userRepository.save(user);
-
         // 선택한 장르 저장
         List<Genre> allGenres = genreRepository.findByNameIn(genres);
+        allGenres.forEach(genre -> {
+            UserGenre userGenre = new UserGenre(user, genre);
+            user.getUserGenres().add(userGenre);
+        });
 
-        List<UserGenre> userGenres = allGenres.stream()
-                .map(genre -> new UserGenre(user, genre))
-                .collect(Collectors.toList());
-
-        userGenreRepository.saveAll(userGenres);
+        userRepository.save(user);
     }
 
     public boolean isDuplicateNickname(String nickname) {
@@ -75,13 +70,13 @@ public class RegisterService {
         }
     }
 
-    public Map<String, Object> isDuplicatePhone(String phone) {
+    public Map<String, Object> isDuplicatePhone(String inputPhone) {
         Map<String, Object> result = new HashMap<>();
-        List<String> phoneNumbers = userRepository.findAllPhoneNumbers();
+        List<String> phones = userRepository.findAllPhoneNumbers();
 
-        for (String encodedPhone : phoneNumbers) {
-            if (passwordEncoder.matches(phone, encodedPhone)) {
-                String socialType = userRepository.findSocialTypeByPhone(encodedPhone);
+        for (String phone : phones) {
+            if (phone.equals(inputPhone)) {
+                String socialType = userRepository.findSocialTypeByPhone(phone);
                 result.put("isDuplicate", true);
                 result.put("socialType", socialType);
                 return result;

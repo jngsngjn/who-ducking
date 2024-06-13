@@ -5,8 +5,18 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<h1>메인</h1>
-<a href="/login">로그인</a>
+
+<th:block th:if="${nickname != null}">
+    <p>안녕하세요, <span th:text="${nickname}"></span>님!</p>
+    <a href="/myPage">내 정보</a>
+    <a href="/logout">로그아웃</a>
+</th:block>
+
+<th:block th:if="${nickname == null}">
+    <a href="/login">로그인</a>
+</th:block>
+<a href="/review-write">리뷰작성페이지</a>
+
 <div th:insert="~{fragment/footer :: footer}"></div>
 </body>
 </html>

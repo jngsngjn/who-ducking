@@ -73,6 +73,11 @@ $(document).ready(function() {
 function sendCode() {
     const phone = $('#phone').val().trim();
 
+    if (phone === "") {
+        alert("전화번호를 입력해 주세요.");
+        return;
+    }
+
     const regex = /^010\d{8}$/;
     if (!regex.test(phone)) {
         alert("전화번호 형식이 올바르지 않습니다.");
@@ -105,6 +110,11 @@ function sendCode() {
 function checkCode() {
     const verificationCode = $('#verification-code').val();
     const phone = $('#phone').val();
+
+    if (verificationCode === "") {
+        alert("인증번호를 입력해 주세요.");
+        return;
+    }
 
     $.ajax({
         type: "POST",

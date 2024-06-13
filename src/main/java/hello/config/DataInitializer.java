@@ -5,6 +5,7 @@ import hello.entity.user.Level;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,36 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private final GenreRepository genreRepository;
 
     private boolean initialized = false;
+
+    @Value("${level1}")
+    private String level1;
+
+    @Value("${level2}")
+    private String level2;
+
+    @Value("${level3}")
+    private String level3;
+
+    @Value("${level4}")
+    private String level4;
+
+    @Value("${level5}")
+    private String level5;
+
+    @Value("${level6}")
+    private String level6;
+
+    @Value("${level7}")
+    private String level7;
+
+    @Value("${level8}")
+    private String level8;
+
+    @Value("${level9}")
+    private String level9;
+
+    @Value("${level10}")
+    private String level10;
 
     @Override
     @Transactional
@@ -70,16 +101,16 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
         if (levelRepository.count() == 0) {
             List<Level> levels = new ArrayList<>();
-            levels.add(new Level(0, ""));
-            levels.add(new Level(20, ""));
-            levels.add(new Level(40, ""));
-            levels.add(new Level(100, ""));
-            levels.add(new Level(240, ""));
-            levels.add(new Level(580, ""));
-            levels.add(new Level(1300, ""));
-            levels.add(new Level(3200, ""));
-            levels.add(new Level(8700, ""));
-            levels.add(new Level(20000, ""));
+            levels.add(new Level(0, level1));
+            levels.add(new Level(20, level2));
+            levels.add(new Level(40, level3));
+            levels.add(new Level(100, level4));
+            levels.add(new Level(240, level5));
+            levels.add(new Level(580, level6));
+            levels.add(new Level(1300, level7));
+            levels.add(new Level(3200, level8));
+            levels.add(new Level(8700, level9));
+            levels.add(new Level(20000, level10));
 
             levelRepository.saveAll(levels);
         }
