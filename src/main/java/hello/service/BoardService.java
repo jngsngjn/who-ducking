@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class BoardService {
 
     private final BoardRepository boardRepository;
+
+    private final String serverBoardImagePath = "C:/Users/smkim/server/board";
 
     @Autowired
     public BoardService(BoardRepository boardRepository) {
@@ -23,8 +27,19 @@ public class BoardService {
     }
 
     //글작성
-    public void createBoard(BoardDTO writeboard, User loginUser)  {
+    public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception  {
         Board board = new Board();
+
+        UUID uuid = UUID.randomUUID();
+
+        String filename = uuid + "_" + file.getOriginalFilename();
+
+        File saveFile = new File(serverBoardImagePath + "/" + filename);
+
+        file.transferTo(saveFile);
+
+        writeboard.setImageName(filename);
+        writeboard.setImagePath(serverBoardImagePath + "/" + filename);
 
         board.setTitle(writeboard.getTitle());
         board.setContent(writeboard.getContent());
@@ -35,11 +50,6 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    //게시판 목록
-    public List<Board> getAllBoards() {
-        return boardRepository.findAll();
-    }
-
     //상세보기
     public Optional<Board> getBoardById(Long id) {
         //조회수 업데이트
@@ -48,10 +58,21 @@ public class BoardService {
     }
 
     //글 수정
-    public void updateBoard(Long boardId, BoardDTO updateboard, User loginUser) throws NotFoundException {
+    public void updateBoard(Long boardId, BoardDTO updateboard, User loginUser, MultipartFile file) throws Exception {
         Optional<Board> optionalBoard = boardRepository.findById(boardId);
         if (optionalBoard.isPresent()) {
             Board board = optionalBoard.get();
+
+            UUID uuid = UUID.randomUUID();
+
+            String filename = uuid + "_" + file.getOriginalFilename();
+
+            File saveFile = new File(serverBoardImagePath + "/" + filename);
+
+            file.transferTo(saveFile);
+
+            updateboard.setImageName(filename);
+            updateboard.setImagePath(serverBoardImagePath + "/" + filename);
 
             board.setTitle(updateboard.getTitle());
             board.setContent(updateboard.getContent());
@@ -78,6 +99,7 @@ public class BoardService {
         }
     }
 
+    //전체 목록 보기
     //최신순
     public List<Board> getBoardsSortedByLatest(){
         return boardRepository.findAllByOrderByWriteDate();

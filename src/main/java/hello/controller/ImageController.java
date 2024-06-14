@@ -18,9 +18,21 @@ public class ImageController {
     @Value("${profilePath}")
     private String profilePath;
 
+    @Value("${boardPath}")
+    private String boardPath;
+
     @GetMapping("/image/{type}/{imageName}")
     public Resource renderImage(@PathVariable("type") String type, @PathVariable("imageName") String imageName) throws MalformedURLException {
-        String basePath = type.equals("level") ? levelPath : profilePath;
+        String basePath = null;
+        if(type.equals("level")) {
+            basePath = levelPath;
+        }
+        else if(type.equals("profile")) {
+            basePath = profilePath;
+        }
+        else if(type.equals("board")){
+            basePath = boardPath;
+        }
         return new UrlResource("file:" + basePath + imageName);
     }
 
@@ -28,8 +40,12 @@ public class ImageController {
     public Resource renderImageHeader(@PathVariable("imageName") String imageName) throws MalformedURLException {
         if (imageName.contains("level")) {
             return new UrlResource("file:" + levelPath + imageName);
-        } else {
+        }
+        else if (imageName.contains("profile")){
             return new UrlResource("file:" + profilePath + imageName);
+        }
+        else{
+            return new UrlResource("file:" + boardPath + imageName);
         }
     }
 }

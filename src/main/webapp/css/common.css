@@ -11,6 +11,7 @@
 @import url(./header.css);
 @import url(./footer.css);
 @import url(./main.css);
+@import url(./boardList.css);
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {

@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>게시글 상세보기</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
 </head>
 <body>
-    <div th:insert="~{fragment/header :: header}"></div>
+    <div th:insert="~{fragments/header :: header}"></div>
     <div class="board-container">
         <h1 th:text="${board.title}">제목</h1>
         <div class="board-meta">
@@ -15,6 +37,11 @@
         <div class="board-content">
             <p th:text="${board.content}">내용</p>
         </div>
+        <div class="form-group">
+            <img class="board-img" id="boardImagePreview"
+                 th:src="${!board.imageName.equals('')  ? '/image/board/' + board.imageName : ''}"
+                 alt="Board Image"/>
+        </div>
         <div class="board-actions">
             <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="btn btn-primary">수정</a>
             <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
@@ -23,6 +50,6 @@
         </div>
         <a href="/board" class="btn btn-secondary">목록으로</a>
     </div>
-    <div th:insert="~{fragment/footer :: footer}"></div>
+    <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

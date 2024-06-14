@@ -50,9 +50,9 @@ public class BoardController {
 
     //작성된 폼을 가지고 새로운 게시글 작성
     @PostMapping("/create")
-    public String createBoard(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("board") BoardDTO board) {
+    public String createBoard(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("board") BoardDTO board, @RequestParam("file")MultipartFile file) throws Exception {
         User loginUser = userService.getLoginUserDetail(user);
-        boardService.createBoard(board,loginUser);
+        boardService.createBoard(board,loginUser,file);
         return "redirect:/board";
     }
 
@@ -77,13 +77,14 @@ public class BoardController {
             return "redirect:/board";
         }
         model.addAttribute("board", board);
+        System.out.println(board.getImageName());
         return "board/edit";
     }
 
     @PostMapping("/{boardId}/edit")
-    public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard) throws NotFoundException {
+    public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file) throws Exception {
         User loginUser = userService.getLoginUserDetail(user);
-        boardService.updateBoard(boardId,updatedBoard,loginUser);
+        boardService.updateBoard(boardId,updatedBoard,loginUser,file);
         return "redirect:/board";
     }
 
