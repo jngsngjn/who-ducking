@@ -51,18 +51,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 글자수 체크
-function countText() {
-    let textarea = document.getElementById("review-content");
-    let countSpan = document.getElementById("count");
-    let count = textarea.value.length;
-    countSpan.textContent = count + "/500";
-}
+document.addEventListener("DOMContentLoaded", function() {
+    function countText() {
+        let textarea = document.getElementById("review-content");
+        let countSpan = document.getElementById("count");
+        let count = textarea.value.length;
 
-document.getElementById("review-content").addEventListener("input", countText);
+        countSpan.textContent = count + "/500";
 
-// ... 클릭시 수정 삭제 모달
+        if (count >= 500) {
+            alert("500자 이상 입력하실 수 없습니다");
+        }
+    }
 
-// 최신순, 좋아요순 구현하기(아직안함)
-document.querySelector(".order_btn").addEventListener("click", function () {
-    this.classList.add("clicked");
+    document.getElementById("review-content").addEventListener("input", countText);
 });

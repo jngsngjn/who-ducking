@@ -1,18 +1,3 @@
-@keyframes fadeInOut {
-    0% {
-        opacity: 0;
-    }
-    30%{
-        opacity:1;
-    }
-    50% {
-        opacity: 50%;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
 .review-body {
     width: 87.5rem; /* 1400px */
     margin: 0 auto;
@@ -114,8 +99,8 @@ h1 {
     box-shadow: 0.0625rem 0.1875rem 0.1875rem 0.25rem rgb(177, 177, 177);
 }
 
-.ani-info-box{
-    height:48.125rem;
+.ani-info-box {
+    height: 48.125rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -130,7 +115,7 @@ h1 {
 
 .ani-title-box {
     font-size: 3rem;
-    position:relative;
+    position: relative;
 }
 
 .ani-title {
@@ -146,12 +131,10 @@ h1 {
     font-size: 1.25rem;
     font-weight: 400;
     height: 3.125rem;
-    padding: 0.625rem;
+    line-height: 3.125rem;
     border-radius: 0.625rem;
     margin-left: 1.25rem;
     box-shadow: 0.1875rem 0.1875rem 0.1875rem gray;
-    position:absolute;
-    top:110%;
 }
 
 .grade {
@@ -160,10 +143,18 @@ h1 {
 }
 
 .tag-list {
-    list-style: none;
     display: flex;
     width: 100%;
     padding: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
 }
 
 .tag-name {
@@ -191,6 +182,10 @@ h1 {
     margin-bottom: 1.25rem;
 }
 
+.ani-score {
+    font-size: 2.25rem;
+}
+
 /* //////// 별점 //////// */
 
 .score-box {
@@ -201,11 +196,6 @@ h1 {
     justify-content: flex-end;
     align-items: center;
 }
-
-/* .score {
-  font-size: 2.25rem;
-  margin-left: 0.625rem;
-} */
 
 .fa-star {
     margin-right: 0.625rem;
@@ -223,7 +213,7 @@ h1 {
 
 /* ///////// 리뷰 작성 폼 //////// */
 .write-box {
-    position: relative;
+    /* position: relative; */
     width: 81.25rem;
     height: 20.75rem;
     border: 0.0625rem solid #d9d9d9;
@@ -266,15 +256,10 @@ textarea:focus {
 
 .letter-count {
     font-size: 1.5rem;
-    position: absolute;
-    right: 2em;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0.3125rem;
     color: #d9d9d9;
-    top: calc(70%);
-}
-
-/* 리뷰작성란과 간격 조절용 */
-.review-write-box {
-    margin-top: 2rem;
 }
 
 .submit-btn {
@@ -285,6 +270,7 @@ textarea:focus {
     color: white;
     font-size: 1.5rem;
     padding: 0;
+    cursor: pointer;
 }
 
 .order-box {
@@ -302,7 +288,7 @@ textarea:focus {
     height: 3.125rem;
     border-radius: 1.25rem;
     border: none;
-    background-color: rgba(255, 139, 0, 0.2);
+    background-color: rgba(255, 139, 0, 0.5);
     color: white;
     font-size: 1.5rem;
     margin: 0 0.625rem;
@@ -319,7 +305,13 @@ textarea:focus {
     border-bottom: 0.0625rem solid #d9d9d9;
     padding: 1em 2em;
     font-size: 1.75rem;
+    position: relative;
+    height: 13rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
+
 .review-writer {
     font-size: 1.75rem;
     font-weight: 500;
@@ -329,7 +321,7 @@ textarea:focus {
     display: inline-block;
     text-align: center;
     width: 5.5rem;
-    height: 1.8875rem;
+    /*height: 1.8875rem;*/
     border-radius: 0.625rem;
     background-color: #ffc60b;
     color: white;
@@ -396,17 +388,54 @@ textarea:focus {
     overflow: hidden;
     color: gold;
 }
+
 .score {
-    margin-left: 8px;
-    font-size: 1.2em;
+    margin-left: 0.5rem;
+    font-size: 2.3rem;
+}
+
+/* modal */
+.update-modal-container {
+    width: 9.375rem;
+    height: 8.75rem;
+    border: 0.0625rem solid #d9d9d9;
+    border-radius: 1.25rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 10%;
+    left: 101%;
+}
+
+.update-review-btn {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.25rem;
+    border: none;
+    font-size: 1.25rem;
+    background-color: transparent;
+}
+
+.update-review-btn:hover {
+    color: #ff8b00;
+}
+
+hr {
+    width: 100%;
+    height: 0.063rem;
+    background: #d9d9d9;
+    border: 0;
+    margin: 0;
 }
 
 /* //////// 사이드 이미지 /////// */
 .left-img {
     position: absolute;
     opacity: 0.6;
-    top: 15%;
-    left: -14%;
+    top: 20%;
     width: 53.8125rem;
     height: 76.1875rem;
     z-index: -1;
@@ -417,7 +446,7 @@ textarea:focus {
     width: 53.8125rem;
     height: 76.1875rem;
     top: 42%;
-    right: -24%;
+    right: -8%;
     z-index: -1;
     opacity: 0.6;
 }

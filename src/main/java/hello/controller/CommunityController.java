@@ -33,7 +33,7 @@ public class CommunityController {
     }
 
     // 애니메이션 상세페이지(리뷰작성페이지)
-    @GetMapping("/reviewBoard")
+    @GetMapping("/community/1")
     public String getAnimation() {
 //    @GetMapping("/reviewBoard/{id}")
 //    public String getAnimation(@PathVariable("id") Long id, Model model) {

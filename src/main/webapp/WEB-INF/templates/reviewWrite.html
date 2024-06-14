@@ -1,13 +1,36 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <title>Review Board</title>
-    <link rel="stylesheet" href="/css/reviewWrite.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Who's DucKing</title>
+
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css" />
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css" />
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+    <!--    <link rel="stylesheet" href="/css/ReviewWrite.css" /> -->
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script
+            src="https://kit.fontawesome.com/2f3ee9d12e.js"
+            crossorigin="anonymous"
+    ></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/ReviewWrite.js"></script>
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-</head>
+  </head>
   <body>
     <div th:insert="~{fragments/header :: header}"></div>
     <div class="review-body">
@@ -18,14 +41,16 @@
           <div class="title-bar">
             <h3 class="ani-title-box">
               <span class="ani-title">나의 히어로 아카데미아</span>
-              <span class="is-complete">완결</span>
             </h3>
             <img src="/images/age-15.png" alt="age" class="grade" />
           </div>
-          <ul class="tag-list">
-            <li class="tag-name">개그</li>
-            <li class="tag-name">일상</li>
-          </ul>
+          <div class="tag-list">
+            <ul>
+              <li class="tag-name">개그</li>
+              <li class="tag-name">일상</li>
+            </ul>
+            <span class="is-complete">완결</span>
+          </div>
           <div class="ani-info-box2">
             <p class="author-name"><b>호리코시 코헤이</b></p>
             <p class="broad-date">2014.07.21</p>
@@ -39,6 +64,7 @@
           </div>
           <div class="score-box">
             <i class="fa-solid fa-star"></i>
+
             <div class="score"><span class="ani-score"> 4.7 / 5.0</span></div>
           </div>
         </div>
@@ -61,18 +87,12 @@
           rows="5"
           cols="50"
         ></textarea>
-<!--        <span class="letter-count">0/500</span>-->
-        <div class="letter-count">0/500</div>
+        <div class="letter-count" id="count">0/500</div>
         <div class="row-box review-write-box">
-          <div>
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><span class="score">5 </span>
-          </div>
+          <div class="stars-container"></div>
           <input type="submit" value="등록" class="submit-btn" />
         </div>
       </form>
-
       <div class="order-box">
         <div class="row-box">
           <button id="recent" class="order-btn">최신 순</button>
@@ -92,6 +112,11 @@
             유저이름 <span class="best-icon">BEST</span>
           </p>
           <i class="fa-solid fa-ellipsis-vertical"></i>
+          <div class="update-modal-container">
+            <button class="update-review-btn" id="update-btn">수정</button>
+            <hr />
+            <button class="update-review-btn" id="delete-btn">삭제</button>
+          </div>
         </div>
         <p class="review-comment">
           최고의 스포츠 애니! 하이큐 벌써 4번째 정주행 중 아직 못 본 사람은 꼭
