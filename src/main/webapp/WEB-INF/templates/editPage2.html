@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who's DucKing</title>
+    <link rel="stylesheet" href="/css/editPage.css" />
+    <script src="/js/editPage.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="line"></div>
+<h2>프로필 수정</h2>
+<div class="container">
+    <form th:action="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+        <div class="profile-image">
+            <img class="profile-img" id="profileImagePreview"
+                 th:src="${loginUser.profileImage != null ? '/image/profile/' + loginUser.profileImage.storeImageName : ''}"
+                 alt="Profile Image"
+                 style="display: none;"/>
+            <img class="profile-img" id="levelImagePreview"
+                 th:src="@{'/image/level/' + ${loginUser.level.imageName}}"
+                 alt="Level Image"
+                 style="display: none;"/>
+        </div>
+        <input type="file" id="profileImageInput" name="profileImage" accept="image/*">
+        <button type="button" id="useDefaultImage" style="display: none;">기본 이미지 사용</button>
+        <input type="hidden" id="useDefaultImageFlag" name="useDefaultImage"
+               th:value="${loginUser.profileImage == null ? 'true' : 'false'}">
+
+        <ul>
+            <ul>
+                <li class="name">닉네임</li>
+                <li class="box">
+                    <input type="text" id="currentNickname" name="nickname" class="text" th:value="${loginUser.getNickname()}" readonly>
+                    <button class="check" type="button" id="changeNicknameButton">변 경</button>
+                </li>
+            </ul>
+
+            <ul>
+                <li class="name">이메일</li>
+                <li class="box">
+                    <input type="email" class="text" th:value="${loginUser.getEmail()}" readonly>
+                    <i class="fas fa-lock icon"></i>
+                <li class="email">
+                    <!-- 체크박스와 텍스트를 연결하기 위해 label 사용 -->
+                    <label class="email-label">
+                        이메일 수신여부
+                        <input type="checkbox" class="email-checkbox" name="emailConsent" th:checked="${loginUser.emailConsent}">
+                    </label>
+                </li>
+            </ul>
+
+            <ul>
+                <li class="name">전화번호</li>
+                <li class="box">
+                    <input type="number" id="phone" class="text" name="phone" th:value="${loginUser.phone}" readonly>
+                    <button type="button" id="changePhoneButton" class="check" onclick="changePhone(this)">변 경</button>
+                </li>
+            </ul>
+
+            <ul id="verification-code" class="hidden">
+                <li class="name">인증번호</li>
+                <li class="box">
+                    <input type="number" id="verificationInput" class="text">
+                    <button type="button" id="checkCodeButton" class="check" onclick="verifyCode()">인증번호 확인</button>
+                </li>
+            </ul>
+        </ul>
+
+        <div>
+            <label for="male">
+                <input type="radio" id="male" name="gender" value="MALE"
+                       th:checked="${loginUser.gender == T(hello.entity.user.Gender).MALE}"/> 남
+            </label>
+            <label for="female">
+                <input type="radio" id="female" name="gender" value="FEMALE"
+                       th:checked="${loginUser.gender == T(hello.entity.user.Gender).FEMALE}"/> 여
+            </label>
+        </div>
+
+        <ul>
+            <li class="name">주소</li>
+            <li class="box">
+                <input type="text" class="text" id="postcode" name="zipcode" th:value="${loginUser.homeAddress.zipcode}" readonly>
+                <button type="button" class="check" onclick="execDaumPostcode()">우편번호 찾기</button>
+            </li>
+            <li class="box">
+                <input type="text" class="text" name="address" oninput="updateStyledText(this)" id="address" th:value="${loginUser.homeAddress.address}" readonly>
+                <span class="styled-text" id="address">주소</span>
+            </li>
+            <li class="box">
+                <input type="text" class="text" name="detailAddress" th:value="${loginUser.homeAddress.detailedAddress}" oninput="updateStyledText(this)" id="detail-address">
+                <span class="styled-text" id="address-detail">상세 주소</span>
+            </li>
+        </ul>
+
+        <ul>
+            <li class="action">
+                <button type="submit" class="edit">회원 정보 수정</button>
+            </li>
+        </ul>
+    </form>
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

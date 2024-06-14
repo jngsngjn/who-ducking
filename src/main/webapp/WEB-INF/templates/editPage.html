@@ -1,8 +1,29 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+
     <script src="/js/editPage.js"></script>
     <style>
         .profile-img {
@@ -14,7 +35,7 @@
     </style>
 </head>
 <body>
-<div th:insert="~{fragment/header :: header}"></div>
+<div th:insert="~{fragments/header :: header}"></div>
 
 <h2>프로필 수정</h2>
 <form th:action="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}" method="post" enctype="multipart/form-data">
@@ -78,6 +99,6 @@
     <input type="submit" value="정보 수정">
 </form>
 
-<div th:insert="~{fragment/footer :: footer}"></div>
+<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

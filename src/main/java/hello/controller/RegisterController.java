@@ -122,6 +122,6 @@ public class RegisterController {
         session.removeAttribute("registerBasicDTO");
         session.removeAttribute("registering");
         session.removeAttribute("registerBasic");
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

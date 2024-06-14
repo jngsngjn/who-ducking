@@ -1,0 +1,279 @@
+<!-- templates/fragment/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing Header</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header" th:fragment="header">
+        <div class="h-inner">
+            <!-- Left -->
+            <div class="h-left">
+                <!-- Logo -->
+                <h1 class="h-logo">
+                    <a class="navbar-brand" href="/">
+                        <img src="/images/logo.png" alt="로고">
+                    </a>
+                </h1>
+                <!-- Search Box -->
+                <form action="/search" method="get" class="h-search_box">
+                    <input type="text" id="" name="name" class="h-search_bar" />
+                    <button type="submit" class="h-search_btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+            <!-- Right -->
+            <div class="h-right">
+                <!-- Global Navigation Bar -->
+                <ul class="h-gnb_items">
+                    <li>
+                        <a href="/genre">장르</a>
+                    </li>
+                    <li>
+                        <a href="/community">커뮤니티</a>
+                    </li>
+                    <li>
+                        <a href="/news">소식</a>
+                    </li>
+                    <li>
+                        <a href="/playground">놀이터</a>
+                    </li>
+                    <!-- Alarm Dropdown -->
+                    <div class="h-alarm">
+                        <div class="h-alarm_btn" sec:authorize="isAuthenticated()">
+                            <li>
+                                <a href="#none">
+                                    알림
+                                    <!-- <span class="h-alarm_count">12</span> -->
+                                </a>
+                            </li>
+                        </div>
+
+                        <div class="h-alarm_btn" sec:authorize="!isAuthenticated()">
+                            <li>
+                                <a href="/login" style="color: #ff8b00">
+                                    로그인
+                                    <!-- <span class="h-alarm_count">12</span> -->
+                                </a>
+                            </li>
+                        </div>
+
+                        <!-- Alarm List -->
+                        <ul class="h-alarm_list">
+                            <!-- Before Login -->
+                            <li>
+                                <a href="#none">로그인 후 이용해 주세요.</a>
+                            </li>
+                            <!-- After Login -->
+                            <!-- Alarm X -->
+                            <li>
+                                <a href="#none">알림이 없습니다.</a>
+                            </li>
+                            <!-- Alarm O -->
+                            <li>
+                                <a href="#none">
+                                    ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#none">
+                                    ~~ 건의에 대한 답변이 등록되었습니다.
+                                </a>
+                            </li>
+                            <!-- 리스트 추가 시, 양식대로 추가
+                            <li>
+                                <a href="#none">
+
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </ul>
+                <!-- Profile -->
+                <div class="h-profile_box">
+                    <!-- Profile Btn -->
+                    <div class="h-profile" sec:authorize="isAuthenticated()">
+                        <div>
+                            <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}"/>
+                        </div>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+                <!-- Profile Menu -->
+                <ul class="h-profile_menu" sec:authorize="isAuthenticated()">
+                    <!-- Before Login -->
+                    <!-- After Login -->
+                    <li>
+                        <strong class="h-profile_menu_nickname" th:text="${session.nickname}"></strong>
+                    </li>
+                    <li class="h-profile_menu_exp_box">
+                        <div class="h-profile_menu_level-point">
+                            <span class="h-proflie_menu_level" th:text="Lv. + ${session.level}"></span>
+                            <div class="h-profile_menu_point">
+                                <i class="fa-solid fa-coins"></i>
+                                <span th:text="${session.point}"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="h-profile_menu_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'XP'"></span>
+                        </div>
+                        <div class="exp-bar">
+                            <div class="exp-bar-inner" th:style="'width:' + (${session.currentExp} > 0 ? (${session.maxExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/myPage">마이페이지</a>
+                    </li>
+                    <li>
+                        <a href="/logout">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="h-mobile">
+            <!-- Open Btn -->
+            <button class="h-mobile_btn-open">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="h-mobile_box">
+                <!-- Close Btn -->
+                <button class="h-mobile_btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <!-- Mobile Menu -->
+                <div class="h-mobile_menu_box">
+                    <!-- Logo -->
+                    <div class="h-logo mobile-logo">
+                        <a href="/">
+                            <img src="/images/logo.png" alt="로고">
+                        </a>
+                    </div>
+                    <!-- Mobile Profile (비로그인 시, 주석) -->
+                    <ul class="h-mobile_profile-gnb">
+                        <li>
+                            <div class="h-mobile_profile-box" sec:authorize="isAuthenticated()">
+                                <div class="h-mobile_profile">
+                                    <div>
+                                        <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}"/>
+                                    </div>
+                                    <strong href="/myPage" class="h-mobile_profile-nickname" th:value="${session.nickname}">UserNickname</strong>
+                                </div>
+                                <div class="h-mobile_profile_exp_box">
+                                    <div class="h-mobile_profile_level-point">
+                                        <span class="h-mobile_profile_level" th:text="Lv. + ${session.level}"></span>
+                                        <div class="h-mobile_profile_point">
+                                            <i class="fa-solid fa-coins"></i>
+                                            <span th:text="${session.point}"></span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="h-mobile_profile_exp_point">16 / 20 EXP</span>
+                                    </div>
+                                    <div class="h-mobile_profile_menu_exp">
+                                        <span class="h-mobile_profile_exp_track"></span>
+                                        <span class="h-mobile_profile_exp_thumb" style="width: 80%;"></span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                            <ul class="h-mobile_profile-lnb" sec:authorize="isAuthenticated()">
+                                <div class="h-mobile_alarm">
+                                    <div class="h-mobile_alarm-btn">
+                                        <li>
+                                            <a href="#none">
+                                                알림
+                                                <!-- <span class="h-mobile_alarm_count">12</span> -->
+                                            </a>
+                                        </li>
+                                    </div>
+                                    <ul class="h-mobile_alarm-list">
+                                        <!-- Alarm X -->
+                                        <li>
+                                            <a href="#none">알림이 없습니다.</a>
+                                        </li>
+                                        <!-- Alarm O -->
+                                        <li>
+                                            <a href="#none">
+                                                ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#none">
+                                                ~~ 건의에 대한 답변이 등록되었습니다.
+                                            </a>
+                                        </li>
+                                        <!-- 리스트 추가 시, 양식대로 추가
+                                        <li>
+                                            <a href="#none">
+            
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <li>
+                                    <a href="/mypage">마이페이지</a>
+                                </li>
+                                <li>
+                                    <a href="/logout">로그아웃</a>
+                                </li>
+                            </ul>
+                            <!-- Mobile Menu Default -->
+                            <ul class="h-mobile_menu">
+                                <li>
+                                    <a href="/genre">장르</a>
+                                </li>
+                                <li>
+                                    <a href="/community">커뮤니티</a>
+                                </li>
+                                <li>
+                                    <a href="/news">소식</a>
+                                </li>
+                                <li>
+                                    <a href="/playground">놀이터</a>
+                                </li>
+                            </ul>
+                            <!-- Before Login Menu -->
+                            <ul class="h-mobile_sign">
+                                <li>
+                                    <a class="nav-link" href="/login">로그인</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+
+</html>

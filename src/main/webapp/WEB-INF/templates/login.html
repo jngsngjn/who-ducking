@@ -1,13 +1,34 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/css/loginPage.css">
-  <title>로그인 페이지</title>
+  <title>Who's DucKing</title>
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+  <!-- AOS -->
+  <link rel="stylesheet" href="/vendor/aos/aos.css">
+  <!-- Animate -->
+  <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/common.css" />
+
+  <!-- jQuery -->
+  <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+  <!-- swiper -->
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- AOS -->
+  <script src="/vendor/aos/aos.js"></script>
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+  <!-- JavaScript -->
+  <script type="text/javascript" src="/js/common.js"></script>
 </head>
 
 <body>
   <div class="sign-up-login">
-    <div th:insert="~{fragment/header :: header}"></div>
+    <div th:insert="~{fragments/header :: header}"></div>
 
     <div class="login-container">
       <div class="login-wrapper">
@@ -35,7 +56,7 @@
         </div>
       </div>
     </div>
-    <div th:insert="~{fragment/footer :: footer}"></div>
+    <div th:insert="~{fragments/footer :: footer}"></div>
   </div>
 </body>
 

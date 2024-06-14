@@ -1,0 +1,495 @@
+/* 성진 추가 */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* 스핀 버튼 숨기기 (웹킷 브라우저) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* 스핀 버튼 숨기기 (IE 브라우저) */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* 준명 */
+.header,
+.header * {
+    box-sizing: border-box;
+}
+
+.header {
+    background: #ffffff;
+    border-style: solid;
+    border-color: #ededed;
+    border-width: 0px 0px 1px 0px;
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.group-152 {
+    position: absolute;
+    inset: 0;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    gap: 89px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 550.1px;
+    position: absolute;
+    left: 1109.9px;
+    top: 15px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    width: 390px;
+    position: relative;
+}
+
+.header-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.div {
+    color: #000000;
+    text-align: left;
+    font-family: "JejuGothic-Regular", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    position: relative;
+}
+
+.group-153 {
+    flex-shrink: 0;
+    width: 45px;
+    height: 34px;
+    position: static;
+}
+
+.group-151 {
+    width: 21px;
+    height: 12px;
+    position: static;
+}
+
+.count {
+    background: #ff8b00;
+    border-radius: 100px;
+    padding: 2px 4px 2px 4px;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 369px;
+    top: 0px;
+}
+
+._12 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "NanumSquareRoundOtf-Bold", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    position: relative;
+    width: 13px;
+    height: 8px;
+}
+
+.div2 {
+    color: #000000;
+    text-align: left;
+    font-family: "JejuGothic-Regular", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    position: absolute;
+    left: 345px;
+    top: 14px;
+    width: 34px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    width: 71.17px;
+    height: auto;
+    position: relative;
+    overflow: visible;
+}
+
+.left {
+    display: flex;
+    flex-direction: row;
+    gap: 22px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 780.24px;
+    position: absolute;
+    left: 260px;
+    top: 0px;
+}
+
+.logo {
+    flex-shrink: 0;
+    width: 175px;
+    height: 80px;
+    position: relative;
+    object-fit: cover;
+}
+
+.search-bar {
+    flex-shrink: 0;
+    width: 583.33px;
+    height: 45px;
+    position: relative;
+}
+
+.rectangle-7 {
+    background: #feffdb;
+    border-radius: 1000px;
+    width: 583.33px;
+    height: 45px;
+    position: absolute;
+    left: -0.17px;
+    top: calc(50% - 22.5px);
+}
+
+.frame {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 20.33px;
+    top: calc(50% - 10.5px);
+    overflow: visible;
+}
+
+.footer,
+.footer * {
+    box-sizing: border-box;
+}
+
+.footer {
+    position: relative;
+}
+
+.secion-footer {
+    background: #ffffff;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 1px 0px 0px 0px;
+    width: 1920px;
+    height: 263px;
+    position: absolute;
+    left: calc(50% - 960px);
+    bottom: 0px;
+    overflow: hidden;
+}
+
+.frame-83 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    left: 779px;
+    top: 17px;
+}
+
+.logo-black-1 {
+    flex-shrink: 0;
+    width: 125px;
+    height: 80px;
+    position: relative;
+    object-fit: cover;
+}
+
+.link {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.div {
+    color: var(--fcb, #757575);
+    text-align: center;
+    font-family: "JejuGothic-Regular", sans-serif;
+    font-size: 14px;
+    line-height: 168%;
+    font-weight: 400;
+    position: relative;
+}
+
+.div2 {
+    color: #ff8b00;
+    text-align: center;
+    font-family: "JejuGothic-Regular", sans-serif;
+    font-size: 14px;
+    line-height: 168%;
+    font-weight: 400;
+    position: relative;
+}
+
+.copyright-who-s-duc-king-all-rights-reserved {
+    color: #666666;
+    text-align: center;
+    font-family: "JejuGothic-Regular", sans-serif;
+    font-size: 14px;
+    line-height: 168%;
+    font-weight: 400;
+    position: relative;
+}
+
+.div3 {
+    color: #757575;
+    text-align: center;
+    font-family: "JejuGothic-Regular", sans-serif;
+    font-size: 14px;
+    line-height: 168%;
+    font-weight: 400;
+    position: relative;
+}
+
+.github-1 {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    overflow: visible;
+}
+
+
+/* ------------------------------------------------------------------------ */
+h2 {
+    color: #ff8b00;
+    font-size: 50px;
+    margin-bottom: 100px;
+    margin-left: 260px;
+}
+
+.photo {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    /* 가로로 중앙 배치 */
+    align-items: center;
+    /* 세로로 중앙 배치 */
+    margin: auto;
+    border: 1px solid;
+}
+
+.line {
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-width: 1px 0 0 0;
+    width: 1400px;
+    margin: 100px auto;
+    margin-bottom: 100px;
+}
+
+
+.text {
+    padding: 5px;
+    font-size: 20px;
+    border: 0px solid #ccc;
+    border-radius: 15px;
+    width: 500px;
+    /* 텍스트 상자의 너비 조절 */
+    height: 40px;
+    /* 텍스트 상자의 높이 조절 */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 650px;
+    height: 1994px;
+    margin: auto;
+}
+
+.name {
+    font-size: 40px;
+    color: #ff8b00;
+}
+
+.register {
+    padding: 0;
+    border: 1px solid;
+}
+
+.check {
+    height: 40px;
+    background-color: white;
+    border: 0px solid;
+    color: #ffc60b;
+    font-size: 24px;
+    width: 200px;
+}
+
+.but {
+    border: 5px solid #ccc;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 70px;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+.box {
+    border: 1px solid #ccc;
+    /* 상자의 테두리 */
+    padding: 10px;
+    /* 상자의 내부 여백 */
+    width: 600px;
+    border-radius: 20px;
+    /* 상자의 모서리 둥글게 */
+    display: flex;
+    /* 플렉스 박스 설정 */
+    align-items: center;
+    /* 세로 정렬 */
+    position: relative;
+}
+
+.email {
+    color: #ffc60b;
+    font-size: 24px;
+    text-align: right;
+}
+
+.email-label {
+    cursor: pointer;
+    gap: 100px;
+    align-items: center;
+}
+
+.email-checkbox {
+    background: #ffffff;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    width: 25px;
+    height: 25px;
+}
+
+/* 커서가 체크박스 위로 갔을 때 포인터로 변경 */
+.email-checkbox:hover,
+.email-label:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.gender {
+    background: #ffffff;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-width: 1px;
+    width: 150px;
+    height: 100px;
+    color: #ff8b00;
+    font-size: 42px;
+    font-weight: 400;
+}
+
+.gender-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    /* 버튼 간격 */
+}
+
+.gender.selected {
+    background-color: #ff8b00;
+    color: white;
+}
+
+.box input:focus+.styled-text,
+.box input:not(:placeholder-shown)+.styled-text {
+    display: none;
+    /* 입력 중이거나 값이 있으면 숨기기 */
+}
+
+.styled-text {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #d9d9d9;
+    pointer-events: none;
+    /* 클릭 이벤트 무시 */
+    font-size: 32px;
+}
+
+.resign {
+    background: #ffc60b;
+    border-radius: 10px;
+    width: 90px;
+    height: 40px;
+    border: 0px;
+    color: white;
+    font-size: 16px;
+}
+
+.edit {
+    background: #ff8b00;
+    border-radius: 10px;
+    width: 120px;
+    height: 40px;
+    border: 0px;
+    color: white;
+    font-size: 16px;
+}
+
+.action {
+    gap: 30px;
+    display: flex;
+    justify-content: right;
+}
+
+button {
+    cursor: pointer;
+}

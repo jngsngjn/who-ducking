@@ -123,7 +123,7 @@ function checkCode() {
         data: JSON.stringify({ phone: phone, code: verificationCode }),
         success: function(response) {
             if (response === true) {
-                alert("인증 성공!");
+                alert("인증이 성공적으로 완료되었습니다.");
                 $("#phone").prop("readonly", true);
                 $("#verification-code").prop("readonly", true);
                 $("#sendCodeButton").hide();
@@ -136,7 +136,7 @@ function checkCode() {
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Request failed:", textStatus, errorThrown);
-            alert("인증 처리에 실패했습니다.");
+            alert("인증번호 확인 중 오류가 발생했습니다.");
             verifyPhone = false;
         }
     });

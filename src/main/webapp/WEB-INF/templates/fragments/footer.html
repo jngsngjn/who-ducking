@@ -1,0 +1,68 @@
+<!-- templates/fragment/footer.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Who'sDucKing Footer</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <footer id="footer" th:fragment="footer">
+        <div class="f-box">
+            <div class="h-logo">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/logoblack.png" alt="로고">
+                </a>
+            </div>
+            <ul class="f-gnb">
+                <li>
+                    <a href="#none">이용약관</a>
+                </li>
+                <li>
+                    <a href="#none">개인정보처리방침</a>
+                </li>
+                <li>
+                    <a href="#none">공지사항</a>
+                </li>
+                <li>
+                    <a href="#none">자주 묻는 질문</a>
+                </li>
+            </ul>
+            <p class="f-copyright">
+                COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
+            </p>
+            <div class="f-team">
+                <span>정성진</span>
+                <span>노승빈</span>
+                <span>김승민</span>
+                <span>서준명</span>
+                <span>김수정</span>
+                <span>안성민</span>
+            </div>
+            <a class="github-icon" href="/">
+                <img src="/images/github.png" alt="github">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
