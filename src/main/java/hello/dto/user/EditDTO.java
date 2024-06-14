@@ -11,14 +11,11 @@ public class EditDTO {
     private boolean emailConsent;
     private Gender gender;
     private boolean useDefaultImage;
+    private String nickname;
+    private String phone;
+    private String zipcode;
+    private String address;
+    private String detailAddress;
 
-//    private String nickname;
-//    private String phone;
-
-
-
-//
 //    private List<Genre> genres;
-//
-//    private String address;
 }

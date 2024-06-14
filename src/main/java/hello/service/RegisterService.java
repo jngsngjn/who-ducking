@@ -4,6 +4,7 @@ import hello.dto.oauth2.OAuth2Response;
 import hello.dto.user.RegisterBasicDTO;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
+import hello.entity.user.Address;
 import hello.entity.user.User;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
@@ -42,6 +43,7 @@ public class RegisterService {
         user.setEmailConsent(registerBasicDTO.isEmailConsent());
         user.setRole("ROLE_USER");
         user.setLevel(levelRepository.findById(1L).get());
+        user.setHomeAddress(new Address("", "", ""));
 
         // 추천인 로직
         String recommender = registerBasicDTO.getRecommender();

@@ -40,7 +40,7 @@
             <label for="email" class="form-label">이메일</label>
             <div class="input-wrapper">
               <label id="email" th:text="${email}"></label>
-              <img class="icon" src="/images/lock.png" />
+              <i class="fas fa-lock icon"></i>
             </div>
             <div class="form-check">
               <label for="email-subscription" class="form-check-label">이메일 수신 여부</label>
@@ -68,7 +68,7 @@
             <div class="input-wrapper">
               <input type="number" id="verification-code" class="form-input" placeholder="인증번호를 입력해주세요" />
             </div>
-            <button type="button" id="checkCodeButton" class="form-btn" onclick="checkCode()">인증 확인</button>
+            <button type="button" id="checkCodeButton" class="form-btn" onclick="checkCode()">인증번호 확인</button>
           </div>
           <div class="form-group">
             <label for="referrer" class="form-label">추천인 닉네임</label>

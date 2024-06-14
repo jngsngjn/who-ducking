@@ -2,6 +2,7 @@ package hello.service;
 
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.EditDTO;
+import hello.entity.user.Address;
 import hello.entity.user.Image;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
@@ -42,6 +43,10 @@ public class UserService {
         User findUser = findUserById(id);
         findUser.setEmailConsent(editDTO.isEmailConsent());
         findUser.setGender(editDTO.getGender());
+        findUser.setNickname(editDTO.getNickname());
+        session.setAttribute("nickname", editDTO.getNickname());
+        findUser.setPhone(editDTO.getPhone());
+        findUser.setHomeAddress(new Address(editDTO.getZipcode(), editDTO.getAddress(), editDTO.getDetailAddress()));
 
         MultipartFile uploadImage = editDTO.getProfileImage();
         ProfileImage currentImage = findUser.getProfileImage();
