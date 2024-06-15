@@ -1,0 +1,74 @@
+.board-container {
+    max-width: 600px;
+    margin: 90px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff8b00;
+}
+
+.board-meta {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+.board-author,
+.board-date {
+    margin-right: 10px;
+}
+
+.board-content {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.form-group {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.board-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.board-actions {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.board-actions button {
+    margin: 0 5px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #ff8b00;
+}
+
+.btn-danger {
+    background-color: #FEFFDB;
+}
+
+.btn-secondary {
+    display: block;
+    margin: 0 auto;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FF8B00;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}

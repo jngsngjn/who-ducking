@@ -42,12 +42,12 @@
         </div>
         <div class="form-group">
             <label for="file">사진 첨부</label>
-            <img class="board-img" id="boardImagePreview"
-                 th:src="${!board.imageName.equals('') ? '/image/board/' + board.imageName : ''}"
-                 alt="Board Image"/>
+<!--            <img class="board-img" id="boardImagePreview"-->
+<!--                 th:src="${!board.imageName.equals('') ? '/image/board/' + board.imageName : ''}"-->
+<!--                 alt="Board Image"/>-->
             <input type="file" id="file" name="file" accept="image/*">
         </div>
-        <button type="submit">작성</button>
+        <button type="submit" class="board-create-button">작성</button>
     </form>
 </div>
 
