@@ -2,10 +2,13 @@ package hello.service;
 
 import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
+import hello.entity.board.Bookmark;
 import hello.entity.user.User;
 import hello.repository.BoardRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -101,13 +104,13 @@ public class BoardService {
 
     //전체 목록 보기
     //최신순
-    public List<Board> getBoardsSortedByLatest(){
-        return boardRepository.findAllByOrderByWriteDate();
+    public Page<Board> getBoardsSortedByLatest(Pageable pageable){
+        return boardRepository.findAllByOrderByWriteDateDesc(pageable);
     }
 
     //조회순
-    public List<Board> getBoardsSortedByViewCount(){
-        return boardRepository.findAllByOrderByViewCountDesc();
+    public Page<Board> getBoardsSortedByViewCount(Pageable pageable){
+        return boardRepository.findAllByOrderByViewCountDesc(pageable);
     }
 
 

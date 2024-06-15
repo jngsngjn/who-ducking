@@ -3,40 +3,61 @@ package hello.controller;
 import hello.dto.board.BoardDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
+import hello.entity.board.Bookmark;
 import hello.entity.user.User;
 import hello.service.BoardService;
+import hello.service.BookmarkService;
 import hello.service.UserService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
+@EnableSpringDataWebSupport
 public class BoardController {
 
     private final BoardService boardService;
     private final UserService userService;
+    private final BookmarkService bookmarkService;
 
     @GetMapping
-    public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "latest") String sort,Model model) {
-        List<Board> boardList;
-        if ("views".equals(sort)) {
-            boardList = boardService.getBoardsSortedByViewCount();
+    public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "writeDate") String sort,
+                            Model model,
+                            @PageableDefault(page = 0, size = 10) Pageable pageable) {
+
+        Page<Board> boardList;
+        int nowPage;
+        int startPage;
+        int endPage;
+
+        if ("viewCount".equals(sort)) {
+            boardList = boardService.getBoardsSortedByViewCount(pageable);
         } else {
-            boardList = boardService.getBoardsSortedByLatest();
+            boardList = boardService.getBoardsSortedByLatest(pageable);
         }
 
-        model.addAttribute("boardList", boardList);
+        nowPage = boardList.getPageable().getPageNumber() + 1;
+        startPage = Math.max(nowPage-4,1);
+        endPage = Math.min(nowPage+5,boardList.getTotalPages());
 
+        model.addAttribute("boardList", boardList);
         model.addAttribute("sort", sort);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
         return "board/freeBoard";
     }
@@ -58,14 +79,16 @@ public class BoardController {
 
     //목록에서 해당 id에 맞는 게시글 상세보기
     @GetMapping("/{boardId}")
-    public String showBoard(@PathVariable("boardId") Long boardId, Model model) {
+    public String showBoard(@PathVariable("boardId") Long boardId, Model model, @AuthenticationPrincipal CustomOAuth2User loginUser) {
         Board board = boardService.getBoardById(boardId).orElse(null);
+        User user = userService.getLoginUserDetail(loginUser);
 
         //null일경우 페이지 이동안함
         if(board == null) {
             return "redirect:/board";
         }
         model.addAttribute("board", board);
+        model.addAttribute("isBookmarked", bookmarkService.isBookmarked(user, board));
         return "board/show";
     }
 
@@ -81,6 +104,7 @@ public class BoardController {
         return "board/edit";
     }
 
+    //게시글 수정 동작
     @PostMapping("/{boardId}/edit")
     public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file) throws Exception {
         User loginUser = userService.getLoginUserDetail(user);
@@ -88,10 +112,35 @@ public class BoardController {
         return "redirect:/board";
     }
 
+    //게시글 삭제 동작
     @PostMapping("/{boardId}/delete")
     public String deleteBoard(@PathVariable("boardId") Long boardId) throws NotFoundException {
         boardService.deleteBoard(boardId);
         return "redirect:/board";
     }
 
+    //북마크 등록
+    @PostMapping("/{boardId}/bookmark")
+    @ResponseBody
+    public Map<String, Boolean> toggleBookmark(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User loginUser) {
+        User user = userService.getLoginUserDetail(loginUser);
+        Board board = boardService.getBoardById(boardId).orElse(null);
+        boolean bookmarked;
+
+        if (!bookmarkService.isBookmarked(user, board)) {
+            Bookmark bookmark = new Bookmark();
+            bookmark.setUser(user);
+            bookmark.setBoard(board);
+            bookmarkService.addBookmark(bookmark);
+            bookmarked = true;
+        } else {
+            assert board != null;
+            bookmarkService.removeBookmark(user.getId(), board.getId());
+            bookmarked = false;
+        }
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("bookmarked", bookmarked);
+        return response;
+    }
 }

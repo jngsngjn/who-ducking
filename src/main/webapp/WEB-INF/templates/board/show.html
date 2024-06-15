@@ -49,7 +49,37 @@
             </form>
         </div>
         <a href="/board" class="btn btn-secondary">목록으로</a>
+        <div class="board-boomark-box">
+            <button class="board-boomark-button" id="board-bookmark-button" th:attr="data-board-id=${board.id}" th:disabled="${isBookmarked}" th:text="${isBookmarked} ? '북마크됨' : '북마크'"></button>
+        </div>
     </div>
     <div th:insert="~{fragments/footer :: footer}"></div>
+    <script>
+        $(document).ready(function() {
+            $('#board-bookmark-button').click(function() {
+                var boardId = $(this).data('board-id');
+                var button = $(this);
+
+                $.ajax({
+                    url: '/board/' + boardId + '/bookmark',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.bookmarked) {
+                            button.text('북마크됨');
+                            button.prop('disabled', true);
+                        } else {
+                            button.text('북마크');
+                            button.prop('disabled', false);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                        alert('북마크 처리 중 오류가 발생했습니다.');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

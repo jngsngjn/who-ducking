@@ -61,9 +61,10 @@ h1 {
     background-color: #FEFFDB;
 }
 
-.btn-secondary {
+.btn-secondary ,
+.board-boomark-button{
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
