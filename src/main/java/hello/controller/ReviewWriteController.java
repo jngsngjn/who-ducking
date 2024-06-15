@@ -1,12 +1,27 @@
 package hello.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
+import hello.dto.animation.ReviewDTO;
+import hello.service.ReviewWriteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/reviews")
 public class ReviewWriteController {
-    @GetMapping("/review-write")
-    public String gotoReviewWrite(){
-        return "ReviewWrite";
+
+    private final ReviewWriteService reviewService;
+
+    @Autowired
+    public ReviewWriteController(ReviewWriteService reviewService) {
+        this.reviewService = reviewService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Long> saveReview(@RequestBody ReviewDTO reviewDTO) {
+        Long reviewId = reviewService.saveReview(reviewDTO);
+        return new ResponseEntity<>(reviewId, HttpStatus.CREATED);
     }
 }

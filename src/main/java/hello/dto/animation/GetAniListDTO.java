@@ -1,16 +1,24 @@
 package hello.dto.animation;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class GetAniListDTO {
+    private Long animationId;
+    private String imagePath;
+    private Double score;
+    private Long reviewCount;
 
-    private long id;
+    public GetAniListDTO(Long animationId, String imagePath, Double score, Long reviewCount) {
+        this.animationId = animationId;
+        this.imagePath = imagePath;
+        this.score = score;
+        this.reviewCount = reviewCount;
+    }
 
-    private String image_path;
-
-    private int like_count;
-
-    private double score;
-
+    public String getReviewCount() {
+        return String.valueOf(reviewCount);
+    }
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Who's DucKing</title>
+  <!-- Swiper -->
+  <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css"/>
+  <!-- AOS -->
+  <link rel="stylesheet" href="/vendor/aos/aos.css"/>
+  <!-- Animate -->
+  <link rel="stylesheet" href="/vendor/animate/animate.min.css"/>
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/common.css"/>
+  <!-- jQuery -->
+  <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+  <!-- swiper -->
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- AOS -->
+  <script src="/vendor/aos/aos.js"></script>
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+  <!-- JavaScript -->
+  <script type="text/javascript" src="/js/common.js"></script>
+  <script type="text/javascript" src="/js/ReviewBoard.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="sticky-container">
+
+</div>
+<h1 class="page-title">커뮤니티</h1>
+<div class="community-container">
+  <div class="side-container">
+    <button class="side-container-button" id="review-board">리뷰 게시판</button>
+    <hr/>
+    <button class="side-container-button" id="free-board">자유 게시판</button>
+  </div>
+  <div class="aniList-container">
+    <div class="ani-list-container" id="ani-list-container">
+        <div th:each="animation : ${animationLists}" class="ani-info-container">
+          <div class="img-container">
+            <img th:src="${animation.imagePath}" alt="애니 포스터" class="ani-poster" />
+          </div>
+          <div class="row-info-container">
+          <div class="recommend-container">
+            <i class="fa-regular fa-thumbs-up"> [[${animation.reviewCount}]]</i>
+            <i class="fa-solid fa-star"> [[${animation.score}]] / 5.0</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-btn-box">
+  <i class="fa-solid fa-angles-left page-btn" onclick="changePage(1)"></i>
+  <i class="fa-solid fa-angle-left page-btn" onclick="prevPage()"></i>
+  <span class="page-number page-btn" id="current-page">1</span>
+  <i class="fa-solid fa-angle-right page-btn" onclick="nextPage()"></i>
+  <i class="fa-solid fa-angles-right page-btn" onclick="changePage(totalPages)"></i>
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
