@@ -52,7 +52,7 @@ public class SecurityConfig {
 
     private AccessDeniedHandler accessDeniedHandler() {
         return (request, response, accessDeniedException) -> {
-            response.sendRedirect("/error/403");
+            request.getRequestDispatcher("/error/403").forward(request, response);
         };
     }
 }
