@@ -51,18 +51,48 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 글자수 체크
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     function countText() {
-        let textarea = document.getElementById("review-content");
+        let reviewContent = document.getElementById("review-content");
         let countSpan = document.getElementById("count");
-        let count = textarea.value.length;
+        let count = reviewContent.value.length;
 
         countSpan.textContent = count + "/500";
 
-        if (count >= 500) {
-            alert("500자 이상 입력하실 수 없습니다");
+        if (count > 500) {
+            reviewContent.value = reviewContent.value.substring(0, 500);
+            reviewContent.style.border = "1px solid red";
+        } else {
+            reviewContent.style.border = "";
         }
     }
 
-    document.getElementById("review-content").addEventListener("input", countText);
+    document
+        .getElementById("review-content")
+        .addEventListener("input", countText);
 });
+
+// ... 클릭시 수정 삭제 모달
+document.addEventListener("DOMContentLoaded", function () {
+    var showModal = document.getElementById("show-modal");
+    var modalContainer = document.getElementById("modal-container");
+
+    showModal.addEventListener("click", function () {
+        modalContainer.style.display = "block";
+    });
+
+    document.addEventListener("click", function (event) {
+        if (
+            event.target === showModal ||
+            modalContainer.contains(event.target)
+        ) {
+            return;
+        }
+        modalContainer.style.display = "none";
+    });
+});
+
+
+
+
+

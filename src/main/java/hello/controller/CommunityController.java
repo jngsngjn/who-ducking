@@ -1,16 +1,9 @@
 package hello.controller;
 
-import hello.dto.animation.GetAniListDTO;
-import hello.dto.animation.GetOneAniDTO;
-import hello.entity.animation.Animation;
 import hello.service.AnimationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 // @ 커뮤니티 페이지
 @Controller
@@ -29,7 +22,7 @@ public class CommunityController {
 //        List<GetAniListDTO> aniLists = animationService.getAniLists();
 //        model.addAttribute("aniLists", aniLists);
         System.out.println("화연이가 시킴");
-        return "reviewBoard";
+        return "ReviewBoard";
     }
 
     // 애니메이션 상세페이지(리뷰작성페이지)
@@ -39,7 +32,7 @@ public class CommunityController {
 //    public String getAnimation(@PathVariable("id") Long id, Model model) {
 //        GetOneAniDTO oneAnimation = animationService.findById(id);
 //        model.addAttribute("animation", oneAnimation);
-        return "reviewWrite";
+        return "ReviewWrite";
     }
 
 

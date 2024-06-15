@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ReviewWriteController {
     @GetMapping("/review-write")
     public String gotoReviewWrite(){
-        return "reviewWrite";
+        return "ReviewWrite";
     }
 }
