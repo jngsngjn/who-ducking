@@ -37,8 +37,7 @@ public class MyPageController {
         User loginUser = userService.validateUser(user, userId);
         if (loginUser != null) {
             model.addAttribute("loginUser", loginUser);
-//            return "editPage";
-            return "editPage2";
+            return "editPage";
         }
         return "redirect:/";
     }

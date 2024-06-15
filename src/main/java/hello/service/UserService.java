@@ -2,13 +2,13 @@ package hello.service;
 
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.EditDTO;
+import hello.entity.genre.Genre;
+import hello.entity.genre.UserGenre;
 import hello.entity.user.Address;
 import hello.entity.user.Image;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
-import hello.repository.FileStore;
-import hello.repository.ProfileImageRepository;
-import hello.repository.UserRepository;
+import hello.repository.*;
 import hello.service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @Transactional
@@ -27,6 +28,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final ProfileImageRepository profileImageRepository;
     private final FileStore fileStore;
+    private final GenreRepository genreRepository;
+    private final UserGenreRepository userGenreRepository;
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
@@ -47,6 +50,19 @@ public class UserService {
         session.setAttribute("nickname", editDTO.getNickname());
         findUser.setPhone(editDTO.getPhone());
         findUser.setHomeAddress(new Address(editDTO.getZipcode(), editDTO.getAddress(), editDTO.getDetailAddress()));
+
+        // 장르 설정
+        userGenreRepository.deleteByUser(id);
+        List<String> genres = editDTO.getSelectedGenres();
+        for (String genre : genres) {
+            System.out.println("genre = " + genre);
+        }
+        List<Genre> allGenres = genreRepository.findByNameIn(genres);
+
+        allGenres.forEach(genre -> {
+            UserGenre userGenre = new UserGenre(findUser, genre);
+            findUser.getUserGenres().add(userGenre);
+        });
 
         MultipartFile uploadImage = editDTO.getProfileImage();
         ProfileImage currentImage = findUser.getProfileImage();
