@@ -21,21 +21,23 @@ body {
     border-radius: 50%;
     margin: 0 auto 20px;
 }
-h1 {
+h2 {
     font-size: 2em;
     margin-bottom: 20px;
     color: #333;
 }
-p {
-    margin-bottom: 20px;
-    color: #666;
-}
 a {
+    display: inline-block;
     text-decoration: none;
     color: #ff8b00;
     font-weight: bold;
-    transition: color 0.3s;
+    margin: 10px 0;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 10px 20px;
+    border: 1px solid #ff8b00;
+    border-radius: 5px;
 }
 a:hover {
-    color: #e17c02;
+    color: #fff;
+    background-color: #ff8b00;
 }
