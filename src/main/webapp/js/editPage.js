@@ -1,3 +1,4 @@
+// test.js
 $(document).ready(function() {
 
     let profileImagePreview = $('#profileImagePreview');
@@ -38,21 +39,21 @@ $(document).ready(function() {
 
         // 이미 기본 이미지를 사용 중이라면 AJAX 요청을 보내지 않음
         if (useDefaultImage !== 'true') {
-        $.ajax({
-            url: '/myPage/user/level-image',
-            type: 'POST',
-            success: function(data) {
-                let defaultImagePath = '/image/level/' + data;
-                $('#profileImagePreview').attr('src', defaultImagePath).show();
-                $('#levelImagePreview').hide();
-                $('#profileImageInput').val('');
-                $('#useDefaultImageFlag').val('true');
-                useDefaultImageButton.hide();
-            },
-            error: function(xhr, status, error) {
-                alert('기본 이미지 로드에 실패했습니다.');
-            }
-        });
+            $.ajax({
+                url: '/myPage/user/level-image',
+                type: 'POST',
+                success: function(data) {
+                    let defaultImagePath = '/image/level/' + data;
+                    $('#profileImagePreview').attr('src', defaultImagePath).show();
+                    $('#levelImagePreview').hide();
+                    $('#profileImageInput').val('');
+                    $('#useDefaultImageFlag').val('true');
+                    useDefaultImageButton.hide();
+                },
+                error: function(xhr, status, error) {
+                    alert('기본 이미지 로드에 실패했습니다.');
+                }
+            });
         }
     });
 });
@@ -154,7 +155,7 @@ $(document).ready(function() {
 
             let $verifyButton = $('<button>', {
                 type: 'button',
-                text: '인증 번호 전송',
+                text: '인증번호 전송',
                 class: 'check',
                 id: 'sendCodeButton',
                 click: function () {
@@ -308,25 +309,110 @@ function execDaumPostcode() {
     }).open();
 }
 
-// 폼 제출 검증
-function validateForm() {
-    if (!duplicateChecked) {
-        alert("닉네임 중복 검사를 완료해 주세요.");
-        return false;
-    }
+$(document).ready(function() {
+    // 초기 장르를 숨겨진 input 필드에 설정
+    let initialGenres = [];
+    $('#selected-genres label').each(function() {
+        initialGenres.push($(this).text().trim()); // 공백 제거
+    });
+    $('#selectedGenresInput').val(initialGenres.join(',')); // 초기값 설정
 
-    if (!verifyPhone) {
-        alert("전화번호 인증을 완료해 주세요.");
-        return false;
-    }
+    $('#showGenreModal').click(function() {
+        // 모달을 열 때 모든 체크박스 초기화
+        $('input[name="genres"]').prop('checked', false);
+        $('.checkbox_label').removeClass('checkbox_label_click').addClass('checkbox_label');
 
-    const postcode = $('#postcode').val();
-    const detailAddress = $('#detail-address').val();
+        // 현재 선택된 장르를 체크박스로 설정
+        let selectedGenres = $('#selectedGenresInput').val().split(',');
+        selectedGenres.forEach(function(genre) {
+            let checkbox = $('input[name="genres"][value="' + genre.trim() + '"]');
+            checkbox.prop('checked', true);
+            let label = $('label[for="' + checkbox.attr('id') + '"]');
+            label.removeClass('checkbox_label').addClass('checkbox_label_click');
+        });
 
-    if (postcode && detailAddress === "") {
-        alert("상세 주소를 입력해 주세요.");
-        return false;
-    }
+        $('#genreModal').show(); // 모달 표시
+    });
 
-    return true;
-}
+    $('#closeGenreModal').click(function() {
+        $('#genreModal').hide(); // 모달 닫기
+    });
+
+    $('input[name="genres"]').change(function() {
+        let selectedCount = $('input[name="genres"]:checked').length; // 체크된 체크박스 개수 확인
+        if (selectedCount > 5) {
+            alert("최대 5개의 장르만 선택할 수 있습니다."); // 경고 메시지 표시
+            $(this).prop('checked', false); // 체크 해제
+
+            // 체크 해제 시 클래스 변경
+            const label = $('label[for="' + $(this).attr('id') + '"]');
+            label.removeClass('checkbox_label_click').addClass('checkbox_label');
+        } else {
+            // 체크 시 클래스 변경
+            const label = $('label[for="' + $(this).attr('id') + '"]');
+            if ($(this).is(':checked')) {
+                label.removeClass('checkbox_label').addClass('checkbox_label_click');
+            } else {
+                label.removeClass('checkbox_label_click').addClass('checkbox_label');
+            }
+        }
+    });
+
+    $('#submitGenres').click(function() {
+        let selectedGenres = [];
+        $('input[name="genres"]:checked').each(function() {
+            selectedGenres.push($(this).val()); // 선택된 장르 배열에 추가
+        });
+
+        if (selectedGenres.length === 0) {
+            alert("최소 1개 이상의 장르를 선택해야 합니다."); // 경고 메시지 표시
+            return;
+        }
+
+        // 선택한 장르를 표시
+        let selectedGenresList = $('#selected-genres');
+        selectedGenresList.empty(); // 기존 목록 지우기
+        let htmlContent = '<div class="genre-like-row">';
+        selectedGenres.forEach(function(genre) {
+            htmlContent += '<div class="genre-like-item"><label>' + genre + '</label></div>';
+        });
+        htmlContent += '</div>';
+
+        selectedGenresList.append(htmlContent); // 새로운 목록 추가
+
+        // 숨겨진 input 필드에 선택한 장르 설정
+        $('#selectedGenresInput').val(selectedGenres.join(',')); // 선택된 장르 값을 숨겨진 필드에 설정
+
+        // 체크박스 초기화
+        $('input[name="genres"]').prop('checked', false);
+
+        // 모달 닫기
+        $('#genreModal').hide();
+    });
+
+    // 폼 제출 시 선택된 장르를 hidden input에 추가
+    $('#genreForm').submit(function() {
+        let selectedGenres = [];
+        $('#selected-genres li').each(function() {
+            selectedGenres.push($(this).text()); // 선택된 장르 배열에 추가
+        });
+        $('#selectedGenresInput').val(selectedGenres.join(',')); // 선택된 장르 값을 숨겨진 필드에 설정
+    });
+
+    // 모달 외부 클릭 시 닫기
+    $(window).click(function(event) {
+        let modal = $('#genreModal');
+        if ($(event.target).is(modal)) {
+            modal.hide(); // 모달 닫기
+        }
+    });
+});
+
+// 폼 제출 시 선택된 장르를 hidden input에 추가
+$('#genreForm').submit(function () {
+    let selectedGenres = [];
+    $('#selected-genres li').each(function () {
+        selectedGenres.push($(this).text());
+    });
+    $('#selectedGenresInput').val(selectedGenres.join(','));
+});

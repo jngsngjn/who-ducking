@@ -25,6 +25,7 @@ public class Review {
     private Animation animation;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private Double score;

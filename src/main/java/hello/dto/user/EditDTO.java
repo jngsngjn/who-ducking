@@ -4,6 +4,8 @@ import hello.entity.user.Gender;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Data
 public class EditDTO {
 
@@ -16,6 +18,5 @@ public class EditDTO {
     private String zipcode;
     private String address;
     private String detailAddress;
-
-//    private List<Genre> genres;
+    private List<String> selectedGenres;
 }

@@ -25,6 +25,7 @@ public class Board {
     private String title;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "image_name")
