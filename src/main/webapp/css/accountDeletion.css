@@ -1,0 +1,9 @@
+#sendCodeButton.loading {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#sendCodeButton.loading::after {
+    content: " (전송 중...)";
+    color: #666;
+}

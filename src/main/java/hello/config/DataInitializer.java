@@ -2,6 +2,7 @@ package hello.config;
 
 import hello.entity.genre.Genre;
 import hello.entity.user.Level;
+import hello.repository.EmailCodeRepository;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
 import hello.repository.UserRepository;
@@ -16,12 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 @RequiredArgsConstructor
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     private final LevelRepository levelRepository;
     private final GenreRepository genreRepository;
     private final UserRepository userRepository;
+    private final EmailCodeRepository emailCodeRepository;
 
     private boolean initialized = false;
 
@@ -67,7 +70,38 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     }
 
     private void initializeData() {
+        genreInitializer();
 
+        levelInitializer();
+
+        emailCodeInitializer();
+    }
+
+    private void emailCodeInitializer() {
+        if (emailCodeRepository.count() != 0) {
+            emailCodeRepository.deleteAll();
+        }
+    }
+
+    private void levelInitializer() {
+        if (levelRepository.count() == 0) {
+            List<Level> levels = new ArrayList<>();
+            levels.add(new Level(0, level1));
+            levels.add(new Level(20, level2));
+            levels.add(new Level(40, level3));
+            levels.add(new Level(100, level4));
+            levels.add(new Level(240, level5));
+            levels.add(new Level(580, level6));
+            levels.add(new Level(1300, level7));
+            levels.add(new Level(3200, level8));
+            levels.add(new Level(8700, level9));
+            levels.add(new Level(20000, level10));
+
+            levelRepository.saveAll(levels);
+        }
+    }
+
+    private void genreInitializer() {
         if (genreRepository.count() == 0) {
             List<Genre> genres = new ArrayList<>();
             genres.add(new Genre("액션"));
@@ -101,22 +135,5 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
             genreRepository.saveAll(genres);
         }
-
-        if (levelRepository.count() == 0) {
-            List<Level> levels = new ArrayList<>();
-            levels.add(new Level(0, level1));
-            levels.add(new Level(20, level2));
-            levels.add(new Level(40, level3));
-            levels.add(new Level(100, level4));
-            levels.add(new Level(240, level5));
-            levels.add(new Level(580, level6));
-            levels.add(new Level(1300, level7));
-            levels.add(new Level(3200, level8));
-            levels.add(new Level(8700, level9));
-            levels.add(new Level(20000, level10));
-
-            levelRepository.saveAll(levels);
-        }
-
     }
 }

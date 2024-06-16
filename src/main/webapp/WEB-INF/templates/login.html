@@ -27,37 +27,37 @@
 </head>
 
 <body>
+<div th:insert="~{fragments/header :: header}"></div>
   <div class="sign-up-login">
-    <div th:insert="~{fragments/header :: header}"></div>
 
     <div class="login-container">
       <div class="login-wrapper">
-        <img class="who-duck" src="/images/logo.png" />
-        <img class="app-logo" src="/images/10duck.png" />
+        <img class="who-duck" src="/images/Logo/logo.png" />
+        <img class="app-logo" src="/images/Level/10duck.png" />
         <div class="login-options">
           <div class="login-option">
             <div class="login-btn google">
-              <img class="login-icon" src="/images/google-icon.png" />
+              <img class="login-icon" src="/images/SNS_Icon/google-icon.png" />
               <a href="/oauth2/authorization/google">구글로 시작하기</a>
             </div>
           </div>
           <div class="login-option">
             <div class="login-btn naver">
-              <img class="login-icon" src="/images/naver-icon.png" />
+              <img class="login-icon" src="/images/SNS_Icon/naver-icon.png" />
               <a href="/oauth2/authorization/naver">네이버로 시작하기</a>
             </div>
           </div>
           <div class="login-option">
             <div class="login-btn kakao">
-              <img class="login-icon" src="/images/kakao-icon.png" />
+              <img class="login-icon" src="/images/SNS_Icon/kakao-icon.png" />
               <a href="/oauth2/authorization/kakao">카카오로 시작하기</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div th:insert="~{fragments/footer :: footer}"></div>
   </div>
+<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 
 </html>

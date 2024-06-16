@@ -38,6 +38,11 @@ public class MainController {
                 session.setAttribute("point", loginUser.getPoint());
                 session.setAttribute("currentExp", loginUser.getCurrentExp());
                 session.setAttribute("maxExp", loginUser.getLevel().getMaxExp());
+
+                String role = loginUser.getRole();
+                if (role.equals("ROLE_ADMIN")) {
+                    session.setAttribute("isAdmin", true);
+                }
             }
         }
         return "index";
