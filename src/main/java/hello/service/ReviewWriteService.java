@@ -28,24 +28,24 @@ public class ReviewWriteService {
         this.animationRepository = animationRepository;
     }
 
-    @Transactional
-    public Long saveReview(ReviewDTO reviewDTO) {
-        User user = userRepository.findById(reviewDTO.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + reviewDTO.getUserId()));
-
-        Animation animation = animationRepository.findById(reviewDTO.getAnimationId())
-                .orElseThrow(() -> new IllegalArgumentException("Animation not found with id: " + reviewDTO.getAnimationId()));
-
-        Review review = new Review();
-        review.setUser(user);
-        review.setAnimation(animation);
-        review.setContent(reviewDTO.getContent());
-        review.setScore(reviewDTO.getScore());
-        review.setWriteDate(LocalDateTime.now());
-        review.setLikeCount(0);
-        review.setDislikeCount(0);
-
-        Review savedReview = reviewRepository.save(review);
-        return savedReview.getId();
-    }
+//    @Transactional
+//    public Long saveReview(ReviewDTO reviewDTO) {
+//        User user = userRepository.findById(reviewDTO.getUserId())
+//                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + reviewDTO.getUserId()));
+//
+//        Animation animation = animationRepository.findById(reviewDTO.getAnimationId())
+//                .orElseThrow(() -> new IllegalArgumentException("Animation not found with id: " + reviewDTO.getAnimationId()));
+//
+//        Review review = new Review();
+//        review.setUser(user);
+//        review.setAnimation(animation);
+//        review.setContent(reviewDTO.getContent());
+//        review.setScore(reviewDTO.getScore());
+//        review.setWriteDate(LocalDateTime.now());
+//        review.setLikeCount(0);
+//        review.setDislikeCount(0);
+//
+//        Review savedReview = reviewRepository.save(review);
+//        return savedReview.getId();
+//    }
 }

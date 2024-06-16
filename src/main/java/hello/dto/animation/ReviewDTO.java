@@ -5,15 +5,23 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+// 보류 -> 작성때 쓸 수 도 있지 않을까
+
 @Data
 public class ReviewDTO {
 
-    private Long id;
-    private Long userId;
-    private Long animationId;
-    private String content;
-    private Double score;
-    private LocalDateTime writeDate;
+    private String username;
+
     private int likeCount;
+
     private int dislikeCount;
+
+    private LocalDateTime writeDate;
+
+    private double score;
+
+    private String content;
+
+
+
 }

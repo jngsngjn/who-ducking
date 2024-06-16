@@ -36,32 +36,29 @@
 <div class="review-body">
   <h1 class="page-title">리뷰 게시판</h1>
   <div class="ani-container">
-    <img src="/images/ani-poster.png" alt="애니 포스터" class="ani-img" />
+    <img th:src="${aniDetailInfo.imagePath}" alt="애니 포스터" class="ani-img" />
     <div class="ani-info-box">
       <div class="title-bar">
         <h3 class="ani-title-box">
-          <span class="ani-title">나의 히어로 아카데미아</span>
+          <span class="ani-title" th:text="${aniDetailInfo.name}"></span>
         </h3>
-        <img src="/images/age-15.png" alt="age" class="grade" />
+<!--        <img th:src="'/images/' + (${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL'))}) + '.png'" alt="age" class="grade" />-->
+        <div th:text="${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL' ))}" class="grade"></div>
+<!--        <div> <span th:text="${aniDetailInfo.rating}"></span></div> 데이터는 맞게 들어오는데 3항 연산자가 모두 ALL 을 반환함 -->
       </div>
       <div class="tag-list">
         <ul class="tags">
           <li class="tag-name">개그</li>
           <li class="tag-name">일상</li>
         </ul>
-        <span class="is-complete">완결</span>
+        <span class="is-complete" th:text="${aniDetailInfo.isFinished ? '완결' : '진행중'}"></span>
+
       </div>
       <div class="ani-info-box2">
-        <p class="author-name"><b>호리코시 코헤이</b></p>
-        <p class="broad-date">2014.07.21</p>
+        <p class="author-name"><b th:text="${aniDetailInfo.author}">작가 이름</b></p>
+        <p class="broad-date" th:text="${aniDetailInfo.firstDate}">방영 시작일</p>
       </div>
-      <div class="synopsis">
-        무개성은 무조건적으로 차별대우를 받거나 아니면 비밀리에 죽이는
-        시대에 무개성으로 태어나는 비극을 겪는 미도리야는 자신이 동경하는
-        히어로 올마이트를 만나지만 그에게 "히어로의 삶은 현실과 맞물리지
-        않아."라고 충고를 듣지만 친구를 구하기 위해 달려든 것에 감명받은
-        올마이트에게서 힘을 전수받으며 이야기가 시작된다.
-      </div>
+      <div class="synopsis" th:text="${aniDetailInfo.description}"></div>
       <div class="score-box">
         <i class="fa-solid fa-star"></i>
 

@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("input", countText);
 });
 
-// ... 클릭시 수정 삭제 모달
+// 클릭시 수정 삭제 모달
 document.addEventListener("DOMContentLoaded", function () {
     var showModal = document.getElementById("show-modal");
     var modalContainer = document.getElementById("modal-container");
@@ -93,6 +93,30 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// 애니메이션 정보 GET 요청 -> html에서는 되는데 왜 여기서는 안되는거지?
+// $(document).ready(function() {
+//     // ani-poster 클래스를 가진 이미지를 클릭했을 때 실행될 함수
+//     $('.ani-poster').click(function() {
+//         console.log("애니 포스터 click");
+//
+//         let imageId = $(this).siblings('#animation-id').text().trim();
+//         console.log(imageId);
+//         let animationId = parseInt(imageId);
+//         console.log(animationId);
+//
+//         $.ajax({
+//             type: 'GET',
+//             url: '/community/' + animationId,
+//             success: function(response) {
+//                 console.log('GET 요청 성공');
+//                 window.location.href = '/community/' + animationId;
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error('GET 요청 실패');
+//             }
+//         });
+//     });
+// });
 
 
 

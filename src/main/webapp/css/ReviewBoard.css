@@ -145,6 +145,10 @@ hr {
   transform: scale(1.1);
 }
 
+#animation-id{
+  display: none;
+}
+
 .recommend-container {
   width: 100%;
   height: 2.5rem;

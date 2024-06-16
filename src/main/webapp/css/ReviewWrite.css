@@ -2,17 +2,11 @@
     0% {
         opacity: 0;
     }
-    20% {
-        opacity: 80%;
-    }
-    40% {
-        opacity: 30%;
-    }
     60% {
-        opacity: 80%;
+        opacity: 50%;
     }
     80% {
-        opacity: 50%;
+        opacity: 20%;
     }
     100% {
         opacity: 1;
@@ -162,6 +156,13 @@ h1 {
 .grade {
     width: 5rem;
     height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 2px 3px 3px #d1d1d1;
 }
 
 .tag-list {
@@ -508,3 +509,6 @@ hr {
 
 
 
+#animaiton-id{
+    opacity: 0;
+}

@@ -1,17 +1,19 @@
 package hello.dto.animation;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+//@Data
 @Getter
 @Setter
 public class GetAniListDTO {
-    private Long animationId;
+    private long animationId;
     private String imagePath;
     private Double score;
-    private Long reviewCount;
+    private long reviewCount;
 
-    public GetAniListDTO(Long animationId, String imagePath, Double score, Long reviewCount) {
+    public GetAniListDTO(long animationId, String imagePath, Double score, long reviewCount) {
         this.animationId = animationId;
         this.imagePath = imagePath;
         this.score = score;
