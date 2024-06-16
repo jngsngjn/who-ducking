@@ -1,13 +1,11 @@
 package hello.service;
 
+import hello.dto.user.AccountDeletionDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.EditDTO;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
-import hello.entity.user.Address;
-import hello.entity.user.Image;
-import hello.entity.user.ProfileImage;
-import hello.entity.user.User;
+import hello.entity.user.*;
 import hello.repository.*;
 import hello.service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +28,8 @@ public class UserService {
     private final FileStore fileStore;
     private final GenreRepository genreRepository;
     private final UserGenreRepository userGenreRepository;
+    private final EmailCodeRepository emailCodeRepository;
+    private final EmailService emailService;
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
@@ -102,5 +102,22 @@ public class UserService {
             return loginUser;
         }
         return null;
+    }
+
+    public void deleteAccountProcess(AccountDeletionDTO accountDeletionDTO) {
+        String email = accountDeletionDTO.getEmail();
+        String code = accountDeletionDTO.getCode();
+
+        boolean result = emailService.verifyCode(email, code);
+
+        if (result) {
+            ProfileImage findImage = profileImageRepository.findByUserId(userRepository.findByEmail(email).getId());
+            if (findImage != null) {
+                fileStore.deleteFile(findImage.getStoreImageName());
+            }
+
+            userRepository.deleteByEmail(email);
+            emailCodeRepository.deleteByEmail(email);
+        }
     }
 }

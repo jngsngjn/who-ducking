@@ -13,6 +13,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByNickname(String nickname);
 
+    User findByEmail(String email);
+
     boolean existsByNickname(String nickname);
 
     @Query("SELECT u.phone FROM User u")
@@ -21,4 +23,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u.socialType FROM User u WHERE u.phone = :phone")
     String findSocialTypeByPhone(@Param("phone") String phone);
 
+    void deleteByEmail(String email);
 }
