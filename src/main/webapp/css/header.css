@@ -160,7 +160,7 @@
     display: block;
     width: 40px;
     height: 40px;
-    background: url(/who-ducking/src/main/webapp/images/10duck.png) no-repeat center/cover;
+    background: url(/images/Level/10duck.png) no-repeat center/cover;
     border-radius: 100%;
 }
 
@@ -334,7 +334,7 @@
     width: 54px;
     height: 54px;
     border-radius: 100%;
-    background: url(/who-ducking/src/main/webapp/images/10duck.png) no-repeat center/cover;
+    background: url(/images/Level/10duck.png) no-repeat center/cover;
 }
 
 .h-mobile_profile-nickname {
@@ -473,6 +473,10 @@
 
 .h-mobile_sign > li > a {
     font-weight: 500;
+}
+
+.nav-link {
+    color: var(--mainColor);
 }
 
 /* Responsive Web Page ====================== */

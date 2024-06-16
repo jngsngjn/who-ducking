@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +25,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/oauth2/**", "/login", "/register/**").permitAll()
                 .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**", "/images/**", "/vendor/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
 
@@ -42,6 +44,15 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSEIONID"));
 
+        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                .accessDeniedHandler(accessDeniedHandler()));
+
         return http.build();
+    }
+
+    private AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            request.getRequestDispatcher("/error/403").forward(request, response);
+        };
     }
 }

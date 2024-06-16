@@ -20,4 +20,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u.socialType FROM User u WHERE u.phone = :phone")
     String findSocialTypeByPhone(@Param("phone") String phone);
+
 }

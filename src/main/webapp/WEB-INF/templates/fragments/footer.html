@@ -30,7 +30,7 @@
         <div class="f-box">
             <div class="h-logo">
                 <a class="navbar-brand" href="/">
-                    <img src="/images/logoblack.png" alt="로고">
+                    <img src="/images/Logo/logoblack.png" alt="로고">
                 </a>
             </div>
             <ul class="f-gnb">
@@ -46,6 +46,10 @@
                 <li>
                     <a href="#none">자주 묻는 질문</a>
                 </li>
+                <!-- Admin Page Link -->
+                <li th:if="${session.isAdmin}">
+                    <a href="/admin">관리자 페이지</a>
+                </li>
             </ul>
             <p class="f-copyright">
                 COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
@@ -59,7 +63,7 @@
                 <span>안성민</span>
             </div>
             <a class="github-icon" href="/">
-                <img src="/images/github.png" alt="github">
+                <img src="/images/SNS_Icon/github.png" alt="github">
             </a>
         </div>
     </footer>
