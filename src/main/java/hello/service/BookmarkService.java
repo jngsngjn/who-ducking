@@ -5,8 +5,10 @@ import hello.entity.board.Bookmark;
 import hello.entity.user.User;
 import hello.repository.BookmarkRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class BookmarkService {
 
     private final BookmarkRepository bookmarkRepository;

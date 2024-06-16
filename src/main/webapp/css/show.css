@@ -73,3 +73,16 @@ h1 {
     text-decoration: none;
     text-align: center;
 }
+
+.board-boomark-button.bookmarked{
+    display: block;
+    margin: 10px auto;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #666666;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+}
+
