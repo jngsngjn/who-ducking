@@ -96,6 +96,7 @@ public class BoardController {
 
         model.addAttribute("board", board);
         model.addAttribute("comments", comments);
+        model.addAttribute("loginUserId", user.getId());
         model.addAttribute("isBookmarked", bookmarkService.isBookmarked(user, board));
         return "board/show";
     }

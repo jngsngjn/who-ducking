@@ -29,7 +29,7 @@
 <body>
     <div th:insert="~{fragments/header :: header}"></div>
     <div class="board-container">
-        <h1 th:text="${board.title}">제목</h1>
+        <h1 th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목</h1>
         <div class="board-meta">
             <span class="board-author" th:text="${board.user.nickname}">작성자</span>
             <span class="board-date" th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}">작성일</span>
@@ -42,11 +42,13 @@
                  th:src="${!board.imageName.equals('')  ? '/image/board/' + board.imageName : ''}"
                  alt="Board Image"/>
         </div>
-        <div class="board-actions">
-            <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="btn btn-primary">수정</a>
-            <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
-                <button type="submit" class="btn btn-danger">삭제</button>
-            </form>
+        <div th:if="${board.user.id == loginUserId}">
+            <div class="board-actions">
+                <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="btn btn-primary">수정</a>
+                <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">삭제</button>
+                </form>
+            </div>
         </div>
         <a href="/board" class="btn btn-secondary">목록으로</a>
         <div class="board-boomark-box">
@@ -103,13 +105,15 @@
                         <span class="comment-likes">👍 0</span>
                         <span class="comment-dislikes">👎 0</span>
                     </div>
-                    <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" method="post">
-                        <button type="submit">삭제</button>
-                    </form>
-                    <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/edit(boardId=${board.id}, commentId=${comment.id})}" method="post">
-                        <input type="text" name="contentUpdate" placeholder="수정할 댓글 내용" />
-                        <button type="submit">수정</button>
-                    </form>
+                    <div th:if="${comment.user.id == loginUserId}">
+                        <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" method="post">
+                            <button type="submit">삭제</button>
+                        </form>
+                        <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/edit(boardId=${board.id}, commentId=${comment.id})}" method="post">
+                            <input type="text" name="contentUpdate" placeholder="수정할 댓글 내용" />
+                            <button type="submit">수정</button>
+                        </form>
+                    </div>
                 </li>
             </ul>
         </div>
