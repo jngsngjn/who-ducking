@@ -374,22 +374,27 @@
     overflow: hidden;
 }
 
-.h-mobile_profile_exp_track {
+.h-profile_exp_track {
+    margin-top: 0.8rem;
     display: block;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 8px;
     background: #f5f5f5;
+    border-radius: 100rem;
+    overflow: hidden;
 }
 
-.h-mobile_profile_exp_thumb {
-    display: block;
+.h-profile_exp_thumb {
+    display: flex;
     position: absolute;
+    justify-content: center;
+    height: 100%;
+    background: #ff8b00;
+    border-radius: 100rem;
+    transition: 0.5s;
     left: 0;
     top: 0;
-    height: 100%;
-    background: var(--mainColor);
-    transition: 0.5s;
 }
 
 /* Local Navigation Bar */

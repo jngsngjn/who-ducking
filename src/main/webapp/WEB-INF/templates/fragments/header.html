@@ -140,8 +140,8 @@
                         <div>
                             <span class="h-profile_menu_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'XP'"></span>
                         </div>
-                        <div class="exp-bar">
-                            <div class="exp-bar-inner" th:style="'width:' + (${session.currentExp} > 0 ? (${session.maxExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
+                        <div class="h-profile_exp_track">
+                            <div class="h-profile_exp_thumb" th:style="'width:' + (${session.currentExp} > 0 ? (${session.currentExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
                         </div>
                     </li>
                     <li>

@@ -6,7 +6,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who's DucKing</title>
-    <link rel="icon" href="/images/10duck.ico">
     <link rel="stylesheet" href="/css/editPage.css" />
     <script src="/js/editPage.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -34,27 +33,32 @@
 
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-
-<div class="line"></div>
-<h2>프로필 수정</h2>
+<div class="profile-edit-title-container">
+    <span class="profile-edit-title">프로필 수정</span>
+</div>
 <div class="container">
     <form th:action="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}" method="post"
           enctype="multipart/form-data" onsubmit="return validateForm()">
 
-        <div class="profile-image">
-            <img class="profile-img" id="profileImagePreview"
-                 th:src="${loginUser.profileImage != null ? '/image/profile/' + loginUser.profileImage.storeImageName : ''}"
-                 alt="Profile Image" style="display: none;" />
-            <img class="profile-img" id="levelImagePreview"
-                 th:src="@{'/image/level/' + ${loginUser.level.imageName}}" alt="Level Image"
-                 style="display: none;" />
+        <div class="profile-image-wrapper">
+            <div class="profile-image">
+                <img class="profile-img" id="profileImagePreview"
+                     th:src="${loginUser.profileImage != null ? '/image/profile/' + loginUser.profileImage.storeImageName : ''}"
+                     alt="Profile Image" />
+                <img class="profile-img" id="levelImagePreview"
+                     th:src="@{'/image/level/' + ${loginUser.level.imageName}}" alt="Level Image"
+                     style="display: none;" />
+            </div>
+            <div class="edit-icon" onclick="ProfileImageInput()">
+                <i class="fa-solid fa-pencil"></i>
+            </div>
         </div>
         <input type="file" id="profileImageInput" name="profileImage" accept="image/*">
-        <button type="button" id="useDefaultImage" style="display: none;">기본 이미지 사용</button>
+        <button type="button" id="useDefaultImage">기본 이미지 사용</button>
         <input type="hidden" id="useDefaultImageFlag" name="useDefaultImage"
-               th:value="${loginUser.profileImage == null ? 'true' : 'false'}">
-
-        <ul>
+         th:value="${loginUser.profileImage == null ? 'true' : 'false'}">
+        <hr class="edit-hr">
+        <ul class="edit-ul">
             <ul>
                 <li class="name">닉네임</li>
                 <li class="box">
@@ -339,7 +343,7 @@
             </div>
         </div>
 
-        <ul>
+        <ul class="edit-address-ul">
             <li class="name">주소</li>
             <li class="box">
                 <input type="text" class="text" id="postcode" name="zipcode"
@@ -359,6 +363,7 @@
             </li>
         </ul>
 
+
         <ul>
             <li class="action">
                 <button type="submit" class="edit">회원 정보 수정</button>
@@ -367,5 +372,10 @@
     </form>
 </div>
 <div th:insert="~{fragments/footer :: footer}"></div>
+<script>
+    function ProfileImageInput() {
+    document.getElementById('profileImageInput').click();
+}
+</script>
 </body>
 </html>

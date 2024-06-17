@@ -1,0 +1,171 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.popup-store-box {
+    display: flex;
+    height: 100%;
+}
+
+.popup-store-left-list {
+    width: 40%;
+    padding: 0 30px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-img {
+    width: 30%;
+    margin-right: 20px;
+}
+
+.search-box {
+    display: flex;
+    flex: 1;
+    position: relative;
+}
+
+.search-input {
+    background: #feffdb;
+    flex: 1;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #d9d9d9;
+    outline: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff8b00;
+}
+
+.search-button i {
+    font-size: 18px;
+}
+
+.section-choice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.popup-title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #ff8b00;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.schedule-button, .bookmark-button {
+    border-radius: 15px;
+    padding: 6px 15px;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.schedule-button.active, .bookmark-button.active {
+    background-color: #ff8b00;
+    color: #fff;
+}
+
+.schedule-button:not(.active), .bookmark-button:not(.active) {
+    background-color: #fff;
+    color: #000;
+}
+
+.popup-store-left-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.popup-store-left-list li {
+    background: #ffffff;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    border: 1px solid #d9d9d9;
+}
+
+.popup-store-img-container {
+    flex: 0 0 160px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-store-img {
+    border-radius: 20px;
+    width: 100%;
+    height: auto;
+}
+
+.popup-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.popup-info span {
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 100px;
+}
+
+.popup-info span .icon {
+    color: #ff8b00;
+    cursor: pointer;
+}
+
+.popup-dates {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.date-left {
+    text-align: left;
+    color: #000;
+}
+
+.date-right {
+    text-align: right;
+    color: #000;
+}
+
+.map {
+    width: 60%;
+    height: 100%;
+    border-left: 2px solid #d9d9d9;
+}
