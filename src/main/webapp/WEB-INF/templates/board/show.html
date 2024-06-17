@@ -53,7 +53,6 @@
             <button class="board-boomark-button" id="board-bookmark-button" th:attr="data-board-id=${board.id}"  th:text="${isBookmarked} ? '북마크됨' : '북마크'"></button>
         </div>
     </div>
-    <div th:insert="~{fragments/footer :: footer}"></div>
     <script>
         $(document).ready(function() {
             var isBookmarked = $('#board-bookmark-button').hasClass('bookmarked');
@@ -79,5 +78,42 @@
             });
         });
     </script>
+
+    <section class="comment-section">
+        <hr class="comment-section-orange-line">
+
+        <div class="comment-count-box">
+            <img class="comment-count-icon" src="/images/comment_count.svg"/>
+            <span class="comment-count" th:text="${comments.size()}">0</span>
+        </div>
+
+        <div class="comment-container">
+            <form action="#" th:action="@{/board/{boardId}/comment(boardId=${board.id})}" method="post" class="comment-box">
+                <textarea class="comment-input" name="contentWrite" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
+                <button class="comment-submit" type="submit">등록</button>
+            </form>
+            <ul class="comment-list">
+                <li class="comment-item" th:each="comment : ${comments}">
+                    <div class="comment-content">
+                        <span class="comment-writer" th:text="${comment.user.nickname}"></span>
+                        <p th:text="${comment.content}"></p>
+                    </div>
+                    <div class="comment-meta">
+                        <span class="comment-date" th:text="${#temporals.format(comment.writeDate, 'yyyy.MM.dd HH:mm')}"></span>
+                        <span class="comment-likes">👍 0</span>
+                        <span class="comment-dislikes">👎 0</span>
+                    </div>
+                    <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" method="post">
+                        <button type="submit">삭제</button>
+                    </form>
+                    <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/edit(boardId=${board.id}, commentId=${comment.id})}" method="post">
+                        <input type="text" name="contentUpdate" placeholder="수정할 댓글 내용" />
+                        <button type="submit">수정</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

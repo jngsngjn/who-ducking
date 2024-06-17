@@ -4,9 +4,11 @@ import hello.dto.board.BoardDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
+import hello.entity.board.Comment;
 import hello.entity.user.User;
 import hello.service.BoardService;
 import hello.service.BookmarkService;
+import hello.service.CommentService;
 import hello.service.UserService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -32,6 +35,7 @@ public class BoardController {
     private final BoardService boardService;
     private final UserService userService;
     private final BookmarkService bookmarkService;
+    private final CommentService commentService;
 
     @GetMapping
     public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "writeDate") String sort,
@@ -87,7 +91,11 @@ public class BoardController {
         if(board == null) {
             return "redirect:/board";
         }
+
+        List<Comment>comments = commentService.getCommentsByBoardId(boardId);
+
         model.addAttribute("board", board);
+        model.addAttribute("comments", comments);
         model.addAttribute("isBookmarked", bookmarkService.isBookmarked(user, board));
         return "board/show";
     }
@@ -142,5 +150,40 @@ public class BoardController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("bookmarked", bookmarked);
         return response;
+    }
+
+    //댓글 컨트롤러
+
+    //댓글작성
+    @PostMapping("/{boardId}/comment")
+    public String createComment(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @RequestParam("contentWrite") String content) {
+        User loginUser = userService.getLoginUserDetail(user);
+        Board board = boardService.getBoardById(boardId).orElse(null);
+
+        if (board != null) {
+            Comment comment = new Comment();
+            comment.setBoard(board);
+            comment.setUser(loginUser);
+            comment.setContent(content);
+            commentService.createComment(comment);
+        }
+
+        return "redirect:/board/" + boardId;
+    }
+
+    // 댓글 삭제
+    @PostMapping("/{boardId}/comment/{commentId}/delete")
+    public String deleteComment(@PathVariable("boardId") Long boardId, @PathVariable("commentId") Long commentId) throws NotFoundException {
+        commentService.deleteComment(commentId);
+        return "redirect:/board/" + boardId;
+    }
+
+    // 댓글 수정
+    @PostMapping("/{boardId}/comment/{commentId}/edit")
+    public String editComment(@PathVariable("boardId") Long boardId, @PathVariable("commentId") Long commentId, @RequestParam("contentUpdate") String content) throws NotFoundException {
+        Comment updatedComment = new Comment();
+        updatedComment.setContent(content);
+        commentService.updateComment(commentId, updatedComment);
+        return "redirect:/board/" + boardId;
     }
 }
