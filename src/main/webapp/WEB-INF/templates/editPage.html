@@ -124,7 +124,7 @@
                     <li th:each="userGenre : ${loginUser.userGenres}">
 
                         <div class="genre-like-item">
-                            <label th:text="${userGenre.genre.name}"></label>
+                            <label th:text="${userGenre.genre.name}" class="label-like"></label>
                         </div>
                     </li>
                 </div>
