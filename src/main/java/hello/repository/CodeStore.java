@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+// 전화번호 인증코드를 저장하는 메모리 저장소
 @Component
 public class CodeStore {
 
