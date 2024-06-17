@@ -4,12 +4,12 @@ import hello.dto.oauth2.OAuth2Response;
 import hello.dto.user.RegisterBasicDTO;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
+import hello.entity.user.Address;
 import hello.entity.user.User;
 import hello.repository.GenreRepository;
 import hello.repository.LevelRepository;
 import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +26,6 @@ public class RegisterService {
     private final GenreRepository genreRepository;
     private final LevelRepository levelRepository;
 
-    private final BCryptPasswordEncoder passwordEncoder;
     private final SmsService smsService;
     private final PointService pointService;
 
@@ -39,11 +38,12 @@ public class RegisterService {
         user.setNickname(registerBasicDTO.getNickname());
         user.setGender(registerBasicDTO.getGender());
         smsService.sendCode(registerBasicDTO.getPhone());
-        user.setPhone(passwordEncoder.encode(registerBasicDTO.getPhone()));
+        user.setPhone(registerBasicDTO.getPhone());
         user.setEmail(oauth2Response.getEmail());
         user.setEmailConsent(registerBasicDTO.isEmailConsent());
         user.setRole("ROLE_USER");
         user.setLevel(levelRepository.findById(1L).get());
+        user.setHomeAddress(new Address("", "", ""));
 
         // 추천인 로직
         String recommender = registerBasicDTO.getRecommender();
@@ -72,13 +72,13 @@ public class RegisterService {
         }
     }
 
-    public Map<String, Object> isDuplicatePhone(String phone) {
+    public Map<String, Object> isDuplicatePhone(String inputPhone) {
         Map<String, Object> result = new HashMap<>();
-        List<String> phoneNumbers = userRepository.findAllPhoneNumbers();
+        List<String> phones = userRepository.findAllPhoneNumbers();
 
-        for (String encodedPhone : phoneNumbers) {
-            if (passwordEncoder.matches(phone, encodedPhone)) {
-                String socialType = userRepository.findSocialTypeByPhone(encodedPhone);
+        for (String phone : phones) {
+            if (phone.equals(inputPhone)) {
+                String socialType = userRepository.findSocialTypeByPhone(phone);
                 result.put("isDuplicate", true);
                 result.put("socialType", socialType);
                 return result;

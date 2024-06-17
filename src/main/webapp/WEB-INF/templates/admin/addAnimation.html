@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <link rel="stylesheet" href="/css/addAnimation.css" />
+</head>
+<body>
+<div class="container">
+    <h2>애니메이션 추가</h2>
+    <form th:action="@{/admin/add-animation}" method="post" enctype="multipart/form-data">
+        <label for="name">애니명</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="author">작가명</label>
+        <input type="text" id="author" name="author" required>
+
+        <label for="firstDate">방영 시작일</label>
+        <input type="date" id="firstDate" name="firstDate" required>
+
+        <label for="isFinished">종결 여부</label>
+        <select id="isFinished" name="isFinished" required>
+            <option value="true">예</option>
+            <option value="false">아니오</option>
+        </select>
+
+        <label for="rating">관람 등급</label>
+        <select id="rating" name="rating" required>
+            <option value="ALL">전체</option>
+            <option value="TWELVE">12세</option>
+            <option value="FIFTEEN">15세</option>
+            <option value="ADULT">19세</option>
+        </select>
+
+        <label for="description">애니 설명</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <label for="image">애니 이미지</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+
+        <button type="submit">추가하기</button>
+    </form>
+</div>
+</body>
+</html>

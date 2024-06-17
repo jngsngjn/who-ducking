@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'JejuGothic-Regular', sans-serif;
+        }
+
+        .genre-selection {
+            background: #ededed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .genre-container {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #d9d9d9;
+            width: 850px;
+            height: 1600px;
+            box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .genre-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 100px;
+        }
+
+        .genre-title {
+            color: #ff8b00;
+            font-size: 48px;
+            font-weight: 400;
+        }
+
+        .genre-subtitle {
+            color: #ffc60b;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .genre-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 785px;
+            height: 1020px;
+            margin: 159px 0 50px 0;
+        }
+
+        .genre-row {
+            display: flex;
+            gap: 33px;
+            justify-content: center;
+            margin-bottom: 100px;
+            width: 785px;
+        }
+
+        .genre-item {
+            width: auto;
+            height: 60px;
+            text-align: center;
+        }
+
+        .genre-btn {
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #d9d9d9;
+            color: #d9d9d9;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .genre-btn:hover {
+            background: #ff8b00;
+            color: #fff;
+        }
+
+        .genre-submit {
+            width: 650px;
+            height: 75px;
+        }
+
+        .submit-btn {
+            background: #ff8b00;
+            border: none;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 36px;
+            padding: 10px;
+            width: 650px;
+            height: 75px;
+            cursor: pointer;
+            margin-bottom: 100px;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #ff6f00;
+        }
+
+        .secion-footer {
+            background: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .blackframe {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-black-1 {
+            width: 100px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-link {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+            color: #333;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .footer-link:hover {
+            color: #ff8b00;
+        }
+
+        .footer-team span {
+            color: #757575;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .team-name {
+            color: #333;
+            cursor: pointer;
+        }
+
+        .reserved {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .github-1 {
+            width: 30px;
+            margin-top: 10px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .right,
+        .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-bar {
+            display: flex;
+            gap: 20px;
+            cursor: pointer;
+        }
+
+        .header-bar p {
+            margin: 0;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .header-bar p:hover {
+            color: #ff8b00;
+        }
+
+        .alarm-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ff8b00;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            color: #fff;
+        }
+
+        .logo {
+            width: 100px;
+
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .search-input {
+            width: 200px;
+            height: 20px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .rectangle-7 {
+            width: 200px;
+            height: 30px;
+            background: #fff;
+            border-radius: 10px;
+        }
+
+        .frame {
+            width: 20px;
+        }
+
+        .profile {
+            width: 30px;
+            margin-left: 20px;
+        }
+
+        .github1 {
+            width: 20px;
+            margin-top: 10px;
+        }
+
+        /* -------------------------------------------- */
+
+        .checkbox_class {
+            display: none;
+        }
+
+        .checkbox_label {
+            color: #d9d9d9;
+            background-color: white;
+            border: 1px solid #d9d9d9;
+            border-radius: 20px;
+            font-size: 30px;
+            width: auto;
+            min-width: 150px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0 10px;
+        }
+
+        .checkbox_label:hover {
+            background-color: #feffdb;
+            cursor: pointer;
+        }
+
+        .checkbox_label_click {
+            color: #FFFFFF;
+            background-color: #ff8b00;
+            border: 1px solid #ff8b00;
+            border-radius: 20px;
+            font-size: 30px;
+            width: auto;
+            min-width: 150px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0 10px;
+        }
+
+        .checkbox_label_click:hover {
+            cursor: pointer;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/css/genre.css">
+        <script src="/js/registerGenre.js"></script>
+
+        <title>Who's DucKing</title>
+
+        <!-- Swiper -->
+        <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+        <!-- AOS -->
+        <link rel="stylesheet" href="/vendor/aos/aos.css">
+        <!-- Animate -->
+        <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/common.css" />
+
+        <!-- jQuery -->
+        <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+        <!-- swiper -->
+        <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+        <!-- AOS -->
+        <script src="/vendor/aos/aos.js"></script>
+        <!-- FontAwesome -->
+        <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+        <!-- JavaScript -->
+        <script type="text/javascript" src="/js/common.js"></script>
+    </head>
+
+    <body>
+        <div th:insert="~{fragments/header :: header}"></div>
+
+        <form action="/register" method="post">
+            <div class="genre-selection">
+                <div class="genre-container">
+                    <div class="genre-header">
+                        <div class="genre-title">애니 장르 선택</div>
+                        <div class="genre-subtitle">중복 선택 가능</div>
+                    </div>
+                    <div class="genre-list">
+                        <div class="genre-row">
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_action" name="genre" value="액션"
+                                    class="checkbox_class" />
+                                <label for="custom_button_action" id="custom_button_action_label"
+                                    class="checkbox_label">액션</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_munchkin" name="genre" value="먼치킨"
+                                    class="checkbox_class" />
+                                <label for="custom_button_munchkin" id="custom_button_munchkin_label"
+                                    class="checkbox_label">먼치킨</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_mystery" name="genre" value="추리/미스테리"
+                                    class="checkbox_class" />
+                                <label for="custom_button_mystery" id="custom_button_mystery_label"
+                                    class="checkbox_label">추리/미스테리</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_sports" name="genre" value="스포츠"
+                                    class="checkbox_class" />
+                                <label for="custom_button_sports" id="custom_button_sports_label"
+                                    class="checkbox_label">스포츠</label>
+                            </div>
+                        </div>
+                        <div class="genre-row">
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_magic" name="genre" value="마법"
+                                    class="checkbox_class" />
+                                <label for="custom_button_magic" id="custom_button_magic_label"
+                                    class="checkbox_label">마법</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_comedy" name="genre" value="개그"
+                                    class="checkbox_class" />
+                                <label for="custom_button_comedy" id="custom_button_comedy_label"
+                                    class="checkbox_label">개그</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_daily" name="genre" value="일상"
+                                    class="checkbox_class" />
+                                <label for="custom_button_daily" id="custom_button_daily_label"
+                                    class="checkbox_label">일상</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_romance" name="genre" value="순정"
+                                    class="checkbox_class" />
+                                <label for="custom_button_romance" id="custom_button_romance_label"
+                                    class="checkbox_label">순정</label>
+                            </div>
+                        </div>
+                        <div class="genre-row">
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_fantasy" name="genre" value="판타지"
+                                    class="checkbox_class" />
+                                <label for="custom_button_fantasy" id="custom_button_fantasy_label"
+                                    class="checkbox_label">판타지</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_school" name="genre" value="학원"
+                                    class="checkbox_class" />
+                                <label for="custom_button_school" id="custom_button_school_label"
+                                    class="checkbox_label">학원</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_healing" name="genre" value="힐링"
+                                    class="checkbox_class" />
+                                <label for="custom_button_healing" id="custom_button_healing_label"
+                                    class="checkbox_label">힐링</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_historical" name="genre" value="시대"
+                                    class="checkbox_class" />
+                                <label for="custom_button_historical" id="custom_button_historical_label"
+                                    class="checkbox_label">시대</label>
+                            </div>
+                        </div>
+                        <div class="genre-row">
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_maid" name="genre" value="메이드"
+                                    class="checkbox_class" />
+                                <label for="custom_button_maid" id="custom_button_maid_label"
+                                    class="checkbox_label">메이드</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_tsundere" name="genre" value="츤데레"
+                                    class="checkbox_class" />
+                                <label for="custom_button_tsundere" id="custom_button_tsundere_label"
+                                    class="checkbox_label">츤데레</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_yandere" name="genre" value="얀데레"
+                                    class="checkbox_class" />
+                                <label for="custom_button_yandere" id="custom_button_yandere_label"
+                                    class="checkbox_label">얀데레</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_love" name="genre" value="러브"
+                                    class="checkbox_class" />
+                                <label for="custom_button_love" id="custom_button_love_label"
+                                    class="checkbox_label">러브</label>
+                            </div>
+                        </div>
+                        <div class="genre-row">
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_bl" name="genre" value="BL"
+                                    class="checkbox_class" />
+                                <label for="custom_button_bl" id="custom_button_bl_label"
+                                    class="checkbox_label">BL</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_philosophy" name="genre" value="철학"
+                                    class="checkbox_class" />
+                                <label for="custom_button_philosophy" id="custom_button_philosophy_label"
+                                    class="checkbox_label">철학</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_harem" name="genre" value="하렘"
+                                    class="checkbox_class" />
+                                <label for="custom_button_harem" id="custom_button_harem_label"
+                                    class="checkbox_label">하렘</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_reverse_harem" name="genre" value="역하렘"
+                                    class="checkbox_class" />
+                                <label for="custom_button_reverse_harem" id="custom_button_reverse_harem_label"
+                                    class="checkbox_label">역하렘</label>
+                            </div>
+
+                        </div>
+                        <div class="genre-row">
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_yuri" name="genre" value="백합"
+                                    class="checkbox_class" />
+                                <label for="custom_button_yuri" id="custom_button_yuri_label"
+                                    class="checkbox_label">백합</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_horror" name="genre" value="호러"
+                                    class="checkbox_class" />
+                                <label for="custom_button_horror" id="custom_button_horror_label"
+                                    class="checkbox_label">호러</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_kids" name="genre" value="아동"
+                                    class="checkbox_class" />
+                                <label for="custom_button_kids" id="custom_button_kids_label"
+                                    class="checkbox_label">아동</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_virtual" name="genre" value="가상"
+                                    class="checkbox_class" />
+                                <label for="custom_button_virtual" id="custom_button_virtual_label"
+                                    class="checkbox_label">가상</label>
+                            </div>
+                        </div>
+                        <div class="genre-row">
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_mental" name="genre" value="멘붕"
+                                    class="checkbox_class" />
+                                <label for="custom_button_mental" id="custom_button_mental_label"
+                                    class="checkbox_label">멘붕</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_mecha" name="genre" value="메카"
+                                    class="checkbox_class" />
+                                <label for="custom_button_mecha" id="custom_button_mecha_label"
+                                    class="checkbox_label">메카</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_superpower" name="genre" value="능력자"
+                                    class="checkbox_class" />
+                                <label for="custom_button_superpower" id="custom_button_superpower_label"
+                                    class="checkbox_label">능력자</label>
+                            </div>
+                            <div class="genre-item">
+                                <input type="checkbox" id="custom_button_shota" name="genre" value="쇼타"
+                                    class="checkbox_class" />
+                                <label for="custom_button_shota" id="custom_button_shota_label"
+                                    class="checkbox_label">쇼타</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="genre-submit">
+                        <button class="submit-btn" type="submit">회원가입</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div th:insert="~{fragments/footer :: footer}"></div>
+    </body>
+    <script>
+        // 체크박스 가져오기
+        const checkboxes = document.querySelectorAll('.checkbox_class');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('click', (e) => {
+                const label = document.getElementById(e.target.id + "_label");
+                if (e.target.checked == true) {
+                    label.classList.replace('checkbox_label', 'checkbox_label_click');
+                } else {
+                    label.classList.replace('checkbox_label_click', 'checkbox_label');
+                }
+            });
+        });
+    </script>
+
+    </html>

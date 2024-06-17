@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/who-ducking/src/main/webapp/css/common.css" />
+
+  <style>
+    .header,
+    .header * {
+      box-sizing: border-box;
+    }
+
+    .header {
+      background: #ffffff;
+      border-style: solid;
+      border-color: #ededed;
+      border-width: 0px 0px 1px 0px;
+      height: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .group-152 {
+      position: absolute;
+      inset: 0;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: row;
+      gap: 89px;
+      align-items: center;
+      justify-content: flex-start;
+      width: 550.1px;
+      position: absolute;
+      left: 1109.9px;
+      top: 15px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      align-items: flex-end;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      width: 390px;
+      position: relative;
+    }
+
+    .header-bar {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .div {
+      color: #000000;
+      text-align: left;
+      font-family: "JejuGothic-Regular", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .group-153 {
+      flex-shrink: 0;
+      width: 45px;
+      height: 34px;
+      position: static;
+    }
+
+    .group-151 {
+      width: 21px;
+      height: 12px;
+      position: static;
+    }
+
+    .count {
+      background: #ff8b00;
+      border-radius: 100px;
+      padding: 2px 4px 2px 4px;
+      display: flex;
+      flex-direction: row;
+      gap: 0px;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 369px;
+      top: 0px;
+    }
+
+    ._12 {
+      color: #ffffff;
+      text-align: left;
+      font-family: "NanumSquareRoundOtf-Bold", sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      position: relative;
+      width: 13px;
+      height: 8px;
+    }
+
+    .div2 {
+      color: #000000;
+      text-align: left;
+      font-family: "JejuGothic-Regular", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      position: absolute;
+      left: 345px;
+      top: 14px;
+      width: 34px;
+    }
+
+    .profile {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      width: 71.17px;
+      height: auto;
+      position: relative;
+      overflow: visible;
+    }
+
+    .left {
+      display: flex;
+      flex-direction: row;
+      gap: 22px;
+      align-items: center;
+      justify-content: flex-start;
+      width: 780.24px;
+      position: absolute;
+      left: 260px;
+      top: 0px;
+    }
+
+    .logo {
+      flex-shrink: 0;
+      width: 175px;
+      height: 80px;
+      position: relative;
+      object-fit: cover;
+    }
+
+    .search-bar {
+      flex-shrink: 0;
+      width: 583.33px;
+      height: 45px;
+      position: relative;
+    }
+
+    .rectangle-7 {
+      background: #feffdb;
+      border-radius: 1000px;
+      width: 583.33px;
+      height: 45px;
+      position: absolute;
+      left: -0.17px;
+      top: calc(50% - 22.5px);
+    }
+
+    .frame {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 20.33px;
+      top: calc(50% - 10.5px);
+      overflow: visible;
+    }
+
+    .footer,
+    .footer * {
+      box-sizing: border-box;
+    }
+
+    .footer {
+      position: relative;
+    }
+
+    .secion-footer {
+      background: #ffffff;
+      border-style: solid;
+      border-color: #dddddd;
+      border-width: 1px 0px 0px 0px;
+      width: 1900px;
+      height: 263px;
+      position: absolute;
+      left: calc(50% - 960px);
+      bottom: 0px;
+      overflow: hidden;
+    }
+
+    .frame-83 {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-start;
+      position: absolute;
+      left: 779px;
+      top: 17px;
+    }
+
+    .logo-black-1 {
+      flex-shrink: 0;
+      width: 125px;
+      height: 80px;
+      position: relative;
+      object-fit: cover;
+    }
+
+    .link {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .div {
+      color: var(--fcb, #757575);
+      text-align: center;
+      font-family: "JejuGothic-Regular", sans-serif;
+      font-size: 14px;
+      line-height: 168%;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .div2 {
+      color: #ff8b00;
+      text-align: center;
+      font-family: "JejuGothic-Regular", sans-serif;
+      font-size: 14px;
+      line-height: 168%;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .copyright-who-s-duc-king-all-rights-reserved {
+      color: #666666;
+      text-align: center;
+      font-family: "JejuGothic-Regular", sans-serif;
+      font-size: 14px;
+      line-height: 168%;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .div3 {
+      color: #757575;
+      text-align: center;
+      font-family: "JejuGothic-Regular", sans-serif;
+      font-size: 14px;
+      line-height: 168%;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .github-1 {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      position: relative;
+      overflow: visible;
+    }
+
+
+    /* ------------------------------------------------------------------------ */
+    h2 {
+      color: #ff8b00;
+      font-size: 50px;
+      margin-bottom: 100px;
+      margin-left: 260px;
+    }
+
+    .photo {
+      width: 400px;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      /* 가로로 중앙 배치 */
+      align-items: center;
+      /* 세로로 중앙 배치 */
+      margin: auto;
+      border: 1px solid;
+    }
+
+    .line {
+      box-sizing: border-box;
+      border-style: solid;
+      border-color: #d9d9d9;
+      border-width: 1px 0 0 0;
+      width: 1400px;
+      margin: 100px auto;
+      margin-bottom: 100px;
+    }
+
+
+    .text {
+      padding: 5px;
+      font-size: 20px;
+      border: 0px solid #ccc;
+      border-radius: 15px;
+      width: 500px;
+      /* 텍스트 상자의 너비 조절 */
+      height: 40px;
+      /* 텍스트 상자의 높이 조절 */
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 650px;
+      height: 1994px;
+      margin: auto;
+    }
+
+    .name {
+      font-size: 40px;
+      color: #ff8b00;
+    }
+
+    .register {
+      padding: 0;
+      border: 1px solid;
+    }
+
+    .check {
+      height: 40px;
+      background-color: white;
+      border: 0px solid;
+      color: #ffc60b;
+      font-size: 24px;
+      width: 200px;
+      text-align: right;
+    }
+
+    .but {
+      border: 5px solid #ccc;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 70px;
+    }
+
+    li {
+      margin-bottom: 20px;
+    }
+
+    .box {
+      border: 1px solid #ccc;
+      /* 상자의 테두리 */
+      padding: 10px;
+      /* 상자의 내부 여백 */
+      width: 600px;
+      border-radius: 20px;
+      /* 상자의 모서리 둥글게 */
+      display: flex;
+      /* 플렉스 박스 설정 */
+      align-items: center;
+      /* 세로 정렬 */
+      position: relative;
+    }
+
+    .email {
+      display: flex;
+    }
+
+    input[type='checkbox'] {
+      display: none;
+    }
+
+    .email-label {
+      cursor: pointer;
+      align-items: center;
+      color: #ffc60b;
+      font-size: 24px;
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .checkbox-icon::before {
+      content: '';
+      display: block;
+      border-radius: 5px;
+      border: 5px solid #d9d9d9;
+      border-width: 1px;
+      width: 25px;
+      height: 25px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* 커서가 체크박스 위로 갔을 때 포인터로 변경 */
+    .email-checkbox:hover,
+    .email-label:hover {
+      cursor: pointer;
+    }
+
+    /* checked */
+    .email-label input:checked+.checkbox-icon::before {
+      /*   transition: all 0.15s ease; */
+      background: url(https://intranet.adef.co.kr/asset/images/ic_check.png) #ff8b00 no-repeat center;
+      border: none;
+    }
+
+    .check-number {
+      display: none;
+    }
+
+    .gender {
+      background: #ffffff;
+      border-radius: 20px;
+      border-style: solid;
+      border-color: #d9d9d9;
+      border-width: 1px;
+      width: 150px;
+      height: 100px;
+      color: #ff8b00;
+      font-size: 42px;
+      font-weight: 400;
+    }
+
+    .gender-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 100px;
+      /* 버튼 간격 */
+    }
+
+    .gender.selected {
+      background-color: #ff8b00;
+      color: white;
+    }
+
+    .box input:focus+.styled-text,
+    .box input:not(:placeholder-shown)+.styled-text {
+      display: none;
+      /* 입력 중이거나 값이 있으면 숨기기 */
+    }
+
+    .styled-text {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #d9d9d9;
+      pointer-events: none;
+      /* 클릭 이벤트 무시 */
+      font-size: 32px;
+    }
+
+    .resign {
+      background: #ffc60b;
+      border-radius: 10px;
+      width: 90px;
+      height: 40px;
+      border: 0px;
+      color: white;
+      font-size: 16px;
+    }
+
+    .edit {
+      background: #ff8b00;
+      border-radius: 10px;
+      width: 120px;
+      height: 40px;
+      border: 0px;
+      color: white;
+      font-size: 16px;
+    }
+
+    .action {
+      gap: 30px;
+      display: flex;
+      justify-content: right;
+    }
+
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="right">
+      <div class="menu">
+        <div class="header-bar">
+          <div class="div">장르</div>
+          <div class="div">커뮤니티</div>
+          <div class="div">소식</div>
+          <div class="div">놀이터</div>
+        </div>
+        <div class="group-153">
+          <div class="group-151">
+            <div class="count">
+              <div class="_12">12</div>
+            </div>
+          </div>
+          <div class="div">알림</div>
+        </div>
+      </div>
+      <img class="profile" src="profile0.svg" />
+    </div>
+    <div class="left">
+      <img class="logo" src="logo0.png" />
+      <div class="search-bar">
+        <div class="rectangle-7"></div>
+        <img class="frame" src="frame0.svg" />
+      </div>
+    </div>
+  </div>
+
+  <h2>프로필 수정</h2>
+  <div class="photo">
+    <img class="profile1" src="profile" />
+  </div>
+
+  <div class="line"></div>
+
+  <div class="container">
+    <form>
+      <ul>
+        <ul>
+
+          <li class="name">닉네임</li>
+
+          <li class="box">
+            <input type="text" class="text">
+            <button class="check" onclick="changeButtonToDuplicateCheck(this)">변 경</button>
+          </li>
+        </ul>
+
+        <ul>
+
+          <li class="name">이메일</li>
+
+          <li class="box">
+            <input type="text" class="text">
+            <img class="img" src="123" />
+          <li class="email">
+            <!-- 체크박스와 텍스트를 연결하기 위해 label 사용 -->
+            <label class="email-label">이메일 수신여부
+              <input type="checkbox" class="email-checkbox">
+              <span class="checkbox-icon"></span>
+            </label>
+          </li>
+        </ul>
+
+        <ul>
+          <li class="name">전화번호</li>
+          <li class="box">
+            <input type="text" class="text">
+            <button type="button" class="check" onclick="showVerificationCode()">인증하기</button>
+          </li>
+        </ul>
+
+        <ul id="verification-code" class="check-number">
+          <li class="name">인증번호</li>
+          <li class="box">
+            <input type="text" class="text">
+            <button type="button" class="check" onclick="">인증번호</button>
+          </li>
+        </ul>
+      </ul>
+
+      <ul>
+        <li class="name">성별</li>
+        <li class="gender-container">
+          <button type="button" class="gender" onclick="selectGender(this)">남</button>
+          <button type="button" class="gender" onclick="selectGender(this)">여</button>
+        </li>
+      </ul>
+
+      <ul>
+        <li class="name">주소</li>
+        <li class="box">
+          <input type="text" class="text" id="postcode">
+          <button type="button" class="check" onclick="execDaumPostcode()">우편번호 찾기</button>
+        </li>
+        <li class="box">
+          <input type="text" class="text" oninput="updateStyledText(this)" id="address">
+          <span class="styled-text" id="address">주소</span>
+        </li>
+        <li class="box">
+          <input type="text" class="text" oninput="updateStyledText(this)" id="detail-address">
+          <span class="styled-text" id="address-detail">상세 주소</span>
+        </li>
+      </ul>
+
+      <ul>
+        <li class="action">
+          <button type="submit" class="resign">회원 탈퇴</button>
+          <button type="submit" class="edit">회원 정보 수정</button>
+        </li>
+      </ul>
+
+
+
+
+
+    </form>
+  </div>
+
+  <div class="footer">
+    <div class="secion-footer">
+      <div class="frame-83">
+        <img class="logo-black-1" src="logo-black-10.png" />
+        <div class="link">
+          <div class="div">이용약관</div>
+          <div class="div">개인정보처리방침</div>
+          <div class="div">공지사항</div>
+          <div class="div">자주 묻는 질문</div>
+        </div>
+        <div class="copyright-who-s-duc-king-all-rights-reserved">
+          COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
+        </div>
+        <div class="link">
+          <div class="div">정성진</div>
+          <div class="div">노승빈</div>
+          <div class="div">김승민</div>
+          <div class="div3">서준명</div>
+          <div class="div">김수정</div>
+          <div class="div">안성민</div>
+        </div>
+        <img class="github-1" src="github-10.svg" />
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+    function changeButtonToDuplicateCheck(button) {
+      if (button.innerHTML === "변 경") {
+        // 새 중복확인 버튼 생성
+        const duplicateButton = document.createElement("button");
+        duplicateButton.innerHTML = "중복확인";
+        duplicateButton.className = "check";
+        duplicateButton.onclick = function () {
+          checkDuplicate(duplicateButton);
+        };
+
+        // 기존 버튼을 새 버튼으로 교체
+        button.parentNode.replaceChild(duplicateButton, button);
+      }
+    }
+
+    function checkDuplicate(button) {
+      const inputValue = button.previousElementSibling.value;
+      console.log(`중복확인: ${inputValue}`);
+      // 여기에 중복 확인 로직을 추가
+      alert(`중복 확인: ${inputValue}`);
+    }
+
+    function showVerificationCode() {
+      // 인증번호 ul 요소를 보여줌
+      const verificationUl = document.getElementById('verification-code');
+      verificationUl.style.display = 'block';
+    }
+
+    function selectGender(button) {
+      // 모든 버튼의 선택된 스타일 제거
+      const buttons = document.querySelectorAll('.gender');
+      buttons.forEach(btn => btn.classList.remove('selected'));
+
+      // 클릭된 버튼에 선택된 스타일 추가
+      button.classList.add('selected');
+    }
+
+    function updateStyledText(input) {
+      const styledText = document.getElementById(input.id + '-styled');
+      if (input.value) {
+        styledText.style.display = 'none';
+      } else {
+        styledText.style.display = 'block';
+      }
+    }
+    // ----------------------------------------------------
+
+    function execDaumPostcode() {
+      new daum.Postcode({
+        oncomplete: function (data) {
+          // 팝업을 통한 검색 결과 항목 클릭 시 실행
+          var addr = ''; // 주소_결과값이 없을 경우 공백 
+          var extraAddr = ''; // 참고항목
+
+          //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+          if (data.userSelectedType === 'R') { // 도로명 주소를 선택
+            addr = data.roadAddress;
+          } else { // 지번 주소를 선택
+            addr = data.jibunAddress;
+          }
+
+          if (data.userSelectedType === 'R') {
+            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+              extraAddr += data.bname;
+            }
+            if (data.buildingName !== '' && data.apartment === 'Y') {
+              extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            if (extraAddr !== '') {
+              extraAddr = ' (' + extraAddr + ')';
+            }
+          } else {
+            document.getElementById("UserAdd1").value = '';
+          }
+
+          // 선택된 우편번호와 주소 정보를 input 박스에 넣는다.
+          document.getElementById('postcode').value = data.zonecode;
+          document.getElementById("address").value = addr;
+          document.getElementById("address").value += extraAddr;
+          document.getElementById("address-detail").focus(); // 우편번호 + 주소 입력이 완료되었음으로 상세주소로 포커스 이동
+        }
+      }).open();
+    }
+  </script>
+
+
+</body>
+
+</html>

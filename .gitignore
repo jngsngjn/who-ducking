@@ -9,6 +9,7 @@ logback.xml
 src/test
 memo.txt
 conf
+webContexts.xml
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

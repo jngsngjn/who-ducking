@@ -25,7 +25,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        System.out.println(oAuth2User.getAttributes());
+        log.info("userInfo = {}", oAuth2User.getAttributes());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response = null;
@@ -48,7 +48,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new AdditionalInfoRequiredException(oAuth2Response);
         }
 
-        String role = oAuth2User.getAuthorities().iterator().next().getAuthority();
+        String role = userRepository.findByUsername(username).getRole();
         return new CustomOAuth2User(oAuth2Response, role);
     }
 }
