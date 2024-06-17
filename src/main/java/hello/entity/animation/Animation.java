@@ -20,6 +20,7 @@ public class Animation {
     private String author;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -27,9 +28,6 @@ public class Animation {
 
     @Column(name = "first_date")
     private LocalDate firstDate;
-
-    @Column(name = "image_name")
-    private String imageName;
 
     @Column(name = "image_path")
     private String imagePath;

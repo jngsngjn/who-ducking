@@ -1,13 +1,13 @@
 package hello.service;
 
+import hello.dto.user.AccountDeletionDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.EditDTO;
+import hello.dto.user.RequestDTO;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
-import hello.entity.user.Address;
-import hello.entity.user.Image;
-import hello.entity.user.ProfileImage;
-import hello.entity.user.User;
+import hello.entity.request.Request;
+import hello.entity.user.*;
 import hello.repository.*;
 import hello.service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +30,9 @@ public class UserService {
     private final FileStore fileStore;
     private final GenreRepository genreRepository;
     private final UserGenreRepository userGenreRepository;
+    private final EmailCodeRepository emailCodeRepository;
+    private final EmailService emailService;
+    private final RequestRepository requestRepository;
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
@@ -74,7 +77,7 @@ public class UserService {
                 clearProfileImage(id, findUser, currentImage);
             }
 
-            Image image = fileStore.storeFile(uploadImage); // 서버에 이미지 저장
+            Image image = fileStore.storeProfileImageFile(uploadImage); // 서버에 이미지 저장
 
             ProfileImage newProfileImage = new ProfileImage(image.getStoreImageName(), image.getImagePath(), findUser);
             findUser.setProfileImage(newProfileImage);
@@ -93,7 +96,7 @@ public class UserService {
     private void clearProfileImage(Long id, User findUser, ProfileImage currentImage) {
         findUser.setProfileImage(null);
         profileImageRepository.deleteByUserId(id);
-        fileStore.deleteFile(currentImage.getStoreImageName());
+        fileStore.deleteProfileImage(currentImage.getStoreImageName());
     }
 
     public User validateUser(CustomOAuth2User user, Long id) {
@@ -102,5 +105,30 @@ public class UserService {
             return loginUser;
         }
         return null;
+    }
+
+    public void deleteAccountProcess(AccountDeletionDTO accountDeletionDTO) {
+        String email = accountDeletionDTO.getEmail();
+        String code = accountDeletionDTO.getCode();
+
+        boolean result = emailService.verifyCode(email, code);
+
+        if (result) {
+            ProfileImage findImage = profileImageRepository.findByUserId(userRepository.findByEmail(email).getId());
+            if (findImage != null) {
+                fileStore.deleteProfileImage(findImage.getStoreImageName());
+            }
+
+            userRepository.deleteByEmail(email);
+            emailCodeRepository.deleteByEmail(email);
+        }
+    }
+
+    public void receiveRequest(RequestDTO requestDTO, User user) {
+        Request request = new Request();
+        request.setTitle(requestDTO.getTitle());
+        request.setContent(requestDTO.getContent());
+        request.setUser(user);
+        requestRepository.save(request);
     }
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <link rel="stylesheet" href="/css/requestList.css">
+</head>
+<body>
+<div class="container">
+    <h2>건의 목록</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일자</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request, stat : ${requestPage}">
+                <td>
+                    <a th:href="@{/admin/request/{id}(id=${request.id})}"
+                       th:text="${requestPage.number * requestPage.size + stat.index + 1}">1</a>
+                </td>
+                <td>
+                    <a th:href="@{/admin/request/{id}(id=${request.id})}"
+                       th:text="${request.title}">제목</a>
+                </td>
+                <td th:text="${request.nickname}">작성자</td>
+                <td th:text="${request.writeDate}">작성일자</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+        <a th:if="${requestPage.hasPrevious()}" th:href="@{/request-list(page=${requestPage.number - 1})}" class="nav-link">이전</a>
+        <span>페이지 <span th:text="${requestPage.number + 1}">1</span> / <span th:text="${requestPage.totalPages}">1</span></span>
+        <a th:if="${requestPage.hasNext()}" th:href="@{/request-list(page=${requestPage.number + 1})}" class="nav-link">다음</a>
+    </div>
+</div>
+</body>
+</html>

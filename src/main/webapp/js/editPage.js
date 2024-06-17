@@ -374,7 +374,7 @@ $(document).ready(function() {
         selectedGenresList.empty(); // 기존 목록 지우기
         let htmlContent = '<div class="genre-like-row">';
         selectedGenres.forEach(function(genre) {
-            htmlContent += '<div class="genre-like-item"><label>' + genre + '</label></div>';
+            htmlContent += '<div class="genre-like-item"><label class="label-like">' + genre + '</label></div>';
         });
         htmlContent += '</div>';
 
@@ -388,6 +388,8 @@ $(document).ready(function() {
 
         // 모달 닫기
         $('#genreModal').hide();
+
+        applyLabelStyles();
     });
 
     // 폼 제출 시 선택된 장르를 hidden input에 추가
@@ -406,6 +408,22 @@ $(document).ready(function() {
             modal.hide(); // 모달 닫기
         }
     });
+
+    function applyLabelStyles() {
+        $('#selected-genres .label-like').each(function () {
+            var text = $(this).text();
+            if (text.length >= 4) {
+                $(this).css('font-size', '18px'); // 글자 수가 4자 이상일 때 글자 크기를 18px로 조정
+                $(this).html(
+                    '<div style="display: flex; justify-content: center;">' +
+                    text.slice(0, 3) +
+                    '</div><div style="display: flex; justify-content: center;">' +
+                    text.slice(3) +
+                    '</div>'
+                );
+            }
+        });
+    }
 });
 
 // 폼 제출 시 선택된 장르를 hidden input에 추가
@@ -415,4 +433,20 @@ $('#genreForm').submit(function () {
         selectedGenres.push($(this).text());
     });
     $('#selectedGenresInput').val(selectedGenres.join(','));
+});
+
+$(document).ready(function() {
+    $('.label-like').each(function() {
+        var text = $(this).text();
+        if ($(this).text().length >= 4) {
+            $(this).css('font-size', '18px'); // 글자 수가 4자 이상일 때 글자 크기를 18px로 조정
+            $(this).html(
+                '<div style="display: flex; justify-content: center;">' +
+                text.slice(0, 3) +
+                '</div><div style="display: flex; justify-content: center;">' +
+                text.slice(3) +
+                '</div>'
+            );
+        }
+    });
 });
