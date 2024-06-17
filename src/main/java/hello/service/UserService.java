@@ -74,7 +74,7 @@ public class UserService {
                 clearProfileImage(id, findUser, currentImage);
             }
 
-            Image image = fileStore.storeFile(uploadImage); // 서버에 이미지 저장
+            Image image = fileStore.storeProfileImageFile(uploadImage); // 서버에 이미지 저장
 
             ProfileImage newProfileImage = new ProfileImage(image.getStoreImageName(), image.getImagePath(), findUser);
             findUser.setProfileImage(newProfileImage);
@@ -93,7 +93,7 @@ public class UserService {
     private void clearProfileImage(Long id, User findUser, ProfileImage currentImage) {
         findUser.setProfileImage(null);
         profileImageRepository.deleteByUserId(id);
-        fileStore.deleteFile(currentImage.getStoreImageName());
+        fileStore.deleteProfileImage(currentImage.getStoreImageName());
     }
 
     public User validateUser(CustomOAuth2User user, Long id) {
@@ -113,7 +113,7 @@ public class UserService {
         if (result) {
             ProfileImage findImage = profileImageRepository.findByUserId(userRepository.findByEmail(email).getId());
             if (findImage != null) {
-                fileStore.deleteFile(findImage.getStoreImageName());
+                fileStore.deleteProfileImage(findImage.getStoreImageName());
             }
 
             userRepository.deleteByEmail(email);

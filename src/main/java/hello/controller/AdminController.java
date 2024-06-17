@@ -1,14 +1,15 @@
 package hello.controller;
 
+import hello.dto.admin.AnimationDTO;
 import hello.dto.admin.UserInfoDTO;
 import hello.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,5 +28,16 @@ public class AdminController {
         Page<UserInfoDTO> userPage = adminService.getUserInfoPage(page, 10);
         model.addAttribute("userPage", userPage);
         return "admin/userInfo";
+    }
+
+    @GetMapping("/add-animation")
+    public String addAniPage() {
+        return "admin/addAnimation";
+    }
+
+    @PostMapping("/add-animation")
+    public String addAnimation(@ModelAttribute AnimationDTO animationDTO) throws IOException {
+        adminService.saveAnimation(animationDTO);
+        return "redirect:/admin";
     }
 }
