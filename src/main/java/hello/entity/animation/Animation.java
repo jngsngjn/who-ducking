@@ -20,6 +20,7 @@ public class Animation {
     private String author;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
