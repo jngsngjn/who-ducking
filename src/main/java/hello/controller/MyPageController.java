@@ -94,4 +94,6 @@ public class MyPageController {
         userService.deleteAccountProcess(accountDeletionDTO);
         return "redirect:/logout";
     }
+
+    // 건의 내역
 }
