@@ -3,8 +3,10 @@ package hello.service;
 import hello.dto.user.AccountDeletionDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.EditDTO;
+import hello.dto.user.RequestDTO;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
+import hello.entity.request.Request;
 import hello.entity.user.*;
 import hello.repository.*;
 import hello.service.exception.UserNotFoundException;
@@ -30,6 +32,7 @@ public class UserService {
     private final UserGenreRepository userGenreRepository;
     private final EmailCodeRepository emailCodeRepository;
     private final EmailService emailService;
+    private final RequestRepository requestRepository;
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
@@ -119,5 +122,13 @@ public class UserService {
             userRepository.deleteByEmail(email);
             emailCodeRepository.deleteByEmail(email);
         }
+    }
+
+    public void receiveRequest(RequestDTO requestDTO, User user) {
+        Request request = new Request();
+        request.setTitle(requestDTO.getTitle());
+        request.setContent(requestDTO.getContent());
+        request.setUser(user);
+        requestRepository.save(request);
     }
 }

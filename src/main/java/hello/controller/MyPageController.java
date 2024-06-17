@@ -3,6 +3,7 @@ package hello.controller;
 import hello.dto.user.AccountDeletionDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.EditDTO;
+import hello.dto.user.RequestDTO;
 import hello.entity.user.User;
 import hello.service.EmailService;
 import hello.service.UserService;
@@ -96,4 +97,20 @@ public class MyPageController {
     }
 
     // 건의 내역
+    @GetMapping("/request-list")
+    public String requestList() {
+        return "requestList";
+    }
+
+    @GetMapping("/request")
+    public String requestPage() {
+        return "request";
+    }
+
+    @PostMapping("/request")
+    public String request(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute RequestDTO requestDTO) {
+        User loginUser = userService.getLoginUserDetail(user);
+        userService.receiveRequest(requestDTO, loginUser);
+        return "redirect:/myPage/request-list";
+    }
 }
