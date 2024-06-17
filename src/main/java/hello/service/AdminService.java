@@ -1,14 +1,19 @@
 package hello.service;
 
 import hello.dto.admin.AnimationDTO;
+import hello.dto.admin.RequestDetailDTO;
+import hello.dto.admin.RequestListDTO;
 import hello.dto.admin.UserInfoDTO;
 import hello.entity.animation.Animation;
+import hello.entity.request.RequestStatus;
 import hello.repository.AnimationRepository;
 import hello.repository.FileStore;
+import hello.repository.RequestRepository;
 import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +28,7 @@ public class AdminService {
     private final UserRepository userRepository;
     private final AnimationRepository animationRepository;
     private final FileStore fileStore;
+    private final RequestRepository requestRepository;
 
     public Page<UserInfoDTO> getUserInfoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -46,5 +52,14 @@ public class AdminService {
         }
 
         animationRepository.save(animation);
+    }
+
+    public Page<RequestListDTO> getRequestsByStatus(RequestStatus status, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return requestRepository.findByStatus(status, pageable);
+    }
+
+    public RequestDetailDTO getRequestById(Long id) {
+        return requestRepository.findRequestDetailById(id);
     }
 }

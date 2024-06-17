@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <link rel="stylesheet" href="/css/requestDetail.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/requestDetail.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>건의 확인</h2>
+    <div class="content">
+        <p><strong>제목:</strong> <span th:text="${requestDetail.title}">제목</span></p>
+        <p><strong>작성자:</strong> <span th:text="${requestDetail.nickname}">작성자 닉네임</span></p>
+        <p><strong>작성일자:</strong> <span th:text="${requestDetail.writeDate}">작성일자</span></p>
+        <p><strong>내용:</strong></p>
+        <p th:text="${requestDetail.content}">건의 내용</p>
+    </div>
+    <a type="button" class="reject-button" id="openModal">반려</a>
+    <a href="/admin/request-list" class="back-link">목록</a>
+</div>
+
+<!-- Modal -->
+<div id="rejectModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>반려 사유</h2>
+        <form th:action="@{/request/{id}/reject(id=${requestDetail.id})}" method="post">
+            <div>
+                <textarea id="response" name="response" rows="4" placeholder="반려 사유를 입력하세요."></textarea>
+            </div>
+            <div>
+                <button type="submit" class="reject-button">반려</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
