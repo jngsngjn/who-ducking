@@ -1,27 +1,30 @@
-package hello.dto.animation;
-
-import lombok.Data;
-
-
-import java.time.LocalDateTime;
-
-// 보류 -> 작성때 쓸 수 도 있지 않을까
-
-@Data
-public class ReviewDTO {
-
-    private String username;
-
-    private int likeCount;
-
-    private int dislikeCount;
-
-    private LocalDateTime writeDate;
-
-    private double score;
-
-    private String content;
-
-
-
-}
+//package hello.dto.animation;
+//
+//import lombok.Data;
+//
+//
+//import java.time.LocalDateTime;
+//
+//
+//@Data
+//public class ReviewDTO {
+//
+//    private String content;
+//    private Long likeCount;
+//    private Long dislikeCount;
+//    private LocalDateTime writeDate;
+//    private Double score;
+//
+//    private Long userId;
+//
+//
+//    public  ReviewDTO(String content, Long likeCount, Long dislikeCount, LocalDateTime writeDate, Double score, Long userId) {
+//        this.content = content;
+//        this.likeCount = likeCount;
+//        this.dislikeCount = dislikeCount;
+//        this.writeDate = writeDate;
+//        this.score = score;
+//        this.userId = userId;
+//
+//    }
+//}

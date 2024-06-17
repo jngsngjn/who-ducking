@@ -31,16 +31,15 @@
         console.log("애니 포스터 click");
 
         let imageId = $(this).siblings('#animation-id').text().trim();
-        console.log(imageId);
-        let animationId = parseInt(imageId);
-        console.log(animationId);
+        console.log(imageId);//string
+       console.log('/community/'+imageId);
 
         $.ajax({
           type: 'GET',
-          url: '/community/' + animationId,
+          url: '/community/' + imageId,
           success: function(response) {
             console.log('GET 요청 성공');
-            window.location.href = '/community/' + animationId;
+            window.location.href = '/community/' + imageId;
           },
           error: function(xhr, status, error) {
             console.error('GET 요청 실패');

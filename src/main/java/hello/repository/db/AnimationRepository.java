@@ -1,17 +1,36 @@
 package hello.repository.db;
 
-import hello.dto.animation.GetAniDetailDTO;
-import hello.dto.animation.GetAniListDTO;
-import hello.entity.animation.Animation;
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
+import hello.entity.animation.AnimationRating;
+import lombok.Data;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public interface AnimationRepository extends JpaRepository<Animation, Long> {
+@Data
+public class GetAniDetailDTO {
+
+    private Long animationId;
+    private String name;
+    private String author;
+    private String description;
+    private LocalDate firstDate;
+    private String imagePath;
+    private Boolean isFinished;
+    private AnimationRating rating;
+
+    // 리뷰 get용 필드 추가하기
+    private Long reviewId;
+    private int likeCount;
+    private int dislikeCount;
+    private LocalDateTime writeDate;
+    private double score;
+    private String reviewContent;
+
+    // userid로 리뷰작성자도 찾아와야함
+    private Long userId;
+    private String userNickname;
 
     // 애니 전체 리스트 조회
     @Query("SELECT new hello.dto.animation.GetAniListDTO(a.id, a.imagePath, COALESCE(AVG(r.score), 0.0), COUNT(r.id)) " +
@@ -20,8 +39,29 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
     List<GetAniListDTO> findAnimationsWithReviews();
 
 
-    // 애니메이션 세부 정보 조회
-//    List <GetAniDetailDTO> findAnimationDetailById(@Param("animationId") Long animationId);
-    Animation findById(long id);
+//    public GetAniDetailDTO(Long animationId, String name, String author, String description, LocalDate firstDate,
+//                           String imagePath, Boolean isFinished, AnimationRating rating) {
+//    }
+
+    public GetAniDetailDTO(Long animationId, String name, String author, String description, LocalDate firstDate,
+                           String imagePath, Boolean isFinished, AnimationRating rating, Long reviewId, int likeCount,
+                           int dislikeCount, LocalDateTime writeDate, double score, String reviewContent, Long userId, String userNickname) {
+        this.animationId = animationId;
+        this.name = name;
+        this.author = author;
+        this.description = description;
+        this.firstDate = firstDate;
+        this.imagePath = imagePath;
+        this.isFinished = isFinished;
+        this.rating = rating;
+        this.reviewId = reviewId;
+        this.likeCount = likeCount;
+        this.dislikeCount = dislikeCount;
+        this.writeDate = writeDate;
+        this.score = score;
+        this.reviewContent = reviewContent;
+        this.userId = userId;
+        this.userNickname = userNickname;
+    }
 }
 

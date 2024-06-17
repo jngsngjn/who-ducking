@@ -67,8 +67,10 @@
     </div>
   </div>
   <p class="review-count"><i class="fa-solid fa-comment"></i> 1,580</p>
-  <form action="#" method="post" class="write-box">
+<!--  <form th:action="reviewWrite" th:object="formData" method="post" class="write-box">-->
+  <form th:action="reviewWrite" method="post" class="write-box">
     <div class="row-box">
+<!--  usernickname과 userId는 getAniDetail에서 같이 불러와야할듯 에상 aniDetailInfo.nickname, 현재 로그인중인 사용자를 어떻게 불러오지? -->
       <h3 class="review-user" readonly>오덕이는 애니덕후</h3>
       <div class="row-box">
         <p>스포일러 포함</p>
