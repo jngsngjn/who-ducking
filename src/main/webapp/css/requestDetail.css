@@ -38,10 +38,27 @@ h2 {
     border: 1px solid #ff8b00;
     border-radius: 5px;
     transition: color 0.3s, background-color 0.3s;
+    margin-left: 10px;
 }
 .back-link:hover {
     color: #fff;
     background-color: #ff8b00;
+}
+.approve-button {
+    display: inline-block;
+    text-decoration: none;
+    color: #008000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 1px solid #008000;
+    border-radius: 5px;
+    transition: color 0.3s, background-color 0.3s;
+    margin-left: 10px;
+}
+.approve-button:hover {
+    color: #fff;
+    background-color: #008000;
+    cursor: pointer;
 }
 .reject-button {
     display: inline-block;
@@ -52,7 +69,7 @@ h2 {
     border: 1px solid #ff0000;
     border-radius: 5px;
     transition: color 0.3s, background-color 0.3s;
-    margin-left: 10px; /* 추가된 부분: 링크와 버튼 사이 간격 */
+    margin-left: 10px;
 }
 .reject-button:hover {
     color: #fff;

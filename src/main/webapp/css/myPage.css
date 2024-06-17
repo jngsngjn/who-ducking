@@ -209,3 +209,7 @@ body {
     width: 20px;
     margin-top: 10px;
 }
+
+.user-delete-button a:hover {
+    color: #FF8B00;
+}

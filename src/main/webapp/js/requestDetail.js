@@ -1,5 +1,10 @@
 $(document).ready(function() {
-    // 모달 열기
+    // 승인 모달 열기
+    $("#openApproveModal").click(function() {
+        $("#approveModal").show();
+    });
+
+    // 반려 모달 열기
     $("#openRejectModal").click(function() {
         $("#rejectModal").show();
     });

@@ -63,10 +63,17 @@ public class AdminService {
         return requestRepository.findRequestDetailById(id);
     }
 
-    public void rejectRequest(RequestResponseDTO requestResponseDTO) {
-        Request request = requestRepository.findById(requestResponseDTO.getId()).get();
+    public void approveRequest(Long id) {
+        Request request = requestRepository.findById(id).get();
         if (request != null) {
-            request.setResponse(requestResponseDTO.getResponse());
+            request.setStatus(APPROVED);
+        }
+    }
+
+    public void rejectRequest(RequestRejectDTO requestRejectDTO) {
+        Request request = requestRepository.findById(requestRejectDTO.getId()).get();
+        if (request != null) {
+            request.setResponse(requestRejectDTO.getResponse());
             request.setStatus(REJECTED);
         }
     }

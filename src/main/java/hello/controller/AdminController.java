@@ -56,11 +56,19 @@ public class AdminController {
         return "admin/requestDetail";
     }
 
+    @PostMapping("/request/{id}/approve")
+    public String approveRequest(@PathVariable(name = "id") Long id,
+                                 @ModelAttribute AnimationDTO animationDTO) throws IOException {
+        adminService.approveRequest(id);
+        adminService.saveAnimation(animationDTO);
+        return "redirect:/admin/request-list";
+    }
+
     @PostMapping("/request/{id}/reject")
     public String rejectRequest(@PathVariable(name = "id") Long id,
-                                @ModelAttribute RequestResponseDTO requestResponseDTO) {
-        requestResponseDTO.setId(id);
-        adminService.rejectRequest(requestResponseDTO);
+                                @ModelAttribute RequestRejectDTO requestRejectDTO) {
+        requestRejectDTO.setId(id);
+        adminService.rejectRequest(requestRejectDTO);
         return "redirect:/admin/request-list";
     }
 }
