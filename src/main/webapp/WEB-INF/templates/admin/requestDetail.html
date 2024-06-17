@@ -21,7 +21,8 @@
         <p><strong>내용:</strong></p>
         <p th:text="${requestDetail.content}">건의 내용</p>
     </div>
-    <a type="button" class="reject-button" id="openModal">반려</a>
+    <a type="button" class="approve-button" id="openApproveModal">승인</a>
+    <a type="button" class="reject-button" id="openRejectModal">반려</a>
     <a href="/admin/request-list" class="back-link">목록</a>
 </div>
 
@@ -30,11 +31,12 @@
     <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
         <h2>반려 사유</h2>
-        <form th:action="@{/request/{id}/reject(id=${requestDetail.id})}" method="post">
+        <form th:action="@{/admin/request/{id}/reject(id=${requestDetail.id})}" method="post">
             <div>
-                <textarea id="response" name="response" rows="4" placeholder="반려 사유를 입력하세요."></textarea>
+                <textarea id="response" name="response" rows="4" placeholder="반려 사유를 입력하세요." required></textarea>
             </div>
-            <div>
+            <div class="modal-buttons">
+                <button type="button" class="modal-button" id="closeModalButton">닫기</button>
                 <button type="submit" class="reject-button">반려</button>
             </div>
         </form>

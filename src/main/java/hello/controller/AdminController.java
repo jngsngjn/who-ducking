@@ -1,9 +1,6 @@
 package hello.controller;
 
-import hello.dto.admin.AnimationDTO;
-import hello.dto.admin.RequestDetailDTO;
-import hello.dto.admin.RequestListDTO;
-import hello.dto.admin.UserInfoDTO;
+import hello.dto.admin.*;
 import hello.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -57,5 +54,13 @@ public class AdminController {
         RequestDetailDTO requestDetail = adminService.getRequestById(id);
         model.addAttribute("requestDetail", requestDetail);
         return "admin/requestDetail";
+    }
+
+    @PostMapping("/request/{id}/reject")
+    public String rejectRequest(@PathVariable(name = "id") Long id,
+                                @ModelAttribute RequestResponseDTO requestResponseDTO) {
+        requestResponseDTO.setId(id);
+        adminService.rejectRequest(requestResponseDTO);
+        return "redirect:/admin/request-list";
     }
 }

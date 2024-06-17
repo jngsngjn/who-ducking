@@ -1,10 +1,8 @@
 package hello.service;
 
-import hello.dto.admin.AnimationDTO;
-import hello.dto.admin.RequestDetailDTO;
-import hello.dto.admin.RequestListDTO;
-import hello.dto.admin.UserInfoDTO;
+import hello.dto.admin.*;
 import hello.entity.animation.Animation;
+import hello.entity.request.Request;
 import hello.entity.request.RequestStatus;
 import hello.repository.AnimationRepository;
 import hello.repository.FileStore;
@@ -19,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+
+import static hello.entity.request.RequestStatus.*;
 
 @Service
 @Transactional
@@ -61,5 +61,13 @@ public class AdminService {
 
     public RequestDetailDTO getRequestById(Long id) {
         return requestRepository.findRequestDetailById(id);
+    }
+
+    public void rejectRequest(RequestResponseDTO requestResponseDTO) {
+        Request request = requestRepository.findById(requestResponseDTO.getId()).get();
+        if (request != null) {
+            request.setResponse(requestResponseDTO.getResponse());
+            request.setStatus(REJECTED);
+        }
     }
 }

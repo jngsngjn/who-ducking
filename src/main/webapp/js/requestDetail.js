@@ -1,11 +1,11 @@
 $(document).ready(function() {
     // 모달 열기
-    $("#openModal").click(function() {
+    $("#openRejectModal").click(function() {
         $("#rejectModal").show();
     });
 
     // 모달 닫기
-    $("#closeModal").click(function() {
+    $("#closeModal, #closeModalButton").click(function() {
         $("#rejectModal").hide();
     });
 
