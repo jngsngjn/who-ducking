@@ -71,9 +71,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
     private void initializeData() {
         genreInitializer();
-
         levelInitializer();
-
         emailCodeInitializer();
     }
 
@@ -86,7 +84,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private void levelInitializer() {
         if (levelRepository.count() == 0) {
             List<Level> levels = new ArrayList<>();
-            levels.add(new Level(0, level1));
+            levels.add(new Level(9, level1));
             levels.add(new Level(20, level2));
             levels.add(new Level(40, level3));
             levels.add(new Level(100, level4));
