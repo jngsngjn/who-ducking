@@ -6,11 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Who's DucKing</title>
     <link rel="icon" href="/images/10duck.ico">
-    <link rel="stylesheet" href="/css/adminPage.css" />
+    <link rel="stylesheet" href="/css/userInfo.css">
 </head>
 <body>
 <div class="container">
-    <h2>🔐 회원 정보</h2>
+    <h2>회원 정보</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>닉네임</th>
+                <th>이메일</th>
+                <th>소셜 타입</th>
+                <th>성별</th>
+                <th>레벨</th>
+                <th>가입 일자</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user, stat : ${userPage}">
+                <td th:text="${userPage.number * userPage.size + stat.index + 1}">1</td>
+                <td th:text="${user.nickname}">닉네임</td>
+                <td th:text="${user.email}">이메일</td>
+                <td th:text="${user.socialType}">소셜 타입</td>
+                <td th:text="${user.gender}">성별</td>
+                <td th:text="${user.level}">레벨</td>
+                <td th:text="${user.joinDate}">가입 일자</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a th:if="${userPage.hasPrevious()}" th:href="@{/admin/user-info(page=${userPage.number - 1})}">이전</a>
+        <span>페이지 <span th:text="${userPage.number + 1}">1</span> / <span th:text="${userPage.totalPages}">1</span></span>
+        <a th:if="${userPage.hasNext()}" th:href="@{/admin/user-info(page=${userPage.number + 1})}">다음</a>
+    </div>
 </div>
 </body>
 </html>
