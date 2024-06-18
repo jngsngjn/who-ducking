@@ -1,15 +1,15 @@
-body{
+.myFaq_body {
     background-image: url('/images/Background_Image/umaru.png');
     background-repeat: no-repeat;
     background-position: 10% 70%;
     background-size: 400px 500px;
 }
 
-main {
+.myFaq_main {
     transform: scale(0.8);
 }
 
-.head-title{
+.myFaq_head-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,22 +19,23 @@ main {
     margin-bottom: 50px;
 }
 
-h2 {
+.myFaq_h2 {
     color: #ff8b00;
     font-size: 50px;
 }
 
-.write {
+.myFaq_write {
     width: 130px;
     height: 50px;
     background: #ff8b00;
     color: white;
     border-radius: 15px;
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
+    line-height: 50px;
 }
 
-.menulist {
+.myFaq_menulist {
     width: 1400px;
     height: 1200px;
     margin: auto;
@@ -44,7 +45,7 @@ h2 {
     gap: 70px;
 }
 
-.menu {
+.myFaq_menu {
     width: 300px;
     height: 720px;
     border: 1px solid #d9d9d9;
@@ -56,89 +57,93 @@ h2 {
     border-radius: 20px;
 }
 
-.menuli {
+.myFaq_menuli {
     margin-bottom: 60px;
     margin-top: 60px;
 }
 
-.writelist {
+.myFaq_writelist {
     border: 1px solid #d9d9d9;
     border-radius: 20px;
     width: 1025px;
     height: 1070px;
 }
 
-a {
+.myFaq_a {
     color: black;
 }
 
-.line {
+.myFaq_line {
     width: 300px;
     height: 1px;
     border-top: 1px solid #d9d9d9;
 }
 
-.line2 {
+.myFaq_line2 {
     width: 1025px;
     height: 1px;
     border-top: 1px solid #d9d9d9;
 }
 
-.content {
+.myFaq_content {
     width: 940px;
     height: 173px;
     margin: 20px 50px 20px 40px;
-
 }
 
-.title {
+.myFaq_title {
     margin-bottom: 50px;
     font-size: 36px;
 }
 
-.time {
+.myFaq_time {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     color: #d9d9d9;
 }
 
-.state {
+.myFaq_state {
     border-radius: 10px;
-    width: 110px;
+    width: 121px;
     height: 60px;
     font-size: 28px;
     color: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     text-align: center;
-    display: flex; /* Flexbox 사용 */
-    align-items: center; /* 수직 정렬 */
-    justify-content: center; /* 수평 정렬 */
+    line-height: 60px;
 }
 
-.next {
+.myFaq_next {
     width: 424px;
     height: 54px;
     gap: 20px;
     display: flex;
 }
 
-.next-button {
+.myFaq_next-button {
     width: 54px;
+    height: 54px;
     border-radius: 100px;
     background-color: #feffdb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
 }
 
-.now-button {
+.myFaq_now-button {
     width: 54px;
+    height: 54px;
     border-radius: 100px;
     background-color: #ffc60b;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 24px;
 }
 
-.my-request {
+.myFaq_my-request {
     color: #ff8b00;
 }
 

@@ -1,7 +1,7 @@
 // 페이지가 로드된 후 실행
 $(document).ready(function () {
     // 모든 버튼 요소를 선택
-    $('.state').each(function () {
+    $('.myFaq_state').each(function () {
         // 버튼의 id에 따라 스타일 적용 및 텍스트 변경
         switch ($(this).attr('id')) {
             case 'APPROVED':
