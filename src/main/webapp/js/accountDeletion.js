@@ -55,4 +55,9 @@ $(document).ready(function() {
             }
         });
     });
+
+    // 취소 버튼 클릭 시 myPage.html로 이동
+    $(".delete-before").click(function() {
+        window.location.href = "/myPage";
+    });
 });
