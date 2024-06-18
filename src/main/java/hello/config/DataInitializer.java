@@ -2,10 +2,7 @@ package hello.config;
 
 import hello.entity.genre.Genre;
 import hello.entity.user.Level;
-import hello.repository.EmailCodeRepository;
-import hello.repository.GenreRepository;
-import hello.repository.LevelRepository;
-import hello.repository.UserRepository;
+import hello.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
@@ -25,6 +22,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private final GenreRepository genreRepository;
     private final UserRepository userRepository;
     private final EmailCodeRepository emailCodeRepository;
+    private final PrizeRepository prizeRepository;
 
     private boolean initialized = false;
 

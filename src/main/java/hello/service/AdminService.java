@@ -99,4 +99,14 @@ public class AdminService {
 
         prizeRepository.save(prize);
     }
+
+    public Page<PrizeListDTO> getCurrentPrizes(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return prizeRepository.findCurrentPrizes(pageable);
+    }
+
+    public Page<PrizeListDTO> getExpiredPrizes(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return prizeRepository.findExpiredPrizes(pageable);
+    }
 }
