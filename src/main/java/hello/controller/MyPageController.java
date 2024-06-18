@@ -99,8 +99,7 @@ public class MyPageController {
     public String requestList(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<MyRequestDTO> requestPage = userService.getMyRequest(page, 5);
         model.addAttribute("requestPage", requestPage);
-        return "requestListTest";
-//        return "requestList";
+        return "myRequest";
     }
 
     @GetMapping("/request")
