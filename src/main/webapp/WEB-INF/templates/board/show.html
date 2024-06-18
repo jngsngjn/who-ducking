@@ -100,10 +100,14 @@
                         <span class="comment-writer" th:text="${comment.user.nickname}"></span>
                         <p th:text="${comment.content}"></p>
                     </div>
-                    <div class="comment-meta">
+                    <div class="comment-meta" data-comment-id="1">
                         <span class="comment-date" th:text="${#temporals.format(comment.writeDate, 'yyyy.MM.dd HH:mm')}"></span>
-                        <span class="comment-likes">👍 0</span>
-                        <span class="comment-dislikes">👎 0</span>
+                        <button class="comment-likes" onclick="toggleLike(this)">
+                            👍
+                        </button>
+                        <button class="comment-dislikes" onclick="toggleDislike(this)">
+                            👎
+                        </button>
                     </div>
                     <div th:if="${comment.user.id == loginUserId}">
                         <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" method="post">
