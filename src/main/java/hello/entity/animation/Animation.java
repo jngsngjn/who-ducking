@@ -29,6 +29,9 @@ public class Animation {
     @Column(name = "first_date")
     private LocalDate firstDate;
 
+    @Column(name = "image_name")
+    private String imageName;
+
     @Column(name = "image_path")
     private String imagePath;
 

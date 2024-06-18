@@ -49,6 +49,9 @@ public class AdminService {
         if (image != null && !image.isEmpty()) {
             String filePath = fileStore.storeAnimation(image);
             animation.setImagePath(filePath);
+
+            String imageName = filePath.substring(filePath.lastIndexOf('/') + 1);
+            animation.setImageName(imageName);
         }
 
         animationRepository.save(animation);
