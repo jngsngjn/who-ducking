@@ -1,8 +1,7 @@
-
 $(document).ready(function() {
     // 메일 전송
     $("#sendCodeButton").click(function() {
-        const email = $("#emailLabel").text();
+        const email = $("#emailHidden").val(); // text-> val값으로 변경
         const button = $(this);
         button.addClass("loading");
         button.prop("disabled", true);
@@ -13,7 +12,6 @@ $(document).ready(function() {
             data: { email: email },
             success: function() {
                 alert("인증 코드가 이메일로 전송되었습니다.");
-                $("#emailHidden").val(email);
                 button.removeClass("loading");
                 button.prop("disabled", false);
             },
