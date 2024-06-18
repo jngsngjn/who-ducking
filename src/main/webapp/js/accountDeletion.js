@@ -24,7 +24,7 @@ $(document).ready(function() {
     });
 
     // 클라이언트측 코드 검증
-    $("form").submit(function(event) {
+    $("#emailCodeForm").submit(function(event) {
         event.preventDefault(); // 기본 폼 제출 방지
 
         let email = $("#emailHidden").val();
