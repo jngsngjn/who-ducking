@@ -14,7 +14,8 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     @Query("SELECT new hello.dto.admin.RequestListDTO(r.id, r.title, u.nickname, r.writeDate) " +
             "FROM Request r JOIN r.user u " +
-            "WHERE r.status = :status")
+            "WHERE r.status = :status " +
+            "ORDER BY r.writeDate ASC")
     Page<RequestListDTO> findByStatus(@Param("status") RequestStatus status, Pageable pageable);
 
     @Query("SELECT new hello.dto.admin.RequestDetailDTO(r.id, r.title, r.content, u.nickname, r.writeDate) " +
