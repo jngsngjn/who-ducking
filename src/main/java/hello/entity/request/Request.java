@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 
@@ -33,7 +32,6 @@ public class Request {
     @Column(name = "write_date")
     private LocalDate writeDate;
 
-    @UpdateTimestamp
     @Column(name = "response_date")
     private LocalDate responseDate;
 

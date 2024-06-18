@@ -1,15 +1,13 @@
 package hello.controller;
 
-import hello.dto.user.AccountDeletionDTO;
-import hello.dto.user.CustomOAuth2User;
-import hello.dto.user.EditDTO;
-import hello.dto.user.RequestDTO;
+import hello.dto.user.*;
 import hello.entity.user.User;
 import hello.service.EmailService;
 import hello.service.UserService;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -98,8 +96,11 @@ public class MyPageController {
 
     // 건의 내역
     @GetMapping("/request-list")
-    public String requestList() {
-        return "requestList";
+    public String requestList(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<MyRequestDTO> requestPage = userService.getMyRequest(page, 5);
+        model.addAttribute("requestPage", requestPage);
+        return "requestListTest";
+//        return "requestList";
     }
 
     @GetMapping("/request")

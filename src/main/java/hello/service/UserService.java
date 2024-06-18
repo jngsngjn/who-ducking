@@ -1,18 +1,21 @@
 package hello.service;
 
-import hello.dto.user.AccountDeletionDTO;
-import hello.dto.user.CustomOAuth2User;
-import hello.dto.user.EditDTO;
-import hello.dto.user.RequestDTO;
+import hello.dto.user.*;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
 import hello.entity.request.Request;
-import hello.entity.user.*;
+import hello.entity.user.Address;
+import hello.entity.user.Image;
+import hello.entity.user.ProfileImage;
+import hello.entity.user.User;
 import hello.repository.*;
 import hello.service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -130,5 +133,10 @@ public class UserService {
         request.setContent(requestDTO.getContent());
         request.setUser(user);
         requestRepository.save(request);
+    }
+
+    public Page<MyRequestDTO> getMyRequest(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return requestRepository.findMyRequest(pageable);
     }
 }

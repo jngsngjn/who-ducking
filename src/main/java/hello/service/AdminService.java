@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static hello.entity.request.RequestStatus.*;
 
@@ -69,6 +70,7 @@ public class AdminService {
         Request request = requestRepository.findById(id).get();
         if (request != null) {
             request.setStatus(APPROVED);
+            request.setResponseDate(LocalDate.now());
         }
     }
 
@@ -77,6 +79,7 @@ public class AdminService {
         if (request != null) {
             request.setResponse(requestRejectDTO.getResponse());
             request.setStatus(REJECTED);
+            request.setResponseDate(LocalDate.now());
         }
     }
 

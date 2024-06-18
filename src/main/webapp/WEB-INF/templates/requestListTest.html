@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/requestListTest.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/requestListTest.js"></script>
+</head>
+
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<main id="container">
+    <div class="head-title">
+        <h2>나의 글 목록</h2>
+        <a href="/myPage/request" class="write">건의하기</a>
+    </div>
+
+    <div class="menulist">
+        <div class="menu">
+            <ul>
+                <li class="menuli">
+                    <a href="">나의 리뷰</a>
+                </li>
+                <div class="line"></div>
+                <li class="menuli">
+                    <a href="">나의 게시글</a>
+                </li>
+                <div class="line"></div>
+                <li class="menuli">
+                    <a class="my-request" href="/myPage/request">나의 건의 내역</a>
+                </li>
+                <div class="line"></div>
+                <li class="menuli">
+                    <a href="">나의 북마크</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="writelist">
+            <div th:each="request : ${requestPage.content}">
+                <ul class="content">
+                    <li class="title" th:text="${request.title}">제목</li>
+                    <li class="time">
+                        <span th:text="${request.writeDate}">접수일</span>
+                        <label class="state" th:attr="id=${request.status}">상태</label>
+                    </li>
+                </ul>
+                <div class="line2"></div>
+            </div>
+        </div>
+
+        <div class="next">
+            <a class="next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>
+            <a class="next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>
+            <span th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
+                <a th:classappend="${i == requestPage.number + 1} ? 'now-button' : 'next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
+            </span>
+            <a class="next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>
+            <a class="next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>
+        </div>
+    </div>
+</main>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
