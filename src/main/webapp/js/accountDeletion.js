@@ -1,8 +1,7 @@
-
 $(document).ready(function() {
     // 메일 전송
     $("#sendCodeButton").click(function() {
-        const email = $("#emailLabel").text();
+        const email = $("#emailHidden").val(); // text-> val값으로 변경
         const button = $(this);
         button.addClass("loading");
         button.prop("disabled", true);
@@ -13,7 +12,6 @@ $(document).ready(function() {
             data: { email: email },
             success: function() {
                 alert("인증 코드가 이메일로 전송되었습니다.");
-                $("#emailHidden").val(email);
                 button.removeClass("loading");
                 button.prop("disabled", false);
             },
@@ -46,7 +44,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log("Server response:", response); // 디버깅 출력
                 if (response) {
-                    $("form")[0].submit();
+                    $("form")[1].submit();
                 } else {
                     alert("유효하지 않은 코드이거나 시간이 만료되었습니다.");
                 }
@@ -56,5 +54,10 @@ $(document).ready(function() {
                 alert("서버 오류가 발생했습니다. 나중에 다시 시도해주세요.");
             }
         });
+    });
+
+    // 취소 버튼 클릭 시 myPage.html로 이동
+    $(".delete-before").click(function() {
+        window.location.href = "/myPage";
     });
 });
