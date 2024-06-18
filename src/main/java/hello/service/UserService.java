@@ -60,9 +60,6 @@ public class UserService {
         // 장르 설정
         userGenreRepository.deleteByUser(id);
         List<String> genres = editDTO.getSelectedGenres();
-        for (String genre : genres) {
-            System.out.println("genre = " + genre);
-        }
         List<Genre> allGenres = genreRepository.findByNameIn(genres);
 
         allGenres.forEach(genre -> {

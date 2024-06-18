@@ -2,6 +2,8 @@ package hello.service;
 
 import hello.dto.admin.*;
 import hello.entity.animation.Animation;
+import hello.entity.genre.AnimationGenre;
+import hello.entity.genre.Genre;
 import hello.entity.prize.Prize;
 import hello.entity.request.Request;
 import hello.entity.request.RequestStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import static hello.entity.request.RequestStatus.*;
 
@@ -29,6 +32,7 @@ public class AdminService {
     private final FileStore fileStore;
     private final RequestRepository requestRepository;
     private final PrizeRepository prizeRepository;
+    private final GenreRepository genreRepository;
 
     public Page<UserInfoDTO> getUserInfoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -43,6 +47,14 @@ public class AdminService {
         animation.setIsFinished(animationDTO.isFinished());
         animation.setRating(animationDTO.getRating());
         animation.setDescription(animationDTO.getDescription());
+
+        // 장르 저장
+        List<String> genres = animationDTO.getGenres();
+        List<Genre> findGenres = genreRepository.findByNameIn(genres);
+        findGenres.forEach(genre -> {
+            AnimationGenre animationGenre = new AnimationGenre(animation, genre);
+            animation.getAnimationGenres().add(animationGenre);
+        });
 
         // 이미지 파일 저장
         MultipartFile image = animationDTO.getImage();
