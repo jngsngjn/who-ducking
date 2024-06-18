@@ -71,4 +71,15 @@ public class AdminController {
         adminService.rejectRequest(requestRejectDTO);
         return "redirect:/admin/request-list";
     }
+
+    @GetMapping("/prize")
+    public String prizePage() {
+        return "admin/prize";
+    }
+
+    @PostMapping("/add-prize")
+    public String addPrize(@ModelAttribute PrizeAddDTO prizeAddDTO) throws IOException {
+        adminService.addPrize(prizeAddDTO);
+        return "redirect:/admin/prize";
+    }
 }

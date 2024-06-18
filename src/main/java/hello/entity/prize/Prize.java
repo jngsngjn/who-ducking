@@ -2,12 +2,16 @@ package hello.entity.prize;
 
 import hello.entity.user.User;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity @Getter @Setter
 public class Prize {
 
     @Id
@@ -30,10 +34,11 @@ public class Prize {
     private PrizeGrade grade;
 
     @Column(name = "start_date")
-    private LocalDateTime startDate;
+    @CreationTimestamp
+    private LocalDate startDate;
 
-    @Column(name = "end_date")
-    private LocalDateTime endDate;
+    @Column(name = "end_date_time")
+    private LocalDateTime endDateTime;
 
     @OneToMany(mappedBy = "prize")
     private List<Entry> entries = new ArrayList<>();

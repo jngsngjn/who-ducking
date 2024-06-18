@@ -2,12 +2,10 @@ package hello.service;
 
 import hello.dto.admin.*;
 import hello.entity.animation.Animation;
+import hello.entity.prize.Prize;
 import hello.entity.request.Request;
 import hello.entity.request.RequestStatus;
-import hello.repository.AnimationRepository;
-import hello.repository.FileStore;
-import hello.repository.RequestRepository;
-import hello.repository.UserRepository;
+import hello.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +27,7 @@ public class AdminService {
     private final AnimationRepository animationRepository;
     private final FileStore fileStore;
     private final RequestRepository requestRepository;
+    private final PrizeRepository prizeRepository;
 
     public Page<UserInfoDTO> getUserInfoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -79,5 +78,25 @@ public class AdminService {
             request.setResponse(requestRejectDTO.getResponse());
             request.setStatus(REJECTED);
         }
+    }
+
+    public void addPrize(PrizeAddDTO prizeAddDTO) throws IOException {
+        Prize prize = new Prize();
+
+        prize.setName(prizeAddDTO.getName());
+        prize.setGrade(prizeAddDTO.getGrade());
+        prize.setEndDateTime(prizeAddDTO.getEndDateTime());
+
+        // 이미지 파일 저장
+        MultipartFile image = prizeAddDTO.getImage();
+        if (image != null && !image.isEmpty()) {
+            String filePath = fileStore.storePrize(image);
+            prize.setImagePath(filePath);
+
+            String imageName = filePath.substring(filePath.lastIndexOf('/') + 1);
+            prize.setImageName(imageName);
+        }
+
+        prizeRepository.save(prize);
     }
 }
