@@ -131,5 +131,22 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
             genreRepository.saveAll(genres);
         }
+
+        if (levelRepository.count() == 0) {
+            List<Level> levels = new ArrayList<>();
+            levels.add(new Level(0, level1));
+            levels.add(new Level(20, level2));
+            levels.add(new Level(40, level3));
+            levels.add(new Level(100, level4));
+            levels.add(new Level(240, level5));
+            levels.add(new Level(580, level6));
+            levels.add(new Level(1300, level7));
+            levels.add(new Level(3200, level8));
+            levels.add(new Level(8700, level9));
+            levels.add(new Level(20000, level10));
+
+            levelRepository.saveAll(levels);
+        }
+
     }
 }
