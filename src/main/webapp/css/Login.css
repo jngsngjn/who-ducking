@@ -67,12 +67,26 @@
 
 .login_naver {
   background: #03c75a;
+  border: 1px solid #03c75a;
   color: #fff;
   margin-bottom: 2rem;
 }
 
 .login_kakao {
   background: #fff500;
+  border: 1px solid #fff500;
+}
+
+.login_google,
+.login_naver,
+.login_kakao {
+  transition: border 0.3s;
+}
+
+.login_google:hover,
+.login_naver:hover,
+.login_kakao:hover {
+  border: 1px solid #000;
 }
 
 .login-icon {
