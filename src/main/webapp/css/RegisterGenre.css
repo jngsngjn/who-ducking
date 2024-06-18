@@ -1,0 +1,117 @@
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
+}
+
+/* Register Genre =============================================== */
+.register_genre {
+    position: relative;
+    padding: 6rem 0;
+    background: #f5f5f5;
+}
+
+.register_genre_box {
+    margin: 0 auto;
+    padding: 8rem 2rem;
+    width: 800px;
+    background: #fff;
+    box-shadow: var(--box-shadow__A);
+    border-radius: 3rem;
+}
+
+.register_genre_title_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.register_genre_title {
+    font-size: 3.6rem;
+    color: var(--mainColor);
+    text-align: center;
+}
+
+.register_genre_subtitle {
+    font-size: 2.4rem;
+    color: var(--subColor);
+    text-align: center;
+    font-weight: 400;
+}
+
+.register_genre_form-cnt {
+    padding: 3rem 0;
+}
+
+.register_genre-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.register_genre-item {
+    width: 17rem;
+    padding-bottom: 4rem;
+}
+
+.register_genre_checkbox {
+    display: none;
+}
+
+.register_genre_label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #d9d9d9;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 2rem;
+    font-size: 2.4rem;
+    height: 6rem;
+    white-space: nowrap;
+    padding: 0 1rem;
+}
+
+.register_genre_label:hover {
+    background-color: var(--subColor);
+    color: #fff;
+    cursor: pointer;
+}
+
+.register_genre_label_click {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: var(--mainColor);
+    border: 1px solid var(--mainColor);
+    border-radius: 2rem;
+    font-size: 2.4rem;
+    height: 6rem;
+    white-space: nowrap;
+    padding: 0 1rem;
+}
+
+.register_genre_label_click:hover {
+    background-color: var(--subColor);
+    cursor: pointer;
+}
+
+.register_submit_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 60%;
+    height: 45px;
+    border-radius: 1rem;
+    background: var(--mainColor);
+    font-size: 1.8rem;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.register_submit_btn:hover {
+    background: var(--subColor);
+}

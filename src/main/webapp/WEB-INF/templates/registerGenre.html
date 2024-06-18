@@ -1,9 +1,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/genre.css">
-    <script src="/js/registerGenre.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
 
     <!-- Swiper -->
@@ -27,121 +26,226 @@
     <script type="text/javascript" src="/js/common.js"></script>
 </head>
 <body>
-<div th:insert="~{fragments/header :: header}"></div>
+    <div th:insert="~{fragments/header :: header}"></div>
 
-    <form action="/register" method="post">
-        <div class="genre-selection">
-            <div class="genre-container">
-                <div class="genre-header">
-                    <div class="genre-title">애니 장르 선택</div>
-                    <div class="genre-subtitle">중복 선택 가능</div>
+    <!-- Container -->
+    <main id="container">
+        <section class="register_genre">
+            <div class="register_genre_box">
+                <!-- Title -->
+                <div class="register_genre_title_box">
+                    <h1 class="register_genre_title">애니 장르 선택</h1>
+                    <h4 class="register_genre_subtitle">중복 선택 가능</h4>
                 </div>
-                <div class="genre-list">
-                    <div class="genre-row">
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="액션"> 액션</label>
+
+                <form action="/register" method="post" id="register_form">
+                    <!-- Genre Data Input -->
+                    <div class="register_genre_form-cnt">
+
+                        <!-- Row 1 -->
+                        <div class="register_genre-row">
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_action" name="genres" value="액션"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_action" id="genre_custom_button_action_label"
+                                       class="register_genre_label">액션</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_munchkin" name="genres" value="먼치킨"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_munchkin" id="genre_custom_button_munchkin_label"
+                                       class="register_genre_label">먼치킨</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_mystery" name="genres" value="추리/미스테리"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_mystery" id="genre_custom_button_mystery_label"
+                                       class="register_genre_label">추리/미스테리</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_sports" name="genres" value="스포츠"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_sports" id="genre_custom_button_sports_label"
+                                       class="register_genre_label">스포츠</label>
+                            </div>
                         </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="먼치킨"> 먼치킨</label>
+
+                        <!-- Row 2 -->
+                        <div class="register_genre-row">
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_magic" name="genres" value="마법"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_magic" id="genre_custom_button_magic_label"
+                                       class="register_genre_label">마법</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_comedy" name="genres" value="개그"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_comedy" id="genre_custom_button_comedy_label"
+                                       class="register_genre_label">개그</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_daily" name="genres" value="일상"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_daily" id="genre_custom_button_daily_label"
+                                       class="register_genre_label">일상</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_romance" name="genres" value="순정"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_romance" id="genre_custom_button_romance_label"
+                                       class="register_genre_label">순정</label>
+                            </div>
                         </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="추리/미스테리"> 추리/미스테리</label>
+
+                        <!-- Row 3 -->
+                        <div class="register_genre-row">
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_fantasy" name="genres" value="판타지"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_fantasy" id="genre_custom_button_fantasy_label"
+                                       class="register_genre_label">판타지</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_school" name="genres" value="학원"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_school" id="genre_custom_button_school_label"
+                                       class="register_genre_label">학원</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_healing" name="genres" value="힐링"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_healing" id="genre_custom_button_healing_label"
+                                       class="register_genre_label">힐링</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_historical" name="genres" value="시대"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_historical" id="genre_custom_button_historical_label"
+                                       class="register_genre_label">시대</label>
+                            </div>
                         </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="스포츠"> 스포츠</label>
+
+                        <!-- Row 4 -->
+                        <div class="register_genre-row">
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_maid" name="genres" value="메이드"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_maid" id="genre_custom_button_maid_label"
+                                       class="register_genre_label">메이드</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_tsundere" name="genres" value="츤데레"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_tsundere" id="genre_custom_button_tsundere_label"
+                                       class="register_genre_label">츤데레</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_yandere" name="genres" value="얀데레"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_yandere" id="genre_custom_button_yandere_label"
+                                       class="register_genre_label">얀데레</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_love" name="genres" value="러브"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_love" id="genre_custom_button_love_label"
+                                       class="register_genre_label">러브</label>
+                            </div>
                         </div>
+
+                        <!-- Row 5 -->
+                        <div class="register_genre-row">
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_bl" name="genres" value="BL"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_bl" id="genre_custom_button_bl_label"
+                                       class="register_genre_label">BL</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_philosophy" name="genres" value="철학"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_philosophy" id="genre_custom_button_philosophy_label"
+                                       class="register_genre_label">철학</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_harem" name="genres" value="하렘"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_harem" id="genre_custom_button_harem_label"
+                                       class="register_genre_label">하렘</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_reverse_harem" name="genres" value="역하렘"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_reverse_harem"
+                                       id="genre_custom_button_reverse_harem_label"
+                                       class="register_genre_label">역하렘</label>
+                            </div>
+                        </div>
+
+                        <!-- Row 6 -->
+                        <div class="register_genre-row">
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_yuri" name="genres" value="백합"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_yuri" id="genre_custom_button_yuri_label"
+                                       class="register_genre_label">백합</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_horror" name="genres" value="호러"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_horror" id="genre_custom_button_horror_label"
+                                       class="register_genre_label">호러</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_kids" name="genres" value="아동"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_kids" id="genre_custom_button_kids_label"
+                                       class="register_genre_label">아동</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_virtual" name="genres" value="가상"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_virtual" id="genre_custom_button_virtual_label"
+                                       class="register_genre_label">가상</label>
+                            </div>
+                        </div>
+
+                        <!-- Row 7 -->
+                        <div class="register_genre-row">
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_mental" name="genres" value="멘붕"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_mental" id="genre_custom_button_mental_label"
+                                       class="register_genre_label">멘붕</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_mecha" name="genres" value="메카"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_mecha" id="genre_custom_button_mecha_label"
+                                       class="register_genre_label">메카</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_superpower" name="genres" value="능력자"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_superpower" id="genre_custom_button_superpower_label"
+                                       class="register_genre_label">능력자</label>
+                            </div>
+                            <div class="register_genre-item">
+                                <input type="checkbox" id="genre_custom_button_shota" name="genres" value="쇼타"
+                                       class="register_genre_checkbox" />
+                                <label for="genre_custom_button_shota" id="genre_custom_button_shota_label"
+                                       class="register_genre_label">쇼타</label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button class="register_submit_btn" type="submit">회원가입</button>
                     </div>
-                    <div class="genre-row">
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="마법"> 마법</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="개그"> 개그</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="일상"> 일상</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="순정"> 순정</label>
-                        </div>
-                    </div>
-                    <div class="genre-row">
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="판타지"> 판타지</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="학원"> 학원</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="힐링"> 힐링</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="시대"> 시대</label>
-                        </div>
-                    </div>
-                    <div class="genre-row">
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="메이드"> 메이드</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="츤데레"> 츤데레</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="얀데레"> 얀데레</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="러브"> 러브</label>
-                        </div>
-                    </div>
-                    <div class="genre-row">
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="BL"> BL</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="철학"> 철학</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="하렘"> 하렘</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="역하렘"> 역하렘</label>
-                        </div>
-                    </div>
-                    <div class="genre-row">
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="백합"> 백합</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="호러"> 호러</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="아동"> 아동</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="가상"> 가상</label>
-                        </div>
-                    </div>
-                    <div class="genre-row">
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="멘붕"> 멘붕</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="메카"> 메카</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="능력자"> 능력자</label>
-                        </div>
-                        <div class="genre-item">
-                            <label><input type="checkbox" name="genres" value="쇼타"> 쇼타</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="genre-submit">
-                    <button class="submit-btn" type="submit">회원가입</button>
-                </div>
+                </form>
             </div>
-        </div>
-    </form>
+        </section>
+    </main>
 
     <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
