@@ -8,35 +8,38 @@
     <title>Who's DucKing</title>
 
     <!-- Swiper -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/src/main/webapp/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/vendor/aos/aos.css">
+    <link rel="stylesheet" href="/src/main/webapp/vendor/aos/aos.css">
     <!-- Animate -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/vendor/animate/animate.min.css">
+    <link rel="stylesheet" href="/src/main/webapp/vendor/animate/animate.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="/who-ducking/src/main/webapp/css/common.css" />
+    <link rel="stylesheet" href="/src/main/webapp/css/common.css" />
 
     <!-- jQuery -->
-    <script src="/who-ducking/src/main/webapp/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/src/main/webapp/vendor/jquery/jquery-3.7.1.min.js"></script>
     <!-- swiper -->
-    <script src="/who-ducking/src/main/webapp/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/src/main/webapp/vendor/swiper/swiper-bundle.min.js"></script>
     <!-- AOS -->
-    <script src="/who-ducking/src/main/webapp/vendor/aos/aos.js"></script>
+    <script src="/src/main/webapp/vendor/aos/aos.js"></script>
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
-    <script type="text/javascript" src="/who-ducking/src/main/webapp/js/common.js"></script>
+    <script type="text/javascript" src="/src/main/webapp/js/common.js"></script>
+
+
 </head>
-<body>
-	<header id="header" th:fragment="header">
+
+<body class="myFaq_body">
+    <header id="header" th:fragment="header">
         <div class="h-inner">
             <!-- Left -->
             <div class="h-left">
                 <!-- Logo -->
                 <h1 class="h-logo">
                     <a class="navbar-brand" href="/">
-                        <img src="src/main/webapp/images/Logo/logo.png" alt="로고">
-                        
+                        <img src="/src/main/webapp/images/Logo/logo.png" alt="로고">
+
                     </a>
                 </h1>
                 <!-- Search Box -->
@@ -83,30 +86,7 @@
                             </li>
                         </div>
 
-                        <!-- Alarm List -->
-                        <ul class="h-alarm_list" sec:authorize="isAuthenticated()">
-                            <!-- Alarm X -->
-                            <li>
-                                <a href="#none">알림이 없습니다.</a>
-                            </li>
-                            <!-- Alarm O -->
-                            <li>
-                                <a href="#none">
-                                    ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#none">
-                                    ~~ 건의에 대한 답변이 등록되었습니다.
-                                </a>
-                            </li>
-                            <!-- 리스트 추가 시, 양식대로 추가
-                            <li>
-                                <a href="#none">
 
-                                </a>
-                            </li> -->
-                        </ul>
                     </div>
                 </ul>
                 <!-- Profile -->
@@ -114,40 +94,14 @@
                     <!-- Profile Btn -->
                     <div class="h-profile" sec:authorize="isAuthenticated()">
                         <div>
-                            <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}"/>
+                            <img class="h-mobile_profile-img"
+                                th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
                         </div>
                         <i class="fa-solid fa-caret-down"></i>
                     </div>
                 </div>
                 <!-- Profile Menu -->
-                <ul class="h-profile_menu" sec:authorize="isAuthenticated()">
-                    <!-- Before Login -->
-                    <!-- After Login -->
-                    <li>
-                        <strong class="h-profile_menu_nickname" th:text="${session.nickname}"></strong>
-                    </li>
-                    <li class="h-profile_menu_exp_box">
-                        <div class="h-profile_menu_level-point">
-                            <span class="h-proflie_menu_level" th:text="Lv. + ${session.level}"></span>
-                            <div class="h-profile_menu_point">
-                                <i class="fa-solid fa-coins"></i>
-                                <span th:text="${session.point}"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <span class="h-profile_menu_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'XP'"></span>
-                        </div>
-                        <div class="exp-bar">
-                            <div class="exp-bar-inner" th:style="'width:' + (${session.currentExp} > 0 ? (${session.maxExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/myPage">마이페이지</a>
-                    </li>
-                    <li>
-                        <a href="/logout">로그아웃</a>
-                    </li>
-                </ul>
+
             </div>
         </div>
 
@@ -176,9 +130,11 @@
                             <div class="h-mobile_profile-box" sec:authorize="isAuthenticated()">
                                 <div class="h-mobile_profile">
                                     <div>
-                                        <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}"/>
+                                        <img class="h-mobile_profile-img"
+                                            th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
                                     </div>
-                                    <strong href="/myPage" class="h-mobile_profile-nickname" th:value="${session.nickname}">UserNickname</strong>
+                                    <strong href="/myPage" class="h-mobile_profile-nickname"
+                                        th:value="${session.nickname}">UserNickname</strong>
                                 </div>
                                 <div class="h-mobile_profile_exp_box">
                                     <div class="h-mobile_profile_level-point">
@@ -266,17 +222,90 @@
             </div>
         </div>
     </header>
-	<main id="container">
-		<section>
-		
-		</section>
-		<section>
-		
-		</section>
-		<section>
-		
-		</section>
-	</main>
+    <main id="container" class="myFaq_main">
+        <div class="myFaq_head-title">
+            <h2 class="myFaq_h2">나의 글 목록</h2>
+            <button class="myFaq_write">건의하기</button>
+        </div>
+        <div class="myFaq_menulist">
+            <div class="myFaq_menu">
+                <ul>
+                    <li class="myFaq_menuli">
+                        <a href="" class="myFaq_a">나의 리뷰</a>
+                    </li>
+                    <div class="myFaq_line"></div>
+                    <li class="myFaq_menuli">
+                        <a href="" class="myFaq_a">나의 게시글</a>
+                    </li>
+                    <div class="myFaq_line"></div>
+                    <li class="myFaq_menuli">
+                        <a href="" class="myFaq_a">나의 건의 내역</a>
+                    </li>
+                    <div class="myFaq_line"></div>
+                    <li class="myFaq_menuli">
+                        <a href="" class="myFaq_a">나의 북마크</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="myFaq_writelist">
+                <ul class="myFaq_content">
+                    <li class="myFaq_title">
+                        이 애니 추가해주세요ㅋ
+                    </li>
+                    <li class="myFaq_time">2024-06-02 15:33
+                        <button class="myFaq_state" id="접수">접수</button>
+                    </li>
+                </ul>
+                <div class="myFaq_line2"></div>
+                <ul class="myFaq_content">
+                    <li class="myFaq_title">
+                        이 애니 추가해주세요ㅋ
+                    </li>
+                    <li class="myFaq_time">2024-06-02 15:33
+                        <button class="myFaq_state" id="접수">접수</button>
+                    </li>
+                </ul>
+                <div class="myFaq_line2"></div>
+                <ul class="myFaq_content">
+                    <li class="myFaq_title">
+                        이 애니 추가해주세요ㅋ
+                    </li>
+                    <li class="myFaq_time">2024-06-02 15:33
+                        <button class="myFaq_state" id="승인">승인</button>
+                    </li>
+                </ul>
+                <div class="myFaq_line2"></div>
+                <ul class="myFaq_content">
+                    <li class="myFaq_title">
+                        이 애니 추가해주세요ㅋ
+                    </li>
+                    <li class="myFaq_time">2024-06-02 15:33
+                        <button class="myFaq_state" id="반려">반려</button>
+                    </li>
+                </ul>
+                <div class="myFaq_line2"></div>
+                <ul class="myFaq_content">
+                    <li class="myFaq_title">
+                        이 애니 추가해주세요ㅋ
+                    </li>
+                    <li class="myFaq_time">2024-06-02 15:33
+                        <button class="myFaq_state" id="접수">접수</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="myFaq_next">
+                <button class="myFaq_next-button">&lt;&lt;</button>
+                <button class="myFaq_next-button">&lt;</button>
+                <button class="myFaq_now-button">1</button>
+                <button class="myFaq_next-button">2</button>
+                <button class="myFaq_next-button">&gt;</button>
+                <button class="myFaq_next-button">&gt;&gt;</button>
+            </div>
+        </div>
+
+    </main>
     <footer id="footer" th:fragment="footer">
         <div class="f-box">
             <div class="h-logo">
@@ -318,30 +347,28 @@
             </a>
         </div>
     </footer>
+
+    <script>
+        // 페이지가 로드된 후 실행
+        document.addEventListener('DOMContentLoaded', function () {
+            // 모든 버튼 요소를 선택
+            var buttons = document.querySelectorAll('.myFaq_state');
+            buttons.forEach(function (button) {
+                // 버튼의 id에 따라 스타일 적용
+                switch (button.id) {
+                    case '승인':
+                        button.style.backgroundColor = 'rgba(16, 255, 11, 0.5)'; // 파란색
+                        break;
+                    case '반려':
+                        button.style.backgroundColor = 'rgba(255, 0, 0, 0.5)'; // 빨간색
+                        break;
+                    default:
+                        button.style.backgroundColor = '#ffc60b'; // 기본 색상
+                        break;
+                }
+            });
+        });
+    </script>
 </body>
-</html>
-</head>
-<body>
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-</body>
 </html>

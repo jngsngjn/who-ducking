@@ -1,0 +1,141 @@
+.myWrite_body {
+    background-image: url('/src/main/webapp/images/Background_Image/marin.png');
+    background-repeat: no-repeat;
+    background-position: right bottom 267px;
+    background-size: 450px 1000px;
+}
+
+.myWrite_main {
+    transform: scale(0.8);
+}
+
+.myWrite_head-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    height: 50px;
+    width: 1380px;
+    margin-bottom: 50px;
+}
+
+.myWrite_h2 {
+    color: #ff8b00;
+    font-size: 50px;
+}
+
+.myWrite_filter {
+    width: 130px;
+    height: 50px;
+    font-size: 28px;
+    background: #ff8b00;
+    color: white;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
+.myWrite_filter2 {
+    width: 130px;
+    height: 50px;
+    font-size: 28px;
+    background: white;
+    color: black;
+    border-radius: 15px;
+    border: 1px solid #d9d9d9;
+}
+
+.myWrite_menulist {
+    width: 1400px;
+    height: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 70px;
+}
+
+.myWrite_menu {
+    width: 300px;
+    height: 720px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 20px;
+}
+
+.myWrite_menuli {
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.myWrite_writelist {
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+    width: 1025px;
+    height: 1070px;
+}
+
+.myWrite_a {
+    color: black;
+}
+
+.myWrite_line {
+    width: 300px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myWrite_line2 {
+    width: 1025px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myWrite_content {
+    width: 940px;
+    height: 173px;
+    margin: 20px 50px 20px 40px;
+}
+
+.myWrite_title {
+    margin-bottom: 80px;
+    font-size: 36px;
+}
+
+.myWrite_time {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: #d9d9d9;
+}
+
+.myWrite_state {
+    border-radius: 10px;
+    width: 121px;
+    height: 60px;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.myWrite_next {
+    width: 424px;
+    height: 54px;
+    gap: 20px;
+    display: flex;
+}
+
+.myWrite_next-button {
+    width: 54px;
+    border-radius: 100px;
+    background-color: #feffdb;
+}
+
+.myWrite_now-button {
+    width: 54px;
+    border-radius: 100px;
+    background-color: #ffc60b;
+}

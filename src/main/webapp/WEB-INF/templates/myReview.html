@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/src/main/webapp/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/src/main/webapp/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/src/main/webapp/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/src/main/webapp/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/src/main/webapp/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/src/main/webapp/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/src/main/webapp/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/src/main/webapp/js/common.js"></script>
+
+    <style>
+        
+
+        body{
+            background-image: url('/src/main/webapp/images/Background_Image/itachi.png');
+            background-repeat: no-repeat;
+            background-position: 7% 72%;
+            background-size: 350px 700px;
+        }
+
+        main {
+            transform: scale(0.8);
+        }
+
+        .head-title{
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           margin: auto;
+           height: 50px;
+           width: 1380px;
+           margin-bottom: 50px;
+        }
+
+        h2 {
+            color: #ff8b00;
+            font-size: 50px;
+        }
+
+        .filter{
+            width: 130px;
+            height: 50px;
+            font-size: 28px;
+            background: #ff8b00;
+            color: white;
+            border-radius: 15px;
+            margin-right: 10px;
+        }
+
+        .filter2{
+            width: 130px;
+            height: 50px;
+            font-size: 28px;
+            background: white;
+            color: black;
+            border-radius: 15px;
+            border: 1px solid #d9d9d9;
+        }
+
+        .menulist {
+            width: 1400px;
+            height: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 70px;
+        }
+
+        .menu {
+            width: 300px;
+            height: 720px;
+            border: 1px solid #d9d9d9;
+            display: flex;
+            justify-content: center;
+            font-size: 36px;
+            text-align: center;
+            white-space: nowrap;
+            border-radius: 20px;
+        }
+
+        .menuli {
+            margin-bottom: 60px;
+            margin-top: 60px;
+        }
+
+        .writelist {
+            width: 1025px;
+            height: 1070px;
+            margin-bottom: 50px;
+        }
+
+        a {
+            color: black;
+        }
+
+        .line {
+            width: 300px;
+            height: 1px;
+            border-top: 1px solid #d9d9d9;
+        }
+
+        .line2 {
+            width: 1025px;
+            height: 1px;
+            border-top: 1px solid #d9d9d9;
+        }
+
+        .content{
+            margin-bottom: 50px;
+        }
+
+        .ani{
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+        }
+
+        
+
+        
+
+        .next {
+            width: 424px;
+            height: 54px;
+            gap: 20px;
+            display: flex;
+        }
+
+        .next-button {
+            width: 54px;
+            border-radius: 100px;
+            background-color: #feffdb;
+        }
+
+        .now-button {
+            width: 54px;
+            border-radius: 100px;
+            background-color: #ffc60b;
+        }
+
+        .bot{
+            margin-top: 10px;
+            width: 250px;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .comment{
+            color: #91D8E4;   
+        }
+
+        .star{
+            color: #FFF500;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" th:fragment="header">
+        <div class="h-inner">
+            <!-- Left -->
+            <div class="h-left">
+                <!-- Logo -->
+                <h1 class="h-logo">
+                    <a class="navbar-brand" href="/">
+                        <img src="/src/main/webapp/images/Logo/logo.png" alt="로고">
+
+                    </a>
+                </h1>
+                <!-- Search Box -->
+                <form action="/search" method="get" class="h-search_box">
+                    <input type="text" id="" name="name" class="h-search_bar" />
+                    <button type="submit" class="h-search_btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+            <!-- Right -->
+            <div class="h-right">
+                <!-- Global Navigation Bar -->
+                <ul class="h-gnb_items">
+                    <li>
+                        <a href="/genre">장르</a>
+                    </li>
+                    <li>
+                        <a href="/community">커뮤니티</a>
+                    </li>
+                    <li>
+                        <a href="/news">소식</a>
+                    </li>
+                    <li>
+                        <a href="/playground">놀이터</a>
+                    </li>
+                    <!-- Alarm Dropdown -->
+                    <div class="h-alarm">
+                        <div class="h-alarm_btn" sec:authorize="isAuthenticated()">
+                            <li>
+                                <a href="#none">
+                                    알림
+                                    <!-- <span class="h-alarm_count">12</span> -->
+                                </a>
+                            </li>
+                        </div>
+
+                        <div class="h-alarm_btn" sec:authorize="!isAuthenticated()">
+                            <li>
+                                <a href="/login" style="color: var(--mainColor)">
+                                    로그인
+                                    <!-- <span class="h-alarm_count">12</span> -->
+                                </a>
+                            </li>
+                        </div>
+
+
+                    </div>
+                </ul>
+                <!-- Profile -->
+                <div class="h-profile_box">
+                    <!-- Profile Btn -->
+                    <div class="h-profile" sec:authorize="isAuthenticated()">
+                        <div>
+                            <img class="h-mobile_profile-img"
+                                th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
+                        </div>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+                <!-- Profile Menu -->
+
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="h-mobile">
+            <!-- Open Btn -->
+            <button class="h-mobile_btn-open">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="h-mobile_box">
+                <!-- Close Btn -->
+                <button class="h-mobile_btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <!-- Mobile Menu -->
+                <div class="h-mobile_menu_box">
+                    <!-- Logo -->
+                    <div class="h-logo mobile-logo">
+                        <a href="/">
+                            <img src="/images/Logo/logo.png" alt="로고">
+                        </a>
+                    </div>
+                    <!-- Mobile Profile (비로그인 시, 주석) -->
+                    <ul class="h-mobile_profile-gnb">
+                        <li>
+                            <div class="h-mobile_profile-box" sec:authorize="isAuthenticated()">
+                                <div class="h-mobile_profile">
+                                    <div>
+                                        <img class="h-mobile_profile-img"
+                                            th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
+                                    </div>
+                                    <strong href="/myPage" class="h-mobile_profile-nickname"
+                                        th:value="${session.nickname}">UserNickname</strong>
+                                </div>
+                                <div class="h-mobile_profile_exp_box">
+                                    <div class="h-mobile_profile_level-point">
+                                        <span class="h-mobile_profile_level" th:text="Lv. + ${session.level}"></span>
+                                        <div class="h-mobile_profile_point">
+                                            <i class="fa-solid fa-coins"></i>
+                                            <span th:text="${session.point}"></span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="h-mobile_profile_exp_point">16 / 20 EXP</span>
+                                    </div>
+                                    <div class="h-mobile_profile_menu_exp">
+                                        <span class="h-mobile_profile_exp_track"></span>
+                                        <span class="h-mobile_profile_exp_thumb" style="width: 80%;"></span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                            <ul class="h-mobile_profile-lnb" sec:authorize="isAuthenticated()">
+                                <div class="h-mobile_alarm">
+                                    <div class="h-mobile_alarm-btn">
+                                        <li>
+                                            <a href="#none">
+                                                알림
+                                                <!-- <span class="h-mobile_alarm_count">12</span> -->
+                                            </a>
+                                        </li>
+                                    </div>
+                                    <ul class="h-mobile_alarm-list">
+                                        <!-- Alarm X -->
+                                        <li>
+                                            <a href="#none">알림이 없습니다.</a>
+                                        </li>
+                                        <!-- Alarm O -->
+                                        <li>
+                                            <a href="#none">
+                                                ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#none">
+                                                ~~ 건의에 대한 답변이 등록되었습니다.
+                                            </a>
+                                        </li>
+                                        <!-- 리스트 추가 시, 양식대로 추가
+                                        <li>
+                                            <a href="#none">
+            
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <li>
+                                    <a href="/mypage">마이페이지</a>
+                                </li>
+                                <li>
+                                    <a href="/logout">로그아웃</a>
+                                </li>
+                            </ul>
+                            <!-- Mobile Menu Default -->
+                            <ul class="h-mobile_menu">
+                                <li>
+                                    <a href="/genre">장르</a>
+                                </li>
+                                <li>
+                                    <a href="/community">커뮤니티</a>
+                                </li>
+                                <li>
+                                    <a href="/news">소식</a>
+                                </li>
+                                <li>
+                                    <a href="/playground">놀이터</a>
+                                </li>
+                            </ul>
+                            <!-- Before Login Menu -->
+                            <ul class="h-mobile_sign">
+                                <li>
+                                    <a class="nav-link" href="/login">로그인</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id="container">
+        <div class="head-title">
+
+        
+        <h2>나의 글 목록</h2>
+         
+         <div>
+             <button class="filter">최신 순</button>
+             <button class="filter2">조회수 순</button>
+         </div>   
+        </div>
+        <div class="menulist">
+            <div class="menu">
+                <ul>
+                    <li class="menuli">
+                        <a href="">나의 리뷰</a>
+                    </li>
+                    <div class="line"></div>
+                    <li class="menuli">
+                        <a href="">나의 게시글</a>
+                    </li>
+                    <div class="line"></div>
+                    <li class="menuli">
+                        <a href="">나의 건의 내역</a>
+                    </li>
+                    <div class="line"></div>
+                    <li class="menuli">
+                        <a href="">나의 북마크</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="writelist">
+                <ul class="content">
+                    <li class="ani">
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                              <div class="bot">
+                                  
+                                  <div class="comment">
+                                      
+                                      <i class="fa-solid fa-comment"></i>
+                                    </div>
+                                    <!-- 실제 데이터 --> 1,580
+                                <div class="star">
+                                    <i class="fa-solid fa-star"></i>
+
+                                </div>
+                                <!-- 실제 데이터 --> 4.7 / 5.0
+                            
+                                </div>
+                        </div>
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                  </li>
+                </ul>
+                <ul class="content">
+                    <li class="ani">
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                  </li>
+                </ul>
+                <ul class="content">
+                    <li class="ani">
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                        <div class="mainThirdSection_update_animation_img">
+                              <a href="https://www.netflix.com/browse">
+                                    <img src="/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                         alt="/">
+                              </a>
+                        </div>
+                  </li>
+                </ul>
+                
+                
+                
+            </div>
+
+            <div class="next">
+                <button class="next-button">&lt;&lt;</button>
+                <button class="next-button">&lt;</button>
+                <button class="now-button">1</button>
+                <button class="next-button">2</button>
+                <button class="next-button">&gt;</button>
+                <button class="next-button">&gt;&gt;</button>
+            </div>
+        </div>
+
+    </main>
+    <footer id="footer" th:fragment="footer" >
+        <div class="f-box">
+            <div class="h-logo">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/Logo/logoblack.png" alt="로고">
+                </a>
+            </div>
+            <ul class="f-gnb">
+                <li>
+                    <a href="#none">이용약관</a>
+                </li>
+                <li>
+                    <a href="#none">개인정보처리방침</a>
+                </li>
+                <li>
+                    <a href="#none">공지사항</a>
+                </li>
+                <li>
+                    <a href="#none">자주 묻는 질문</a>
+                </li>
+                <!-- Admin Page Link -->
+                <li th:if="${session.isAdmin}">
+                    <a href="/admin">관리자 페이지</a>
+                </li>
+            </ul>
+            <p class="f-copyright">
+                COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
+            </p>
+            <div class="f-team">
+                <span>정성진</span>
+                <span>노승빈</span>
+                <span>김승민</span>
+                <span>서준명</span>
+                <span>김수정</span>
+                <span>안성민</span>
+            </div>
+            <a class="github-icon" href="/">
+                <img src="/images/SNS_Icon/github.png" alt="github">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // 페이지가 로드된 후 실행
+        document.addEventListener('DOMContentLoaded', function () {
+            // 모든 버튼 요소를 선택
+            var buttons = document.querySelectorAll('.state');
+            buttons.forEach(function (button) {
+                // 버튼의 id에 따라 스타일 적용
+                switch (button.id) {
+                    case '승인':
+                        button.style.backgroundColor = 'rgba(16, 255, 11, 0.5)'; // 파란색
+                        break;
+                    case '반려':
+                        button.style.backgroundColor = 'rgba(255, 0, 0, 0.5)'; // 빨간색
+                        break;
+                    default:
+                        button.style.backgroundColor = '#ffc60b'; // 기본 색상
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+

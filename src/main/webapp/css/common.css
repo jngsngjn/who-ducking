@@ -11,6 +11,11 @@
 @import url(./header.css);
 @import url(./footer.css);
 @import url(./main.css);
+@import url(./editPage.css);
+@import url(./genre.css);
+@import url(./myFaq.css);
+@import url(./myWrite.css);
+
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {

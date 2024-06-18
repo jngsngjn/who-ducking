@@ -3,7 +3,7 @@ body {
     font-family: 'JejuGothic-Regular', sans-serif;
 }
 
-.genre-selection {
+.genre_genre-selection {
     background: #ededed;
     min-height: 100vh;
     display: flex;
@@ -11,55 +11,62 @@ body {
     align-items: center;
 }
 
-.genre-container {
+.genre_genre-container {
     background: #ffffff;
     border-radius: 20px;
     border: 1px solid #d9d9d9;
-    width: 700px;
-    padding: 40px;
+    width: 850px;
+    height: 1600px;
     box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
 }
 
-.genre-header {
+.genre_genre-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    margin-top: 100px;
 }
 
-.genre-title {
+.genre_genre-title {
     color: #ff8b00;
     font-size: 48px;
     font-weight: 400;
 }
 
-.genre-subtitle {
+.genre_genre-subtitle {
     color: #ffc60b;
     font-size: 24px;
     font-weight: 400;
 }
 
-.genre-list {
+.genre_genre-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    justify-content: center;
+    width: 785px;
+    height: 1020px;
+    margin: 159px 0 50px 0;
 }
 
-.genre-row {
+.genre_genre-row {
     display: flex;
-    gap: 15px;
+    gap: 33px;
+    justify-content: center;
+    margin-bottom: 100px;
+    width: 785px;
 }
 
-.genre-item {
-    width: 150px;
+.genre_genre-item {
+    width: auto;
+    height: 60px;
+    text-align: center;
 }
 
-.genre-btn {
+.genre_genre-btn {
     background: #ffffff;
     border-radius: 10px;
     border: 1px solid #d9d9d9;
@@ -72,55 +79,58 @@ body {
     transition: background 0.3s, color 0.3s;
 }
 
-.genre-btn:hover {
+.genre_genre-btn:hover {
     background: #ff8b00;
     color: #fff;
 }
 
-.genre-submit {
-    width: 200px;
+.genre_genre-submit {
+    width: 650px;
+    height: 75px;
 }
 
-.submit-btn {
+.genre_submit-btn {
     background: #ff8b00;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     color: #fff;
-    font-size: 20px;
+    font-size: 36px;
     padding: 10px;
-    width: 100%;
+    width: 650px;
+    height: 75px;
     cursor: pointer;
+    margin-bottom: 100px;
     transition: background 0.3s;
 }
 
-.submit-btn:hover {
+.genre_submit-btn:hover {
     background: #ff6f00;
 }
 
-.secion-footer {
+.genre_secion-footer {
     background: #f8f8f8;
     padding: 20px;
     text-align: center;
 }
 
-.blackframe {
+.genre_blackframe {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.logo-black-1 {
+.genre_logo-black-1 {
     width: 100px;
 }
 
-.footer-links {
+.genre_footer-links {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.footer-link {
+.genre_footer-link {
     display: flex;
     gap: 5px;
     flex-wrap: wrap;
@@ -130,33 +140,33 @@ body {
     font-size: 12px;
 }
 
-.footer-link:hover {
+.genre_footer-link:hover {
     color: #ff8b00;
 }
 
-.footer-team span {
+.genre_footer-team span {
     color: #757575;
     font-size: 12px;
     margin-right: 5px;
 }
 
-.team-name {
+.genre_team-name {
     color: #333;
     cursor: pointer;
 }
 
-.reserved {
+.genre_reserved {
     margin-top: 10px;
     color: #666;
     font-size: 14px;
 }
 
-.github-1 {
+.genre_github-1 {
     width: 30px;
     margin-top: 10px;
 }
 
-.header {
+.genre_header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -165,36 +175,35 @@ body {
     border-bottom: 1px solid #d9d9d9;
 }
 
-.right,
-.left {
+.genre_right,
+.genre_left {
     display: flex;
     align-items: center;
 }
 
-.menu {
+.genre_menu {
     display: flex;
     align-items: center;
     gap: 20px;
-
 }
 
-.header-bar {
+.genre_header-bar {
     display: flex;
     gap: 20px;
     cursor: pointer;
 }
 
-.header-bar p {
+.genre_header-bar p {
     margin: 0;
     color: #333;
     cursor: pointer;
 }
 
-.header-bar p:hover {
+.genre_header-bar p:hover {
     color: #ff8b00;
 }
 
-.alarm-check {
+.genre_alarm-check {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -208,45 +217,92 @@ body {
     color: #fff;
 }
 
-
-.logo {
+.genre_logo {
     width: 100px;
 
 }
 
-.search-bar {
+.genre_search-bar {
     display: flex;
     align-items: center;
     background: #f0f0f0;
     border-radius: 10px;
     padding: 5px;
 }
-.search-input {
+
+.genre_search-input {
     width: 200px;
     height: 20px;
     border: none;
     outline: none;
     border-radius: 5px;
     padding: 5px;
-  }
+}
 
-.rectangle-7 {
+.genre_rectangle-7 {
     width: 200px;
     height: 30px;
     background: #fff;
     border-radius: 10px;
 }
 
-.frame {
+.genre_frame {
     width: 20px;
 }
 
-.profile {
+.genre_profile {
     width: 30px;
     margin-left: 20px;
 }
 
-.github1 {
+.genre_github1 {
     width: 20px;
     margin-top: 10px;
+}
+
+/* -------------------------------------------- */
+
+.genre_checkbox_class {
+    display: none;
+}
+
+.genre_checkbox_label {
+    color: #d9d9d9;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+    font-size: 30px;
+    width: auto;
+    min-width: 150px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+
+.genre_checkbox_label:hover {
+    background-color: #feffdb;
+    cursor: pointer;
+}
+
+.genre_checkbox_label_click {
+    color: #FFFFFF;
+    background-color: #ff8b00;
+    border: 1px solid #ff8b00;
+    border-radius: 20px;
+    font-size: 30px;
+    width: auto;
+    min-width: 150px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+
+.genre_checkbox_label_click:hover {
+    cursor: pointer;
 }

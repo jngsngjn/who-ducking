@@ -1,0 +1,130 @@
+.myFaq_body {
+    background-image: url('/src/main/webapp/images/Background_Image/umaru.png');
+    background-repeat: no-repeat;
+    background-position: 10% 70%;
+    background-size: 400px 500px;
+}
+
+.myFaq_main {
+    transform: scale(0.8);
+}
+
+.myFaq_head-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    height: 50px;
+    width: 1380px;
+    margin-bottom: 50px;
+}
+
+.myFaq_h2 {
+    color: #ff8b00;
+    font-size: 50px;
+}
+
+.myFaq_write {
+    width: 130px;
+    height: 50px;
+    background: #ff8b00;
+    color: white;
+    border-radius: 15px;
+    font-size: 28px;
+}
+
+.myFaq_menulist {
+    width: 1400px;
+    height: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 70px;
+}
+
+.myFaq_menu {
+    width: 300px;
+    height: 720px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 20px;
+}
+
+.myFaq_menuli {
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.myFaq_writelist {
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+    width: 1025px;
+    height: 1070px;
+}
+
+.myFaq_a {
+    color: black;
+}
+
+.myFaq_line {
+    width: 300px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myFaq_line2 {
+    width: 1025px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myFaq_content {
+    width: 940px;
+    height: 173px;
+    margin: 20px 50px 20px 40px;
+}
+
+.myFaq_title {
+    margin-bottom: 50px;
+    font-size: 36px;
+}
+
+.myFaq_time {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: #d9d9d9;
+}
+
+.myFaq_state {
+    border-radius: 10px;
+    width: 121px;
+    height: 60px;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.myFaq_next {
+    width: 424px;
+    height: 54px;
+    gap: 20px;
+    display: flex;
+}
+
+.myFaq_next-button {
+    width: 54px;
+    border-radius: 100px;
+    background-color: #feffdb;
+}
+
+.myFaq_now-button {
+    width: 54px;
+    border-radius: 100px;
+    background-color: #ffc60b;
+}
