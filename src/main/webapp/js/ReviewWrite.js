@@ -48,6 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         scoreSpan.textContent = `${selectedRating} `;
     }
+
+    function getSelectedRating() {
+        return selectedRating;
+    }
 });
 
 // 글자수 체크
@@ -119,4 +123,55 @@ document.addEventListener("DOMContentLoaded", function () {
 // });
 
 
+
+// form을 안쓴다면..?
+// 계정 닉네임과 아이디 찾기
+$(document).ready(function() {
+    $('.submit-btn').click(function() {
+        // 닉네임 가져오기
+        let nickname = $('.h-profile_menu_nickname').text().trim();
+        console.log('닉네임:', nickname);
+
+        // 체크박스의 체크 여부 가져오기
+        let isChecked = $('#check-spoiler').prop('checked');
+        if (isChecked) {
+            console.log('체크됨');
+        } else {
+            console.log('체크되지 않음');
+        }
+
+        // 리뷰 내용 가져오기
+        let reviewContent = $('#review-content').val();
+        console.log('리뷰 내용:', reviewContent);
+
+        // 별점 가져오기
+        let scoreValue = $(".score").text().trim();
+        console.log('현재 별점:', scoreValue);
+
+        let data ={
+            nickname: nickname,
+            isChecked: isChecked,
+            reviewContent: reviewContent,
+            score: scoreValue,
+        };
+
+        // Ajax 요청 보내기
+        $.ajax({
+            type: 'POST',
+            url: '/postReview/{id}',
+            data: data,
+            success: function (res) {
+                console.log('POST 성공');
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.log('POST 실패');
+            }
+        });
+    });
+
+
+
+
+});
 

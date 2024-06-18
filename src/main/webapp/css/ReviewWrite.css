@@ -13,6 +13,18 @@
     }
 }
 
+/*시간나면 할 예정*/
+@keyframes twinkle {
+    from {
+        left:0;
+        top:0;
+    }
+    to {
+        right:0;
+        bottom:0;
+    }
+}
+
 .review-body {
     width: 87.5rem; /* 1400px */
     margin: 0 auto;
@@ -114,14 +126,14 @@ h1 {
     box-shadow: 0.0625rem 0.1875rem 0.1875rem 0.25rem rgb(177, 177, 177);
 }
 
+
+
 .title-bar {
     display: flex;
     width: 37.5rem;
     justify-content: space-between;
     align-items: center;
 }
-
-
 
 .ani-info-box{
     display: flex;
@@ -318,6 +330,7 @@ textarea:focus {
     transition: background-color 0.3s;
 }
 
+.order-btn.active,
 .order-btn:hover,
 .order-btn:active,
 .order-btn:focus {
@@ -484,8 +497,8 @@ hr {
 .left-img {
     position: absolute;
     opacity: 0.6;
-    top: 15%;
-    left: -4%;
+    top: 19%;
+    left: -50%;
     width: 53.8125rem;
     height: 76.1875rem;
     z-index: -1;
@@ -495,8 +508,8 @@ hr {
     position: absolute;
     width: 53.8125rem;
     height: 76.1875rem;
-    top: 42%;
-    right: -14%;
+    top: 40%;
+    right: -45%;
     z-index: -1;
     opacity: 0.6;
 }
@@ -507,8 +520,18 @@ hr {
     animation-fill-mode: forwards;
 }
 
-
-
 #animaiton-id{
-    opacity: 0;
+    /*opacity: 0;*/
+    display:none;
+}
+
+
+
+/********************* *반응형 ************************/
+/* 반응형 레이아웃 */
+@media (max-width: 1280px) {
+    .left-img,
+    .right-img {
+        display: none;
+    }
 }

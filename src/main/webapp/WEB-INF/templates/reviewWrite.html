@@ -68,7 +68,7 @@
   </div>
   <p class="review-count"><i class="fa-solid fa-comment"></i> 1,580</p>
 <!--  <form th:action="reviewWrite" th:object="formData" method="post" class="write-box">-->
-  <form th:action="reviewWrite" method="post" class="write-box">
+  <form th:action="@{/postReview}" method="post" class="write-box">
     <div class="row-box">
 <!--  usernickname과 userId는 getAniDetail에서 같이 불러와야할듯 에상 aniDetailInfo.nickname, 현재 로그인중인 사용자를 어떻게 불러오지? -->
       <h3 class="review-user" readonly>오덕이는 애니덕후</h3>
@@ -95,7 +95,7 @@
   </form>
   <div class="order-box">
     <div class="row-box">
-      <button id="recent" class="order-btn">최신 순</button>
+      <button id="recent" class="order-btn active">최신 순</button>
       <button id="like" class="order-btn">좋아요 순</button>
     </div>
     <div class="row-box">
@@ -134,9 +134,10 @@
       </div>
     </div>
   </div>
+  <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
+  <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
 </div>
-<img src="/images/r-saotome.png" alt="left-img" class="left-img" />
-<img src="/images/l-umeco.png" alt="right-img" class="right-img" />
+
 <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

@@ -1,30 +1,23 @@
 .community-container {
   width: 87.5rem;
-  /*height: 126.563rem;*/
   display: flex;
   margin: 0 auto;
-  justify-content: space-between;
+  justify-content: flex-end;
   position: relative;
   overflow: hidden;
   /* align-items: center; */
   align-items: flex-start;
-  margin-top: 4rem;
 }
 
 .sticky-container {
   font-size: 3rem;
   color: #ff8b00;
   width: 87.5rem;
-  height: 12.25rem;
+  height: 5.25rem;
   margin: 0 auto;
-  /* position: sticky;
+  position: sticky;
   top: 9%;
-  left: 16%; */
-  /*background: linear-gradient(*/
-  /*  to bottom,*/
-  /*  rgba(255, 255, 255, 1) 40%,*/
-  /*  rgba(255, 255, 255, 0)*/
-  /*);*/
+  left: 16%;
   z-index: 99;
   line-height: 6.25rem;
 }
@@ -32,10 +25,9 @@
 .page-title {
   font-size: 3rem;
   color: #ff8b00;
-  height: 10rem;
   display: flex;
   align-items: center;
-  margin:0;
+  margin-top: 13%;
 }
 
 .side-container {
@@ -47,11 +39,9 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  /* position: sticky;
-  top: 20%;
-  left: 15%;
-  z-index: 99; */
-  overflow: auto;
+ margin-top: 1.7rem;
+  z-index: 99;
+  overflow: hidden;
   background-color: #ffffff;
 }
 
@@ -82,34 +72,23 @@ hr {
   border: 0;
 }
 
-/*.ani-list-container {*/
-/*  width: 64.125rem;*/
-/*  height: 126.563rem;*/
-/*  z-index: 10;*/
-/*  overflow: hidden;*/
-/*  margin-top: 2rem;*/
-
-/*  display: flex;*/
-/*  flex-wrap: wrap;*/
-/*}*/
-
-/*.ani-info-container {*/
-/*  flex: 1 0 30%;*/
-/*  margin: 1%;*/
-/*  box-sizing: border-box;*/
-/*}*/
-
 .ani-list-container {
   width: 64.125rem;
   margin-top: 2rem;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  gap: 1rem;
 }
 
 .ani-info-container {
-  flex: 1 0 30%; /* 30%의 너비를 사용하여 3개의 열로 배치 */
-  margin: 1%;
+  width: 100%;
+  height: 29.063rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   box-sizing: border-box;
+  margin: 0;
 }
 
 .row-list-container {
@@ -132,11 +111,12 @@ hr {
   border-radius: 1.875rem;
   overflow: hidden;
   cursor: pointer;
+  height:26rem;
 }
 
 .ani-poster {
   width: 18.75rem;
-  height: 25rem;
+  height: 24rem;
   border-radius: 1.875rem;
   transition: transform 0.3s ease;
 }
@@ -158,6 +138,11 @@ hr {
 }
 
 /* ////////  하단부 버튼  ////////*/
+.page-button-wrapper{
+  list-style: none;
+  display: flex;
+}
+
 .page-btn-box {
   width: 100%;
   height: 3.375rem;
