@@ -113,14 +113,37 @@ h2 {
 .modal h2 {
     margin-top: 0;
 }
-.modal textarea {
+.modal .form-group {
+    margin-bottom: 15px;
+}
+.modal .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.modal .form-group input,
+.modal .form-group select {
     width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.modal textarea {
+    width: 100%; /* 100% 너비로 설정 */
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     resize: vertical;
-    box-sizing: border-box;
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 너비를 계산 */
+}
+
+.modal .form-group textarea {
+    resize: vertical;
+}
+.modal-buttons {
+    text-align: right;
 }
 .modal button {
     background-color: white;
@@ -131,10 +154,25 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-left: 10px;
 }
 .modal button:hover {
     color: #fff;
     background-color: #ff8b00;
+}
+.modal .approve-button {
+    background-color: white;
+    color: #008000;
+    border: 1px solid #008000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+}
+.modal .approve-button:hover {
+    color: #fff;
+    background-color: #008000;
 }
 .modal .reject-button {
     background-color: white;
@@ -144,11 +182,9 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-left: 10px;
 }
 .modal .reject-button:hover {
     color: #fff;
     background-color: #ff0000;
-}
-.modal-buttons {
-    text-align: right;
 }
