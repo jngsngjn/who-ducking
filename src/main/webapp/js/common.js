@@ -16,6 +16,7 @@ Promise.all([
     loadScript("/js/header.js"),
     loadScript("/js/main.js"),
     loadScript("/js/registerBasic.js"),
+    loadScript("/js/registerGenre.js"),
 ])
     .then(() => {
         console.log("All scripts loaded.");
