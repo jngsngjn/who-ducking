@@ -1,0 +1,132 @@
+#container {
+  padding-top: 8rem;
+}
+
+.login_section {
+  padding: 6rem 0;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.login_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  padding: 4rem 6rem;
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  box-shadow: var(--box-shadow__A);
+  border-radius: 3rem;
+  gap: 4rem;
+}
+
+/* Logo */
+.login_logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Login Options */
+.login-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  gap: 2rem;
+  width: 100%;
+}
+
+.login_google,
+.login_naver,
+.login_kakao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 300px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.login_google {
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  margin-bottom: 2rem;
+}
+
+.login_naver {
+  background: #03c75a;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.login_kakao {
+  background: #fff500;
+}
+
+.login-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.login_text {
+  font-size: 1.8rem;
+}
+
+/* MEDIA QUERY START ===============================================*/
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 500px) {
+  .login_section {
+    padding: 4rem 0;
+  }
+
+  .login_box {
+    width: calc(100% - 60px);
+    padding: 6rem 4rem;
+    gap: 2rem;
+  }
+
+  .login_logo {
+    gap: 1rem;
+  }
+
+  .login_logo_first img {
+    width: 200px;
+  }
+
+  .login_logo_second img {
+    width: 150px;
+  }
+
+  .login_google,
+  .login_naver,
+  .login_kakao {
+    width: 250px;
+  }
+
+  .login-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .login_text {
+    font-size: 1.4rem;
+  }
+}
+/* MEDIA QUERY END ===============================================*/

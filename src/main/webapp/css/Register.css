@@ -1,0 +1,363 @@
+.register {
+  position: relative;
+  padding: 6rem 0;
+  background: #f5f5f5;
+}
+
+.register_box {
+  margin: 0 auto;
+  padding: 8rem 2rem;
+  width: 500px;
+  background: #fff;
+  box-shadow: var(--box-shadow__A);
+  border-radius: 3rem;
+}
+
+.register_title {
+  font-size: 3.6rem;
+  color: var(--mainColor);
+  text-align: center;
+}
+
+.register_form-cnt {
+  padding: 3rem 0;
+}
+
+.register_input-box {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.register_input-box > label {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--mainColor);
+}
+
+.register_input_email_box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.4rem;
+  height: 45px;
+  padding: 0 1rem;
+  border: 1px solid #d1d1d1;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  color: var(--titleColor);
+}
+
+.register_input_email_box > label,
+.register_input_email_box > i {
+  color: #d1d1d1;
+}
+
+.register_input_email_box > i {
+  margin-left: auto;
+}
+
+.register_input > input[type="text"],
+.register_input > input[type="number"] {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0 1rem;
+  height: 45px;
+  border: 1px solid #d1d1d1;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  color: var(--titleColor);
+}
+
+.register_input > input:focus {
+  outline-color: var(--mainColor);
+}
+
+.register_input > input::placeholder {
+  color: #d1d1d1;
+}
+
+.register_email_check {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  gap: 0.5rem;
+}
+
+.register_email_check_label {
+  margin-left: auto;
+  font-weight: 350;
+  color: var(--subColor);
+}
+
+.register_email_check_box {
+  opacity: 0;
+  position: absolute;
+}
+
+.register_email_check_box,
+.register_email_check_label {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+.register_email_check_box + .register_email_check_label:before {
+  content: "";
+  background: #fff;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d1d1;
+  display: inline-block;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  padding: 0.2rem;
+  margin: 0 0.8rem 0.2rem 0;
+  text-align: center;
+}
+
+.register_email_check_box:checked + .register_email_check_label:before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 5px;
+  border: solid var(--mainColor);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  margin: 0px 1rem 0.7rem 0.5rem;
+}
+
+.register_nickname_check_btn,
+.register_phone_check_btn,
+.register_code_check_btn,
+.register_referrer_check_btn {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-top: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 350;
+  color: var(--subColor);
+}
+
+.register_nickname_check_btn:hover,
+.register_phone_check_btn:hover,
+.register_code_check_btn:hover,
+.register_referrer_check_btn:hover {
+  color: var(--mainColor);
+}
+
+/* 스핀 버튼 숨기기 (웹킷 브라우저) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 스핀 버튼 숨기기 (IE 브라우저) */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.register_input_gender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  padding-bottom: 2rem;
+}
+
+.register_input_gender > input[type="radio"] {
+  display: none;
+}
+
+.register_input_gender > input[type="radio"] + label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 2rem;
+  border: 1px solid #d9d9d9;
+  width: 100px;
+  height: 60px;
+  color: #ff8b00;
+  font-size: 2.8rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.register_input_gender > input[type="radio"]:checked + label {
+  background-color: var(--mainColor);
+  color: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 0px;
+}
+
+.register_terms li {
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+.register_terms li:last-child {
+  margin-bottom: 0;
+}
+
+.register_terms_check_box {
+  opacity: 0;
+  position: absolute;
+}
+
+.register_terms_check_box,
+.register_terms_check_label {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.register_terms_check_box + .register_terms_check_label:before {
+  content: "";
+  background: #fff;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d1d1;
+  display: inline-block;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  padding: 0.2rem;
+  margin: 0 0.8rem 0.2rem 0;
+  text-align: center;
+}
+
+.register_terms_check_box:checked + .register_terms_check_label:before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 5px;
+  border: solid var(--mainColor);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  margin: 0px 1rem 0.7rem 0.5rem;
+}
+
+.register_terms_btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 1.6rem;
+}
+
+.register_terms_btn:hover {
+  color: var(--mainColor);
+}
+
+.register_next_btn {
+  margin-top: 5rem;
+  width: 100%;
+  height: 45px;
+  border-radius: 1rem;
+  background: var(--mainColor);
+  font-size: 1.8rem;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.register_next_btn:hover {
+  background: var(--subColor);
+}
+
+/* Modal =============================================== */
+.register_modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 700px;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 4rem 2rem;
+  border-radius: 3rem;
+}
+
+.register_modal-close {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  font-size: 2rem;
+}
+
+.register_modal-close:hover {
+  color: var(--mainColor);
+}
+
+.register_modal-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--mainColor);
+}
+
+.register_modal-content {
+  margin-top: 2rem;
+  width: 100%;
+  height: 600px;
+  overflow: auto;
+}
+
+/* MEDIA QUERY START ===============================================*/
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 500px) {
+  /* Register =============================================== */
+  .register {
+    padding: 4rem 0;
+  }
+
+  .register_box {
+    width: calc(100% - 40px);
+    padding: 4rem 2rem;
+  }
+
+  .register_input-box > label {
+    font-size: 1.6rem;
+  }
+
+  .register_input_email_box,
+  .register_input > input[type="text"],
+  .register_input > input[type="number"] {
+    font-size: 1.4rem;
+  }
+
+  .register_input_gender > input[type="radio"] + label {
+    width: 80px;
+    height: 40px;
+    font-size: 2.2rem;
+    border-radius: 1.5rem;
+  }
+
+  .register_next_btn {
+    font-size: 1.6rem;
+  }
+
+  /* Modal =============================================== */
+  .register_modal {
+    width: calc(100% - 60px);
+  }
+
+  .register_modal-title {
+    font-size: 1.6rem;
+  }
+
+  .register_modal-content {
+    font-size: 1.4rem;
+    height: 550px;
+  }
+}

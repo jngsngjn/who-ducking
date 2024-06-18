@@ -21,6 +21,8 @@ $(document).ready(function () {
     const mobileMenu_OffBtn = $(".h-mobile_btn-close");
     const mobileMenu = $(".h-mobile_box");
     const searchBox = $(".h-search_box");
+    const mainContents = $("#container");
+    const footer = $("#footer");
 
     mobileMenu.hide();
     mobileMenu_OffBtn.hide();
@@ -28,6 +30,8 @@ $(document).ready(function () {
     mobileMenu_OnBtn.click(function () {
         mobileMenu.fadeIn();
         searchBox.hide();
+        mainContents.hide();
+        footer.hide();
         mobileMenu_OnBtn.hide();
         mobileMenu_OffBtn.show();
     });
@@ -35,6 +39,8 @@ $(document).ready(function () {
     mobileMenu_OffBtn.click(function () {
         mobileMenu.fadeOut();
         searchBox.show();
+        mainContents.show();
+        footer.show();
         mobileMenu_OffBtn.hide();
         mobileMenu_OnBtn.show();
     });
