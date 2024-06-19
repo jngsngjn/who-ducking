@@ -20,8 +20,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/common.css" />
 
-    <link rel="stylesheet" href="/css/editPage.css"/>
-
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
     <!-- swiper -->
@@ -86,10 +84,8 @@
             <ul>
                 <li class="name">전화번호</li>
                 <li class="box">
-                    <input type="number" id="phone" class="text" name="phone" th:value="${loginUser.phone}"
-                           readonly>
-                    <button type="button" id="changePhoneButton" class="check" onclick="changePhone(this)">변
-                        경</button>
+                    <input type="number" id="phone" class="text" name="phone" th:value="${loginUser.phone}" readonly>
+                    <button type="button" id="changePhoneButton" class="check">변 경</button>
                 </li>
             </ul>
 
