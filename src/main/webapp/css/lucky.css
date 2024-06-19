@@ -2,50 +2,62 @@
     text-align: center;
     font-size: 2em;
     color: #FF6F00;
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 .lucky-list {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap:20px;
+    justify-content: flex-start;
+    gap: 20px;
     max-width: 1200px;
     width: 100%;
+    margin-bottom: 40px;
+    padding-left: 20px;
+}
 
+.lucky-cards {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 100%;
 }
 
 .lucky-tab-menu {
     margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        max-width: 1200px;
-        width: 100%;
-        margin-top: 20px;
-        margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .lucky-tab {
-    display:flex;
-    align-items:center;
-    text-align:center;
-    justify-content:center;
-    font-size:25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 25px;
     width: 285px;
     height: 100px;
-    background :rgba(255, 139, 0, 0.15);
-    color:#c9c9c9;
+    background: rgba(255, 139, 0, 0.15);
+    color: #c9c9c9;
     padding: 10px 20px;
     border: 1px solid #d9d9d9;
     cursor: pointer;
     border-radius: 15px 15px 0 0;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
-.lucky-tab:hover{
-    background-color:#FF6F00;
-    color:#fff;
+
+.lucky-tab:hover {
+    background-color: #FF6F00;
+    color: #fff;
 }
 
 .lucky-tab.active {
@@ -71,8 +83,8 @@
 
 .lucky-card img {
     width: 100%;
-    border-bottom: 1px solid #eee;
-    border-radius: 10px 10px 0 0;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .lucky-card-info {
@@ -89,16 +101,23 @@
     font-size: 1.1em;
 }
 
-.lucky-card-menu button {
+.lucky-card-menu .apply-button {
+    margin-top: 10px;
     padding: 10px 20px;
     background-color: #FF6F00;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
 }
 
-.lucky-card-menu button:hover {
+.lucky-card-menu .apply-button a {
+    color: white;
+    text-decoration: none;
+}
+
+.lucky-card-menu .apply-button:hover {
     background-color: #e65c00;
 }
 
@@ -116,10 +135,10 @@
 }
 
 .lucky-check {
-
     text-align: left;
     font-size: 1em;
+    font-weight: bold;
     color: #000;
     margin: 20px 0;
-    padding-left:30px;
+    padding-left: 30px;
 }

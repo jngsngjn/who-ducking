@@ -26,136 +26,45 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <h2 class="lucky-title">럭키 드로우</h2>
-<div class="mv-cnt swiper">
-    <ul class="mv-cnt__items swiper-wrapper">
-        <li class="swiper-slide">
-            <div class="mv-cnt__img-box">
-                                          <span class="mv-cnt__img"
-                                                style="background-image: url(/images/MainCarousel/MainVisual.png);"></span>
-            </div>
-            <div class="mv-cnt__text">
-                <p class="mv-cnt__desc">
-                    리뷰와 럭키드로우를 한번에?!
-                </p>
-                <h2 class="mv-cnt__title">
-                    진격의 거인
-                </h2>
-                <a href="#none" class="mv-cnt__link">
-                    바로가기
-                </a>
-            </div>
-        </li>
-        <li class="swiper-slide">
-            <div class="mv-cnt__img-box">
-                                          <span class="mv-cnt__img"
-                                                style="background-image: url(/images/MainCarousel/MainVisual2.png);"></span>
-            </div>
-            <div class="mv-cnt__text">
-                <p class="mv-cnt__desc">
-                    머구와 함께하는 지구 지키기 프로젝트
-                </p>
-                <h2 class="mv-cnt__title">
-                    머구를 통해 환경을 지켜봐요!
-                </h2>
-                <a href="#none" class="mv-cnt__link">
-                    바로가기
-                </a>
-            </div>
-        </li>
-        <li class="swiper-slide">
-            <div class="mv-cnt__img-box">
-                                          <span class="mv-cnt__img"
-                                                style="background-image: url(/images/MainCarousel/MainVisual3.png);"></span>
-            </div>
-            <div class="mv-cnt__text">
-                <p class="mv-cnt__desc">
-                    머구와 함께하는 지구 지키기 프로젝트
-                </p>
-                <h2 class="mv-cnt__title">
-                    머구를 통해 환경을 지켜봐요!
-                </h2>
-                <a href="#none" class="mv-cnt__link">
-                    바로가기
-                </a>
-            </div>
-        </li>
-    </ul>
-    <!-- Pagination -->
-    <div class="swiper-pagination"></div>
-
-    <!-- Navigation -->
-    <div class="swiper-button-next mainFirstSection_swiper-next_btn"></div>
-    <div class="swiper-button-prev mainFirstSection_swiper-prev_btn"></div>
-</div>
-
 <div class="lucky-tab-menu">
     <div class="lucky-tab">UR</div>
     <div class="lucky-tab">SR</div>
     <div class="lucky-tab">R</div>
     <div class="lucky-tab">N</div>
-
 </div>
 <div class="lucky-notice">
-<p class="lucky-check">럭키 드로우 응모는 하루 1번만 가능 합니다!</p>
+    <p class="lucky-check">럭키 드로우 응모는 하루 1번만 가능 합니다!</p>
 </div>
 <section class="lucky-list">
-    <div class="lucky-card">
-        <span class="draw-grade">UR</span>
-        <div class="lucky-card-menu">
-            <img src="/images/Lucky/OnePad.png">
-            <h4>원피스 장패드</h4>
-            <p>30P</p>
-            <button>응모하기</button>
-        </div>
-    </div>
-    <div class="lucky-card">
-        <span class="draw-grade">UR</span>
-        <div class="lucky-card-menu">
-            <img src="/images/Lucky/OnePad.png">
-            <h4>원피스 장패드</h4>
-            <p><i class="fa-solid fa-coins icon"></i>30P</p>
-            <button>응모하기</button>
-        </div>
-    </div>
-    <div class="lucky-card">
-        <span class="draw-grade">UR</span>
-        <div class="lucky-card-menu">
-            <img src="/images/Lucky/OnePad.png">
-            <h4>원피스 장패드</h4>
-            <p>30P</p>
-            <button>응모하기</button>
-        </div>
-    </div>
-    <div class="lucky-card">
-        <span class="draw-grade">UR</span>
-        <div class="lucky-card-menu">
-            <img src="/images/Lucky/OnePad.png">
-            <h4>원피스 장패드</h4>
-            <p>30P</p>
-            <button>응모하기</button>
-        </div>
-    </div>
-    <div class="lucky-card">
-        <span class="draw-grade">UR</span>
-        <div class="lucky-card-menu">
-            <img src="/images/Lucky/OnePad.png">
-            <h4>원피스 장패드</h4>
-            <p>30P</p>
-            <button>응모하기</button>
-        </div>
-    </div>
-    <div class="lucky-card">
-        <span class="draw-grade">UR</span>
-        <div class="lucky-card-menu">
-            <img src="/images/Lucky/OnePad.png">
-            <h4>원피스 장패드</h4>
-            <p>30P</p>
-            <button>응모하기</button>
-        </div>
-    </div>
-
-
-
+    <ul class="lucky-cards">
+        <li class="lucky-card">
+            <span class="draw-grade">UR</span>
+            <div class="lucky-card-menu">
+                <img src="/images/Lucky/OnePad.png">
+                <h4>원피스 장패드</h4>
+                <p><i class="fa-solid fa-coins icon"></i>30P</p>
+                <div class="apply-button"><a href="/">응모하기</a></div>
+            </div>
+        </li>
+        <li class="lucky-card">
+            <span class="draw-grade">UR</span>
+            <div class="lucky-card-menu">
+                <img src="/images/Lucky/OnePad.png">
+                <h4>원피스 장패드</h4>
+                <p><i class="fa-solid fa-coins icon"></i>30P</p>
+                <div class="apply-button"><a href="/">응모하기</a></div>
+            </div>
+        </li>
+        <li class="lucky-card">
+            <span class="draw-grade">UR</span>
+            <div class="lucky-card-menu">
+                <img src="/images/Lucky/OnePad.png">
+                <h4>원피스 장패드</h4>
+                <p><i class="fa-solid fa-coins icon"></i>30P</p>
+                <div class="apply-button"><a href="/">응모하기</a></div>
+            </div>
+        </li>
+    </ul>
 </section>
 <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
