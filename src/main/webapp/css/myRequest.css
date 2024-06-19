@@ -151,3 +151,15 @@
     pointer-events: none;
     color: grey;
 }
+
+.myFaq_no-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* 높이는 원하는 대로 조정하세요 */
+}
+.myFaq_no-data {
+    text-align: center;
+    font-size: 18px; /* 폰트 크기는 원하는 대로 조정하세요 */
+    color: #666; /* 텍스트 색상은 원하는 대로 조정하세요 */
+}

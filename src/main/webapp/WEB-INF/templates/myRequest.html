@@ -61,6 +61,9 @@
         </div>
 
         <div class="myFaq_writelist">
+            <div th:if="${#lists.isEmpty(requestPage.content)}" class="myFaq_no-data-container">
+                <p class="myFaq_no-data">건의 내역이 없습니다.</p>
+            </div>
             <div th:each="request : ${requestPage.content}">
                 <ul class="myFaq_content">
                     <li class="myFaq_title" th:text="${request.title}">제목</li>
@@ -76,9 +79,12 @@
         <div class="myFaq_next">
             <a class="myFaq_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>
             <a class="myFaq_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>
-            <span th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
-                <a th:classappend="${i == requestPage.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
-            </span>
+            <span th:if="${requestPage.totalPages > 0}" th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
+        <a th:classappend="${i == requestPage.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
+    </span>
+            <span th:if="${requestPage.totalPages == 0}">
+        <a class="myFaq_now-button" href="#">1</a>
+    </span>
             <a class="myFaq_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>
             <a class="myFaq_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>
         </div>
