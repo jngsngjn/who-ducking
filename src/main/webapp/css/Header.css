@@ -540,11 +540,11 @@
 
     /* Global Navigation Bar */
     .h-gnb_items > li > a {
-        font-size: 1.6rem;
+        font-size: 1.55rem;
     }
 
     .h-alarm_btn > li > a {
-        font-size: 1.6rem;
+        font-size: 1.55rem;
     }
 }
 
@@ -565,16 +565,27 @@
 
     /* Global Navigation Bar */
     .h-gnb_items > li > a {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
     }
 
     .h-alarm_btn > li > a {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
     }
 
     /* Profile Menu */
     .h-profile_menu {
         left: 83%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    /* Global Navigation Bar */
+    .h-gnb_items > li > a {
+        font-size: 1.15rem;
+    }
+
+    .h-alarm_btn > li > a {
+        font-size: 1.15rem;
     }
 }
 
@@ -608,7 +619,7 @@
     }
 
     .h-mobile_btn-close {
-        right: 2.2rem;
+        right: 4.2rem;
     }
 
     .mobile-logo {
