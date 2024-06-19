@@ -257,3 +257,59 @@
     background-color: #f0f0f0;
     cursor: pointer;
 }
+
+.myFaq_inputtitle label,
+.myFaq_inputtitle input {
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+
+.myFaq_inputtitle label{
+    color: var(--mainColor);
+    margin-right: 10px;
+}
+
+.myFaq_inputtitle input{
+    width: 90%;
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+
+}
+
+.myFaq_inputtitle input::placeholder{
+    color: #aaaaaa;
+}
+
+.myFaq_inputtitle input:focus{
+    outline: none;
+}
+
+.myFaq_inputtext label{
+    color: var(--mainColor);
+    font-size: 20px;
+}
+
+.myFaq_inputtext textarea{
+    font-size: 20px;
+    width: 100%;
+    padding-inline: 10px;
+    padding-block: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+}
+
+.myFaq_faqbutton{
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.myFaq_faqgo{
+    width: 150px;
+    height: 50px;
+    background: var(--mainColor);
+    border-radius: 10px;
+    color: white;
+}

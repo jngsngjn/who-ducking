@@ -85,4 +85,20 @@ $(document).ready(function () {
             modal.hide();
         }
     });
+
+    $("#openModal").click(function(){
+        $("#myModal2").show();
+    });
+
+    // 모달 닫기
+    $(".custom_modal-close").click(function(){
+        $(this).closest(".custom_modal").hide();
+    });
+
+    // 모달 외부 클릭 시 닫기
+    $(window).click(function(event){
+        if($(event.target).hasClass("custom_modal")){
+            $(".custom_modal").hide();
+        }
+    });
 });
