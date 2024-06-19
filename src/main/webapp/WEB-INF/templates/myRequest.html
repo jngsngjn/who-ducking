@@ -96,17 +96,25 @@
     <span class="custom_modal-close">&times;</span>
     <h2 class="custom_modal-title">건의 상세 내역</h2>
     <div class="custom_modal-content">
-        <p><strong>제목:</strong> <span id="modalTitle"></span></p>
-        <p><strong>내용:</strong> <span id="modalContent"></span></p>
-        <p><strong>작성일:</strong> <span id="writeDate"></span></p>
-        <p id="responseDate" style="display: none;"><strong>응답일:</strong> <span id="responseDateValue"></span></p>
-        <p id="responseText" style="display: none;"><strong>응답:</strong> <span id="response"></span></p>
-        <form action="myPage/request-delete" method="post" id="deleteForm" style="display: none;">
-            <input type="hidden" name="requestId" id="requestId">
-            <button type="submit">삭제</button>
-        </form>
+        <p><strong class="myFaq_tag">제&nbsp;목&nbsp;&nbsp;: </strong><span id="modalTitle" class="myFaq_text"></span></p>
+        <p><strong class="myFaq_tag">작성일 : </strong> <span id="writeDate" class="myFaq_text"></span></p>
+        <div class="myFaq_faq">
+            <p><span id="modalContent" class="myFaq_text"></span></p>
+        </div>
+        <p id="responseDate" style="display: none">
+            <strong class="myFaq_tag">응답일 :</strong>
+            <span id="responseDateValue" class="myFaq_text"></span>
+        </p>
+        <div id="responseText" class="myFaq_response" style="display: none">
+            <p><span id="response" class="myFaq_text"></span></p>
+        </div>
     </div>
+    <form action="/myPage/request-delete" method="post" id="deleteForm" class="myFaq_delete" style="display: none">
+        <input type="hidden" name="requestId" id="requestId">
+        <button type="submit" class="myFaq_deletebutton">삭제</button>
+    </form>
 </div>
+
 
 <div th:insert="~{fragments/footer :: footer}"></div>
 </body>

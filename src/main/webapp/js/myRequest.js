@@ -17,6 +17,7 @@ $(document).ready(function () {
     });
 
     var modal = $('#myModal');
+    var closeModalBtn = $('.custom_modal-close');
     var modalTitle = $('#modalTitle');
     var modalContent = $('#modalContent');
     var writeDate = $('#writeDate');
@@ -62,10 +63,20 @@ $(document).ready(function () {
             responseText.hide();
         }
 
+        // Get current scroll position
+        var scrollTop = $(window).scrollTop();
+
+        // Set the modal position based on current scroll position
+        modal.css({
+            'top': scrollTop + 50 + 'px',
+            'left': '50%',
+            'transform': 'translate(-50%, 0)'
+        });
+
         modal.show();
     });
 
-    $('.custom_modal-close').on('click', function() {
+    closeModalBtn.on('click', function() {
         modal.hide();
     });
 
