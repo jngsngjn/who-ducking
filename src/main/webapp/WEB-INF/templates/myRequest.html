@@ -36,7 +36,7 @@
 <main id="container" class="myFaq_main">
     <div class="myFaq_head-title">
         <h2 class="myFaq_h2">나의 글 목록</h2>
-        <a href="/myPage/request" class="myFaq_write">건의하기</a>
+        <button id="openModal" class="myFaq_write">건의하기</button>
     </div>
 
     <div class="myFaq_menulist">
@@ -91,7 +91,7 @@
     </div>
 </main>
 
-<!-- Modal -->
+<!-- Modal1 -->
 <div id="myModal" class="custom_modal">
     <span class="custom_modal-close">&times;</span>
     <h2 class="custom_modal-title">건의 상세 내역</h2>
@@ -115,7 +115,26 @@
     </form>
 </div>
 
-
+<!-- Modal2 -->
+<div id="myModal2" class="custom_modal">
+    <span class="custom_modal-close">&times;</span>
+    <h2 class="custom_modal-title">건의하기</h2>
+    <div class="custom_modal-content">
+        <form action="/myPage/request" method="post">
+            <div class="myFaq_inputtitle">
+                <label for="title2">제목</label>
+                <input type="text" id="title2" name="title" required>
+                <span></span>
+            </div>
+            <div class="myFaq_inputtext">
+                <textarea id="content" name="content" rows="10" required class="hi"></textarea>
+            </div>
+            <div class="myFaq_faqbutton">
+                <button type="submit" class="myFaq_faqgo">건의하기</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>
