@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Data
-public class EditDTO {
+public class UserInfoEditDTO {
 
     private MultipartFile profileImage;
     private boolean emailConsent;

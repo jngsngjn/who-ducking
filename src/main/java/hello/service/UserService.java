@@ -48,18 +48,18 @@ public class UserService {
     }
 
     // 사용자 정보 업데이트
-    public void editUserProcess(Long id, EditDTO editDTO, HttpSession session) throws IOException {
+    public void editUserProcess(Long id, UserInfoEditDTO userInfoEditDTO, HttpSession session) throws IOException {
         User findUser = findUserById(id);
-        findUser.setEmailConsent(editDTO.isEmailConsent());
-        findUser.setGender(editDTO.getGender());
-        findUser.setNickname(editDTO.getNickname());
-        session.setAttribute("nickname", editDTO.getNickname());
-        findUser.setPhone(editDTO.getPhone());
-        findUser.setHomeAddress(new Address(editDTO.getZipcode(), editDTO.getAddress(), editDTO.getDetailAddress()));
+        findUser.setEmailConsent(userInfoEditDTO.isEmailConsent());
+        findUser.setGender(userInfoEditDTO.getGender());
+        findUser.setNickname(userInfoEditDTO.getNickname());
+        session.setAttribute("nickname", userInfoEditDTO.getNickname());
+        findUser.setPhone(userInfoEditDTO.getPhone());
+        findUser.setHomeAddress(new Address(userInfoEditDTO.getZipcode(), userInfoEditDTO.getAddress(), userInfoEditDTO.getDetailAddress()));
 
         // 장르 설정
         userGenreRepository.deleteByUser(id);
-        List<String> genres = editDTO.getSelectedGenres();
+        List<String> genres = userInfoEditDTO.getSelectedGenres();
         List<Genre> allGenres = genreRepository.findByNameIn(genres);
 
         allGenres.forEach(genre -> {
@@ -67,7 +67,7 @@ public class UserService {
             findUser.getUserGenres().add(userGenre);
         });
 
-        MultipartFile uploadImage = editDTO.getProfileImage();
+        MultipartFile uploadImage = userInfoEditDTO.getProfileImage();
         ProfileImage currentImage = findUser.getProfileImage();
 
         // 사용자가 사진을 업로드한 경우
@@ -86,7 +86,7 @@ public class UserService {
         }
 
         // 기본 이미지 사용 버튼을 클릭한 경우
-        boolean useDefaultImage = editDTO.isUseDefaultImage();
+        boolean useDefaultImage = userInfoEditDTO.isUseDefaultImage();
         if (useDefaultImage && currentImage != null) {
             clearProfileImage(id, findUser, currentImage);
             session.setAttribute("profileImageName", null);

@@ -1,4 +1,4 @@
-package hello.controller;
+package hello.controller.image;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;

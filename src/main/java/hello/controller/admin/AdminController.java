@@ -1,4 +1,4 @@
-package hello.controller;
+package hello.controller.admin;
 
 import hello.dto.admin.*;
 import hello.service.AdminService;
