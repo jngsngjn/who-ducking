@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    @Query("SELECT new hello.dto.user.MyRequestDTO(r.id, r.title, r.content, r.writeDate, r.status, r.responseDate)" +
+    @Query("SELECT new hello.dto.user.MyRequestDTO(r.id, r.title, r.content, r.writeDate, r.status, r.responseDate, r.response)" +
             "FROM Request r")
     Page<MyRequestDTO> findMyRequest(Pageable pageable);
 

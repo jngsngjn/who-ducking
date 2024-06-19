@@ -66,7 +66,7 @@
             </div>
             <div th:each="request : ${requestPage.content}">
                 <ul class="myFaq_content">
-                    <li class="myFaq_title" th:text="${request.title}" th:data-content="${request.content}" th:data-status="${request.status}" th:data-request-id="${request.id}" id="title">제목</li>
+                    <li class="myFaq_title" th:text="${request.title}" th:data-content="${request.content}" th:data-status="${request.status}" th:data-request-id="${request.id}" th:data-response-date="${request.responseDate}" th:data-write-date="${request.writeDate}" th:data-response="${request.response}" id="title">제목</li>
                     <li class="myFaq_time">
                         <span th:text="${request.writeDate}">접수일</span>
                         <label class="myFaq_state" th:attr="id=${request.status}">상태</label>
@@ -92,12 +92,16 @@
 </main>
 
 <!-- Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>건의 상세 내역</h2>
-        <p id="modalContent">여기에 건의 내용을 넣으세요.</p>
-        <form action="/myPage/request-delete" method="post" id="deleteForm" style="display: none;">
+<div id="myModal" class="custom_modal">
+    <span class="custom_modal-close">&times;</span>
+    <h2 class="custom_modal-title">건의 상세 내역</h2>
+    <div class="custom_modal-content">
+        <p><strong>제목:</strong> <span id="modalTitle"></span></p>
+        <p><strong>내용:</strong> <span id="modalContent"></span></p>
+        <p><strong>작성일:</strong> <span id="writeDate"></span></p>
+        <p id="responseDate" style="display: none;"><strong>응답일:</strong> <span id="responseDateValue"></span></p>
+        <p id="responseText" style="display: none;"><strong>응답:</strong> <span id="response"></span></p>
+        <form action="myPage/request-delete" method="post" id="deleteForm" style="display: none;">
             <input type="hidden" name="requestId" id="requestId">
             <button type="submit">삭제</button>
         </form>
