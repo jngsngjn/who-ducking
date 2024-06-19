@@ -30,6 +30,26 @@
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
   />
+  <script>
+    $(document).ready(function() {
+      let id = $('#').val();
+      $('#delete-btn').on('click', function() {
+        const url = `/reviews/delete/${id}`;
+
+        $.ajax({
+          url: url,
+          type: 'DELETE',
+          contentType: 'application/json',
+          success: function(data) {
+            console.log('성공:', data);
+          },
+          error: function(error) {
+            console.error('삭제 요청에 문제가 발생했습니다:', error);
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -37,22 +57,22 @@
   <h1 class="page-title">리뷰 게시판</h1>
   <div class="ani-container">
     <img th:src="${aniDetailInfo.imagePath}" alt="애니 포스터" class="ani-img" />
+    <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>
     <div class="ani-info-box">
       <div class="title-bar">
         <h3 class="ani-title-box">
           <span class="ani-title" th:text="${aniDetailInfo.name}"></span>
         </h3>
-<!--        <img th:src="'/images/' + (${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL'))}) + '.png'" alt="age" class="grade" />-->
-        <div th:text="${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL' ))}" class="grade"></div>
-<!--        <div> <span th:text="${aniDetailInfo.rating}"></span></div> 데이터는 맞게 들어오는데 3항 연산자가 모두 ALL 을 반환함 -->
+        <div class="grade">
+<!--          <img th:src="'/images/' + (${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL'))}) + '.png'" alt="age" class="grade" />-->
+          <div th:text="${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL' ))}" class="grade"></div>
+        </div>
       </div>
       <div class="tag-list">
         <ul class="tags">
-          <li class="tag-name">개그</li>
-          <li class="tag-name">일상</li>
+          <li th:each="aniGenre : ${aniDetailInfo.animationGenres}" class="tag-name" th:text="${aniGenre.genre.name}"></li>
         </ul>
         <span class="is-complete" th:text="${aniDetailInfo.isFinished ? '완결' : '진행중'}"></span>
-
       </div>
       <div class="ani-info-box2">
         <p class="author-name"><b th:text="${aniDetailInfo.author}">작가 이름</b></p>
@@ -62,40 +82,43 @@
       <div class="score-box">
         <i class="fa-solid fa-star"></i>
 
-        <div class="score"><span class="ani-score"> 4.7 / 5.0</span></div>
+        <div class="score">
+          <span class="ani-score" th:text="${totalReviews[0].score} + ' / 5.0'">
+          </span>
+        </div>
       </div>
     </div>
   </div>
-  <p class="review-count"><i class="fa-solid fa-comment"></i> 1,580</p>
-<!--  <form th:action="reviewWrite" th:object="formData" method="post" class="write-box">-->
-  <form th:action="@{/postReview}" method="post" class="write-box">
+  <p class="review-count">
+    <i class="fa-solid fa-comment"></i>
+    <span th:text="${totalReviews[0].reviewCount}"></span>
+  </p>
+  <form th:action="@{/community/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
+    <input type="hidden" name="userId" th:value="${userId}" />
+    <input type="hidden" name="nickname" th:value="${nickname}"/>
     <div class="row-box">
-<!--  usernickname과 userId는 getAniDetail에서 같이 불러와야할듯 에상 aniDetailInfo.nickname, 현재 로그인중인 사용자를 어떻게 불러오지? -->
-      <h3 class="review-user" readonly>오덕이는 애니덕후</h3>
+      <h3  th:text="${nickname}" class="review-user" id="review-user" ></h3>
       <div class="row-box">
         <p>스포일러 포함</p>
-        <input type="checkbox" id="check-spoiler" class="check-spoiler" />
+        <input  name="isSpoiler" type="checkbox" id="check-spoiler" class="check-spoiler"  />
+        <input type="hidden" name="_isSpoiler" value="on"/>
         <label for="check-spoiler" class="check-switch">
           <span class="change-check-btn"></span>
         </label>
       </div>
     </div>
-    <textarea
-            id="review-content"
-            placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징게 대상이 될 수 있습니다."
-            rows="5"
-            cols="50"
-            class="review-content"
-    ></textarea>
+    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content">
+    </textarea>
     <div class="letter-count" id="count">0/500</div>
     <div class="row-box review-write-box">
       <div class="stars-container"></div>
+      <input type="hidden" name="score" id="score-number"/>
       <input type="submit" value="등록" class="submit-btn" />
     </div>
   </form>
   <div class="order-box">
     <div class="row-box">
-      <button id="recent" class="order-btn active">최신 순</button>
+      <button id="recent" class="order-btn" >최신 순</button>
       <button id="like" class="order-btn">좋아요 순</button>
     </div>
     <div class="row-box">
@@ -106,38 +129,41 @@
       </label>
     </div>
   </div>
-  <div class="review-list">
+  <div th:each="review, iterStat : ${reviews}" class="review-list">
     <div class="row-box">
-      <p class="review-writer">
-        유저이름 <span class="best-icon">BEST</span>
+      <p th:text="${review.user.nickname}" class="review-writer">
+        <span class="best-icon">BEST</span>
       </p>
-      <i class="fa-solid fa-ellipsis-vertical" id="show-modal"></i>
-      <div class="update-modal-container" id="modal-container">
+      <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}"></i>
+      <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}">
         <button class="update-review-btn" id="update-btn">수정</button>
         <hr />
-        <button class="update-review-btn" id="delete-btn">삭제</button>
+        <button class="delete-review-btn" id="delete-btn" th:data-review-id="${review.id}">삭제</button>
       </div>
     </div>
-    <p class="review-comment">
-      최고의 스포츠 애니! 하이큐 벌써 4번째 정주행 중 아직 못 본 사람은 꼭
-      보세요! 후회하지 않아요!
-    </p>
+    <p th:text="${review.content}" class="review-comment"></p>
     <div class="row-box">
-      <p class="write-date">2024.06.10 15:30:18</p>
+      <p th:text="${review.writeDate}" class="write-date"></p>
       <div>
         <button id="recommend-like" class="recommend-btn">
-          <i class="fa-regular fa-thumbs-up"></i> 3,000
+          <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
         </button>
         <button id="recommend-dislike" class="recommend-btn">
-          <i class="fa-regular fa-thumbs-down"></i> 7
+          <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
         </button>
       </div>
     </div>
   </div>
+
+
+
+
   <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
   <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
 </div>
 
 <div th:insert="~{fragments/footer :: footer}"></div>
+<script>
+</script>
 </body>
 </html>

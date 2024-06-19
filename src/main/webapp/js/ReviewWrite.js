@@ -1,7 +1,10 @@
-// 별점
+// 별점 -> (o)
 document.addEventListener("DOMContentLoaded", function () {
     const totalStars = 5;
     const starsContainer = document.querySelector(".stars-container");
+    let scoreInput = document.createElement("input");
+    scoreInput.setAttribute("type", "hidden");
+    scoreInput.setAttribute("name", "score");
 
     const starsDiv = document.createElement("div");
     starsDiv.classList.add("stars");
@@ -28,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     starsContainer.appendChild(starsDiv);
     starsContainer.appendChild(scoreSpan);
+    starsContainer.appendChild(scoreInput);
 
     function updateStars() {
         const stars = starsDiv.querySelectorAll("i");
@@ -47,14 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         scoreSpan.textContent = `${selectedRating} `;
-    }
-
-    function getSelectedRating() {
-        return selectedRating;
+        scoreInput.value = selectedRating;
     }
 });
 
-// 글자수 체크
+
+
+// 글자수 체크 -> (o)
 document.addEventListener("DOMContentLoaded", function () {
     function countText() {
         let reviewContent = document.getElementById("review-content");
@@ -76,102 +79,82 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("input", countText);
 });
 
-// 클릭시 수정 삭제 모달
+
+
+// 최신순 인기순 버튼
+document.addEventListener('DOMContentLoaded', function() {
+    const recentBtn = document.getElementById('recent');
+    const likeBtn = document.getElementById('like');
+
+    recentBtn.classList.add('active');
+
+    function handleButtonClick(event) {
+
+        recentBtn.classList.remove('active');
+        likeBtn.classList.remove('active');
+
+        event.target.classList.add('active');
+    }
+
+    recentBtn.addEventListener('click', handleButtonClick);
+    likeBtn.addEventListener('click', handleButtonClick);
+});
+
+
+// 클릭시 수정 삭제 모달창 -> (o)
 document.addEventListener("DOMContentLoaded", function () {
-    var showModal = document.getElementById("show-modal");
-    var modalContainer = document.getElementById("modal-container");
+    const showModalButtons = document.querySelectorAll("[id^='show-modal-']");
+    const modalContainers = document.querySelectorAll("[id^='modal-container-']");
 
-    showModal.addEventListener("click", function () {
-        modalContainer.style.display = "block";
-    });
+    showModalButtons.forEach((showModalButton, index) => {
+        const modalContainer = modalContainers[index];
 
-    document.addEventListener("click", function (event) {
-        if (
-            event.target === showModal ||
-            modalContainer.contains(event.target)
-        ) {
-            return;
-        }
-        modalContainer.style.display = "none";
+        showModalButton.addEventListener("click", function () {
+            modalContainer.style.display = "block";
+        });
+
+        document.addEventListener("click", function (event) {
+            if (event.target === showModalButton || modalContainer.contains(event.target)) {
+                return;
+            }
+            modalContainer.style.display = "none";
+        });
     });
 });
 
 
-// 애니메이션 정보 GET 요청 -> html에서는 되는데 왜 여기서는 안되는거지?
-// $(document).ready(function() {
-//     // ani-poster 클래스를 가진 이미지를 클릭했을 때 실행될 함수
-//     $('.ani-poster').click(function() {
-//         console.log("애니 포스터 click");
-//
-//         let imageId = $(this).siblings('#animation-id').text().trim();
-//         console.log(imageId);
-//         let animationId = parseInt(imageId);
-//         console.log(animationId);
-//
-//         $.ajax({
-//             type: 'GET',
-//             url: '/community/' + animationId,
-//             success: function(response) {
-//                 console.log('GET 요청 성공');
-//                 window.location.href = '/community/' + animationId;
-//             },
-//             error: function(xhr, status, error) {
-//                 console.error('GET 요청 실패');
-//             }
-//         });
-//     });
-// });
 
 
+// 리뷰 삭제 -> (o)
+document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = document.querySelectorAll(".delete-review-btn");
 
-// form을 안쓴다면..?
-// 계정 닉네임과 아이디 찾기
-$(document).ready(function() {
-    $('.submit-btn').click(function() {
-        // 닉네임 가져오기
-        let nickname = $('.h-profile_menu_nickname').text().trim();
-        console.log('닉네임:', nickname);
-
-        // 체크박스의 체크 여부 가져오기
-        let isChecked = $('#check-spoiler').prop('checked');
-        if (isChecked) {
-            console.log('체크됨');
-        } else {
-            console.log('체크되지 않음');
-        }
-
-        // 리뷰 내용 가져오기
-        let reviewContent = $('#review-content').val();
-        console.log('리뷰 내용:', reviewContent);
-
-        // 별점 가져오기
-        let scoreValue = $(".score").text().trim();
-        console.log('현재 별점:', scoreValue);
-
-        let data ={
-            nickname: nickname,
-            isChecked: isChecked,
-            reviewContent: reviewContent,
-            score: scoreValue,
-        };
-
-        // Ajax 요청 보내기
-        $.ajax({
-            type: 'POST',
-            url: '/postReview/{id}',
-            data: data,
-            success: function (res) {
-                console.log('POST 성공');
-                window.location.reload();
-            },
-            error: function (xhr, status, error) {
-                console.log('POST 실패');
-            }
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener("click", function () {
+            const reviewId = this.getAttribute("data-review-id");
+            deleteReview(reviewId);
         });
     });
 
-
-
-
+    function deleteReview(reviewId) {
+        if (confirm("정말로 이 리뷰를 삭제하시겠습니까?")) {
+            fetch(`/deleteReview/${reviewId}`, {
+                method: "DELETE"
+            })
+                .then(res => {
+                    if (res.ok) {
+                        alert("리뷰가 삭제되었습니다.");
+                        window.location.reload();
+                    } else {
+                        alert("리뷰 삭제에 실패했습니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error("server Error deleting review:", error);
+                });
+        }
+    }
 });
+
+
 

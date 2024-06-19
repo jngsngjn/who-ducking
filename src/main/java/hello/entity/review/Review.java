@@ -41,6 +41,6 @@ public class Review {
     private int dislikeCount;
 
     //추가좀 하겠습니다요
-    @Column(name = "is_spoiler")
+    @Column(name = "is_spoiler", nullable = false)
     private boolean isSpoiler;
 }

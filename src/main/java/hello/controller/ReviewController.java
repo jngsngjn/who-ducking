@@ -1,21 +1,45 @@
 package hello.controller;
 
+import hello.dto.animation.AniReviewDTO;
+import hello.entity.review.Review;
+import hello.service.AnimationService;
+import hello.service.ReviewService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class ReviewController {
 
-    @PostMapping("/postReview")
-    public ModelAndView postReview(
-            @RequestParam("reviewContent") String reviewContent,
-            @RequestParam(value = "spoilerIncluded", required = false) boolean spoilerIncluded
-    ) {
-    // 일단 아이디를 가져와야해..
-        ModelAndView modelAndView = new ModelAndView("forward:/currentUrl");
-        return modelAndView;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private AnimationService animationService;
+
+    /* POST : 리뷰 작성 */
+    @PostMapping("/community/{AnimationId}/review")
+    public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO){
+        aniReviewDTO.setAnimationId(AnimationId);
+        reviewService.addReview(aniReviewDTO);
+        return "redirect:/community/" + AnimationId;
+    }
+
+    /* @ 리뷰 수정
+    *  @ id = reviewId
+    * */
+//    @PatchMapping("/reviews/patch/{id}")
+//    public String updateReview (@PathVariable long id, @RequestBody Review review){
+//        review.setId(id);
+//    }
+
+    /* @ 리뷰 삭제
+    *  @ id = reviewId */
+    @DeleteMapping("/deleteReview/{id}")
+    public ResponseEntity<Void> deleteReview(@PathVariable long id) {
+        reviewService.deleteReview(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,5 +1,7 @@
 package hello.config;
 
+import hello.entity.animation.Animation;
+import hello.entity.genre.AnimationGenre;
 import hello.entity.genre.Genre;
 import hello.entity.user.Level;
 import hello.repository.db.*;
@@ -71,6 +73,12 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         genreInitializer();
         levelInitializer();
         emailCodeInitializer();
+
+//        Animation animation = animationRepository.findById(1L).get();
+//        Genre genre = genreRepository.findById(1L).get();
+//
+//        AnimationGenre animationGenre = new AnimationGenre(animation, genre);
+//        animation.getAnimationGenres().add(animationGenre);
     }
 
     private void emailCodeInitializer() {
