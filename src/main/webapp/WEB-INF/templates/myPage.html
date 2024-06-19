@@ -82,7 +82,7 @@
                                     </div>
                                     <div>
                                         <span class="mypage_profile_exp_point"
-                                              th:text="${loginUser.getCurrentExp()} + ' / ' + ${loginUser.getLevel().getMaxExp()} + 'EXP'">16
+                                              th:text="${loginUser.getCurrentExp()} + ' / ' + ${loginUser.getLevel().getMaxExp()} + ' EXP'">16
                                             / 20 EXP</span>
                                     </div>
                                     <div class="mypage_profile_exp_track">
@@ -117,7 +117,7 @@
                         <!-- List 3. -->
                         <li class="mypage_board_item">
                             <i class="fa-regular fa-flag"></i>
-                            <span class="mypage_board_text"><a href="">나의 건의 내역</a></span>
+                            <span class="mypage_board_text"><a href="/myPage/request-list">나의 건의 내역</a></span>
                         </li>
                         <!-- List 4. -->
                         <li class="mypage_board_item">
@@ -169,7 +169,7 @@
                         <!-- List 3. -->
                         <li class="mypage_center_item">
                             <i class="fa-solid fa-user-slash"></i>
-                            <span class="mypage_center_text"><a href="">회원 탈퇴</a></span>
+                            <span class="mypage_center_text"><a href="/myPage/account-deletion">회원 탈퇴</a></span>
                         </li>
                     </ul>
                 </div>
