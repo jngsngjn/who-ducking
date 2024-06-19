@@ -2,6 +2,7 @@ package hello.service;
 
 import hello.dto.admin.*;
 import hello.entity.animation.Animation;
+import hello.entity.board.Announcement;
 import hello.entity.genre.AnimationGenre;
 import hello.entity.genre.Genre;
 import hello.entity.prize.Prize;
@@ -33,6 +34,7 @@ public class AdminService {
     private final RequestRepository requestRepository;
     private final PrizeRepository prizeRepository;
     private final GenreRepository genreRepository;
+    private final AnnouncementRepository announcementRepository;
 
     public Page<UserInfoDTO> getUserInfoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -123,5 +125,21 @@ public class AdminService {
     public Page<PrizeListDTO> getExpiredPrizes(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return prizeRepository.findExpiredPrizes(pageable);
+    }
+
+    public Page<AnnouncementListDTO> getAnnouncementPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return announcementRepository.findAnnouncementPage(pageable);
+    }
+
+    public void addAnnouncement(AnnouncementWriteDTO announcementWriteDTO) {
+        Announcement announcement = new Announcement();
+        announcement.setTitle(announcementWriteDTO.getTitle());
+        announcement.setContent(announcementWriteDTO.getContent());
+        announcementRepository.save(announcement);
+    }
+
+    public void deleteAnnouncement(Long id) {
+        announcementRepository.deleteById(id);
     }
 }

@@ -1,0 +1,71 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <link rel="stylesheet" href="/css/announcement.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/announcement.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>공지사항</h2>
+    <div class="header">
+        <button id="openModalBtn" class="write-button">글쓰기</button>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성일</th>
+                <th>-</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="announcement, stat : ${announcements.content}">
+                <td th:text="${announcements.number * announcements.size + stat.index + 1}">1</td>
+                <td th:text="${announcement.title}">제목</td>
+                <td th:text="${announcement.writeDate}">작성일</td>
+                <td>
+                    <form action="/admin/announcement-delete" method="post">
+                        <input type="hidden" name="id" th:value="${announcement.id}">
+                        <button type="submit">삭제</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${announcements.totalPages >= 1}" class="pagination">
+        <a class="paging" th:if="${announcements.hasPrevious()}" th:href="@{/admin/announcement(page=${announcements.number - 1})}">이전</a>
+        <span>페이지 <span th:text="${announcements.number + 1}">1</span> / <span th:text="${announcements.totalPages}">1</span></span>
+        <a class="paging" th:if="${announcements.hasNext()}" th:href="@{/admin/announcement(page=${announcements.number + 1})}">다음</a>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 class="custom_modal-title">글쓰기</h2>
+        <div class="custom_modal-content">
+            <form id="announcementForm" method="post" action="/admin/announcement">
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="content">내용:</label>
+                <textarea id="content" name="content" required></textarea>
+
+                <button type="submit">저장</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
