@@ -163,6 +163,18 @@ var areaArr = [
         bookmarked: false
     },
     {
+                title: "카드캡터사쿠라전 (展) | 마법의 걸린 미술관",
+                lat: "37.5579",
+                lng: "126.9264",
+                address: "장소: 서울특별시 마포구 양화로 188 애경타워 AK Plaza 홍대 4F",
+                date: "기간 : 24.05.01 ~ 24.07.02",
+                time: "시간: 10:30 ~22:00",
+                image: "/images/Popup_Image/sakura.png",
+                bookmarked: false
+            },
+
+
+    {
         title: "원피스 대해적시대展",
         lat: "37.5297718014452",
         lng: "126.964741503485",
@@ -231,7 +243,9 @@ var areaArr = [
         time: "시간: 10:30 ~22:00",
         image: "/images/Popup_Image/gu-default.png",
         bookmarked: false
-    }
+    },
+
+
 ];
 
 let markers = [];
@@ -319,6 +333,7 @@ function getClickHandler(seq) {
         }
     }
 }
+
 
 // 모든 정보창 닫기
 function closeAllInfoWindows() {

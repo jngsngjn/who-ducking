@@ -1,5 +1,5 @@
 body {
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 .attendance {
@@ -21,7 +21,7 @@ body {
 }
 
 .title-check {
-    color:#ff8b00;
+    color: #ff8b00;
     font-size: 50px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -45,7 +45,7 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
     position: relative;
-    left: 385px;
+    left: 380px;
 }
 
 .calendar {
@@ -61,7 +61,6 @@ body {
     width: 890px;
     height: 890px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-
 }
 
 .inner {
@@ -145,16 +144,18 @@ h3 {
 
 .notice {
     border-top: 1px solid #000;
-    margin-top: 2rem;
     padding-top: 1rem;
     text-align: left;
-    font-size: 4rem;
+    font-size: 2rem;
     line-height: 4rem;
-    width: 80%;
+    width: 70%;
+    margin-top: 10rem;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom:20px;
 }
 
 .notice ul {
     list-style-type: disc;
+
 }

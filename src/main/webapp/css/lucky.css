@@ -1,0 +1,125 @@
+.lucky-title {
+    text-align: center;
+    font-size: 2em;
+    color: #FF6F00;
+    margin-top:100px;
+}
+
+.lucky-list {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:20px;
+    max-width: 1200px;
+    width: 100%;
+
+}
+
+.lucky-tab-menu {
+    margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 1200px;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+}
+
+.lucky-tab {
+    display:flex;
+    align-items:center;
+    text-align:center;
+    justify-content:center;
+    font-size:25px;
+    width: 285px;
+    height: 100px;
+    background :rgba(255, 139, 0, 0.15);
+    color:#c9c9c9;
+    padding: 10px 20px;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+.lucky-tab:hover{
+    background-color:#FF6F00;
+    color:#fff;
+}
+
+.lucky-tab.active {
+    background-color: #FF6F00;
+    color: white;
+    border-color: #FF6F00;
+}
+
+.lucky-tab.active::before {
+    transform: scale(1);
+}
+
+.lucky-card {
+    width: 350px;
+    border: 1px solid #feffdb;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    background-color: #FEFFDB;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.lucky-card img {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    border-radius: 10px 10px 0 0;
+}
+
+.lucky-card-info {
+    padding: 10px;
+}
+
+.lucky-card-menu h4 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.lucky-card-menu p {
+    color: #FF6F00;
+    font-size: 1.1em;
+}
+
+.lucky-card-menu button {
+    padding: 10px 20px;
+    background-color: #FF6F00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.lucky-card-menu button:hover {
+    background-color: #e65c00;
+}
+
+.draw-grade {
+    font-size: 50px;
+}
+
+.lucky-notice {
+    font-size: 28px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.lucky-check {
+
+    text-align: left;
+    font-size: 1em;
+    color: #000;
+    margin: 20px 0;
+    padding-left:30px;
+}
