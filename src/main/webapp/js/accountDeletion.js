@@ -44,7 +44,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log("Server response:", response); // 디버깅 출력
                 if (response) {
-                    $("form")[0].submit();
+                    $("form")[1].submit();
                 } else {
                     alert("유효하지 않은 코드이거나 시간이 만료되었습니다.");
                 }
@@ -57,7 +57,7 @@ $(document).ready(function() {
     });
 
     // 취소 버튼 클릭 시 myPage.html로 이동
-    $(".delete-before").click(function() {
+    $(".delete-reset").click(function() {
         window.location.href = "/myPage";
     });
 });

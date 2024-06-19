@@ -1,6 +1,15 @@
+#sendCodeButton.loading {
+    cursor: not-allowed;
+}
+
+#sendCodeButton.loading::after {
+    content: " (전송 중…)";
+    color: #ff9900;
+}
+
 .delete-container {
     background: #ededed;
-    margin-top:50px;
+    margin-top: 50px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -42,7 +51,7 @@
 }
 
 .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .form-label {
@@ -59,7 +68,7 @@
     width: 100%;
     padding: 10px 35px 10px 10px;
     border: 1px solid #dddddd;
-    border-radius: 5px;
+    border-radius: 25px;
     background-color: #fff;
 }
 
@@ -80,19 +89,36 @@
     color: #cccccc;
 }
 
+.email-check {
+    display: block;
+    margin-top: 10px;
+    margin-left: 240px;
+    color: #FFC60B;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    text-align: right;
+}
+
+.email-check:hover {
+    color: #FF8B00;
+}
+
 .form-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
+    gap:30px;
     margin-top: 20px;
 }
 
-.delete-user, .delete-before {
-    width: 40%;
+.delete-user, .delete-reset {
+    width: 30%;
     padding: 10px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .delete-user {
@@ -100,21 +126,7 @@
     color: #ffffff;
 }
 
-.delete-before {
+.delete-reset {
     background-color: #FFC60B;
     color: #ffffff;
-}
-
-.email-check {
-    color: #FFC60B;
-    text-align: right;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 16px;
-    padding: 0;
-}
-
-.email-check:hover {
-    color: #FF8B00;
 }
