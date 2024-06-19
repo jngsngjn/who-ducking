@@ -314,6 +314,11 @@ input[type="number"] {
 @media screen and (max-width: 1024px) {
 }
 @media screen and (max-width: 768px) {
+  .register_next_btn {
+    font-size: 1.4rem;
+    height: 35px;
+    width: 50%;
+  }
 }
 @media screen and (max-width: 500px) {
   /* Register =============================================== */
@@ -344,7 +349,9 @@ input[type="number"] {
   }
 
   .register_next_btn {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
+    border-radius: 1rem;
+    width: 40%;
   }
 
   /* Modal =============================================== */
@@ -361,3 +368,4 @@ input[type="number"] {
     height: 550px;
   }
 }
+/* MEDIA QUERY END ===============================================*/

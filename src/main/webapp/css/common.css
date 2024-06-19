@@ -8,12 +8,14 @@
 
 /* Elements ===============================================*/
 /* 새로운 css 파일 생성 시 import 추가 */
-@import url(./header.css);
-@import url(./footer.css);
-@import url(./main.css);
+@import url(./Header.css);
+@import url(./Footer.css);
+@import url(./Main.css);
+@import url(./Sub.css);
 @import url(./Login.css);
 @import url(./Register.css);
 @import url(./RegisterGenre.css);
+@import url(./MyPage.css);
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {

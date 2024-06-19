@@ -1,0 +1,569 @@
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
+}
+
+.mypage_profile_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80rem;
+    height: 30rem;
+    background-color: var(--subColor);
+    border: 1px solid var(--subColor);
+    border-radius: 4rem;
+    margin: 0 auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    gap: 2rem;
+    box-shadow: rgba(149, 157, 165, 0.8) 0px 8px 24px;
+}
+
+.mypage_profile_left {
+    margin-left: 4rem;
+}
+
+.mypage_profile_image {
+    width: 25rem;
+    height: 25rem;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.mypage_profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mypage_profile_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 6rem;
+    margin-right: 4rem;
+}
+
+.mypage_profile_right_first {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.mypage_profile_nickname {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.mypage_profile_modify_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    height: 5rem;
+    background-color: #fff;
+    border: 2px solid var(--mainColor);
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--mainColor);
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+    cursor: pointer;
+}
+
+.mypage_profile_modify_btn:hover {
+    background-color: var(--mainColor);
+    color: #fff;
+}
+
+.mypage_profile_right_second {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.mypage_profile_exp_level_box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    color: #fff;
+}
+
+.mypage_profile_level_point {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2.4rem;
+    font-weight: 500;
+    width: 100%;
+}
+
+.mypage_profile_level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.mypage_profile_point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mypage_profile_exp_point {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.mypage_profile_exp_track {
+    margin-top: 0.8rem;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 24px;
+    background: #f5f5f5;
+    border-radius: 100rem;
+    overflow: hidden;
+}
+
+.mypage_profile_exp_thumb {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    height: 100%;
+    background: #ff8b00;
+    border-radius: 100rem;
+    transition: 0.5s;
+    left: 0;
+    top: 0;
+}
+
+/* Board =================================================== */
+.mypage_board_box {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.mypage_board_title {
+    font-size: 3.2rem;
+    color: var(--mainColor);
+    margin-bottom: 2rem;
+}
+
+.mypage_board_list {
+    font-size: 3.2rem;
+    margin-left: 5rem;
+    color: #000;
+    font-weight: 500;
+}
+
+.mypage_board_list > li {
+    padding: 3rem 0;
+}
+
+.mypage_board_list > li:last-child {
+    padding-bottom: 0;
+}
+
+.mypage_board_item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.mypage_board_item:hover {
+    color: var(--mainColor);
+    cursor: pointer;
+}
+
+.mypage_board_item > i {
+    width: 3.2rem;
+    height: 3.2rem;
+    color: var(--mainColor);
+}
+
+/* Event =================================================== */
+.mypage_event_box {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.mypage_event_title {
+    font-size: 3.2rem;
+    color: var(--mainColor);
+    margin-bottom: 2rem;
+}
+
+.mypage_event_list {
+    font-size: 3.2rem;
+    margin-left: 5rem;
+    color: #000;
+    font-weight: 500;
+}
+
+.mypage_event_list > li {
+    padding: 3rem 0;
+}
+
+.mypage_event_list > li:last-child {
+    padding-bottom: 0;
+}
+
+.mypage_event_item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.mypage_event_item:hover {
+    color: var(--mainColor);
+    cursor: pointer;
+}
+
+.mypage_event_item > i {
+    width: 3.2rem;
+    height: 3.2rem;
+    color: var(--mainColor);
+}
+
+/* Cusomer Center ========================================= */
+.mypage_center_box {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.mypage_center_title {
+    font-size: 3.2rem;
+    color: var(--mainColor);
+    margin-bottom: 2rem;
+}
+
+.mypage_center_list {
+    font-size: 3.2rem;
+    margin-left: 5rem;
+    color: #000;
+    font-weight: 500;
+}
+
+.mypage_center_list > li {
+    padding: 3rem 0;
+}
+
+.mypage_center_list > li:last-child {
+    padding-bottom: 0;
+}
+
+.mypage_center_item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.mypage_center_item:hover {
+    color: var(--mainColor);
+    cursor: pointer;
+}
+
+.mypage_center_item > i {
+    width: 3.2rem;
+    height: 3.2rem;
+    color: var(--mainColor);
+}
+
+/* MEDIA QUERY START ===============================================*/
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 768px) {
+    /* Profile */
+    .mypage_profile_box {
+        width: 60rem;
+        height: 25rem;
+        justify-content: space-between;
+    }
+
+    .mypage_profile_left {
+        margin-left: 3rem;
+    }
+
+    .mypage_profile_image {
+        width: 18rem;
+        height: 18rem;
+    }
+
+    .mypage_profile_right {
+        width: 60%;
+        gap: 4rem;
+        margin-right: 3rem;
+    }
+
+    .mypage_profile_right_first {
+        justify-content: space-between;
+    }
+
+    .mypage_profile_nickname {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .mypage_profile_modify_btn {
+        width: 12rem;
+        height: 4rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.4rem;
+    }
+
+    .mypage_profile_right_second {
+        justify-content: space-between;
+    }
+
+    .mypage_profile_exp_level_box {
+        gap: 0.3rem;
+    }
+
+    .mypage_profile_level_point {
+        font-size: 1.8rem;
+    }
+
+    .mypage_profile_exp_point {
+        font-size: 1.2rem;
+    }
+
+    /* Board */
+    .mypage_board_box {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+    .mypage_board_title {
+        font-size: 2.4rem;
+        margin-bottom: 2rem;
+    }
+
+    .mypage_board_list {
+        font-size: 2.4rem;
+        margin-left: 3rem;
+    }
+
+    .mypage_board_list > li {
+        padding: 1.5rem 0;
+    }
+
+    .mypage_board_item {
+        gap: 1.5rem;
+    }
+
+    .mypage_board_item > i {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    /* Event */
+    .mypage_event_box {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+    .mypage_event_title {
+        font-size: 2.4rem;
+        margin-bottom: 2rem;
+    }
+
+    .mypage_event_list {
+        font-size: 2.4rem;
+        margin-left: 3rem;
+    }
+
+    .mypage_event_list > li {
+        padding: 1.5rem 0;
+    }
+
+    .mypage_event_item {
+        gap: 1.5rem;
+    }
+
+    .mypage_event_item > i {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    /* Customer Center */
+    .mypage_center_box {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+    .mypage_center_title {
+        font-size: 2.4rem;
+        margin-bottom: 2rem;
+    }
+
+    .mypage_center_list {
+        font-size: 2.4rem;
+        margin-left: 3rem;
+    }
+
+    .mypage_center_list > li {
+        padding: 1.5rem 0;
+    }
+
+    .mypage_center_item {
+        gap: 1.5rem;
+    }
+
+    .mypage_center_item > i {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+}
+@media screen and (max-width: 500px) {
+    /* Profile */
+    .mypage_profile_box {
+        width: 40rem;
+        height: 25rem;
+        justify-content: space-between;
+    }
+
+    .mypage_profile_left {
+        margin-left: 1rem;
+    }
+
+    .mypage_profile_image {
+        width: 15rem;
+        height: 15rem;
+    }
+
+    .mypage_profile_right {
+        gap: 2rem;
+        margin-right: 1rem;
+    }
+
+    .mypage_profile_right_first {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .mypage_profile_nickname {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .mypage_profile_modify_btn {
+        width: 8rem;
+        height: 3rem;
+        font-size: 1rem;
+    }
+
+    .mypage_profile_right_second {
+        justify-content: space-between;
+    }
+
+    .mypage_profile_exp_level_box {
+        gap: 0.3rem;
+    }
+
+    .mypage_profile_level_point {
+        font-size: 1.4rem;
+    }
+
+    .mypage_profile_exp_point {
+        font-size: 1rem;
+    }
+
+    .mypage_profile_exp_track {
+        height: 12px;
+    }
+
+    /* Board */
+    .mypage_board_box {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .mypage_board_title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .mypage_board_list {
+        font-size: 2rem;
+        margin-left: 3rem;
+    }
+
+    .mypage_board_list > li {
+        padding: 1.5rem 0;
+    }
+
+    .mypage_board_item {
+        gap: 1rem;
+    }
+
+    .mypage_board_item > i {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    /* Event */
+    .mypage_event_box {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .mypage_event_title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .mypage_event_list {
+        font-size: 2rem;
+        margin-left: 3rem;
+    }
+
+    .mypage_event_list > li {
+        padding: 1.5rem 0;
+    }
+
+    .mypage_event_item {
+        gap: 1rem;
+    }
+
+    .mypage_event_item > i {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    /* Customer Center */
+    .mypage_center_box {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .mypage_center_title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .mypage_center_list {
+        font-size: 2rem;
+        margin-left: 3rem;
+    }
+
+    .mypage_center_list > li {
+        padding: 1.5rem 0;
+    }
+
+    .mypage_center_item {
+        gap: 1rem;
+    }
+
+    .mypage_center_item > i {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+/* MEDIA QUERY END ===============================================*/
