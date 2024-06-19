@@ -27,155 +27,156 @@
     <script type="text/javascript" src="/js/common.js"></script>
 </head>
 <body>
-<div th:insert="~{fragments/header :: header}"></div>
-<!-- Container -->
-<main id="container">
-    <!-- Sub Component : Title -->
-    <section class="subCommon">
-        <div class="inner_box" data-aos="fade-up">
-            <h2 class="subTitle">내 프로필</h2>
-        </div>
-    </section>
+    <div th:insert="~{fragments/header :: header}"></div>
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <h2 class="subTitle">내 프로필</h2>
+            </div>
+        </section>
 
-    <!-- Sub Component : Contents -->
-    <section class="subContents">
-        <div class="inner_box" data-aos="fade-up">
-            <div class="mypage_box">
-                <!-- 1. Profile -->
-                <div class="mypage_profile_box">
-                    <!-- Profile Left : Image -->
-                    <div class="mypage_profile_left">
-                        <!-- 1-1. Image -->
-                        <div class="mypage_profile_image">
-                            <img class="mypage_profile-img" th:if="${loginUser.profileImage != null}"
-                                 th:src="@{'/image/profile/' + ${loginUser.profileImage.storeImageName}}"
-                                 alt="Profile Image" />
-                            <img class="mypage_profile-img" th:unless="${loginUser.profileImage != null}"
-                                 th:src="@{'/image/level/' + ${loginUser.level.imageName}}" alt="Level Image" />
-                        </div>
-                    </div>
-
-                    <!-- Profile Right : NickName & Status -->
-                    <div class="mypage_profile_right">
-                        <!-- Profile NickName -->
-                        <div class="mypage_profile_right_first">
-                            <!-- 1-2. Nickname -->
-                            <div class="mypage_profile_nickname" th:text="${loginUser.getNickname()}">
-                                오덕
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="mypage_box">
+                    <!-- 1. Profile -->
+                    <div class="mypage_profile_box">
+                        <!-- Profile Left : Image -->
+                        <div class="mypage_profile_left">
+                            <!-- 1-1. Image -->
+                            <div class="mypage_profile_image">
+                                <img class="mypage_profile-img" th:if="${loginUser.profileImage != null}"
+                                     th:src="@{'/image/profile/' + ${loginUser.profileImage.storeImageName}}"
+                                     alt="Profile Image" />
+                                <img class="mypage_profile-img" th:unless="${loginUser.profileImage != null}"
+                                     th:src="@{'/image/level/' + ${loginUser.level.imageName}}" alt="Level Image" />
                             </div>
-                            <!-- 1-3. Modify Button -->
-                            <button class="mypage_profile_modify_btn">프로필 수정</button>
                         </div>
 
-                        <!-- Profile Status -->
-                        <div class="mypage_profile_right_second">
-                            <!-- 1-4. Level & Point -->
-                            <div class="mypage_profile_exp_level_box">
-                                <div class="mypage_profile_level_point">
-                                            <span class="mypage_profile_level"
-                                                  th:text="'Lv.' + ${loginUser.getLevel().getId()}">Lv.1</span>
-                                    <div class="mypage_profile_point">
-                                        <i class="fa-solid fa-coins"></i>
-                                        <span th:text="${loginUser.getPoint()} + 'P'">200P</span>
+                        <!-- Profile Right : NickName & Status -->
+                        <div class="mypage_profile_right">
+                            <!-- Profile NickName -->
+                            <div class="mypage_profile_right_first">
+                                <!-- 1-2. Nickname -->
+                                <div class="mypage_profile_nickname" th:text="${loginUser.getNickname()}">
+                                    오덕오덕오덕오덕오덕오덕
+                                </div>
+                                <!-- 1-3. Modify Button -->
+                                <a class="mypage_profile_modify_btn"
+                                   th:href="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}">프로필 수정</a>
+                            </div>
+
+                            <!-- Profile Status -->
+                            <div class="mypage_profile_right_second">
+                                <!-- 1-4. Level & Point -->
+                                <div class="mypage_profile_exp_level_box">
+                                    <div class="mypage_profile_level_point">
+                                        <span class="mypage_profile_level"
+                                              th:text="'Lv.' + ${loginUser.getLevel().getId()}">Lv.10</span>
+                                        <div class="mypage_profile_point">
+                                            <i class="fa-solid fa-coins"></i>
+                                            <span th:text="${loginUser.getPoint()} + 'P'">50000P</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                            <span class="mypage_profile_exp_point"
-                                                  th:text="${loginUser.getCurrentExp()} + ' / ' + ${loginUser.getLevel().getMaxExp()} + 'EXP'">16
-                                                / 20 EXP</span>
-                                </div>
-                                <div class="mypage_profile_exp_track">
-                                    <div class="mypage_profile_exp_thumb"
-                                         th:style="'width:' + (${loginUser.getLevel().getMaxExp()} > 0 ? (${loginUser.getCurrentExp()} / ${loginUser.getLevel().getMaxExp()} * 100) : 0) + '%;'">
+                                    <div>
+                                        <span class="mypage_profile_exp_point"
+                                              th:text="${loginUser.getCurrentExp()} + ' / ' + ${loginUser.getLevel().getMaxExp()} + 'EXP'">16
+                                            / 20 EXP</span>
+                                    </div>
+                                    <div class="mypage_profile_exp_track">
+                                        <div class="mypage_profile_exp_thumb"
+                                             th:style="'width:' + (${loginUser.getLevel().getMaxExp()} > 0 ? (${loginUser.getCurrentExp()} / ${loginUser.getLevel().getMaxExp()} * 100) : 0) + '%;'">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr />
+
+                <!-- 2. My Board -->
+                <div class="mypage_board_box">
+                    <!-- 2-1. My Board Title -->
+                    <h3 class="mypage_board_title">📝 나의 글 목록</h3>
+
+                    <!-- 2-2. My Board List -->
+                    <ul class="mypage_board_list">
+                        <!-- List 1. -->
+                        <li class="mypage_board_item">
+                            <i class="fa-regular fa-comment"></i>
+                            <span class="mypage_board_text"><a href="">나의 리뷰</a></span>
+                        </li>
+                        <!-- List 2. -->
+                        <li class="mypage_board_item">
+                            <i class="fa-regular fa-clipboard"></i>
+                            <span class="mypage_board_text"><a href="">나의 게시글</a></span>
+                        </li>
+                        <!-- List 3. -->
+                        <li class="mypage_board_item">
+                            <i class="fa-regular fa-flag"></i>
+                            <span class="mypage_board_text"><a href="">나의 건의 내역</a></span>
+                        </li>
+                        <!-- List 4. -->
+                        <li class="mypage_board_item">
+                            <i class="fa-regular fa-bookmark"></i>
+                            <span class="mypage_board_text"><a href="">나의 북마크</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <hr />
+
+                <!-- 3. My Event -->
+                <div class="mypage_event_box">
+                    <!-- 3-1. My Event Title -->
+                    <h3 class="mypage_event_title">📝 이벤트</h3>
+
+                    <!-- 3-2. My Event List -->
+                    <ul class="mypage_event_list">
+                        <!-- List 1. -->
+                        <li class="mypage_event_item">
+                            <i class="fa-solid fa-clover"></i>
+                            <span class="mypage_event_text"><a href="">럭키 드로우 응모내역</a></span>
+                        </li>
+                        <!-- List 2. -->
+                        <li class="mypage_event_item">
+                            <i class="fa-solid fa-store"></i>
+                            <span class="mypage_event_text"><a href="">팝업 스토어 북마크</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <hr />
+
+                <!-- 4. Customer Center -->
+                <div class="mypage_center_box">
+                    <!-- 4-1. Customer Center Title -->
+                    <h3 class="mypage_center_title">📝 고객센터</h3>
+
+                    <!-- 4-2. Customer Center List -->
+                    <ul class="mypage_center_list">
+                        <!-- List 1. -->
+                        <li class="mypage_center_item">
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <span class="mypage_center_text"><a href="">공지사항</a></span>
+                        </li>
+                        <!-- List 2. -->
+                        <li class="mypage_center_item">
+                            <i class="fa-regular fa-comments"></i>
+                            <span class="mypage_center_text"><a href="">자주 묻는 질문</a></span>
+                        </li>
+                        <!-- List 3. -->
+                        <li class="mypage_center_item">
+                            <i class="fa-solid fa-user-slash"></i>
+                            <span class="mypage_center_text"><a href="">회원 탈퇴</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <hr />
             </div>
-            <hr />
-
-            <!-- 2. My Board -->
-            <div class="mypage_board_box">
-                <!-- 2-1. My Board Title -->
-                <h3 class="mypage_board_title">📝 나의 글 목록</h3>
-
-                <!-- 2-2. My Board List -->
-                <ul class="mypage_board_list">
-                    <!-- List 1. -->
-                    <li class="mypage_board_item">
-                        <i class="fa-regular fa-comment"></i>
-                        <span class="mypage_board_text">나의 리뷰</span>
-                    </li>
-                    <!-- List 2. -->
-                    <li class="mypage_board_item">
-                        <i class="fa-regular fa-clipboard"></i>
-                        <span class="mypage_board_text">나의 게시글</span>
-                    </li>
-                    <!-- List 3. -->
-                    <li class="mypage_board_item">
-                        <i class="fa-regular fa-flag"></i>
-                        <span class="mypage_board_text">나의 건의 내역</span>
-                    </li>
-                    <!-- List 4. -->
-                    <li class="mypage_board_item">
-                        <i class="fa-regular fa-bookmark"></i>
-                        <span class="mypage_board_text">나의 북마크</span>
-                    </li>
-                </ul>
-            </div>
-            <hr />
-
-            <!-- 3. My Event -->
-            <div class="mypage_event_box">
-                <!-- 3-1. My Event Title -->
-                <h3 class="mypage_event_title">📝 이벤트</h3>
-
-                <!-- 3-2. My Event List -->
-                <ul class="mypage_event_list">
-                    <!-- List 1. -->
-                    <li class="mypage_event_item">
-                        <i class="fa-solid fa-clover"></i>
-                        <span class="mypage_event_text">럭키 드로우 응모내역</span>
-                    </li>
-                    <!-- List 2. -->
-                    <li class="mypage_event_item">
-                        <i class="fa-solid fa-store"></i>
-                        <span class="mypage_event_text">팝업 스토어 북마크</span>
-                    </li>
-                </ul>
-            </div>
-            <hr />
-
-            <!-- 4. Customer Center -->
-            <div class="mypage_center_box">
-                <!-- 4-1. Customer Center Title -->
-                <h3 class="mypage_center_title">📝 고객센터</h3>
-
-                <!-- 4-2. Customer Center List -->
-                <ul class="mypage_center_list">
-                    <!-- List 1. -->
-                    <li class="mypage_center_item">
-                        <i class="fa-solid fa-bullhorn"></i>
-                        <span class="mypage_center_text">공지사항</span>
-                    </li>
-                    <!-- List 2. -->
-                    <li class="mypage_center_item">
-                        <i class="fa-regular fa-comments"></i>
-                        <span class="mypage_center_text">자주 묻는 질문</span>
-                    </li>
-                    <!-- List 3. -->
-                    <li class="mypage_center_item">
-                        <i class="fa-solid fa-user-slash"></i>
-                        <span class="mypage_center_text">회원 탈퇴</span>
-                    </li>
-                </ul>
-            </div>
-            <hr />
-        </div>
-    </section>
-</main>
-<div th:insert="~{fragments/footer :: footer}"></div>
+        </section>
+    </main>
+    <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

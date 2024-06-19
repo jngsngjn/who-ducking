@@ -181,7 +181,7 @@
     gap: 2rem;
 }
 
-.mypage_board_item:hover {
+.mypage_board_item > span > a:hover {
     color: var(--mainColor);
     cursor: pointer;
 }
@@ -225,7 +225,7 @@
     gap: 2rem;
 }
 
-.mypage_event_item:hover {
+.mypage_event_item > span > a:hover {
     color: var(--mainColor);
     cursor: pointer;
 }
@@ -269,7 +269,7 @@
     gap: 2rem;
 }
 
-.mypage_center_item:hover {
+.mypage_center_item > span > a:hover {
     color: var(--mainColor);
     cursor: pointer;
 }
