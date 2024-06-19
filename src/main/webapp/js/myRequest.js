@@ -15,4 +15,37 @@ $(document).ready(function () {
                 break;
         }
     });
+
+    var modal = $('#myModal');
+    var modalContent = $('#modalContent');
+    var deleteForm = $('#deleteForm');
+    var requestIdInput = $('#requestId');
+
+    $('.myFaq_title').on('click', function() {
+        var title = $(this).text();
+        var content = $(this).attr('data-content');
+        var status = $(this).attr('data-status');
+        var requestId = $(this).attr('data-request-id');
+
+        modalContent.html('<strong>' + title + '</strong><br>' + content);
+        requestIdInput.val(requestId);
+
+        if (status === 'RECEIVED') {
+            deleteForm.show();
+        } else {
+            deleteForm.hide();
+        }
+
+        modal.show();
+    });
+
+    $('.close').on('click', function() {
+        modal.hide();
+    });
+
+    $(window).on('click', function(event) {
+        if ($(event.target).is(modal)) {
+            modal.hide();
+        }
+    });
 });

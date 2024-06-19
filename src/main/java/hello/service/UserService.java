@@ -136,4 +136,8 @@ public class UserService {
         Pageable pageable = PageRequest.of(page, size);
         return requestRepository.findMyRequest(pageable);
     }
+
+    public void deleteRequest(Long requestId) {
+        requestRepository.deleteById(requestId);
+    }
 }

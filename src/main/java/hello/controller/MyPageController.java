@@ -113,4 +113,10 @@ public class MyPageController {
         userService.receiveRequest(requestDTO, loginUser);
         return "redirect:/myPage/request-list";
     }
+
+    @PostMapping("/request-delete")
+    public String deleteRequest(@RequestParam("requestId") Long requestId) {
+        userService.deleteRequest(requestId);
+        return "redirect:/myPage/request-list";
+    }
 }
