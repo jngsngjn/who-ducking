@@ -4,16 +4,12 @@ import hello.dto.animation.AniReviewDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.User;
-import hello.repository.AnimationRepository;
-import hello.repository.ReviewRepository;
-import hello.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import hello.repository.db.AnimationRepository;
+import hello.repository.db.ReviewRepository;
+import hello.repository.db.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

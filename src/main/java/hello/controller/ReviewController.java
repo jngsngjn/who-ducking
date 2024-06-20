@@ -2,17 +2,12 @@ package hello.controller;
 
 import hello.dto.animation.AniReviewDTO;
 import hello.entity.review.Review;
-import hello.repository.ReviewRepository;
-import hello.service.AnimationService;
+import hello.repository.db.ReviewRepository;
 import hello.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ReviewController {

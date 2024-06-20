@@ -3,11 +3,10 @@ package hello.service;
 import hello.dto.animation.GetAniListDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
-import hello.repository.AnimationRepository;
-import hello.repository.ReviewRepository;
+import hello.repository.db.AnimationRepository;
+import hello.repository.db.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
