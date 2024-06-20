@@ -3,7 +3,7 @@ package hello.service.board;
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
 import hello.entity.user.User;
-import hello.repository.BookmarkRepository;
+import hello.repository.db.BookmarkRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

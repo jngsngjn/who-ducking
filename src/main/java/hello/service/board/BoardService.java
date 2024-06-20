@@ -3,7 +3,7 @@ package hello.service.board;
 import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
-import hello.repository.BoardRepository;
+import hello.repository.db.BoardRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

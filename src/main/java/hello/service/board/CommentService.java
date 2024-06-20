@@ -1,7 +1,7 @@
 package hello.service.board;
 
 import hello.entity.board.Comment;
-import hello.repository.CommentRepository;
+import hello.repository.db.CommentRepository;
 
 import org.springframework.stereotype.Service;
 
