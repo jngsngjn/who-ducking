@@ -69,7 +69,7 @@
             <ul>
                 <li class="name">이메일</li>
                 <li class="box">
-                    <input type="email" class="text" th:value="${loginUser.getEmail()}" readonly>
+                    <label type="email" class="text" th:text="${loginUser.getEmail()}">
                     <div class="image">
 
                         <i class="fas fa-lock icon"></i>

@@ -53,7 +53,13 @@ public class EmailService {
 
         Context context = new Context();
         context.setVariable("verificationCode", verificationCode);
-        String html = templateEngine.process("email/verificationEmail", context);
+        String html = "";
+
+        if (to.contains("gmail")) {
+            html = templateEngine.process("email/verificationEmailGoogle", context);
+        } else {
+            html = templateEngine.process("email/verificationEmail", context);
+        }
 
         helper.setTo(to);
         helper.setSubject("[Who's Ducking] 계정 삭제 인증 코드");
