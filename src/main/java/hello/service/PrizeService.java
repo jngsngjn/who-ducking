@@ -24,6 +24,7 @@ public class PrizeService {
 
     private final PrizeRepository prizeRepository;
     private final EntryRepository entryRepository;
+    private final PointService pointService;
 
     public boolean checkPoint(User user) {
         int userPoint = user.getPoint();
@@ -56,12 +57,18 @@ public class PrizeService {
         return lastDrawDate != null && lastDrawDate.isEqual(today);
     }
 
+    public boolean isAddressEmpty(User user) {
+        String detailedAddress = user.getHomeAddress().getDetailedAddress();
+        return detailedAddress == null || detailedAddress.isEmpty();
+    }
+
     public void entryPrize(Long prizeId, User user) {
         LocalDate today = LocalDate.now();
         user.setLastDrawDate(today);
 
         Prize prize = prizeRepository.findById(prizeId).orElseThrow();
         Entry findEntry = entryRepository.findByUserId(user.getId()).orElseThrow();
+        pointService.decreasePoint(user, 30);
 
         // 처음 응모한 경우
         if (findEntry == null) {
@@ -75,6 +82,7 @@ public class PrizeService {
 
     public User randomDraw(Long prizeId) {
         List<Entry> entries = entryRepository.findByPrizeId(prizeId);
+        Prize prize = prizeRepository.findById(prizeId).orElseThrow();
         if (entries.isEmpty()) {
             return null;
         }
@@ -88,6 +96,10 @@ public class PrizeService {
 
         Random random = new Random();
         int winnerIndex = random.nextInt(drawPool.size());
-        return drawPool.get(winnerIndex);
+
+        User winner = drawPool.get(winnerIndex);
+        prize.setUser(winner);
+
+        return winner;
     }
 }

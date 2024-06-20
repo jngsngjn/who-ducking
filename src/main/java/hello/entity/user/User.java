@@ -103,4 +103,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Request> requests = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoginHistory> loginHistories = new ArrayList<>();
 }

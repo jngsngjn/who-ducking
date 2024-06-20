@@ -140,4 +140,9 @@ public class UserService {
     public void deleteRequest(Long requestId) {
         requestRepository.deleteById(requestId);
     }
+
+    public boolean isLevelOne(User user) {
+        Long level = user.getLevel().getId();
+        return level.equals(1L);
+    }
 }
