@@ -75,6 +75,11 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
+//파라미터 플래그때문에 잠시 설정 -수정
+tasks.withType(JavaCompile) {
+    options.compilerArgs.add("-parameters")
+}
+
 test {
     useJUnitPlatform()
 }

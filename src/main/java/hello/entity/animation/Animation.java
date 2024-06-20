@@ -48,4 +48,5 @@ public class Animation {
 
     @OneToMany(mappedBy = "animation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AnimationGenre> animationGenres = new HashSet<>();
+
 }
