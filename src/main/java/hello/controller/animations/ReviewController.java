@@ -1,9 +1,9 @@
-package hello.controller;
+package hello.controller.animations;
 
 import hello.dto.animation.AniReviewDTO;
 import hello.entity.review.Review;
 import hello.repository.db.ReviewRepository;
-import hello.service.ReviewService;
+import hello.service.animations.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,11 +18,11 @@ public class ReviewController {
     private ReviewRepository reviewRepository;
 
     /* POST : 리뷰 작성 */
-    @PostMapping("/community/{AnimationId}/review")
+    @PostMapping("/animations/{AnimationId}/review")
     public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO){
         aniReviewDTO.setAnimationId(AnimationId);
         reviewService.addReview(aniReviewDTO);
-        return "redirect:/community/" + AnimationId;
+        return "redirect:/animations/" + AnimationId;
     }
 
     /* @ 리뷰 수정

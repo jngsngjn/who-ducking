@@ -2,10 +2,9 @@
   width: 87.5rem;
   display: flex;
   margin: 0 auto;
-  justify-content: flex-end;
   position: relative;
   overflow: hidden;
-  /* align-items: center; */
+  justify-content: space-around;
   align-items: flex-start;
 }
 
@@ -77,6 +76,7 @@ hr {
   margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  place-content: center;
   gap: 1rem;
 }
 

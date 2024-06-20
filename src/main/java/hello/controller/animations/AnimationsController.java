@@ -1,11 +1,11 @@
-package hello.controller;
+package hello.controller.animations;
 
 import hello.dto.animation.GetAniListDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.User;
-import hello.service.AnimationService;
+import hello.service.animations.AnimationService;
 import hello.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,13 +18,13 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class CommunityController {
+public class AnimationsController {
 
     private final AnimationService animationService;
     private final UserService userService;
 
     // 전체 애니메이션 데이터 조회
-    @GetMapping("/community")
+    @GetMapping("/animations")
     public String getAllAnimationsWithReviewData(Model model) {
         model.addAttribute("animationLists", animationService.getAllAnimationWithReviewData());
         return "reviewBoard";
@@ -32,7 +32,7 @@ public class CommunityController {
 
     /* 애니메이션 상세페이지 GET(리뷰작성페이지)
      * PathVariable id = animationId */
-    @GetMapping("community/{id}")
+    @GetMapping("animations/{id}")
     public String getAnimation(@PathVariable Long id,
                                Model model,
                                @AuthenticationPrincipal CustomOAuth2User user) {

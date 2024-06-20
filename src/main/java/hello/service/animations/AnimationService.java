@@ -1,4 +1,4 @@
-package hello.service;
+package hello.service.animations;
 
 import hello.dto.animation.GetAniListDTO;
 import hello.entity.animation.Animation;
