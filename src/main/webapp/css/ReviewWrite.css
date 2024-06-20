@@ -2,12 +2,6 @@
     0% {
         opacity: 0;
     }
-    60% {
-        opacity: 50%;
-    }
-    80% {
-        opacity: 20%;
-    }
     100% {
         opacity: 1;
     }
@@ -170,10 +164,9 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: orange;
     border-radius: 20px;
     color: white;
-    box-shadow: 2px 3px 3px #d1d1d1;
+    /*box-shadow: 2px 3px 3px #d1d1d1;*/
 }
 
 .tag-list {
@@ -410,7 +403,6 @@ textarea:focus {
     width: 100%;
     height: 49%;
     border-radius: 20px;
-    background-color: white;
     border: none;
     font-size: 1.25rem;
 }

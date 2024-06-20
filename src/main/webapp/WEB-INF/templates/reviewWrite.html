@@ -64,8 +64,7 @@
           <span class="ani-title" th:text="${aniDetailInfo.name}"></span>
         </h3>
         <div class="grade">
-<!--          <img th:src="'/images/' + (${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL'))}) + '.png'" alt="age" class="grade" />-->
-          <div th:text="${aniDetailInfo.rating == 'ADULT' ? '18' : (aniDetailInfo.rating == 'FIFTEEN' ? '15' : (aniDetailInfo.rating == 'TWELVE' ? '12' : 'ALL' ))}" class="grade"></div>
+          <img th:src="'/images/AgeLimit/' + (${aniDetailInfo.rating.description == '성인 관람가' ? 'Age_19' : (aniDetailInfo.rating.description == '15세 관람가' ? 'Age_15' : (aniDetailInfo.rating.description == '12세 관람가' ? 'Age_12' : 'Age_ALL'))}) + '.png'" alt="age" class="grade" />
         </div>
       </div>
       <div class="tag-list">
@@ -145,19 +144,17 @@
     <div class="row-box">
       <p th:text="${review.writeDate}" class="write-date"></p>
       <div>
-        <button id="recommend-like" class="recommend-btn">
+        <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
           <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
         </button>
-        <button id="recommend-dislike" class="recommend-btn">
+
+        <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
           <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
         </button>
+
       </div>
     </div>
   </div>
-
-
-
-
   <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
   <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
 </div>

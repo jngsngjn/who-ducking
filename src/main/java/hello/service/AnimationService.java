@@ -39,7 +39,7 @@ public class AnimationService {
 
     // 리뷰 정보 get
     public List<Review> getReviewsByAnimationId(Long id){
-        return reviewRepository.findTopReviewsByAnimationId(id);
+        return reviewRepository.findRecentReviewsByAnimationId(id);
     }
 
     // 애니 리뷰수&평점 조회

@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// 최신순 인기순 버튼
+// 최신순 인기순 버튼 활성 -> (o) / 기능 -> (x)
 document.addEventListener('DOMContentLoaded', function() {
     const recentBtn = document.getElementById('recent');
     const likeBtn = document.getElementById('like');
@@ -157,4 +157,55 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+// 좋아요 요청 함수 -> 405에러? -> 500에러
+function likeReview(reviewId) {
+    let url = `/reviews/${reviewId}/like`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        if (!res.ok) {
+            return res.text().then(text => {
+                let error = new Error(text);
+                error.status = res.status;
+                throw error;
+            });
+        }
+        return res.json();
+    }).then(data => {
+        window.location.reload();
+    }).catch(error => {
+        console.error('서버 에러: 좋아요 액션 중 오류 발생', error);
+    });
+}
+
+
+// 싫어요 요청 함수
+function dislikeReview(reviewId) {
+    let url = `/reviews/${reviewId}/dislike`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        if (!res.ok) {
+            return res.text().then(text => {
+                let error = new Error(text);
+                error.status = res.status;
+                throw error;
+            });
+        }
+        return res.json();
+    }).then(data => {
+        window.location.reload();
+    }).catch(error => {
+        console.error('서버 에러: 싫어요 액션 중 오류 발생', error.status);
+    });
+}
 

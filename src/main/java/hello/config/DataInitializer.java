@@ -74,11 +74,6 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         levelInitializer();
         emailCodeInitializer();
 
-//        Animation animation = animationRepository.findById(1L).get();
-//        Genre genre = genreRepository.findById(1L).get();
-//
-//        AnimationGenre animationGenre = new AnimationGenre(animation, genre);
-//        animation.getAnimationGenres().add(animationGenre);
     }
 
     private void emailCodeInitializer() {

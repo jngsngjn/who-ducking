@@ -2,6 +2,7 @@ package hello.controller;
 
 import hello.dto.animation.AniReviewDTO;
 import hello.entity.review.Review;
+import hello.repository.ReviewRepository;
 import hello.service.AnimationService;
 import hello.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ReviewController {
@@ -17,7 +20,7 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
     @Autowired
-    private AnimationService animationService;
+    private ReviewRepository reviewRepository;
 
     /* POST : 리뷰 작성 */
     @PostMapping("/community/{AnimationId}/review")
@@ -42,4 +45,33 @@ public class ReviewController {
         reviewService.deleteReview(id);
         return ResponseEntity.noContent().build();
     }
+
+    /* @ 좋아요 클릭시 요청 */
+    @PatchMapping("/reviews/{id}/like")
+    public ResponseEntity<?> likeReview(@PathVariable("id") Long id) {
+        Review reviewId = reviewRepository.findById(id).orElse(null);
+        if (reviewId == null) {
+            return ResponseEntity.notFound().build();
+        }
+        reviewId.setLikeCount(reviewId.getLikeCount() + 1);
+        reviewRepository.save(reviewId);
+
+        return ResponseEntity.ok().body(reviewId.getLikeCount());
+    }
+
+
+    /* @ 싫어요 클릭시 요청 */
+    @PatchMapping("/reviews/{id}/dislike")
+    public ResponseEntity<?> dislikeReview(@PathVariable("id") Long id) {
+        Review reviewId = reviewRepository.findById(id).orElse(null);
+        if (reviewId == null) {
+            return ResponseEntity.notFound().build();
+        }
+        reviewId.setDislikeCount(reviewId.getDislikeCount() + 1);
+        reviewRepository.save(reviewId);
+
+        return ResponseEntity.ok().body(reviewId.getDislikeCount());
+    }
+
+
 }

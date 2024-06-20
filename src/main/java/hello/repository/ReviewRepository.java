@@ -1,7 +1,5 @@
 package hello.repository;
 
-
-import hello.dto.animation.AniReviewDTO;
 import hello.entity.review.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +16,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     /* @ 최근 게시글 불러오기 */
     @Query("SELECT r FROM Review r WHERE r.animation.id = :animationId ORDER BY r.writeDate DESC")
     List<Review> findRecentReviewsByAnimationId(@Param("animationId") Long animationId);
+
+
 }
 
