@@ -53,7 +53,6 @@ public class ReviewService {
         reviewRepository.deleteById(reviewId);
     }
 
-    // 좋아요 싫어요 2
 
 }
 

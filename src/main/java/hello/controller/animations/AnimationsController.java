@@ -6,8 +6,6 @@ import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.User;
 import hello.service.animations.AnimationService;
-import hello.service.UserService;
-import hello.service.animations.AnimationService;
 import hello.service.basic.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -52,11 +50,13 @@ public class AnimationsController {
         model.addAttribute("userId", loginUser.getId());
 
 
-
-        /* @ 리뷰 데이터 조회 */
+        /* @ 애니 리뷰 데이터 조회 */
         List<Review> reviews = animationService.getReviewsByAnimationId(id);
         model.addAttribute("reviews", reviews);
         return "reviewWrite";
     }
 
+
+//    @GetMapping("animations/{id}/order")
+//    public String getReviews(@PathVariable Long id, )
 }

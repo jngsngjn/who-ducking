@@ -45,4 +45,9 @@ public class AnimationService {
     public List<GetAniListDTO> getCountReviewAndScore(Long id){
         return animationRepository.findAnimationDetailsById(id);
     }
+
+    // 리뷰 인기순 조회
+    public List<Review> getReviewsByAnimationIdOrderedLikeCount(Long id){
+        return reviewRepository.findTopReviewsByAnimationId(id);
+    }
 }

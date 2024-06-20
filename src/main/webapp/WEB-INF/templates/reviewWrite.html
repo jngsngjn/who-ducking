@@ -30,26 +30,26 @@
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
   />
-  <script>
-    $(document).ready(function() {
-      let id = $('#').val();
-      $('#delete-btn').on('click', function() {
-        const url = `/reviews/delete/${id}`;
+<!--  <script>-->
+<!--    $(document).ready(function() {-->
+<!--      let id = $('#').val();-->
+<!--      $('#delete-btn').on('click', function() {-->
+<!--        const url = `/reviews/delete/${id}`;-->
 
-        $.ajax({
-          url: url,
-          type: 'DELETE',
-          contentType: 'application/json',
-          success: function(data) {
-            console.log('성공:', data);
-          },
-          error: function(error) {
-            console.error('삭제 요청에 문제가 발생했습니다:', error);
-          }
-        });
-      });
-    });
-  </script>
+<!--        $.ajax({-->
+<!--          url: url,-->
+<!--          type: 'DELETE',-->
+<!--          contentType: 'application/json',-->
+<!--          success: function(data) {-->
+<!--            console.log('성공:', data);-->
+<!--          },-->
+<!--          error: function(error) {-->
+<!--            console.error('삭제 요청에 문제가 발생했습니다:', error);-->
+<!--          }-->
+<!--        });-->
+<!--      });-->
+<!--    });-->
+<!--  </script>-->
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -92,7 +92,7 @@
     <i class="fa-solid fa-comment"></i>
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
-  <form th:action="@{/community/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
+  <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
     <input type="hidden" name="userId" th:value="${userId}" />
     <input type="hidden" name="nickname" th:value="${nickname}"/>
     <div class="row-box">
@@ -106,19 +106,19 @@
         </label>
       </div>
     </div>
-    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content">
+    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content" >
     </textarea>
     <div class="letter-count" id="count">0/500</div>
     <div class="row-box review-write-box">
       <div class="stars-container"></div>
-      <input type="hidden" name="score" id="score-number"/>
+      <input type="hidden" name="score" id="score-number" value="0"/>
       <input type="submit" value="등록" class="submit-btn" />
     </div>
   </form>
   <div class="order-box">
     <div class="row-box">
-      <button id="recent" class="order-btn" >최신 순</button>
-      <button id="like" class="order-btn">좋아요 순</button>
+      <button id="recent" class="order-btn" th:onclick="handleOrderBtn" >최신 순</button>
+      <button id="like" class="order-btn" th:onclick="handleOrderBtn">좋아요 순</button>
     </div>
     <div class="row-box">
       <p>스포일러 포함</p>
@@ -142,10 +142,7 @@
     </div>
     <p th:text="${review.content}" class="review-comment"></p>
     <div class="row-box">
-
-            <p th:text="${review.writeDate}" class="write-date"></p>
       <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
-
       <div>
         <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
           <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>

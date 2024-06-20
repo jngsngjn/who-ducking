@@ -2,9 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const totalStars = 5;
     const starsContainer = document.querySelector(".stars-container");
-    let scoreInput = document.createElement("input");
-    scoreInput.setAttribute("type", "hidden");
-    scoreInput.setAttribute("name", "score");
+    const scoreInput = document.getElementById("score-number");
 
     const starsDiv = document.createElement("div");
     starsDiv.classList.add("stars");
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     starsContainer.appendChild(starsDiv);
     starsContainer.appendChild(scoreSpan);
-    starsContainer.appendChild(scoreInput);
 
     function updateStars() {
         const stars = starsDiv.querySelectorAll("i");
@@ -39,10 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (index < Math.floor(selectedRating)) {
                 star.classList.add("filled");
                 star.classList.remove("half");
-            } else if (
-                index === Math.floor(selectedRating) &&
-                selectedRating % 1 !== 0
-            ) {
+            } else if (index === Math.floor(selectedRating) && selectedRating % 1 !== 0) {
                 star.classList.add("half");
                 star.classList.remove("filled");
             } else {
@@ -54,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
         scoreInput.value = selectedRating;
     }
 });
-
 
 
 // 글자수 체크 -> (o)
@@ -158,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// 좋아요 요청 함수 -> 405에러? -> 500에러
+// 좋아요 요청 함수 ->(o)
 function likeReview(reviewId) {
     let url = `/reviews/${reviewId}/like`;
 
@@ -208,4 +201,26 @@ function dislikeReview(reviewId) {
         console.error('서버 에러: 싫어요 액션 중 오류 발생', error.status);
     });
 }
+
+
+// 리뷰 작성 시 빈 값 요청 불가
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".write-box");
+    const reviewContent = document.getElementById("review-content");
+
+    form.addEventListener("submit", function(event) {
+        let isValid = true;
+        let errorMessage = "";
+
+        if (reviewContent.value.trim() === "") {
+            isValid = false;
+            errorMessage += "리뷰 내용을 입력해주세요.\n";
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+            alert(errorMessage);
+        }
+    });
+});
 
