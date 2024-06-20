@@ -1,0 +1,110 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<main id="container">
+    <div class="free-board">
+        <section class="subCommon">
+            <h2 class="sub_title">커뮤니티</h2>
+            <div class="sort-option-box">
+                <ul class="sort-options">
+                    <li th:class="${sort == 'writeDate'} ? 'sort-option selected' : 'sort-option'">
+                        <a th:href="@{/board(sort='writeDate')}">최신순</a>
+                    </li>
+                    <li th:class="${sort == 'viewCount'} ? 'sort-option selected' : 'sort-option'">
+                        <a th:href="@{/board(sort='viewCount')}">조회수순</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <div class="main_section">
+            <section class="free-board-snb">
+                <div class="free-board-category-box">
+                    <ul class="free-board-category-box-fnr ">
+                        <!--타임리프 필요-->
+                        <li class="free-board-category-box-fnr-title"><a href="">리뷰 게시판</a></li>
+                        <div class="free-board-category-box-fnr-separator"></div>
+                        <li class="free-board-category-box-fnr-title selected"><a href="">자유 게시판</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="free-board-board-list">
+                <div class="board-list-top">
+                    <span class="board-list-top_num">번호</span>
+                    <span class="board-list-top_title">제목</span>
+                    <span class="board-list-top_writer">작성자</span>
+                    <span class="board-list-top_date">작성일</span>
+                    <span class="board-list-top_view-cnt">조회수</span>
+                </div>
+
+                <div class="board-list-separator"></div>
+
+                <!--타임리프 적용 필요-->
+                <div class="board-list-bot">
+                    <ul class="board-list-bot-items">
+                        <li th:each="board, iterStat : ${boardList}">
+                            <span class="board-list-num" th:text="${iterStat.count}"></span>
+                            <span class="board-list-title"><a th:href="@{/board/{boardId}(boardId=${board.id})}" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목없음</a></span>
+                            <span class="board-list-writer" th:text="${board.user.nickname}"></span>
+                            <span class="board-list-date" th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}"></span>
+                            <span class="board-list-view-cnt" th:text="${board.viewCount}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <div class="free-board-write-button">
+            <a href="/board/new">글쓰기</a>
+        </div>
+        <section class="pagination">
+            <div class="pagination-wrap">
+                <ul class="pagination-wrap-elements">
+                    <li th:if="${boardList.hasPrevious()}">
+                        <!-- 이전 화살표 아이콘 -->
+                        <a th:href="@{/board(page=${boardList.number - 1}, sort=${sort})}">이전</a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(startPage, endPage)}"
+                        th:classappend="${page == nowPage} ? 'active' : ''">
+                        <a th:href="@{/board(page=${page - 1}, sort=${sort})}" th:text="${page}"></a>
+                    </li>
+                    <li th:if="${boardList.hasNext()}">
+                        <!-- 다음 화살표 아이콘 -->
+                        <a th:href="@{/board(page=${boardList.number + 1}, sort=${sort})}">다음</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <img class="background-image" src="/images/freeBoard-eren.png" />
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -17,6 +17,12 @@
 @import url(./RegisterGenre.css);
 @import url(./MyPage.css);
 @import url(./LuckyMain.css);
+@import url(./header.css);
+@import url(./footer.css);
+@import url(./main.css);
+@import url(./boardList.css);
+@import url(./createAndedit.css);
+@import url(./show.css);
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {
