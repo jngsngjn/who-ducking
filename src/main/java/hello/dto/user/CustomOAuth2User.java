@@ -15,6 +15,7 @@ public class CustomOAuth2User implements OAuth2User {
     private final OAuth2Response oAuth2Response;
     private final String role;
 
+    // 각 서비스마다 반환하는 attribute 형태가 달라서 사용 X
     @Override
     public Map<String, Object> getAttributes() {
         return null;
