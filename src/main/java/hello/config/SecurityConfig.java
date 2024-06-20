@@ -2,7 +2,7 @@ package hello.config;
 
 import hello.security.CustomClientRegistration;
 import hello.security.handler.CustomAuthenticationFailureHandler;
-import hello.service.CustomOAuth2UserService;
+import hello.service.oauth2.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
