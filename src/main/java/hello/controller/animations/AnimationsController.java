@@ -7,6 +7,8 @@ import hello.entity.review.Review;
 import hello.entity.user.User;
 import hello.service.animations.AnimationService;
 import hello.service.UserService;
+import hello.service.animations.AnimationService;
+import hello.service.basic.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

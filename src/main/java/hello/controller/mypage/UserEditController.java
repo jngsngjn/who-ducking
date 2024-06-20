@@ -3,7 +3,7 @@ package hello.controller.mypage;
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.UserInfoEditDTO;
 import hello.entity.user.User;
-import hello.service.UserService;
+import hello.service.basic.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

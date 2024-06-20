@@ -1,7 +1,7 @@
 package hello.controller.admin;
 
 import hello.dto.admin.*;
-import hello.service.AdminService;
+import hello.service.admin.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
