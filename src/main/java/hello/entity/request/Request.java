@@ -32,6 +32,9 @@ public class Request {
     @Column(name = "write_date")
     private LocalDate writeDate;
 
+    @Column(name = "response_date")
+    private LocalDate responseDate;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

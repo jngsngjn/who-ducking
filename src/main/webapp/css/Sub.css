@@ -1,0 +1,62 @@
+/* SubCommon =============================================== */
+.inner_box {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.subCommon {
+    padding: 10rem 0 0;
+}
+
+.subTitle {
+    font-size: 3.2rem;
+    color: var(--mainColor);
+}
+
+.subContents {
+    padding-bottom: 12rem;
+}
+
+/* MEDIA QUERY START ===============================================*/
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 768px) {
+    /* SubCommon ===============================================*/
+    .inner_box {
+        max-width: 650px;
+    }
+
+    .subCommon {
+        padding: 6rem 0 0;
+    }
+
+    .subTitle {
+        font-size: 2.4rem;
+    }
+
+    .subContents {
+        padding-bottom: 8rem;
+    }
+}
+@media screen and (max-width: 500px) {
+    /* SubCommon ===============================================*/
+    .inner_box {
+        max-width: 450px;
+    }
+
+    .subCommon {
+        padding: 4rem 0 0;
+    }
+
+    .subTitle {
+        font-size: 2rem;
+    }
+
+    .subContents {
+        padding-bottom: 4rem;
+    }
+}
+/* MEDIA QUERY END ===============================================*/

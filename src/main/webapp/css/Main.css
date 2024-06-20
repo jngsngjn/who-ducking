@@ -202,7 +202,7 @@
     font-size: 3.6rem;
     color: var(--mainColor);
     font-weight: 600;
-    margin: 0 0 0 25.15rem;
+    margin: 0 0 0 14.5333rem;
 }
 
 .mainSecondSection_popularity_animation_box {
@@ -303,7 +303,7 @@
     font-size: 3.6rem;
     color: var(--mainColor);
     font-weight: 600;
-    margin: 0 0 0 25.15rem;
+    margin: 0 0 0 14.5333rem;
 }
 
 .mainThirdSection_update_animation_box {
@@ -365,8 +365,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 0 0 4rem 26rem;
-    gap: 56rem;
+    margin: 0 0 4rem 20.5rem;
+    gap: 45.5rem;
 }
 
 .mainFourthSection_title_First,
@@ -498,6 +498,20 @@
     opacity: 1;
 }
 
+.mainFourthSection_swiper-next_btn,
+.mainFourthSection_swiper-prev_btn {
+    position: absolute;
+    transform: translateY(-45%);
+    width: 50px;
+    height: 500px;
+    border-radius: 50%;
+    color: var(--subColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
 /* Free Board */
 .mainFourthSection_freeboard_box {
     position: relative;

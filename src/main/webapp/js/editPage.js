@@ -1,4 +1,4 @@
-// test.js
+// editPage.js
 $(document).ready(function() {
 
     let profileImagePreview = $('#profileImagePreview');
@@ -142,7 +142,6 @@ $(document).ready(function() {
     }
 });
 
-// 전화번호
 let verifyPhone = true;
 $(document).ready(function() {
     const currentPhone = $('#phone').val();
@@ -170,7 +169,7 @@ $(document).ready(function() {
                 }
             });
         }
-    }
+    };
 
     window.sendCode = function(input, currentPhone) {
         if (input === currentPhone) {
@@ -208,7 +207,7 @@ $(document).ready(function() {
                 alert("인증 코드 발송에 실패했습니다.");
             }
         });
-    }
+    };
 
     window.verifyCode = function() {
         const verificationCode = $('#verificationInput').val();
@@ -243,7 +242,11 @@ $(document).ready(function() {
                 verifyPhone = false;
             }
         });
-    }
+    };
+
+    $('#changePhoneButton').on('click', function() {
+        changePhone(this);
+    });
 
     // 입력 필드에 숫자 4자리 제한 추가
     $('#verificationInput').on('input', function() {
@@ -450,3 +453,14 @@ $(document).ready(function() {
         }
     });
 });
+
+function validateForm() {
+    let detailAddress = document.getElementById('detail-address').value;
+
+    if (detailAddress.trim() === "") {
+        alert("상세 주소를 입력해주세요.");
+        return false; // 폼 제출을 막음
+    }
+
+    return true; // 폼 제출을 허용
+}

@@ -1,7 +1,6 @@
 package hello.service;
 
 import hello.entity.user.User;
-import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PointService {
 
-    private final UserRepository userRepository;
-
     public void increasePoint(User user, int point) {
         user.setPoint(user.getPoint() + point);
-        userRepository.save(user);
+    }
+
+    public void decreasePoint(User user, int point) {
+        int currentPoint = user.getPoint();
+        if (currentPoint >= point) {
+            user.setPoint(currentPoint - point);
+        }
     }
 }

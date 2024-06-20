@@ -201,3 +201,19 @@ function validateForm() {
 
     return true;
 }
+
+// Register Modal On/Off
+$(document).ready(function () {
+    $(".register_modal").hide();
+
+    $("#modal-terms1").click(function () {
+        $(".register_modal-1").show();
+    });
+    $("#modal-terms2").click(function () {
+        $(".register_modal-2").show();
+    });
+
+    $(".register_modal-close").click(function () {
+        $(".register_modal").hide();
+    });
+});

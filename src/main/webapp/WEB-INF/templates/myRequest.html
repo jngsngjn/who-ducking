@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/myRequest.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/myRequest.js"></script>
+</head>
+
+<body class="myFaq_body">
+<div th:insert="~{fragments/header :: header}"></div>
+<main id="container" class="myFaq_main">
+    <div class="myFaq_head-title">
+        <h2 class="myFaq_h2">나의 글 목록</h2>
+        <button id="openModal" class="myFaq_write">건의하기</button>
+    </div>
+
+    <div class="myFaq_menulist">
+        <div class="myFaq_menu">
+            <ul>
+                <li class="myFaq_menuli">
+                    <a href="">나의 리뷰</a>
+                </li>
+                <div class="myFaq_line"></div>
+                <li class="myFaq_menuli">
+                    <a href="">나의 게시글</a>
+                </li>
+                <div class="myFaq_line"></div>
+                <li class="myFaq_menuli">
+                    <a class="myFaq_my-request" href="/myPage/request-list">나의 건의 내역</a>
+                </li>
+                <div class="myFaq_line"></div>
+                <li class="myFaq_menuli">
+                    <a href="">나의 북마크</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="myFaq_writelist">
+            <div th:if="${#lists.isEmpty(requestPage.content)}" class="myFaq_no-data-container">
+                <p class="myFaq_no-data">건의 내역이 없습니다.</p>
+            </div>
+            <div th:each="request : ${requestPage.content}">
+                <ul class="myFaq_content">
+                    <li class="myFaq_title" th:text="${request.title}" th:data-content="${request.content}" th:data-status="${request.status}" th:data-request-id="${request.id}" th:data-response-date="${request.responseDate}" th:data-write-date="${request.writeDate}" th:data-response="${request.response}" id="title">제목</li>
+                    <li class="myFaq_time">
+                        <span th:text="${request.writeDate}">접수일</span>
+                        <label class="myFaq_state" th:attr="id=${request.status}">상태</label>
+                    </li>
+                </ul>
+                <div class="myFaq_line2"></div>
+            </div>
+        </div>
+
+        <div class="myFaq_next">
+            <a class="myFaq_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>
+            <a class="myFaq_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>
+            <span th:if="${requestPage.totalPages > 0}" th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
+        <a th:classappend="${i == requestPage.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
+    </span>
+            <span th:if="${requestPage.totalPages == 0}">
+        <a class="myFaq_now-button" href="#">1</a>
+    </span>
+            <a class="myFaq_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>
+            <a class="myFaq_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>
+        </div>
+    </div>
+</main>
+
+<!-- Modal1 -->
+<div id="myModal" class="custom_modal">
+    <span class="custom_modal-close">&times;</span>
+    <h2 class="custom_modal-title">건의 상세 내역</h2>
+    <div class="custom_modal-content">
+        <p><strong class="myFaq_tag">제&nbsp;목&nbsp;&nbsp;: </strong><span id="modalTitle" class="myFaq_text"></span></p>
+        <p><strong class="myFaq_tag">작성일 : </strong> <span id="writeDate" class="myFaq_text"></span></p>
+        <div class="myFaq_faq">
+            <p><span id="modalContent" class="myFaq_text"></span></p>
+        </div>
+        <p id="responseDate" style="display: none">
+            <strong class="myFaq_tag">응답일 :</strong>
+            <span id="responseDateValue" class="myFaq_text"></span>
+        </p>
+        <div id="responseText" class="myFaq_response" style="display: none">
+            <p><span id="response" class="myFaq_text"></span></p>
+        </div>
+    </div>
+    <form action="/myPage/request-delete" method="post" id="deleteForm" class="myFaq_delete" style="display: none">
+        <input type="hidden" name="requestId" id="requestId">
+        <button type="submit" class="myFaq_deletebutton">삭제</button>
+    </form>
+</div>
+
+<!-- Modal2 -->
+<div id="myModal2" class="custom_modal">
+    <span class="custom_modal-close">&times;</span>
+    <h2 class="custom_modal-title">건의하기</h2>
+    <div class="custom_modal-content">
+        <form action="/myPage/request" method="post">
+            <div class="myFaq_inputtitle">
+                <label for="title2">제목</label>
+                <input type="text" id="title2" name="title" required>
+                <span></span>
+            </div>
+            <div class="myFaq_inputtext">
+                <textarea id="content" name="content" rows="10" required class="hi"></textarea>
+            </div>
+            <div class="myFaq_faqbutton">
+                <button type="submit" class="myFaq_faqgo">건의하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

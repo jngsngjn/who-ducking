@@ -112,7 +112,7 @@
     margin-top: 20px;
 }
 
-.delete-user, .delete-reset {
+.delete-user, .delete-before {
     width: 30%;
     padding: 10px;
     border: none;
@@ -126,7 +126,7 @@
     color: #ffffff;
 }
 
-.delete-reset {
+.delete-before {
     background-color: #FFC60B;
     color: #ffffff;
 }

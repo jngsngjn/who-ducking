@@ -1,18 +1,21 @@
 package hello.service;
 
-import hello.dto.user.AccountDeletionDTO;
-import hello.dto.user.CustomOAuth2User;
-import hello.dto.user.EditDTO;
-import hello.dto.user.RequestDTO;
+import hello.dto.user.*;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
 import hello.entity.request.Request;
-import hello.entity.user.*;
+import hello.entity.user.Address;
+import hello.entity.user.Image;
+import hello.entity.user.ProfileImage;
+import hello.entity.user.User;
 import hello.repository.*;
 import hello.service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,21 +48,18 @@ public class UserService {
     }
 
     // 사용자 정보 업데이트
-    public void editUserProcess(Long id, EditDTO editDTO, HttpSession session) throws IOException {
+    public void editUserProcess(Long id, UserInfoEditDTO userInfoEditDTO, HttpSession session) throws IOException {
         User findUser = findUserById(id);
-        findUser.setEmailConsent(editDTO.isEmailConsent());
-        findUser.setGender(editDTO.getGender());
-        findUser.setNickname(editDTO.getNickname());
-        session.setAttribute("nickname", editDTO.getNickname());
-        findUser.setPhone(editDTO.getPhone());
-        findUser.setHomeAddress(new Address(editDTO.getZipcode(), editDTO.getAddress(), editDTO.getDetailAddress()));
+        findUser.setEmailConsent(userInfoEditDTO.isEmailConsent());
+        findUser.setGender(userInfoEditDTO.getGender());
+        findUser.setNickname(userInfoEditDTO.getNickname());
+        session.setAttribute("nickname", userInfoEditDTO.getNickname());
+        findUser.setPhone(userInfoEditDTO.getPhone());
+        findUser.setHomeAddress(new Address(userInfoEditDTO.getZipcode(), userInfoEditDTO.getAddress(), userInfoEditDTO.getDetailAddress()));
 
         // 장르 설정
         userGenreRepository.deleteByUser(id);
-        List<String> genres = editDTO.getSelectedGenres();
-        for (String genre : genres) {
-            System.out.println("genre = " + genre);
-        }
+        List<String> genres = userInfoEditDTO.getSelectedGenres();
         List<Genre> allGenres = genreRepository.findByNameIn(genres);
 
         allGenres.forEach(genre -> {
@@ -67,7 +67,7 @@ public class UserService {
             findUser.getUserGenres().add(userGenre);
         });
 
-        MultipartFile uploadImage = editDTO.getProfileImage();
+        MultipartFile uploadImage = userInfoEditDTO.getProfileImage();
         ProfileImage currentImage = findUser.getProfileImage();
 
         // 사용자가 사진을 업로드한 경우
@@ -86,7 +86,7 @@ public class UserService {
         }
 
         // 기본 이미지 사용 버튼을 클릭한 경우
-        boolean useDefaultImage = editDTO.isUseDefaultImage();
+        boolean useDefaultImage = userInfoEditDTO.isUseDefaultImage();
         if (useDefaultImage && currentImage != null) {
             clearProfileImage(id, findUser, currentImage);
             session.setAttribute("profileImageName", null);
@@ -130,5 +130,19 @@ public class UserService {
         request.setContent(requestDTO.getContent());
         request.setUser(user);
         requestRepository.save(request);
+    }
+
+    public Page<MyRequestDTO> getMyRequest(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return requestRepository.findMyRequest(pageable);
+    }
+
+    public void deleteRequest(Long requestId) {
+        requestRepository.deleteById(requestId);
+    }
+
+    public boolean isLevelOne(User user) {
+        Long level = user.getLevel().getId();
+        return level.equals(1L);
     }
 }

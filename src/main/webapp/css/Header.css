@@ -160,7 +160,6 @@
     display: block;
     width: 40px;
     height: 40px;
-    background: url(/images/Level/10duck.png) no-repeat center/cover;
     border-radius: 100%;
 }
 
@@ -179,7 +178,7 @@
     left: 95%;
     transform: translateX(-50%);
     padding: 1.6rem;
-    width: 160px;
+    width: 260px;
     background: #fff;
     box-shadow: var(--box-shadow__A);
     border-radius: 2rem;
@@ -206,6 +205,11 @@
     color: var(--mainColor);
 }
 
+.h-profile_menu_nickname_comment {
+    color: var(--descColor);
+    font-size: 1.4rem;
+}
+
 /* Level & Point */
 .h-profile_menu_level-point {
     display: flex;
@@ -224,31 +228,27 @@
     justify-content: flex-end;
 }
 
-.h-profile_menu_exp {
+.h-profile_exp_track {
     margin-top: 0.8rem;
+    display: block;
     position: relative;
     width: 100%;
     height: 8px;
+    background: #f5f5f5;
     border-radius: 100rem;
     overflow: hidden;
 }
 
-.h-profile_exp_track {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: #f5f5f5;
-}
-
 .h-profile_exp_thumb {
-    display: block;
+    display: flex;
     position: absolute;
+    justify-content: center;
+    height: 100%;
+    background: #ff8b00;
+    border-radius: 100rem;
+    transition: 0.5s;
     left: 0;
     top: 0;
-    height: 100%;
-    background: var(--mainColor);
-    transition: 0.5s;
 }
 
 /* Mobile ================================= */
@@ -326,7 +326,7 @@
 .h-mobile_profile {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .h-mobile_profile-img {
@@ -336,14 +336,19 @@
     border-radius: 100%;
 }
 
-.h-mobile_profile-nickname {
-    font-size: 2.4rem;
+.h-mobile_profile_nickname {
+    font-size: 2rem;
     color: var(--mainColor);
+}
+
+.h-mobile_profile_nickname_comment {
+    color: var(--descColor);
+    font-size: 1.4rem;
 }
 
 /* Mobile Level & Point */
 .h-mobile_profile_exp_box {
-    width: 50%;
+    width: 35%;
 }
 
 .h-mobile_profile_level-point {
@@ -364,16 +369,7 @@
     justify-content: flex-end;
 }
 
-.h-mobile_profile_menu_exp {
-    margin-top: 0.8rem;
-    position: relative;
-    width: 100%;
-    height: 8px;
-    border-radius: 100rem;
-    overflow: hidden;
-}
-
-.h-profile_exp_track {
+.h-mobile_profile_exp_track {
     margin-top: 0.8rem;
     display: block;
     position: relative;
@@ -384,7 +380,7 @@
     overflow: hidden;
 }
 
-.h-profile_exp_thumb {
+.h-mobile_profile_exp_thumb {
     display: flex;
     position: absolute;
     justify-content: center;
@@ -479,26 +475,40 @@
     font-weight: 500;
 }
 
-.nav-link {
-    color: var(--mainColor);
-}
-
 /* Responsive Web Page ====================== */
 /* Media Query Start */
+@media screen and (max-width: 1530px) {
+    /* Profile */
+    .h-profile_menu {
+        left: 90%;
+    }
+}
+
 @media screen and (max-width: 1320px) {
     /* Left */
     .h-left {
         gap: 4rem;
         padding-left: 2rem;
     }
+
     /* Right */
     .h-right {
         gap: 5rem;
         padding-right: 3rem;
     }
+
     /* Profile */
     .h-profile_menu {
-        left: 92%;
+        left: 88%;
+    }
+
+    /* Global Navigation Bar */
+    .h-gnb_items > li > a {
+        font-size: 1.5rem;
+    }
+
+    .h-alarm_btn > li > a {
+        font-size: 1.5rem;
     }
 }
 
@@ -516,6 +526,11 @@
         gap: 4rem;
     }
 
+    /* Profile */
+    .h-profile_menu {
+        left: 86%;
+    }
+
     /* Search Box */
     .h-search_box {
         width: 39.0625vw; /* 400px */
@@ -523,11 +538,11 @@
 
     /* Global Navigation Bar */
     .h-gnb_items > li > a {
-        font-size: 1.6rem;
+        font-size: 1.55rem;
     }
 
     .h-alarm_btn > li > a {
-        font-size: 1.6rem;
+        font-size: 1.55rem;
     }
 }
 
@@ -548,16 +563,27 @@
 
     /* Global Navigation Bar */
     .h-gnb_items > li > a {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
     }
 
     .h-alarm_btn > li > a {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
     }
 
     /* Profile Menu */
     .h-profile_menu {
-        left: 90%;
+        left: 83%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    /* Global Navigation Bar */
+    .h-gnb_items > li > a {
+        font-size: 1.15rem;
+    }
+
+    .h-alarm_btn > li > a {
+        font-size: 1.15rem;
     }
 }
 
@@ -586,7 +612,21 @@
         display: block;
     }
 
+    .h-mobile_btn-open {
+        right: 2.2rem;
+    }
+
+    .h-mobile_btn-close {
+        right: 4.2rem;
+    }
+
     .mobile-logo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .h-mobile_profile_nickname_box span {
         display: none;
     }
 }
@@ -638,6 +678,10 @@
     .h-mobile_profile-img {
         width: 36px;
         height: 36px;
+    }
+
+    .h-mobile_profile_nickname_box span {
+        display: none;
     }
 
     .h-mobile_profile-nickname {

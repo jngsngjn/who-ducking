@@ -18,6 +18,10 @@ public class FileStore {
     @Value("${aniPath}")
     private String aniPath;
 
+    @Value("${prizePath}")
+    private String prizePath;
+
+
     public Image storeProfileImageFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile == null || multipartFile.isEmpty()) {
             return null;
@@ -64,6 +68,18 @@ public class FileStore {
         String storeFileName = createStoreFileName(multipartFile.getOriginalFilename());
 
         String fullPath = aniPath + storeFileName;
+        multipartFile.transferTo(new File(fullPath));
+        return fullPath;
+    }
+
+    public String storePrize(MultipartFile multipartFile) throws IOException {
+        if (multipartFile == null || multipartFile.isEmpty()) {
+            return "";
+        }
+
+        String storeFileName = createStoreFileName(multipartFile.getOriginalFilename());
+
+        String fullPath = prizePath + storeFileName;
         multipartFile.transferTo(new File(fullPath));
         return fullPath;
     }

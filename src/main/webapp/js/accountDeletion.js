@@ -24,7 +24,7 @@ $(document).ready(function() {
     });
 
     // 클라이언트측 코드 검증
-    $("form").submit(function(event) {
+    $("#emailCodeForm").submit(function(event) {
         event.preventDefault(); // 기본 폼 제출 방지
 
         let email = $("#emailHidden").val();
@@ -57,7 +57,7 @@ $(document).ready(function() {
     });
 
     // 취소 버튼 클릭 시 myPage.html로 이동
-    $(".delete-reset").click(function() {
+    $(".delete-before").click(function() {
         window.location.href = "/myPage";
     });
 });

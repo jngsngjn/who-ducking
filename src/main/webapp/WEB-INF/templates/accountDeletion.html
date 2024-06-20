@@ -24,8 +24,8 @@
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/accountDeletion.js"></script>
 </head>
-<div th:insert="~{fragments/header :: header}"></div>
 <body>
+<div th:insert="~{fragments/header :: header}"></div>
 <div class="delete-container">
     <div class="signup-container">
         <div class="form-delete">
@@ -33,7 +33,7 @@
                 <div class="form-content">
                     <div class="form-header">회원 탈퇴</div>
                     <p class="form-delete-message">가입된 이메일로 본인 인증 후 탈퇴 처리됩니다.</p>
-                    <form action="/myPage/account-deletion/verifyCode" method="post">
+                    <form action="/myPage/account-deletion/verifyCode" method="post" id="emailCodeForm">
                         <div class="form-group">
                             <label for="email" class="form-label">이메일</label>
                             <div class="input-wrapper">
@@ -46,12 +46,12 @@
                         <div class="form-group">
                             <label for="verificationCodeInput" class="form-label">인증 코드</label>
                             <div class="input-wrapper">
-                                <input type="text" id="verificationCodeInput" name="code" class="form-input" placeholder="인증 코드" />
+                                <input type="text" id="verificationCodeInput" name="code" class="form-input"/>
                             </div>
                         </div>
                         <div class="form-footer">
-                            <button type="submit" class="delete-user">회원탈퇴</button>
-                            <button type="button" class="delete-reset">취소</button>
+                            <button type="submit" class="delete-user">계정 삭제</button>
+                            <button type="button" class="delete-before">취소</button>
                         </div>
                     </form>
                 </div>

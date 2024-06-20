@@ -1,15 +1,21 @@
 /* Fonts ===============================================*/
 /* 폰트 추가 예정 */
 @import url("https://webfontworld.github.io/SCoreDream/SCoreDream.css");
+
 /* Normalize ===============================================*/
 @import url(./reset.css);
 @import url(./base.css);
 
 /* Elements ===============================================*/
-/* 새로운 css 폴더 생성 시 import 추가 */
-@import url(./header.css);
-@import url(./footer.css);
-@import url(./main.css);
+/* 새로운 css 파일 생성 시 import 추가 */
+@import url(./Header.css);
+@import url(./Footer.css);
+@import url(./Main.css);
+@import url(./Sub.css);
+@import url(./Login.css);
+@import url(./Register.css);
+@import url(./RegisterGenre.css);
+@import url(./MyPage.css);
 @import url(./luckyMain.css);
 
 /* MEDIA QUERY START ===============================================*/

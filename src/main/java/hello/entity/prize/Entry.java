@@ -21,5 +21,14 @@ public class Entry {
     private Prize prize;
 
     @Column(name = "entry_count")
-    private int entryCount;
+    private int entryCount = 0;
+
+    public Entry() {
+    }
+
+    public Entry(User user, Prize prize) {
+        this.user = user;
+        this.prize = prize;
+        this.entryCount++;
+    }
 }
