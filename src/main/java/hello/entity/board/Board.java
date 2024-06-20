@@ -24,7 +24,9 @@ public class Board {
 
     private String title;
 
+
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "image_name")
@@ -53,6 +55,7 @@ public class Board {
     @OneToMany(mappedBy = "board")
     private List<Bookmark> bookmarks = new ArrayList<>();
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
 }

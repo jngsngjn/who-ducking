@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/attendance.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+<div class="attendance">
+    <div th:insert="~{fragments/header :: header}"></div>
+    <div class="header-content">
+        <span class="title-check">출석 이벤트</span>
+        <img src="/images/welcome.png" class="event-image">
+    </div>
+    <div class="points">수령한 포인트 : 0P</div>
+    <div class="calendar">
+        <div class="outer">
+            <div class="inner">
+                <div class="frame">
+                    <div class="month">6월</div>
+                    <div class="header">
+                        <ul class="days">
+                            <li>월</li>
+                            <li>화</li>
+                            <li>수</li>
+                            <li>목</li>
+                            <li>금</li>
+                            <li>토</li>
+                            <li>일</li>
+                        </ul>
+                    </div>
+                    <div class="week">
+                        <ul class="dates">
+                            <li class="filled">26</li>
+                            <li class="filled">27</li>
+                            <li class="filled">28</li>
+                            <li class="filled">29</li>
+                            <li class="filled">30</li>
+                            <li class="filled">31</li>
+                            <li class="empty">1</li>
+                        </ul>
+                    </div>
+                    <div class="week">
+                        <ul class="dates">
+                            <li class="empty">2</li>
+                            <li class="empty">3</li>
+                            <li class="empty">4</li>
+                            <li class="empty">5</li>
+                            <li class="empty">6</li>
+                            <li class="empty">7</li>
+                            <li class="empty">8</li>
+                        </ul>
+                    </div>
+                    <div class="week">
+                        <ul class="dates">
+                            <li class="empty">9</li>
+                            <li class="empty">10</li>
+                            <li class="empty">11</li>
+                            <li class="empty">12</li>
+                            <li class="empty">13</li>
+                            <li class="empty">14</li>
+                            <li class="empty">15</li>
+                        </ul>
+                    </div>
+                    <div class="week">
+                        <ul class="dates">
+                            <li class="empty">16</li>
+                            <li class="empty">17</li>
+                            <li class="empty">18</li>
+                            <li class="empty">19</li>
+                            <li class="empty">20</li>
+                            <li class="empty">21</li>
+                            <li class="empty">22</li>
+                        </ul>
+                    </div>
+                    <div class="week">
+                        <ul class="dates">
+                            <li class="empty">23</li>
+                            <li class="empty">24</li>
+                            <li class="empty">25</li>
+                            <li class="empty">26</li>
+                            <li class="empty">27</li>
+                            <li class="empty">28</li>
+                            <li class="empty">29</li>
+                        </ul>
+                    </div>
+                    <div class="week">
+                        <ul class="dates">
+                            <li class="empty">30</li>
+                            <li class="filled">1</li>
+                            <li class="filled">2</li>
+                            <li class="filled">3</li>
+                            <li class="filled">4</li>
+                            <li class="filled">5</li>
+                            <li class="filled">6</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="notice">
+        <h3>유의 사항</h3>
+        <ul>
+            <li>본 출석 이벤트는 Who's DuckKing 회원 전용 이벤트입니다.</li>
+            <li>출석 시, 1P & 5XP 바로 지급하며 1주일 개근 시 3P추가 지급합니다</li>
+            <li>부당한 방법으로 참여한 고객의 경우 포인트 회수 및 추후 이벤트에 불이익이 발생할 수 있습니다.</li>
+        </ul>
+    </div>
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

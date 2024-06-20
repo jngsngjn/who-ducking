@@ -58,7 +58,7 @@
                         <a href="/genre">장르</a>
                     </li>
                     <li>
-                        <a href="/community">커뮤니티</a>
+                        <a href="/board">커뮤니티</a>
                     </li>
                     <li>
                         <a href="/news">소식</a>
@@ -87,12 +87,7 @@
                         </div>
 
                         <!-- Alarm List -->
-                        <ul class="h-alarm_list">
-                            <!-- Before Login -->
-                            <li>
-                                <a href="#none">로그인 후 이용해 주세요.</a>
-                            </li>
-                            <!-- After Login -->
+                        <ul class="h-alarm_list" sec:authorize="isAuthenticated()">
                             <!-- Alarm X -->
                             <li>
                                 <a href="#none">알림이 없습니다.</a>

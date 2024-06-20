@@ -1,14 +1,16 @@
 package hello.service;
 
+import hello.dto.user.AccountDeletionDTO;
 import hello.dto.user.CustomOAuth2User;
-import hello.dto.user.EditDTO;
+import hello.dto.user.UserInfoEditDTO;
+import hello.entity.genre.Genre;
+import hello.entity.genre.UserGenre;
 import hello.entity.user.Address;
 import hello.entity.user.Image;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
-import hello.repository.FileStore;
-import hello.repository.ProfileImageRepository;
-import hello.repository.UserRepository;
+import hello.repository.db.*;
+import hello.repository.server.FileStore;
 import hello.service.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @Transactional
@@ -27,6 +30,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final ProfileImageRepository profileImageRepository;
     private final FileStore fileStore;
+    private final GenreRepository genreRepository;
+    private final UserGenreRepository userGenreRepository;
+    private final EmailCodeRepository emailCodeRepository;
+    private final EmailService emailService;
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
@@ -39,16 +46,26 @@ public class UserService {
     }
 
     // 사용자 정보 업데이트
-    public void editUserProcess(Long id, EditDTO editDTO, HttpSession session) throws IOException {
+    public void editUserProcess(Long id, UserInfoEditDTO userInfoEditDTO, HttpSession session) throws IOException {
         User findUser = findUserById(id);
-        findUser.setEmailConsent(editDTO.isEmailConsent());
-        findUser.setGender(editDTO.getGender());
-        findUser.setNickname(editDTO.getNickname());
-        session.setAttribute("nickname", editDTO.getNickname());
-        findUser.setPhone(editDTO.getPhone());
-        findUser.setHomeAddress(new Address(editDTO.getZipcode(), editDTO.getAddress(), editDTO.getDetailAddress()));
+        findUser.setEmailConsent(userInfoEditDTO.isEmailConsent());
+        findUser.setGender(userInfoEditDTO.getGender());
+        findUser.setNickname(userInfoEditDTO.getNickname());
+        session.setAttribute("nickname", userInfoEditDTO.getNickname());
+        findUser.setPhone(userInfoEditDTO.getPhone());
+        findUser.setHomeAddress(new Address(userInfoEditDTO.getZipcode(), userInfoEditDTO.getAddress(), userInfoEditDTO.getDetailAddress()));
 
-        MultipartFile uploadImage = editDTO.getProfileImage();
+        // 장르 설정
+        userGenreRepository.deleteByUser(id);
+        List<String> genres = userInfoEditDTO.getSelectedGenres();
+        List<Genre> allGenres = genreRepository.findByNameIn(genres);
+
+        allGenres.forEach(genre -> {
+            UserGenre userGenre = new UserGenre(findUser, genre);
+            findUser.getUserGenres().add(userGenre);
+        });
+
+        MultipartFile uploadImage = userInfoEditDTO.getProfileImage();
         ProfileImage currentImage = findUser.getProfileImage();
 
         // 사용자가 사진을 업로드한 경우
@@ -58,7 +75,7 @@ public class UserService {
                 clearProfileImage(id, findUser, currentImage);
             }
 
-            Image image = fileStore.storeFile(uploadImage); // 서버에 이미지 저장
+            Image image = fileStore.storeProfileImageFile(uploadImage); // 서버에 이미지 저장
 
             ProfileImage newProfileImage = new ProfileImage(image.getStoreImageName(), image.getImagePath(), findUser);
             findUser.setProfileImage(newProfileImage);
@@ -67,7 +84,7 @@ public class UserService {
         }
 
         // 기본 이미지 사용 버튼을 클릭한 경우
-        boolean useDefaultImage = editDTO.isUseDefaultImage();
+        boolean useDefaultImage = userInfoEditDTO.isUseDefaultImage();
         if (useDefaultImage && currentImage != null) {
             clearProfileImage(id, findUser, currentImage);
             session.setAttribute("profileImageName", null);
@@ -77,7 +94,7 @@ public class UserService {
     private void clearProfileImage(Long id, User findUser, ProfileImage currentImage) {
         findUser.setProfileImage(null);
         profileImageRepository.deleteByUserId(id);
-        fileStore.deleteFile(currentImage.getStoreImageName());
+        fileStore.deleteProfileImage(currentImage.getStoreImageName());
     }
 
     public User validateUser(CustomOAuth2User user, Long id) {
@@ -86,5 +103,27 @@ public class UserService {
             return loginUser;
         }
         return null;
+    }
+
+    public void deleteAccountProcess(AccountDeletionDTO accountDeletionDTO) {
+        String email = accountDeletionDTO.getEmail();
+        String code = accountDeletionDTO.getCode();
+
+        boolean result = emailService.verifyCode(email, code);
+
+        if (result) {
+            ProfileImage findImage = profileImageRepository.findByUserId(userRepository.findByEmail(email).getId());
+            if (findImage != null) {
+                fileStore.deleteProfileImage(findImage.getStoreImageName());
+            }
+
+            userRepository.deleteByEmail(email);
+            emailCodeRepository.deleteByEmail(email);
+        }
+    }
+
+    public boolean isLevelOne(User user) {
+        Long level = user.getLevel().getId();
+        return level.equals(1L);
     }
 }

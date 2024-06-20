@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <link rel="stylesheet" href="/css/addAnimation.css" />
+</head>
+<body>
+<div class="container">
+    <h2>애니메이션 추가</h2>
+    <form th:action="@{/admin/add-animation}" method="post" enctype="multipart/form-data">
+        <label for="name">애니명</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="author">작가명</label>
+        <input type="text" id="author" name="author" required>
+
+        <label for="firstDate">방영 시작일</label>
+        <input type="date" id="firstDate" name="firstDate" required>
+
+        <label for="isFinished">종결 여부</label>
+        <select id="isFinished" name="isFinished" required>
+            <option value="true">예</option>
+            <option value="false">아니오</option>
+        </select>
+
+        <label for="rating">관람 등급</label>
+        <select id="rating" name="rating" required>
+            <option value="ALL">전체</option>
+            <option value="TWELVE">12세</option>
+            <option value="FIFTEEN">15세</option>
+            <option value="ADULT">19세</option>
+        </select>
+
+        <label for="genres">장르</label>
+        <div id="genres">
+            <label><input type="checkbox" name="genres" value="액션"> 액션</label>
+            <label><input type="checkbox" name="genres" value="먼치킨"> 먼치킨</label>
+            <label><input type="checkbox" name="genres" value="추리/미스테리"> 추리/미스테리</label>
+            <label><input type="checkbox" name="genres" value="스포츠"> 스포츠</label>
+            <label><input type="checkbox" name="genres" value="마법"> 마법</label>
+            <label><input type="checkbox" name="genres" value="개그"> 개그</label>
+            <label><input type="checkbox" name="genres" value="일상"> 일상</label>
+            <label><input type="checkbox" name="genres" value="순정"> 순정</label>
+            <label><input type="checkbox" name="genres" value="판타지"> 판타지</label>
+            <label><input type="checkbox" name="genres" value="학원"> 학원</label>
+            <label><input type="checkbox" name="genres" value="힐링"> 힐링</label>
+            <label><input type="checkbox" name="genres" value="시대"> 시대</label>
+            <label><input type="checkbox" name="genres" value="메이드"> 메이드</label>
+            <label><input type="checkbox" name="genres" value="츤데레"> 츤데레</label>
+            <label><input type="checkbox" name="genres" value="얀데레"> 얀데레</label>
+            <label><input type="checkbox" name="genres" value="러브"> 러브</label>
+            <label><input type="checkbox" name="genres" value="BL"> BL</label>
+            <label><input type="checkbox" name="genres" value="철학"> 철학</label>
+            <label><input type="checkbox" name="genres" value="하렘"> 하렘</label>
+            <label><input type="checkbox" name="genres" value="역하렘"> 역하렘</label>
+            <label><input type="checkbox" name="genres" value="백합"> 백합</label>
+            <label><input type="checkbox" name="genres" value="호러"> 호러</label>
+            <label><input type="checkbox" name="genres" value="아동"> 아동</label>
+            <label><input type="checkbox" name="genres" value="가상"> 가상</label>
+            <label><input type="checkbox" name="genres" value="멘붕"> 멘붕</label>
+            <label><input type="checkbox" name="genres" value="메카"> 메카</label>
+            <label><input type="checkbox" name="genres" value="능력자"> 능력자</label>
+            <label><input type="checkbox" name="genres" value="쇼타"> 쇼타</label>
+        </div>
+
+        <label for="description">애니 설명</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <label for="image">애니 이미지</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+
+        <button type="submit">추가하기</button>
+    </form>
+</div>
+</body>
+</html>

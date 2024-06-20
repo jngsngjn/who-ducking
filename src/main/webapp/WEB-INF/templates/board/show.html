@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+    <div th:insert="~{fragments/header :: header}"></div>
+    <div class="board-container">
+        <h1 th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목</h1>
+        <div class="board-meta">
+            <span class="board-author" th:text="${board.user.nickname}">작성자</span>
+            <span class="board-date" th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}">작성일</span>
+        </div>
+        <div class="board-content">
+            <p th:text="${board.content}">내용</p>
+        </div>
+        <div class="form-group">
+            <img class="board-img" id="boardImagePreview"
+                 th:src="${!board.imageName.equals('')  ? '/image/board/' + board.imageName : ''}"
+                 alt="Board Image"/>
+        </div>
+        <div th:if="${board.user.id == loginUserId}">
+            <div class="board-actions">
+                <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="btn btn-primary">수정</a>
+                <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">삭제</button>
+                </form>
+            </div>
+        </div>
+        <a href="/board" class="btn btn-secondary">목록으로</a>
+        <div class="board-boomark-box">
+            <button class="board-boomark-button" id="board-bookmark-button" th:attr="data-board-id=${board.id}"  th:text="${isBookmarked} ? '북마크됨' : '북마크'"></button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var isBookmarked = $('#board-bookmark-button').hasClass('bookmarked');
+
+            $('#board-bookmark-button').click(function() {
+                var boardId = $(this).data('board-id');
+                var button = $(this);
+
+                $.ajax({
+                    url: '/board/' + boardId + '/bookmark',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        isBookmarked = response.bookmarked;
+                        button.toggleClass('bookmarked', isBookmarked);
+                        button.text(isBookmarked ? '북마크됨' : '북마크');
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                        alert('북마크 처리 중 오류가 발생했습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <section class="comment-section">
+        <hr class="comment-section-orange-line">
+
+        <div class="comment-count-box">
+            <img class="comment-count-icon" src="/images/comment_count.svg"/>
+            <span class="comment-count" th:text="${comments.size()}">0</span>
+        </div>
+
+        <div class="comment-container">
+            <form action="#" th:action="@{/board/{boardId}/comment(boardId=${board.id})}" method="post" class="comment-box">
+                <textarea class="comment-input" name="contentWrite" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
+                <button class="comment-submit" type="submit">등록</button>
+            </form>
+            <ul class="comment-list">
+                <li class="comment-item" th:each="comment : ${comments}">
+                    <div class="comment-content">
+                        <span class="comment-writer" th:text="${comment.user.nickname}"></span>
+                        <p th:text="${comment.content}"></p>
+                    </div>
+                    <div class="comment-meta" data-comment-id="1">
+                        <span class="comment-date" th:text="${#temporals.format(comment.writeDate, 'yyyy.MM.dd HH:mm')}"></span>
+                        <button class="comment-likes" onclick="toggleLike(this)">
+                            👍
+                        </button>
+                        <button class="comment-dislikes" onclick="toggleDislike(this)">
+                            👎
+                        </button>
+                    </div>
+                    <div th:if="${comment.user.id == loginUserId}">
+                        <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" method="post">
+                            <button type="submit">삭제</button>
+                        </form>
+                        <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/edit(boardId=${board.id}, commentId=${comment.id})}" method="post">
+                            <input type="text" name="contentUpdate" placeholder="수정할 댓글 내용" />
+                            <button type="submit">수정</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

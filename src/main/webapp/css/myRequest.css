@@ -1,0 +1,315 @@
+.myFaq_body {
+    background-image: url('/images/Background_Image/umaru.png');
+    background-repeat: no-repeat;
+    background-position: 10% 70%;
+    background-size: 400px 500px;
+}
+
+.myFaq_main {
+    transform: scale(0.8);
+}
+
+.myFaq_head-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    height: 50px;
+    width: 1380px;
+    margin-bottom: 50px;
+}
+
+.myFaq_h2 {
+    color: #ff8b00;
+    font-size: 50px;
+}
+
+.myFaq_write {
+    width: 130px;
+    height: 50px;
+    background: #ff8b00;
+    color: white;
+    border-radius: 15px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.myFaq_menulist {
+    width: 1400px;
+    height: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 70px;
+}
+
+.myFaq_menu {
+    width: 300px;
+    height: 720px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 20px;
+}
+
+.myFaq_menuli {
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.myFaq_writelist {
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+    width: 1025px;
+    height: 1070px;
+}
+
+.myFaq_a {
+    color: black;
+}
+
+.myFaq_line {
+    width: 300px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myFaq_line2 {
+    width: 1025px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myFaq_content {
+    width: 940px;
+    height: 173px;
+    margin: 20px 50px 20px 40px;
+}
+
+.myFaq_title {
+    margin-bottom: 50px;
+    font-size: 36px;
+}
+
+.myFaq_time {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: #d9d9d9;
+}
+
+.myFaq_state {
+    border-radius: 10px;
+    width: 121px;
+    height: 60px;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    line-height: 60px;
+}
+
+.myFaq_next {
+    width: 424px;
+    height: 54px;
+    gap: 20px;
+    display: flex;
+}
+
+.myFaq_next-button {
+    width: 54px;
+    height: 54px;
+    border-radius: 100px;
+    background-color: #feffdb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.myFaq_now-button {
+    width: 54px;
+    height: 54px;
+    border-radius: 100px;
+    background-color: #ffc60b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.myFaq_my-request {
+    color: #ff8b00;
+}
+
+.disabled {
+    pointer-events: none;
+    color: grey;
+}
+
+.myFaq_no-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* 높이는 원하는 대로 조정하세요 */
+}
+.myFaq_no-data {
+    text-align: center;
+    font-size: 18px; /* 폰트 크기는 원하는 대로 조정하세요 */
+    color: #666; /* 텍스트 색상은 원하는 대로 조정하세요 */
+}
+/* Custom Modal =============================================== */
+.custom_modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 700px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 4rem 2rem;
+    border-radius: 3rem;
+    display: none;
+    z-index: 1000;
+}
+
+.custom_modal-close {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    font-size: 4rem;
+    cursor: pointer;
+}
+
+.custom_modal-close:hover {
+    color: var(--mainColor);
+}
+
+.custom_modal-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
+.custom_modal-content {
+    margin-top: 2rem;
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.myFaq_faq{
+    margin-bottom: 60px;
+    border: 1px solid #d9d9d9;
+    padding-inline: 10px;
+    border-radius: 10px;
+    word-break: break-all;
+}
+
+.myFaq_tag{
+    font-size: 20px;
+    margin-top: 50px;
+    color: var(--mainColor);
+}
+
+.myFaq_text{
+    font-size: 20px;
+    color: black;
+    white-space: pre-line;
+    word-break: break-all;
+}
+
+.myFaq_response{
+    border: 1px solid #d9d9d9;
+    padding-block: 10px;
+    padding-inline: 10px;
+    border-radius: 10px;
+}
+
+.myFaq_delete{
+    display: flex;
+    justify-content: right;
+    margin-top: 30px;
+    padding-right: 50px;
+}
+
+.myFaq_deletebutton{
+    width: 100px;
+    height: 30px;
+    border-radius: 1rem;
+    color: white;
+    background: rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.myFaq_title:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.myFaq_inputtitle label,
+.myFaq_inputtitle input {
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+
+.myFaq_inputtitle label{
+    color: var(--mainColor);
+    margin-right: 10px;
+}
+
+.myFaq_inputtitle input{
+    width: 90%;
+    border: none;
+    border-bottom: 1px solid #d9d9d9;
+
+}
+
+.myFaq_inputtitle input::placeholder{
+    color: #aaaaaa;
+}
+
+.myFaq_inputtitle input:focus{
+    outline: none;
+}
+
+.myFaq_inputtext label{
+    color: var(--mainColor);
+    font-size: 20px;
+}
+
+.myFaq_inputtext textarea{
+    font-size: 20px;
+    width: 100%;
+    padding-inline: 10px;
+    padding-block: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+}
+
+.myFaq_faqbutton{
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.myFaq_faqgo{
+    width: 150px;
+    height: 50px;
+    background: var(--mainColor);
+    border-radius: 10px;
+    color: white;
+}

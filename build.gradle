@@ -66,9 +66,18 @@ dependencies {
     // sms service
     implementation 'net.nurigo:sdk:4.3.0'
 
+    // JavaMail API
+    implementation 'jakarta.mail:jakarta.mail-api:2.0.1'
+    implementation 'com.sun.mail:jakarta.mail:2.0.1'
+
     // Test
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+//파라미터 플래그때문에 잠시 설정 -수정
+tasks.withType(JavaCompile) {
+    options.compilerArgs.add("-parameters")
 }
 
 test {

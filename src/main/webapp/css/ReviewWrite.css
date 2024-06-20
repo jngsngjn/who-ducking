@@ -1,0 +1,502 @@
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/*시간나면 할 예정*/
+@keyframes twinkle {
+    from {
+        left:0;
+        top:0;
+    }
+    to {
+        right:0;
+        bottom:0;
+    }
+}
+
+.review-body {
+    width: 87.5rem; /* 1400px */
+    margin: 0 auto;
+    position: relative;
+}
+
+button {
+    cursor: pointer;
+}
+
+.row-box {
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    height: 2.5rem;
+}
+
+/*///////////// 스포일러 버튼 ///////////////*/
+.check-spoiler {
+    display: none;
+}
+
+.check-switch {
+    width: 5rem;
+    height: 1.875rem;
+    display: block;
+    position: relative;
+    border-radius: 1.875rem;
+    background-color: #d9d9d9;
+    box-shadow: 0 0 1rem 0.1875rem rgba(0 0 0 / 15%);
+    transition: background 0.5s ease;
+    cursor: pointer;
+    margin: 1.875rem;
+}
+
+.check-switch .change-check-btn {
+    width: 3.125rem;
+    height: 3.125rem;
+    box-shadow: 0.1875rem 0.1875rem 0.1875rem gray;
+    position: absolute;
+    top: 50%;
+    left: -1.5rem;
+    transform: translateY(-50%);
+    transition: left 0.3s ease, background 0.3s ease;
+    border: 0.0625rem solid #d9d9d9;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+#check-spoiler:checked ~ .check-switch {
+    background: #ff8b00;
+}
+
+#check-spoiler:checked ~ .check-switch .change-check-btn {
+    left: calc(100% - 2.5rem);
+    background: #fff;
+}
+
+#show-spoiler:checked ~ .check-switch {
+    background: #ff8b00;
+}
+
+#show-spoiler:checked ~ .check-switch .change-check-btn {
+    left: calc(100% - 2.5rem);
+    background: #fff;
+}
+
+.check-spoiler {
+    width: 1.875rem;
+}
+
+.spoiler-btn {
+    width: 3.75rem;
+    height: 1.875rem;
+}
+
+/* //////////////////////// Body 시작 //////////////////////*/
+.page-title {
+    color: #ff8b00;
+}
+
+.ani-container {
+    display: flex;
+    justify-content: space-around;
+    border-top: 0.3125rem solid #ff8b00;
+    border-bottom: 0.3125rem solid #ff8b00;
+    padding: 1.875rem;
+}
+
+h1 {
+    font-size: 3.125rem;
+}
+
+.ani-img {
+    width: 34.625rem;
+    height: 48.125rem;
+    border-radius: 0.625rem;
+    box-shadow: 0.0625rem 0.1875rem 0.1875rem 0.25rem rgb(177, 177, 177);
+}
+
+
+
+.title-bar {
+    display: flex;
+    width: 37.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ani-info-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ani-title-box {
+    font-size: 3rem;
+}
+
+.ani-title {
+    width: 10.6875rem;
+    height: 4.0625rem;
+}
+
+.is-complete {
+    width: 6.25rem !important;
+    background-color: #ff8b00;
+    color: white;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 400;
+    height: 3.125rem;
+    padding: 0.625rem;
+    border-radius: 0.625rem;
+    margin-left: 1.25rem;
+    box-shadow: 0.1875rem 0.1875rem 0.1875rem gray;
+}
+
+.grade {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    color: white;
+    /*box-shadow: 2px 3px 3px #d1d1d1;*/
+}
+
+.tag-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+}
+
+.tags{
+    display: flex;
+}
+
+.tag-name {
+    margin: 0 0.625rem;
+    text-align: center;
+    font-size: 1.5625rem;
+    padding: 0.625rem;
+    border-radius: 1.25rem;
+    border: 0.0625rem solid rgb(225, 225, 225);
+    box-shadow: 0 0.1875rem 0.1875rem gray;
+}
+
+.ani-info-box2 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2.25rem;
+}
+
+.synopsis {
+    width: 38.5rem;
+    height: 18.75rem;
+    font-size: 1.5rem;
+    line-height: 250%;
+    margin-bottom: 1.25rem;
+}
+
+/* //////// 별점 //////// */
+
+.score-box {
+    width: 100%;
+    height: 3.75rem;
+    font-size: 2.25rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* .score {
+  font-size: 2.25rem;
+  margin-left: 0.625rem;
+} */
+
+.fa-star {
+    margin-right: 0.625rem;
+    color: #ff8b00;
+}
+
+.review-count {
+    font-size: 3rem;
+    padding: 2rem 4.375rem;
+}
+
+.fa-comment {
+    color: rgb(145, 216, 228);
+}
+
+/* ///////// 리뷰 작성 폼 //////// */
+.write-box {
+    position: relative;
+    width: 81.25rem;
+    height: 19.75rem;
+    border: 0.0625rem solid #d9d9d9;
+    border-radius: 1.25rem;
+    padding: 1rem 2rem;
+    background-color: white;
+    margin: 0 auto;
+}
+
+label {
+    font-size: 1.75rem;
+}
+
+input {
+    border: none;
+    font-size: 1.75rem;
+    padding: 1.25rem;
+    width: 81.25rem;
+    height: 8.75rem;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.review-content{
+    border: none;
+    font-size: 1.75rem;
+    margin: 0.625rem;
+    width: 75.75rem;
+    height: 8.125rem;
+    background-color: transparent;
+    overflow: hidden;
+    resize: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.letter-count {
+    font-size: 1.5rem;
+    color: #d9d9d9;
+    display: flex;
+    flex-direction: row-reverse
+}
+
+/* 리뷰작성란과 간격 조절용 */
+.review-write-box {
+    margin-top: 0.5rem;
+}
+
+.submit-btn {
+    width: 6.25rem;
+    height: 3.125rem;
+    border-radius: 0.625rem;
+    background-color: #ff8b00;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.order-box {
+    height: 9.375rem;
+    padding: 1em;
+    border-top: 0.0625rem solid #d9d9d9;
+    border-bottom: 0.0625rem solid #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.order-btn {
+    width: 9.375rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    border: none;
+    background-color: rgba(255, 139, 0, 0.5);
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 0.625rem;
+    transition: background-color 0.3s;
+}
+
+.order-btn.active,
+.order-btn:hover,
+.order-btn:active,
+.order-btn:focus {
+    background-color: rgba(255, 139, 0, 1);
+}
+
+.review-list {
+    border-bottom: 0.0625rem solid #d9d9d9;
+    padding: 1em 2em;
+    font-size: 1.75rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position:relative;
+}
+.review-writer {
+    font-size: 1.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.best-icon {
+    display: inline-block;
+    text-align: center;
+    width: 5.5rem;
+    height: 1.8875rem;
+    align-items: center;
+    line-height: 1.8875rem;
+    border-radius: 0.625rem;
+    background-color: #ffc60b;
+    color: white;
+    /*padding-top: 0.9375rem;*/
+    font-size: 1.125rem;
+    box-shadow: 0 0.25rem 0.25rem 0.1875rem #d9d9d9;
+    margin-left: 1rem;
+}
+
+.review-comment {
+    font-size: 1.25rem;
+}
+
+.write-date {
+    font-size: 1.25rem;
+    color: #999999;
+}
+
+.recommend-btn {
+    font-size: 1.5rem;
+    width: 7.5rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    background-color: white;
+    border: none;
+    box-shadow: 0 0.1875rem 0.1875rem gray;
+}
+
+.recommend-btn:hover {
+    cursor: pointer;
+    background-color: #ff8b00;
+    color: white;
+}
+
+.update-modal-container {
+    width: 10rem;
+    height: 8.75rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 1.25rem;
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    right: -10%;
+    display: none;
+}
+
+.delete-review-btn,
+.update-review-btn {
+    width: 100%;
+    height: 49%;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.25rem;
+}
+
+
+.update-review-btn:hover {
+    color: #ff8b00;
+}
+
+hr {
+    width: 100%;
+    height: 0.063rem;
+    background: #d9d9d9;
+    border: 0;
+}
+
+/* i 태그들 */
+.fa-ellipsis-vertical {
+    cursor: pointer;
+    width: 1rem;
+    height: 2rem;
+    position: relative;
+    /* 모달 연결용 position */
+}
+
+.stars {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.stars i {
+    font-size: 2em;
+    color: gray;
+    position: relative;
+}
+
+.stars i.filled {
+    color: gold;
+}
+
+.stars i.half::before {
+    content: "\f005";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+    color: gold;
+}
+.score {
+    margin-left: 8px;
+    font-size: 1.2em;
+}
+
+/* //////// 사이드 이미지 /////// */
+.left-img {
+    position: absolute;
+    opacity: 0.6;
+    top: 19%;
+    left: -50%;
+    width: 53.8125rem;
+    height: 76.1875rem;
+    z-index: -1;
+}
+
+.right-img {
+    position: absolute;
+    width: 53.8125rem;
+    height: 76.1875rem;
+    top: 40%;
+    right: -45%;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+.left-img,
+.right-img {
+    animation: fadeInOut 3s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+#animaiton-id{
+    /*opacity: 0;*/
+    display:none;
+}
+
+
+
+/********************* *반응형 ************************/
+/* 반응형 레이아웃 */
+@media (max-width: 1280px) {
+    .left-img,
+    .right-img {
+        display: none;
+    }
+}

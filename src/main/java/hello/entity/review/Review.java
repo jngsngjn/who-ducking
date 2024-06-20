@@ -25,6 +25,7 @@ public class Review {
     private Animation animation;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private Double score;
@@ -38,4 +39,8 @@ public class Review {
 
     @Column(name = "dislike_count")
     private int dislikeCount;
+
+    //추가좀 하겠습니다요
+    @Column(name = "is_spoiler", nullable = false)
+    private boolean isSpoiler;
 }

@@ -5,8 +5,9 @@ import hello.dto.oauth2.KakaoResponse;
 import hello.dto.oauth2.NaverResponse;
 import hello.dto.oauth2.OAuth2Response;
 import hello.dto.user.CustomOAuth2User;
+import hello.entity.user.User;
+import hello.repository.db.UserRepository;
 import hello.security.exception.AdditionalInfoRequiredException;
-import hello.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -21,11 +22,12 @@ import org.springframework.stereotype.Service;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
+    private final LoginService loginService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        System.out.println(oAuth2User.getAttributes());
+        log.info("userInfo = {}", oAuth2User.getAttributes());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response = null;
@@ -43,12 +45,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
 
         String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
+        User user = userRepository.findByUsername(username);
         // 처음 로그인한 회원 -> 회원가입 폼으로 리다이렉트
-        if (userRepository.findByUsername(username) == null) {
+        if (user == null) {
             throw new AdditionalInfoRequiredException(oAuth2Response);
         }
 
-        String role = oAuth2User.getAuthorities().iterator().next().getAuthority();
+        loginService.processLogin(user);
+        String role = userRepository.findByUsername(username).getRole();
         return new CustomOAuth2User(oAuth2Response, role);
     }
 }

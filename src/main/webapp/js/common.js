@@ -15,8 +15,11 @@ function loadScript(url) {
 Promise.all([
     loadScript("/js/header.js"),
     loadScript("/js/main.js"),
+    loadScript("/js/boardWritePage.js"),
+    loadScript("/js/showPage.js"),
     loadScript("/js/registerBasic.js"),
     loadScript("/js/registerGenre.js"),
+    loadScript("/js/lucky.js"),
 ])
     .then(() => {
         console.log("All scripts loaded.");

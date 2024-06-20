@@ -6,6 +6,7 @@ import hello.entity.board.Comment;
 import hello.entity.genre.UserGenre;
 import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
+import hello.entity.request.Request;
 import hello.entity.review.Review;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -99,4 +100,10 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Request> requests = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoginHistory> loginHistories = new ArrayList<>();
 }

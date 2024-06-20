@@ -1,0 +1,132 @@
+#sendCodeButton.loading {
+    cursor: not-allowed;
+}
+
+#sendCodeButton.loading::after {
+    content: " (전송 중…)";
+    color: #ff9900;
+}
+
+.delete-container {
+    background: #ededed;
+    margin-top: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-delete {
+    width: 400px;
+    margin: auto;
+}
+
+.form-wrapper {
+    padding: 20px;
+}
+
+.form-header {
+    font-size: 30px;
+    color: #ff9900;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.form-delete-message {
+    text-align: center;
+    color: #FFC60B;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FF8B00;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    border: 1px solid #dddddd;
+    border-radius: 25px;
+    background-color: #fff;
+}
+
+.form-input[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #ff9900;
+}
+
+.input-wrapper .fa-lock {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    color: #cccccc;
+}
+
+.email-check {
+    display: block;
+    margin-top: 10px;
+    margin-left: 240px;
+    color: #FFC60B;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    text-align: right;
+}
+
+.email-check:hover {
+    color: #FF8B00;
+}
+
+.form-footer {
+    display: flex;
+    justify-content:center;
+    gap:30px;
+    margin-top: 20px;
+}
+
+.delete-user, .delete-before {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.delete-user {
+    background-color: #ff9900;
+    color: #ffffff;
+}
+
+.delete-before {
+    background-color: #FFC60B;
+    color: #ffffff;
+}
