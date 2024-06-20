@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.db;
 
 import hello.entity.genre.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -6,7 +6,7 @@ import hello.dto.oauth2.NaverResponse;
 import hello.dto.oauth2.OAuth2Response;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.user.User;
-import hello.repository.UserRepository;
+import hello.repository.db.UserRepository;
 import hello.security.exception.AdditionalInfoRequiredException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

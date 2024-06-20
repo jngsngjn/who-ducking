@@ -2,7 +2,7 @@ package hello.config;
 
 import hello.entity.genre.Genre;
 import hello.entity.user.Level;
-import hello.repository.*;
+import hello.repository.db.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;

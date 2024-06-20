@@ -2,8 +2,8 @@ package hello.service;
 
 import hello.entity.user.LoginHistory;
 import hello.entity.user.User;
-import hello.repository.LoginHistoryRepository;
-import hello.repository.UserRepository;
+import hello.repository.db.LoginHistoryRepository;
+import hello.repository.db.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.memory;
 
 import org.springframework.stereotype.Component;
 
