@@ -2,18 +2,17 @@ package hello.service;
 
 import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
-import hello.entity.board.Bookmark;
 import hello.entity.user.User;
 import hello.repository.BoardRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,7 +21,8 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    private final String serverBoardImagePath = "C:/Users/smkim/server/board";
+    @Value("${boardPath}")
+    private String serverBoardImagePath;
 
     @Autowired
     public BoardService(BoardRepository boardRepository) {
