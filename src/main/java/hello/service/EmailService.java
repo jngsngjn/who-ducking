@@ -1,7 +1,7 @@
 package hello.service;
 
 import hello.entity.user.EmailCode;
-import hello.repository.EmailCodeRepository;
+import hello.repository.db.EmailCodeRepository;
 import jakarta.activation.DataSource;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

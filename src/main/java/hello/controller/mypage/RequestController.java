@@ -4,6 +4,7 @@ import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.MyRequestDTO;
 import hello.dto.user.RequestDTO;
 import hello.entity.user.User;
+import hello.service.RequestService;
 import hello.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,11 +19,12 @@ import org.springframework.web.bind.annotation.*;
 public class RequestController {
 
     private final UserService userService;
+    private final RequestService requestService;
 
     // 건의 내역
     @GetMapping("/request-list")
     public String requestList(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
-        Page<MyRequestDTO> requestPage = userService.getMyRequest(page, 5);
+        Page<MyRequestDTO> requestPage = requestService.getMyRequest(page, 5);
         model.addAttribute("requestPage", requestPage);
         return "myRequest";
     }
@@ -30,13 +32,13 @@ public class RequestController {
     @PostMapping("/request")
     public String request(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute RequestDTO requestDTO) {
         User loginUser = userService.getLoginUserDetail(user);
-        userService.receiveRequest(requestDTO, loginUser);
+        requestService.writeRequest(requestDTO, loginUser);
         return "redirect:/myPage/request-list";
     }
 
     @PostMapping("/request-delete")
     public String deleteRequest(@RequestParam("requestId") Long requestId) {
-        userService.deleteRequest(requestId);
+        requestService.deleteRequest(requestId);
         return "redirect:/myPage/request-list";
     }
 }

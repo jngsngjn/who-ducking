@@ -3,7 +3,7 @@ package hello.controller;
 import hello.dto.oauth2.OAuth2Response;
 import hello.dto.user.RegisterBasicDTO;
 import hello.dto.user.SmsCodeVerificationRequest;
-import hello.repository.CodeStore;
+import hello.repository.memory.CodeStore;
 import hello.service.RegisterService;
 import hello.service.SmsService;
 import jakarta.servlet.http.HttpSession;

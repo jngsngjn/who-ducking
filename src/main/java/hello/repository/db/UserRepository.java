@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.db;
 
 import hello.dto.admin.UserInfoDTO;
 import hello.entity.user.User;

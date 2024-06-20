@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.db;
 
 import hello.entity.prize.Entry;
 import org.springframework.data.jpa.repository.JpaRepository;

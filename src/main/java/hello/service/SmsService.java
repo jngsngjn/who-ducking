@@ -1,6 +1,6 @@
 package hello.service;
 
-import hello.repository.CodeStore;
+import hello.repository.memory.CodeStore;
 import jakarta.annotation.PostConstruct;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.model.Message;

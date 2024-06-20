@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.db;
 
 import hello.dto.admin.RequestDetailDTO;
 import hello.dto.admin.RequestListDTO;

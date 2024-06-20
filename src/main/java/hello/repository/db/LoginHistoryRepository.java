@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.db;
 
 import hello.entity.user.LoginHistory;
 import hello.entity.user.User;

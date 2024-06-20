@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.server;
 
 import hello.entity.user.Image;
 import org.springframework.beans.factory.annotation.Value;

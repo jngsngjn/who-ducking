@@ -2,7 +2,7 @@ package hello.service;
 
 import hello.entity.user.Level;
 import hello.entity.user.User;
-import hello.repository.LevelRepository;
+import hello.repository.db.LevelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
