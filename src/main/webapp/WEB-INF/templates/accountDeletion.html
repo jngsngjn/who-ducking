@@ -27,29 +27,29 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="delete-container">
-    <div class="signup-container">
-        <div class="form-delete">
-            <div class="form-wrapper">
-                <div class="form-content">
-                    <div class="form-header">회원 탈퇴</div>
-                    <p class="form-delete-message">가입된 이메일로 본인 인증 후 탈퇴 처리됩니다.</p>
-                    <form action="/myPage/account-deletion/verifyCode" method="post" id="emailCodeForm">
-                        <div class="form-group">
-                            <label for="email" class="form-label">이메일</label>
-                            <div class="input-wrapper">
-                                <input type="email" id="email" class="form-input" placeholder="이메일" readonly th:value="${email}" />
+    <div class="delete-signup-container">
+        <div class="delete-form-delete">
+            <div class="delete-form-wrapper">
+                <div class="delete-form-content">
+                    <div class="delete-form-header">회원 탈퇴</div>
+                    <p class="delete-form-delete-message">가입된 이메일로 본인 인증 후 탈퇴 처리됩니다.</p>
+                    <form action="/myPage/account-deletion/verifyCode" method="post" id="delete-emailCodeForm">
+                        <div class="delete-form-group">
+                            <label for="delete-email" class="delete-form-label">이메일</label>
+                            <div class="delete-input-wrapper">
+                                <input type="email" id="delete-email" class="delete-form-input" placeholder="이메일" readonly th:value="${email}" />
                                 <i class="fa fa-lock"></i>
                             </div>
-                            <button id="sendCodeButton" type="button" class="email-check">인증 코드 보내기</button>
-                            <input type="hidden" name="email" id="emailHidden" th:value="${email}">
+                            <button id="delete-sendCodeButton" type="button" class="delete-email-check">인증 코드 보내기</button>
+                            <input type="hidden" name="email" id="delete-emailHidden" th:value="${email}">
                         </div>
-                        <div class="form-group">
-                            <label for="verificationCodeInput" class="form-label">인증 코드</label>
-                            <div class="input-wrapper">
-                                <input type="text" id="verificationCodeInput" name="code" class="form-input"/>
+                        <div class="delete-form-group">
+                            <label for="delete-verificationCodeInput" class="delete-form-label">인증 코드</label>
+                            <div class="delete-input-wrapper">
+                                <input type="text" id="delete-verificationCodeInput" name="code" class="delete-form-input"/>
                             </div>
                         </div>
-                        <div class="form-footer">
+                        <div class="delete-form-footer">
                             <button type="submit" class="delete-user">계정 삭제</button>
                             <button type="button" class="delete-before">취소</button>
                         </div>
