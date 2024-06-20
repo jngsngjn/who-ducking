@@ -3,8 +3,9 @@ package hello.controller.mypage;
 import hello.dto.user.AccountDeletionDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.user.User;
-import hello.service.EmailService;
-import hello.service.UserService;
+import hello.service.account.EmailService;
+import hello.service.basic.UserService;
+import hello.service.account.AccountService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class AccountDeletionController {
 
     private final UserService userService;
     private final EmailService emailService;
+    private final AccountService accountService;
 
     // 회원 탈퇴 페이지
     @GetMapping("/account-deletion")
@@ -50,7 +52,7 @@ public class AccountDeletionController {
     // 계정 삭제
     @PostMapping("/account-deletion/verifyCode")
     public String deleteAccount(@ModelAttribute AccountDeletionDTO accountDeletionDTO) {
-        userService.deleteAccountProcess(accountDeletionDTO);
+        accountService.deleteAccountProcess(accountDeletionDTO);
         return "redirect:/logout";
     }
 }
