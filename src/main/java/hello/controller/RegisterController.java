@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Map;
@@ -106,7 +107,8 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String registerGenre(HttpSession session, @RequestParam("genres") List<String> genres) {
+    public String registerGenre(HttpSession session, @RequestParam("genres") List<String> genres,
+                                RedirectAttributes redirectAttributes) {
 
         if (genres.size() > MAX_GENRES) {
             return "registerGenre";
@@ -122,6 +124,7 @@ public class RegisterController {
         session.removeAttribute("registerBasicDTO");
         session.removeAttribute("registering");
         session.removeAttribute("registerBasic");
+        redirectAttributes.addFlashAttribute("welcomeMessage", "회원가입을 환영합니다!");
         return "redirect:/login";
     }
 }
