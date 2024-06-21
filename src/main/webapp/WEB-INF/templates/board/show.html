@@ -40,7 +40,7 @@
         <div class="form-group" th:if="${board.imageName != null}">
             <img class="board-img" id="boardImagePreview"
                  th:src="@{'/image/board/' + ${board.imageName}}"
-                 alt="Board Image"/>
+                 alt="Board Image" style="max-width: 100%; height: auto;"/>
         </div>
         <div th:if="${board.user.id == loginUserId}">
             <div class="board-actions">
