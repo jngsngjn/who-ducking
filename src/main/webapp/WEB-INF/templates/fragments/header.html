@@ -135,7 +135,7 @@
                             <span class="h-profile_menu_level" th:text="Lv. + ${session.level}"></span>
                             <div class="h-profile_menu_point">
                                 <i class="fa-solid fa-coins"></i>
-                                <span th:text="${session.point} + 'P'"></span>
+                                <span th:text="${session.point} + 'P'" id="point"></span>
                             </div>
                         </div>
                         <div>
@@ -193,7 +193,7 @@
                                         <span class="h-mobile_profile_level" th:text="Lv. + ${session.level}"></span>
                                         <div class="h-mobile_profile_point">
                                             <i class="fa-solid fa-coins"></i>
-                                            <span th:text="${session.point} + 'P'"></span>
+                                            <span th:text="${session.point} + 'P'" id="mobile-point"></span>
                                         </div>
                                     </div>
                                     <div>
