@@ -111,53 +111,19 @@
         <section class="noticePage-main-content-section">
             <div class="noticePage-main-content">
                 <ul class="noticePage-main-content-list">
-                    <!--타임리프 할것-->
-                    <li class="noticePage-main-content-list-elements">
+                    <li class="noticePage-main-content-list-elements" th:each="notice : ${notices}">
                         <div class="noticePage-main-content-list-elements-box">
                             <div class="noticePage-main-content-list-elements-left">
                                 <span class="noticePage-main-content-list-elements-title">공지</span>
-                                <span class="noticePage-main-content-list-elements-subject">공지사항 제목</span>
+                                <span class="noticePage-main-content-list-elements-subject" th:text="${notice.content}">공지사항 제목</span>
                             </div>
                             <div class="noticePage-main-content-list-elements-right">
-                                <span class="noticePage-main-content-list-elements-date">2024-06-19</span>
+                                <span class="noticePage-main-content-list-elements-date" th:text="${notice.writeDate}">2024-06-19</span>
                                 <button class="noticePage-main-content-list-elements-moreview">+</button>
                             </div>
                         </div>
                         <div class="noticePage-main-content-dropdown">
-                            <!-- 드롭다운 내용 여기에 추가 -->
-                            <p>여기에 추가적인 공지사항 내용을 입력하세요.</p>
-                        </div>
-                    </li>
-                    <li class="noticePage-main-content-list-elements">
-                        <div class="noticePage-main-content-list-elements-box">
-                            <div class="noticePage-main-content-list-elements-left">
-                                <span class="noticePage-main-content-list-elements-title">공지</span>
-                                <span class="noticePage-main-content-list-elements-subject">공지사항 제목</span>
-                            </div>
-                            <div class="noticePage-main-content-list-elements-right">
-                                <span class="noticePage-main-content-list-elements-date">2024-06-19</span>
-                                <button class="noticePage-main-content-list-elements-moreview">+</button>
-                            </div>
-                        </div>
-                        <div class="noticePage-main-content-dropdown">
-                            <!-- 드롭다운 내용 여기에 추가 -->
-                            <p>여기에 추가적인 공지사항 내용을 입력하세요.</p>
-                        </div>
-                    </li>
-                    <li class="noticePage-main-content-list-elements">
-                        <div class="noticePage-main-content-list-elements-box">
-                            <div class="noticePage-main-content-list-elements-left">
-                                <span class="noticePage-main-content-list-elements-title">공지</span>
-                                <span class="noticePage-main-content-list-elements-subject">공지사항 제목</span>
-                            </div>
-                            <div class="noticePage-main-content-list-elements-right">
-                                <span class="noticePage-main-content-list-elements-date">2024-06-19</span>
-                                <button class="noticePage-main-content-list-elements-moreview">+</button>
-                            </div>
-                        </div>
-                        <div class="noticePage-main-content-dropdown">
-                            <!-- 드롭다운 내용 여기에 추가 -->
-                            <p>여기에 추가적인 공지사항 내용을 입력하세요.</p>
+                            <p th:text="${notice.content}">여기에 추가적인 공지사항 내용을 입력하세요.</p>
                         </div>
                     </li>
                 </ul>
@@ -165,16 +131,16 @@
         </section>
         <section class="noticePage-main-pagination-section">
             <div class="noticePage-pagination">
-                <!-- <a class="noticePage-pagination-move-button" th:classappend="${noticePage.first} ? 'disabled' : ''" th:href="@{/noticePage/notice-list(page=${noticePage.number - 1})}">&lt;&lt;</a>
-                <a class="noticePage-pagination-move-button" th:classappend="${noticePage.first} ? 'disabled' : ''" th:href="@{/noticePage/notice-list(page=${noticePage.number - 1})}">&lt;</a>
-                <span th:if="${noticePage.totalPages > 0}" th:each="i : ${#numbers.sequence(1, noticePage.totalPages)}">
-                    <a th:classappend="${i == noticePage.number + 1} ? 'noticePage-pagination-now-button' : 'noticePage-pagination-move-button'" th:href="@{/noticePage/notice-list(page=${i - 1})}" th:text="${i}">1</a>
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;&lt;</a>
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;</a>
+                <span th:if="${notices.totalPages > 0}" th:each="i : ${#numbers.sequence(1, notices.totalPages)}">
+                    <a th:classappend="${i == notices.number + 1} ? 'noticePage-pagination-now-button' : 'noticePage-pagination-move-button'" th:href="@{/notice(page=${i - 1})}" th:text="${i}">1</a>
                 </span>
-                <span th:if="${noticePage.totalPages == 0}">
+                <span th:if="${notices.totalPages == 0}">
                      <a class="noticePage-pagination-now-button" href="#">1</a>
                 </span>
-                <a class="noticePage-pagination-move-button" th:classappend="${noticePage.last} ? 'disabled' : ''" th:href="@{/noticePage/notice-list(page=${noticePage.number + 1})}">&gt;</a>
-                <a class="noticePage-pagination-move-button" th:classappend="${noticePage.last} ? 'disabled' : ''" th:href="@{/noticePage/notice-list(page=${noticePage.number + 1})}">&gt;&gt;</a> -->
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;</a>
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;&gt;</a>
             </div>
         </section>
     </main>
