@@ -19,27 +19,32 @@
 
 <div id="worldModal" class="world-modal">
     <div class="world-modal-content">
+        <img src="/images/10duck.ico" class="world-modal-title-img" >
         <h2>씹덕이의 이상형 월드컵</h2>
-        <label for="rounds">총 라운드를 선택하세요.</label>
+
+        <label for="rounds">총 라운드를 선택하세요</label>
         <select id="rounds">
             <option value="4">4강</option>
             <option value="8">8강</option>
             <option value="16">16강</option>
             <option value="32">32강</option>
         </select>
-        <button id="startGameBtn">시작하기</button>
+        <button id="startGameBtn" class="world-start">시작하기</button>
+        <a href="/"><button class="world-home">홈페이지</button></a>
     </div>
 </div>
 
 <div class="world-header">
-    <h1 id="roundInfo">애니</h1>
+    <h1 id="roundInfo"></h1>
 </div>
 
 <div class="world-container">
+    <div class="vs-title">애니 이상형 월드컵</div>
     <div class="world-image-container" id="world-left-container">
         <img src="" id="world-left-image" alt="Left Image">
         <div class="world-caption" id="world-left-caption"></div>
     </div>
+
     <div class="vs-text">VS</div>
     <div class="world-image-container" id="world-right-container">
         <img src="" id="world-right-image" alt="Right Image">
@@ -51,8 +56,8 @@
         <h2>선택 결과</h2>
         <img id="finalImage" src="" alt="Final Image">
         <p id="finalCaption"></p>
-        <button onclick="restartGame()">다시 시작</button>
-        <a href="/"><button>리뷰 게시판</button></a>
+        <button onclick="restartGame()" class="world-reset">다시 시작</button>
+        <a href="/"><button class="world-review">리뷰 게시판</button></a>
     </div>
 </div>
 <div th:insert="~{fragments/footer :: footer}"></div>
