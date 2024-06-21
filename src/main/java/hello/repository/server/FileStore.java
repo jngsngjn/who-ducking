@@ -21,6 +21,8 @@ public class FileStore {
     @Value("${prizePath}")
     private String prizePath;
 
+    @Value("${boardPath}")
+    private String boardPath;
 
     public Image storeProfileImageFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile == null || multipartFile.isEmpty()) {
@@ -82,5 +84,13 @@ public class FileStore {
         String fullPath = prizePath + storeFileName;
         multipartFile.transferTo(new File(fullPath));
         return fullPath;
+    }
+
+    public void deleteBoardImage(String filename) {
+        String fullPath = boardPath + filename;
+        File file = new File(fullPath);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 }

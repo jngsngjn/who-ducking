@@ -4,8 +4,9 @@ import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
 import hello.repository.db.BoardRepository;
+import hello.repository.server.FileStore;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,17 +18,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final FileStore fileStore;
 
     @Value("${boardPath}")
     private String serverBoardImagePath;
-
-    @Autowired
-    public BoardService(BoardRepository boardRepository) {
-        this.boardRepository = boardRepository;
-    }
 
     //글작성
     public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception  {
@@ -96,8 +94,15 @@ public class BoardService {
         Optional<Board> optionalBoard = boardRepository.findById(boardId);
         if (optionalBoard.isPresent()) {
             boardRepository.deleteById(boardId);
+
+            // 게시글 이미지 삭제 추가
+            Board board = optionalBoard.get();
+            String imageName = board.getImageName();
+            if (!imageName.isEmpty()) {
+                fileStore.deleteBoardImage(imageName);
+            }
         }
-        else{
+        else {
             throw new NotFoundException("게시물을 찾을 수 없습니다.");
         }
     }

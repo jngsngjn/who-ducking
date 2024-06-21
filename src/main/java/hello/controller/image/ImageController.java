@@ -36,6 +36,7 @@ public class ImageController {
         return new UrlResource("file:" + basePath + imageName);
     }
 
+    // 수정 금지~!
     @GetMapping("/image/{imageName}")
     public Resource renderImageHeader(@PathVariable("imageName") String imageName) throws MalformedURLException {
         if (imageName.contains("level")) {
