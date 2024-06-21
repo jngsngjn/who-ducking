@@ -1,34 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.world-header {
+    width: 100%;
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.world-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
 .world-title {
     margin-top: 20px;
     font-size: 2em;
     text-align: center;
     font-weight: bold;
 }
+
 .world-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding-top: 60px; /* Adjusted for the fixed header */
 }
+
 .world-image-container {
     margin: 10px;
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 .world-image-container img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 80%;
+    max-height: 80%;
     cursor: pointer;
     border-radius: 10px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
 .world-image-container img:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
-.modal {
+
+.vs-text {
+    font-size: 3em;
+    font-weight: bold;
+    color: #FF8B00;
+    margin: 0 20px;
+}
+
+.world-caption {
+    margin-top: 10px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.world-modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -41,35 +83,47 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
-.modal-content {
+
+.world-modal-content {
     background-color: #fff;
     margin: auto;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 50%;
+    width: 45%;
+    height:45%;
     text-align: center;
+    transform: translateY(-100%);
 }
-.modal h2 {
+
+
+.world-modal.show .world-modal-content {
+    transform: translateY(0);
+}
+
+.world-modal h2 {
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: bold;
     color: #333;
 }
-.modal label {
+
+.world-modal label {
     display: block;
     margin-bottom: 10px;
     font-size: 16px;
     color: #666;
 }
-.modal select {
+
+.world-modal select {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.modal button {
+
+.world-modal button {
     padding: 10px 20px;
     margin: 10px;
     border: none;
@@ -79,18 +133,43 @@
     font-size: 16px;
     cursor: pointer;
 }
-.modal button:hover {
+
+.world-modal button:hover {
     background-color: #FFC60B;
 }
-.close {
+
+.world-close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
-.close:hover,
-.close:focus {
+
+.world-close:hover,
+.world-close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#resultModal .world-modal-content {
+    margin-top: 1000px;
+    max-width: 80%;
+    transition: margin-top 0.5s ease;
+}
+
+#resultModal.show .world-modal-content {
+    margin-top: 0;
+}
+
+#finalImage {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+#finalCaption {
+    font-size: 1.5em;
+    margin-bottom: 20px;
 }
