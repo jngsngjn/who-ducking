@@ -23,4 +23,9 @@ public class NoticePageController {
         model.addAttribute("notices", noticePage);
         return "/notice/noticePage";
     }
+
+    @GetMapping("/faqPage")
+    public String faqPage() {
+        return "/notice/faqPage";
+    }
 }
