@@ -98,8 +98,7 @@
 .lucky-card .card-overlay {
     position: absolute;
     bottom: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.5);
+    background-color:#000;
     color: white;
     padding: 5px 10px;
     border-radius: 10px;
@@ -122,7 +121,7 @@
 
 .lucky-card-menu p {
     color: #FF6F00;
-    font-size: 1.1em;
+    font-size: 2em;
 }
 
 .lucky-card-menu .apply-button {

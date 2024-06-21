@@ -66,7 +66,7 @@
 
 .delete-form-input {
     width: 350px;
-    height:60px;
+    height: 50px;
     padding: 10px 35px 10px 10px;
     border: 1px solid #dddddd;
     border-radius: 25px;
@@ -85,7 +85,7 @@
 
 .delete-input-wrapper .fa-lock {
     position: absolute;
-    top: 23px;
+    top: 18px;
     right: 20px;
     color: #cccccc;
 }

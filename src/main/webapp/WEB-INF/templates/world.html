@@ -13,17 +13,32 @@
     <script src="/vendor/aos/aos.js"></script>
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/js/common.js"></script>
-
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<span class="world-title">이상형 월드컵</span>
-<div class="container">
-    <div class="image-container" id="left-container">
-        <img src="" id="left-image" alt="Left Image">
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>씹덕이의 이상형 월드컵</h2>
+        <label for="rounds">총 라운드를 선택하세요.</label>
+        <select id="rounds">
+            <option value="4">4강</option>
+            <option value="8">8강</option>
+            <option value="16">16강</option>
+            <option value="32">32강</option>
+        </select>
+        <button id="startGameBtn">시작하기</button>
     </div>
-    <div class="image-container" id="right-container">
-        <img src="" id="right-image" alt="Right Image">
+</div>
+
+<div class="world-container">
+    <div class="world-title">이상형 월드컵</div>
+    <div class="world-image-container" id="world-left-container">
+        <img src="" id="world-left-image" alt="Left Image">
+    </div>
+    <div class="world-image-container" id="world-right-container">
+        <img src="" id="world-right-image" alt="Right Image">
     </div>
 </div>
 <div th:insert="~{fragments/footer :: footer}"></div>
