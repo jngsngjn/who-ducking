@@ -7,20 +7,22 @@ import hello.entity.user.User;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewRepository;
 import hello.repository.db.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class ReviewService {
 
-    @Autowired
-    private ReviewRepository reviewRepository;
-    @Autowired
-    private AnimationRepository animationRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final ReviewRepository reviewRepository;
+    private final AnimationRepository animationRepository;
+    private final UserRepository userRepository;
 
     public void addReview(AniReviewDTO aniReviewDTO) {
 
@@ -53,8 +55,13 @@ public class ReviewService {
         reviewRepository.deleteById(reviewId);
     }
 
-    // 좋아요 싫어요 2
-
+    // 매일 자정 실행
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void resetReviewCount() {
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            user.setReviewCount(0);
+        }
+        userRepository.saveAll(users);
+    }
 }
-
-

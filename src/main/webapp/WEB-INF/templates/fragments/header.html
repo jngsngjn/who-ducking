@@ -135,7 +135,7 @@
                             <span class="h-profile_menu_level" th:text="Lv. + ${session.level}"></span>
                             <div class="h-profile_menu_point">
                                 <i class="fa-solid fa-coins"></i>
-                                <span th:text="${session.point} + 'P'"></span>
+                                <span th:text="${session.point} + 'P'" id="point"></span>
                             </div>
                         </div>
                         <div>
@@ -193,7 +193,7 @@
                                         <span class="h-mobile_profile_level" th:text="Lv. + ${session.level}"></span>
                                         <div class="h-mobile_profile_point">
                                             <i class="fa-solid fa-coins"></i>
-                                            <span th:text="${session.point} + 'P'"></span>
+                                            <span th:text="${session.point} + 'P'" id="mobile-point"></span>
                                         </div>
                                     </div>
                                     <div>
@@ -252,7 +252,7 @@
                                     <a href="/animations">애니</a>
                                 </li>
                                 <li>
-                                    <a href="/community">커뮤니티</a>
+                                    <a href="/board">커뮤니티</a>
                                 </li>
                                 <li>
                                     <a href="/news">소식</a>

@@ -92,7 +92,7 @@
     <i class="fa-solid fa-comment"></i>
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
-  <form th:action="@{/community/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
+  <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
     <input type="hidden" name="userId" th:value="${userId}" />
     <input type="hidden" name="nickname" th:value="${nickname}"/>
     <div class="row-box">
