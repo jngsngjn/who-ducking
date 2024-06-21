@@ -28,6 +28,7 @@
 @import url(./main.css);
 @import url(./ReviewBoard.css);
 @import url(./ReviewWrite.css);
+@import url(./NoticePage.css);
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {
