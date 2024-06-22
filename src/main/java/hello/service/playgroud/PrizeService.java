@@ -1,5 +1,6 @@
 package hello.service.playgroud;
 
+import hello.dto.playground.prize.PrizeBasicDTO;
 import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
 import hello.entity.prize.PrizeGrade;
@@ -102,5 +103,9 @@ public class PrizeService {
         prize.setUser(winner);
 
         return winner;
+    }
+
+    public PrizeBasicDTO getEarliestPrizeByGrade(PrizeGrade grade) {
+        return prizeRepository.findFirstByGradeOrderByStartDateAsc(grade);
     }
 }

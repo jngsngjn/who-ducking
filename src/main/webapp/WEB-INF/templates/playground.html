@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/playground.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/adminPrize.js"></script>
+</head>
+<body class="nori_body">
+<div th:insert="~{fragments/header :: header}"></div>
+<main id="container" class="nori_main">
+    <div class="nori_content">
+        <ul class="nori_ul">
+            <li>
+                <h2 class="nori_h2">놀이터</h2>
+            </li>
+        </ul>
+        <ul class="nori_ul">
+            <li>
+                <h2 class="nori_draw">WHO's DUCK 럭키 드로우</h2>
+            </li>
+            <li>
+                <a href="" class="nori_drawgo">더 보기 <i class="fa-solid fa-arrow-right"></i></a>
+            </li>
+        </ul>
+
+        <!-- 럭키드로우 상품 -->
+        <ul class="nori_ul">
+            <li class="nori_draw_item">
+                <div class="nori_ur">UR</div>
+                <div class="nori_draw_img">
+                    <ul class="nori_draw_img_ul">
+                        <img th:src="@{/image/prize/{imageName}(imageName=${ur.imageName})}" alt="">
+                        <li class="nori_draw_img_box">
+                            <div class="nori_draw_coin">
+                                <div class="nori_draw_icon1">
+                                    <i class="fa-solid fa-coins"></i>
+                                </div>
+                                30P
+                            </div>
+                            <div class="nori_draw_date">
+                                <div class="nori_draw_icon2">
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                </div>
+                                <span th:text="${ur.endDate} + '까지'"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nori_draw_name" th:text="${ur.name}">미츠리 레진 대형 스테츄</div>
+                <a th:href="@{/prize/entry/{prizeId}(prizeId=${ur.id})}" class="nori_draw_button">응모하기</a>
+            </li>
+            <li class="nori_draw_item">
+                <div class="nori_sr">SR</div>
+                <div class="nori_draw_img">
+                    <ul class="nori_draw_img_ul">
+                        <img th:src="@{/image/prize/{imageName}(imageName=${sr.imageName})}" alt="">
+                        <li class="nori_draw_img_box">
+                            <div class="nori_draw_coin">
+                                <div class="nori_draw_icon1">
+                                    <i class="fa-solid fa-coins"></i>
+                                </div>
+                                30P
+                            </div>
+                            <div class="nori_draw_date">
+                                <div class="nori_draw_icon2">
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                </div>
+                                <span th:text="${sr.endDate} + '까지'"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nori_draw_name" th:text="${sr.name}">미츠리 레진 대형 스테츄</div>
+                <a th:href="@{/prize/entry/{prizeId}(prizeId=${sr.id})}" class="nori_draw_button">응모하기</a>
+            </li>
+            <li class="nori_draw_item">
+                <div class="nori_r">R</div>
+                <div class="nori_draw_img">
+                    <ul class="nori_draw_img_ul">
+                        <img th:src="@{/image/prize/{imageName}(imageName=${r.imageName})}" alt="">
+                        <li class="nori_draw_img_box">
+                            <div class="nori_draw_coin">
+                                <div class="nori_draw_icon1">
+                                    <i class="fa-solid fa-coins"></i>
+                                </div>
+                                30P
+                            </div>
+                            <div class="nori_draw_date">
+                                <div class="nori_draw_icon2">
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                </div>
+                                <span th:text="${r.endDate} + '까지'"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nori_draw_name" th:text="${r.name}">미츠리 레진 대형 스테츄</div>
+                <a th:href="@{/prize/entry/{prizeId}(prizeId=${r.id})}" class="nori_draw_button">응모하기</a>
+            </li>
+        </ul>
+
+        <!-- 하단 배너 -->
+        <div class="nori_line"></div>
+        <ul class="nori_content2">
+            <li>
+                <a href="/playground/world-cup" class="nori_worldcup">
+                    <img src="/images/Playground/Worldcup.png" alt="">
+                </a>
+            </li>
+
+            <li class="nori_banner2">
+                <a href="/playground/roulette" class="nori_roulette">
+                    <img src="/images/Playground/Roulette.png" alt="">
+                </a>
+                <a href="/playground/quiz" class="nori_quiz">
+                    <img src="/images/Playground/Quiz.png" alt="">
+                </a>
+            </li>
+        </ul>
+    </div>
+</main>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

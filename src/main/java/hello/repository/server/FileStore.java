@@ -13,7 +13,7 @@ import java.util.UUID;
 public class FileStore {
 
     @Value("${profilePath}")
-    private String profilePath; // 실제 파일 데이터가 저장될 서버 위치
+    private String profilePath;
 
     @Value("${aniPath}")
     private String aniPath;

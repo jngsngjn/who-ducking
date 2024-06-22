@@ -15,18 +15,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
-public class WheelController {
+public class RouletteController {
 
     private final PointService pointService;
     private final UserService userService;
-    private final int wheelPoint = 2;
 
-    @GetMapping("/wheel")
-    public String wheelPage() {
-        return "wheel";
+    @GetMapping("/playground/roulette")
+    public String roulettePage() {
+        return "roulette";
     }
 
-    @PostMapping("/wheel/get-points")
+    @PostMapping("/roulette/get-points")
     @ResponseBody
     public String updatePoints(@AuthenticationPrincipal CustomOAuth2User user,
                                @RequestBody PointsRequest pointsRequest) {
@@ -35,11 +34,12 @@ public class WheelController {
         return "{\"success\": true}";
     }
 
-    @PostMapping("/check-points")
+    @PostMapping("/roulette/check-points")
     @ResponseBody
     public boolean checkPoints(@AuthenticationPrincipal CustomOAuth2User user) {
         User loginUser = userService.getLoginUserDetail(user);
         int points = loginUser.getPoint();
+        int wheelPoint = 2;
         boolean result = points >= wheelPoint;
         if (result) {
             pointService.decreasePoint(loginUser, wheelPoint);

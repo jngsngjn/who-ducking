@@ -74,16 +74,16 @@ public class AdminController {
 
     @GetMapping("/prize")
     public String prizePage(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
-        Page<PrizeListDTO> currentPrizes = adminService.getCurrentPrizes(page, 10);
-        Page<PrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
+        Page<AdminPrizeListDTO> currentPrizes = adminService.getCurrentPrizes(page, 10);
+        Page<AdminPrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
         model.addAttribute("currentPrizes", currentPrizes);
         model.addAttribute("expiredPrizes", expiredPrizes);
-        return "admin/prize";
+        return "admin/adminPrize";
     }
 
     @PostMapping("/add-prize")
-    public String addPrize(@ModelAttribute PrizeAddDTO prizeAddDTO) throws IOException {
-        adminService.addPrize(prizeAddDTO);
+    public String addPrize(@ModelAttribute AdminPrizeAddDTO adminPrizeAddDTO) throws IOException {
+        adminService.addPrize(adminPrizeAddDTO);
         return "redirect:/admin/prize";
     }
 

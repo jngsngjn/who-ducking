@@ -98,15 +98,15 @@ public class AdminService {
         }
     }
 
-    public void addPrize(PrizeAddDTO prizeAddDTO) throws IOException {
+    public void addPrize(AdminPrizeAddDTO adminPrizeAddDTO) throws IOException {
         Prize prize = new Prize();
 
-        prize.setName(prizeAddDTO.getName());
-        prize.setGrade(prizeAddDTO.getGrade());
-        prize.setEndDateTime(prizeAddDTO.getEndDateTime());
+        prize.setName(adminPrizeAddDTO.getName());
+        prize.setGrade(adminPrizeAddDTO.getGrade());
+        prize.setEndDate(adminPrizeAddDTO.getEndDate());
 
         // 이미지 파일 저장
-        MultipartFile image = prizeAddDTO.getImage();
+        MultipartFile image = adminPrizeAddDTO.getImage();
         if (image != null && !image.isEmpty()) {
             String filePath = fileStore.storePrize(image);
             prize.setImagePath(filePath);
@@ -118,12 +118,12 @@ public class AdminService {
         prizeRepository.save(prize);
     }
 
-    public Page<PrizeListDTO> getCurrentPrizes(int page, int size) {
+    public Page<AdminPrizeListDTO> getCurrentPrizes(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return prizeRepository.findCurrentPrizes(pageable);
     }
 
-    public Page<PrizeListDTO> getExpiredPrizes(int page, int size) {
+    public Page<AdminPrizeListDTO> getExpiredPrizes(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return prizeRepository.findExpiredPrizes(pageable);
     }
