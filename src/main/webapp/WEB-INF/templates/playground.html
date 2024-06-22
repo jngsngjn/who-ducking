@@ -27,7 +27,7 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
-    <script type="text/javascript" src="/js/adminPrize.js"></script>
+    <script type="text/javascript" src="/js/prizeEntry.js"></script>
 </head>
 <body class="nori_body">
 <div th:insert="~{fragments/header :: header}"></div>
@@ -71,7 +71,9 @@
                     </ul>
                 </div>
                 <div class="nori_draw_name" th:text="${ur.name}">미츠리 레진 대형 스테츄</div>
-                <a th:href="@{/prize/entry/{prizeId}(prizeId=${ur.id})}" class="nori_draw_button">응모하기</a>
+<!--                <a th:href="@{/prize/entry/{prizeId}(prizeId=${ur.id})}" class="nori_draw_button">응모하기</a>-->
+                <!-- 테스트하려고 잠시 button으로 바꿉니다. (원래 a태그) -->
+                <button type="button" id="entry-button" class="nori_draw_button">응모하기</button>
             </li>
             <li class="nori_draw_item">
                 <div class="nori_sr">SR</div>
@@ -144,5 +146,10 @@
     </div>
 </main>
 <div th:insert="~{fragments/footer :: footer}"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const prizeId = [[${ur.id}]];
+    /*]]>*/
+</script>
 </body>
 </html>

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -64,21 +65,23 @@ public class PrizeService {
         return detailedAddress == null || detailedAddress.isEmpty();
     }
 
+    // 개선 필요 (추후 예정)
     public void entryPrize(Long prizeId, User user) {
         LocalDate today = LocalDate.now();
         user.setLastDrawDate(today);
 
         Prize prize = prizeRepository.findById(prizeId).orElseThrow();
-        Entry findEntry = entryRepository.findByUserId(user.getId()).orElseThrow();
+        Optional<Entry> findEntry = entryRepository.findByUserId(user.getId());
         pointService.decreasePoint(user, 30);
 
         // 처음 응모한 경우
-        if (findEntry == null) {
+        if (findEntry.isEmpty()) {
             Entry entry = new Entry(user, prize);
             entryRepository.save(entry);
         } else {
             // 한 번 이상 응모한 경우
-            findEntry.setEntryCount(findEntry.getEntryCount() + 1);
+            findEntry.get().setEntryCount(findEntry.get().getEntryCount() + 1);
+            entryRepository.save(findEntry.get());
         }
     }
 
@@ -107,5 +110,9 @@ public class PrizeService {
 
     public PrizeBasicDTO getEarliestPrizeByGrade(PrizeGrade grade) {
         return prizeRepository.findFirstByGradeOrderByStartDateAsc(grade);
+    }
+
+    public Prize findById(Long prizeId) {
+        return prizeRepository.findById(prizeId).orElseThrow();
     }
 }
