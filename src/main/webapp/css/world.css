@@ -59,7 +59,7 @@
 
 .vs-title {
     position: fixed;
-    top: 150px;
+    top: 100px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 30px;
@@ -136,62 +136,157 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-/*============버튼 영역====================*/
-.world-modal button.world-start {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #FF8B00;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-}
-.world-modal button.world-home {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #FF8B00;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
+/*============버튼 영역 인스타 릴스에서 본걸로 꾸며보기====================*/
+button.world-start { /*시작하기*/
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
 }
 
-.world-modal button.world-reset {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #FF8B00;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
+button.world-start:before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  background-image: linear-gradient(to right, #FF8B00 0%, #FFC60B 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 0.3s ease;
 }
-.world-modal button.world-review {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #FFC60B;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
+
+button.world-start:hover:before {
+  width: 9em;
 }
-.world-modal button.world-reset:hover {
-    background-color: #FEFFDB;
-    color:#444444;
+button.world-start:hover {
+  color: #fff;
 }
-.world-modal button.world-start:hover {
-    background-color: #FFC60B;
+
+/* 홈페이지 */
+button.world-home {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
 }
-.world-modal button.world-home:hover {
-    background-color: #FFC60B;
+
+button.world-home:before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  background-image: linear-gradient(to right, #3498db 0%, #8e44ad 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 0.3s ease;
 }
-.world-modal button.world-review:hover {
-    background-color: #FEFFDB;
-    color:#444444;
+
+button.world-home:hover:before {
+  width: 9em;
 }
+button.world-home:hover {
+  color: #fff;
+}
+
+/* 다시하기 */
+button.world-reset {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+
+button.world-reset:before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  background-image: linear-gradient(to right, #2ecc71 0%, #27ae60 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+
+button.world-reset:hover:before {
+  width: 9em;
+}
+button.world-reset:hover {
+  color: #fff;
+}
+
+/* 리뷰게시판 */
+button.world-review {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  font-family: inherit;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+
+button.world-review:before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  background-image: linear-gradient(to right, #FFA726 0%, #FFB74D 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+button.world-review:hover:before {
+  width: 9em;
+}
+button.world-review:hover {
+  color: #fff;
+}
+
 /*=========결과==========*/
 #resultModal .world-modal-content {
     height:700px;
