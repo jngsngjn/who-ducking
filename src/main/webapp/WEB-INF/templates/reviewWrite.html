@@ -117,8 +117,9 @@
   </form>
   <div class="order-box">
     <div class="row-box">
-      <button id="recent" class="order-btn" th:onclick="handleOrderBtn" >최신 순</button>
-      <button id="like" class="order-btn" th:onclick="handleOrderBtn">좋아요 순</button>
+      <button id="recent" class="order-btn" onclick="showReviews('recent')">최신 순</button>
+      <button id="like" class="order-btn" onclick="showReviews('like')">좋아요 순</button>
+
     </div>
     <div class="row-box">
       <p>스포일러 포함</p>
@@ -128,39 +129,80 @@
       </label>
     </div>
   </div>
-  <div th:each="review, iterStat : ${reviews}" class="review-list">
-    <div class="row-box">
-      <p th:text="${review.user.nickname}" class="review-writer">
-        <span class="best-icon">BEST</span>
-      </p>
-      <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}"></i>
-      <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}">
-        <button class="update-review-btn" id="update-btn">수정</button>
-        <hr />
-        <button class="delete-review-btn" id="delete-btn" th:data-review-id="${review.id}">삭제</button>
+  <div id="recent-reviews" th:if="${#lists.size(recentReviews) > 0}" class="review-list">
+    <div th:each="review, iterStat : ${recentReviews}" class="review-list">
+      <!-- 리뷰 표시 코드 -->
+      <div class="row-box">
+        <p th:text="${review.user.nickname}" class="review-writer">
+<!--          <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span> -->
+        </p>
+        <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}"></i>
+        <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}">
+          <button class="update-review-btn" id="update-btn">수정</button>
+          <hr />
+          <button class="delete-review-btn" id="delete-btn" th:data-review-id="${review.id}">삭제</button>
+        </div>
       </div>
-    </div>
-    <p th:text="${review.content}" class="review-comment"></p>
-    <div class="row-box">
-      <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
-      <div>
-        <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
-          <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
-        </button>
-
-        <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
-          <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
-        </button>
-
+      <p th:text="${review.content}" class="review-comment"></p>
+      <div class="row-box">
+        <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
+        <div>
+          <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
+            <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
+          </button>
+          <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
+            <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
+  <!-- 좋아요순 리뷰 리스트 -->
+  <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}" style="display:none;" class="review-list">
+    <div th:each="review, iterStat : ${topReviews}" class="review-list">
+      <!-- 리뷰 표시 코드 -->
+      <div class="row-box">
+        <p th:text="${review.user.nickname}" class="review-writer">
+          <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span> <!-- 베스트 리뷰 3개에만 best 표시 -->
+        </p>
+        <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}"></i>
+        <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}">
+          <button class="update-review-btn" id="update-btn">수정</button>
+          <hr />
+          <button class="delete-review-btn" id="delete-btn" th:data-review-id="${review.id}">삭제</button>
+        </div>
+      </div>
+      <p th:text="${review.content}" class="review-comment"></p>
+      <div class="row-box">
+        <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
+        <div>
+          <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
+            <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
+          </button>
+          <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
+            <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
   <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
 </div>
 
 <div th:insert="~{fragments/footer :: footer}"></div>
 <script>
+  function showReviews(order) {
+    if (order === 'recent') {
+      document.getElementById('recent-reviews').style.display = 'block';
+      document.getElementById('like-reviews').style.display = 'none';
+    } else if (order === 'like') {
+      document.getElementById('recent-reviews').style.display = 'none';
+      document.getElementById('like-reviews').style.display = 'block';
+    }
+  }
 </script>
 </body>
 </html>

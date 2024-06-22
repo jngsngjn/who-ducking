@@ -8,6 +8,8 @@ import hello.entity.user.User;
 import hello.service.animations.AnimationService;
 import hello.service.basic.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,9 @@ public class AnimationsController {
 
     private final AnimationService animationService;
     private final UserService userService;
+
+    private static final Logger logger = LoggerFactory.getLogger(AnimationsController.class);
+
 
     // 전체 애니메이션 데이터 조회
     @GetMapping("/animations")
@@ -42,21 +47,52 @@ public class AnimationsController {
         animation.setId(id); //경로에 있는 애니메이션 id를 animation 클래스의 id필드에 세팅
         model.addAttribute("aniDetailInfo", animation);
 
+        /* @ 전체 리뷰수와 평점 */
         List<GetAniListDTO> reviewAndScore = animationService.getCountReviewAndScore(id);
         model.addAttribute("totalReviews", reviewAndScore);
 
+        /* @ 로그인 유저정보  */
         User loginUser = userService.getLoginUserDetail(user); // -> dto의 CustomOauth2User로 받아와야해
         model.addAttribute("nickname", loginUser.getNickname());
         model.addAttribute("userId", loginUser.getId());
 
 
-        /* @ 애니 리뷰 데이터 조회 */
-        List<Review> reviews = animationService.getReviewsByAnimationId(id);
-        model.addAttribute("reviews", reviews);
+        /* @ 애니의 리뷰 데이터 조회 */
+//        List<Review> reviews = animationService.getReviewsByAnimationId(id);
+//        model.addAttribute("reviews", reviews);
+        List<Review> recentReviews = animationService.getRecentReviewsByAnimationId(id); // 최신순
+        List<Review> topReviews = animationService.getTopReviewsByAnimationId(id); //인기순
+        model.addAttribute("recentReviews", recentReviews);
+        model.addAttribute("topReviews", topReviews);
         return "reviewWrite";
     }
 
 
-//    @GetMapping("animations/{id}/order")
-//    public String getReviews(@PathVariable Long id, )
+    // 리뷰 최신순 조회
+//    @GetMapping("/animations/{id}/reviews/like")
+//    public ResponseEntity<List<Review>> getReviewsOrderedByLike(@PathVariable Long id) {
+//        try {
+//            List<Review> reviews = animationService.getReviewsByAnimationIdOrderedLikeCount(id);
+//            logger.info("리뷰 최신순 버튼 클릭시 컨트롤러 요청");
+//            return ResponseEntity.ok(reviews);
+//        } catch (Exception e) {
+//            logger.error("리뷰 최신순 버튼 클릭시 컨트롤러 요청 중 에러 발생: {}", e.getMessage(), e);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
+//    // 리뷰 인기순 조회
+//    @GetMapping("/animations/{id}/reviews/recent")
+//    public ResponseEntity<List<Review>> getRecentReviews(@PathVariable Long id) {
+//        try {
+//            List<Review> reviews = animationService.getReviewsByAnimationId(id);
+//            logger.info("리뷰 인기순 버튼 클릭시 컨트롤러 요청");
+//            return ResponseEntity.ok(reviews);
+//        } catch (Exception e) {
+//            logger.error("리뷰 인기순 버튼 클릭시 컨트롤러 요청 중 에러 발생: {}", e.getMessage(), e);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
+
 }
+
+

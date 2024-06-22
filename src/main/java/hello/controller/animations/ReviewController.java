@@ -5,25 +5,24 @@ import hello.entity.review.Review;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import hello.service.animations.ReviewService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequiredArgsConstructor
 public class ReviewController {
 
-    private final ReviewService reviewService;
-    private final ReviewRepository reviewRepository;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     /* POST : 리뷰 작성 */
-    @PostMapping("/animations/{AnimationId}/review")
+    @PostMapping("/community/{AnimationId}/review")
     public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO){
         aniReviewDTO.setAnimationId(AnimationId);
         reviewService.addReview(aniReviewDTO);
-        return "redirect:/animations/" + AnimationId;
+        return "redirect:/community/" + AnimationId;
     }
 
     /* @ 리뷰 수정
