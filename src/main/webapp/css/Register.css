@@ -1,3 +1,8 @@
+/* Container ================================================ */
+#container {
+  padding-top: 8rem;
+}
+
 .register {
   position: relative;
   padding: 6rem 0;
@@ -128,6 +133,10 @@
   margin: 0px 1rem 0.7rem 0.5rem;
 }
 
+.register_email_check_box:checked + .register_email_check_label {
+  color: var(--mainColor);
+}
+
 .register_nickname_check_btn,
 .register_phone_check_btn,
 .register_code_check_btn,
@@ -146,6 +155,7 @@
 .register_code_check_btn:hover,
 .register_referrer_check_btn:hover {
   color: var(--mainColor);
+  transition: 0.3s;
 }
 
 /* 스핀 버튼 숨기기 (웹킷 브라우저) */
@@ -252,6 +262,7 @@ input[type="number"] {
 
 .register_terms_btn:hover {
   color: var(--mainColor);
+  transition: 0.3s;
 }
 
 .register_next_btn {
@@ -260,13 +271,16 @@ input[type="number"] {
   height: 45px;
   border-radius: 1rem;
   background: var(--mainColor);
+  border: 2px solid var(--mainColor);
   font-size: 1.8rem;
   color: #fff;
   transition: 0.3s;
 }
 
 .register_next_btn:hover {
-  background: var(--subColor);
+  background: #fff;
+  color: var(--mainColor);
+  transition: 0.5s;
 }
 
 /* Modal =============================================== */
