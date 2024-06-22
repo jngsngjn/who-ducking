@@ -23,8 +23,8 @@ canvas {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: left;
-    align-self: flex-start; /* Align the title to the left */
-    margin-left: 10%; /* Add margin to the left to position it */
+    align-self: flex-start;
+    margin-left: 10%;
 }
 
 .event-image {
@@ -41,32 +41,62 @@ canvas {
 }
 
 .spin-button {
-    background: #FF8B00;
-    margin-top: 4rem;
-    padding: 2rem 2rem;
-    border: none;
-    font-size: 2rem;
-    font-weight: bold;
-    border-radius: 15px;
+    color:#000;
+    width: 200px;
+    height: 50px;
+    border-radius: 30em;
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 3px 3px 6px #c5c5c5, -6px -6px 12px #ffffff;
     cursor: pointer;
-    color: #f9f9f9;
-    text-align: center;
+    transition: all 0.3s ease;
+    margin: 10px;
+    border:1px solid #FF8B00;
 }
 
-.spin-button:active {
-    background: #FFC60B;
-    color: #f9f9f9;
+.spin-button:before {
+    content: '';
+    width: 100%;
+    height: 0;
+    border-radius: 30em;
+    background-image: linear-gradient(to top, #FF8B00 0%, #FFC60B 100%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: height 0.3s ease;
 }
+
+.spin-button:hover:before {
+    height: 100%;
+}
+
+.spin-button:hover {
+    color: #fff;
+}
+
 
 #menu {
     width: 100%;
-    height: 960px;
     overflow: hidden;
     display: flex;
     align-items: center;
     text-align: center;
     flex-direction: column;
     position: relative;
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    margin: 2rem 0;
 }
 
 #arrow {
@@ -76,25 +106,50 @@ canvas {
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 15px solid transparent; /*화살표*/
-    border-right: 15px solid transparent; /*화살표*/
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
     border-top: 40px solid red;
+}
+
+.bottom-image-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 2rem;
+}
+
+.side-image.left-image {
+    max-width: 300px;
+    height: 400px;
+    align-self: flex-end;
+}
+
+.side-image.right-image {
+    max-width: 300px;
+    height: 400px;
+    align-self: flex-end;
 }
 
 .notice-title {
     color: #febf00;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 .notice {
     border-top: 1px solid #000;
-    margin-top: 10rem;
     padding-top: 1rem;
     text-align: left;
-    font-size: 17px;
+    font-size: 20px;
     line-height: 6rem;
     width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+.button-canvas {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
 }

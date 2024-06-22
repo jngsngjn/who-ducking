@@ -35,25 +35,25 @@
 }
 
 .register_input_email_box {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-top: 0.4rem;
-  height: 45px;
-  padding: 0 1rem;
-  border: 1px solid #d1d1d1;
-  border-radius: 1rem;
-  font-size: 1.6rem;
-  color: var(--titleColor);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.4rem;
+    height: 45px;
+    padding: 0 1rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    color: var(--titleColor);
 }
 
 .register_input_email_box > label,
 .register_input_email_box > i {
-  color: #d1d1d1;
+    color: #d1d1d1;
 }
 
 .register_input_email_box > i {
-  margin-left: auto;
+    margin-left: auto;
 }
 
 .register_input > input[type="text"],

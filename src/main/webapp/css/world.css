@@ -138,11 +138,10 @@
 }
 /*============버튼 영역 인스타 릴스에서 본걸로 꾸며보기====================*/
 button.world-start { /*시작하기*/
-  width: 9em;
-  height: 3em;
-  border-radius: 30em;
+  width: 144px;
+  height: 48px;
+  border-radius: 300px;
   font-size: 15px;
-  font-family: inherit;
   border: none;
   position: relative;
   overflow: hidden;
@@ -157,8 +156,8 @@ button.world-start { /*시작하기*/
 button.world-start:before {
   content: '';
   width: 0;
-  height: 3em;
-  border-radius: 30em;
+  height: 48px;
+  border-radius: 300px;
   background-image: linear-gradient(to right, #FF8B00 0%, #FFC60B 100%);
   position: absolute;
   top: 0;
@@ -168,7 +167,7 @@ button.world-start:before {
 }
 
 button.world-start:hover:before {
-  width: 9em;
+  width: 144px;
 }
 button.world-start:hover {
   color: #fff;
@@ -176,11 +175,10 @@ button.world-start:hover {
 
 /* 홈페이지 */
 button.world-home {
-  width: 9em;
-  height: 3em;
-  border-radius: 30em;
+  width: 144px;
+  height: 48px;
+  border-radius: 300px;
   font-size: 15px;
-  font-family: inherit;
   border: none;
   position: relative;
   overflow: hidden;
@@ -195,8 +193,8 @@ button.world-home {
 button.world-home:before {
   content: '';
   width: 0;
-  height: 3em;
-  border-radius: 30em;
+  height: 48px;
+  border-radius: 300px;
   background-image: linear-gradient(to right, #3498db 0%, #8e44ad 100%);
   position: absolute;
   top: 0;
@@ -206,7 +204,7 @@ button.world-home:before {
 }
 
 button.world-home:hover:before {
-  width: 9em;
+  width: 144px;
 }
 button.world-home:hover {
   color: #fff;
@@ -214,11 +212,10 @@ button.world-home:hover {
 
 /* 다시하기 */
 button.world-reset {
-  width: 9em;
-  height: 3em;
-  border-radius: 30em;
+  width: 144px;
+  height: 48px;
+  border-radius: 300px;
   font-size: 15px;
-  font-family: inherit;
   border: none;
   position: relative;
   overflow: hidden;
@@ -233,8 +230,8 @@ button.world-reset {
 button.world-reset:before {
   content: '';
   width: 0;
-  height: 3em;
-  border-radius: 30em;
+  height: 48px;
+  border-radius: 300px;
   background-image: linear-gradient(to right, #2ecc71 0%, #27ae60 100%);
   position: absolute;
   top: 0;
@@ -244,7 +241,7 @@ button.world-reset:before {
 }
 
 button.world-reset:hover:before {
-  width: 9em;
+  width: 144px;
 }
 button.world-reset:hover {
   color: #fff;
@@ -252,11 +249,10 @@ button.world-reset:hover {
 
 /* 리뷰게시판 */
 button.world-review {
-  width: 9em;
-  height: 3em;
-  border-radius: 30em;
+  width: 144px;
+  height: 48px;
+  border-radius: 300px;
   font-size: 15px;
-  font-family: inherit;
   border: none;
   position: relative;
   overflow: hidden;
@@ -271,8 +267,8 @@ button.world-review {
 button.world-review:before {
   content: '';
   width: 0;
-  height: 3em;
-  border-radius: 30em;
+  height: 48px;
+  border-radius: 300px;
   background-image: linear-gradient(to right, #FFA726 0%, #FFB74D 100%);
   position: absolute;
   top: 0;
@@ -280,8 +276,9 @@ button.world-review:before {
   z-index: -1;
   transition: width 0.3s ease;
 }
+
 button.world-review:hover:before {
-  width: 9em;
+  width: 144px;
 }
 button.world-review:hover {
   color: #fff;

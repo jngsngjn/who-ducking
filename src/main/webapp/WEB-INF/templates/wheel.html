@@ -28,12 +28,21 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="header-content">
     <span class="title-wheel">룰렛</span>
-    <img src="/images/wheelImg.png" class="event-image">
+    <img src="/images/Roulette/wheelImg.png" class="event-image">
 </div>
 
 <div id="menu">
-    <canvas width="400" height='400'></canvas>
-    <button id="spin-button" class="spin-button" onclick="rotate()">2P로 룰렛 돌리기</button>
+    <div class="bottom-image-container">
+        <img src="/images/Roulette/left.png" class="side-image left-image">
+        <div class="canvas-container">
+            <canvas width="400" height='400'></canvas>
+            <div class="button-canvas">
+                <button id="spin-button" class="spin-button" onclick="rotate()">2P로 룰렛 돌리기</button>
+            </div>
+        </div>
+        <img src="/images/Roulette/right.png" class="side-image right-image">
+    </div>
+
     <div class="notice">
         <span class="notice-title">유의 사항</span>
         <ul>
