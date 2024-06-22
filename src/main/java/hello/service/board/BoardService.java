@@ -31,23 +31,21 @@ public class BoardService {
     public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception  {
         Board board = new Board();
 
-        UUID uuid = UUID.randomUUID();
+        if (!file.isEmpty()) {
+            UUID uuid = UUID.randomUUID();
+            String filename = uuid + "_" + file.getOriginalFilename();
+            File saveFile = new File(serverBoardImagePath + "/" + filename);
+            file.transferTo(saveFile);
 
-        String filename = uuid + "_" + file.getOriginalFilename();
-
-        File saveFile = new File(serverBoardImagePath + "/" + filename);
-
-        file.transferTo(saveFile);
-
-        writeboard.setImageName(filename);
-        writeboard.setImagePath(serverBoardImagePath + "/" + filename);
+            writeboard.setImageName(filename);
+            writeboard.setImagePath(serverBoardImagePath + "/" + filename);
+            board.setImageName(writeboard.getImageName());
+            board.setImagePath(writeboard.getImagePath());
+        }
 
         board.setTitle(writeboard.getTitle());
         board.setContent(writeboard.getContent());
-        board.setImageName(writeboard.getImageName());
-        board.setImagePath(writeboard.getImagePath());
         board.setUser(loginUser);
-
         boardRepository.save(board);
     }
 

@@ -10,3 +10,15 @@ $(document).ready(function() {
         }
     });
 });
+
+function formValidate() {
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+
+    if (!title || !content) {
+        alert('내용을 입력해 주세요.');
+        return false;
+    }
+
+    return true;
+}
