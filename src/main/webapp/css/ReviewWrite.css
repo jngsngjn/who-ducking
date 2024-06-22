@@ -300,13 +300,13 @@ textarea:focus {
 
 .order-box {
     height: 9.375rem;
-    padding: 1em;
+    padding: 1rem;
     border-top: 0.0625rem solid #d9d9d9;
     border-bottom: 0.0625rem solid #d9d9d9;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2rem 0;
+    margin: 2rem 0 0 0;
 }
 
 .order-btn {
@@ -329,13 +329,17 @@ textarea:focus {
 }
 
 .reviews-container{
-    height: 700px;
+    height: 120rem;
+    width:112%;
+    overflow: hidden;
 }
 
+
 .review-list {
-    border-bottom: 0.0625rem solid #d9d9d9;
+    border-top: 0.0625rem solid #d9d9d9;
     padding: 1em 2em;
     font-size: 1.75rem;
+    width: 87rem;
     height: 15rem;
     display: flex;
     flex-direction: column;

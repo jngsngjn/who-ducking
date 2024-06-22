@@ -57,42 +57,13 @@ public class AnimationsController {
         model.addAttribute("userId", loginUser.getId());
 
 
-        /* @ 애니의 리뷰 데이터 조회 */
-//        List<Review> reviews = animationService.getReviewsByAnimationId(id);
-//        model.addAttribute("reviews", reviews);
+        /* @ 애니의 리뷰 데이터 조회 (최신순&좋아요순) */
         List<Review> recentReviews = animationService.getRecentReviewsByAnimationId(id); // 최신순
         List<Review> topReviews = animationService.getTopReviewsByAnimationId(id); //인기순
         model.addAttribute("recentReviews", recentReviews);
         model.addAttribute("topReviews", topReviews);
         return "reviewWrite";
     }
-
-
-    // 리뷰 최신순 조회
-//    @GetMapping("/animations/{id}/reviews/like")
-//    public ResponseEntity<List<Review>> getReviewsOrderedByLike(@PathVariable Long id) {
-//        try {
-//            List<Review> reviews = animationService.getReviewsByAnimationIdOrderedLikeCount(id);
-//            logger.info("리뷰 최신순 버튼 클릭시 컨트롤러 요청");
-//            return ResponseEntity.ok(reviews);
-//        } catch (Exception e) {
-//            logger.error("리뷰 최신순 버튼 클릭시 컨트롤러 요청 중 에러 발생: {}", e.getMessage(), e);
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
-//    // 리뷰 인기순 조회
-//    @GetMapping("/animations/{id}/reviews/recent")
-//    public ResponseEntity<List<Review>> getRecentReviews(@PathVariable Long id) {
-//        try {
-//            List<Review> reviews = animationService.getReviewsByAnimationId(id);
-//            logger.info("리뷰 인기순 버튼 클릭시 컨트롤러 요청");
-//            return ResponseEntity.ok(reviews);
-//        } catch (Exception e) {
-//            logger.error("리뷰 인기순 버튼 클릭시 컨트롤러 요청 중 에러 발생: {}", e.getMessage(), e);
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
-
 }
 
 

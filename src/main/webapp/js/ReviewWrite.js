@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// 최신순 인기순 버튼 활성 -> (o) / 기능 -> (x)
+// 최신순 인기순 버튼 활성 -> (o) / 기능 -> (o)
 document.addEventListener('DOMContentLoaded', function() {
     const recentBtn = document.getElementById('recent');
     const likeBtn = document.getElementById('like');
@@ -223,4 +223,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-

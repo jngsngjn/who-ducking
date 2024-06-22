@@ -129,7 +129,8 @@
       </label>
     </div>
   </div>
-  <div id="recent-reviews" th:if="${#lists.size(recentReviews) > 0}" class="review-list">
+  <div class="reviews-container">
+  <div id="recent-reviews" th:if="${#lists.size(recentReviews) > 0}" >
     <div th:each="review, iterStat : ${recentReviews}" class="review-list">
       <!-- 리뷰 표시 코드 -->
       <div class="row-box">
@@ -157,8 +158,10 @@
       </div>
     </div>
   </div>
+
   <!-- 좋아요순 리뷰 리스트 -->
-  <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}" style="display:none;" class="review-list">
+
+  <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}" style="display:none;">
     <div th:each="review, iterStat : ${topReviews}" class="review-list">
       <!-- 리뷰 표시 코드 -->
       <div class="row-box">
@@ -185,6 +188,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 
 

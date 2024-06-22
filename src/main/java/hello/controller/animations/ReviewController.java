@@ -18,11 +18,11 @@ public class ReviewController {
     private ReviewRepository reviewRepository;
 
     /* POST : 리뷰 작성 */
-    @PostMapping("/community/{AnimationId}/review")
+    @PostMapping("/animations/{AnimationId}/review")
     public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO){
         aniReviewDTO.setAnimationId(AnimationId);
         reviewService.addReview(aniReviewDTO);
-        return "redirect:/community/" + AnimationId;
+        return "redirect:/animations/" + AnimationId;
     }
 
     /* @ 리뷰 수정
