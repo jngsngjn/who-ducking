@@ -4,6 +4,8 @@ import hello.dto.animation.AniReviewDTO;
 import hello.entity.review.Review;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
+import org.springframework.beans.factory.annotation.Autowired;
+import hello.service.animations.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

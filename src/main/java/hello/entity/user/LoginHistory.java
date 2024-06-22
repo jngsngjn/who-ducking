@@ -22,7 +22,6 @@ public class LoginHistory {
     private LocalDate loginDate;
 
     public LoginHistory() {
-
     }
 
     public LoginHistory(User user, LocalDate loginDate) {

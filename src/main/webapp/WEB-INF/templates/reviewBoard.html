@@ -37,16 +37,16 @@
 
           let imageId = $(this).siblings("#animation-id").text().trim();
           console.log("이미지 아이디" + imageId + "을 클릭"); //string
-          console.log("url = /community/" + imageId);
+          console.log("url = /animations/" + imageId);
 
           $.ajax({
             type: "GET",
-            url: "/community/" + imageId,
+            url: "/animations/" + imageId,
             success: function (response) {
               console.log("GET 요청 성공");
               console.log("Animation data:", response);
 
-              window.location.href = "/community/" + imageId;
+              window.location.href = "/animations/" + imageId;
             },
             error: function (jqXHR, textStatus, errorThrown) {
               console.log("AJAX request failed:", textStatus, errorThrown);
@@ -60,15 +60,6 @@
   <body>
     <div th:insert="~{fragments/header :: header}"></div>
     <div class="sticky-container"><h1 class="page-title">커뮤니티</h1>
-      <div class="side-container">
-      <button class="side-container-button" id="review-board">
-        리뷰 게시판
-      </button>
-      <hr />
-      <button class="side-container-button" id="free-board">
-        자유 게시판
-      </button>
-      </div>
     </div>
     <div class="comminty-page">
       <div class="community-container">

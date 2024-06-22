@@ -1,4 +1,4 @@
-package hello.controller.playground;
+package hello.controller.popup;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +10,6 @@ public class PopupStoreController {
 
     @GetMapping()
     public String popupStore() {
-        return "popupStore";
+        return "popup/popupStore";
     }
 }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="header-content">
+    <span class="title-check">출석 체크</span>
+    <img src="/images/welcome.png" class="event-image">
+</div>
+<div class="calendar-container">
+    <div class="calendar-year-month"></div>
+    <div class="calendar-header">
+        <div class="calendar-nav">
+            <button class="calendar-nav-btn calendar-go-prev" onclick="calendarPrevMonth()">&lt;</button>
+            <button class="calendar-nav-btn calendar-go-today" onclick="calendarGoToday()">Today</button>
+            <button class="calendar-nav-btn calendar-go-next" onclick="calendarNextMonth()">&gt;</button>
+        </div>
+        <div class="calendar-points">수령한 포인트 : <span id="points">0</span>P</div>
+    </div>
+    <div class="calendar-main">
+        <div class="calendar-days">
+            <div class="calendar-day">일</div>
+            <div class="calendar-day">월</div>
+            <div class="calendar-day">화</div>
+            <div class="calendar-day">수</div>
+            <div class="calendar-day">목</div>
+            <div class="calendar-day">금</div>
+            <div class="calendar-day">토</div>
+        </div>
+        <div class="calendar-dates"></div>
+    </div>
+</div>
+<div class="calendar-notice">
+    <h3>유의 사항</h3>
+    <ul>
+        <li>본 출석 이벤트는 Who's DuckKing 회원 전용 이벤트입니다.</li>
+        <li>출석 시, 1P & 5XP 바로 지급하며 1주일 개근 시 3P추가 지급합니다</li>
+        <li>부당한 방법으로 참여한 고객의 경우 포인트 회수 및 추후 이벤트에 불이익이 발생할 수 있습니다.</li>
+    </ul>
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+<script src="/js/calendar.js"></script>
+</body>
+</html>

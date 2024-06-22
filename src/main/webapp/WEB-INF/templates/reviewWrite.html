@@ -92,7 +92,7 @@
     <i class="fa-solid fa-comment"></i>
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
-  <form th:action="@{/community/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
+  <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
     <input type="hidden" name="userId" th:value="${userId}" />
     <input type="hidden" name="nickname" th:value="${nickname}"/>
     <div class="row-box">
@@ -142,7 +142,10 @@
     </div>
     <p th:text="${review.content}" class="review-comment"></p>
     <div class="row-box">
-      <p th:text="${review.writeDate}" class="write-date"></p>
+
+            <p th:text="${review.writeDate}" class="write-date"></p>
+      <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
+
       <div>
         <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
           <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
