@@ -9,6 +9,8 @@ import hello.repository.db.EntryRepository;
 import hello.repository.db.PrizeRepository;
 import hello.service.basic.PointService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -114,5 +116,10 @@ public class PrizeService {
 
     public Prize findById(Long prizeId) {
         return prizeRepository.findById(prizeId).orElseThrow();
+    }
+
+    public Page<PrizeBasicDTO> getPrizePage(int page, int size, PrizeGrade grade) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return prizeRepository.findPrizePageByGrade(pageRequest, grade);
     }
 }

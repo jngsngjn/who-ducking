@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface PrizeRepository extends JpaRepository<Prize, Long> {
 
@@ -20,4 +21,8 @@ public interface PrizeRepository extends JpaRepository<Prize, Long> {
     Page<AdminPrizeListDTO> findExpiredPrizes(Pageable pageable);
 
     PrizeBasicDTO findFirstByGradeOrderByStartDateAsc(PrizeGrade grade);
+
+    @Query("SELECT new hello.dto.playground.prize.PrizeBasicDTO(p.id, p.name, p.imageName, p.endDate) " +
+            "FROM Prize p where p.grade = :grade")
+    Page<PrizeBasicDTO> findPrizePageByGrade(Pageable pageable, @Param("grade") PrizeGrade grade);
 }
