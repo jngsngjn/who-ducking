@@ -223,3 +223,29 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+
+// 스포일러 체크 여부에따라 보여주기
+document.addEventListener('DOMContentLoaded', function () {
+    const spoilerCheckbox = document.getElementById('show-spoiler');
+
+    spoilerCheckbox.addEventListener('change', function () {
+        const showSpoiler = this.checked;
+        console.log('Spoiler checkbox status:', showSpoiler);
+        const reviews = document.querySelectorAll('.review-list');
+
+        reviews.forEach(review => {
+            const isSpoiler = review.querySelector('#is-reviews-spoiler').value === 'true';
+            if (showSpoiler) {
+                review.classList.remove('hidden');
+            } else {
+                if (isSpoiler) {
+                    review.classList.add('hidden');
+                } else {
+                    review.classList.remove('hidden');
+                }
+            }
+        });
+    });
+    spoilerCheckbox.dispatchEvent(new Event('change'));
+});

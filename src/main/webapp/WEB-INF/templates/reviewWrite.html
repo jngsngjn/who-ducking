@@ -30,26 +30,11 @@
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
   />
-<!--  <script>-->
-<!--    $(document).ready(function() {-->
-<!--      let id = $('#').val();-->
-<!--      $('#delete-btn').on('click', function() {-->
-<!--        const url = `/reviews/delete/${id}`;-->
-
-<!--        $.ajax({-->
-<!--          url: url,-->
-<!--          type: 'DELETE',-->
-<!--          contentType: 'application/json',-->
-<!--          success: function(data) {-->
-<!--            console.log('성공:', data);-->
-<!--          },-->
-<!--          error: function(error) {-->
-<!--            console.error('삭제 요청에 문제가 발생했습니다:', error);-->
-<!--          }-->
-<!--        });-->
-<!--      });-->
-<!--    });-->
-<!--  </script>-->
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -119,7 +104,6 @@
     <div class="row-box">
       <button id="recent" class="order-btn" onclick="showReviews('recent')">최신 순</button>
       <button id="like" class="order-btn" onclick="showReviews('like')">좋아요 순</button>
-
     </div>
     <div class="row-box">
       <p>스포일러 포함</p>
@@ -134,6 +118,8 @@
     <div th:each="review, iterStat : ${recentReviews}" class="review-list">
       <!-- 리뷰 표시 코드 -->
       <div class="row-box">
+<!--        <h3 th:text="${review.isSpoiler()}"></h3> true false로 나옴-->
+        <input type="hidden" th:value="${review.isSpoiler()}" id="is-reviews-spoiler"/>
         <p th:text="${review.user.nickname}" class="review-writer">
 <!--          <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span> -->
         </p>
@@ -165,8 +151,9 @@
     <div th:each="review, iterStat : ${topReviews}" class="review-list">
       <!-- 리뷰 표시 코드 -->
       <div class="row-box">
+        <input type="hidden" th:value="${review.isSpoiler()}" id="is-reviews-spoiler"/>
         <p th:text="${review.user.nickname}" class="review-writer">
-          <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span> <!-- 베스트 리뷰 3개에만 best 표시 -->
+          <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span>
         </p>
         <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}"></i>
         <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}">
@@ -198,6 +185,7 @@
 
 <div th:insert="~{fragments/footer :: footer}"></div>
 <script>
+  // 정렬된 리뷰 목록 보여주기
   function showReviews(order) {
     if (order === 'recent') {
       document.getElementById('recent-reviews').style.display = 'block';
