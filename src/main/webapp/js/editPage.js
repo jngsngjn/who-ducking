@@ -456,11 +456,12 @@ $(document).ready(function() {
 
 function validateForm() {
     let detailAddress = document.getElementById('detail-address').value;
+    let postcode = document.getElementById('postcode').value;
 
-    if (detailAddress.trim() === "") {
+    if (!postcode.trim() === "" && detailAddress.trim() === "") {
         alert("상세 주소를 입력해주세요.");
-        return false; // 폼 제출을 막음
+        return false;
     }
 
-    return true; // 폼 제출을 허용
+    return true;
 }

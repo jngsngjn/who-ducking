@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/adminPrizeDraw.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>경품 추첨</h2>
+    <div class="content">
+        <p><strong>경품 이름:</strong> <span th:text="${prizeDraw.name}">이름</span></p>
+    </div>
+    <button type="button" id="drawButton">추첨</button>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const prizeId = [[${prizeDraw.id}]];
+    /*]]>*/
+</script>
+</body>
+</html>

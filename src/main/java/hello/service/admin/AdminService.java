@@ -98,15 +98,15 @@ public class AdminService {
         }
     }
 
-    public void addPrize(PrizeAddDTO prizeAddDTO) throws IOException {
+    public void addPrize(AdminPrizeAddDTO adminPrizeAddDTO) throws IOException {
         Prize prize = new Prize();
 
-        prize.setName(prizeAddDTO.getName());
-        prize.setGrade(prizeAddDTO.getGrade());
-        prize.setEndDateTime(prizeAddDTO.getEndDateTime());
+        prize.setName(adminPrizeAddDTO.getName());
+        prize.setGrade(adminPrizeAddDTO.getGrade());
+        prize.setEndDate(adminPrizeAddDTO.getEndDate());
 
         // 이미지 파일 저장
-        MultipartFile image = prizeAddDTO.getImage();
+        MultipartFile image = adminPrizeAddDTO.getImage();
         if (image != null && !image.isEmpty()) {
             String filePath = fileStore.storePrize(image);
             prize.setImagePath(filePath);
@@ -118,14 +118,18 @@ public class AdminService {
         prizeRepository.save(prize);
     }
 
-    public Page<PrizeListDTO> getCurrentPrizes(int page, int size) {
+    public Page<AdminPrizeListDTO> getCurrentPrizes(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return prizeRepository.findCurrentPrizes(pageable);
     }
 
-    public Page<PrizeListDTO> getExpiredPrizes(int page, int size) {
+    public Page<AdminPrizeListDTO> getExpiredPrizes(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return prizeRepository.findExpiredPrizes(pageable);
+    }
+
+    public PrizeDrawDTO getPrizeDraw(Long id) {
+        return prizeRepository.findPrizeDrawById(id);
     }
 
     public Page<AnnouncementListDTO> getAnnouncementPage(int page, int size) {
@@ -142,5 +146,25 @@ public class AdminService {
 
     public void deleteAnnouncement(Long id) {
         announcementRepository.deleteById(id);
+    }
+
+    public void addAnimationsWithGenres(List<Animation> animations, List<List<String>> genreNamesList) {
+        for (int i = 0; i < animations.size(); i++) {
+            Animation animation = animations.get(i);
+            List<String> genreNames = genreNamesList.get(i);
+
+            animationRepository.save(animation); // 애니메이션 저장
+
+            // 1. 장르 이름으로 장르들을 조회합니다.
+            List<Genre> genres = genreRepository.findByNameIn(genreNames);
+
+            // 2. 각 애니메이션과 장르를 매핑하는 AnimationGenre 생성 및 저장
+            for (Genre genre : genres) {
+                AnimationGenre animationGenre = new AnimationGenre(animation, genre);
+                animation.getAnimationGenres().add(animationGenre);
+            }
+
+            animationRepository.save(animation); // 변경된 애니메이션 저장 (매핑 정보 포함)
+        }
     }
 }

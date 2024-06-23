@@ -1,5 +1,6 @@
 package hello.service.account;
 
+import hello.entity.prize.Prize;
 import hello.entity.user.EmailCode;
 import hello.repository.db.EmailCodeRepository;
 import jakarta.activation.DataSource;
@@ -125,5 +126,30 @@ public class EmailService {
         return findEmailCode != null
                 && findEmailCode.getCode().equalsIgnoreCase(code)
                 && findEmailCode.getCreatedAt().isAfter(LocalDateTime.now().minusMinutes(5));
+    }
+
+    public void sendToWinner(String to, String nickname, Prize prize) throws URISyntaxException, IOException, MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        Path logoPath = Paths.get(getClass().getClassLoader().getResource("/Logo/whoduck.jpg").toURI());
+        byte[] logoImageBytes = Files.readAllBytes(logoPath);
+        DataSource logoImageData = new ByteArrayDataSource(logoImageBytes, "image/jpeg");
+
+        Path prizePath = Paths.get(prize.getImagePath());
+        byte[] prizeImageBytes = Files.readAllBytes(prizePath);
+        DataSource prizeImageData = new ByteArrayDataSource(prizeImageBytes, "image/jpeg");
+
+        Context context = new Context();
+        context.setVariable("nickname", nickname);
+        context.setVariable("prizeName", prize.getName());
+        String html = templateEngine.process("email/prizeWinnerEmail", context);
+
+        helper.setTo(to);
+        helper.setSubject("[Who's Ducking] 럭키드로우 당첨 알림");
+        helper.setText(html, true);
+        helper.addInline("logoImage", logoImageData);
+        helper.addInline("prizeImage", prizeImageData);
+        javaMailSender.send(message);
     }
 }

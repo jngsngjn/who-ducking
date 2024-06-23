@@ -12,6 +12,12 @@
 <body>
 <div class="container">
     <h2>애니메이션 추가</h2>
+    <form action="/admin/add-animation/excel" method="post" enctype="multipart/form-data">
+        엑셀로 추가 <br>
+        <input type="file" name="file" />
+        <input type="submit" value="Upload" />
+    </form>
+    <hr>
     <form th:action="@{/admin/add-animation}" method="post" enctype="multipart/form-data">
         <label for="name">애니명</label>
         <input type="text" id="name" name="name" required>

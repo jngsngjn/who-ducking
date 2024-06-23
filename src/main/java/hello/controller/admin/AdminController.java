@@ -1,14 +1,20 @@
 package hello.controller.admin;
 
 import hello.dto.admin.*;
+import hello.entity.user.User;
 import hello.service.admin.AdminService;
+import hello.service.admin.ExcelService;
+import hello.service.playgroud.PrizeService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static hello.entity.request.RequestStatus.RECEIVED;
 
@@ -18,6 +24,8 @@ import static hello.entity.request.RequestStatus.RECEIVED;
 public class AdminController {
 
     private final AdminService adminService;
+    private final PrizeService prizeService;
+    private final ExcelService excelService;
 
     @GetMapping
     public String adminPage() {
@@ -39,6 +47,12 @@ public class AdminController {
     @PostMapping("/add-animation")
     public String addAnimation(@ModelAttribute AnimationDTO animationDTO) throws IOException {
         adminService.saveAnimation(animationDTO);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/add-animation/excel")
+    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        excelService.importAnimationsFromExcel(file);
         return "redirect:/admin";
     }
 
@@ -74,17 +88,32 @@ public class AdminController {
 
     @GetMapping("/prize")
     public String prizePage(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
-        Page<PrizeListDTO> currentPrizes = adminService.getCurrentPrizes(page, 10);
-        Page<PrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
+        Page<AdminPrizeListDTO> currentPrizes = adminService.getCurrentPrizes(page, 10);
+        Page<AdminPrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
         model.addAttribute("currentPrizes", currentPrizes);
         model.addAttribute("expiredPrizes", expiredPrizes);
-        return "admin/prize";
+        return "admin/adminPrize";
     }
 
     @PostMapping("/add-prize")
-    public String addPrize(@ModelAttribute PrizeAddDTO prizeAddDTO) throws IOException {
-        adminService.addPrize(prizeAddDTO);
+    public String addPrize(@ModelAttribute AdminPrizeAddDTO adminPrizeAddDTO) throws IOException {
+        adminService.addPrize(adminPrizeAddDTO);
         return "redirect:/admin/prize";
+    }
+
+    @GetMapping("/prize/draw/{prizeId}")
+    public String drawPage(@PathVariable("prizeId") Long prizeId,
+                           Model model) {
+        PrizeDrawDTO prizeDraw = adminService.getPrizeDraw(prizeId);
+        model.addAttribute("prizeDraw", prizeDraw);
+        return "admin/adminPrizeDraw";
+    }
+
+    @PostMapping("/prize-draw/random")
+    @ResponseBody
+    public boolean drawUser(@RequestParam("prizeId") Long prizeId) throws MessagingException, URISyntaxException, IOException {
+        User user = prizeService.randomDraw(prizeId);
+        return user != null;
     }
 
     @GetMapping("/announcement")
