@@ -4,18 +4,18 @@ import hello.dto.animation.AniReviewDTO;
 import hello.entity.review.Review;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequiredArgsConstructor
 public class ReviewController {
 
-    @Autowired
-    private ReviewService reviewService;
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private final ReviewService reviewService;
+    private final ReviewRepository reviewRepository;
 
     /* POST : 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
@@ -26,12 +26,25 @@ public class ReviewController {
     }
 
     /* @ 리뷰 수정
-    *  @ id = reviewId
-    * */
-//    @PatchMapping("/reviews/patch/{id}")
-//    public String updateReview (@PathVariable long id, @RequestBody Review review){
-//        review.setId(id);
-//    }
+    *  @ id = reviewId */
+    @PatchMapping("/reviews/patch/{id}")
+    public ResponseEntity<String> updateReview(@PathVariable long id, @RequestBody Review review) {
+        try {
+            // id에 해당하는 리뷰를 찾아서 업데이트합니다.
+            Review existingReview = reviewService.findById(id);
+            if (existingReview != null) {
+                existingReview.setContent(review.getContent()); // 클라이언트에서 전송된 content로 업데이트
+                reviewService.save(existingReview); // 업데이트된 리뷰 저장
+
+                return ResponseEntity.ok("Review updated successfully");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating review: " + e.getMessage());
+        }
+    }
+
 
     /* @ 리뷰 삭제
     *  @ id = reviewId */
@@ -67,6 +80,7 @@ public class ReviewController {
 
         return ResponseEntity.ok().body(reviewId.getDislikeCount());
     }
-
-
 }
+
+
+// 글 바로 수정하기

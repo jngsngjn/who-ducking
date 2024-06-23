@@ -50,6 +50,16 @@ public class ReviewService {
         }
     }
 
+    // @ 리뷰 수정
+    public Review findById(Long id) {
+        return reviewRepository.findById(id).orElse(null);
+    }
+
+    public Review save(Review review) {
+        return reviewRepository.save(review);
+    }
+
+
     // @ 리뷰 삭제
     public void deleteReview(long reviewId) {
         reviewRepository.deleteById(reviewId);

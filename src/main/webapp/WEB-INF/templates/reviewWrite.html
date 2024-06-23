@@ -116,18 +116,18 @@
   <div class="reviews-container">
   <div id="recent-reviews" th:if="${#lists.size(recentReviews) > 0}" >
     <div th:each="review, iterStat : ${recentReviews}" class="review-list">
-      <!-- 리뷰 표시 코드 -->
       <div class="row-box">
-<!--        <h3 th:text="${review.isSpoiler()}"></h3> true false로 나옴-->
+<!--        <h1 th:text="${review.id}"></h1>-->
+        <input type="hidden" th:value="${review.id}" id="review-id"/>
         <input type="hidden" th:value="${review.isSpoiler()}" id="is-reviews-spoiler"/>
         <p th:text="${review.user.nickname}" class="review-writer">
 <!--          <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span> -->
         </p>
-        <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}"></i>
-        <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}">
-          <button class="update-review-btn" id="update-btn">수정</button>
+        <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
+        <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
+          <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
           <hr />
-          <button class="delete-review-btn" id="delete-btn" th:data-review-id="${review.id}">삭제</button>
+          <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
         </div>
       </div>
       <p th:text="${review.content}" class="review-comment"></p>
@@ -144,13 +144,13 @@
       </div>
     </div>
   </div>
-
   <!-- 좋아요순 리뷰 리스트 -->
-
   <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}" style="display:none;">
     <div th:each="review, iterStat : ${topReviews}" class="review-list">
-      <!-- 리뷰 표시 코드 -->
       <div class="row-box">
+<!--        <h1 th:text="${review.id}"></h1>-->
+        <input type="hidden" th:value="${review.id}" id="review-id"/>
+        <input type="hidden" th:value="${review.getUser().id}"/>
         <input type="hidden" th:value="${review.isSpoiler()}" id="is-reviews-spoiler"/>
         <p th:text="${review.user.nickname}" class="review-writer">
           <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span>
@@ -177,12 +177,9 @@
     </div>
   </div>
   </div>
-
-
   <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
   <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
 </div>
-
 <div th:insert="~{fragments/footer :: footer}"></div>
 <script>
   // 정렬된 리뷰 목록 보여주기

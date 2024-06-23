@@ -325,7 +325,7 @@ textarea:focus {
 .order-btn:hover,
 .order-btn:active,
 .order-btn:focus {
-    background-color: rgba(255, 139, 0, 1);
+    background-color: #ff8b00;
 }
 
 .reviews-container{
@@ -394,6 +394,9 @@ textarea:focus {
     color: white;
 }
 
+
+
+/* 리뷰 수정 관련 css */
 .update-modal-container {
     width: 10rem;
     height: 8.75rem;
@@ -426,6 +429,44 @@ hr {
     background: #d9d9d9;
     border: 0;
 }
+
+.update-comment-textarea{
+    width:90%;
+    position:relative;
+    border: none;
+    resize: none;
+    border-radius: 5px;
+}
+
+.update-comment-textarea:focus{
+    border: 1px solid #d9d9d9;
+}
+
+.save-review-btn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    width: 6.25rem;
+    height: 3.125rem;
+    background-color: #ff8b00;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    position:absolute;
+    right:5%;
+}
+
+.save-review-btn:hover {
+    background-color: #e87e04;
+}
+
+
+
+
+
+
+
+
+
 
 /* i 태그들 */
 .fa-ellipsis-vertical {
