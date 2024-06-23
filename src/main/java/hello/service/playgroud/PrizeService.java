@@ -7,13 +7,18 @@ import hello.entity.prize.PrizeGrade;
 import hello.entity.user.User;
 import hello.repository.db.EntryRepository;
 import hello.repository.db.PrizeRepository;
+import hello.service.account.EmailService;
 import hello.service.basic.PointService;
+import hello.service.register.SmsService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +35,8 @@ public class PrizeService {
     private final PrizeRepository prizeRepository;
     private final EntryRepository entryRepository;
     private final PointService pointService;
+    private final SmsService smsService;
+    private final EmailService emailService;
 
     public boolean checkPoint(User user) {
         int userPoint = user.getPoint();
@@ -87,7 +94,7 @@ public class PrizeService {
         }
     }
 
-    public User randomDraw(Long prizeId) {
+    public User randomDraw(Long prizeId) throws MessagingException, URISyntaxException, IOException {
         List<Entry> entries = entryRepository.findByPrizeId(prizeId);
         Prize prize = prizeRepository.findById(prizeId).orElseThrow();
         if (entries.isEmpty()) {
@@ -107,6 +114,8 @@ public class PrizeService {
         User winner = drawPool.get(winnerIndex);
         prize.setUser(winner);
 
+        smsService.sendToWinner(winner.getPhone(), winner.getNickname());
+        emailService.sendToWinner(winner.getEmail(), winner.getNickname());
         return winner;
     }
 

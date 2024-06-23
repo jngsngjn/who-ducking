@@ -1,7 +1,10 @@
 package hello.controller.admin;
 
 import hello.dto.admin.*;
+import hello.entity.user.User;
 import hello.service.admin.AdminService;
+import hello.service.playgroud.PrizeService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static hello.entity.request.RequestStatus.RECEIVED;
 
@@ -18,6 +22,7 @@ import static hello.entity.request.RequestStatus.RECEIVED;
 public class AdminController {
 
     private final AdminService adminService;
+    private final PrizeService prizeService;
 
     @GetMapping
     public String adminPage() {
@@ -85,6 +90,21 @@ public class AdminController {
     public String addPrize(@ModelAttribute AdminPrizeAddDTO adminPrizeAddDTO) throws IOException {
         adminService.addPrize(adminPrizeAddDTO);
         return "redirect:/admin/prize";
+    }
+
+    @GetMapping("/prize/draw/{prizeId}")
+    public String drawPage(@PathVariable("prizeId") Long prizeId,
+                           Model model) {
+        PrizeDrawDTO prizeDraw = adminService.getPrizeDraw(prizeId);
+        model.addAttribute("prizeDraw", prizeDraw);
+        return "admin/adminPrizeDraw";
+    }
+
+    @PostMapping("/prize-draw/random")
+    @ResponseBody
+    public boolean drawUser(@RequestParam("prizeId") Long prizeId) throws MessagingException, URISyntaxException, IOException {
+        User user = prizeService.randomDraw(prizeId);
+        return user != null;
     }
 
     @GetMapping("/announcement")

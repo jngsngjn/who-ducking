@@ -34,8 +34,8 @@
             </thead>
             <tbody id="currentPrizes">
             <tr th:each="prize, stat : ${currentPrizes.content}">
-                <td><a th:href="@{/prizes/{id}(id=${prize.id})}" th:text="${stat.index + 1 + (currentPrizes.number * currentPrizes.size)}"></a></td>
-                <td><a th:href="@{/prizes/{id}(id=${prize.id})}" th:text="${prize.name}"></a></td>
+                <td><a th:href="@{/admin/prize/{id}(id=${prize.id})}" th:text="${stat.index + 1 + (currentPrizes.number * currentPrizes.size)}"></a></td>
+                <td><a th:href="@{/admin/prize/{id}(id=${prize.id})}" th:text="${prize.name}"></a></td>
                 <td th:text="${prize.startDate}"></td>
                 <td th:text="${prize.endDate}"></td>
                 <td th:text="${prize.grade}"></td>
@@ -58,12 +58,12 @@
             <tbody id="expiredPrizes">
             <tr th:each="prize, stat : ${expiredPrizes.content}">
                 <td th:if="${prize.nickname == null}">
-                    <a th:href="@{/prizes/{id}(id=${prize.id})}" th:text="${stat.index + 1 + (expiredPrizes.number * expiredPrizes.size)}"></a>
+                    <a th:href="@{/admin/prize/draw/{id}(id=${prize.id})}" th:text="${stat.index + 1 + (expiredPrizes.number * expiredPrizes.size)}"></a>
                 </td>
                 <td th:unless="${prize.nickname == null}" th:text="${stat.index + 1 + (expiredPrizes.number * expiredPrizes.size)}"></td>
 
                 <td th:if="${prize.nickname == null}">
-                    <a th:href="@{/prizes/{id}(id=${prize.id})}" th:text="${prize.name}"></a>
+                    <a th:href="@{/admin/prize/draw/{id}(id=${prize.id})}" th:text="${prize.name}"></a>
                 </td>
                 <td th:unless="${prize.nickname == null}" th:text="${prize.name}"></td>
 

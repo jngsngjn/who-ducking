@@ -126,4 +126,23 @@ public class EmailService {
                 && findEmailCode.getCode().equalsIgnoreCase(code)
                 && findEmailCode.getCreatedAt().isAfter(LocalDateTime.now().minusMinutes(5));
     }
+
+    public void sendToWinner(String to, String nickname) throws URISyntaxException, IOException, MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        Path path = Paths.get(getClass().getClassLoader().getResource("/Logo/whoduck.jpg").toURI());
+        byte[] imageBytes = Files.readAllBytes(path);
+        DataSource dataSource = new ByteArrayDataSource(imageBytes, "image/jpeg");
+
+        Context context = new Context();
+        context.setVariable("nickname", nickname);
+        String html = templateEngine.process("email/prizeWinnerEmail", context);
+
+        helper.setTo(to);
+        helper.setSubject("[Who's Ducking] 럭키드로우 당첨 알림");
+        helper.setText(html, true);
+        helper.addInline("logoImage", dataSource);
+        javaMailSender.send(message);
+    }
 }

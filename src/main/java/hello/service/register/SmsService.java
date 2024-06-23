@@ -51,4 +51,18 @@ public class SmsService {
     public static int getRandomPassword() {
         return (int) (Math.random() * 9000) + 1000;
     }
+
+    public void sendToWinner(String phone, String nickname) {
+        Message message = new Message();
+        message.setFrom(senderPhoneNumber);
+        message.setTo(phone);
+        message.setText("[Who's DucKing]\n" + nickname + "님, 당첨을 축하드립니다.");
+
+        try {
+//            messageService.send(message); // 실행하면 돈 나감..!
+            System.out.println("당첨자에게 문자 전송 성공");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

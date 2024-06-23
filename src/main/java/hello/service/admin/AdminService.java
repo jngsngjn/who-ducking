@@ -128,6 +128,10 @@ public class AdminService {
         return prizeRepository.findExpiredPrizes(pageable);
     }
 
+    public PrizeDrawDTO getPrizeDraw(Long id) {
+        return prizeRepository.findPrizeDrawById(id);
+    }
+
     public Page<AnnouncementListDTO> getAnnouncementPage(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return announcementRepository.findAnnouncementPage(pageable);
