@@ -431,7 +431,6 @@ hr {
 }
 
 .update-comment-textarea{
-    width:90%;
     position:relative;
     border: none;
     resize: none;
@@ -447,16 +446,15 @@ hr {
     padding: 5px 10px;
     width: 6.25rem;
     height: 3.125rem;
-    background-color: #ff8b00;
-    border-radius: 10px;
-    color: white;
+    color: #d9d9d9;
+    border:none;
     cursor: pointer;
     position:absolute;
     right:5%;
 }
 
 .save-review-btn:hover {
-    background-color: #e87e04;
+   color: #e87e04;
 }
 
 
