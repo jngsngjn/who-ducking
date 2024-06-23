@@ -49,6 +49,7 @@
     max-height: 70%;
     cursor: pointer;
     border-radius: 10px;
+    filter:drop-shadow(12px 8px 10px orange);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 

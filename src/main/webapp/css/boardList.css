@@ -1,16 +1,16 @@
-#container{
+#board-container {
     padding-top: 80px;
 }
+
 .free-board {
     background: transparent;
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* 부모 요소의 overflow를 visible로 설정 */
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
-
-
 }
+
 /* 게시판 제목 스타일 */
 .subCommon {
     display: flex;
@@ -23,9 +23,8 @@
 .sub_title {
     color: #ff8b00;
     font-size: 48px;
-    font-weight:bold;
-    left: 260px;
-    top: 180px;
+    font-weight: bold;
+    margin-left: 50px;
 }
 
 .sort-option-box {
@@ -64,25 +63,27 @@
     color: #fff;
 }
 
-.main_section{
+.main_section {
     display: flex;
 }
 
 /* 카테고리 박스 스타일 */
-.free-board-snb{
+.free-board-snb {
     width: 300px;
-    height: 400px;
     margin-right: 20px;
 }
+
 .free-board-category-box {
-    background-color: #ffffff;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: sticky; /* 고정 위치 설정 */
+    top: 100px;
 }
 
 .free-board-category-box-fnr {
+    background-color: rgba(255, 255, 255, 0.8); /* 배경 투명도 조정 */
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -91,40 +92,42 @@
     border: 1px solid #d9d9d9;
     border-radius: 20px;
     overflow: hidden;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 350px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    height: auto;
+    padding: 20px;
 }
 
 .free-board-category-box-fnr-title {
-    padding: 60px 20px;
+    padding: 20px;
+    width: 100%; /* 너비를 100%로 */
+    text-align: center; /* 텍스트 중앙 정렬 */
 }
 
 .free-board-category-box-fnr-title a {
     text-decoration: none;
     color: #000000;
     font-weight: bold;
-    font-size: 40px;
-    text-align: center;
-    align-items: center;
+    font-size: 24px;
 }
 
-.free-board-category-box-fnr-title.selected a{
+.free-board-category-box-fnr-title.selected a {
     color: #ff8b00;
 }
 
-
 .free-board-category-box-fnr-separator {
-    width: 300px;
-    height: 0px;
+    width: 100%; /* 너비를 100%로 */
+    height: 1px;
     border-top: 1px solid #d9d9d9;
+    margin: 10px 0;
 }
 
 /* 게시판 리스트 스타일 */
-.free-board-board-list{
+.free-board-board-list {
     flex: 1;
 }
+
 .board-list-top {
     display: flex;
     background-color: transparent;
@@ -164,11 +167,34 @@
     font-weight: 400;
 }
 
+/* 글쓰기 버튼 스타일 */
+.free-board-write-button {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.free-board-write-button a {
+    text-decoration: none;
+    background-color: #ff8b00;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+
+.free-board-write-button a:hover {
+    background-color: #d97706;
+}
+
 /* 페이지네이션 스타일 */
 .pagination-wrap {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .pagination-wrap-elements {
@@ -182,17 +208,30 @@
     margin: 0 5px;
 }
 
+.pagination-wrap-elements li a {
+    text-decoration: none;
+    color: #ff8b00;
+    padding: 5px 10px;
+    border-radius: 100px;
+}
+
+.pagination-wrap-elements li a:hover {
+    background-color: #ff8b00;
+    color: #ffffff;
+}
+
 .pagination-wrap-elements li.active a {
     font-weight: bold;
-    color: #333;
+    background-color: #ffc60b;
+    color: #ffffff;
 }
 
 /* 배경 이미지 스타일 */
 .background-image {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    max-width: 30%;
-    height: auto;
-    z-index: -100;
+     position: fixed;
+            bottom: 0;
+            left: 200px;
+            max-width: 20%;
+            height: auto;
+            z-index: -100;
 }

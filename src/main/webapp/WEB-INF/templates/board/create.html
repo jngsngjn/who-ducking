@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/create.css" />
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
     <!-- swiper -->
@@ -23,27 +24,34 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/create.js"></script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 
-<div class="board-form-container">
+<div class="create-board-form-container">
     <h2>게시글 작성</h2>
     <form th:action="@{/board/create}" th:object="${board}" method="post" enctype="multipart/form-data" onsubmit="return formValidate()">
-        <div class="form-group">
-            <label for="title">제목</label>
-            <input type="text" id="title" name="title" th:field="*{title}" placeholder="제목을 입력하세요">
+        <div class="create-form-group">
+            <div class="create-file-label-title">사진 첨부</div>
+            <div class="create-image-preview-container">
+                <img id="create-imagePreview" class="create-board-img" style="display:none;">
+                <button type="button" class="create-delete-image-button" style="display:none;" onclick="createRemoveImage()">삭제</button>
+            </div>
+            <input type="file" id="create-file" name="file" accept="image/*" class="create-board-write-file-input">
         </div>
-        <div class="form-group">
-            <label for="content">내용</label>
-            <textarea name="content" id="content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
+        <div class="create-file-button-container">
+            <button type="button" class="create-file-button" onclick="document.getElementById('create-file').click()">사진 추가</button>
         </div>
-        <div class="form-group">
-            <label for="file">사진 첨부</label>
-            <img class="board-img" id="imagePreview" alt="Board Image" style="display:none; max-width: 100%; height: auto;"/>
-            <input type="file" id="file" name="file" accept="image/*" class="board-write-file-input">
+        <div class="create-form-group">
+            <label for="create-title">제목</label>
+            <input type="text" id="create-title" name="title" th:field="*{title}" placeholder="제목을 입력하세요">
         </div>
-        <button type="submit" class="board-create-button">작성</button>
+        <div class="create-form-group">
+            <label for="create-content">내용</label>
+            <textarea name="content" id="create-content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
+        </div>
+        <button type="submit" class="create-board-create-button">작성</button>
     </form>
 </div>
 
