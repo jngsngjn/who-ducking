@@ -3,6 +3,7 @@ package hello.controller.admin;
 import hello.dto.admin.*;
 import hello.entity.user.User;
 import hello.service.admin.AdminService;
+import hello.service.admin.ExcelService;
 import hello.service.playgroud.PrizeService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -23,6 +25,7 @@ public class AdminController {
 
     private final AdminService adminService;
     private final PrizeService prizeService;
+    private final ExcelService excelService;
 
     @GetMapping
     public String adminPage() {
@@ -44,6 +47,12 @@ public class AdminController {
     @PostMapping("/add-animation")
     public String addAnimation(@ModelAttribute AnimationDTO animationDTO) throws IOException {
         adminService.saveAnimation(animationDTO);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/add-animation/excel")
+    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        excelService.importAnimationsFromExcel(file);
         return "redirect:/admin";
     }
 

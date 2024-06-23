@@ -147,4 +147,24 @@ public class AdminService {
     public void deleteAnnouncement(Long id) {
         announcementRepository.deleteById(id);
     }
+
+    public void addAnimationsWithGenres(List<Animation> animations, List<List<String>> genreNamesList) {
+        for (int i = 0; i < animations.size(); i++) {
+            Animation animation = animations.get(i);
+            List<String> genreNames = genreNamesList.get(i);
+
+            animationRepository.save(animation); // 애니메이션 저장
+
+            // 1. 장르 이름으로 장르들을 조회합니다.
+            List<Genre> genres = genreRepository.findByNameIn(genreNames);
+
+            // 2. 각 애니메이션과 장르를 매핑하는 AnimationGenre 생성 및 저장
+            for (Genre genre : genres) {
+                AnimationGenre animationGenre = new AnimationGenre(animation, genre);
+                animation.getAnimationGenres().add(animationGenre);
+            }
+
+            animationRepository.save(animation); // 변경된 애니메이션 저장 (매핑 정보 포함)
+        }
+    }
 }
