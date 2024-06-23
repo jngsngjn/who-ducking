@@ -12,7 +12,7 @@
         const worldRightCaption = document.getElementById("world-right-caption");
         const finalImage = document.getElementById("finalImage");
         const finalCaption = document.getElementById("finalCaption");
-        const jsConfetti = new JSConfetti(); // JSConfetti 초기화
+        const jsConfetti = new JSConfetti(); //폭죽
     
         modal.style.display = "block";
         modal.classList.add("show");
@@ -115,19 +115,25 @@
             resultModal.style.display = "block";
             resultModal.classList.add("show");
             worldContainer.style.display = "none";
-    
+
             // 폭죽 효과 추가
             jsConfetti.addConfetti({
                 confettiColors: [
-                    "#ff0a54",
-                    "#ff477e",
-                    "#ff7096",
-                    "#ff85a1",
-                    "#fbb1bd",
-                    "#f9bec7",
+                    "#ff0a54", // 핑크
+                    "#ff477e", // 밝은 핑크
+                    "#ff7096", // 밝은 빨강
+                    "#ff85a1", // 살구색
+                    "#fbb1bd", // 밝은 살구색
+                    "#f9bec7", // 연한 핑크
+                    "#ff0000", // 빨강
+                    "#ffcc00", // 노랑
+                    "#00ff00", // 초록
+                    "#0000ff", // 파랑
+                    "#800080", // 보라
+                    "#ffa500"  // 주황
                 ],
                 confettiRadius: 5,
-                confettiNumber: 500,
+                confettiNumber: 1000,
             });
         }
     
