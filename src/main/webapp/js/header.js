@@ -14,6 +14,21 @@ $(document).ready(function () {
     headerProfile_Btn.click(function () {
         $(this).find(".h-profile").toggleClass("active");
         headerProfile_Menu.slideToggle();
+
+        $.ajax({
+            url: '/update-header',
+            type: 'POST',
+            success: function(response) {
+                console.log('요청이 성공적으로 완료되었습니다.');
+                console.log(response);
+
+                $('#point').text(response.point + "P");
+            },
+            error: function() {
+                // 요청이 실패했을 때 실행할 코드
+                console.log('요청이 실패했습니다.');
+            }
+        });
     });
 
     // MobileMenu_OnOffEvent
@@ -34,6 +49,20 @@ $(document).ready(function () {
         footer.hide();
         mobileMenu_OnBtn.hide();
         mobileMenu_OffBtn.show();
+        $.ajax({
+            url: '/update-header',
+            type: 'POST',
+            success: function(response) {
+                console.log('요청이 성공적으로 완료되었습니다.');
+                console.log(response);
+
+                $('#mobile-point').text(response.point + "P");
+            },
+            error: function() {
+                // 요청이 실패했을 때 실행할 코드
+                console.log('요청이 실패했습니다.');
+            }
+        });
     });
 
     mobileMenu_OffBtn.click(function () {

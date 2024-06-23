@@ -29,6 +29,7 @@ public class MainController {
                 String profileImageName = null;
                 if (profileImage != null) {
                     profileImageName = profileImage.getStoreImageName();
+                    System.out.println("profileImageName = " + profileImageName);
                 }
 
                 session.setAttribute("nickname", nickname);

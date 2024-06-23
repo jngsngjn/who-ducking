@@ -1,4 +1,4 @@
-package hello.repository;
+package hello.repository.db;
 
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;

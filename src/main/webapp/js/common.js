@@ -20,6 +20,7 @@ Promise.all([
     loadScript("/js/registerBasic.js"),
     loadScript("/js/registerGenre.js"),
     loadScript("/js/lucky.js"),
+    loadScript("/js/noticePage.js"),
 ])
     .then(() => {
         console.log("All scripts loaded.");
