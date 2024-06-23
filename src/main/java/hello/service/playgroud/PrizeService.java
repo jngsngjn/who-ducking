@@ -14,6 +14,7 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,7 +81,7 @@ public class PrizeService {
         user.setLastDrawDate(today);
 
         Prize prize = prizeRepository.findById(prizeId).orElseThrow();
-        Optional<Entry> findEntry = entryRepository.findByUserId(user.getId());
+        Optional<Entry> findEntry = entryRepository.findByUserIdAndPrizeId(user.getId(), prizeId);
         pointService.decreasePoint(user, 30);
 
         // 처음 응모한 경우
@@ -114,13 +115,15 @@ public class PrizeService {
         User winner = drawPool.get(winnerIndex);
         prize.setUser(winner);
 
-        smsService.sendToWinner(winner.getPhone(), winner.getNickname());
-        emailService.sendToWinner(winner.getEmail(), winner.getNickname());
+        smsService.sendToWinner(winner.getPhone(), winner.getNickname(), prize.getName());
+        emailService.sendToWinner(winner.getEmail(), winner.getNickname(), prize);
         return winner;
     }
 
     public PrizeBasicDTO getEarliestPrizeByGrade(PrizeGrade grade) {
-        return prizeRepository.findFirstByGradeOrderByStartDateAsc(grade);
+        Pageable firstResult = PageRequest.of(0, 1);
+        List<PrizeBasicDTO> result = prizeRepository.findFirstByGradeOrderByStartDateAsc(grade, firstResult);
+        return result.isEmpty() ? null : result.get(0);
     }
 
     public Prize findById(Long prizeId) {

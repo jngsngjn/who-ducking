@@ -52,11 +52,11 @@ public class SmsService {
         return (int) (Math.random() * 9000) + 1000;
     }
 
-    public void sendToWinner(String phone, String nickname) {
+    public void sendToWinner(String phone, String nickname, String prizeName) {
         Message message = new Message();
         message.setFrom(senderPhoneNumber);
         message.setTo(phone);
-        message.setText("[Who's DucKing]\n" + nickname + "님, 당첨을 축하드립니다.");
+        message.setText("[Who's DucKing]\n" + nickname + "님, [" + prizeName + "] 럭키드로우 당첨을 축하드립니다!\n마이페이지에 입력하신 주소로 경품이 배송될 예정이오니 주소를 다시 한 번 확인해 주세요.");
 
         try {
 //            messageService.send(message); // 실행하면 돈 나감..!

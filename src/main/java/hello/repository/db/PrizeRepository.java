@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface PrizeRepository extends JpaRepository<Prize, Long> {
 
     @Query("SELECT new hello.dto.admin.AdminPrizeListDTO(p.id, p.name, p.startDate, p.endDate, p.grade) " +
@@ -21,7 +23,10 @@ public interface PrizeRepository extends JpaRepository<Prize, Long> {
             "FROM Prize p left JOIN p.user u WHERE p.endDate <= CURRENT_TIMESTAMP ORDER BY p.endDate DESC")
     Page<AdminPrizeListDTO> findExpiredPrizes(Pageable pageable);
 
-    PrizeBasicDTO findFirstByGradeOrderByStartDateAsc(PrizeGrade grade);
+    @Query("SELECT new hello.dto.playground.prize.PrizeBasicDTO(p.id, p.name, p.imageName, p.endDate) " +
+            "FROM Prize p WHERE p.grade = :grade AND p.endDate > CURRENT_DATE " +
+            "ORDER BY p.startDate ASC")
+    List<PrizeBasicDTO> findFirstByGradeOrderByStartDateAsc(@Param("grade") PrizeGrade grade, Pageable pageable);
 
     @Query("SELECT new hello.dto.playground.prize.PrizeBasicDTO(p.id, p.name, p.imageName, p.endDate) " +
             "FROM Prize p where p.grade = :grade")
