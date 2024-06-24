@@ -65,3 +65,27 @@ function loadLikesDislikes() {
         }
     });
 }
+
+$(document).ready(function() {
+    var isBookmarked = $('#board-bookmark-button').hasClass('bookmarked');
+
+    $('#board-bookmark-button').click(function() {
+        var boardId = $(this).data('board-id');
+        var button = $(this);
+
+        $.ajax({
+            url: '/board/' + boardId + '/bookmark',
+            type: 'POST',
+            dataType: 'json',
+            success: function(response) {
+                isBookmarked = response.bookmarked;
+                button.toggleClass('bookmarked', isBookmarked);
+                button.text(isBookmarked ? '북마크됨' : '북마크');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', error);
+                alert('북마크 처리 중 오류가 발생했습니다.');
+            }
+        });
+    });
+});

@@ -52,9 +52,12 @@ public class BoardService {
 
     //상세보기
     public Optional<Board> getBoardById(Long id) {
-        //조회수 업데이트
-        boardRepository.incrementViewCount(id);
         return boardRepository.findById(id);
+    }
+
+    //조회수 업데이트
+    public void updateViewCount(Long id){
+        boardRepository.incrementViewCount(id);
     }
 
     //글 수정

@@ -94,6 +94,12 @@ public class BoardController {
         return "board/show";
     }
 
+    @PostMapping("/{boardId}/incrementViewCount")
+    @ResponseBody
+    public void incrementViewCount(@PathVariable("boardId") Long boardId) {
+        boardService.updateViewCount(boardId);
+    }
+
     //게시글 수정 폼
     @GetMapping("/{boardId}/edit")
     public String showEditBoard(@PathVariable("boardId") Long boardId, Model model) {

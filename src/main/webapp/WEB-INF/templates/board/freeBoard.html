@@ -55,12 +55,11 @@
 
                 <div class="board-list-separator"></div>
 
-                <!--타임리프 적용 필요-->
                 <div class="board-list-bot">
                     <ul class="board-list-bot-items">
                         <li th:each="board, iterStat : ${boardList}">
                             <span class="board-list-num" th:text="${currentPage * pageSize + iterStat.index + 1}"></span>
-                            <span class="board-list-title"><a th:href="@{/board/{boardId}(boardId=${board.id})}" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목없음</a></span>
+                            <span class="board-list-title"><a href="#" th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목없음</a></span>
                             <span class="board-list-writer" th:text="${board.user.nickname}"></span>
                             <span class="board-list-date" th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}"></span>
                             <span class="board-list-view-cnt" th:text="${board.viewCount}"></span>
