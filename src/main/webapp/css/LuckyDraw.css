@@ -5,7 +5,7 @@
 .lucky_ul {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 0;
     list-style-type: none; /* li 요소의 기본 스타일 제거 */
     gap: 20px; /* 요소 사이의 간격 추가 */
@@ -252,34 +252,4 @@ body {
 
 .lucky_draw_button:hover {
     background-color: #ec8303;
-}
-
-.myFaq_next {
-    width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
-    display: flex;
-    justify-content: center; /* 가로로 가운데 정렬 */
-    gap: 20px; /* 버튼 사이의 간격 추가 */
-    margin-top: 20px; /* 상단 여백 추가 */
-}
-
-.myFaq_next-button, .myFaq_now-button {
-    width: 54px;
-    height: 54px;
-    border-radius: 100px;
-    background-color: #feffdb;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    text-decoration: none; /* 링크의 기본 밑줄 제거 */
-    color: inherit; /* 링크의 텍스트 색상을 부모 요소로부터 상속 */
-}
-
-.myFaq_now-button {
-    background-color: #ffc60b;
-}
-
-.disabled {
-    pointer-events: none;
-    color: grey;
 }

@@ -92,7 +92,7 @@
             <!-- UR Section -->
             <div class="lucky_tab__content active">
                 <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${ur.content}">
+                    <li class="lucky_draw_item" th:each="item : ${ur}">
                         <div class="lucky_ur">UR</div>
                         <div class="lucky_draw_img">
                             <div class="lucky_draw_img_box">
@@ -117,23 +117,11 @@
                         <a href="#" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
-                <div class="myFaq_next">
-                    <a class="myFaq_next-button" th:classappend="${ur.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${ur.number - 1}, type='UR')}">&lt;&lt;</a>
-                    <a class="myFaq_next-button" th:classappend="${ur.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${ur.number - 1}, type='UR')}">&lt;</a>
-                    <span th:if="${ur.totalPages > 0}" th:each="i : ${#numbers.sequence(1, ur.totalPages)}">
-            <a th:classappend="${i == ur.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/playground/lucky-draw(page=${i - 1}, type='UR')}" th:text="${i}">1</a>
-        </span>
-                    <span th:if="${ur.totalPages == 0}">
-            <a class="myFaq_now-button" href="#">1</a>
-        </span>
-                    <a class="myFaq_next-button" th:classappend="${ur.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${ur.number + 1}, type='UR')}">&gt;</a>
-                    <a class="myFaq_next-button" th:classappend="${ur.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${ur.number + 1}, type='UR')}">&gt;&gt;</a>
-                </div>
             </div>
 
             <div class="lucky_tab__content">
                 <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${sr.content}">
+                    <li class="lucky_draw_item" th:each="item : ${sr}">
                         <div class="lucky_sr">SR</div>
                         <div class="lucky_draw_img">
                             <div class="lucky_draw_img_box">
@@ -158,23 +146,11 @@
                         <a href="#" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
-                <div class="myFaq_next">
-                    <a class="myFaq_next-button" th:classappend="${sr.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${sr.number - 1}, type='SR')}">&lt;&lt;</a>
-                    <a class="myFaq_next-button" th:classappend="${sr.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${sr.number - 1}, type='SR')}">&lt;</a>
-                    <span th:if="${sr.totalPages > 0}" th:each="i : ${#numbers.sequence(1, sr.totalPages)}">
-            <a th:classappend="${i == sr.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/playground/lucky-draw(page=${i - 1}, type='SR')}" th:text="${i}">1</a>
-        </span>
-                    <span th:if="${sr.totalPages == 0}">
-            <a class="myFaq_now-button" href="#">1</a>
-        </span>
-                    <a class="myFaq_next-button" th:classappend="${sr.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${sr.number + 1}, type='SR')}">&gt;</a>
-                    <a class="myFaq_next-button" th:classappend="${sr.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${sr.number + 1}, type='SR')}">&gt;&gt;</a>
-                </div>
             </div>
 
             <div class="lucky_tab__content">
                 <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${r.content}">
+                    <li class="lucky_draw_item" th:each="item : ${r}">
                         <div class="lucky_r">R</div>
                         <div class="lucky_draw_img">
                             <div class="lucky_draw_img_box">
@@ -199,23 +175,11 @@
                         <a href="#" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
-                <div class="myFaq_next">
-                    <a class="myFaq_next-button" th:classappend="${r.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${r.number - 1}, type='R')}">&lt;&lt;</a>
-                    <a class="myFaq_next-button" th:classappend="${r.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${r.number - 1}, type='R')}">&lt;</a>
-                    <span th:if="${r.totalPages > 0}" th:each="i : ${#numbers.sequence(1, r.totalPages)}">
-            <a th:classappend="${i == r.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/playground/lucky-draw(page=${i - 1}, type='R')}" th:text="${i}">1</a>
-        </span>
-                    <span th:if="${r.totalPages == 0}">
-            <a class="myFaq_now-button" href="#">1</a>
-        </span>
-                    <a class="myFaq_next-button" th:classappend="${r.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${r.number + 1}, type='R')}">&gt;</a>
-                    <a class="myFaq_next-button" th:classappend="${r.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${r.number + 1}, type='R')}">&gt;&gt;</a>
-                </div>
             </div>
 
             <div class="lucky_tab__content">
                 <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${n.content}">
+                    <li class="lucky_draw_item" th:each="item : ${n}">
                         <div class="lucky_n">N</div>
                         <div class="lucky_draw_img">
                             <div class="lucky_draw_img_box">
@@ -240,18 +204,6 @@
                         <a href="#" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
-                <div class="myFaq_next">
-                    <a class="myFaq_next-button" th:classappend="${n.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${n.number - 1}, type='N')}">&lt;&lt;</a>
-                    <a class="myFaq_next-button" th:classappend="${n.hasPrevious()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${n.number - 1}, type='N')}">&lt;</a>
-                    <span th:if="${n.totalPages > 0}" th:each="i : ${#numbers.sequence(1, n.totalPages)}">
-            <a th:classappend="${i == n.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/playground/lucky-draw(page=${i - 1}, type='N')}" th:text="${i}">1</a>
-        </span>
-                    <span th:if="${n.totalPages == 0}">
-            <a class="myFaq_now-button" href="#">1</a>
-        </span>
-                    <a class="myFaq_next-button" th:classappend="${n.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${n.number + 1}, type='N')}">&gt;</a>
-                    <a class="myFaq_next-button" th:classappend="${n.hasNext()} ? '' : 'disabled'" th:href="@{/playground/lucky-draw(page=${n.number + 1}, type='N')}">&gt;&gt;</a>
-                </div>
             </div>
         </div>
     </div>

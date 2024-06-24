@@ -12,7 +12,6 @@ import hello.service.basic.PointService;
 import hello.service.register.SmsService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -130,8 +129,7 @@ public class PrizeService {
         return prizeRepository.findById(prizeId).orElseThrow();
     }
 
-    public Page<PrizeBasicDTO> getPrizePage(int page, int size, PrizeGrade grade) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        return prizeRepository.findPrizePageByGrade(pageRequest, grade);
+    public List<PrizeBasicDTO> getPrizePage(PrizeGrade grade) {
+        return prizeRepository.findPrizePageByGrade(grade);
     }
 }
