@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (reviewBoardBtn) {
         reviewBoardBtn.click();
     }
-
-    // 통합되었을떄 자유게시판 클릭시 그 게시판이 나오는 함수 넣기
 });
 
 

@@ -47,9 +47,11 @@ public class AnimationsController {
         animation.setId(id); //경로에 있는 애니메이션 id를 animation 클래스의 id필드에 세팅
         model.addAttribute("aniDetailInfo", animation);
 
+
         /* @ 전체 리뷰수와 평점 */
         List<GetAniListDTO> reviewAndScore = animationService.getCountReviewAndScore(id);
         model.addAttribute("totalReviews", reviewAndScore);
+
 
         /* @ 로그인 유저정보  */
         User loginUser = userService.getLoginUserDetail(user); // -> dto의 CustomOauth2User로 받아와야해

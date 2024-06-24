@@ -58,19 +58,6 @@ public class AnimationService {
         }
     }
 
-//    // 리뷰 인기순 조회
-//    public List<Review> getReviewsByAnimationIdOrderedLikeCount(Long id) {
-//        logger.info("리뷰 인기순으로 받아오기 서비스 로직 실행");
-//        try {
-//            List<Review> reviews = reviewRepository.findTopReviewsByAnimationId(id);
-//            logger.info("가져온 리뷰 수: {}", reviews.size());
-//            return reviews;
-//        } catch (Exception e) {
-//            logger.error("리뷰 인기순으로 받아오기 중 에러 발생: {}", e.getMessage(), e);
-//            throw e;
-//        }
-//    }
-
     public List<Review> getRecentReviewsByAnimationId(Long animationId) {
         return reviewRepository.findRecentReviewsByAnimationId(animationId);
     }

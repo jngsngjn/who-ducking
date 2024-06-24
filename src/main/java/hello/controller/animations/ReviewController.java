@@ -1,12 +1,16 @@
 package hello.controller.animations;
 
 import hello.dto.animation.AniReviewDTO;
+import hello.dto.user.CustomOAuth2User;
 import hello.entity.review.Review;
+import hello.entity.user.User;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
+import hello.service.basic.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +20,17 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewRepository reviewRepository;
+    private final UserService userService;
 
     /* POST : 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
-    public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO){
+    public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO, @AuthenticationPrincipal CustomOAuth2User user){
         aniReviewDTO.setAnimationId(AnimationId);
-        reviewService.addReview(aniReviewDTO);
+        User loginUser = userService.getLoginUserDetail(user);
+        reviewService.addReview(aniReviewDTO, loginUser);
         return "redirect:/animations/" + AnimationId;
     }
+
 
     /* @ 리뷰 수정
     *  @ id = reviewId */
@@ -53,6 +60,7 @@ public class ReviewController {
         return ResponseEntity.noContent().build();
     }
 
+
     /* @ 좋아요 클릭시 요청 */
     @PatchMapping("/reviews/{id}/like")
     public ResponseEntity<?> likeReview(@PathVariable("id") Long id) {
@@ -80,6 +88,3 @@ public class ReviewController {
         return ResponseEntity.ok().body(reviewId.getDislikeCount());
     }
 }
-
-
-// 글 바로 수정하기
