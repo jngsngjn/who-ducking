@@ -21,6 +21,9 @@ public class ImageController {
     @Value("${boardPath}")
     private String boardPath;
 
+    @Value("${prizePath}")
+    private String prizePath;
+
     @Value("${aniPath}")
     private String aniPath;
 
@@ -35,6 +38,8 @@ public class ImageController {
         }
         else if (type.equals("board")){
             basePath = boardPath;
+        } else if (type.equals("prize")) {
+            basePath = prizePath;
         }
         else if (type.equals("ani")){
             basePath = aniPath;

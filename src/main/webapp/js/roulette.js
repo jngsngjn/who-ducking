@@ -61,7 +61,7 @@ const drawArrow = () => {
 // 돌림판
 const rotate = () => {
     $.ajax({
-        url: '/check-points',  // 포인트 확인을 위한 서버 엔드포인트
+        url: '/roulette/check-points',  // 포인트 확인을 위한 서버 엔드포인트
         type: 'POST',
         success: function(response) {
             if (response) {
@@ -109,7 +109,7 @@ newMake();
 
 // DB에 포인트를 업데이트하는 함수
 const updatePointsInDB = (points) => {
-    return fetch('/wheel/get-points', {
+    return fetch('/roulette/get-points', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
