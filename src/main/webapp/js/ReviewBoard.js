@@ -52,8 +52,8 @@ function renderPage(page) {
         animation.style.display = 'none';
     });
 
-    const start = (page - 1) * 9;
-    const end = page * 9;
+    const start = (page - 1) * 12;
+    const end = page * 12;
     for (let i = start; i < end && i < animations.length; i++) {
         animations[i].style.display = 'block';
     }
@@ -79,7 +79,7 @@ function changePage(page) {
 document.addEventListener("DOMContentLoaded", function () {
     const aniListContainer = document.getElementById('ani-list-container');
     totalAni = aniListContainer.querySelectorAll('.ani-info-container').length;
-    totalPages = Math.ceil(totalAni / 9);
+    totalPages = Math.ceil(totalAni / 12);
     renderPage(currentPage);
 });
 

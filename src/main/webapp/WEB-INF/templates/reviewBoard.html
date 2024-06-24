@@ -59,35 +59,100 @@
   </head>
   <body>
     <div th:insert="~{fragments/header :: header}"></div>
-    <div class="sticky-container"><h1 class="page-title">커뮤니티</h1>
-    </div>
-    <div class="comminty-page">
+
+    <div class="community-page">
+
       <div class="community-container">
+        <div class="title-container">
+          <h1 class="page-title">커뮤니티</h1>
+          <div class="order-container">
+            <button class="order-btn" id="ordered-recent">최신순</button>
+            <button class="order-btn" id="ordered-review">리뷰순</button>
+          </div>
+          <div class="genre-container">
+            <h3 class="genre-title">장르</h3>
+            <div class="genre-list-container"><!--form으로하는게 편할까 고민 -->
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 미스테리
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 로맨스
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 액션
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 추리
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> GL
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> BL
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 쇼타
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 성인
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 장르1
+                </label>
+              </div>
+              <div >
+                <input type="checkbox" id="genre" class="genre-list"/>
+                <label for="genre" class="check-genre"> 장르2
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-container">
+
           <div class="ani-list-container" id="ani-list-container">
             <div
               th:each="animation : ${animationLists}"
-              class="ani-info-container"
-            >
+              class="ani-info-container">
               <div class="img-container">
                 <img
                   th:src="${animation.imagePath}"
                   alt="애니 포스터"
-                  class="ani-poster"
-                />
+                  class="ani-poster"/>
                 <div id="animation-id">[[${animation.animationId}]]</div>
               </div>
               <div class="row-info-container">
                 <div class="recommend-container">
-                  <i class="fa-solid fa-comment">
-                    [[${animation.reviewCount}]]</i
-                  >
+                  <i class="fa-solid fa-comment">[[${animation.reviewCount}]]</i>
                   <i class="fa-solid fa-star"> [[${animation.score}]] / 5.0</i>
                 </div>
+              </div>
+              <div class="ani-list-title-container">
+                <p th:text="${animation.getName()}"  class="ani-list-title">
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
       <div class="page-btn-box">
         <i class="fa-solid fa-angles-left page-btn" onclick="changePage(1)"></i>
         <i class="fa-solid fa-angle-left page-btn" onclick="prevPage()"></i>
@@ -100,6 +165,7 @@
           onclick="changePage(totalPages)"
         ></i>
       </div>
+
     <div th:insert="~{fragments/footer :: footer}"></div>
   </body>
 </html>

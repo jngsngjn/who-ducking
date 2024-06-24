@@ -35,6 +35,8 @@ public class AnimationsController {
         return "reviewBoard";
     }
 
+    // 필터링해서 선택된 장르 id로 보여줄 애니 리스트 조회
+
     /* 애니메이션 상세페이지 GET(리뷰작성페이지)
      * PathVariable id = animationId */
     @GetMapping("animations/{id}")
