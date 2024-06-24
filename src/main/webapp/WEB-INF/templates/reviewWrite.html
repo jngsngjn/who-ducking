@@ -56,7 +56,7 @@
 <div class="review-body">
   <h1 class="page-title">리뷰 게시판</h1>
   <div class="ani-container">
-    <img th:src="${aniDetailInfo.imagePath}" alt="애니 포스터" class="ani-img" />
+    <img th:src="@{'/image/ani/' + ${aniDetailInfo.imageName}}" alt="애니 포스터" class="ani-img" />
     <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>
     <div class="ani-info-box">
       <div class="title-bar">
