@@ -74,7 +74,7 @@
                         <span class="comment-writer" th:text="${comment.user.nickname}"></span>
                         <p th:text="${comment.content}"></p>
                     </div>
-                    <div class="comment-meta" data-comment-id="1">
+                    <div class="comment-meta" th:attr="data-comment-id=${comment.id}">
                         <span class="comment-date" th:text="${#temporals.format(comment.writeDate, 'yyyy.MM.dd HH:mm')}"></span>
                         <button class="comment-likes" onclick="toggleLike(this)">
                             👍

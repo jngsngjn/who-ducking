@@ -12,7 +12,7 @@
 
 }
 /* 게시판 제목 스타일 */
-.subCommon {
+.subCommon-freeBoard {
     display: flex;
     justify-content: space-between;
     align-items: center;
