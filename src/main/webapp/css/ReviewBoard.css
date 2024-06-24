@@ -115,8 +115,10 @@ hr {
 }
 
 .ani-poster {
-  width: 18.75rem;
-  height: 24rem;
+  /*width: 18.75rem;*/
+  /*height: 24rem;*/
+  width: auto;
+  height: auto;
   border-radius: 1.875rem;
   transition: transform 0.3s ease;
 }

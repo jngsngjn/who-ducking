@@ -82,8 +82,8 @@
                 <span th:if="${boardList.totalPages == 0}">
                      <a class="free-board-pagination-now-button" href="#">1</a>
                 </span>
-                <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;&gt;</a>
-                <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;</a>
+                <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;&gt;</a>
+                <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;</a>
             </div>
         </section>
     </div>

@@ -21,6 +21,9 @@ public class ImageController {
     @Value("${boardPath}")
     private String boardPath;
 
+    @Value("${aniPath}")
+    private String aniPath;
+
     @GetMapping("/image/{type}/{imageName}")
     public Resource renderImage(@PathVariable("type") String type, @PathVariable("imageName") String imageName) throws MalformedURLException {
         String basePath = null;
@@ -32,6 +35,9 @@ public class ImageController {
         }
         else if (type.equals("board")){
             basePath = boardPath;
+        }
+        else if (type.equals("ani")){
+            basePath = aniPath;
         }
         return new UrlResource("file:" + basePath + imageName);
     }
