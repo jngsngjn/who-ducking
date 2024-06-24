@@ -110,11 +110,11 @@
                                 <div class="lucky_draw_icon2">
                                     <i class="fa-regular fa-calendar-days"></i>
                                 </div>
-                                <span th:text="${item.endDate}">2024-05-30</span>
+                                <span th:text="${item.endDate} + '까지'">2024-05-30</span>
                             </div>
                         </div>
                         <div class="lucky_draw_name" th:text="${item.name}">아이언맨</div>
-                        <a href="#" class="lucky_draw_button">응모하기</a>
+                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
             </div>
@@ -139,11 +139,11 @@
                                 <div class="lucky_draw_icon2">
                                     <i class="fa-regular fa-calendar-days"></i>
                                 </div>
-                                <span th:text="${item.endDate}">2024-06-28까지</span>
+                                <span th:text="${item.endDate} + '까지'">2024-06-28까지</span>
                             </div>
                         </div>
                         <div class="lucky_draw_name" th:text="${item.name}">미츠리 레진 대형 스테츄</div>
-                        <a href="#" class="lucky_draw_button">응모하기</a>
+                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
             </div>
@@ -168,11 +168,11 @@
                                 <div class="lucky_draw_icon2">
                                     <i class="fa-regular fa-calendar-days"></i>
                                 </div>
-                                <span th:text="${item.endDate}">2024-06-28까지</span>
+                                <span th:text="${item.endDate} + '까지'">2024-06-28까지</span>
                             </div>
                         </div>
                         <div class="lucky_draw_name" th:text="${item.name}">미츠리 레진 대형 스테츄</div>
-                        <a href="#" class="lucky_draw_button">응모하기</a>
+                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
             </div>
@@ -197,11 +197,11 @@
                                 <div class="lucky_draw_icon2">
                                     <i class="fa-regular fa-calendar-days"></i>
                                 </div>
-                                <span th:text="${item.endDate}">2024-06-28까지</span>
+                                <span th:text="${item.endDate} + '까지'">2024-06-28까지</span>
                             </div>
                         </div>
                         <div class="lucky_draw_name" th:text="${item.name}">미츠리 레진 대형 스테츄</div>
-                        <a href="#" class="lucky_draw_button">응모하기</a>
+                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,7 @@
 package hello.service.playgroud;
 
 import hello.dto.playground.prize.PrizeBasicDTO;
+import hello.dto.playground.prize.PrizeOneDTO;
 import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
 import hello.entity.prize.PrizeGrade;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -131,5 +133,24 @@ public class PrizeService {
 
     public List<PrizeBasicDTO> getPrizePage(PrizeGrade grade) {
         return prizeRepository.findPrizePageByGrade(grade);
+    }
+
+    public PrizeOneDTO getPrizeOne(Long id) {
+        return prizeRepository.findPrizeOneById(id);
+    }
+
+    public List<PrizeOneDTO> getRandomPrizes() {
+        List<Prize> prizes = prizeRepository.findRandomPrizes();
+        return prizes.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    private PrizeOneDTO convertToDto(Prize prize) {
+        return new PrizeOneDTO(
+                prize.getId(),
+                prize.getName(),
+                prize.getStartDate(),
+                prize.getEndDate(),
+                prize.getImageName()
+        );
     }
 }

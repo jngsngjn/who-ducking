@@ -19,7 +19,6 @@ Promise.all([
     loadScript("/js/showPage.js"),
     loadScript("/js/registerBasic.js"),
     loadScript("/js/registerGenre.js"),
-    loadScript("/js/lucky.js"),
     loadScript("/js/noticePage.js"),
 ])
     .then(() => {

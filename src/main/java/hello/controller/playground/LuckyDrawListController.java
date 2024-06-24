@@ -14,7 +14,7 @@ import static hello.entity.prize.PrizeGrade.*;
 
 @Controller
 @RequiredArgsConstructor
-public class LuckyDrawController {
+public class LuckyDrawListController {
 
     private final PrizeService prizeService;
 
@@ -22,7 +22,6 @@ public class LuckyDrawController {
     public String luckyDraw(Model model,
                             @RequestParam(name = "page", defaultValue = "0") int page,
                             @RequestParam(name = "type", defaultValue = "UR") String type) {
-        int size = 6;
 
         List<PrizeBasicDTO> ur = prizeService.getPrizePage(UR);
         List<PrizeBasicDTO> sr = prizeService.getPrizePage(SR);
@@ -35,6 +34,6 @@ public class LuckyDrawController {
         model.addAttribute("n", n);
         model.addAttribute("currentType", type);
 
-        return "luckyDraw";
+        return "luckyDrawList";
     }
 }
