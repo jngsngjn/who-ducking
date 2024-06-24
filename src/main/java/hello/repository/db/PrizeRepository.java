@@ -3,6 +3,7 @@ package hello.repository.db;
 import hello.dto.admin.AdminPrizeListDTO;
 import hello.dto.admin.PrizeDrawDTO;
 import hello.dto.playground.prize.PrizeBasicDTO;
+import hello.dto.playground.prize.PrizeOneDTO;
 import hello.entity.prize.Prize;
 import hello.entity.prize.PrizeGrade;
 import org.springframework.data.domain.Page;
@@ -29,10 +30,16 @@ public interface PrizeRepository extends JpaRepository<Prize, Long> {
     List<PrizeBasicDTO> findFirstByGradeOrderByStartDateAsc(@Param("grade") PrizeGrade grade, Pageable pageable);
 
     @Query("SELECT new hello.dto.playground.prize.PrizeBasicDTO(p.id, p.name, p.imageName, p.endDate) " +
-            "FROM Prize p where p.grade = :grade")
-    Page<PrizeBasicDTO> findPrizePageByGrade(Pageable pageable, @Param("grade") PrizeGrade grade);
+            "FROM Prize p where p.grade = :grade AND p.endDate > CURRENT_DATE ORDER BY p.startDate ASC")
+    List<PrizeBasicDTO> findPrizePageByGrade(@Param("grade") PrizeGrade grade);
 
     @Query("select new hello.dto.admin.PrizeDrawDTO(p.id, p.name) from Prize p " +
             "where p.id = :id")
     PrizeDrawDTO findPrizeDrawById(@Param("id") Long id);
+
+    @Query("select new hello.dto.playground.prize.PrizeOneDTO(p.id, p.name, p.startDate, p.endDate, p.imageName) from Prize p where p.id = :id")
+    PrizeOneDTO findPrizeOneById(@Param("id") Long id);
+
+    @Query(value = "SELECT * FROM prize WHERE end_date > CURRENT_DATE ORDER BY RAND() LIMIT 6", nativeQuery = true)
+    List<Prize> findRandomPrizes();
 }

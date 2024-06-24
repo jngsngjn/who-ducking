@@ -1,6 +1,7 @@
 package hello.service.playgroud;
 
 import hello.dto.playground.prize.PrizeBasicDTO;
+import hello.dto.playground.prize.PrizeOneDTO;
 import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
 import hello.entity.prize.PrizeGrade;
@@ -12,7 +13,6 @@ import hello.service.basic.PointService;
 import hello.service.register.SmsService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -130,8 +131,26 @@ public class PrizeService {
         return prizeRepository.findById(prizeId).orElseThrow();
     }
 
-    public Page<PrizeBasicDTO> getPrizePage(int page, int size, PrizeGrade grade) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        return prizeRepository.findPrizePageByGrade(pageRequest, grade);
+    public List<PrizeBasicDTO> getPrizePage(PrizeGrade grade) {
+        return prizeRepository.findPrizePageByGrade(grade);
+    }
+
+    public PrizeOneDTO getPrizeOne(Long id) {
+        return prizeRepository.findPrizeOneById(id);
+    }
+
+    public List<PrizeOneDTO> getRandomPrizes() {
+        List<Prize> prizes = prizeRepository.findRandomPrizes();
+        return prizes.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    private PrizeOneDTO convertToDto(Prize prize) {
+        return new PrizeOneDTO(
+                prize.getId(),
+                prize.getName(),
+                prize.getStartDate(),
+                prize.getEndDate(),
+                prize.getImageName()
+        );
     }
 }

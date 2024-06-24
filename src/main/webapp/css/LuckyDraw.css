@@ -1,3 +1,131 @@
+.tab__content_wrapper{
+    height: 100rem;
+}
+
+.lucky_ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0;
+    list-style-type: none; /* li 요소의 기본 스타일 제거 */
+    gap: 20px; /* 요소 사이의 간격 추가 */
+}
+
+.lucky_draw_item {
+    flex: 1 1 calc(33.333% - 20px); /* 각 아이템이 한 줄에 3개씩 들어가도록 설정 */
+    box-sizing: border-box;
+    max-width: calc(33.333% - 20px); /* 아이템이 한 줄에 3개씩 들어가도록 설정 */
+    height: 740px;
+    margin-bottom: 20px; /* 각 아이템의 아래에 약간의 공간 추가 */
+    background-color: #FEFFDB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.lucky_draw_img {
+    width: 100%; /* 이미지를 아이템의 전체 너비에 맞추기 */
+    display: flex;
+    justify-content: center;
+}
+
+.lucky_draw_img_box {
+    width: 400px; /* 이미지 박스의 너비를 고정 */
+    height: 400px; /* 이미지 박스의 높이를 고정 */
+}
+
+.lucky_draw_img_box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lucky_draw_info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px; /* 좌우 여백 추가 */
+    margin-top: 10px;
+}
+
+.lucky_draw_coin {
+    font-size: 24px;
+    background-color: white;
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+    font-weight: 900;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lucky_draw_icon1 {
+    color: #FFC60B;
+    margin-right: 10px;
+}
+
+.lucky_draw_date {
+    font-size: 18px;
+    background-color: white;
+    width: 180px;
+    height: 35px;
+    border-radius: 10px;
+    font-weight: 900;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lucky_draw_icon2 {
+    margin-right: 10px;
+}
+
+.lucky_draw_name {
+    font-size: 32px;
+    align-self: flex-start;
+    margin-left: 30px;
+    color: black;
+}
+
+.lucky_draw_button {
+    width: 400px;
+    height: 95px;
+    border-radius: 20px;
+    background-color: #ff8b00;
+    color: white;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lucky_ur {
+    color: #e50e0e;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    position: relative;
+    height: 40px;
+    -webkit-text-stroke: 3px #ff9696;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px; /* 기존 40px에서 줄임 */
+}
+
+/* 추가된 전역 스타일 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding: 20px;
+}
+
+/* 기존 CSS 유지 */
 .lucky_body {
     background-image: url('/images/Background_Image/mitsuri.png');
     background-repeat: no-repeat;
@@ -21,13 +149,6 @@
 .lucky_h2 {
     color: #ff8b00;
     font-size: 50px;
-}
-
-.lucky_ul {
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 /* 상단 배너 */
@@ -85,109 +206,6 @@
     display: block;
 }
 
-
-/* 드로우 상품 */
-.lucky_draw_item {
-    width: 445px;
-    height: 740px;
-    border-radius: 10px;
-    background-color: #FEFFDB;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.lucky_draw_img {
-    width: 400px;
-    height: 400px;
-}
-
-.lucky_draw_img_ul {
-    width: 400px;
-    height: 400px;
-    display: flex;
-}
-
-.lucky_draw_img_box {
-    position: absolute;
-    display: flex;
-    width: 400px;
-    margin-bottom: 10px;
-    margin-bottom: 15px;
-    justify-content: space-between;
-    align-self: flex-end;
-}
-
-.lucky_draw_coin {
-    font-size: 24px;
-    background-color: white;
-    width: 100px;
-    height: 35px;
-    border-radius: 10px;
-    margin-left: 10px;
-    font-weight: 900;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.lucky_draw_icon1 {
-    color: #FFC60B;
-    margin-right: 10px;
-}
-
-.lucky_draw_date {
-    font-size: 18px;
-    background-color: white;
-    width: 180px;
-    height: 35px;
-    border-radius: 10px;
-    margin-right: 10px;
-    font-weight: 900;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.lucky_draw_icon2 {
-    margin-right: 10px;
-}
-
-.lucky_draw_name {
-    font-size: 32px;
-    align-self: flex-start;
-    margin-left: 30px;
-    color: black;
-}
-
-.lucky_draw_button {
-    width: 400px;
-    height: 95px;
-    border-radius: 20px;
-    background-color: #ff8b00;
-    color: white;
-    font-size: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.lucky_ur {
-    color: #e50e0e;
-    text-align: center;
-    font-size: 50px;
-    font-weight: 900;
-    position: relative;
-    height: 40px;
-    -webkit-text-stroke: 3px #ff9696;
-    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
-}
-
 .lucky_sr {
     color: #0C22EE;
     text-align: center;
@@ -234,38 +252,4 @@
 
 .lucky_draw_button:hover {
     background-color: #ec8303;
-}
-
-.myFaq_next {
-    width: 424px;
-    height: 54px;
-    gap: 20px;
-    display: flex;
-}
-
-.myFaq_next-button {
-    width: 54px;
-    height: 54px;
-    border-radius: 100px;
-    background-color: #feffdb;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-}
-
-.myFaq_now-button {
-    width: 54px;
-    height: 54px;
-    border-radius: 100px;
-    background-color: #ffc60b;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-}
-
-.disabled {
-    pointer-events: none;
-    color: grey;
 }

@@ -71,9 +71,7 @@
                     </ul>
                 </div>
                 <div class="nori_draw_name" th:text="${ur.name}">미츠리 레진 대형 스테츄</div>
-<!--                <a th:href="@{/prize/entry/{prizeId}(prizeId=${ur.id})}" class="nori_draw_button">응모하기</a>-->
-                <!-- 테스트하려고 잠시 button으로 바꿉니다. (원래 a태그) -->
-                <button type="button" id="entry-button" class="nori_draw_button">응모하기</button>
+                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${ur.id})}" class="nori_draw_button">응모하기</a>
             </li>
             <li class="nori_draw_item">
                 <div class="nori_sr">SR</div>
@@ -97,7 +95,7 @@
                     </ul>
                 </div>
                 <div class="nori_draw_name" th:text="${sr.name}">미츠리 레진 대형 스테츄</div>
-                <a th:href="@{/prize/entry/{prizeId}(prizeId=${sr.id})}" class="nori_draw_button">응모하기</a>
+                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${sr.id})}" class="nori_draw_button">응모하기</a>
             </li>
             <li class="nori_draw_item">
                 <div class="nori_r">R</div>
@@ -121,7 +119,7 @@
                     </ul>
                 </div>
                 <div class="nori_draw_name" th:text="${r.name}">미츠리 레진 대형 스테츄</div>
-                <a th:href="@{/prize/entry/{prizeId}(prizeId=${r.id})}" class="nori_draw_button">응모하기</a>
+                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${r.id})}" class="nori_draw_button">응모하기</a>
             </li>
         </ul>
 
