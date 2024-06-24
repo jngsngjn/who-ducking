@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // 메일 전송
-    $("#sendCodeButton").click(function() {
-        const email = $("#emailHidden").val(); // text-> val값으로 변경
+    $("#delete-sendCodeButton").click(function() {
+        const email = $("#delete-emailHidden").val(); // text-> val값으로 변경
         const button = $(this);
         button.addClass("loading");
         button.prop("disabled", true);
@@ -24,11 +24,11 @@ $(document).ready(function() {
     });
 
     // 클라이언트측 코드 검증
-    $("#emailCodeForm").submit(function(event) {
+    $("#delete-emailCodeForm").submit(function(event) {
         event.preventDefault(); // 기본 폼 제출 방지
 
-        let email = $("#emailHidden").val();
-        let code = $("#verificationCodeInput").val();
+        let email = $("#delete-emailHidden").val();
+        let code = $("#delete-verificationCodeInput").val();
 
         if (code === "") {
             alert("인증 코드를 입력해 주세요.");

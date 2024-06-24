@@ -4,13 +4,13 @@ import hello.entity.prize.PrizeGrade;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
-public class PrizeAddDTO {
+public class AdminPrizeAddDTO {
 
     private String name;
     private PrizeGrade grade;
-    private LocalDateTime endDateTime;
+    private LocalDate endDate;
     private MultipartFile image;
 }
