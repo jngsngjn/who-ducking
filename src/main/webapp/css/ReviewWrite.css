@@ -329,7 +329,6 @@ textarea:focus {
 }
 
 .reviews-container{
-    height: 120rem;
     width:112%;
     overflow: hidden;
 }
@@ -456,15 +455,6 @@ hr {
 .save-review-btn:hover {
    color: #e87e04;
 }
-
-
-
-
-
-
-
-
-
 
 /* i 태그들 */
 .fa-ellipsis-vertical {

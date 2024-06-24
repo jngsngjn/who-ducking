@@ -30,11 +30,10 @@ public class ReviewController {
     @PatchMapping("/reviews/patch/{id}")
     public ResponseEntity<String> updateReview(@PathVariable long id, @RequestBody Review review) {
         try {
-            // id에 해당하는 리뷰를 찾아서 업데이트합니다.
             Review existingReview = reviewService.findById(id);
             if (existingReview != null) {
-                existingReview.setContent(review.getContent()); // 클라이언트에서 전송된 content로 업데이트
-                reviewService.save(existingReview); // 업데이트된 리뷰 저장
+                existingReview.setContent(review.getContent());
+                reviewService.save(existingReview);
 
                 return ResponseEntity.ok("Review updated successfully");
             } else {

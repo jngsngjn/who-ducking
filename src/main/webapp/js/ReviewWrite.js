@@ -251,18 +251,50 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// 리뷰 수정 하기 -> 이슈: 좋아요 순에서는 작동하지 않움
+// 리뷰 정렬하기 &  수정 하기
 document.addEventListener("DOMContentLoaded", function() {
-    function changeReviewTag(reviewId) {
-        let recentReviewBox = document.querySelector("#recent-reviews #review-" + reviewId);
-        let likeReviewBox = document.querySelector("#like-reviews #review-" + reviewId);
+    let currentOrder = 'recent';
 
-        if (!recentReviewBox && !likeReviewBox) {
+    function showReviews(order) {
+        currentOrder = order;
+        if (order === 'recent') {
+            document.getElementById('recent-reviews').style.display = 'block';
+            document.getElementById('like-reviews').style.display = 'none';
+        } else if (order === 'like') {
+            document.getElementById('recent-reviews').style.display = 'none';
+            document.getElementById('like-reviews').style.display = 'block';
+        }
+    }
+
+    document.body.addEventListener("click", function(event) {
+        if (event.target.classList.contains("order-btn")) {
+            let order = event.target.id;
+            console.log(order);
+            showReviews(order);
+        }
+
+        if (event.target.classList.contains("update-review-btn")) {
+            let reviewId = event.target.dataset.reviewId;
+            reviewUpdate(reviewId);
+        }
+    });
+
+    // 수정 버튼 클릭 처리 함수
+    function clickUpdateBtn(e) {
+        let reviewId = e.target.dataset.reviewId;
+        console.log("수정 버튼을 눌렀을때의 리뷰 id = " + reviewId)
+        reviewUpdate(reviewId);
+    }
+
+    // 리뷰 업데이트 처리 함수
+    function reviewUpdate(reviewId) {
+        let reviewBox = document.querySelector(`#${currentOrder}-reviews #review-${reviewId}`);
+        console.log(`${currentOrder} reviewBox = `+ reviewBox);
+
+        if (!reviewBox) { // reviewId 잘 받아와
             console.error('Review box not found for review ID:', reviewId);
             return;
         }
-
-        let reviewBox = recentReviewBox || likeReviewBox;
 
         let reviewComment = reviewBox.querySelector(".review-comment");
         if (!reviewComment) {
@@ -282,68 +314,47 @@ document.addEventListener("DOMContentLoaded", function() {
         saveButton.className = "save-review-btn";
 
         saveButton.addEventListener("click", function() {
-            saveUpdatedReview(reviewId);
+            let updatedContent = currentText.value;
+
+            fetch(`/reviews/patch/${reviewId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: updatedContent
+                })
+            })
+                .then(res => res.text())
+                .then(data => {
+                    console.log('Response text:', data);
+
+                    if (data === "Review updated successfully") {
+                        let reviewComment = document.createElement("p");
+                        reviewComment.className = "review-comment";
+                        // reviewComment.innerText = updatedContent;
+                        // currentText.replaceWith(reviewComment);
+                        window.location.reload();
+
+                        if (saveButton.parentNode) {
+                            saveButton.parentNode.removeChild(saveButton);
+                        }
+                    } else {
+                        console.error('Error updating review:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to fetch when updating review:', error);
+                });
         });
 
         currentText.after(saveButton);
     }
 
-    function saveUpdatedReview(reviewId) {
-        let recentReviewBox = document.querySelector("#recent-reviews #review-" + reviewId);
-        let likeReviewBox = document.querySelector("#like-reviews #review-" + reviewId);
-
-        if (!recentReviewBox && !likeReviewBox) {
-            console.error('Review box not found for review ID:', reviewId);
-            return;
-        }
-
-        let reviewBox = recentReviewBox || likeReviewBox;
-        let currentText = reviewBox.querySelector(".update-comment-textarea");
-
-        if (!currentText) {
-            console.error('Modified comment textarea not found for review ID:', reviewId);
-            return;
-        }
-
-        let updatedContent = currentText.value;
-
-        fetch(`/reviews/patch/${reviewId}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                content: updatedContent
-            })
-        })
-            .then(res => res.text())
-            .then(data => {
-                console.log('Response text:', data);
-
-                if (data === "Review updated successfully") {
-                    let reviewComment = document.createElement("p");
-                    reviewComment.className = "review-comment";
-                    reviewComment.innerText = updatedContent;
-
-                    currentText.replaceWith(reviewComment);
-
-                    let saveButton = reviewBox.querySelector(".save-review-btn");
-                    if (saveButton) {
-                        saveButton.remove();
-                    }
-                } else {
-                    console.error('Error updating review:', data);
-                }
-            })
-            .catch(error => {
-                console.error('Failed to fetch when updating review:', error);
-            });
-    }
-
-    document.querySelectorAll(".update-review-btn").forEach(function(button) {
-        button.addEventListener("click", function() {
-            let reviewId = this.dataset.reviewId;
-            changeReviewTag(reviewId);
-        });
+    let likeReviewUpdateButtons = document.querySelectorAll('#like-reviews .update-review-btn');
+    likeReviewUpdateButtons.forEach(button => {
+        button.addEventListener('click', clickUpdateBtn);
     });
+
+    showReviews('recent');
 });
