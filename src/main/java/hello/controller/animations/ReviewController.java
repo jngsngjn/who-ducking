@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -24,12 +25,21 @@ public class ReviewController {
 
     /* POST : 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
-    public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO, @AuthenticationPrincipal CustomOAuth2User user){
+    public String writeReview(@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO, @AuthenticationPrincipal CustomOAuth2User user, Model model) {
         aniReviewDTO.setAnimationId(AnimationId);
         User loginUser = userService.getLoginUserDetail(user);
-        reviewService.addReview(aniReviewDTO, loginUser);
+
+        try {
+            reviewService.addReview(aniReviewDTO, loginUser);
+        } catch (ReviewService.ReviewLimitExceed e) {
+            String errorMessage = e.getMessage();
+            model.addAttribute("error", errorMessage);
+        }
+
         return "redirect:/animations/" + AnimationId;
     }
+
+
 
     /* @ 리뷰 수정
     *  @ id = reviewId */

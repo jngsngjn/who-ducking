@@ -40,6 +40,12 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="review-body">
   <h1 class="page-title">리뷰 게시판</h1>
+
+<!--  리다이렉트하지않고 어떻게 오류메세지를 띄울 수 있을까...-->
+  <div th:if="${error}" class="alert alert-danger">
+    <p th:text="${error}"></p>
+  </div>
+
   <div class="ani-container">
     <img th:src="@{/image/ani/{imageName}(imageName=${aniDetailInfo.imageName})}" alt="애니 포스터" class="ani-img" />
     <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>

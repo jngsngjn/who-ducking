@@ -7,12 +7,14 @@ import hello.entity.user.User;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewRepository;
 import hello.repository.db.UserRepository;
+import hello.service.basic.ExpService;
 import hello.service.basic.PointService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,40 +27,43 @@ public class ReviewService {
     private final AnimationRepository animationRepository;
     private final UserRepository userRepository;
     private final PointService pointService;
+    private final ExpService expService;
 
     public void addReview(AniReviewDTO aniReviewDTO, User user) {
-
         Optional<Animation> animationOpt = animationRepository.findById(aniReviewDTO.getAnimationId());
         Optional<User> userOpt = userRepository.findById(aniReviewDTO.getUserId());
 
-        if (animationOpt.isPresent() && userOpt.isPresent()) {
-            Review review = new Review();
-            review.setAnimation(animationOpt.get());
-            review.setUser(userOpt.get());
-            review.setContent(aniReviewDTO.getContent());
-            review.setScore(aniReviewDTO.getScore());
-            review.setSpoiler(aniReviewDTO.getIsSpoiler());
+        if (animationOpt.isEmpty()) {
+            throw new IllegalArgumentException("Animation id: " + aniReviewDTO.getAnimationId() + " 가 없습니다.");
+        }
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("사용자 id: " + aniReviewDTO.getUserId() + " 가 없습니다.");
+        }
 
-            reviewRepository.save(review);
+        LocalDate today = LocalDate.now();
+        long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
-            int currentReviewCount = user.getReviewCount();
+        if (reviewCountToday >= 3) {
+            throw new ReviewLimitExceed("하루에 3번만 리뷰를 작성 할 수 있습니다.");
+        }
 
-            if (currentReviewCount == 0) {
-                pointService.increasePoint(user, 3);
-            } else {
-                pointService.increasePoint(user, 1);
-            }
+        Review review = new Review();
+        review.setAnimation(animationOpt.get());
+        review.setUser(userOpt.get());
+        review.setContent(aniReviewDTO.getContent());
+        review.setScore(aniReviewDTO.getScore());
+        review.setSpoiler(aniReviewDTO.getIsSpoiler());
 
-            user.setReviewCount(currentReviewCount + 1);
-            userRepository.save(user);
+        int currentReviewCount = user.getReviewCount();
+        user.setReviewCount(currentReviewCount + 1);
+        reviewRepository.save(review);
+
+        if (reviewCountToday == 0) {
+            pointService.increasePoint(user, 5);
+            expService.increaseExp(user, 5);
         } else {
-            System.out.println("Animation or User not found");
-            if (animationOpt.isEmpty()) {
-                System.out.println("애니메이션 id : " + aniReviewDTO.getAnimationId());
-            }
-            if (userOpt.isEmpty()) {
-                System.out.println("유저 id가: " + aniReviewDTO.getUserId());
-            }
+            pointService.increasePoint(user, 1);
+            expService.increaseExp(user, 3);
         }
     }
 
@@ -66,10 +71,10 @@ public class ReviewService {
     public Review findById(Long id) {
         return reviewRepository.findById(id).orElse(null);
     }
+
     public Review save(Review review) {
         return reviewRepository.save(review);
     }
-
 
     // @ 리뷰 삭제
     public void deleteReview(long reviewId) {
@@ -97,6 +102,10 @@ public class ReviewService {
         }
         userRepository.saveAll(users);
     }
+
+    public static class ReviewLimitExceed extends RuntimeException {
+        public ReviewLimitExceed(String message) {
+            super(message);
+        }
+    }
 }
-
-
