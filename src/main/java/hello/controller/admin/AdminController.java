@@ -141,8 +141,8 @@ public class AdminController {
     }
 
     @PostMapping("/popup-store/add")
-    public String popupStoreAdd(@ModelAttribute PopupStoreAddDTO popupStoreAddDTO) {
-
-        return "";
+    public String popupStoreAdd(@ModelAttribute PopupStoreAddDTO popupStoreAddDTO) throws IOException {
+        adminService.addPopupStore(popupStoreAddDTO);
+        return "redirect:/admin/popup-store";
     }
 }
