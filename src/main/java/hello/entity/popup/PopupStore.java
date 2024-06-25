@@ -2,6 +2,8 @@ package hello.entity.popup;
 
 import hello.entity.user.Address;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "popup_store")
+@Getter @Setter
 public class PopupStore {
 
     @Id
