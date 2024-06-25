@@ -11,14 +11,15 @@ function loadScript(url) {
     });
 }
 
-/* 새로운 JavaScript 파일 생성 시 loadScript 추가. [Ex. loadScript("/경로/header.js")] */
+/* 새로운 JavaScript 파일 생성 시 loadScript 추가. [Ex. loadScript("/경로/header.js"),] */
 Promise.all([
     loadScript("/js/header.js"),
     loadScript("/js/main.js"),
-    loadScript("/js/boardWritePage.js"),
-    loadScript("/js/showPage.js"),
     loadScript("/js/registerBasic.js"),
     loadScript("/js/registerGenre.js"),
+
+    loadScript("/js/boardWritePage.js"),
+    loadScript("/js/showPage.js"),
     loadScript("/js/noticePage.js"),
 ])
     .then(() => {

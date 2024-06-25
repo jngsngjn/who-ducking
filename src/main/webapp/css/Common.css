@@ -16,16 +16,14 @@
 @import url(./Register.css);
 @import url(./RegisterGenre.css);
 @import url(./MyPage.css);
+@import url(./EditPage.css);
+@import url(./MyRequest.css);
+@import url(./AccountDeletion.css);
+
 @import url(./LuckyMain.css);
-@import url(./header.css);
-@import url(./footer.css);
-@import url(./main.css);
 @import url(./boardList.css);
 @import url(./createAndedit.css);
 @import url(./show.css);
-@import url(./header.css);
-@import url(./footer.css);
-@import url(./main.css);
 @import url(./ReviewBoard.css);
 @import url(./ReviewWrite.css);
 @import url(./NoticePage.css);

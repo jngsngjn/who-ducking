@@ -2,7 +2,12 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/accountDeletion.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico" />
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -10,7 +15,7 @@
     <!-- Animate -->
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/Common.css" />
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
@@ -25,40 +30,56 @@
     <script type="text/javascript" src="/js/accountDeletion.js"></script>
 </head>
 <body>
+<!-- Header -->
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="delete-container">
-    <div class="delete-signup-container">
-        <div class="delete-form-delete">
-            <div class="delete-form-wrapper">
-                <div class="delete-form-content">
-                    <div class="delete-form-header">회원 탈퇴</div>
-                    <p class="delete-form-delete-message">가입된 이메일로 본인 인증 후 탈퇴 처리됩니다.</p>
-                    <form action="/myPage/account-deletion/verifyCode" method="post" id="delete-emailCodeForm">
-                        <div class="delete-form-group">
-                            <label for="delete-email" class="delete-form-label">이메일</label>
-                            <div class="delete-input-wrapper">
-                                <input type="email" id="delete-email" class="delete-form-input" placeholder="이메일" readonly th:value="${email}" />
-                                <i class="fa fa-lock"></i>
-                            </div>
-                            <button id="delete-sendCodeButton" type="button" class="delete-email-check">인증 코드 전송</button>
-                            <input type="hidden" name="email" id="delete-emailHidden" th:value="${email}">
+
+<!-- Container -->
+<main id="container">
+    <section class="accountDeletion">
+        <div class="accountDeletion_box">
+            <!-- Title -->
+            <h1 class="accountDeletion_title">회원 탈퇴</h1>
+            <h4 class="accountDeletion_subtitle">가입된 이메일로 본인 인증 후 탈퇴 처리됩니다</h4>
+            <!-- Form -->
+            <form action="/myPage/account-deletion/verifyCode" method="post" id="emailCodeForm">
+                <!-- Data Input -->
+                <div class="accountDeletion_form-cnt">
+                    <!-- Email -->
+                    <div class="accountDeletion_input-box">
+                        <label for="email">이메일</label>
+                        <div class="accountDeletion_input">
+                            <input type="email" id="email" class="accountDeletion_email_input_box"
+                                   placeholder="이메일" th:value="${email}" readonly />
+                            <i class="fa fa-lock"></i>
                         </div>
-                        <div class="delete-form-group">
-                            <label for="delete-verificationCodeInput" class="delete-form-label">인증 코드</label>
-                            <div class="delete-input-wrapper">
-                                <input type="text" id="delete-verificationCodeInput" name="code" class="delete-form-input"/>
-                            </div>
+                        <!-- Email Send Button -->
+                        <button type="button" id="sendCodeButton"
+                                class="accountDeletion_email_sendCode_check_btn">인증 코드 전송</button>
+                        <input type="hidden" name="email" id="emailHidden" th:value="${email}">
+                    </div>
+
+                    <!-- Verification Code -->
+                    <div class="accountDeletion_input-box">
+                        <label for="verificationCodeInput" class="accountDeletion_label">인증
+                            코드</label>
+                        <div class="accountDeletion_input">
+                            <input type="text" id="verificationCodeInput"
+                                   class="accountDeletion_code_input_box" placeholder="인증번호"
+                                   name="code" />
                         </div>
-                        <div class="delete-form-footer">
-                            <button type="submit" class="delete-user">계정 삭제</button>
-                            <button type="button" class="delete-before">취소</button>
-                        </div>
-                    </form>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="accountDeletion_btns">
+                        <button type="submit" class="accountDeletion_delete_btn">계정 삭제</button>
+                        <button type="button" class="accountDeletion_cancel_btn">취소</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </div>
-</div>
+    </section>
+</main>
+<!-- Footer -->
 <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>
