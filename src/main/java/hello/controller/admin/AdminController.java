@@ -4,7 +4,7 @@ import hello.dto.admin.*;
 import hello.entity.user.User;
 import hello.service.admin.AdminService;
 import hello.service.admin.ExcelService;
-import hello.service.playgroud.PrizeService;
+import hello.service.playground.PrizeService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

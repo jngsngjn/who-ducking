@@ -109,7 +109,7 @@ button {
     padding: 1.875rem;
 }
 
-h1 {
+.page-title {
     font-size: 3.125rem;
 }
 
@@ -119,8 +119,6 @@ h1 {
     border-radius: 0.625rem;
     box-shadow: 0.0625rem 0.1875rem 0.1875rem 0.25rem rgb(177, 177, 177);
 }
-
-
 
 .title-bar {
     display: flex;
@@ -166,7 +164,6 @@ h1 {
     align-items: center;
     border-radius: 20px;
     color: white;
-    /*box-shadow: 2px 3px 3px #d1d1d1;*/
 }
 
 .tag-list {
@@ -199,10 +196,13 @@ h1 {
 
 .synopsis {
     width: 38.5rem;
-    height: 18.75rem;
+    height: 21.75rem;
     font-size: 1.5rem;
-    line-height: 250%;
+    line-height: 210%;
     margin-bottom: 1.25rem;
+    overflow:auto;
+    scrollbar-width: thin;
+    scrollbar-color: #FFF transparent ;
 }
 
 /* //////// 별점 //////// */
@@ -216,11 +216,6 @@ h1 {
     align-items: center;
 }
 
-/* .score {
-  font-size: 2.25rem;
-  margin-left: 0.625rem;
-} */
-
 .fa-star {
     margin-right: 0.625rem;
     color: #ff8b00;
@@ -229,6 +224,8 @@ h1 {
 .review-count {
     font-size: 3rem;
     padding: 2rem 4.375rem;
+    display: flex;
+    align-items: center;
 }
 
 .fa-comment {
@@ -247,18 +244,8 @@ h1 {
     margin: 0 auto;
 }
 
-label {
+.check-switch {
     font-size: 1.75rem;
-}
-
-input {
-    border: none;
-    font-size: 1.75rem;
-    padding: 1.25rem;
-    width: 81.25rem;
-    height: 8.75rem;
-    background-color: transparent;
-    overflow: hidden;
 }
 
 .review-content{
@@ -288,7 +275,7 @@ textarea:focus {
     margin-top: 0.5rem;
 }
 
-.submit-btn {
+.write-review-submit-btn {
     width: 6.25rem;
     height: 3.125rem;
     border-radius: 0.625rem;
@@ -296,17 +283,19 @@ textarea:focus {
     color: white;
     font-size: 1.5rem;
     padding: 0;
+    border:none;
+    cursor: pointer;
 }
 
 .order-box {
     height: 9.375rem;
-    padding: 1em;
+    padding: 1rem;
     border-top: 0.0625rem solid #d9d9d9;
     border-bottom: 0.0625rem solid #d9d9d9;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2rem 0;
+    margin: 2rem 0 0 0;
 }
 
 .order-btn {
@@ -325,19 +314,27 @@ textarea:focus {
 .order-btn:hover,
 .order-btn:active,
 .order-btn:focus {
-    background-color: rgba(255, 139, 0, 1);
+    background-color: #ff8b00;
 }
 
+.reviews-container{
+    width:112%;
+    overflow: hidden;
+}
+
+
 .review-list {
-    border-bottom: 0.0625rem solid #d9d9d9;
+    border-top: 0.0625rem solid #d9d9d9;
     padding: 1em 2em;
     font-size: 1.75rem;
+    width: 87rem;
     height: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     position:relative;
 }
+
 .review-writer {
     font-size: 1.75rem;
     font-weight: 500;
@@ -386,6 +383,9 @@ textarea:focus {
     color: white;
 }
 
+
+
+/* 리뷰 수정 관련 css */
 .update-modal-container {
     width: 10rem;
     height: 8.75rem;
@@ -417,6 +417,33 @@ hr {
     height: 0.063rem;
     background: #d9d9d9;
     border: 0;
+}
+
+.update-comment-textarea{
+    position:relative;
+    border: none;
+    resize: none;
+    border-radius: 5px;
+}
+
+.update-comment-textarea:focus{
+    border: 1px solid #d9d9d9;
+}
+
+.save-review-btn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    width: 6.25rem;
+    height: 3.125rem;
+    color: #d9d9d9;
+    border:none;
+    cursor: pointer;
+    position:absolute;
+    right:5%;
+}
+
+.save-review-btn:hover {
+   color: #e87e04;
 }
 
 /* i 태그들 */
@@ -492,7 +519,7 @@ hr {
 
 
 
-/********************* *반응형 ************************/
+/********************* 반응형 ************************/
 /* 반응형 레이아웃 */
 @media (max-width: 1280px) {
     .left-img,

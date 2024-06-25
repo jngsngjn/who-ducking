@@ -2,9 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const totalStars = 5;
     const starsContainer = document.querySelector(".stars-container");
-    let scoreInput = document.createElement("input");
-    scoreInput.setAttribute("type", "hidden");
-    scoreInput.setAttribute("name", "score");
+    const scoreInput = document.getElementById("score-number");
 
     const starsDiv = document.createElement("div");
     starsDiv.classList.add("stars");
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     starsContainer.appendChild(starsDiv);
     starsContainer.appendChild(scoreSpan);
-    starsContainer.appendChild(scoreInput);
 
     function updateStars() {
         const stars = starsDiv.querySelectorAll("i");
@@ -39,10 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (index < Math.floor(selectedRating)) {
                 star.classList.add("filled");
                 star.classList.remove("half");
-            } else if (
-                index === Math.floor(selectedRating) &&
-                selectedRating % 1 !== 0
-            ) {
+            } else if (index === Math.floor(selectedRating) && selectedRating % 1 !== 0) {
                 star.classList.add("half");
                 star.classList.remove("filled");
             } else {
@@ -54,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
         scoreInput.value = selectedRating;
     }
 });
-
 
 
 // 글자수 체크 -> (o)
@@ -81,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// 최신순 인기순 버튼 활성 -> (o) / 기능 -> (x)
+// 최신순 인기순 버튼 활성 -> (o) / 기능 -> (o)
 document.addEventListener('DOMContentLoaded', function() {
     const recentBtn = document.getElementById('recent');
     const likeBtn = document.getElementById('like');
@@ -158,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// 좋아요 요청 함수 -> 405에러? -> 500에러
+// 좋아요 요청 함수 ->(o)
 function likeReview(reviewId) {
     let url = `/reviews/${reviewId}/like`;
 
@@ -209,3 +202,159 @@ function dislikeReview(reviewId) {
     });
 }
 
+
+// 리뷰 작성 시 빈 값 요청 불가
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".write-box");
+    const reviewContent = document.getElementById("review-content");
+
+    form.addEventListener("submit", function(event) {
+        let isValid = true;
+        let errorMessage = "";
+
+        if (reviewContent.value.trim() === "") {
+            isValid = false;
+            errorMessage += "리뷰 내용을 입력해주세요.\n";
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+            alert(errorMessage);
+        }
+    });
+});
+
+
+// 스포일러 체크 여부에따라 보여주기
+document.addEventListener('DOMContentLoaded', function () {
+    const spoilerCheckbox = document.getElementById('show-spoiler');
+
+    spoilerCheckbox.addEventListener('change', function () {
+        const showSpoiler = this.checked;
+        const reviews = document.querySelectorAll('.review-list');
+
+        reviews.forEach(review => {
+            const isSpoiler = review.querySelector('.is-reviews-spoiler').value === 'true';
+            if (showSpoiler) {
+                review.classList.remove('hidden');
+            } else {
+                if (isSpoiler) {
+                    review.classList.add('hidden');
+                } else {
+                    review.classList.remove('hidden');
+                }
+            }
+        });
+    });
+
+    spoilerCheckbox.dispatchEvent(new Event('change'));
+});
+
+
+// 리뷰 정렬하기 &  수정 하기
+document.addEventListener("DOMContentLoaded", function() {
+    let currentOrder = 'recent';
+
+    function showReviews(order) {
+        currentOrder = order;
+        if (order === 'recent') {
+            document.getElementById('recent-reviews').style.display = 'block';
+            document.getElementById('like-reviews').style.display = 'none';
+        } else if (order === 'like') {
+            document.getElementById('recent-reviews').style.display = 'none';
+            document.getElementById('like-reviews').style.display = 'block';
+        }
+    }
+
+    document.body.addEventListener("click", function(event) {
+        if (event.target.classList.contains("order-btn")) {
+            let order = event.target.id;
+            console.log(order);
+            showReviews(order);
+        }
+
+        if (event.target.classList.contains("update-review-btn")) {
+            let reviewId = event.target.dataset.reviewId;
+            reviewUpdate(reviewId);
+        }
+    });
+
+    // 수정 버튼 클릭 처리 함수
+    function clickUpdateBtn(e) {
+        let reviewId = e.target.dataset.reviewId;
+        console.log("수정 버튼을 눌렀을때의 리뷰 id = " + reviewId)
+        reviewUpdate(reviewId);
+    }
+
+    // 리뷰 업데이트 처리 함수
+    function reviewUpdate(reviewId) {
+        let reviewBox = document.querySelector(`#${currentOrder}-reviews #review-${reviewId}`);
+        console.log(`${currentOrder} reviewBox = `+ reviewBox);
+
+        if (!reviewBox) { // reviewId 잘 받아와
+            console.error('Review box not found for review ID:', reviewId);
+            return;
+        }
+
+        let reviewComment = reviewBox.querySelector(".review-comment");
+        if (!reviewComment) {
+            console.error('Review comment element not found for review ID:', reviewId);
+            return;
+        }
+
+        let currentContent = reviewComment.innerText;
+        let currentText = document.createElement("textarea");
+        currentText.value = currentContent;
+        currentText.className = "update-comment-textarea";
+
+        reviewComment.replaceWith(currentText);
+
+        let saveButton = document.createElement("button");
+        saveButton.innerText = "수정";
+        saveButton.className = "save-review-btn";
+
+        saveButton.addEventListener("click", function() {
+            let updatedContent = currentText.value;
+
+            fetch(`/reviews/patch/${reviewId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: updatedContent
+                })
+            })
+                .then(res => res.text())
+                .then(data => {
+                    console.log('Response text:', data);
+
+                    if (data === "Review updated successfully") {
+                        let reviewComment = document.createElement("p");
+                        reviewComment.className = "review-comment";
+                        // reviewComment.innerText = updatedContent;
+                        // currentText.replaceWith(reviewComment);
+                        window.location.reload();
+
+                        if (saveButton.parentNode) {
+                            saveButton.parentNode.removeChild(saveButton);
+                        }
+                    } else {
+                        console.error('Error updating review:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to fetch when updating review:', error);
+                });
+        });
+
+        currentText.after(saveButton);
+    }
+
+    let likeReviewUpdateButtons = document.querySelectorAll('#like-reviews .update-review-btn');
+    likeReviewUpdateButtons.forEach(button => {
+        button.addEventListener('click', clickUpdateBtn);
+    });
+
+    showReviews('recent');
+});

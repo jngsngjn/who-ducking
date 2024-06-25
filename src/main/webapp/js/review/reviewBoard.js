@@ -1,26 +1,22 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let buttons = document.querySelectorAll(".side-container-button");
+document.addEventListener('DOMContentLoaded', function() {
+    const orderRecentBtn = document.getElementById('ordered-recent');
+    const orderLikeBtn = document.getElementById('ordered-review');
 
-    buttons.forEach((btn) => {
-        btn.addEventListener("click", function () {
-            buttons.forEach(function (btn) {
-                btn.classList.remove("active");
-                btn.classList.add("inactive");
-            });
+    orderRecentBtn.classList.add('active');
 
-            this.classList.remove("inactive");
-            this.classList.add("active");
-        });
-    });
-
-    let reviewBoardBtn = document.getElementById("review-board");
-    if (reviewBoardBtn) {
-        reviewBoardBtn.click();
+    function handleButtonClick(event) {
+        if (event.target === orderRecentBtn) {
+            orderRecentBtn.classList.add('active');
+            orderLikeBtn.classList.remove('active');
+        } else if (event.target === orderLikeBtn) {
+            orderLikeBtn.classList.add('active');
+            orderRecentBtn.classList.remove('active');
+        }
     }
 
-    // 통합되었을떄 자유게시판 클릭시 그 게시판이 나오는 함수 넣기
+    orderRecentBtn.addEventListener('click', handleButtonClick);
+    orderLikeBtn.addEventListener('click', handleButtonClick);
 });
-
 
 
 /* @ 페이지 네이션 */
@@ -43,8 +39,10 @@ function renderPage(page) {
         pageButton.innerText = i;
         pageButton.onclick = () => changePage(i);
 
+        console.log(pageButton.innerText)
         if (i === currentPage) {
-            pageButton.classList.add('current-page');
+            pageButton.style.backgroundColor = '#ff8b00';
+            pageButton.style.color='white'
         }
 
         buttonWrapper.appendChild(pageButton);
@@ -54,8 +52,8 @@ function renderPage(page) {
         animation.style.display = 'none';
     });
 
-    const start = (page - 1) * 9;
-    const end = page * 9;
+    const start = (page - 1) * 12;
+    const end = page * 12;
     for (let i = start; i < end && i < animations.length; i++) {
         animations[i].style.display = 'block';
     }
@@ -81,7 +79,58 @@ function changePage(page) {
 document.addEventListener("DOMContentLoaded", function () {
     const aniListContainer = document.getElementById('ani-list-container');
     totalAni = aniListContainer.querySelectorAll('.ani-info-container').length;
-    totalPages = Math.ceil(totalAni / 9);
+    totalPages = Math.ceil(totalAni / 12);
     renderPage(currentPage);
 });
+
+
+
+// 최신순 정렬 함수
+function sortByAnimationId() {
+    console.log("최신순 정렬 버튼 클릭");
+    const aniListContainer = document.getElementById('ani-list-container');
+    const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
+    const totalAniCount = arrayAnimations.length;
+    console.log(typeof totalAniCount)
+
+        console.log("최신순 정렬")
+    arrayAnimations.map(e => {
+        console.log(e)
+    })
+
+    arrayAnimations.sort((a, b) => {
+        let aAnimationId = parseInt(a.getAttribute('data-animation-id'), 10);
+        let bAnimationId = parseInt(b.getAttribute('data-animation-id'), 10);
+        return bAnimationId - aAnimationId;
+    });
+
+    aniListContainer.innerHTML = '';
+    arrayAnimations.forEach(container => aniListContainer.appendChild(container));
+
+    renderPage(currentPage);
+}
+
+// 리뷰순 정렬 함수
+function sortByReviewCount() {
+
+    const aniListContainer = document.getElementById('ani-list-container');
+    const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
+    const totalAniCount = arrayAnimations.length;
+
+    console.log("리뷰순 정렬")
+    arrayAnimations.map(e => {
+        console.log(e)
+    })
+
+    arrayAnimations.sort((a, b) => {
+        let aReviewCount = parseInt(a.getAttribute('data-review-count'), 10);
+        let bReviewCount = parseInt(b.getAttribute('data-review-count'), 10);
+        return bReviewCount - aReviewCount;
+    });
+
+    aniListContainer.innerHTML = '';
+    arrayAnimations.forEach(container => aniListContainer.appendChild(container));
+
+    renderPage(currentPage);
+}
 
