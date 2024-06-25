@@ -5,7 +5,7 @@ import hello.dto.user.CustomOAuth2User;
 import hello.entity.prize.Prize;
 import hello.entity.user.User;
 import hello.service.basic.UserService;
-import hello.service.playgroud.PrizeService;
+import hello.service.playground.PrizeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
