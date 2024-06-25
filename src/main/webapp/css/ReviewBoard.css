@@ -1,3 +1,5 @@
+
+
 .community-page{
   margin: 0 auto;
 }
@@ -12,13 +14,17 @@
   margin-top: 11rem;
   justify-content: space-between;
   padding: 0 3rem;
+  align-items: center;
 }
 
-.page-title {
+.ani-list-page-title {
   font-size: 3rem;
   color: #ff8b00;
+  margin:0;
+}
+
+.order-container{
   display: flex;
-  align-items: center;
 }
 
 .community-container {
@@ -35,34 +41,42 @@
   position:sticky;
   top:0;
   background-color: #1a1a1a;
-  padding: 1rem 0.5rem;
+  font-size: 1.7rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
 }
 
 .genre-container{
   color: #FFFFFF;
   width: 20rem;
-  height: 30rem;
+  height: 38rem;
   border: 1px solid black;
   border-radius: 20px;
   background-color: #1a1a1a;
-  padding: 1rem 2rem 2rem calc(2rem + 10px);
+  padding: 0 2rem 2rem calc(2rem + 10px);
   position: absolute;
-  top:17%;
-  left: 14%;
+  top:2%;
+  left: -30%;
   z-index: 99;
   list-style: none;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-color: dimgray #1A1A1A ;
-  scrollbar-width:thin;
+}
 
-
+.genre-title-list{
+  margin:0;
+  height: 3rem;
+  display: flex;
+  align-items: center;
 }
 
 .genre-list-container{
-  scrollbar-width: thin;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: dimgray #1A1A1A ;
+  scrollbar-width :thin;
+  height: 30rem; /* 스크롤바 영역 설정 */
 }
 
 
@@ -70,28 +84,28 @@
 .genre-list-container input[type="checkbox"] {
   width: 1.5rem;
   height: 1.5rem;
+  margin-right: 0.5rem;
 }
 
+/*장르 테이블 부모 포지션*/
+.body-container{
+  position: relative;
+}
 
 .order-btn{
   width: 8rem;
   height: 5rem;
   border: 1px solid #d1d1d1;
   border-radius: 20px;
+  background-color: #feffdb;
 }
 
-.order-btn:hover {
+.order-btn.active,
+.order-btn:hover,
+.order-btn:active,
+.order-btn:focus {
   background-color: #ff8b00;
   color: white;
-}
-
-.side-container-button.active {
-  background-color: #ff8b00;
-  color: white;
-}
-
-.side-container-button.inactive {
-  color: #000000;
 }
 
 
@@ -196,7 +210,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin: 1rem;
 }
 
 i,
@@ -244,4 +258,32 @@ i.fa-solid{
   top: 15%;
   left: -6%;
   z-index: -1;
+}
+
+@media (max-width: 1400px) {
+  .community-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .genre-container{
+    width: 75.5rem;
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 2rem;
+    height: 22rem;
+  }
+
+  .genre-list-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 14rem;
+  }
+
+  .ani-list-container {
+    width: 100%;
+  }
+
 }

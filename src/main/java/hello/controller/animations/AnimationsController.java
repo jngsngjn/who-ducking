@@ -6,6 +6,7 @@ import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.User;
 import hello.service.animations.AnimationService;
+import hello.service.animations.GenreService;
 import hello.service.basic.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ public class AnimationsController {
 
     private final AnimationService animationService;
     private final UserService userService;
+    private final GenreService genreService;
 
     private static final Logger logger = LoggerFactory.getLogger(AnimationsController.class);
 
@@ -31,6 +33,7 @@ public class AnimationsController {
     // 전체 애니메이션 데이터 조회
     @GetMapping("/animations")
     public String getAllAnimationsWithReviewData(Model model) {
+        model.addAttribute("genreLists", genreService.getAllGenres());
         model.addAttribute("animationLists", animationService.getAllAnimationWithReviewData());
         return "reviewBoard";
     }

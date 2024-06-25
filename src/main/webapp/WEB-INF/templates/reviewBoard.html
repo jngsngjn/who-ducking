@@ -59,79 +59,30 @@
   </head>
   <body>
     <div th:insert="~{fragments/header :: header}"></div>
-
     <div class="community-page">
-
       <div class="community-container">
         <div class="title-container">
-          <h1 class="page-title">커뮤니티</h1>
+          <h1 class="ani-list-page-title">애니메이션</h1>
           <div class="order-container">
-            <button class="order-btn" id="ordered-recent">최신순</button>
-            <button class="order-btn" id="ordered-review">리뷰순</button>
+            <button class="order-btn" id="ordered-recent" onclick="sortByAnimationId()">최신순</button>
+            <button class="order-btn" id="ordered-review" onclick="sortByReviewCount()">리뷰순</button>
           </div>
+        </div>
+        <div class="body-container">
           <div class="genre-container">
             <h3 class="genre-title">장르</h3>
-            <div class="genre-list-container"><!--form으로하는게 편할까 고민 -->
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 미스테리
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 로맨스
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 액션
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 추리
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> GL
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> BL
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 쇼타
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 성인
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 장르1
-                </label>
-              </div>
-              <div >
-                <input type="checkbox" id="genre" class="genre-list"/>
-                <label for="genre" class="check-genre"> 장르2
+            <div class="genre-list-container">
+              <div th:each="genre: ${genreLists}" class="genre-title-list">
+                <input  type="checkbox" id="genre" class="genre-list" th:id="'genre-' + ${genre.id}"/>
+                <label for="genre" class="check-genre" th:text="${genre.name}">
                 </label>
               </div>
             </div>
           </div>
-        </div>
-        <div class="body-container">
-
           <div class="ani-list-container" id="ani-list-container">
-            <div
-              th:each="animation : ${animationLists}"
-              class="ani-info-container">
-              <div class="img-container">
+            <div th:each="animation : ${animationLists}" class="ani-info-container"
+                 th:attr="data-review-count=${animation.reviewCount}, data-animation-id=${animation.animationId}">
+            <div class="img-container">
                 <img
                   th:src="${animation.imagePath}"
                   alt="애니 포스터"
