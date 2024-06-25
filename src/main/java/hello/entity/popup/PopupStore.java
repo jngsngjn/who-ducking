@@ -36,6 +36,12 @@ public class PopupStore {
     @Embedded
     private Address address;
 
+    // 경도 (x)
+    private double longitude;
+
+    // 위도 (y)
+    private double latitude;
+
     @Column(name = "image_path")
     private String imagePath;
 

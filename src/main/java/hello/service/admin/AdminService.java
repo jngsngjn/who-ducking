@@ -36,6 +36,7 @@ public class AdminService {
     private final PrizeRepository prizeRepository;
     private final GenreRepository genreRepository;
     private final AnnouncementRepository announcementRepository;
+    private final PopupStoreRepository popupStoreRepository;
 
     public Page<UserInfoDTO> getUserInfoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);

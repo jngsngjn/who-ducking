@@ -21,4 +21,12 @@ public class UserPopupStore {
     @ManyToOne
     @JoinColumn(name = "popup_store_id")
     private PopupStore popupStore;
+
+    public UserPopupStore() {
+    }
+
+    public UserPopupStore(PopupStore popupStore, User user) {
+        this.popupStore = popupStore;
+        this.user = user;
+    }
 }
