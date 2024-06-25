@@ -7,6 +7,8 @@ import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,8 @@ public class AnimationService {
 
     private final AnimationRepository animationRepository;
     private final ReviewRepository reviewRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(AnimationService.class);
 
     public List<GetAniListDTO> getAllAnimationWithReviewData() {
         return animationRepository.findAnimationsWithReviews();
@@ -36,13 +40,31 @@ public class AnimationService {
         return animationOptional.orElseThrow(() -> new RuntimeException("Animation not found with id " + id));
     }
 
-    // 리뷰 정보 get
-    public List<Review> getReviewsByAnimationId(Long id){
-        return reviewRepository.findRecentReviewsByAnimationId(id);
-    }
-
     // 애니 리뷰수&평점 조회
     public List<GetAniListDTO> getCountReviewAndScore(Long id){
         return animationRepository.findAnimationDetailsById(id);
     }
+
+    // 리뷰 정보 get
+    public List<Review> getReviewsByAnimationId(Long id) {
+        logger.info("리뷰 최신순으로 받아오기 서비스 로직 실행");
+        try {
+            List<Review> reviews = reviewRepository.findRecentReviewsByAnimationId(id);
+            logger.info("가져온 리뷰 수: {}", reviews.size());
+            return reviews;
+        } catch (Exception e) {
+            logger.error("리뷰 최신순으로 받아오기 중 에러 발생: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    public List<Review> getRecentReviewsByAnimationId(Long animationId) {
+        return reviewRepository.findRecentReviewsByAnimationId(animationId);
+    }
+
+    public List<Review> getTopReviewsByAnimationId(Long animationId) {
+        return reviewRepository.findTopReviewsByAnimationId(animationId);
+    }
+
+
 }

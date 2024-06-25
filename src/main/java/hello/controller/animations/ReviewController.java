@@ -1,11 +1,16 @@
 package hello.controller.animations;
 
 import hello.dto.animation.AniReviewDTO;
+import hello.dto.user.CustomOAuth2User;
 import hello.entity.review.Review;
+import hello.entity.user.User;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
+import hello.service.basic.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,22 +20,36 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewRepository reviewRepository;
+    private final UserService userService;
 
     /* POST : 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
-    public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO){
+    public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO, @AuthenticationPrincipal CustomOAuth2User user){
         aniReviewDTO.setAnimationId(AnimationId);
-        reviewService.addReview(aniReviewDTO);
+        User loginUser = userService.getLoginUserDetail(user);
+        reviewService.addReview(aniReviewDTO, loginUser);
         return "redirect:/animations/" + AnimationId;
     }
 
     /* @ 리뷰 수정
-    *  @ id = reviewId
-    * */
-//    @PatchMapping("/reviews/patch/{id}")
-//    public String updateReview (@PathVariable long id, @RequestBody Review review){
-//        review.setId(id);
-//    }
+    *  @ id = reviewId */
+    @PatchMapping("/reviews/patch/{id}")
+    public ResponseEntity<String> updateReview(@PathVariable long id, @RequestBody Review review) {
+        try {
+            Review existingReview = reviewService.findById(id);
+            if (existingReview != null) {
+                existingReview.setContent(review.getContent());
+                reviewService.save(existingReview);
+
+                return ResponseEntity.ok("Review updated successfully");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating review: " + e.getMessage());
+        }
+    }
+
 
     /* @ 리뷰 삭제
     *  @ id = reviewId */
