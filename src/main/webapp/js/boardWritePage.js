@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     $('#create-file').on('change', function(event) {
         let file = event.target.files[0];
@@ -7,6 +6,7 @@ $(document).ready(function() {
             reader.onload = function(e) {
                 $('#create-imagePreview').attr('src', e.target.result).show();
                 $('.create-delete-image-button').show();
+                $('#create-fileName').text(file.name).show();
             }
             reader.readAsDataURL(file);
         }
@@ -17,6 +17,7 @@ function createRemoveImage() {
     $('#create-imagePreview').attr('src', '').hide();
     $('#create-file').val('');
     $('.create-delete-image-button').hide();
+    $('#create-fileName').hide();
 }
 
 function formValidate() {
