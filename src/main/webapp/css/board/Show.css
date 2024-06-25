@@ -26,7 +26,6 @@
 .board-container-title {
     font-size: 45px;
     color: #ff8b00;
-    margin-bottom: 20px;
     margin-right: 1150px;
 }
 
@@ -93,7 +92,7 @@
 
 .comment-section-orange-line {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto 20px;
     border: none;
     height: 6px;
@@ -184,8 +183,6 @@
     border-radius: 15px;
     background-color: #FF8B00;
     color: #fff;
-    margin-left:20px;
-    margin-top:50px;
 }
 .btn-secondary i {
     margin-right: 15px;

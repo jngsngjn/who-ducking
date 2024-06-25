@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
-    <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -31,16 +30,16 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="board-container-title-wrapper">
     <div class="board-container-title">자유 게시판</div>
+    <a href="/board" class="btn-secondary"> <i class="fa-solid fa-bars"></i>목록</a>
 </div>
+
 <hr class="comment-section-orange-line">
 <div class="board-title-line" style="position: relative;">
     <span class="board-author" th:text="${board.user.nickname}">작성자</span>
     <span class="board-title" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목</span>
     <span class="board-menu-toggle" id="board-menu-toggle"><i class="fa-solid fa-ellipsis-vertical"></i></span>
 </div>
-<div class="secondary-container">
-<a href="/board" class="btn-secondary"> <i class="fa-solid fa-bars"></i>목록</a>
-</div>
+
 <div id="board-menu" class="board-menu-content">
     <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="menu-item">수정</a>
     <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
