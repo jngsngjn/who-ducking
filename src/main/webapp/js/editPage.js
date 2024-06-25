@@ -350,9 +350,9 @@ $(document).ready(function () {
         let htmlContent = '<div class="userInfoEdit_selected_genres_list_row">';
         selectedGenres.forEach(function (genre) {
             htmlContent +=
-                '<div class="userInfoEdit_selected_genres_item"><span class="userInfoEdit_genres_name">' +
+                '<div class="userInfoEdit_selected_genres_item"><label class="userInfoEdit_genres_name">' +
                 genre +
-                "</span></div>";
+                "</label></div>";
         });
         htmlContent += "</div>";
 
@@ -493,7 +493,7 @@ function validateForm() {
     let detailAddress = document.getElementById("detail-address").value;
     let postcode = document.getElementById("postcode").value;
 
-    if (!postcode.trim() === "" && detailAddress.trim() === "") {
+    if (!(postcode.trim() === "") && detailAddress.trim() === "") {
         alert("상세 주소를 입력해주세요.");
         return false; // 폼 제출을 막음
     }

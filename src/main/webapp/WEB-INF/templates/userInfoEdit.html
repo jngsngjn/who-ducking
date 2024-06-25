@@ -173,8 +173,8 @@
                                     <li class="userInfoEdit_selected_genres_list"
                                         th:each="userGenre : ${loginUser.userGenres}">
                                         <div class="userInfoEdit_selected_genres_item">
-                                            <span class="userInfoEdit_genres_name"
-                                                  th:text="${userGenre.genre.name}"></span>
+                                            <label class="userInfoEdit_genres_name"
+                                                  th:text="${userGenre.genre.name}"></label>
                                         </div>
                                     </li>
                                 </div>
