@@ -3,30 +3,30 @@
 @import url("https://webfontworld.github.io/SCoreDream/SCoreDream.css");
 
 /* Normalize ===============================================*/
-@import url(./reset.css);
-@import url(./base.css);
+@import url(./setting/Reset.css);
+@import url(./setting/Base.css);
+@import url(./setting/Sub.css);
 
 /* Elements ===============================================*/
 /* 새로운 css 파일 생성 시 import 추가 */
-@import url(./Header.css);
-@import url(./Footer.css);
+@import url(./fragments/Header.css);
+@import url(./fragments/Footer.css);
 @import url(./Main.css);
-@import url(./Sub.css);
-@import url(./Login.css);
-@import url(./Register.css);
-@import url(./RegisterGenre.css);
-@import url(./MyPage.css);
-@import url(./EditPage.css);
-@import url(./MyRequest.css);
-@import url(./AccountDeletion.css);
+@import url(./basic/Login.css);
+@import url(./basic/RegisterBasic.css);
+@import url(./basic/RegisterGenre.css);
+@import url(./mypage/MyPage.css);
+@import url(./mypage/UserInfoEdit.css);
+@import url(./mypage/MyRequest.css);
+@import url(./mypage/AccountDeletion.css);
 
-@import url(./LuckyMain.css);
-@import url(./boardList.css);
-@import url(./createAndedit.css);
-@import url(./show.css);
-@import url(./ReviewBoard.css);
-@import url(./ReviewWrite.css);
-@import url(./NoticePage.css);
+@import url(./playground/LuckyMain.css);
+@import url(./board/boardList.css);
+@import url(./board/CreateAndEdit.css);
+@import url(./board/Show.css);
+@import url(./review/ReviewBoard.css);
+@import url(./review/ReviewWrite.css);
+@import url(./notice/NoticePage.css);
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {

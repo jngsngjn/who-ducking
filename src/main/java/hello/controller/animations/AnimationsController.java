@@ -27,7 +27,7 @@ public class AnimationsController {
     @GetMapping("/animations")
     public String getAllAnimationsWithReviewData(Model model) {
         model.addAttribute("animationLists", animationService.getAllAnimationWithReviewData());
-        return "reviewBoard";
+        return "review/reviewBoard";
     }
 
     /* 애니메이션 상세페이지 GET(리뷰작성페이지)
@@ -54,7 +54,7 @@ public class AnimationsController {
         /* @ 리뷰 데이터 조회 */
         List<Review> reviews = animationService.getReviewsByAnimationId(id);
         model.addAttribute("reviews", reviews);
-        return "reviewWrite";
+        return "review/reviewWrite";
     }
 
 }

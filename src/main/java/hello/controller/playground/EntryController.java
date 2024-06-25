@@ -81,6 +81,6 @@ public class EntryController {
         model.addAttribute("prize", prizeOne);
         model.addAttribute("announceDate", formattedAnnounceDate + " 12:00");
         model.addAttribute("randomPrizes", randomPrizes);
-        return "entryPage";
+        return "playground/entryPage";
     }
 }

@@ -29,7 +29,7 @@ public class UserEditController {
         User loginUser = userService.validateUser(user, userId);
         if (loginUser != null) {
             model.addAttribute("loginUser", loginUser);
-            return "userInfoEdit";
+            return "mypage/userInfoEdit";
         }
         return "redirect:/";
     }

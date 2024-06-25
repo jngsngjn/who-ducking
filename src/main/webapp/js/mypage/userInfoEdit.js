@@ -1,4 +1,4 @@
-// editPage.js
+// userInfoEdit.js
 
 // 이미지
 function ProfileImageInput() {
