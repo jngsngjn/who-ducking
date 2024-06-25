@@ -43,7 +43,7 @@ public class RegisterController {
         model.addAttribute("email", email);
 
         session.setAttribute("registering", true);
-        return "registerBasic";
+        return "basic/registerBasic";
     }
 
     // AJAX
@@ -87,7 +87,7 @@ public class RegisterController {
                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> System.out.println(error.toString()));
-            return "registerBasic";
+            return "basic/registerBasic";
         }
 
         session.setAttribute("registerBasicDTO", registerBasicDTO);
@@ -103,7 +103,7 @@ public class RegisterController {
             return "redirect:/";
         }
 
-        return "registerGenre";
+        return "basic/registerGenre";
     }
 
     @PostMapping
@@ -111,7 +111,7 @@ public class RegisterController {
                                 RedirectAttributes redirectAttributes) {
 
         if (genres.size() > MAX_GENRES) {
-            return "registerGenre";
+            return "basic/registerGenre";
         }
 
         OAuth2Response oauth2Response = (OAuth2Response) session.getAttribute("oauth2Response");

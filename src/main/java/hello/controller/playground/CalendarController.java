@@ -8,6 +8,6 @@ public class CalendarController {
 
     @GetMapping("/calendar")
     public String calendar() {
-        return "calendar";
+        return "playground/calendar";
     }
 }

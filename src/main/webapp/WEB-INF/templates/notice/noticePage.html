@@ -2,10 +2,10 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/MyPage.css">
+    <link rel="stylesheet" href="/css/mypage/MyPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Who's DucKing</title>
-
+    <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -13,7 +13,7 @@
     <!-- Animate -->
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/Common.css" />
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
@@ -115,7 +115,7 @@
                         <div class="noticePage-main-content-list-elements-box">
                             <div class="noticePage-main-content-list-elements-left">
                                 <span class="noticePage-main-content-list-elements-title">공지</span>
-                                <span class="noticePage-main-content-list-elements-subject" th:text="${notice.content}">공지사항 제목</span>
+                                <span class="noticePage-main-content-list-elements-subject" th:text="${notice.title}">공지사항 제목</span>
                             </div>
                             <div class="noticePage-main-content-list-elements-right">
                                 <span class="noticePage-main-content-list-elements-date" th:text="${notice.writeDate}">2024-06-19</span>

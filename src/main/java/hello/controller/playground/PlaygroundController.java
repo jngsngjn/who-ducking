@@ -24,6 +24,6 @@ public class PlaygroundController {
         model.addAttribute("ur", ur);
         model.addAttribute("sr", sr);
         model.addAttribute("r", r);
-        return "playground";
+        return "playground/playground";
     }
 }
