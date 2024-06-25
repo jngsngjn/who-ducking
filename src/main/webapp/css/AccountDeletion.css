@@ -1,0 +1,186 @@
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
+}
+
+.accountDeletion {
+    position: relative;
+    padding: 10rem 0;
+    background: #f5f5f5;
+}
+
+.accountDeletion_box {
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    width: 500px;
+    background: #fff;
+    box-shadow: var(--box-shadow__A);
+    border-radius: 3rem;
+}
+
+.accountDeletion_title {
+    font-size: 3.6rem;
+    color: var(--mainColor);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.accountDeletion_subtitle {
+    font-size: 1.6rem;
+    color: var(--subColor);
+    text-align: center;
+}
+
+.accountDeletion_form-cnt {
+    padding: 3rem 0;
+}
+
+.accountDeletion_input-box {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.accountDeletion_input-box > label {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
+.accountDeletion_input {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.accountDeletion_email_input_box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.4rem;
+    height: 45px;
+    padding: 0 1rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    color: var(--titleColor);
+}
+
+.accountDeletion_email_input_box[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.accountDeletion_input > label,
+.accountDeletion_input > i {
+    color: #d1d1d1;
+}
+
+.accountDeletion_input > i {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    right: 1.5rem;
+    font-size: 1.6rem;
+}
+
+.accountDeletion_input > input[type="email"],
+.accountDeletion_input > input[type="text"],
+.accountDeletion_input > input[type="hidden"] {
+    width: 100%;
+    margin-top: 0.4rem;
+    padding: 0 1rem;
+    height: 55px;
+    border: 1px solid #d1d1d1;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    color: var(--titleColor);
+}
+
+.accountDeletion_input > input:focus {
+    outline-color: var(--mainColor);
+}
+
+.accountDeletion_input > input::placeholder {
+    color: #d1d1d1;
+}
+
+.accountDeletion_email_sendCode_check_btn {
+    display: flex;
+    margin-top: 0.5rem;
+    margin-left: auto;
+    font-weight: 350;
+    color: var(--subColor);
+}
+
+.accountDeletion_email_sendCode_check_btn:hover {
+    color: var(--mainColor);
+    transition: 0.5s;
+}
+
+.accountDeletion_code_input_box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.4rem;
+    height: 45px;
+    padding: 0 1rem;
+    border: 1px solid #d1d1d1;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    color: var(--titleColor);
+}
+
+#sendCodeButton.loading {
+    cursor: not-allowed;
+}
+
+#sendCodeButton.loading::after {
+    content: " (전송 중…)";
+    color: #ff9900;
+}
+
+.accountDeletion_btns {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    margin-top: 4rem;
+}
+
+.accountDeletion_delete_btn {
+    width: 25%;
+    padding: 1rem 2rem;
+    border: 2px solid var(--mainColor);
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: #fff;
+    background-color: var(--mainColor);
+}
+
+.accountDeletion_cancel_btn {
+    width: 25%;
+    padding: 1rem 2rem;
+    border: 2px solid var(--subColor);
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: #fff;
+    background-color: var(--subColor);
+}
+
+.accountDeletion_delete_btn:hover {
+    background-color: #fff;
+    color: var(--mainColor);
+    border: 2px solid var(--mainColor);
+    transition: 0.5s;
+}
+
+.accountDeletion_cancel_btn:hover {
+    background-color: #fff;
+    color: var(--subColor);
+    border: 2px solid var(--subColor);
+    transition: 0.5s;
+}

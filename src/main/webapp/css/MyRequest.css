@@ -1,0 +1,559 @@
+.myRequest_backgroundImage {
+    background-image: url("/images/Background_Image/umaru.png");
+    background-repeat: no-repeat;
+    background-position: 10% 70%; /* 재조정 필요 */
+    background-size: 400px 500px;
+}
+
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
+}
+
+/* Title */
+.myRequest_title_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.myRequest_write_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 4rem;
+    background-color: var(--mainColor);
+    color: #fff;
+    font-size: 1.6rem;
+    border-radius: 1rem;
+    border: 2px solid var(--mainColor);
+    cursor: pointer;
+}
+
+.myRequest_write_btn:hover {
+    background-color: #fff;
+    color: var(--mainColor);
+    transition: 0.5s;
+}
+
+/* Content */
+.myRequest_content_box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2.5rem;
+}
+
+/* Left */
+.myRequest_menu_box {
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+    height: 610px;
+    border: 2px solid #d9d9d9;
+    border-radius: 2rem;
+}
+
+.myRequest_menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.myRequest_menu_tab {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    padding: 5rem 0;
+    text-align: center;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.myRequest_menu_tab:last-of-type {
+    border-bottom-style: none;
+}
+
+.myRequest_menu_tab > a {
+    font-size: 2.8rem;
+    font-weight: 500;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.myRequest_menu_tab > a:hover {
+    color: var(--subColor);
+}
+
+.myRequest_selected_tab {
+    color: var(--mainColor);
+}
+
+/* Right */
+.myRequest_list_box {
+    width: 925px;
+    height: 1000px;
+    border: 2px solid #d9d9d9;
+    border-radius: 2rem;
+}
+
+/* Data Empty */
+.myRequest_list_data_empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.myRequest_list_data_empty_text {
+    font-size: 3.6rem;
+    color: var(--descColor);
+}
+
+/* Data Exist */
+.myRequest_list {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 3rem 4rem;
+    height: 19.75rem;
+}
+
+.myRequest_list_title {
+    font-size: 3.6rem;
+    font-weight: 500;
+    color: var(--descColor);
+}
+
+.myRequest_list_title:hover {
+    color: var(--mainColor);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.myRequest_list_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.6rem;
+    color: var(--descColor);
+}
+
+.myRequest_list_date {
+    color: #d1d1d1;
+    font-size: 1.8rem;
+}
+
+.myRequest_list_state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 4rem;
+    font-size: 2rem;
+    color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.myRequest_list_line {
+    width: 96%;
+    height: 2px;
+    background-color: #d9d9d9;
+}
+
+.myRequest_list_data_box > .myRequest_list_line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* Pagination */
+.myRequest_pagination_box {
+    padding-top: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.myRequest_pagination_box > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--mainColor);
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    border: 1px solid var(--mainColor);
+    transition: 0.3s;
+}
+
+.myRequest_pagination_box > a.active {
+    background: var(--mainColor);
+    color: #fff;
+}
+
+.myRequest_pagination_box > a:hover {
+    background: var(--mainColor);
+    color: #fff;
+    cursor: pointer;
+}
+
+.myRequest_pagination_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    color: var(--mainColor);
+    border-radius: 100%;
+    border: 1px solid var(--mainColor);
+}
+
+.myRequest_pagination_btn:hover {
+    background-color: var(--mainColor);
+    color: #fff;
+    cursor: pointer;
+}
+
+.myRequest_pagination_btn:hover > i {
+    color: #fff;
+}
+
+.myRequest_pagination_btn > i {
+    color: var(--mainColor);
+}
+
+.myRequest_pagination_now_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    background: var(--mainColor);
+    color: #fff;
+    border-radius: 100%;
+    border: 1px solid var(--mainColor);
+}
+
+.disabled {
+    cursor: not-allowed;
+    color: grey;
+}
+
+/* Modal All */
+.myRequest_modal {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.myRequest_modal-close {
+    position: absolute;
+    right: 4rem;
+    top: 3rem;
+    font-size: 4rem;
+}
+
+.myRequest_modal-close:hover {
+    color: var(--mainColor);
+}
+
+/* Modal 1 */
+.myRequest_modal_detail_contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 750px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 6rem 4rem;
+    border-radius: 3rem;
+    z-index: 1000;
+}
+
+.myRequest_modal_detail_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.6rem;
+    color: var(--mainColor);
+    text-align: center;
+}
+
+.myRequest_modal_detail_content {
+    margin-top: 3rem;
+    width: 100%;
+    height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 2rem;
+}
+
+.myRequest_modal_detail_contents_title_box {
+    display: flex;
+    justify-content: flex-start;
+    gap: 6rem;
+    align-items: baseline;
+    margin-bottom: 3rem;
+}
+
+.myRequest_modal_detail_contents_title_tag {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: var(--mainColor);
+}
+
+.myRequest_modal_detail_contents_title_text {
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: var(--descColor);
+    word-break: break-all;
+}
+
+.myRequest_modal_detail_contents_date_box {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    align-items: baseline;
+    margin-bottom: 3rem;
+}
+
+.myRequest_modal_detail_contents_date_tag {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: var(--mainColor);
+}
+
+.myRequest_modal_detail_contents_date_text {
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: var(--descColor);
+}
+
+.myRequest_modal_detail_contents_text_box {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.myRequest_modal_detail_contents_text {
+    font-size: 2rem;
+    word-break: break-all;
+}
+
+.myRequest_modal_detail_contents_responseDate_box {
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    bottom: 4rem;
+    gap: 3rem;
+    align-items: baseline;
+    margin-bottom: 3rem;
+}
+
+.myRequest_modal_detail_contents_responseDate_tag {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: var(--mainColor);
+}
+
+.myRequest_modal_detail_contents_responseDate_text {
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: var(--descColor);
+}
+
+.myRequest_modal_detail_delete_form {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+}
+
+.myRequest_modal_detail_delete_btn {
+    width: 10rem;
+    height: 4rem;
+    background-color: var(--mainColor);
+    color: #fff;
+    font-size: 1.6rem;
+    border-radius: 1rem;
+    border: 2px solid var(--mainColor);
+    cursor: pointer;
+}
+
+.myRequest_modal_detail_delete_btn:hover {
+    background-color: #fff;
+    color: var(--mainColor);
+    transition: 0.5s;
+}
+
+/* Modal 2 */
+.myRequest_modal_write_contents {
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 750px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 6rem 4rem;
+    border-radius: 3rem;
+    z-index: 1000;
+}
+
+.myRequest_modal_write_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.6rem;
+    color: var(--mainColor);
+    text-align: center;
+}
+
+.myRequest_modal_write_content {
+    margin-top: 3rem;
+    width: 100%;
+    height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 2rem;
+}
+
+.myRequest_modal_write_contents_title_box {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.myRequest_modal_write_contents_title_tag {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: var(--mainColor);
+    width: 8%;
+}
+
+.myRequest_modal_write_contents_title_text {
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--descColor);
+    word-break: break-all;
+    border: 1px solid #d9d9d9;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.myRequest_modal_write_contents_title_text:focus {
+    outline-color: var(--mainColor);
+}
+
+.myRequest_modal_write_contents_title_text::placeholder {
+    color: #d1d1d1;
+}
+
+.myRequest_modal_write_contents_title_count {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.6rem;
+    color: var(--mainColor);
+    margin-bottom: 2rem;
+}
+
+.myRequest_modal_write_contents_textarea_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.myRequest_modal_write_contents_textarea_tag {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: var(--mainColor);
+}
+
+.myRequest_modal_write_contents_textarea_text {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--descColor);
+    border: 1px solid #d9d9d9;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 36rem;
+    resize: none;
+}
+
+.myRequest_modal_write_contents_textarea_text:focus {
+    outline-color: var(--mainColor);
+}
+
+.myRequest_modal_write_contents_textarea_text::placeholder {
+    color: #d1d1d1;
+}
+
+.myRequest_modal_write_contents_textarea_count {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.6rem;
+    color: var(--mainColor);
+}
+
+.myRequest_modal_write_contents_button_box {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.myRequest_modal_write_contents_btn {
+    width: 10rem;
+    height: 4rem;
+    background-color: var(--mainColor);
+    color: #fff;
+    font-size: 1.6rem;
+    border-radius: 1rem;
+    border: 2px solid var(--mainColor);
+    cursor: pointer;
+}
+
+.myRequest_modal_write_contents_btn:hover {
+    background-color: #fff;
+    color: var(--mainColor);
+    transition: 0.5s;
+}
+
+/* ================================================================= */
+
+.myFaq_main {
+    transform: scale(0.8);
+}

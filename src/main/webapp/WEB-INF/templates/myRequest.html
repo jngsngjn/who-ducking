@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
-    <link rel="icon" href="/images/10duck.ico">
 
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -16,7 +17,6 @@
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/myRequest.css" />
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
@@ -29,112 +29,224 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/myRequest.js"></script>
+
 </head>
 
-<body class="myFaq_body">
-<div th:insert="~{fragments/header :: header}"></div>
-<main id="container" class="myFaq_main">
-    <div class="myFaq_head-title">
-        <h2 class="myFaq_h2">나의 글 목록</h2>
-        <button id="openModal" class="myFaq_write">건의하기</button>
-    </div>
+<body class="myRequest_backgroundImage">
+    <div th:insert="~{fragments/header :: header}"></div>
 
-    <div class="myFaq_menulist">
-        <div class="myFaq_menu">
-            <ul>
-                <li class="myFaq_menuli">
-                    <a href="">나의 리뷰</a>
-                </li>
-                <div class="myFaq_line"></div>
-                <li class="myFaq_menuli">
-                    <a href="">나의 게시글</a>
-                </li>
-                <div class="myFaq_line"></div>
-                <li class="myFaq_menuli">
-                    <a class="myFaq_my-request" href="/myPage/request-list">나의 건의 내역</a>
-                </li>
-                <div class="myFaq_line"></div>
-                <li class="myFaq_menuli">
-                    <a href="">나의 북마크</a>
-                </li>
-            </ul>
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="myRequest_title_box">
+                    <h2 class="subTitle">나의 글 목록 </h2>
+                    <button id="openModal" class="myRequest_write_btn">건의하기</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+
+                <!-- My Request Content Box -->
+                <div class="myRequest_content_box">
+
+                    <!-- Left : Menu List -->
+                    <div class="myRequest_menu_box">
+                        <ul class="myRequest_menu">
+                            <!-- First Tab -->
+                            <li class="myRequest_menu_tab">
+                                <a href="/">나의 리뷰</a>
+                            </li>
+                            <div class="myRequest_menu_line"></div>
+                            <!-- Second Tab -->
+                            <li class="myRequest_menu_tab">
+                                <a href="/">나의 게시글</a>
+                            </li>
+                            <div class="myRequest_menu_line"></div>
+                            <!-- Third Tab -->
+                            <li class="myRequest_menu_tab">
+                                <a href="/myPage/request-list" class="myRequest_selected_tab">나의 건의
+                                    내역</a>
+                            </li>
+                            <div class="myRequest_menu_line"></div>
+                            <!-- Fourth Tab -->
+                            <li class="myRequest_menu_tab">
+                                <a href="/">나의 북마크</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right : My Request List -->
+                    <div class="myRequest_list_box">
+                        <!-- Data Empty -->
+                        <div th:if="${#lists.isEmpty(requestPage.content)}"
+                             class="myRequest_list_data_empty">
+                            <span class="myRequest_list_data_empty_text">건의 내역이 없습니다.</span>
+                        </div>
+
+                        <!-- Data Exist -->
+                        <div class="myRequest_list_data_box" th:each="request : ${requestPage.content}">
+                            <ul class="myRequest_list">
+                                <li class="myRequest_list_title" th:text="${request.title}"
+                                    th:data-content="${request.content}"
+                                    th:data-status="${request.status}"
+                                    th:data-request-id="${request.id}"
+                                    th:data-response-date="${request.responseDate}"
+                                    th:data-write-date="${request.writeDate}"
+                                    th:data-response="${request.response}" id="title">제목
+                                </li>
+                                <li class="myRequest_list_info">
+                                                      <span class="myRequest_list_date"
+                                                            th:text="${request.writeDate}">접수일</span>
+                                    <label class="myRequest_list_state"
+                                           th:attr="id=${request.status}">상태</label>
+                                </li>
+                            </ul>
+                            <div class="myRequest_list_line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom : Pagination -->
+                <div class="myRequest_pagination_box">
+                    <!-- Double Left Arrow -->
+                    <a class="myRequest_pagination_btn"
+                       th:classappend="${requestPage.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">
+                        <!-- Double Left Icon -->
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+
+                    <!-- Left Arrow -->
+                    <a class="myRequest_pagination_btn"
+                       th:classappend="${requestPage.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">
+                        <!-- Left Icon -->
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!-- Page Number -->
+                    <span th:if="${requestPage.totalPages > 0}"
+                          th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
+                                    <a th:classappend="${i == requestPage.number + 1} ? 'myRequest_pagination_now_btn' : 'myRequest_pagination_btn'"
+                                       th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
+                              </span>
+                    <span th:if="${requestPage.totalPages == 0}">
+                                    <a class="myRequest_pagination_now_btn" href="#">1</a>
+                              </span>
+
+                    <!-- Right Arrow -->
+                    <a class="myRequest_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">
+                        <!-- Right Icon -->
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <!-- Double Right Arrow -->
+                    <a class="myRequest_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">
+                        <!-- Double Right Icon -->
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal 1 -->
+        <div id="myModal" class="myRequest_modal">
+            <div class="myRequest_modal_detail_contents">
+
+                <!-- Modal X Mark -->
+                <button type="button" class="myRequest_modal-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <!-- Modal Title -->
+                <h3 class="myRequest_modal_detail_title">건의 상세 내역</h3>
+
+                <!-- Modal Content -->
+                <div class="myRequest_modal_detail_content">
+                    <!-- 1. Content Title -->
+                    <div class="myRequest_modal_detail_contents_title_box">
+                        <span class="myRequest_modal_detail_contents_title_tag">제목</span>
+                        <span id="modalTitle" class="myRequest_modal_detail_contents_title_text"></span>
+                    </div>
+                    <!-- 2. Content Date -->
+                    <div class="myRequest_modal_detail_contents_date_box">
+                        <span class="myRequest_modal_detail_contents_date_tag">작성일</span>
+                        <span id="writeDate"
+                              class="myRequest_modal_detail_contents_date_text">2024.10.20</span>
+                    </div>
+                    <!-- 3. Content Text -->
+                    <div class="myRequest_modal_detail_contents_text_box">
+                        <span id="modalContent" class="myRequest_modal_detail_contents_text"></span>
+                    </div>
+                    <!-- 4. Response Date -->
+                    <div id="responseDate" class="myRequest_modal_detail_contents_responseDate_box"
+                         style="display: none;">
+                        <span class="myRequest_modal_detail_contents_responseDate_tag">응답일</span>
+                        <span id="responseDateValue"
+                              class="myRequest_modal_detail_contents_responseDate_text"></span>
+                    </div>
+                </div>
+
+                <!-- Modal Form -->
+                <form action="/myPage/request-delete" method="post" id="deleteForm"
+                      class="myRequest_modal_detail_delete_form" style="display: none">
+                    <input type="hidden" name="requestId" id="requestId">
+                    <button type="submit" class="myRequest_modal_detail_delete_btn">삭제</button>
+                </form>
+            </div>
         </div>
 
-        <div class="myFaq_writelist">
-            <div th:if="${#lists.isEmpty(requestPage.content)}" class="myFaq_no-data-container">
-                <p class="myFaq_no-data">건의 내역이 없습니다.</p>
-            </div>
-            <div th:each="request : ${requestPage.content}">
-                <ul class="myFaq_content">
-                    <li class="myFaq_title" th:text="${request.title}" th:data-content="${request.content}" th:data-status="${request.status}" th:data-request-id="${request.id}" th:data-response-date="${request.responseDate}" th:data-write-date="${request.writeDate}" th:data-response="${request.response}" id="title">제목</li>
-                    <li class="myFaq_time">
-                        <span th:text="${request.writeDate}">접수일</span>
-                        <label class="myFaq_state" th:attr="id=${request.status}">상태</label>
-                    </li>
-                </ul>
-                <div class="myFaq_line2"></div>
-            </div>
-        </div>
+        <!-- Modal 2 -->
+        <div id="myModal2" class="myRequest_modal">
+            <div class="myRequest_modal_write_contents">
 
-        <div class="myFaq_next">
-            <a class="myFaq_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>
-            <a class="myFaq_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>
-            <span th:if="${requestPage.totalPages > 0}" th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
-        <a th:classappend="${i == requestPage.number + 1} ? 'myFaq_now-button' : 'myFaq_next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
-    </span>
-            <span th:if="${requestPage.totalPages == 0}">
-        <a class="myFaq_now-button" href="#">1</a>
-    </span>
-            <a class="myFaq_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>
-            <a class="myFaq_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>
-        </div>
-    </div>
-</main>
+                <!-- Modal X Mark -->
+                <button type="button" class="myRequest_modal-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
 
-<!-- Modal1 -->
-<div id="myModal" class="custom_modal">
-    <span class="custom_modal-close">&times;</span>
-    <h2 class="custom_modal-title">건의 상세 내역</h2>
-    <div class="custom_modal-content">
-        <p><strong class="myFaq_tag">제&nbsp;목&nbsp;&nbsp;: </strong><span id="modalTitle" class="myFaq_text"></span></p>
-        <p><strong class="myFaq_tag">작성일 : </strong> <span id="writeDate" class="myFaq_text"></span></p>
-        <div class="myFaq_faq">
-            <p><span id="modalContent" class="myFaq_text"></span></p>
-        </div>
-        <p id="responseDate" style="display: none">
-            <strong class="myFaq_tag">응답일 :</strong>
-            <span id="responseDateValue" class="myFaq_text"></span>
-        </p>
-        <div id="responseText" class="myFaq_response" style="display: none">
-            <p><span id="response" class="myFaq_text"></span></p>
-        </div>
-    </div>
-    <form action="/myPage/request-delete" method="post" id="deleteForm" class="myFaq_delete" style="display: none">
-        <input type="hidden" name="requestId" id="requestId">
-        <button type="submit" class="myFaq_deletebutton">삭제</button>
-    </form>
-</div>
+                <!-- Modal Title -->
+                <h3 class="myRequest_modal_write_title">건의하기</h3>
 
-<!-- Modal2 -->
-<div id="myModal2" class="custom_modal">
-    <span class="custom_modal-close">&times;</span>
-    <h2 class="custom_modal-title">건의하기</h2>
-    <div class="custom_modal-content">
-        <form action="/myPage/request" method="post">
-            <div class="myFaq_inputtitle">
-                <label for="title2">제목</label>
-                <input type="text" id="title2" name="title" required>
-                <span></span>
+                <!-- Modal Content -->
+                <div class="myRequest_modal_write_content">
+                    <form action="/myPage/request" method="post" class="myRequest_modal_write_form">
+                        <!-- 1. Title -->
+                        <div class="myRequest_modal_write_contents_title_box">
+                            <label for="title2"
+                                   class="myRequest_modal_write_contents_title_tag">제목</label>
+                            <input type="text" id="title2" name="title"
+                                   class="myRequest_modal_write_contents_title_text" maxlength="30"
+                                   placeholder="제목을 입력해주세요" required>
+                        </div>
+                        <span id="title_count" class="myRequest_modal_write_contents_title_count">0 /
+                                          30</span>
+
+                        <!-- 2. Content -->
+                        <div class="myRequest_modal_write_contents_textarea_box">
+                                          <textarea id="content" name="content" rows="10"
+                                                    class="myRequest_modal_write_contents_textarea_text" maxlength="500"
+                                                    placeholder="내용을 입력해주세요" required></textarea>
+                        </div>
+                        <span id="textarea_count"
+                                    class="myRequest_modal_write_contents_textarea_count">0 / 500</span>
+
+                        <!-- 3. Button -->
+                        <div class="myRequest_modal_write_contents_button_box">
+                            <button type="submit" class="myRequest_modal_write_contents_btn">건의하기</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="myFaq_inputtext">
-                <textarea id="content" name="content" rows="10" required class="hi"></textarea>
-            </div>
-            <div class="myFaq_faqbutton">
-                <button type="submit" class="myFaq_faqgo">건의하기</button>
-            </div>
-        </form>
-    </div>
-</div>
-<div th:insert="~{fragments/footer :: footer}"></div>
+        </div>
+    </main>
+    <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

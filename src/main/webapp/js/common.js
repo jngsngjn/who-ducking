@@ -17,6 +17,7 @@ Promise.all([
     loadScript("/js/main.js"),
     loadScript("/js/registerBasic.js"),
     loadScript("/js/registerGenre.js"),
+
     loadScript("/js/boardWritePage.js"),
     loadScript("/js/showPage.js"),
     loadScript("/js/lucky.js"),
