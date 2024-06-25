@@ -1,6 +1,7 @@
 package hello.service.admin;
 
 import hello.dto.admin.KakaoApiResponse;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -28,27 +29,20 @@ public class GeocodingService {
 
         if (apiResponse != null && !apiResponse.getDocuments().isEmpty()) {
             KakaoApiResponse.Document document = apiResponse.getDocuments().get(0);
-            return new GeoLocation(Double.parseDouble(document.getY()), Double.parseDouble(document.getX()));
+            return new GeoLocation(Double.parseDouble(document.getLatitude()), Double.parseDouble(document.getLongitude()));
         } else {
             throw new RuntimeException("주소를 변환할 수 없습니다: " + address);
         }
     }
 
+    @Getter
     public static class GeoLocation {
-        private final double latitude;
-        private final double longitude;
+        private final double latitude; // 위도
+        private final double longitude; // 경도
 
         public GeoLocation(double latitude, double longitude) {
             this.latitude = latitude;
             this.longitude = longitude;
-        }
-
-        public double getLatitude() {
-            return latitude;
-        }
-
-        public double getLongitude() {
-            return longitude;
         }
     }
 }
