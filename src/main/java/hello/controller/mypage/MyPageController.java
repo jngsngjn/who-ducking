@@ -22,6 +22,6 @@ public class MyPageController {
     public String myPage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
         User loginUser = userService.getLoginUserDetail(user);
         model.addAttribute("loginUser", loginUser);
-        return "myPage";
+        return "mypage/myPage";
     }
 }

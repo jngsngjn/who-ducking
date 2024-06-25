@@ -7,11 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Who's DucKing</title>
     <link rel="icon" href="/images/10duck.ico">
-    <link rel="stylesheet" href="/css/addAnimation.css" />
+    <link rel="stylesheet" href="/css/admin/AddAnimation.css" />
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <div class="container">
     <h2>애니메이션 추가</h2>
+    <button class="excel-add" type="button" id="openModalBtn">엑셀로 추가하기</button>
     <form th:action="@{/admin/add-animation}" method="post" enctype="multipart/form-data">
         <label for="name">애니명</label>
         <input type="text" id="name" name="name" required>
@@ -74,8 +76,39 @@
         <label for="image">애니 이미지</label>
         <input type="file" id="image" name="image" accept="image/*" required>
 
-        <button type="submit">추가하기</button>
+        <button class="add-basic" type="submit">추가하기</button>
     </form>
 </div>
+<div id="myModal" class="modal" style="display: none">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>엑셀로 추가</h3>
+        <form action="/admin/add-animation/excel" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required/>
+            <input type="submit" value="추가하기"/>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        var modal = $("#myModal");
+        var btn = $("#openModalBtn");
+        var span = $(".close");
+
+        btn.on('click', function() {
+            modal.show();
+        });
+
+        span.on('click', function() {
+            modal.hide();
+        });
+
+        $(window).on('click', function(event) {
+            if (event.target == modal[0]) {
+                modal.hide();
+            }
+        });
+    });
+</script>
 </body>
 </html>

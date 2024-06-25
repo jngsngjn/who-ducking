@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <link rel="stylesheet" href="/css/admin/adminPage.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/admin/adminPrizeDraw.js"></script>
+    <link rel="stylesheet" href="/css/admin/adminPrizeDraw.css" />
+</head>
+<body>
+<div class="container">
+    <h2>경품 추첨</h2>
+    <div class="content">
+        <p><strong>경품 이름:</strong> <span th:text="${prizeDraw.name}"></span></p>
+        <p><strong>응모 횟수:</strong> <span th:text="${prizeDraw.entryCount} + '회'"></span></p>
+        <p><img th:src="@{/image/prize/{imageName}(imageName=${prizeDraw.imageName})}" style="width: 100%; height: auto;"></p>
+    </div>
+    <button type="button" id="backButton" class="btn">뒤로가기</button>
+    <button type="button" id="drawButton" class="btn">추첨하기</button>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const prizeId = [[${prizeDraw.id}]];
+    /*]]>*/
+</script>
+</body>
+</html>

@@ -26,7 +26,7 @@ public class RequestController {
     public String requestList(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<MyRequestDTO> requestPage = requestService.getMyRequest(page, 5);
         model.addAttribute("requestPage", requestPage);
-        return "myRequest";
+        return "mypage/myRequest";
     }
 
     @PostMapping("/request")

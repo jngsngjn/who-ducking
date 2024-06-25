@@ -1,20 +1,31 @@
 package hello.service.playgroud;
 
+import hello.dto.playground.prize.PrizeBasicDTO;
+import hello.dto.playground.prize.PrizeOneDTO;
 import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
 import hello.entity.prize.PrizeGrade;
 import hello.entity.user.User;
 import hello.repository.db.EntryRepository;
 import hello.repository.db.PrizeRepository;
+import hello.service.account.EmailService;
 import hello.service.basic.PointService;
+import hello.service.register.SmsService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,6 +37,8 @@ public class PrizeService {
     private final PrizeRepository prizeRepository;
     private final EntryRepository entryRepository;
     private final PointService pointService;
+    private final SmsService smsService;
+    private final EmailService emailService;
 
     public boolean checkPoint(User user) {
         int userPoint = user.getPoint();
@@ -63,25 +76,27 @@ public class PrizeService {
         return detailedAddress == null || detailedAddress.isEmpty();
     }
 
+    // 개선 필요 (추후 예정)
     public void entryPrize(Long prizeId, User user) {
         LocalDate today = LocalDate.now();
         user.setLastDrawDate(today);
 
         Prize prize = prizeRepository.findById(prizeId).orElseThrow();
-        Entry findEntry = entryRepository.findByUserId(user.getId()).orElseThrow();
+        Optional<Entry> findEntry = entryRepository.findByUserIdAndPrizeId(user.getId(), prizeId);
         pointService.decreasePoint(user, 30);
 
         // 처음 응모한 경우
-        if (findEntry == null) {
+        if (findEntry.isEmpty()) {
             Entry entry = new Entry(user, prize);
             entryRepository.save(entry);
         } else {
             // 한 번 이상 응모한 경우
-            findEntry.setEntryCount(findEntry.getEntryCount() + 1);
+            findEntry.get().setEntryCount(findEntry.get().getEntryCount() + 1);
+            entryRepository.save(findEntry.get());
         }
     }
 
-    public User randomDraw(Long prizeId) {
+    public User randomDraw(Long prizeId) throws MessagingException, URISyntaxException, IOException {
         List<Entry> entries = entryRepository.findByPrizeId(prizeId);
         Prize prize = prizeRepository.findById(prizeId).orElseThrow();
         if (entries.isEmpty()) {
@@ -101,6 +116,41 @@ public class PrizeService {
         User winner = drawPool.get(winnerIndex);
         prize.setUser(winner);
 
+        smsService.sendToWinner(winner.getPhone(), winner.getNickname(), prize.getName());
+        emailService.sendToWinner(winner.getEmail(), winner.getNickname(), prize);
         return winner;
+    }
+
+    public PrizeBasicDTO getEarliestPrizeByGrade(PrizeGrade grade) {
+        Pageable firstResult = PageRequest.of(0, 1);
+        List<PrizeBasicDTO> result = prizeRepository.findFirstByGradeOrderByStartDateAsc(grade, firstResult);
+        return result.isEmpty() ? null : result.get(0);
+    }
+
+    public Prize findById(Long prizeId) {
+        return prizeRepository.findById(prizeId).orElseThrow();
+    }
+
+    public List<PrizeBasicDTO> getPrizePage(PrizeGrade grade) {
+        return prizeRepository.findPrizePageByGrade(grade);
+    }
+
+    public PrizeOneDTO getPrizeOne(Long id) {
+        return prizeRepository.findPrizeOneById(id);
+    }
+
+    public List<PrizeOneDTO> getRandomPrizes() {
+        List<Prize> prizes = prizeRepository.findRandomPrizes();
+        return prizes.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    private PrizeOneDTO convertToDto(Prize prize) {
+        return new PrizeOneDTO(
+                prize.getId(),
+                prize.getName(),
+                prize.getStartDate(),
+                prize.getEndDate(),
+                prize.getImageName()
+        );
     }
 }

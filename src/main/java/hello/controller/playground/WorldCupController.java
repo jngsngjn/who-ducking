@@ -8,6 +8,6 @@ public class WorldCupController {
 
     @GetMapping("/world")
     public String world() {
-        return "world";
+        return "playground/world";
     }
 }
