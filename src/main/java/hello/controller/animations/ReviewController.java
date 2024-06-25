@@ -31,7 +31,6 @@ public class ReviewController {
         return "redirect:/animations/" + AnimationId;
     }
 
-
     /* @ 리뷰 수정
     *  @ id = reviewId */
     @PatchMapping("/reviews/patch/{id}")
@@ -59,7 +58,6 @@ public class ReviewController {
         reviewService.deleteReview(id);
         return ResponseEntity.noContent().build();
     }
-
 
     /* @ 좋아요 클릭시 요청 */
     @PatchMapping("/reviews/{id}/like")

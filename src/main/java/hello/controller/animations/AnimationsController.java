@@ -35,10 +35,8 @@ public class AnimationsController {
     public String getAllAnimationsWithReviewData(Model model) {
         model.addAttribute("genreLists", genreService.getAllGenres());
         model.addAttribute("animationLists", animationService.getAllAnimationWithReviewData());
-        return "reviewBoard";
+        return "review/reviewBoard";
     }
-
-    // 필터링해서 선택된 장르 id로 보여줄 애니 리스트 조회
 
     /* 애니메이션 상세페이지 GET(리뷰작성페이지)
      * PathVariable id = animationId */
@@ -69,8 +67,7 @@ public class AnimationsController {
         List<Review> topReviews = animationService.getTopReviewsByAnimationId(id); //인기순
         model.addAttribute("recentReviews", recentReviews);
         model.addAttribute("topReviews", topReviews);
-        return "reviewWrite";
+        return "review/reviewWrite";
     }
+
 }
-
-

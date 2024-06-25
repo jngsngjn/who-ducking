@@ -11,9 +11,9 @@ import java.util.List;
 public interface AnimationRepository extends JpaRepository<Animation, Long> {
 
     // 애니 전체 리스트 조회 -> 최신순으로 조회
-    @Query("SELECT new hello.dto.animation.GetAniListDTO(a.id, a.imagePath, ROUND(COALESCE(AVG(r.score), 0.0), 1), COUNT(r.id), a.name) " +
+    @Query("SELECT new hello.dto.animation.GetAniListDTO(a.id, a.imageName, ROUND(COALESCE(AVG(r.score), 0.0), 1), COUNT(r.id), a.name) " +
             "FROM Animation a LEFT JOIN a.reviews r " +
-            "GROUP BY a.id, a.imagePath, a.name " +
+            "GROUP BY a.id, a.imageName, a.name " +
             "ORDER BY a.id DESC")
     List<GetAniListDTO> findAnimationsWithReviews();
 

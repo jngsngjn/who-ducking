@@ -22,7 +22,7 @@ public class RouletteController {
 
     @GetMapping("/playground/roulette")
     public String roulettePage() {
-        return "roulette";
+        return "playground/roulette";
     }
 
     @PostMapping("/roulette/get-points")

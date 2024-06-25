@@ -42,7 +42,20 @@ public class ExcelService {
             animation.setName(getCellValueAsString(currentRow.getCell(0)));
             animation.setAuthor(getCellValueAsString(currentRow.getCell(1)));
             animation.setDescription(getCellValueAsString(currentRow.getCell(2)));
-            animation.setRating(AnimationRating.valueOf(getCellValueAsString(currentRow.getCell(3)).toUpperCase()));
+
+            String ratingValue = getCellValueAsString(currentRow.getCell(3)).trim().toUpperCase();
+
+            if (ratingValue.isEmpty()) {
+                continue;
+            }
+
+            try {
+                animation.setRating(AnimationRating.valueOf(ratingValue));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid Rating Value: " + ratingValue);
+                continue;
+            }
+
             animation.setFirstDate(LocalDate.parse(getCellValueAsString(currentRow.getCell(4))));
             animation.setImageName(getCellValueAsString(currentRow.getCell(5)));
             animation.setImagePath(getCellValueAsString(currentRow.getCell(6)));
@@ -66,17 +79,17 @@ public class ExcelService {
 
         switch (cell.getCellType()) {
             case STRING:
-                return cell.getStringCellValue();
+                return cell.getStringCellValue().trim();
             case NUMERIC:
                 if (DateUtil.isCellDateFormatted(cell)) {
                     return cell.getLocalDateTimeCellValue().toLocalDate().toString();
                 } else {
-                    return String.valueOf(cell.getNumericCellValue());
+                    return String.valueOf(cell.getNumericCellValue()).trim();
                 }
             case BOOLEAN:
-                return String.valueOf(cell.getBooleanCellValue());
+                return String.valueOf(cell.getBooleanCellValue()).trim();
             case FORMULA:
-                return cell.getCellFormula();
+                return cell.getCellFormula().trim();
             case BLANK:
                 return "";
             default:

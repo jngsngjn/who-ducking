@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/mypage/userInfoEdit.js"></script>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <!-- Map -->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+</head>
+
+<body>
+<!-- Header -->
+<div th:insert="~{fragments/header :: header}"></div>
+
+<!-- Container -->
+<main id="container">
+    <!-- Sub Component : Title -->
+    <section class="subCommon">
+        <div class="inner_box" data-aos="fade-up">
+            <h2 class="subTitle">프로필 수정</h2>
+        </div>
+    </section>
+
+    <!-- Sub Component : Contents -->
+    <section class="subContents">
+        <div class="inner_box" data-aos="fade-up">
+            <form th:action="@{/myPage/{userId}/edit(userId=${loginUser.getId()})}" method="post"
+                  enctype="multipart/form-data" onsubmit="return validateForm()">
+                <!-- 1. Profile Image -->
+                <div class="userInfoEdit_profile_img_box">
+                    <div class="userInfoEdit_profile_image">
+                        <img class="userInfoEdit_profile_img" id="profileImagePreview"
+                             th:src="${loginUser.profileImage != null ? '/image/profile/' + loginUser.profileImage.storeImageName : ''}"
+                             alt="Profile Image" />
+                        <img class="userInfoEdit_profile_img" id="levelImagePreview"
+                             th:src="@{'/image/level/' + ${loginUser.level.imageName}}" alt="Level Image"
+                             style="display: none;" />
+                    </div>
+                    <div class="userInfoEdit_profile_edit_icon" onclick="ProfileImageInput()">
+                        <i class="fa-solid fa-pencil"></i>
+                    </div>
+                </div>
+                <input type="file" id="profileImageInput" name="profileImage" accept="image/*">
+                <button type="button" id="useDefaultImage" class="userInfoEdit_profile_basic_image_btn">기본 이미지
+                    사용</button>
+                <input type="hidden" id="useDefaultImageFlag" name="useDefaultImage"
+                       th:value="${loginUser.profileImage == null ? 'true' : 'false'}">
+                <hr />
+
+                <div class="userInfoEdit_input_cnt">
+                    <!-- 2. Email -->
+                    <div class="userInfoEdit_email_box">
+                        <!-- 2-1. Email Title -->
+                        <h3 class="userInfoEdit_email_title">이메일</h3>
+                        <!-- 2-2. Email Input -->
+                        <div class="userInfoEdit_input">
+                            <div class="userInfoEdit_email_input_box">
+                                <label id="email" th:text="${loginUser.getEmail()}">shtmdqls21@nate.com</label>
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                        </div>
+                        <!-- 2-3. Email Check -->
+                        <div class="userInfoEdit_email_check">
+                            <input type="checkbox" id="email-subscription" name="emailConsent"
+                                   th:checked="${loginUser.emailConsent}" class="userInfoEdit_email_check_box">
+                            <label for="email-subscription" class="userInfoEdit_email_check_label">이메일 수신
+                                여부</label>
+                        </div>
+                    </div>
+
+                    <!-- 3. Nickname -->
+                    <div class="userInfoEdit_nickname_box">
+                        <!-- 3-1. Nickname Title -->
+                        <h3 class="userInfoEdit_nickname_title">닉네임</h3>
+                        <!-- 3-2. Nickname Input -->
+                        <div class="userInfoEdit_input">
+                            <input type="text" id="currentNickname" name="nickname"
+                                   class="userInfoEdit_nickname_input_box" th:value="${loginUser.getNickname()}"
+                                   readonly>
+                            <!-- 3-3. Nickname Check Btn -->
+                            <button type="button" id="changeNicknameButton"
+                                    class="userInfoEdit_nickname_check_btn">변경</button>
+                        </div>
+
+                    </div>
+
+                    <!-- 4. Phone -->
+                    <div class="userInfoEdit_phone_box">
+                        <!-- 4-1. Phone Title -->
+                        <h3 class="userInfoEdit_phone_title">전화번호</h3>
+                        <!-- 4-2. Phone Input -->
+                        <div class="userInfoEdit_input">
+                            <input type="number" id="phone" name="phone" class="userInfoEdit_phone_input_box"
+                                   th:value="${loginUser.phone}" readonly>
+                            <!-- 4-3. Phone Check Btn -->
+                            <button type="button" id="changePhoneButton" class="userInfoEdit_phone_check_btn"
+                                    onclick="changePhone(this)">변경</button>
+                        </div>
+
+                    </div>
+
+                    <!-- 5. Verification Code -->
+                    <div class="userInfoEdit_code_box hidden" id="verification-code">
+                        <!-- 5-1. Verification Code Title -->
+                        <h3 class="userInfoEdit_code_title">인증번호</h3>
+                        <!-- 5-2. Verification Code Input -->
+                        <div class="userInfoEdit_input">
+                            <input type="number" id="verificationInput" class="userInfoEdit_code_input_box">
+                        </div>
+                        <!-- 5-3. Verification Code Btn -->
+                        <div class="userInfoEdit_code_check">
+                            <button type="button" id="checkCodeButton" class="userInfoEdit_code_check_btn"
+                                    onclick="verifyCode()">인증번호
+                                확인</button>
+                        </div>
+                    </div>
+
+                    <!-- 6. Gender -->
+                    <div class="userInfoEdit_gender_box">
+                        <!-- 6-1. Gender Title -->
+                        <h3 class="userInfoEdit_gender_title">성별</h3>
+                        <!-- 6-2. Gender CheckBox -->
+                        <div class="userInfoEdit_gender_input">
+                            <input type="radio" id="male" name="gender" value="MALE"
+                                   class="userInfoEdit_gender_check_btn"
+                                   th:checked="${loginUser.gender == T(hello.entity.user.Gender).MALE}" />
+                            <label for="male" class="userInfoEdit_gender_check_label">남</label>
+                            <input type="radio" id="female" name="gender" value="FEMALE"
+                                   class="userInfoEdit_gender_check_btn"
+                                   th:checked="${loginUser.gender == T(hello.entity.user.Gender).FEMALE}" />
+                            <label for="female" class="userInfoEdit_gender_check_label">여</label>
+                        </div>
+                    </div>
+
+                    <!-- 7. Genres -->
+                    <div class="userInfoEdit_genres_box">
+                        <div class="userInfoEdit_genres_title_box">
+                            <!-- 7-1. Genre Title -->
+                            <h3 class="userInfoEdit_genres_title">선호 애니 장르</h3>
+                            <!-- 7-2. Genre Change Btn -->
+                            <button type="button" id="showGenreModal" class="userInfoEdit_genres_subtitle">장르
+                                변경</button>
+                        </div>
+                        <!-- 7-3. Selected Genre List -->
+                        <ul id="selected-genres" class="userInfoEdit_selected_genres_box">
+                            <div class="userInfoEdit_selected_genres_list_row">
+                                <li class="userInfoEdit_selected_genres_list"
+                                    th:each="userGenre : ${loginUser.userGenres}">
+                                    <div class="userInfoEdit_selected_genres_item">
+                                        <label class="userInfoEdit_genres_name"
+                                               th:text="${userGenre.genre.name}"></label>
+                                    </div>
+                                </li>
+                            </div>
+                        </ul>
+                        <input type="hidden" name="selectedGenres" id="selectedGenresInput">
+                    </div>
+
+                    <!-- 8. Address -->
+                    <div class="userInfoEdit_address_box">
+                        <!-- 8-1. Address Title -->
+                        <h3 class="userInfoEdit_address_title">주소</h3>
+                        <!-- 8-2. Address Input -->
+                        <div class="userInfoEdit_address_input_list">
+                            <!-- Row 1 -->
+                            <div class="userInfoEdit_address_input">
+                                <input type="text" class="userInfoEdit_address_input_box" id="postcode"
+                                       name="zipcode" placeholder="우편번호" th:value="${loginUser.homeAddress.zipcode}"
+                                       readonly>
+                                <button type="button" class="userInfoEdit_address_check_btn"
+                                        onclick="execDaumPostcode()">우편번호
+                                    찾기</button>
+                            </div>
+                            <!-- Row 2 -->
+                            <div class="userInfoEdit_address_input">
+                                <input type="text" class="userInfoEdit_address_input_box" id="address"
+                                       name="address" placeholder="주소" th:value="${loginUser.homeAddress.address}"
+                                       readonly>
+                            </div>
+                            <!-- Row 3 -->
+                            <div class="userInfoEdit_address_input">
+                                <input type="text" class="userInfoEdit_address_input_box" id="detail-address"
+                                       name="detailAddress" placeholder="상세 주소"
+                                       th:value="${loginUser.homeAddress.detailedAddress}"
+                                       oninput="updateStyledText(this)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Modify Button -->
+                    <button type="submit" class="userInfoEdit_edit_btn">회원 정보 수정</button>
+                </div>
+
+                <!-- Modal -->
+                <div id="genreModal" class="userInfoEdit_genreModal">
+                    <div class="userInfoEdit_genreModal_contents">
+                        <!-- Modal X Mark -->
+                        <button type="button" class="userInfoEdit_genreModal-close" id="closeGenreModal">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <!-- Modal Title -->
+                        <div class="userInfoEdit_genreModal_title_box">
+                            <h3 class="userInfoEdit_genreModal-title">선호 애니 장르 선택</h3>
+                            <h5 class="userInfoEdit_genreModal-subtitle">최대 5개 선택가능</h5>
+                        </div>
+                        <!-- Modal Genre List -->
+                        <div class="userInfoEdit_genreModal-list">
+                            <div class="userInfoEdit_genreModal-row">
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_action" name="genres" value="액션"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_action" id="custom_button_action_label"
+                                           class="userInfoEdit_genreModal_check_label">액션</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_munchkin" name="genres" value="먼치킨"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_munchkin" id="custom_button_munchkin_label"
+                                           class="userInfoEdit_genreModal_check_label">먼치킨</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_mystery" name="genres" value="추리/미스테리"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_mystery" id="custom_button_mystery_label"
+                                           class="userInfoEdit_genreModal_check_label">추리/미스테리</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_sports" name="genres" value="스포츠"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_sports" id="custom_button_sports_label"
+                                           class="userInfoEdit_genreModal_check_label">스포츠</label>
+                                </div>
+                            </div>
+                            <div class="userInfoEdit_genreModal-row">
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_magic" name="genres" value="마법"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_magic" id="custom_button_magic_label"
+                                           class="userInfoEdit_genreModal_check_label">마법</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_comedy" name="genres" value="개그"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_comedy" id="custom_button_comedy_label"
+                                           class="userInfoEdit_genreModal_check_label">개그</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_daily" name="genres" value="일상"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_daily" id="custom_button_daily_label"
+                                           class="userInfoEdit_genreModal_check_label">일상</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_romance" name="genres" value="순정"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_romance" id="custom_button_romance_label"
+                                           class="userInfoEdit_genreModal_check_label">순정</label>
+                                </div>
+                            </div>
+                            <div class="userInfoEdit_genreModal-row">
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_fantasy" name="genres" value="판타지"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_fantasy" id="custom_button_fantasy_label"
+                                           class="userInfoEdit_genreModal_check_label">판타지</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_school" name="genres" value="학원"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_school" id="custom_button_school_label"
+                                           class="userInfoEdit_genreModal_check_label">학원</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_healing" name="genres" value="힐링"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_healing" id="custom_button_healing_label"
+                                           class="userInfoEdit_genreModal_check_label">힐링</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_historical" name="genres" value="시대"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_historical" id="custom_button_historical_label"
+                                           class="userInfoEdit_genreModal_check_label">시대</label>
+                                </div>
+                            </div>
+                            <div class="userInfoEdit_genreModal-row">
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_maid" name="genres" value="메이드"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_maid" id="custom_button_maid_label"
+                                           class="userInfoEdit_genreModal_check_label">메이드</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_tsundere" name="genres" value="츤데레"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_tsundere" id="custom_button_tsundere_label"
+                                           class="userInfoEdit_genreModal_check_label">츤데레</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_yandere" name="genres" value="얀데레"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_yandere" id="custom_button_yandere_label"
+                                           class="userInfoEdit_genreModal_check_label">얀데레</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_love" name="genres" value="러브"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_love" id="custom_button_love_label"
+                                           class="userInfoEdit_genreModal_check_label">러브</label>
+                                </div>
+                            </div>
+                            <div class="userInfoEdit_genreModal-row">
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_bl" name="genres" value="BL"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_bl" id="custom_button_bl_label"
+                                           class="userInfoEdit_genreModal_check_label">BL</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_philosophy" name="genres" value="철학"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_philosophy" id="custom_button_philosophy_label"
+                                           class="userInfoEdit_genreModal_check_label">철학</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_harem" name="genres" value="하렘"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_harem" id="custom_button_harem_label"
+                                           class="userInfoEdit_genreModal_check_label">하렘</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_reverse_harem" name="genres"
+                                           value="역하렘" class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_reverse_harem" id="custom_button_reverse_harem_label"
+                                           class="userInfoEdit_genreModal_check_label">역하렘</label>
+                                </div>
+                            </div>
+                            <div class="userInfoEdit_genreModal-row">
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_yuri" name="genres" value="백합"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_yuri" id="custom_button_yuri_label"
+                                           class="userInfoEdit_genreModal_check_label">백합</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_horror" name="genres" value="호러"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_horror" id="custom_button_horror_label"
+                                           class="userInfoEdit_genreModal_check_label">호러</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_kids" name="genres" value="아동"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_kids" id="custom_button_kids_label"
+                                           class="userInfoEdit_genreModal_check_label">아동</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_virtual" name="genres" value="가상"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_virtual" id="custom_button_virtual_label"
+                                           class="userInfoEdit_genreModal_check_label">가상</label>
+                                </div>
+                            </div>
+                            <div class="userInfoEdit_genreModal-row">
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_mental" name="genres" value="멘붕"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_mental" id="custom_button_mental_label"
+                                           class="userInfoEdit_genreModal_check_label">멘붕</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_mecha" name="genres" value="메카"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_mecha" id="custom_button_mecha_label"
+                                           class="userInfoEdit_genreModal_check_label">메카</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_superpower" name="genres" value="능력자"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_superpower" id="custom_button_superpower_label"
+                                           class="userInfoEdit_genreModal_check_label">능력자</label>
+                                </div>
+                                <div class="userInfoEdit_genreModal-item">
+                                    <input type="checkbox" id="custom_button_shota" name="genres" value="쇼타"
+                                           class="userInfoEdit_genreModal_checkbox" />
+                                    <label for="custom_button_shota" id="custom_button_shota_label"
+                                           class="userInfoEdit_genreModal_check_label">쇼타</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Submit -->
+                        <div class="genre-submit">
+                            <button class="userInfoEdit_genreModal_select_btn" type="button" id="submitGenres">선택
+                                완료</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
