@@ -34,10 +34,7 @@
     <script>
       $(document).ready(function () {
         $(".ani-poster").click(function () {
-          console.log("애니 포스터 click");
-
-          let imageId = $(this).siblings("#animation-id").text().trim();
-          console.log("이미지 아이디" + imageId + "을 클릭"); //string
+           let imageId = $(this).siblings("#animation-id").text().trim();
           console.log("url = /animations/" + imageId);
 
           $.ajax({

@@ -41,7 +41,7 @@
 <div class="review-body">
   <h1 class="page-title">리뷰 게시판</h1>
   <div class="ani-container">
-    <img th:src="${aniDetailInfo.imagePath}" alt="애니 포스터" class="ani-img" />
+    <img th:src="@{/image/ani/{imageName}(imageName=${aniDetailInfo.imageName})}" alt="애니 포스터" class="ani-img" />
     <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>
     <div class="ani-info-box">
       <div class="title-bar">
@@ -97,7 +97,7 @@
     <div class="row-box review-write-box">
       <div class="stars-container"></div>
       <input type="hidden" name="score" id="score-number" value="0"/>
-      <input type="submit" value="등록" class="submit-btn" />
+      <input type="submit" value="등록" class="write-review-submit-btn" />
     </div>
   </form>
   <div class="order-box">

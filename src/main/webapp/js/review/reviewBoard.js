@@ -39,8 +39,10 @@ function renderPage(page) {
         pageButton.innerText = i;
         pageButton.onclick = () => changePage(i);
 
+        console.log(pageButton.innerText)
         if (i === currentPage) {
-            pageButton.classList.add('current-page');
+            pageButton.style.backgroundColor = '#ff8b00';
+            pageButton.style.color='white'
         }
 
         buttonWrapper.appendChild(pageButton);

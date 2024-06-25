@@ -40,7 +40,7 @@
 .genre-title{
   position:sticky;
   top:0;
-  background-color: #1a1a1a;
+  background-color: #FFFFFF;
   font-size: 1.7rem;
   height: 6rem;
   display: flex;
@@ -48,13 +48,14 @@
 }
 
 .genre-container{
-  color: #FFFFFF;
+  color: black;
+  /*color:#ff8b00;*/
   width: 20rem;
-  height: 38rem;
-  border: 1px solid black;
+  height: 30rem;
+  border: 1px solid #ff8b00;
   border-radius: 20px;
-  background-color: #1a1a1a;
-  padding: 0 2rem 2rem calc(2rem + 10px);
+  background-color: #FFFFFF;
+  padding: 0 2rem 2rem 2rem;
   position: absolute;
   top:2%;
   left: -30%;
@@ -74,9 +75,9 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-color: dimgray #1A1A1A ;
+  scrollbar-color: #FEC02E #FEFFDA ;
   scrollbar-width :thin;
-  height: 30rem; /* 스크롤바 영역 설정 */
+  height: 21rem; /* 스크롤바 영역 설정 */
 }
 
 
@@ -196,6 +197,20 @@
   justify-content: space-around;
 }
 
+.ani-list-title{
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* hover 효과 줬었나?*/
+.current-page {
+  background-color: #ff8b00;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
 
 
 /* ////////  하단부 버튼  ////////*/
