@@ -1,4 +1,4 @@
-.create-board-form-container {
+.edit-board-form-container {
     max-width: 600px;
     margin: 90px auto;
     padding: 20px;
@@ -7,20 +7,20 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.create-board-form-container h2 {
+.edit-board-form-container h2 {
     text-align: left;
     margin-bottom: 20px;
     color: #ff8b00;
 }
 
-.create-form-group {
+.edit-form-group {
     margin-bottom: 20px;
     text-align:center;
     align-items: center;
     justify-content: center;
 }
 
-.create-form-group label {
+.edit-form-group label {
     display: flex;
     text-align:center;
     align-items: center;
@@ -29,15 +29,15 @@
     color: #ff8b00;
 }
 
-.create-file-label-title{
+.edit-file-label-title {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
     color: #ff8b00;
 }
 
-.create-form-group input[type="text"],
-.create-form-group textarea {
+.edit-form-group input[type="text"],
+.edit-form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -45,24 +45,24 @@
     font-size: 16px;
 }
 
-.create-form-group textarea {
+.edit-form-group textarea {
     height: 150px;
 }
 
-.create-image-preview-container {
+.edit-image-preview-container {
     position: relative;
     display: inline-block;
 }
 
-.create-board-img {
-     max-width: 500px;
-        height: 400px;
+.edit-board-img {
+    max-width: 500px;
+    height: 400px;
     display: block;
     margin-bottom: 10px;
     border-radius: 10px;
 }
 
-.create-delete-image-button {
+.edit-delete-image-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -76,14 +76,20 @@
     transition: background-color 0.3s ease;
 }
 
-.create-delete-image-button:hover {
+.edit-delete-image-button:hover {
     background-color: red;
 }
 
-.create-board-create-button {
-    display: block;
-    width: 100px;
-    padding: 10px;
+.edit-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+.edit-board-edit-button {
+    padding: 10px 20px;
     background-color: #ff8b00;
     color: #fff;
     border: none;
@@ -93,14 +99,13 @@
     transition: background-color 0.3s ease;
 }
 
-.create-board-create-button:hover {
+.edit-board-edit-button:hover {
     background-color: #e67e00;
 }
-.create-board-create-button-reset {
-    display: block;
-    width: 100px;
-    padding: 10px;
-    background-color: #FFC60B;
+
+.edit-board-edit-reset {
+    padding: 10px 20px;
+    background-color: #ffc60b;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -109,15 +114,16 @@
     transition: background-color 0.3s ease;
 }
 
-
-.create-board-create-button-reset:hover {
-    background-color: #444444;
+.edit-board-edit-reset:hover {
+    background-color: #ffae00;
 }
-.create-file-button-container {
+
+
+.edit-file-button-container {
     text-align: center;
 }
 
-.create-file-button {
+.edit-file-button {
     display: inline-block;
     padding: 10px 20px;
     background-color: #ff8b00;
@@ -132,24 +138,17 @@
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.create-file-button:hover {
+.edit-file-button:hover {
     background-color: #e67e00;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-.create-board-write-file-input {
+
+.edit-board-write-file-input {
     display: none;
 }
 
-.create-file-name {
+.edit-file-name {
     margin-top: 10px;
     font-size: 20px;
     color: #555;
 }
-.create-button-bottom{
-    display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        gap: 20px;
-}
-

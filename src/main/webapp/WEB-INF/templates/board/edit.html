@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
-    <link rel="icon" href="/images/10duck.ico">
+
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -25,27 +25,67 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript">
+        function editRemoveImage() {
+            document.getElementById('edit-file').value = "";
+            document.getElementById('edit-imagePreview').style.display = 'none';
+            document.querySelector('.edit-delete-image-button').style.display = 'none';
+            document.getElementById('edit-fileName').style.display = 'none';
+        }
+
+        $(document).ready(function() {
+            $('#edit-file').change(function() {
+                var input = this;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#edit-imagePreview').attr('src', e.target.result);
+                        $('#edit-imagePreview').show();
+                        $('.edit-delete-image-button').show();
+                        $('#edit-fileName').text(input.files[0].name).show();
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        });
+        function editRemoveImage() {
+            $('#edit-imagePreview').attr('src', '').hide();
+            $('#edit-file').val('');
+            $('.edit-delete-image-button').hide();
+            $('#edit-fileName').hide();
+}
+    </script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 
-<div class="board-form-container">
+<div class="edit-board-form-container">
     <h2>게시글 수정</h2>
-    <form th:action="@{/board/{boardId}/edit(boardId =${board.id})}" th:object="${board}" method="post"  enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="title">제목</label>
-            <input type="text" id="title" name="title"th:field="*{title}" th:value="${board.title}">
+    <form th:action="@{/board/{boardId}/edit(boardId=${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
+        <div class="edit-form-group">
+            <div class="edit-file-label-title">사진 첨부</div>
+            <div class="edit-image-preview-container">
+                <img id="edit-imagePreview" class="edit-board-img" style="display:none;">
+                <button type="button" class="edit-delete-image-button" style="display:none;" onclick="editRemoveImage()">삭제</button>
+                <div id="edit-fileName" class="edit-file-name" style="display:none;"></div>
+            </div>
+            <input type="file" id="edit-file" name="file" accept="image/*" class="edit-board-write-file-input">
         </div>
-        <div class="form-group">
-            <label for="content">내용</label>
-            <textarea id="content" name="content" th:field="*{content}" th:value="${board.content}"></textarea>
+        <div class="edit-file-button-container">
+            <button type="button" class="edit-file-button" onclick="document.getElementById('edit-file').click()">사진 추가</button>
         </div>
-                <div class="form-group">
-                    <label for="file">사진 첨부</label>
-                    <img class="board-img" id="imagePreview" alt="Board Image" style="display:none; max-width: 100%; height: auto;"/>
-                    <input type="file" id="file" name="file" accept="image/*" class="board-write-file-input">
-                </div>
-        <button type="submit" class="board-edit-button">수정</button>
+        <div class="edit-form-group">
+            <label for="edit-title">제목</label>
+            <input type="text" id="edit-title" name="title" th:field="*{title}" placeholder="제목을 입력하세요">
+        </div>
+        <div class="edit-form-group">
+            <label for="edit-content">내용</label>
+            <textarea name="content" id="edit-content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
+        </div>
+        <div class="edit-button-group">
+            <button type="submit" class="edit-board-edit-button ">수정</button>
+            <button type="button" class="edit-board-edit-reset" onclick="window.location.href='/board/list'">취소</button>
+        </div>
     </form>
 </div>
 

@@ -55,7 +55,7 @@ const newMake = () => {
 const drawArrow = () => {
     const arrow = document.createElement('div');
     arrow.id = 'arrow';
-    document.getElementById('menu').appendChild(arrow);
+    document.querySelector('.canvas-container').appendChild(arrow); // canvas-container에 화살표 추가
 }
 
 // 돌림판
