@@ -25,6 +25,7 @@
 @import url(./board/boardList.css);
 @import url(./board/CreateAndEdit.css);
 @import url(./board/Show.css);
+@import url(./board/EditBoard.css);
 @import url(./review/ReviewBoard.css);
 @import url(./review/ReviewWrite.css);
 @import url(./notice/NoticePage.css);

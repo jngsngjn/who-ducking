@@ -71,7 +71,6 @@ public class ReviewService {
     public Review findById(Long id) {
         return reviewRepository.findById(id).orElse(null);
     }
-
     public Review save(Review review) {
         return reviewRepository.save(review);
     }
@@ -105,12 +104,15 @@ public class ReviewService {
         userRepository.saveAll(users);
     }
 
+    public int getReviewCount(Animation animation) {
+        return reviewRepository.findReviewCount(animation);
+    }
+
+
     // 리뷰 작성 횟수 제한
     public static class ReviewLimitExceed extends RuntimeException {
         public ReviewLimitExceed(String message) {
             super(message);
         }
     }
-
-    // 좋아요
 }

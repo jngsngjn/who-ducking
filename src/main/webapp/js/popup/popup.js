@@ -44,6 +44,11 @@ $(document).ready(function() {
 
     // 북마크 버튼 클릭
     $(document).on('click', '.bookmark-icon', function() {
+        if (!isAuthenticated) {
+            alert('로그인이 필요합니다.');
+            return;
+        }
+
         var $icon = $(this);
         var storeTitle = $icon.closest('li').find('span').text().trim();
         var store = areaArr.find(function(item) {
@@ -60,9 +65,16 @@ $(document).ready(function() {
 
 function loadPopupStores() {
     $.ajax({
-        url: '/api/popupstores',
+        url: '/api/popup-stores',
         method: 'GET',
         success: function(data) {
+            console.log('Server response:', data);  // 응답 데이터 형식 출력
+
+            if (!Array.isArray(data)) {
+                console.error('Invalid data format:', data);
+                return;
+            }
+
             areaArr = data.map(function(store) {
                 return {
                     id: store.id,
@@ -73,7 +85,7 @@ function loadPopupStores() {
                     date: "기간 : " + formatDate(store.startDate) + " ~ " + formatDate(store.endDate),
                     time: "시간: " + store.openTime + " ~ " + store.closeTime,
                     image: "/image/popup/" + store.imageName,
-                    bookmarked: store.bookmarked // 서버에서 북마크 상태를 반환
+                    bookmarked: store.bookmarked || false // 서버에서 북마크 상태를 반환, 인증되지 않은 경우 기본값으로 false 사용
                 };
             });
             initMap();
@@ -121,7 +133,7 @@ function setMarkers() {
                     <img src="${areaArr[i].image}" class="popup-store-img">
                 </div>
                 <div class="popup-info">
-                    <span>${areaArr[i].title} <i class="${areaArr[i].bookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark icon bookmark-icon"></i></span>
+                    <span>${areaArr[i].title} ${isAuthenticated ? `<i class="${areaArr[i].bookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark icon bookmark-icon"></i>` : ''}</span>
                     <div class="popup-dates">
                         <div class="date-left">${areaArr[i].date}</div>
                         <div class="date-left">${areaArr[i].time}</div>
@@ -221,7 +233,7 @@ function displaySearchResults(results) {
                         <img src="${store.image}" class="popup-store-img">
                     </div>
                     <div class="popup-info">
-                        <span>${store.title} <i class="${bookmarkClass} fa-bookmark icon bookmark-icon"></i></span>
+                        <span>${store.title} ${isAuthenticated ? `<i class="${bookmarkClass} fa-bookmark icon bookmark-icon"></i>` : ''}</span>
                         <div class="popup-dates">
                             <div class="date-left-date" data-label="기간:">${store.date}</div>
                             <div class="date-left-time" data-label="시간:">${store.time}</div>

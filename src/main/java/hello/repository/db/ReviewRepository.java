@@ -1,5 +1,6 @@
 package hello.repository.db;
 
+import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,5 +24,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("SELECT COUNT(r) FROM Review r WHERE r.user = :user AND DATE(r.writeDate) = :date")
     long countReviewByUserAndDate(@Param("user") User user, @Param("date") LocalDate date);
 
+    @Query("select count(r) from Review r where r.animation = :animation")
+    int findReviewCount(@Param("animation") Animation animation);
 }
-

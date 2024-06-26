@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// @ 리뷰 삭제 -> (o)
+// 리뷰 삭제 -> (o)
 document.addEventListener("DOMContentLoaded", function () {
     const deleteButtons = document.querySelectorAll(".delete-review-btn");
 
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// @ 좋아요 요청 함수 ->(o)
+// 좋아요 요청 함수 ->(o)
 function likeReview(reviewId) {
     let url = `/reviews/${reviewId}/like`;
 
@@ -177,7 +177,7 @@ function likeReview(reviewId) {
 }
 
 
-// @ 싫어요 요청 함수
+// 싫어요 요청 함수
 function dislikeReview(reviewId) {
     let url = `/reviews/${reviewId}/dislike`;
 
@@ -203,7 +203,7 @@ function dislikeReview(reviewId) {
 }
 
 
-// @ 리뷰 작성 시 빈 값 요청 불가
+// 리뷰 작성 시 빈 값 요청 불가
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector(".write-box");
     const reviewContent = document.getElementById("review-content");
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// @ 스포일러 체크 여부에따라 보여주기
+// 스포일러 체크 여부에따라 보여주기
 document.addEventListener('DOMContentLoaded', function () {
     const spoilerCheckbox = document.getElementById('show-spoiler');
 
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// @ 리뷰 정렬하기 &  수정 하기
+// 리뷰 정렬하기 &  수정 하기
 document.addEventListener("DOMContentLoaded", function() {
     let currentOrder = 'recent';
 

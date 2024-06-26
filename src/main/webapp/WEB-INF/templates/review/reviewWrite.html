@@ -77,7 +77,7 @@
     <i class="fa-solid fa-comment"></i>
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
-  <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box">
+  <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box" th:if="${isAuthenticated}">
     <input type="hidden" name="userId" th:value="${userId}" />
     <input type="hidden" name="nickname" th:value="${nickname}"/>
     <div class="row-box">
@@ -104,7 +104,7 @@
       <input type="submit" value="등록" class="write-review-submit-btn" />
     </div>
   </form>
-  <div class="order-box">
+  <div class="order-box" th:if="${reviewCount != 0}">
     <div class="row-box">
       <button id="recent" class="order-btn" >최신 순</button>
       <button id="like" class="order-btn" >좋아요 순</button>
@@ -137,7 +137,7 @@
         <p th:text="${review.content}" class="review-comment"></p>
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
-          <div>
+          <div th:if="${isAuthenticated}">
             <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
               <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
             </button>
@@ -167,7 +167,7 @@
         <p th:text="${review.content}" class="review-comment"></p>
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
-          <div>
+          <div th:if="${isAuthenticated}">
             <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
               <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
             </button>

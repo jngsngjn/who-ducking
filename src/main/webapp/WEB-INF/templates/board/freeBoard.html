@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
-    <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -28,10 +27,10 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 
-<main id="container">
+<main id="board-container">
     <div class="free-board">
-        <section class="sub_Common">
-            <h2 class="sub_title">커뮤니티</h2>
+        <section class="subCommon-freeBoard">
+            <h2 class="sub_title">자유 게시판</h2>
             <div class="sort-option-box">
                 <ul class="sort-options">
                     <li th:class="${sort == 'writeDate'} ? 'sort-option selected' : 'sort-option'">
@@ -45,6 +44,7 @@
         </section>
         <div class="main_section">
             <section class="free-board-board-list">
+                <div class="board-list-separator"></div>
                 <div class="board-list-top">
                     <span class="board-list-top_num">번호</span>
                     <span class="board-list-top_title">제목</span>
@@ -52,10 +52,7 @@
                     <span class="board-list-top_date">작성일</span>
                     <span class="board-list-top_view-cnt">조회수</span>
                 </div>
-
                 <div class="board-list-separator"></div>
-
-                <!--타임리프 적용 필요-->
                 <div class="board-list-bot">
                     <ul class="board-list-bot-items">
                         <li th:each="board, iterStat : ${boardList}">
@@ -67,28 +64,27 @@
                         </li>
                     </ul>
                 </div>
+                <div class="pagination-wrap">
+                    <ul class="pagination-wrap-elements">
+                        <li th:if="${boardList.hasPrevious()}">
+                            <a th:href="@{/board(page=${boardList.number - 1}, sort=${sort})}">이전</a>
+                        </li>
+                        <li th:each="page : ${#numbers.sequence(startPage, endPage)}"
+                            th:classappend="${page == nowPage} ? 'active' : ''">
+                            <a th:href="@{/board(page=${page - 1}, sort=${sort})}" th:text="${page}"></a>
+                        </li>
+                        <li th:if="${boardList.hasNext()}">
+                            <a th:href="@{/board(page=${boardList.number + 1}, sort=${sort})}">다음</a>
+                        </li>
+                    </ul>
+                </div>
             </section>
         </div>
         <div class="free-board-write-button">
             <a href="/board/new">글쓰기</a>
         </div>
         <section class="pagination">
-            <div class="pagination-wrap">
-                <ul class="pagination-wrap-elements">
-                    <li th:if="${boardList.hasPrevious()}">
-                        <!-- 이전 화살표 아이콘 -->
-                        <a th:href="@{/board(page=${boardList.number - 1}, sort=${sort})}">이전</a>
-                    </li>
-                    <li th:each="page : ${#numbers.sequence(startPage, endPage)}"
-                        th:classappend="${page == nowPage} ? 'active' : ''">
-                        <a th:href="@{/board(page=${page - 1}, sort=${sort})}" th:text="${page}"></a>
-                    </li>
-                    <li th:if="${boardList.hasNext()}">
-                        <!-- 다음 화살표 아이콘 -->
-                        <a th:href="@{/board(page=${boardList.number + 1}, sort=${sort})}">다음</a>
-                    </li>
-                </ul>
-            </div>
+
         </section>
     </div>
     <img class="background-image" src="/images/freeBoard-eren.png" />
@@ -97,3 +93,4 @@
 <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>
+

@@ -71,17 +71,6 @@ const renderCalendar = () => {
     if (attendance[date.textContent]) {
       date.classList.add('filled');
     }
-
-    date.addEventListener('click', () => {
-      if (!attendance[date.textContent]) {
-        attendance[date.textContent] = true;
-        localStorage.setItem("attendance", JSON.stringify(attendance));
-        points = parseInt(points) + 1;
-        localStorage.setItem("points", points);
-        pointsElement.innerText = points;
-        date.classList.add('filled');
-      }
-    });
   });
 }
 
