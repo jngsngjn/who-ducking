@@ -22,9 +22,8 @@
     font-size: 1.4rem;
 }
 
-.f-gnb > li:nth-child(2) > a {
+.admin_page {
     font-weight: 500;
-    color: var(--mainColor);
 }
 
 .f-copyright {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Who's DucKing</title>
     <link rel="icon" href="/images/10duck.ico">
@@ -22,7 +22,7 @@
         </div>
         <section class="section-choice">
             <span class="popup-title" onclick="location.reload();">팝업 스토어</span>
-            <div class="button-group">
+            <div class="button-group" th:if="${isAuthenticated}">
                 <button class="schedule-button active">일정순</button>
                 <button class="bookmark-button">북마크</button>
             </div>
@@ -31,6 +31,9 @@
     </div>
     <div class="map" id="map"></div>
 </div>
+<script>
+    var isAuthenticated = /*[[${isAuthenticated}]]*/ false;
+</script>
 <script src="/js/popup/popup.js"></script>
 </body>
 </html>
