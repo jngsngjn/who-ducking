@@ -6,7 +6,7 @@ $(document).ready(function () {
     });
 
     // MainVisualSwiper
-    const mainVisualSwiper = new Swiper(".mv-cnt-lucky", {
+    const mainVisualSwiper = new Swiper(".mv-cnt__luckyDraw", {
         spaceBetween: 40,
         centeredSlides: true,
         loop: true,
@@ -27,13 +27,13 @@ $(document).ready(function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const tabs = document.querySelectorAll(".lucky_tab");
-    const contents = document.querySelectorAll(".lucky_tab__content");
+    const tabs = document.querySelectorAll(".luckyDraw_grade");
+    const contents = document.querySelectorAll(".luckyDraw_product");
 
     tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
-            tabs.forEach(tab => tab.classList.remove("active"));
-            contents.forEach(content => content.classList.remove("active"));
+            tabs.forEach((tab) => tab.classList.remove("active"));
+            contents.forEach((content) => content.classList.remove("active"));
 
             tab.classList.add("active");
             contents[index].classList.add("active");

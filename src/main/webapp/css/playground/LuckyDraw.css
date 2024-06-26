@@ -1,255 +1,459 @@
-.tab__content_wrapper{
-    height: 100rem;
-}
-
-.lucky_ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding: 0;
-    list-style-type: none; /* li 요소의 기본 스타일 제거 */
-    gap: 20px; /* 요소 사이의 간격 추가 */
-}
-
-.lucky_draw_item {
-    flex: 1 1 calc(33.333% - 20px); /* 각 아이템이 한 줄에 3개씩 들어가도록 설정 */
-    box-sizing: border-box;
-    max-width: calc(33.333% - 20px); /* 아이템이 한 줄에 3개씩 들어가도록 설정 */
-    height: 740px;
-    margin-bottom: 20px; /* 각 아이템의 아래에 약간의 공간 추가 */
-    background-color: #FEFFDB;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.lucky_draw_img {
-    width: 100%; /* 이미지를 아이템의 전체 너비에 맞추기 */
-    display: flex;
-    justify-content: center;
-}
-
-.lucky_draw_img_box {
-    width: 400px; /* 이미지 박스의 너비를 고정 */
-    height: 400px; /* 이미지 박스의 높이를 고정 */
-}
-
-.lucky_draw_img_box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.lucky_draw_info {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px; /* 좌우 여백 추가 */
-    margin-top: 10px;
-}
-
-.lucky_draw_coin {
-    font-size: 24px;
-    background-color: white;
-    width: 100px;
-    height: 35px;
-    border-radius: 10px;
-    font-weight: 900;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.lucky_draw_icon1 {
-    color: #FFC60B;
-    margin-right: 10px;
-}
-
-.lucky_draw_date {
-    font-size: 18px;
-    background-color: white;
-    width: 180px;
-    height: 35px;
-    border-radius: 10px;
-    font-weight: 900;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.lucky_draw_icon2 {
-    margin-right: 10px;
-}
-
-.lucky_draw_name {
-    font-size: 32px;
-    align-self: flex-start;
-    margin-left: 30px;
-    color: black;
-}
-
-.lucky_draw_button {
-    width: 400px;
-    height: 95px;
-    border-radius: 20px;
-    background-color: #ff8b00;
-    color: white;
-    font-size: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.lucky_ur {
-    color: #e50e0e;
-    text-align: center;
-    font-size: 50px;
-    font-weight: 900;
-    position: relative;
-    height: 40px;
-    -webkit-text-stroke: 3px #ff9696;
-    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px; /* 기존 40px에서 줄임 */
-}
-
-/* 추가된 전역 스타일 */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    padding: 20px;
-}
-
-/* 기존 CSS 유지 */
-.lucky_body {
-    background-image: url('/images/Background_Image/mitsuri.png');
+.luckyDraw_backgroundImage {
+    background-image: url("/images/Background_Image/mitsuri.png");
     background-repeat: no-repeat;
     background-position: 0% 40%;
     background-size: 100% 52%;
 }
 
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
+}
+
+.luckyDraw {
+    padding-bottom: 12rem;
+}
+
+/* Main Carousel */
+.mv-cnt__luckyDraw {
+    position: relative;
+    margin: 0 auto;
+    width: 1200px;
+    height: 450px;
+    overflow: hidden;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.mv-cnt__items {
+    position: relative;
+    height: 100%;
+}
+
+.mv-cnt__items > li {
+    position: relative;
+    height: 100%;
+}
+
+.mv-cnt__img-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 3rem;
+    overflow: hidden;
+}
+
+.mv-cnt__img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: no-repeat center/cover;
+    transform: scale(1.1);
+    transition: 5s;
+}
+
+.swiper-slide-active .mv-cnt__img {
+    transform: scale(1);
+}
+
+.mv-cnt__img::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.mv-cnt__text {
+    position: relative;
+    z-index: 1;
+    padding: 12rem 10rem;
+}
+
+.mv-cnt__desc {
+    font-size: 2rem;
+    color: #fff;
+}
+
+.swiper-slide-active .mv-cnt__desc {
+    animation: fadeInUp;
+    animation-duration: 3s;
+}
+
+.mv-cnt__title {
+    font-size: 4rem;
+    color: #fff;
+}
+
+.swiper-slide-active .mv-cnt__title {
+    animation: fadeInUp;
+    animation-duration: 3s;
+}
+
+.mv-cnt__link {
+    margin-top: 4rem;
+    display: inline-block;
+    padding: 0.8rem 1.6rem;
+    background: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--mainColor);
+    border-radius: 10rem;
+    transition: 0.3s;
+}
+
+.mv-cnt__link:hover {
+    background: var(--mainColor);
+    color: #fff;
+}
+
+.swiper-slide-active .mv-cnt__link {
+    animation: fadeInUp;
+    animation-duration: 3s;
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.swiper-next_btn,
+.swiper-prev_btn {
+    position: absolute;
+    transform: translateY(-45%);
+    width: 50px;
+    height: 500px;
+    border-radius: 50%;
+    color: var(--subColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+/* Lucky Draw Tab ==================================== */
+.luckyDraw_grade_tab {
+    display: flex;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    max-width: 1200px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.luckyDraw_grade {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 120px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    border-radius: 1.5rem 1.5rem 0 0;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease-in-out;
+}
+
+.luckyDraw_grade:hover {
+    transform: translateY(-15px);
+    transition: 0.5s;
+}
+
+.luckyDraw_grade_tab:hover > :not(:hover) {
+    opacity: 0.5;
+}
+
+.luckyDraw_grade_tab > div:nth-child(1) {
+    color: #e50e0e;
+    border: 2px solid #e50e0e;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #ff9696;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.luckyDraw_grade_tab > div:nth-child(1):hover {
+    background-color: #ffc0c0;
+    border: 2px solid #fff;
+}
+
+.luckyDraw_grade:nth-child(1).active {
+    background-color: #fad6d6;
+    border: 2px solid #e50e0e;
+}
+
+.luckyDraw_grade_tab > div:nth-child(2) {
+    color: #0c22ee;
+    border: 2px solid #0c22ee;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #8481ff;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.luckyDraw_grade_tab > div:nth-child(2):hover {
+    background-color: #ababf1;
+    border: 2px solid #fff;
+}
+
+.luckyDraw_grade:nth-child(2).active {
+    background-color: #cfcfff;
+    border: 2px solid #0c22ee;
+}
+
+.luckyDraw_grade_tab > div:nth-child(3) {
+    color: #24b329;
+    border: 2px solid #24b329;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #05ff00;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.luckyDraw_grade_tab > div:nth-child(3):hover {
+    background-color: #b4f1b4;
+    border: 2px solid #fff;
+}
+
+.luckyDraw_grade:nth-child(3).active {
+    background-color: #d4ecd4;
+    border: 2px solid #24b329;
+}
+
+.luckyDraw_grade_tab > div:nth-child(4) {
+    color: #000000;
+    border: 2px solid #000000;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #7f7e7e;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+.luckyDraw_grade_tab > div:nth-child(4):hover {
+    background-color: #d8d8d8;
+    border: 2px solid #fff;
+}
+
+.luckyDraw_grade:nth-child(4).active {
+    background-color: #f8f6f6;
+    border: 2px solid #000000;
+}
+
+.luckyDraw_notice_desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+/* Lucky Draw Product ==================================== */
+
+.luckyDraw_product {
+    display: none;
+}
+
+.luckyDraw_product.active {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.luckyDraw_item_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 3rem;
+}
+
+.luckyDraw_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 38rem;
+    background-color: var(--primaryColor);
+    border: 2px solid var(--subColor);
+    border-radius: 2rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.luckyDraw_item_img_box {
+    width: 30rem;
+    height: 30rem;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.luckyDraw_item_img_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.luckyDraw_item_img_content > img {
+    width: 30rem;
+    height: 30rem;
+    border-radius: 1rem;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.luckyDraw_item_img_info {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 3%;
+    width: 28.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.luckyDraw_item_coin {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.luckyDraw_item_coin i {
+    color: var(--mainColor);
+}
+
+.luckyDraw_item_date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.luckyDraw_item_date i {
+    color: var(--mainColor);
+}
+
+.luckyDraw_item_name_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.luckyDraw_item_name {
+    display: block;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.luckyDraw_item_btn {
+    width: 70%;
+    padding: 0.5rem 0;
+    margin: 1rem 0 2rem;
+    background-color: var(--mainColor);
+    border: 2px solid var(--mainColor);
+    color: #fff;
+    font-size: 1.8rem;
+    text-align: center;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.luckyDraw_item_btn:hover {
+    background-color: #fff;
+    color: var(--mainColor);
+    border: 2px solid var(--mainColor);
+    transition: 0.3s;
+}
+
+.luckyDraw_item_grade_UR {
+    color: #e50e0e;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #ff9696;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.luckyDraw_item_grade_SR {
+    color: #0c22ee;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #8481ff;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.luckyDraw_item_grade_R {
+    color: #24b329;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #05ff00;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+.luckyDraw_item_grade_N {
+    color: #000000;
+    text-align: center;
+    font-size: 4.8rem;
+    font-weight: 900;
+    position: relative;
+    -webkit-text-stroke: 3px #7f7e7e;
+    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
+
+/* 기존 CSS 유지 */
 .lucky_header {
     transform: scale(0.85714);
 }
 
 .lucky_main {
     transform: scale(0.85714);
-}
-
-.lucky_content {
-    width: 1400px;
-    margin: 0 auto;
-}
-
-.lucky_h2 {
-    color: #ff8b00;
-    font-size: 50px;
-}
-
-/* 상단 배너 */
-.mv-cnt-lucky {
-    width: 1400px;
-    height: 450px;
-    margin-bottom: 50px;
-}
-
-/* 메뉴 탭 */
-
-.lucky_tab_menu {
-    display: flex;
-    justify-content: center;
-    max-width: 1400px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.lucky_tab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 50px;
-    width: 350px;
-    height: 120px;
-    background: rgba(255, 139, 0, 0.15);
-    color: #c9c9c9;
-    padding: 10px 20px;
-    border: 1px solid #d9d9d9;
-    cursor: pointer;
-    border-radius: 15px 15px 0 0;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.lucky_tab:hover {
-    background-color: #FF8b00;
-    color: #fff;
-}
-
-.lucky_tab.active {
-    background-color: #FF8b00;
-    color: white;
-    border-color: #FF8b00;
-}
-
-.lucky_tab.active::before {
-    transform: scale(1);
-}
-
-.lucky_tab__content {
-    display: none;
-}
-.lucky_tab__content.active {
-    display: block;
-}
-
-.lucky_sr {
-    color: #0C22EE;
-    text-align: center;
-    font-size: 50px;
-    font-weight: 900;
-    position: relative;
-    height: 40px;
-    -webkit-text-stroke: 3px #8481FF;
-    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
-}
-
-.lucky_r {
-    color: #24B329;
-    text-align: center;
-    font-size: 50px;
-    font-weight: 900;
-    position: relative;
-    height: 40px;
-    -webkit-text-stroke: 3px #05FF00;
-    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
-}
-
-.lucky_n {
-    color: #000000;
-    text-align: center;
-    font-size: 50px;
-    font-weight: 900;
-    position: relative;
-    height: 40px;
-    -webkit-text-stroke: 3px #7f7e7e;
-    text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
-}
-
-.lucky_notice {
-    text-align: left;
-    font-size: 28px;
-    font-weight: bold;
-    color: #000;
-    margin: 30px 0;
-}
-
-.lucky_draw_button:hover {
-    background-color: #ec8303;
 }

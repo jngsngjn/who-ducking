@@ -30,184 +30,218 @@
     <script type="text/javascript" src="/js/playground/luckyDraw.js"></script>
 </head>
 
-<body class="lucky_body">
-<div th:insert="~{fragments/header :: header}"></div>
-<main id="container" class="lucky_main">
+<body class="luckyDraw_backgroundImage">
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
 
-    <div class="lucky_content">
-        <ul class="lucky_ul">
-            <h2 class="lucky_h2">럭키 드로우</h2>
-        </ul>
-        <div class="mv-cnt-lucky swiper">
-            <ul class="mv-cnt__items swiper-wrapper">
-                <li class="swiper-slide">
-                    <div class="mv-cnt__img-box">
-                        <span class="mv-cnt__img" style="background-image: url(/images/MainCarousel/MainVisual.png);"></span>
-                    </div>
-                    <div class="mv-cnt__text">
-                        <p class="mv-cnt__desc">리뷰와 럭키드로우를 한번에?!</p>
-                        <h2 class="mv-cnt__title">진격의 거인</h2>
-                        <a href="#none" class="mv-cnt__link">바로가기</a>
-                    </div>
-                </li>
-                <li class="swiper-slide">
-                    <div class="mv-cnt__img-box">
-                        <span class="mv-cnt__img" style="background-image: url(/images/MainCarousel/MainVisual2.png);"></span>
-                    </div>
-                    <div class="mv-cnt__text">
-                        <p class="mv-cnt__desc">머구와 함께하는 지구 지키기 프로젝트</p>
-                        <h2 class="mv-cnt__title">머구를 통해 환경을 지켜봐요!</h2>
-                        <a href="#none" class="mv-cnt__link">바로가기</a>
-                    </div>
-                </li>
-                <li class="swiper-slide">
-                    <div class="mv-cnt__img-box">
-                        <span class="mv-cnt__img" style="background-image: url(/images/MainCarousel/MainVisual3.png);"></span>
-                    </div>
-                    <div class="mv-cnt__text">
-                        <p class="mv-cnt__desc">머구와 함께하는 지구 지키기 프로젝트</p>
-                        <h2 class="mv-cnt__title">머구를 통해 환경을 지켜봐요!</h2>
-                        <a href="#none" class="mv-cnt__link">바로가기</a>
-                    </div>
-                </li>
-            </ul>
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
-
-            <!-- Navigation -->
-            <div class="swiper-button-next mainFirstSection_swiper-next_btn"></div>
-            <div class="swiper-button-prev mainFirstSection_swiper-prev_btn"></div>
-        </div>
-
-        <div class="lucky_tab_menu">
-            <div class="lucky_tab active" id="tab1">UR</div>
-            <div class="lucky_tab" id="tab2">SR</div>
-            <div class="lucky_tab" id="tab3">R</div>
-            <div class="lucky_tab" id="tab4">N</div>
-        </div>
-        <div class="lucky_notice">
-            <p class="lucky_notice">럭키 드로우 응모는 하루 1번만 가능 합니다!</p>
-        </div>
-        <div class="tab__content-wrapper">
-            <!-- UR Section -->
-            <div class="lucky_tab__content active">
-                <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${ur}">
-                        <div class="lucky_ur">UR</div>
-                        <div class="lucky_draw_img">
-                            <div class="lucky_draw_img_box">
-                                <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}" alt="">
-                            </div>
-                        </div>
-                        <div class="lucky_draw_info">
-                            <div class="lucky_draw_coin">
-                                <div class="lucky_draw_icon1">
-                                    <i class="fa-solid fa-coins"></i>
-                                </div>
-                                30P
-                            </div>
-                            <div class="lucky_draw_date">
-                                <div class="lucky_draw_icon2">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </div>
-                                <span th:text="${item.endDate} + '까지'">2024-05-30</span>
-                            </div>
-                        </div>
-                        <div class="lucky_draw_name" th:text="${item.name}">아이언맨</div>
-                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
-                    </li>
-                </ul>
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <h2 class="subTitle">럭키 드로우</h2>
             </div>
+        </section>
 
-            <div class="lucky_tab__content">
-                <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${sr}">
-                        <div class="lucky_sr">SR</div>
-                        <div class="lucky_draw_img">
-                            <div class="lucky_draw_img_box">
-                                <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}" alt="">
-                            </div>
-                        </div>
-                        <div class="lucky_draw_info">
-                            <div class="lucky_draw_coin">
-                                <div class="lucky_draw_icon1">
-                                    <i class="fa-solid fa-coins"></i>
-                                </div>
-                                30P
-                            </div>
-                            <div class="lucky_draw_date">
-                                <div class="lucky_draw_icon2">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </div>
-                                <span th:text="${item.endDate} + '까지'">2024-06-28까지</span>
-                            </div>
-                        </div>
-                        <div class="lucky_draw_name" th:text="${item.name}">미츠리 레진 대형 스테츄</div>
-                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Sub Component : Lucky Draw -->
+        <section class="luckyDraw">
+            <div class="inner_box" data-aos="fade-up">
 
-            <div class="lucky_tab__content">
-                <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${r}">
-                        <div class="lucky_r">R</div>
-                        <div class="lucky_draw_img">
-                            <div class="lucky_draw_img_box">
-                                <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}" alt="">
+                <!-- 1. Main Carousel -->
+                <div class="mv-cnt__luckyDraw swiper">
+                    <ul class="mv-cnt__items swiper-wrapper">
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                                    <span class="mv-cnt__img"
+                                                          style="background-image: url(/images/MainCarousel/MainVisual.png);"></span>
                             </div>
-                        </div>
-                        <div class="lucky_draw_info">
-                            <div class="lucky_draw_coin">
-                                <div class="lucky_draw_icon1">
-                                    <i class="fa-solid fa-coins"></i>
-                                </div>
-                                30P
+                            <div class="mv-cnt__text">
+                                <p class="mv-cnt__desc">
+                                    리뷰와 럭키드로우를 한번에?!
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    진격의 거인
+                                </h2>
+                                <a href="#none" class="mv-cnt__link">
+                                    바로가기
+                                </a>
                             </div>
-                            <div class="lucky_draw_date">
-                                <div class="lucky_draw_icon2">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </div>
-                                <span th:text="${item.endDate} + '까지'">2024-06-28까지</span>
+                        </li>
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                                    <span class="mv-cnt__img"
+                                                          style="background-image: url(/images/MainCarousel/MainVisual2.png);"></span>
                             </div>
-                        </div>
-                        <div class="lucky_draw_name" th:text="${item.name}">미츠리 레진 대형 스테츄</div>
-                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
-                    </li>
-                </ul>
-            </div>
+                            <div class="mv-cnt__text">
+                                <p class="mv-cnt__desc">
+                                    머구와 함께하는 지구 지키기 프로젝트
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    머구를 통해 환경을 지켜봐요!
+                                </h2>
+                                <a href="#none" class="mv-cnt__link">
+                                    바로가기
+                                </a>
+                            </div>
+                        </li>
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                                    <span class="mv-cnt__img"
+                                                          style="background-image: url(/images/MainCarousel/MainVisual3.png);"></span>
+                            </div>
+                            <div class="mv-cnt__text">
+                                <p class="mv-cnt__desc">
+                                    머구와 함께하는 지구 지키기 프로젝트
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    머구를 통해 환경을 지켜봐요!
+                                </h2>
+                                <a href="#none" class="mv-cnt__link">
+                                    바로가기
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
 
-            <div class="lucky_tab__content">
-                <ul class="lucky_ul">
-                    <li class="lucky_draw_item" th:each="item : ${n}">
-                        <div class="lucky_n">N</div>
-                        <div class="lucky_draw_img">
-                            <div class="lucky_draw_img_box">
-                                <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}" alt="">
-                            </div>
-                        </div>
-                        <div class="lucky_draw_info">
-                            <div class="lucky_draw_coin">
-                                <div class="lucky_draw_icon1">
-                                    <i class="fa-solid fa-coins"></i>
+                    <!-- Navigation -->
+                    <div class="swiper-button-next swiper-next_btn"></div>
+                    <div class="swiper-button-prev swiper-prev_btn"></div>
+                </div>
+
+                <!-- 2. Lucky Draw Tab -->
+                <div class="luckyDraw_grade_tab">
+                    <div class="luckyDraw_grade active" id="tab1">UR</div>
+                    <div class="luckyDraw_grade" id="tab2">SR</div>
+                    <div class="luckyDraw_grade" id="tab3">R</div>
+                    <div class="luckyDraw_grade" id="tab4">N</div>
+                </div>
+                <span class="luckyDraw_notice_desc">럭키 드로우 응모는 하루 1번만 가능합니다!</span>
+
+                <!-- 3. Lucky Draw Product -->
+                <div class="luckyDraw_all_product_box">
+                    <!-- UR Product -->
+                    <div class="luckyDraw_product active">
+                        <ul class="luckyDraw_item_box">
+                            <li class="luckyDraw_item" th:each="item : ${ur}">
+                                <span class="luckyDraw_item_grade_UR">UR</span>
+                                <div class="luckyDraw_item_img_box">
+                                    <div class="luckyDraw_item_img_content">
+                                        <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}"
+                                             alt="UR 상품 이미지" />
+                                        <div class="luckyDraw_item_img_info">
+                                            <div class="luckyDraw_item_coin">
+                                                <i class="fa-solid fa-coins"></i>30P
+                                            </div>
+                                            <div class="luckyDraw_item_date">
+                                                <i class="fa-regular fa-calendar-days"></i>
+                                                <span
+                                                        th:text="${item.endDate} + '까지'">2024-06-30까지</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                30P
-                            </div>
-                            <div class="lucky_draw_date">
-                                <div class="lucky_draw_icon2">
-                                    <i class="fa-regular fa-calendar-days"></i>
+                                <span class="luckyDraw_item_name" th:text="${item.name}">손흥민
+                                                          피규어</span>
+                                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}"
+                                   class="luckyDraw_item_btn">응모하기</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- SR Product -->
+                    <div class="luckyDraw_product">
+                        <ul class="luckyDraw_item_box">
+                            <li class="luckyDraw_item" th:each="item : ${sr}">
+                                <span class="luckyDraw_item_grade_SR">SR</span>
+                                <div class="luckyDraw_item_img_box">
+                                    <div class="luckyDraw_item_img_content">
+                                        <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}"
+                                             alt="SR 상품 이미지" />
+                                        <div class="luckyDraw_item_img_info">
+                                            <div class="luckyDraw_item_coin">
+                                                <i class="fa-solid fa-coins"></i>30P
+                                            </div>
+                                            <div class="luckyDraw_item_date">
+                                                <i class="fa-regular fa-calendar-days"></i>
+                                                <span
+                                                        th:text="${item.endDate} + '까지'">2024-06-30까지</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span th:text="${item.endDate} + '까지'">2024-06-28까지</span>
-                            </div>
-                        </div>
-                        <div class="lucky_draw_name" th:text="${item.name}">미츠리 레진 대형 스테츄</div>
-                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}" class="lucky_draw_button">응모하기</a>
-                    </li>
-                </ul>
+                                <span class="luckyDraw_item_name" th:text="${item.name}">링크
+                                                          피규어</span>
+                                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}"
+                                   class="luckyDraw_item_btn">응모하기</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- R Product -->
+                    <div class="luckyDraw_product">
+                        <ul class="luckyDraw_item_box">
+                            <li class="luckyDraw_item" th:each="item : ${r}">
+                                <span class="luckyDraw_item_grade_R">R</span>
+                                <div class="luckyDraw_item_img_box">
+                                    <div class="luckyDraw_item_img_content">
+                                        <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}"
+                                             alt="R 상품 이미지" />
+                                        <div class="luckyDraw_item_img_info">
+                                            <div class="luckyDraw_item_coin">
+                                                <i class="fa-solid fa-coins"></i>30P
+                                            </div>
+                                            <div class="luckyDraw_item_date">
+                                                <i class="fa-regular fa-calendar-days"></i>
+                                                <span
+                                                        th:text="${item.endDate} + '까지'">2024-06-30까지</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="luckyDraw_item_name" th:text="${item.name}">아이언맨
+                                                          피규어</span>
+                                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}"
+                                   class="luckyDraw_item_btn">응모하기</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- N Product -->
+                    <div class="luckyDraw_product">
+                        <ul class="luckyDraw_item_box">
+                            <li class="luckyDraw_item" th:each="item : ${n}">
+                                <span class="luckyDraw_item_grade_N">N</span>
+                                <div class="luckyDraw_item_img_box">
+                                    <div class="luckyDraw_item_img_content">
+                                        <img th:src="@{/image/prize/{imageName}(imageName=${item.imageName})}"
+                                             alt="N 상품 이미지" />
+                                        <div class="luckyDraw_item_img_info">
+                                            <div class="luckyDraw_item_coin">
+                                                <i class="fa-solid fa-coins"></i>30P
+                                            </div>
+                                            <div class="luckyDraw_item_date">
+                                                <i class="fa-regular fa-calendar-days"></i>
+                                                <span
+                                                        th:text="${item.endDate} + '까지'">2024-06-30까지</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="luckyDraw_item_name" th:text="${item.name}">헐크
+                                                          피규어</span>
+                                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${item.id})}"
+                                   class="luckyDraw_item_btn">응모하기</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</main>
-<div th:insert="~{fragments/footer :: footer}"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>
