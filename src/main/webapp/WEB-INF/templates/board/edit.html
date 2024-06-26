@@ -48,12 +48,10 @@
                 }
             });
         });
-        function editRemoveImage() {
-            $('#edit-imagePreview').attr('src', '').hide();
-            $('#edit-file').val('');
-            $('.edit-delete-image-button').hide();
-            $('#edit-fileName').hide();
-}
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </head>
 <body>
@@ -62,6 +60,7 @@
 <div class="edit-board-form-container">
     <h2>게시글 수정</h2>
     <form th:action="@{/board/{boardId}/edit(boardId=${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="redirectUrl" th:value="${param.redirectUrl}"/>
         <div class="edit-form-group">
             <div class="edit-file-label-title">사진 첨부</div>
             <div class="edit-image-preview-container">
@@ -83,8 +82,8 @@
             <textarea name="content" id="edit-content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
         </div>
         <div class="edit-button-group">
-            <button type="submit" class="edit-board-edit-button ">수정</button>
-            <button type="button" class="edit-board-edit-reset" onclick="window.location.href='/board/list'">취소</button>
+            <button type="submit" class="edit-board-edit-button">수정</button>
+            <button type="button" class="edit-board-edit-reset" onclick="goBack()">취소</button>
         </div>
     </form>
 </div>
