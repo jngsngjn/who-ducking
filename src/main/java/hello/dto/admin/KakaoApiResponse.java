@@ -11,8 +11,8 @@ public class KakaoApiResponse {
 
     @Data
     public static class Document {
-        private String address_name;
-        private String latitude; // 위도
-        private String longitude; // 경도
+        private String address_name; // 주소명
+        private String y; // 위도 (latitude)
+        private String x; // 경도 (longitude)
     }
 }

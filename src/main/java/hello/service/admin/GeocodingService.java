@@ -29,7 +29,12 @@ public class GeocodingService {
 
         if (apiResponse != null && !apiResponse.getDocuments().isEmpty()) {
             KakaoApiResponse.Document document = apiResponse.getDocuments().get(0);
-            return new GeoLocation(Double.parseDouble(document.getLatitude()), Double.parseDouble(document.getLongitude()));
+            String latitude = document.getY();
+            String longitude = document.getX();
+            if (latitude == null || longitude == null) {
+                throw new RuntimeException("위도와 경도 값을 찾을 수 없습니다.");
+            }
+            return new GeoLocation(Double.parseDouble(document.getY()), Double.parseDouble(document.getX()));
         } else {
             throw new RuntimeException("주소를 변환할 수 없습니다: " + address);
         }

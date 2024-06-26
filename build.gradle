@@ -75,6 +75,8 @@ dependencies {
     // POI OOXML for .xlsx files
     implementation 'org.apache.poi:poi-ooxml:5.2.3'
 
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
     // Test
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
