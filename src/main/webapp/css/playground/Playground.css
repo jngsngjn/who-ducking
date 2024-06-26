@@ -31,6 +31,10 @@
     font-size: 1.8rem;
     color: var(--mainColor);
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .playground_luckyDraw_more_btn:hover {
@@ -39,6 +43,7 @@
 
 .playground_luckyDraw_more_btn i {
     transition: 0.3s;
+    padding-bottom: 0.3rem;
 }
 
 .playground_luckyDraw_more_btn:hover i {
