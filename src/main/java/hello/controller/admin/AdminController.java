@@ -134,4 +134,16 @@ public class AdminController {
         adminService.deleteAnnouncement(id);
         return "redirect:/admin/announcement";
     }
+
+    @GetMapping("/popup-store")
+    public String popupStorePage() {
+        return "admin/popupStore-admin";
+    }
+
+    @PostMapping("/popup-store/add")
+    public String popupStoreAdd(@ModelAttribute PopupStoreAddDTO popupStoreAddDTO) throws IOException {
+        System.out.println("popupStoreAddDTO = " + popupStoreAddDTO);
+        adminService.addPopupStore(popupStoreAddDTO);
+        return "redirect:/admin/popup-store";
+    }
 }

@@ -10,6 +10,6 @@ public class PopupStoreController {
 
     @GetMapping()
     public String popupStore() {
-        return "playground/popupStore";
+        return "popup/popupStore";
     }
 }

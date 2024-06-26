@@ -24,6 +24,9 @@ public class FileStore {
     @Value("${boardPath}")
     private String boardPath;
 
+    @Value("${popupPath}")
+    private String popupPath;
+
     public Image storeProfileImageFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile == null || multipartFile.isEmpty()) {
             return null;
@@ -92,5 +95,17 @@ public class FileStore {
         if (file.exists()) {
             file.delete();
         }
+    }
+
+    public String storePopupImage(MultipartFile multipartFile) throws IOException {
+        if (multipartFile == null || multipartFile.isEmpty()) {
+            return "";
+        }
+
+        String storeFileName = createStoreFileName(multipartFile.getOriginalFilename());
+
+        String fullPath = popupPath + storeFileName;
+        multipartFile.transferTo(new File(fullPath));
+        return fullPath;
     }
 }
