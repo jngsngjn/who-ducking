@@ -1,5 +1,6 @@
 package hello.controller.popup;
 
+import hello.dto.popup.PopupStoreDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.popup.PopupStore;
 import hello.entity.popup.UserPopupStore;
@@ -11,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +24,18 @@ public class PopupStoreApiController {
     private final UserService userService;
 
     @GetMapping("/api/popupstores")
-    public List<PopupStore> getAllPopupStores() {
+    public List<PopupStoreDTO> getAllPopupStores(@AuthenticationPrincipal CustomOAuth2User user) {
         LocalDate today = LocalDate.now();
+        User loginUser = userService.getLoginUserDetail(user);
+        List<UserPopupStore> userBookmarks = popupStoreService.getUserPopupStore(loginUser);
         return popupStoreService.getAllPopupStores().stream()
                 .filter(store -> !store.getEndDate().isBefore(today))
+                .sorted(Comparator.comparing(PopupStore::getStartDate))
+                .map(store -> {
+                    boolean isBookmarked = userBookmarks.stream()
+                            .anyMatch(bookmark -> bookmark.getPopupStore().getId().equals(store.getId()));
+                    return new PopupStoreDTO(store, isBookmarked);
+                })
                 .collect(Collectors.toList());
     }
 
