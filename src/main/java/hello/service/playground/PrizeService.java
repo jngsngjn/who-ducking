@@ -1,4 +1,4 @@
-package hello.service.playgroud;
+package hello.service.playground;
 
 import hello.dto.playground.prize.PrizeBasicDTO;
 import hello.dto.playground.prize.PrizeOneDTO;

@@ -4,7 +4,7 @@ import hello.dto.admin.*;
 import hello.entity.user.User;
 import hello.service.admin.AdminService;
 import hello.service.admin.ExcelService;
-import hello.service.playgroud.PrizeService;
+import hello.service.playground.PrizeService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -133,5 +133,17 @@ public class AdminController {
     public String deleteAnnouncement(@RequestParam("id") Long id) {
         adminService.deleteAnnouncement(id);
         return "redirect:/admin/announcement";
+    }
+
+    @GetMapping("/popup-store")
+    public String popupStorePage() {
+        return "admin/popupStore-admin";
+    }
+
+    @PostMapping("/popup-store/add")
+    public String popupStoreAdd(@ModelAttribute PopupStoreAddDTO popupStoreAddDTO) throws IOException {
+        System.out.println("popupStoreAddDTO = " + popupStoreAddDTO);
+        adminService.addPopupStore(popupStoreAddDTO);
+        return "redirect:/admin/popup-store";
     }
 }

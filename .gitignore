@@ -11,6 +11,7 @@ memo.txt
 conf
 webContexts.xml
 Tomcat_10_1_23.xml
+Project_Default.xml
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

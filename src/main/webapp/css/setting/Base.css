@@ -19,7 +19,7 @@ select,
 textarea,
 button,
 table {
-    font-family: "SCoreDream", sans-serif; /* 폰트 수정 예정 */
+    font-family: "SCoreDream", sans-serif;
     font-size: 1.6rem;
     font-weight: 400; /* 100~900 */
     color: var(--descColor);
@@ -28,4 +28,15 @@ table {
 a {
     text-decoration: none;
     color: var(--descColor);
+}
+
+/* 크롬, 사파리 */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: black !important;
+}
+
+input {
+    background-color: #fff;
 }
