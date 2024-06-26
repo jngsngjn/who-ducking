@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .requestMatchers("/", "/oauth2/**", "/login", "/register/**").permitAll()
                 .requestMatchers("/announcement", "/faq").permitAll()
                 .requestMatchers("/popup", "/api/popup-stores").permitAll()
+                .requestMatchers("/playground").permitAll()
                 .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**", "/images/**", "/image/**", "/vendor/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
