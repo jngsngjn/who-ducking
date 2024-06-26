@@ -92,4 +92,5 @@ function toggleCommentMenu(icon) {
             const originalContent = editForm.closest('.comment-item').find('.comment-writer-result').text().trim();
             editForm.find('input[name="contentUpdate"]').val(originalContent);
         });
+
     });

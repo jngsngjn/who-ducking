@@ -46,7 +46,7 @@
 }
 
 .board-title-line span {
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .board-title-second {
@@ -98,6 +98,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom:20px;
 }
 
 .board-author-group {
