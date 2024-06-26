@@ -82,7 +82,7 @@
 
 .create-board-create-button {
     display: block;
-    width: 100%;
+    width: 100px;
     padding: 10px;
     background-color: #ff8b00;
     color: #fff;
@@ -96,7 +96,23 @@
 .create-board-create-button:hover {
     background-color: #e67e00;
 }
+.create-board-create-button-reset {
+    display: block;
+    width: 100px;
+    padding: 10px;
+    background-color: #FFC60B;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+
+.create-board-create-button-reset:hover {
+    background-color: #444444;
+}
 .create-file-button-container {
     text-align: center;
 }
@@ -129,3 +145,11 @@
     font-size: 20px;
     color: #555;
 }
+.create-button-bottom{
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 20px;
+}
+

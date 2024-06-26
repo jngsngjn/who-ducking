@@ -63,7 +63,7 @@
     top: 100px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 30px;
+    font-size: 45px;
     font-weight: bold;
     color: #FF8B00;
     background-color: #fff;
@@ -79,9 +79,10 @@
 }
 
 .world-caption {
-    color#444444;
-    margin-top: 20px;
-    font-size: 2.5em;
+    color:#444444;
+    margin-top: 40px;
+    font-size: 45px;
+    font-weight:400;
     text-align: center;
 }
 /*===========모달창===============*/
@@ -142,7 +143,7 @@ button.world-start { /*시작하기*/
   width: 144px;
   height: 48px;
   border-radius: 300px;
-  font-size: 15px;
+  font-size: 20px;
   border: none;
   position: relative;
   overflow: hidden;
@@ -179,7 +180,7 @@ button.world-home {
   width: 144px;
   height: 48px;
   border-radius: 300px;
-  font-size: 15px;
+  font-size: 20px;
   border: none;
   position: relative;
   overflow: hidden;
@@ -216,7 +217,7 @@ button.world-reset {
   width: 144px;
   height: 48px;
   border-radius: 300px;
-  font-size: 15px;
+  font-size: 20px;
   border: none;
   position: relative;
   overflow: hidden;
@@ -253,7 +254,7 @@ button.world-review {
   width: 144px;
   height: 48px;
   border-radius: 300px;
-  font-size: 15px;
+  font-size: 20px;
   border: none;
   position: relative;
   overflow: hidden;
@@ -297,7 +298,7 @@ button.world-review:hover {
 
 #finalImage {
     width:450px;
-    height:450px;
+    height:350px;
     max-width: 80%;
     max-height: 400px;
     object-fit: contain;
