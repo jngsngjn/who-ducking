@@ -358,3 +358,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
     showReviews('recent');
 });
+
+
+// 리뷰 작성 불가 시
+document.addEventListener("DOMContentLoaded", function() {
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(function(part) {
+            const [key, value] = part.split("=");
+            if (key) {
+                params[decodeURIComponent(key)] = decodeURIComponent(value.replace(/\+/g, " "));
+            }
+        });
+        return params;
+    }
+
+    const params = getQueryParams();
+    if (params.error) {
+        // 에러 메시지가 있으면 textarea를 비활성화
+        document.getElementById("review-content").disabled = true;
+    }
+});

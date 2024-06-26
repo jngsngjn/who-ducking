@@ -7,18 +7,6 @@
     }
 }
 
-/*시간나면 할 예정*/
-@keyframes twinkle {
-    from {
-        left:0;
-        top:0;
-    }
-    to {
-        right:0;
-        bottom:0;
-    }
-}
-
 .review-body {
     width: 87.5rem; /* 1400px */
     margin: 0 auto;
@@ -99,6 +87,8 @@ button {
 /* //////////////////////// Body 시작 //////////////////////*/
 .page-title {
     color: #ff8b00;
+    margin-top:10rem;
+    text-align: left;
 }
 
 .ani-container {
@@ -270,9 +260,17 @@ textarea:focus {
     flex-direction: row-reverse
 }
 
-/* 리뷰작성란과 간격 조절용 */
 .review-write-box {
     margin-top: 0.5rem;
+}
+
+.alert-danger {
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    font-size:2rem;
+    top: 30%;
+    left:4%;
 }
 
 .write-review-submit-btn {

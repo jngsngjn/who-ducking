@@ -44,7 +44,7 @@ public class ReviewService {
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
         if (reviewCountToday >= 3) {
-            throw new ReviewLimitExceed("하루에 3번만 리뷰를 작성 할 수 있습니다.");
+            throw new ReviewLimitExceed("하루에 댓글은 세번만 작성 할 수 있습니다.");
         }
 
         Review review = new Review();
@@ -84,10 +84,12 @@ public class ReviewService {
             Review review = reviewOpt.get();
             User user = review.getUser();
 
-            user.setReviewCount(user.getReviewCount() - 1);
-            userRepository.save(user);
+            // 리뷰를 전부 지울경우 또다시 5포인트를 받게됨 -> 1.첫 리뷰 boolean을 만든다 vs 2.user가 작성했다는 기록은 남겨두고 이름만 익명으로 바꾼다.
+           // user.setReviewCount(user.getReviewCount() - 1);
+            //userRepository.save(user);
 
             reviewRepository.deleteById(reviewId);
+
         } else {
             System.out.println("Review not found for id: " + reviewId);
         }

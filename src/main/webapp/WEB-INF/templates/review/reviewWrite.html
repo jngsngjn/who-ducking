@@ -40,12 +40,6 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="review-body">
   <h1 class="page-title">리뷰 게시판</h1>
-
-<!--  리다이렉트하지않고 어떻게 오류메세지를 띄울 수 있을까...-->
-  <div th:if="${error}" class="alert alert-danger">
-    <p th:text="${error}"></p>
-  </div>
-
   <div class="ani-container">
     <img th:src="@{/image/ani/{imageName}(imageName=${aniDetailInfo.imageName})}" alt="애니 포스터" class="ani-img" />
     <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>
@@ -97,12 +91,16 @@
         </label>
       </div>
     </div>
-    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content" >
+    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content">
     </textarea>
+    <div th:if="${param.error}" class="alert alert-danger">
+      <p th:text="${param.error}"></p>
+    </div>
     <div class="letter-count" id="count">0/500</div>
     <div class="row-box review-write-box">
-      <div class="stars-container"></div>
+      <div class="stars-container">
       <input type="hidden" name="score" id="score-number" value="0"/>
+      </div>
       <input type="submit" value="등록" class="write-review-submit-btn" />
     </div>
   </form>
@@ -125,7 +123,10 @@
         <div class="row-box">
           <input type="hidden" th:value="${review.id}" class="review-id"/>
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
-          <p th:text="${review.user.nickname}" class="review-writer"></p>
+<!--          <p th:text="${review.user.nickname}" class="review-writer"></p>-->
+
+          <p th:text="${review.getUser() != null ? review.getUser().getNickname() : '익명의 리뷰어'}" class="review-writer"></p>
+
           <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
           <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
             <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
@@ -154,7 +155,7 @@
           <input type="hidden" th:value="${review.getUser().id}"/>
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
           <p th:text="${review.user.nickname}" class="review-writer">
-            <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span>
+            <span th:if="${iterStat.index < 3 && review.likeCount > 5}" class="best-icon">BEST</span>
           </p>
           <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
           <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">

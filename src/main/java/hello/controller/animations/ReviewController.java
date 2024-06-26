@@ -14,6 +14,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriUtils;
+
+import java.nio.charset.StandardCharsets;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,23 +26,27 @@ public class ReviewController {
     private final ReviewRepository reviewRepository;
     private final UserService userService;
 
-    /* POST : 리뷰 작성 */
+    /* POST 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
-    public String writeReview(@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO, @AuthenticationPrincipal CustomOAuth2User user, Model model) {
+    public ResponseEntity<String> writeReview(
+            @PathVariable long AnimationId,
+            @ModelAttribute AniReviewDTO aniReviewDTO,
+            @AuthenticationPrincipal CustomOAuth2User user, Model model) {
+
         aniReviewDTO.setAnimationId(AnimationId);
         User loginUser = userService.getLoginUserDetail(user);
 
         try {
             reviewService.addReview(aniReviewDTO, loginUser);
+            return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/animations/" + AnimationId).build();
         } catch (ReviewService.ReviewLimitExceed e) {
             String errorMessage = e.getMessage();
-            model.addAttribute("error", errorMessage);
+            String encodedErrorMessage = UriUtils.encode(errorMessage, StandardCharsets.UTF_8);
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", "/animations/" + AnimationId + "?error=" + encodedErrorMessage)
+                    .build();
         }
-
-        return "redirect:/animations/" + AnimationId;
     }
-
-
 
     /* @ 리뷰 수정
     *  @ id = reviewId */
