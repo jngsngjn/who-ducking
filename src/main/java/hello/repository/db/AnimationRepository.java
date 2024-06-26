@@ -2,6 +2,7 @@ package hello.repository.db;
 
 
 import hello.dto.animation.GetAniListDTO;
+import hello.dto.playground.WorldCupDTO;
 import hello.entity.animation.Animation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,9 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
             "WHERE a.id = :animationId " +
             "GROUP BY a.id, a.name")
     List<GetAniListDTO> findAnimationDetailsById(long animationId);
+
+    @Query("SELECT new hello.dto.playground.WorldCupDTO(a.id, a.name, a.imageName) " +
+            "FROM Animation a " +
+            "ORDER BY a.id DESC")
+    List<WorldCupDTO> findWorldCupAnimations();
 }

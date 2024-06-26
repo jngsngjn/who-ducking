@@ -41,7 +41,7 @@ public class AnimationsController {
 
     /* 애니메이션 상세페이지 GET(리뷰작성페이지)
      * PathVariable id = animationId */
-    @GetMapping("animations/{id}")
+    @GetMapping("/animations/{id}")
     public String getAnimation(@PathVariable Long id,
                                Model model,
                                @AuthenticationPrincipal CustomOAuth2User user) {
