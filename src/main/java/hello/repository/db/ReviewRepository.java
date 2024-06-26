@@ -1,5 +1,6 @@
 package hello.repository.db;
 
+import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,5 +18,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("SELECT r FROM Review r WHERE r.animation.id = :animationId ORDER BY r.writeDate DESC")
     List<Review> findRecentReviewsByAnimationId(@Param("animationId") Long animationId);
 
+    @Query("select count(r) from Review r where r.animation = :animation")
+    int findReviewCount(@Param("animation") Animation animation);
 }
-
