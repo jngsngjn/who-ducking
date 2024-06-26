@@ -34,10 +34,10 @@ public class ReviewService {
         Optional<User> userOpt = userRepository.findById(aniReviewDTO.getUserId());
 
         if (animationOpt.isEmpty()) {
-            throw new IllegalArgumentException("Animation id: " + aniReviewDTO.getAnimationId() + " 가 없습니다.");
+            throw new IllegalArgumentException("Animation id: " + aniReviewDTO.getAnimationId() + " not found.");
         }
         if (userOpt.isEmpty()) {
-            throw new IllegalArgumentException("사용자 id: " + aniReviewDTO.getUserId() + " 가 없습니다.");
+            throw new IllegalArgumentException("user id: " + aniReviewDTO.getUserId() + " not found");
         }
 
         LocalDate today = LocalDate.now();
@@ -105,9 +105,12 @@ public class ReviewService {
         userRepository.saveAll(users);
     }
 
+    // 리뷰 작성 횟수 제한
     public static class ReviewLimitExceed extends RuntimeException {
         public ReviewLimitExceed(String message) {
             super(message);
         }
     }
+
+    // 좋아요
 }

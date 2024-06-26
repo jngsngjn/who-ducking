@@ -26,7 +26,7 @@ public class ReviewController {
     private final ReviewRepository reviewRepository;
     private final UserService userService;
 
-    /* POST 리뷰 작성 */
+    /* @ POST 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
     public ResponseEntity<String> writeReview(
             @PathVariable long AnimationId,
@@ -77,13 +77,20 @@ public class ReviewController {
     }
 
     /* @ 좋아요 클릭시 요청 */
-    @PatchMapping("/reviews/{id}/like")
-    public ResponseEntity<?> likeReview(@PathVariable("id") Long id) {
+    @PatchMapping("/reviews/{reviewId}/like")
+    public ResponseEntity<?> likeReview(@PathVariable("reviewId") Long id) {
         Review reviewId = reviewRepository.findById(id).orElse(null);
         if (reviewId == null) {
             return ResponseEntity.notFound().build();
         }
+
+        reviewId.getReviewLikes().size();
+
+        if(reviewId.)
+
         reviewId.setLikeCount(reviewId.getLikeCount() + 1);
+//        reviewId.setReviewLikes(reviewId.getReviewLikes());
+//        System.out.println(reviewId.getReviewLikes());
         reviewRepository.save(reviewId);
 
         return ResponseEntity.ok().body(reviewId.getLikeCount());
@@ -91,8 +98,8 @@ public class ReviewController {
 
 
     /* @ 싫어요 클릭시 요청 */
-    @PatchMapping("/reviews/{id}/dislike")
-    public ResponseEntity<?> dislikeReview(@PathVariable("id") Long id) {
+    @PatchMapping("/reviews/{reviewId}/dislike")
+    public ResponseEntity<?> dislikeReview(@PathVariable("reviewId") Long id) {
         Review reviewId = reviewRepository.findById(id).orElse(null);
         if (reviewId == null) {
             return ResponseEntity.notFound().build();
