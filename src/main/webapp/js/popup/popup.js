@@ -14,7 +14,7 @@ $(document).ready(function() {
         if ($(this).hasClass('bookmark-button')) {
             displayBookmarkedStores(); // 북마크된 정보만 표시
         } else if ($(this).hasClass('schedule-button')) {
-            displaySearchResults(areaArr); // 전체 정보 표시 (이미 정렬되어 있음)
+            location.reload(); // 페이지 새로고침
         } else {
             displaySearchResults(areaArr); // 전체 정보 표시
         }
@@ -69,14 +69,13 @@ function loadPopupStores() {
                     title: store.name,
                     lat: store.latitude,
                     lng: store.longitude,
-                    address: "장소: " + store.address.address + " " + store.address.detailedAddress,
+                    address: "장소: " + store.address,
                     date: "기간 : " + formatDate(store.startDate) + " ~ " + formatDate(store.endDate),
                     time: "시간: " + store.openTime + " ~ " + store.closeTime,
                     image: "/image/popup/" + store.imageName,
-                    bookmarked: store.bookmarked // 서버에서 북마크 상태를 반환하도록 수정
+                    bookmarked: store.bookmarked // 서버에서 북마크 상태를 반환
                 };
             });
-            sortPopupStoresByDate(); // 데이터를 일정순으로 정렬
             initMap();
             setMarkers(); // 마커 설정 함수 호출
             displaySearchResults(areaArr); // 초기 화면에 표시
@@ -241,30 +240,15 @@ function displayBookmarkedStores() {
     var bookmarkedStores = areaArr.filter(function(store) {
         return store.bookmarked;
     });
-    displaySearchResults(bookmarkedStores);
-}
 
-// 일정순으로 정렬하여 표시하는 함수
-function sortPopupStoresByDate() {
-    areaArr.sort(function(a, b) {
-        var dateA = a.date.split(' ~ ')[0].replace(/기간 : /g, '').split('.');
-        var dateB = b.date.split(' ~ ')[0].replace(/기간 : /g, '').split('.');
+    var resultsContainer = $('.popup-store-left-list ul');
+    resultsContainer.empty();
 
-        var yearA = parseInt(dateA[0]);
-        var yearB = parseInt(dateB[0]);
-        var monthA = parseInt(dateA[1]);
-        var monthB = parseInt(dateB[1]);
-        var dayA = parseInt(dateA[2]);
-        var dayB = parseInt(dateB[2]);
-
-        if (yearA !== yearB) {
-            return yearA - yearB;
-        } else if (monthA !== monthB) {
-            return monthA - monthB;
-        } else {
-            return dayA - dayB;
-        }
-    });
+    if (bookmarkedStores.length === 0) {
+        resultsContainer.append('<li>북마크된 팝업스토어가 없습니다.</li>');
+    } else {
+        displaySearchResults(bookmarkedStores);
+    }
 }
 
 function toggleBookmark(store, bookmarked, $icon) {

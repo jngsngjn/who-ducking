@@ -41,4 +41,8 @@ public class PopupStoreService {
     public void deleteBookmark(UserPopupStore userPopupStore) {
         userPopupStoreRepository.delete(userPopupStore);
     }
+
+    public List<UserPopupStore> getUserPopupStore(User user) {
+        return userPopupStoreRepository.findAllByUser(user);
+    }
 }
