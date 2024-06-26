@@ -34,6 +34,6 @@ public class LuckyDrawListController {
         model.addAttribute("n", n);
         model.addAttribute("currentType", type);
 
-        return "playground/luckyDrawList";
+        return "luckyDraw";
     }
 }
