@@ -1,207 +1,256 @@
-.nori_body {
-    background-image: url('/images/Background_Image/naruto.png');
+.playground_backgroundImage {
+    background-image: url("/images/Background_Image/naruto.png");
     background-repeat: no-repeat;
     background-position: 0% 40%;
     background-size: 100% 52.08%;
 }
 
-.nori_header {
-    transform: scale(0.85714);
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
 }
 
-.nori_main {
-    transform: scale(0.85714);
+/* Lucky Draw ================================================ */
+.luckyDraw {
+    margin-top: 3rem;
 }
 
-.nori_content {
-    width: 1400px;
-    margin: 0 auto;
-}
-
-.nori_h2 {
-    color: #ff8b00;
-    font-size: 50px;
-}
-
-.nori_ul {
-    margin-bottom: 30px;
+.playground_luckyDraw_title_box {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
-.nori_draw {
-    color: #ff8b00;
-    font-size: 50px;
+.playground_luckyDraw_title {
+    font-size: 2.4rem;
+    color: var(--mainColor);
 }
 
-.nori_drawgo {
-    color: #ff8b00;
-    font-size: 30px;
+.playground_luckyDraw_more_btn {
+    font-size: 1.8rem;
+    color: var(--mainColor);
+    cursor: pointer;
 }
 
-.nori_draw_item {
-    width: 445px;
-    height: 740px;
-    border-radius: 10px;
-    background-color: #FEFFDB;
+.playground_luckyDraw_more_btn:hover {
+    color: var(--mainColor);
+}
+
+.playground_luckyDraw_more_btn i {
+    transition: 0.3s;
+}
+
+.playground_luckyDraw_more_btn:hover i {
+    transform: translateX(4px);
+}
+
+.playground_luckyDraw_item_box {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 7rem;
+}
+
+.playground_luckyDraw_item {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
     align-items: center;
+    width: 31.5%;
+    background-color: var(--primaryColor);
+    border: 2px solid var(--subColor);
+    border-radius: 2rem;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.nori_draw_img {
-    width: 400px;
-    height: 400px;
+.playground_luckyDraw_item_img_box {
+    width: 30rem;
+    height: 30rem;
+    border-radius: 1rem;
 }
 
-.nori_draw_img_ul {
-    width: 400px;
-    height: 400px;
+.playground_luckyDraw_item_img_content {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.nori_draw_img_box {
+.playground_luckyDraw_item_img_content > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.playground_luckyDraw_item_img_info {
     position: absolute;
     display: flex;
-    width: 400px;
-    margin-bottom: 10px;
-    margin-bottom: 15px;
     justify-content: space-between;
-    align-self: flex-end;
+    align-items: center;
+    bottom: 23%;
+    width: 28.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
-.nori_draw_coin {
-    font-size: 24px;
-    background-color: white;
-    width: 100px;
-    height: 35px;
-    border-radius: 10px;
-    margin-left: 10px;
-    font-weight: 900;
-    color: black;
+.playground_luckyDraw_item_coin {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.playground_luckyDraw_item_coin i {
+    color: var(--mainColor);
+}
+
+.playground_luckyDraw_item_date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.playground_luckyDraw_item_date i {
+    color: var(--mainColor);
+}
+
+.playground_luckyDraw_item_name_box {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    width: 100%;
 }
 
-.nori_draw_icon1 {
-    color: #FFC60B;
-    margin-right: 10px;
+.playground_luckyDraw_item_name {
+    display: block;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.nori_draw_date {
-    font-size: 18px;
-    background-color: white;
-    width: 190px;
-    height: 35px;
-    border-radius: 10px;
-    margin-right: 10px;
-    font-weight: 900;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.playground_luckyDraw_item_btn {
+    width: 70%;
+    padding: 0.5rem 0;
+    margin: 1rem 0 2rem;
+    background-color: var(--mainColor);
+    border: 2px solid var(--mainColor);
+    color: #fff;
+    font-size: 1.8rem;
+    text-align: center;
+    border-radius: 1rem;
+    cursor: pointer;
 }
 
-.nori_draw_icon2 {
-    margin-right: 10px;
+.playground_luckyDraw_item_btn:hover {
+    background-color: #fff;
+    color: var(--mainColor);
+    border: 2px solid var(--mainColor);
+    transition: 0.3s;
 }
 
-.nori_draw_name {
-    font-size: 32px;
-    align-self: flex-start;
-    margin-left: 30px;
-    color: black;
-}
-
-.nori_draw_button {
-    width: 400px;
-    height: 95px;
-    border-radius: 20px;
-    background-color: #ff8b00;
-    color: white;
-    font-size: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.nori_draw_button:hover {
-    background-color: #ec8303;
-}
-
-.nori_ur {
+.playground_luckyDraw_item_grade_UR {
     color: #e50e0e;
     text-align: center;
-    font-size: 50px;
+    font-size: 4.8rem;
     font-weight: 900;
     position: relative;
-    height: 40px;
     -webkit-text-stroke: 3px #ff9696;
     text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
+    margin-bottom: 1rem;
 }
 
-.nori_sr {
-    color: #0C22EE;
+.playground_luckyDraw_item_grade_SR {
+    color: #0c22ee;
     text-align: center;
-    font-size: 50px;
+    font-size: 4.8rem;
     font-weight: 900;
     position: relative;
-    height: 40px;
-    -webkit-text-stroke: 3px #8481FF;
+    -webkit-text-stroke: 3px #8481ff;
     text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
+    margin-bottom: 1rem;
 }
 
-.nori_r {
-    color: #24B329;
+.playground_luckyDraw_item_grade_R {
+    color: #24b329;
     text-align: center;
-    font-size: 50px;
+    font-size: 4.8rem;
     font-weight: 900;
     position: relative;
-    height: 40px;
-    -webkit-text-stroke: 3px #05FF00;
+    -webkit-text-stroke: 3px #05ff00;
     text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
+    margin-bottom: 1rem;
 }
 
-.nori_line{
-    width: 1400px;
+/* Line */
+.playground_line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1200px;
     height: 1px;
-    border-top: 1px solid #d9d9d9;
-    margin-bottom: 100px;
-    margin-top: 100px;
+    border: 1px solid #d9d9d9;
+    margin-bottom: 7rem;
 }
 
-.nori_content2{
+/* Banner ================================================ */
+.banner {
+    margin-top: 3rem;
+    padding-bottom: 12rem;
+}
+
+.playground_banner_box {
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    height: 50rem;
 }
 
-.nori_worldcup{
-    display: block;
-    width: 650px;
-    height: 650px;
+.playground_banner_worldcup > img {
+    width: 50rem;
+    height: 50rem;
 }
 
-.nori_roulette{
-    display: block;
-    width: 720px;
-    height: 240px;
-}
-
-.nori_quiz{
-    display: block;
-    width: 720px;
-    height: 380px;
-}
-
-.nori_banner2{
+.playground_banner_right {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 68rem;
+    height: 50rem;
+    gap: 2rem;
+}
+
+.playground_banner_roulette {
+    width: 68rem;
+    height: 18.6rem;
+}
+
+.playground_banner_roulette > img {
+    width: 68rem;
+    height: 18.6rem;
+}
+
+.playground_banner_quiz {
+    width: 68rem;
+    height: 29.4rem;
+}
+
+.playground_banner_quiz > img {
+    width: 68rem;
+    height: 29.4rem;
 }

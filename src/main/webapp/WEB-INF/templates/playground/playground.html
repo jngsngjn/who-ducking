@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
-    <link rel="icon" href="/images/10duck.ico">
 
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -15,7 +16,6 @@
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="/css/Common.css" />
-    <link rel="stylesheet" href="/css/playground/Playground.css" />
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
@@ -28,121 +28,134 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
 </head>
-<body class="nori_body">
-<div th:insert="~{fragments/header :: header}"></div>
-<main id="container" class="nori_main">
-    <div class="nori_content">
-        <ul class="nori_ul">
-            <li>
-                <h2 class="nori_h2">놀이터</h2>
-            </li>
-        </ul>
-        <ul class="nori_ul">
-            <li>
-                <h2 class="nori_draw">WHO's DUCK 럭키 드로우</h2>
-            </li>
-            <li>
-                <a href="/playground/lucky-draw" class="nori_drawgo">더보기 <i class="fa-solid fa-arrow-right"></i></a>
-            </li>
-        </ul>
 
-        <!-- 럭키드로우 상품 -->
-        <ul class="nori_ul">
-            <li class="nori_draw_item">
-                <div class="nori_ur">UR</div>
-                <div class="nori_draw_img">
-                    <ul class="nori_draw_img_ul">
-                        <img th:src="@{/image/prize/{imageName}(imageName=${ur.imageName})}" alt="">
-                        <li class="nori_draw_img_box">
-                            <div class="nori_draw_coin">
-                                <div class="nori_draw_icon1">
-                                    <i class="fa-solid fa-coins"></i>
-                                </div>
-                                30P
-                            </div>
-                            <div class="nori_draw_date">
-                                <div class="nori_draw_icon2">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </div>
-                                <span th:text="${ur.endDate} + '까지'"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nori_draw_name" th:text="${ur.name}">미츠리 레진 대형 스테츄</div>
-                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${ur.id})}" class="nori_draw_button">응모하기</a>
-            </li>
-            <li class="nori_draw_item">
-                <div class="nori_sr">SR</div>
-                <div class="nori_draw_img">
-                    <ul class="nori_draw_img_ul">
-                        <img th:src="@{/image/prize/{imageName}(imageName=${sr.imageName})}" alt="">
-                        <li class="nori_draw_img_box">
-                            <div class="nori_draw_coin">
-                                <div class="nori_draw_icon1">
-                                    <i class="fa-solid fa-coins"></i>
-                                </div>
-                                30P
-                            </div>
-                            <div class="nori_draw_date">
-                                <div class="nori_draw_icon2">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </div>
-                                <span th:text="${sr.endDate} + '까지'"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nori_draw_name" th:text="${sr.name}">미츠리 레진 대형 스테츄</div>
-                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${sr.id})}" class="nori_draw_button">응모하기</a>
-            </li>
-            <li class="nori_draw_item">
-                <div class="nori_r">R</div>
-                <div class="nori_draw_img">
-                    <ul class="nori_draw_img_ul">
-                        <img th:src="@{/image/prize/{imageName}(imageName=${r.imageName})}" alt="">
-                        <li class="nori_draw_img_box">
-                            <div class="nori_draw_coin">
-                                <div class="nori_draw_icon1">
-                                    <i class="fa-solid fa-coins"></i>
-                                </div>
-                                30P
-                            </div>
-                            <div class="nori_draw_date">
-                                <div class="nori_draw_icon2">
-                                    <i class="fa-regular fa-calendar-days"></i>
-                                </div>
-                                <span th:text="${r.endDate} + '까지'"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nori_draw_name" th:text="${r.name}">미츠리 레진 대형 스테츄</div>
-                <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${r.id})}" class="nori_draw_button">응모하기</a>
-            </li>
-        </ul>
+<body class="playground_backgroundImage">
 
-        <!-- 하단 배너 -->
-        <div class="nori_line"></div>
-        <ul class="nori_content2">
-            <li>
-                <a href="/playground/world-cup" class="nori_worldcup">
-                    <img src="/images/Playground/Worldcup.png" alt="">
-                </a>
-            </li>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
 
-            <li class="nori_banner2">
-                <a href="/playground/roulette" class="nori_roulette">
-                    <img src="/images/Playground/Roulette.png" alt="">
-                </a>
-                <a href="/playground/quiz" class="nori_quiz">
-                    <img src="/images/Playground/Quiz.png" alt="">
-                </a>
-            </li>
-        </ul>
-    </div>
-</main>
-<div th:insert="~{fragments/footer :: footer}"></div>
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <h2 class="subTitle">놀이터</h2>
+            </div>
+        </section>
+
+        <!-- Sub Component : Lucky Draw -->
+        <section class="luckyDraw">
+            <div class="inner_box" data-aos="fade-up">
+                <!-- LuckyDraw Title -->
+                <div class="playground_luckyDraw_title_box">
+                    <h3 class="playground_luckyDraw_title">WHO's DUCK 럭키 드로우</h3>
+                    <a href="/playground/lucky-draw" class="playground_luckyDraw_more_btn">
+                        더보기
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- 1. Lucky Draw Products -->
+                <ul class="playground_luckyDraw_item_box">
+                    <!-- First Item -->
+                    <li class="playground_luckyDraw_item">
+                        <span class="playground_luckyDraw_item_grade_UR">UR</span>
+                        <div class="playground_luckyDraw_item_img_box">
+                            <div class="playground_luckyDraw_item_img_content">
+                                <img th:src="@{/image/prize/{imageName}(imageName=${ur.imageName})}"
+                                     alt="UR 상품 이미지" />
+                                <div class="playground_luckyDraw_item_img_info">
+                                    <div class="playground_luckyDraw_item_coin">
+                                        <i class="fa-solid fa-coins"></i>30P
+                                    </div>
+                                    <div class="playground_luckyDraw_item_date">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                        <span th:text="${ur.endDate} + '까지'">2024-06-30까지</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="playground_luckyDraw_item_name" th:text="${ur.name}">손흥민
+                                              피규어</span>
+                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${ur.id})}"
+                           class="playground_luckyDraw_item_btn">응모하기</a>
+                    </li>
+
+                    <!-- Second Item -->
+                    <li class="playground_luckyDraw_item">
+                        <span class="playground_luckyDraw_item_grade_SR">SR</span>
+                        <div class="playground_luckyDraw_item_img_box">
+                            <div class="playground_luckyDraw_item_img_content">
+                                <img th:src="@{/image/prize/{imageName}(imageName=${sr.imageName})}"
+                                     alt="SR 상품 이미지">
+                                <div class="playground_luckyDraw_item_img_info">
+                                    <div class="playground_luckyDraw_item_coin">
+                                        <i class="fa-solid fa-coins"></i>30P
+                                    </div>
+                                    <div class="playground_luckyDraw_item_date">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                        <span th:text="${sr.endDate} + '까지'">2024-06-30까지</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="playground_luckyDraw_item_name" th:text="${sr.name}">링크
+                                              피규어</span>
+                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${sr.id})}"
+                           class="playground_luckyDraw_item_btn">응모하기</a>
+                    </li>
+
+                    <!-- Third Item -->
+                    <li class="playground_luckyDraw_item">
+                        <span class="playground_luckyDraw_item_grade_R">R</span>
+                        <div class="playground_luckyDraw_item_img_box">
+                            <div class="playground_luckyDraw_item_img_content">
+                                <img th:src="@{/image/prize/{imageName}(imageName=${r.imageName})}"
+                                     alt="SR 상품 이미지">
+                                <div class="playground_luckyDraw_item_img_info">
+                                    <div class="playground_luckyDraw_item_coin">
+                                        <i class="fa-solid fa-coins"></i>30P
+                                    </div>
+                                    <div class="playground_luckyDraw_item_date">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                        <span th:text="${r.endDate} + '까지'">2024-06-30까지</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="playground_luckyDraw_item_name" th:text="${r.name}">아이언맨 피규어</span>
+                        <a th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${r.id})}"
+                           class="playground_luckyDraw_item_btn">응모하기</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Sub Component : Banner -->
+        <section class="banner">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="playground_line"></div>
+                <ul class="playground_banner_box">
+                    <li class="playground_banner_left">
+                        <a href="/playground/world-cup" class="playground_banner_worldcup">
+                            <img src="/images/Playground/Worldcup.png" alt="World Cup">
+                        </a>
+                    </li>
+
+                    <li class="playground_banner_right">
+                        <a href="/playground/roulette" class="playground_banner_roulette">
+                            <img src="/images/Playground/Roulette.png" alt="Roulette">
+                        </a>
+                        <a href="/playground/quiz" class="playground_banner_quiz">
+                            <img src="/images/Playground/Quiz.png" alt="Quiz">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+
 <script th:inline="javascript">
     /*<![CDATA[*/
     const prizeId = [[${ur.id}]];
