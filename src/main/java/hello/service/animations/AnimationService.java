@@ -25,6 +25,7 @@ public class AnimationService {
 
     private static final Logger logger = LoggerFactory.getLogger(AnimationService.class);
 
+    // 모든 애니 get
     public List<GetAniListDTO> getAllAnimationWithReviewData() {
         return animationRepository.findAnimationsWithReviews();
     }
@@ -58,13 +59,13 @@ public class AnimationService {
         }
     }
 
+    // 최신순으로 정렬된 리뷰 get
     public List<Review> getRecentReviewsByAnimationId(Long animationId) {
         return reviewRepository.findRecentReviewsByAnimationId(animationId);
     }
 
+    // 인기순으로 정렬된 리뷰 get
     public List<Review> getTopReviewsByAnimationId(Long animationId) {
         return reviewRepository.findTopReviewsByAnimationId(animationId);
     }
-
-
 }

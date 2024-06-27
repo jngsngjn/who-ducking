@@ -300,5 +300,8 @@ i.fa-solid{
   .ani-list-container {
     width: 100%;
   }
+}
 
+.genre-id {
+  display: none;
 }

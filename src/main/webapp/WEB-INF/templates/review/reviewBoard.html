@@ -85,6 +85,8 @@
                      alt="애니 포스터"
                      class="ani-poster"
                 />
+              <h4 th:text="${animation.genreId1}" class="genre-id"></h4>
+              <h4 th:text="${animation.genreId2}" class="genre-id"></h4>
                 <div id="animation-id">[[${animation.animationId}]]</div>
               </div>
               <div class="row-info-container">
@@ -115,5 +117,35 @@
         ></i>
       </div>
     <div th:insert="~{fragments/footer :: footer}"></div>
+    <script>
+      // !function() {
+      //   function detectDevTool(allow) {
+      //     if(isNaN(+allow)) allow = 100;
+      //     let start = +new Date();
+      //     debugger;
+      //     let end = +new Date();
+      //     if(isNaN(start) || isNaN(end) || end - start > allow) {
+      //       alert("메롱")
+      //     }
+      //   }
+      //   if(window.attachEvent) {
+      //     if (document.readyState === "complete" || document.readyState === "interactive") {
+      //       detectDevTool();
+      //       window.attachEvent('onresize', detectDevTool);
+      //       window.attachEvent('onmousemove', detectDevTool);
+      //       window.attachEvent('onfocus', detectDevTool);
+      //       window.attachEvent('onblur', detectDevTool);
+      //     } else {
+      //       setTimeout(argument.callee, 0);
+      //     }
+      //   } else {
+      //     window.addEventListener('load', detectDevTool);
+      //     window.addEventListener('resize', detectDevTool);
+      //     window.addEventListener('mousemove', detectDevTool);
+      //     window.addEventListener('focus', detectDevTool);
+      //     window.addEventListener('blur', detectDevTool);
+      //   }
+      // }();
+    </script>
   </body>
 </html>

@@ -24,12 +24,20 @@ let currentPage = 1;
 let totalAni;
 let totalPages;
 
+function updateURL(page) {
+    const url = new URL(window.location);
+    url.searchParams.set('page', page);
+    history.replaceState(null, '', url);
+}
+
 function renderPage(page) {
     const aniListContainer = document.getElementById('ani-list-container');
     const animations = aniListContainer.querySelectorAll('.ani-info-container');
     const buttonWrapper = document.getElementById('button-wrapper');
 
     currentPage = page;
+
+    updateURL(page);
 
     buttonWrapper.innerHTML = '';
 
@@ -39,10 +47,9 @@ function renderPage(page) {
         pageButton.innerText = i;
         pageButton.onclick = () => changePage(i);
 
-        console.log(pageButton.innerText)
         if (i === currentPage) {
             pageButton.style.backgroundColor = '#ff8b00';
-            pageButton.style.color='white'
+            pageButton.style.color = 'white';
         }
 
         buttonWrapper.appendChild(pageButton);
@@ -80,6 +87,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const aniListContainer = document.getElementById('ani-list-container');
     totalAni = aniListContainer.querySelectorAll('.ani-info-container').length;
     totalPages = Math.ceil(totalAni / 12);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = parseInt(urlParams.get('page'), 10);
+
+    if (!isNaN(pageParam) && pageParam > 0 && pageParam <= totalPages) {
+        currentPage = pageParam;
+    }
+
     renderPage(currentPage);
 });
 
@@ -87,16 +102,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 최신순 정렬 함수
 function sortByAnimationId() {
-    console.log("최신순 정렬 버튼 클릭");
+
     const aniListContainer = document.getElementById('ani-list-container');
     const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
     const totalAniCount = arrayAnimations.length;
-    console.log(typeof totalAniCount)
-
-        console.log("최신순 정렬")
-    arrayAnimations.map(e => {
-        console.log(e)
-    })
 
     arrayAnimations.sort((a, b) => {
         let aAnimationId = parseInt(a.getAttribute('data-animation-id'), 10);
@@ -115,12 +124,7 @@ function sortByReviewCount() {
 
     const aniListContainer = document.getElementById('ani-list-container');
     const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
-    const totalAniCount = arrayAnimations.length;
 
-    console.log("리뷰순 정렬")
-    arrayAnimations.map(e => {
-        console.log(e)
-    })
 
     arrayAnimations.sort((a, b) => {
         let aReviewCount = parseInt(a.getAttribute('data-review-count'), 10);
@@ -134,3 +138,50 @@ function sortByReviewCount() {
     renderPage(currentPage);
 }
 
+
+// 장르 선택시 보여질 애니메이션 컨트롤
+let selectedGenres = [];
+
+// 장르 체크박스 클릭 시 필터링 함수
+function filterAnimations() {
+
+    let animations = document.querySelectorAll('.ani-info-container');
+
+    animations.forEach(function(animation) {
+
+        let genreId1 = animation.querySelector('h4:nth-of-type(1)').textContent.trim();
+        let genreId2 = animation.querySelector('h4:nth-of-type(2)').textContent.trim();
+
+        let showAnimation = selectedGenres.includes(genreId1) || selectedGenres.includes(genreId2);
+
+        if (showAnimation) {
+            animation.style.display = 'block';
+        } else {
+            animation.style.display = 'none';
+        }
+    });
+}
+
+// 장르 체크박스 클릭 시 호출
+document.addEventListener('DOMContentLoaded', function() {
+    let genreCheckboxes = document.querySelectorAll('.genre-list');
+
+    genreCheckboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            let genreId = checkbox.id.replace('genre-', '');
+
+            if (checkbox.checked) {
+                selectedGenres.push(genreId);
+                console.log("선택된 장르 : " + selectedGenres)
+            } else {
+                let index = selectedGenres.indexOf(genreId);
+                if (index !== -1) {
+                    selectedGenres.splice(index, 1);
+                    console.log("선택 해제후 남은 장르 : " + selectedGenres)
+                }
+            }
+
+            filterAnimations();
+        });
+    });
+});

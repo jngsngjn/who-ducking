@@ -86,7 +86,6 @@ public class ReviewController {
 
         reviewId.getReviewLikes().size();
 
-        if(reviewId.)
 
         reviewId.setLikeCount(reviewId.getLikeCount() + 1);
 //        reviewId.setReviewLikes(reviewId.getReviewLikes());
