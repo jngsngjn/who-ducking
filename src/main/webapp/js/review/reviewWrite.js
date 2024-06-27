@@ -61,7 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (count > 500) {
             reviewContent.value = reviewContent.value.substring(0, 500);
-            reviewContent.style.border = "1px solid red";
+            reviewContent.style.border = "2px solid red";
+            reviewContent.style.borderRadius ="10px";
+            reviewContent.style.padding="1rem";
         } else {
             reviewContent.style.border = "";
         }
