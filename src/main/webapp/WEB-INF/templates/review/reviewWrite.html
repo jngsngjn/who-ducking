@@ -36,6 +36,7 @@
     }
   </style>
 </head>
+
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="review-body">
@@ -173,9 +174,9 @@
         <div class="review-comment">
           <span th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></span>
           <span class="extra-content" style="display: none;"></span>
-          <a href="javascript:void(0);" class="toggle-read-on">[더보기]</a>
+          <button  class="toggle-read-on">[더보기]</button>
           </br>
-          <a href="javascript:void(0);" class="toggle-read-off" style="display: none;">[닫기]</a>
+          <button class="toggle-read-off" style="display: none;">[닫기]</button>
         </div>
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
