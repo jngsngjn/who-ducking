@@ -49,6 +49,8 @@ $(document).ready(function () {
         footer.hide();
         mobileMenu_OnBtn.hide();
         mobileMenu_OffBtn.show();
+
+        // 프로필 누를 때마다 포인트 업데이트 (추후 경험치, 레벨 업데이트도 추가할 예정)
         $.ajax({
             url: '/update-header',
             type: 'POST',
@@ -96,12 +98,11 @@ $(document).ready(function () {
         headerAlarm_List.slideToggle();
     });
 
-    // 외부 클릭 시 닫기
+    // 외부 클릭 시 알림 창 열려 있으면 닫기
     $(window).click(function (event) {
-        // 만약 클릭한 요소가 h-alarm_btn이나 headerAlarm_List가 아닐 경우에만 실행
         if (!$(event.target).closest('.h-alarm_btn, #h-alarm_list').length) {
-            var headerAlarm_List = $('#h-alarm_list'); // 슬라이드 업 할 요소를 선택
-            if ($(this).find(".h-alarm_btn").toggleClass("active")) { // h-alarm_btn에 active 클래스가 있는지 확인
+            let headerAlarm_List = $('#h-alarm_list');
+            if ($(this).find(".h-alarm_btn").toggleClass("active")) {
                 headerAlarm_List.slideUp();
             }
         }
@@ -118,6 +119,7 @@ $(document).ready(function () {
         mobileAlarm_List.slideToggle();
     });
 
+    // 페이지 로드될 때마다 요청
     $.ajax({
         url: '/update-alarm',
         type: 'POST',
@@ -125,14 +127,16 @@ $(document).ready(function () {
             let alarmList = $('.h-alarm_list');
             alarmList.empty(); // 기존 알림 리스트 비우기
 
-            if (response.alarmCount === 0) {
+            if (response.alarmCount === 0) { // 알림이 없을 때
                 $('#alarm_count').hide();
                 alarmList.append('<li><a>알림이 없습니다.</a></li>');
                 $('#markAllRead').hide();
+
             } else if (response.alarms && response.alarms.length > 0) {
                 $('#alarm_count').text(response.alarmCount);
                 alarmList.append('<button id="markAllRead">모두 확인</button>')
                 $('#markAllRead').show();
+
                 response.alarms.forEach(function(alarm) {
                     let link = '<a href="' + alarm.link + '" data-id="' + alarm.id + '">' + alarm.message + '</a>';
                     let listItem = '<li>' + link + ' <button class="delete-alarm-btn" data-id="' + alarm.id + '">X</button> </li>';
@@ -149,6 +153,7 @@ $(document).ready(function () {
     });
 });
 
+// X 버튼 클릭 시
 $(document).on('click', '.delete-alarm-btn', function (event) {
     event.preventDefault(); // 버튼의 기본 동작을 막음
     event.stopPropagation(); // 이벤트 전파를 막음
@@ -158,6 +163,7 @@ $(document).on('click', '.delete-alarm-btn', function (event) {
     }
 });
 
+// 리스트 클릭 시
 $(document).on('click', 'a', function() {
     var alarmId = $(this).data('id');
     if (alarmId) {
@@ -165,7 +171,7 @@ $(document).on('click', 'a', function() {
     }
 });
 
-// '모두 확인' 버튼 클릭
+// '모두 확인' 버튼 클릭 시
 $(document).on('click', '#markAllRead', function() {
     $.ajax({
         url: '/delete-all-alarms',
