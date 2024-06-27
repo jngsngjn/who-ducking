@@ -228,7 +228,15 @@
   margin: 1rem;
 }
 
-i,
+
+i.fa-solid.fa-angle-left.page-btn,
+i.fa-solid.fa-angles-left.page-btn,
+i.fa-solid.fa-angle-right.page-btn,
+i.fa-solid.fa-angles-right.page-btn{
+  display: flex;
+}
+
+.page-btn,
 .page-number {
   margin: 0 0.5rem;
 }
@@ -251,10 +259,6 @@ i,
   border-radius:50%;
   background-color: #ff8b00;
   color:#FFFFFF;
-}
-
-i.fa-solid{
-  display: flex;
 }
 
 .fa-comment:before{
