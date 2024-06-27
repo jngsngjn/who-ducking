@@ -1,13 +1,23 @@
-.bookmark-icon {
-    font-size: 24px;
-    cursor: pointer;
-    color: #FF8B00;
+.btn-bookmark {
+    font-size: 20px;
+        margin: 10px 0;
+        padding: 8px 16px;
+        width: 120px;
+        border-radius: 15px;
+        background-color: #FF8B00;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 }
 
-.bookmark-icon.fa-solid {
-    color: #FFC60B;
+.btn-bookmark i {
+    margin-right: 10px;
 }
 
+.btn-bookmark:hover {
+    background-color: #FFC60B;
+}
 .board-container {
     max-width: 1400px;
     margin: 0 auto 20px;
@@ -82,7 +92,7 @@
 }
 
 .board-author {
-    font-size: 25px;
+    font-size: 20px;
     margin-right: 10px;
 }
 
@@ -133,7 +143,7 @@
 }
 
 .board-menu-item {
-    font-size: 25px;
+    font-size: 20px;
     color: red;
 }
 
@@ -145,6 +155,7 @@
     width: 100%;
     max-width: 1400px;
     margin: 20px auto 10px;
+    gap:20px;
 }
 
 .comment-section-orange-line {
@@ -168,14 +179,14 @@
 }
 
 .board-meta-left {
-    font-size: 25px;
+    font-size: 20px;
     color: #000;
     display: flex;
     align-items: center;
 }
 
 .board-date {
-    font-size: 25px;
+    font-size: 20px;
     margin-right: 10px;
 }
 
@@ -252,6 +263,7 @@
     padding: 8px 16px;
     width: 120px;
     border-radius: 15px;
+    gap:5px;
     background-color: #FF8B00;
     color: #fff;
     display: flex;
@@ -334,8 +346,8 @@
 
 .char-counter {
     position: absolute;
-    bottom: 30px;
-    right: 50px;
+    bottom: 20px;
+    right: 35px;
     font-size: 20px;
     color: #888;
 }
@@ -345,7 +357,7 @@
     align-items: flex-end;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 10px 10px;
+    padding: 10px 20px;
 }
 
 .comment-submit {
@@ -483,7 +495,7 @@
     max-width: 1450px;
     margin: 0 auto 20px;
     border: none;
-    height: 2px;
+    height: 1px;
     border-radius: 5px;
     background-color: #c9c9c9;
 }

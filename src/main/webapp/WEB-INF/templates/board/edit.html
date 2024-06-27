@@ -27,31 +27,38 @@
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript">
         function editRemoveImage() {
-            document.getElementById('edit-file').value = "";
-            document.getElementById('edit-imagePreview').style.display = 'none';
-            document.querySelector('.edit-delete-image-button').style.display = 'none';
-            document.getElementById('edit-fileName').style.display = 'none';
-        }
+           document.getElementById('edit-file').value = "";
+           document.getElementById('edit-imagePreview').style.display = 'none';
+           document.querySelector('.edit-delete-image-button').style.display = 'none';
+           document.getElementById('edit-fileName').style.display = 'none';
+       }
 
-        $(document).ready(function() {
-            $('#edit-file').change(function() {
-                var input = this;
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#edit-imagePreview').attr('src', e.target.result);
-                        $('#edit-imagePreview').show();
-                        $('.edit-delete-image-button').show();
-                        $('#edit-fileName').text(input.files[0].name).show();
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
-            });
-        });
+       $(document).ready(function() {
+           $('#edit-file').change(function() {
+               var input = this;
+               if (input.files && input.files[0]) {
+                   var reader = new FileReader();
+                   reader.onload = function(e) {
+                       $('#edit-imagePreview').attr('src', e.target.result);
+                       $('#edit-imagePreview').show();
+                       $('.edit-delete-image-button').show();
+                       $('#edit-fileName').text(input.files[0].name).show();
+                   }
+                   reader.readAsDataURL(input.files[0]);
+               }
+           });
+       });
 
-        function goBack() {
-            window.history.back();
-        }
+       function goBack() {
+           window.history.back();
+       }
+
+       function checkFileInput() {
+           const fileInput = document.getElementById('edit-file');
+           if (fileInput.value === "") {
+               fileInput.disabled = true;
+           }
+       }
     </script>
 </head>
 <body>
@@ -82,7 +89,7 @@
             <textarea name="content" id="edit-content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
         </div>
         <div class="edit-button-group">
-            <button type="submit" class="edit-board-edit-button">수정</button>
+            <button type="submit" class="edit-board-edit-button" >수정</button>
             <button type="button" class="edit-board-edit-reset" onclick="goBack()">취소</button>
         </div>
     </form>

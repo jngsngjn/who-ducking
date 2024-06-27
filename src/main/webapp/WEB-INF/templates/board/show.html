@@ -67,9 +67,8 @@
         <div class="board-content">
             <p th:text="${board.content}">내용</p>
         </div>
-        <div class="board-image-wrapper" th:if="${board.imageName != null}">
-            <img class="board-img" id="boardImagePreview"
-                 th:src="@{'/image/board/' + ${board.imageName}}"/>
+        <div class="board-image-wrapper" th:if="${board.imageName != null and board.imageName != ''}">
+            <img class="board-img" id="boardImagePreview" th:src="@{'/image/board/' + ${board.imageName}}" th:style="${board.imageName == null or board.imageName == ''} ? 'display:none;' : ''"/>
         </div>
     </div>
 </div>
@@ -77,6 +76,7 @@
 
 <div class="board-bottom-line">
     <a href="/board" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</a>
+    <a href="#" class="btn-bookmark"><i class="fa-regular fa-bookmark"></i>북마크</a>
 </div>
 <section class="comment-section">
     <hr class="comment-section-orange-line">
@@ -143,9 +143,14 @@
     // 메뉴 기능
  document.addEventListener('DOMContentLoaded', (event) => {
      const menuToggle = document.getElementById('board-menu-toggle');
+
      const menu = document.getElementById('board-menu');
      const commentInput = document.getElementById('comment-input');
      const charCounter = document.getElementById('char-counter');
+     const boardImagePreview = document.getElementById('boardImagePreview');
+        if (!boardImagePreview.src || boardImagePreview.src.endsWith('null')) {
+        boardImagePreview.style.display = 'none';
+     }
 
      if (menuToggle && menu) {
          menuToggle.addEventListener('click', function(e) {

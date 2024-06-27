@@ -33,9 +33,10 @@
 
 .sort-options {
     list-style-type: none;
-    margin: 0;
+    margin: 0 10px;
     padding: 0;
     display: flex;
+
 }
 
 .sort-option {
@@ -70,10 +71,12 @@
 .free-board-board-list {
     flex: 1;
     background: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    border: 5px solid #FFC60B;
+    border-radius: 20px;
+    border: 10px solid #FFC60B;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
                 0 1px 3px rgba(0, 0, 0, 0.08);
+    overflow: hidden; /* border-radius 문제 해결을 위해 추가 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 크기 조정 */
 }
 
 .board-list-top {
@@ -123,7 +126,7 @@
     white-space: nowrap;
     text-overflow: ellipsis; /*... 스타일*/
     display: block;
-    max-width: 200px; /* 제목 열 넓이 설정 값에 따라 ... 여부 달라짐*/
+    max-width: 300px; /* 제목 열 넓이 설정 값에 따라 ... 여부 달라짐*/
 }
 
 .board-list-bot-items li a:hover {
@@ -133,7 +136,7 @@
 .free-board-write-button {
     display: flex;
     justify-content: end;
-    margin:20px auto;
+    margin:20px 10px;
 }
 
 .free-board-write-button a {
