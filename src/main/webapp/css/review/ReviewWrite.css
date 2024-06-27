@@ -10,7 +10,6 @@
 .review-body {
     width: 87.5rem; /* 1400px */
     margin: 0 auto;
-    position: relative;
 }
 
 button {
@@ -125,6 +124,7 @@ button {
 
 .ani-title-box {
     font-size: 3rem;
+    position: relative;
 }
 
 .ani-title {
@@ -318,6 +318,7 @@ textarea:focus {
 .reviews-container{
     width:112%;
     overflow: hidden;
+    padding:1.5rem 1rem 1rem 0;
 }
 
 
@@ -326,7 +327,6 @@ textarea:focus {
     padding: 1em 2em;
     font-size: 1.75rem;
     width: 87rem;
-    height: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -358,6 +358,8 @@ textarea:focus {
 
 .review-comment {
     font-size: 1.25rem;
+    line-height: 2.5rem;
+    margin: 1rem 0;
 }
 
 .write-date {
@@ -487,8 +489,8 @@ hr {
 .left-img {
     position: absolute;
     opacity: 0.6;
-    top: 19%;
-    left: -50%;
+    top: 30%;
+    left: -5%;
     width: 53.8125rem;
     height: 76.1875rem;
     z-index: -1;
@@ -498,8 +500,8 @@ hr {
     position: absolute;
     width: 53.8125rem;
     height: 76.1875rem;
-    top: 40%;
-    right: -45%;
+    top: 30%;
+    right: -5%;
     z-index: -1;
     opacity: 0.6;
 }
@@ -510,11 +512,37 @@ hr {
     animation-fill-mode: forwards;
 }
 
-#animaiton-id{
-    /*opacity: 0;*/
-    display:none;
+/*#animaiton-id{*/
+/*    display:none;*/
+/*}*/
+
+
+/****************** 리뷰 토글 *************************/
+.review-comment .extra-content {
+    display: none;
 }
 
+.review-comment.expanded .extra-content {
+    display: inline;
+}
+
+.review-comment .toggle-read-on {
+    display: inline;
+    font-weight: 700;
+}
+
+.review-comment .toggle-read-less {
+    display: none;
+}
+
+.review-comment.expanded .toggle-read-on {
+    display: none;
+}
+
+.review-comment.expanded .toggle-read-off {
+    display: inline;
+    font-weight: 700;
+}
 
 
 /********************* 반응형 ************************/

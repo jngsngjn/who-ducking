@@ -123,9 +123,9 @@
         <div class="row-box">
           <input type="hidden" th:value="${review.id}" class="review-id"/>
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
-<!--          <p th:text="${review.user.nickname}" class="review-writer"></p>-->
+          <p th:text="${review.user.nickname}" class="review-writer"></p>
 
-          <p th:text="${review.getUser() != null ? review.getUser().getNickname() : '익명의 리뷰어'}" class="review-writer"></p>
+<!--          <p th:text="${review.getUser() != null ? review.getUser().getNickname() : '익명의 리뷰어'}" class="review-writer"></p>-->
 
           <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
           <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
@@ -134,7 +134,13 @@
             <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
           </div>
         </div>
-        <p th:text="${review.content}" class="review-comment"></p>
+        <div class="review-comment">
+          <span th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></span>
+          <span class="extra-content" style="display: none;"></span>
+          <a href="javascript:void(0);" class="toggle-read-on">[더보기]</a>
+          </br>
+          <a href="javascript:void(0);" class="toggle-read-off" style="display: none;">[닫기]</a>
+        </div>
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
@@ -152,7 +158,7 @@
       <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'review-' + ${review.id}">
         <div class="row-box">
           <input type="hidden" th:value="${review.id}" class="review-id"/>
-          <input type="hidden" th:value="${review.getUser().id}"/>
+<!--          <input type="hidden" th:value="${review.getUser().id}"/>-->
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
           <p th:text="${review.user.nickname}" class="review-writer">
             <span th:if="${iterStat.index < 3 && review.likeCount > 5}" class="best-icon">BEST</span>
@@ -164,7 +170,13 @@
             <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
           </div>
         </div>
-        <p th:text="${review.content}" class="review-comment"></p>
+        <div class="review-comment">
+          <span th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></span>
+          <span class="extra-content" style="display: none;"></span>
+          <a href="javascript:void(0);" class="toggle-read-on">[더보기]</a>
+          </br>
+          <a href="javascript:void(0);" class="toggle-read-off" style="display: none;">[닫기]</a>
+        </div>
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
@@ -179,6 +191,8 @@
       </div>
     </div>
   </div>
+<!--  <img src="https://mblogthumb-phinf.pstatic.net/MjAyMDExMDRfMjA3/MDAxNjA0NDk4MzI1MTcx.1rQYApiE_Gk87vu8GabpGdwdTzU1zwK28RvgK7Z3VjQg.vvxQff96eE-9sretdOftFw4RrUuLcQTI5y8nqgY1XvYg.JPEG.kjm04206/IMG_5733.jpg?type=w800" class="left-img"/>.-->
+<!--  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTNE46kLDCrSi0Aw3ZugjFk3mppguGomLMgQ&usqp=CAU" class="right-img" />-->
   <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
   <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
 </div>

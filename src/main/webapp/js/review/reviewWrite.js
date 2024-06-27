@@ -379,3 +379,38 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("review-content").disabled = true;
     }
 });
+
+// 보여지는 리뷰의 글자수에따라 토글 활성화
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.review-comment').forEach(function(reviewComment) {
+        const shortReview = reviewComment.querySelector('.short-content');
+        const hiddenReview = reviewComment.querySelector('.extra-content');
+        const showMoreReview = reviewComment.querySelector('.toggle-read-on');
+        const hideReview = reviewComment.querySelector('.toggle-read-off');
+        const fullContent = shortReview.getAttribute('data-full-content');
+
+        if (fullContent.length > 200) {
+            shortReview.innerText = fullContent.substring(0, 200) + '...';
+            hiddenReview.innerText = fullContent.substring(200);
+        } else {
+            showMoreReview.style.display = 'none';
+        }
+
+        showMoreReview.addEventListener('click', function() {
+            reviewComment.classList.add('expanded');
+            shortReview.innerText = fullContent;
+            hiddenReview.style.display = 'none';
+            showMoreReview.style.display = 'none';
+            hideReview.style.display = 'inline';
+        });
+
+        hideReview.addEventListener('click', function() {
+            reviewComment.classList.remove('expanded');
+            shortReview.innerText = fullContent.substring(0, 200) + '...';
+            hiddenReview.style.display = 'none';
+            showMoreReview.style.display = 'inline';
+            hideReview.style.display = 'none';
+        });
+    });
+});
+
