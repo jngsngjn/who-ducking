@@ -95,6 +95,7 @@ public class BoardController {
         return "board/show";
     }
 
+    //조회수 증가
     @PostMapping("/{boardId}/incrementViewCount")
     @ResponseBody
     public void incrementViewCount(@PathVariable("boardId") Long boardId) {
@@ -117,7 +118,7 @@ public class BoardController {
     public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file) throws Exception {
         User loginUser = userService.getLoginUserDetail(user);
         boardService.updateBoard(boardId,updatedBoard,loginUser,file);
-        return "redirect:/board";
+        return "redirect:/board/"+boardId;
     }
 
     //게시글 삭제 동작

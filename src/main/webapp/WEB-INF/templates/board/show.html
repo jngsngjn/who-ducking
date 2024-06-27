@@ -51,7 +51,16 @@
                 <i class="fa-solid fa-eye"></i>
                 <span class="board-cnt" th:text="${board.viewCount}"></span>
             </div>
-            <a href="#" class="board-menu-item">신고<i class="fas fa-exclamation-circle"></i> </a>
+            <a href="#" class="board-menu-item-report">신고<i class="fas fa-exclamation-circle"></i> </a>
+            <div class="board-show-report-modal">
+                <h3 class="board-show-report-title">신고하기</h3>
+                <select class="board-show-report-modal-choice-reason">
+                    <option value="1">a</option>
+                    <option value="2">b</option>
+                    <option value="3">c</option>
+                    <button class="board-show-report-modal-cancel">취소</button>
+                </select>
+            </div>
         </div>
     </div>
 </div>
@@ -171,6 +180,14 @@
        }
 
        loadLikesDislikes();
+   });
+
+   //신고 모달창 열기
+   const modal = document.querySelector('.board-show-report-modal');
+   const openModalBtn = document.querySelector('.board-menu-item-report');
+
+   openModalBtn.addEventListener('click',function (){
+      modal.style.display='flex';
    });
 </script>
 <script type="text/javascript" src="/js/showPage.js"></script>
