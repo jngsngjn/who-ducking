@@ -44,6 +44,7 @@
                     <label for="file">사진 첨부</label>
                     <img class="board-img" id="imagePreview" alt="Board Image" th:src="@{'/image/board/' + ${board.imageName}}" style="max-width: 100%; height: auto;"/>
                     <input type="file" id="file" name="file" accept="image/*" class="board-write-file-input">
+                    <input type="hidden" name="currentImageName" th:value="${board.imageName}">
                 </div>
         <button type="submit" class="board-edit-button">수정</button>
     </form>

@@ -1,4 +1,4 @@
-.container{
+.noticePage-container{
     max-width: 1200px;
     width: 100%;
     padding-top: 8rem;
@@ -16,7 +16,7 @@
     transform: translateX(0);
 }
 /*notice page a-tag + search bar*/
-.noticePage-atag-searchbar-sections{
+.noticePage-atag-searchbar-section{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +62,6 @@
 }
 
 .noticePage-main-content{
-    display: center;
     align-items: center;
 }
 
@@ -157,7 +156,7 @@
     font-size: 24px;
 }
 
-.disabled {
+.noticePage-disabled {
     pointer-events: none;
     color: grey;
 }

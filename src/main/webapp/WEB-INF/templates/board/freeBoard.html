@@ -28,41 +28,41 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 
-<main id="container">
+<main id="free-board-container">
     <div class="free-board">
-        <section class="subCommon-freeBoard">
-            <h2 class="sub_title">커뮤니티</h2>
-            <div class="sort-option-box">
-                <ul class="sort-options">
-                    <li th:class="${sort == 'writeDate'} ? 'sort-option selected' : 'sort-option'">
+        <section class="free-board-subCommon">
+            <h2 class="free-board-sub_title">커뮤니티</h2>
+            <div class="free-board-sort-option-box">
+                <ul class="free-board-sort-options">
+                    <li th:class="${sort == 'writeDate'} ? 'free-board-sort-option selected' : 'free-board-sort-option'">
                         <a th:href="@{/board(sort='writeDate')}">최신순</a>
                     </li>
-                    <li th:class="${sort == 'viewCount'} ? 'sort-option selected' : 'sort-option'">
+                    <li th:class="${sort == 'viewCount'} ? 'free-board-sort-option selected' : 'free-board-sort-option'">
                         <a th:href="@{/board(sort='viewCount')}">조회수순</a>
                     </li>
                 </ul>
             </div>
         </section>
-        <div class="main_section">
+        <div class="free-board-main_section">
             <section class="free-board-board-list">
-                <div class="board-list-top">
-                    <span class="board-list-top_num">번호</span>
-                    <span class="board-list-top_title">제목</span>
-                    <span class="board-list-top_writer">작성자</span>
-                    <span class="board-list-top_date">작성일</span>
-                    <span class="board-list-top_view-cnt">조회수</span>
+                <div class="free-board-list-top">
+                    <span class="free-board-list-top_num">번호</span>
+                    <span class="free-board-list-top_title">제목</span>
+                    <span class="free-board-list-top_writer">작성자</span>
+                    <span class="free-board-list-top_date">작성일</span>
+                    <span class="free-board-list-top_view-cnt">조회수</span>
                 </div>
 
-                <div class="board-list-separator"></div>
+                <div class="free-board-list-separator"></div>
 
-                <div class="board-list-bot">
-                    <ul class="board-list-bot-items">
+                <div class="free-board-list-bot">
+                    <ul class="free-board-list-bot-items">
                         <li th:each="board, iterStat : ${boardList}">
-                            <span class="board-list-num" th:text="${currentPage * pageSize + iterStat.index + 1}"></span>
-                            <span class="board-list-title"><a href="#" th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목없음</a></span>
-                            <span class="board-list-writer" th:text="${board.user.nickname}"></span>
-                            <span class="board-list-date" th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}"></span>
-                            <span class="board-list-view-cnt" th:text="${board.viewCount}"></span>
+                            <span class="free-board-list-num" th:text="${currentPage * pageSize + iterStat.index + 1}"></span>
+                            <span class="free-board-list-title"><a href="#" th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목없음</a></span>
+                            <span class="free-board-list-writer" th:text="${board.user.nickname}"></span>
+                            <span class="free-board-list-date" th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}"></span>
+                            <span class="free-board-list-view-cnt" th:text="${board.viewCount}"></span>
                         </li>
                     </ul>
                 </div>
@@ -73,16 +73,16 @@
         </div>
         <section class="free-board-pagination-section">
             <div class="free-board-pagination">
-                <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number - 1})}">&lt;&lt;</a>
-                <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number - 1})}">&lt;</a>
+                <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'free-board-disabled' : ''" th:href="@{/board(page=${boardList.number - 1})}">&lt;&lt;</a>
+                <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'free-board-disabled' : ''" th:href="@{/board(page=${boardList.number - 1})}">&lt;</a>
                 <span th:if="${boardList.totalPages > 0}" th:each="i : ${#numbers.sequence(1, boardList.totalPages)}">
                     <a th:classappend="${i == boardList.number + 1} ? 'free-board-pagination-now-button' : 'free-board-pagination-move-button'" th:href="@{/board(page=${i - 1})}" th:text="${i}">1</a>
                 </span>
                 <span th:if="${boardList.totalPages == 0}">
                      <a class="free-board-pagination-now-button" href="#">1</a>
                 </span>
-                <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;&gt;</a>
-                <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;</a>
+                <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'free-board-disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;&gt;</a>
+                <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'free-board-disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;</a>
             </div>
         </section>
     </div>

@@ -21,6 +21,7 @@ Promise.all([
     loadScript("/js/registerGenre.js"),
     loadScript("/js/noticePage.js"),
     loadScript("/js/freeBoard.js"),
+    loadScript("/js/")
 ])
     .then(() => {
         console.log("All scripts loaded.");

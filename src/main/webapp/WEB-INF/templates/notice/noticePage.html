@@ -28,7 +28,7 @@
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-    <main class="container">
+    <main class="noticePage-container">
         <section class="noticePage-top-banner">
             <div class="mv-cnt swiper noticePage-image-banner">
                 <ul class="mv-cnt__items swiper-wrapper">
@@ -131,16 +131,16 @@
         </section>
         <section class="noticePage-main-pagination-section">
             <div class="noticePage-pagination">
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;&lt;</a>
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;</a>
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;&lt;</a>
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;</a>
                 <span th:if="${notices.totalPages > 0}" th:each="i : ${#numbers.sequence(1, notices.totalPages)}">
                     <a th:classappend="${i == notices.number + 1} ? 'noticePage-pagination-now-button' : 'noticePage-pagination-move-button'" th:href="@{/notice(page=${i - 1})}" th:text="${i}">1</a>
                 </span>
                 <span th:if="${notices.totalPages == 0}">
                      <a class="noticePage-pagination-now-button" href="#">1</a>
                 </span>
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;</a>
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;&gt;</a>
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;</a>
+                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;&gt;</a>
             </div>
         </section>
     </main>

@@ -1,4 +1,4 @@
-#container{
+#free-board-container{
     padding-top: 80px;
 }
 .free-board {
@@ -12,7 +12,7 @@
 
 }
 /* 게시판 제목 스타일 */
-.subCommon-freeBoard {
+.free-board-subCommon {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +20,7 @@
     padding-top: 100px;
 }
 
-.sub_title {
+.free-board-sub_title {
     color: #ff8b00;
     font-size: 48px;
     font-weight:bold;
@@ -28,23 +28,23 @@
     top: 180px;
 }
 
-.sort-option-box {
+.free-board-sort-option-box {
     display: flex;
     align-items: center;
 }
 
-.sort-options {
+.free-board-sort-options {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-.sort-option {
+.free-board-sort-option {
     margin-left: 10px;
 }
 
-.sort-option a {
+.free-board-sort-option a {
     text-decoration: none;
     background-color: #ffffff;
     color: #000000;
@@ -54,109 +54,56 @@
     border: 1px solid #d9d9d9;
 }
 
-.sort-option a:hover {
+.free-board-sort-option a:hover {
     background-color: #d9d9d9;
 }
 
-.sort-option.selected a {
+.free-board-sort-option.selected a {
     background-color: #ff8b00;
     border: 1px solid #ff8b00;
     color: #fff;
 }
 
-.main_section{
+.free-board-main_section{
     display: flex;
-}
-
-/* 카테고리 박스 스타일 */
-.free-board-snb{
-    width: 300px;
-    height: 400px;
-    margin-right: 20px;
-}
-.free-board-category-box {
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.free-board-category-box-fnr {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    border: 1px solid #d9d9d9;
-    border-radius: 20px;
-    overflow: hidden;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 350px;
-}
-
-.free-board-category-box-fnr-title {
-    padding: 60px 20px;
-}
-
-.free-board-category-box-fnr-title a {
-    text-decoration: none;
-    color: #000000;
-    font-weight: bold;
-    font-size: 40px;
-    text-align: center;
-    align-items: center;
-}
-
-.free-board-category-box-fnr-title.selected a{
-    color: #ff8b00;
-}
-
-
-.free-board-category-box-fnr-separator {
-    width: 300px;
-    height: 0px;
-    border-top: 1px solid #d9d9d9;
 }
 
 /* 게시판 리스트 스타일 */
 .free-board-board-list{
     flex: 1;
 }
-.board-list-top {
+.free-board-list-top {
     display: flex;
     background-color: transparent;
     padding: 10px;
     font-weight: bold;
 }
 
-.board-list-top span {
+.free-board-list-top span {
     flex: 1;
     text-align: center;
     color: #ff8b00;
     font-size: 24px;
 }
 
-.board-list-separator {
+.free-board-list-separator {
     height: 1px;
     border-top: 2px solid #d9d9d9;
     margin: 10px 0;
 }
 
-.board-list-bot-items {
+.free-board-list-bot-items {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.board-list-bot-items li {
+.free-board-list-bot-items li {
     display: flex;
     padding: 10px;
 }
 
-.board-list-bot-items li span {
+.free-board-list-bot-items li span {
     flex: 1;
     text-align: center;
     color: #000000;
@@ -201,6 +148,11 @@
     justify-content: center;
     align-items: center;
     font-size: 24px;
+}
+
+.free-board-disabled{
+    pointer-events: none;
+    color: grey;
 }
 
 /* 배경 이미지 스타일 */
