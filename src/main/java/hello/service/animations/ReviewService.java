@@ -97,6 +97,8 @@ public class ReviewService {
         }
         userRepository.saveAll(users);
     }
+
+    public int getReviewCount(Animation animation) {
+        return reviewRepository.findReviewCount(animation);
+    }
 }
-
-
