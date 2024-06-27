@@ -36,4 +36,8 @@ public class AlarmService {
     public List<Alarm> getUserAlarms(User user) {
         return alarmRepository.findAllByUser(user);
     }
+
+    public void deleteAlarm(Long id) {
+        alarmRepository.deleteById(id);
+    }
 }

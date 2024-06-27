@@ -10,8 +10,11 @@ import hello.service.basic.AlarmService;
 import hello.service.basic.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -63,7 +66,7 @@ public class HeaderController {
                     message = "기타 알림입니다.";
                     link = "#";
                 }
-                return new AlarmDTO.AlarmResponse(message, link);
+                return new AlarmDTO.AlarmResponse(alarm.getId(), message, link);
             }).collect(Collectors.toList());
 
             AlarmDTO alarmDTO = new AlarmDTO();
@@ -72,5 +75,15 @@ public class HeaderController {
             return alarmDTO;
         }
         return null;
+    }
+
+    @PostMapping("/delete-alarm")
+    public ResponseEntity<Void> deleteAlarm(@RequestParam Long id) {
+        try {
+            alarmService.deleteAlarm(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

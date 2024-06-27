@@ -120,8 +120,9 @@ $(document).ready(function () {
             } else if (response.alarms && response.alarms.length > 0) {
                 $('#alarm_count').text(response.alarmCount);
                 response.alarms.forEach(function(alarm) {
-                    let link = '<a href="' + alarm.link + '">' + alarm.message + '</a>';
-                    alarmList.append('<li onclick="deleteAlarm()">' + link + '</li>');
+                    let link = '<a href="' + alarm.link + '" data-id="' + alarm.id + '">' + alarm.message + '</a>';
+                    let listItem = '<li>' + link + '</li>';
+                    alarmList.append(listItem);
                 });
             }
         },
@@ -133,3 +134,33 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).on('click', 'a', function() {
+    var alarmId = $(this).data('id');
+    if (alarmId) {
+        deleteAlarm(alarmId);
+    }
+});
+
+function deleteAlarm(alarmId) {
+    $.ajax({
+        url: '/delete-alarm', // 서버의 알림 삭제 API 엔드포인트
+        type: 'POST',
+        data: { id: alarmId },
+        success: function() {
+            // 알림 삭제 성공 시 알림 항목 제거
+            $('a[data-id="' + alarmId + '"]').closest('li').remove();
+            // 알림 카운트 업데이트
+            let alarmCount = parseInt($('#alarm_count').text()) - 1;
+            if (alarmCount > 0) {
+                $('#alarm_count').text(alarmCount);
+            } else {
+                $('#alarm_count').hide();
+                alarmList.append('<li><a>알림이 없습니다.</a></li>');
+            }
+        },
+        error: function() {
+            alert('알림을 삭제하는 데 실패했습니다.');
+        }
+    });
+}

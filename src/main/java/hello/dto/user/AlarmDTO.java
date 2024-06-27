@@ -12,13 +12,15 @@ public class AlarmDTO {
 
     @Data
     public static class AlarmResponse {
+        private Long id;
         private String message;
         private String link;
 
         public AlarmResponse() {
         }
 
-        public AlarmResponse(String message, String link) {
+        public AlarmResponse(Long id, String message, String link) {
+            this.id = id;
             this.message = message;
             this.link = link;
         }
