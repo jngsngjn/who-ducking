@@ -1,9 +1,11 @@
 package hello.entity.user;
 
+import hello.entity.alarm.Alarm;
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
 import hello.entity.board.Comment;
 import hello.entity.genre.UserGenre;
+import hello.entity.popup.UserPopupStore;
 import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
 import hello.entity.request.Request;
@@ -106,4 +108,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LoginHistory> loginHistories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserPopupStore> userPopupStores = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Alarm> alarms = new ArrayList<>();
 }

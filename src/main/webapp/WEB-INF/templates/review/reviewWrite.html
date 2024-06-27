@@ -1,0 +1,180 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Who's DucKing</title>
+  <link rel="icon" href="/images/10duck.ico">
+  <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css" />
+  <!-- AOS -->
+  <link rel="stylesheet" href="/vendor/aos/aos.css" />
+  <!-- Animate -->
+  <link rel="stylesheet" href="/vendor/animate/animate.min.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/Common.css" />
+  <!--    <link rel="stylesheet" href="/css/ReviewWrite.css" /> -->
+  <!-- jQuery -->
+  <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+  <!-- swiper -->
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- AOS -->
+  <script src="/vendor/aos/aos.js"></script>
+  <!-- FontAwesome -->
+  <script
+          src="https://kit.fontawesome.com/2f3ee9d12e.js"
+          crossorigin="anonymous"
+  ></script>
+  <!-- JavaScript -->
+  <script type="text/javascript" src="/js/common.js"></script>
+  <script type="text/javascript" src="/js/review/reviewWrite.js"></script>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="review-body">
+  <h1 class="page-title">리뷰 게시판</h1>
+  <div class="ani-container">
+    <img th:src="@{/image/ani/{imageName}(imageName=${aniDetailInfo.imageName})}" alt="애니 포스터" class="ani-img" />
+    <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>
+    <div class="ani-info-box">
+      <div class="title-bar">
+        <h3 class="ani-title-box">
+          <span class="ani-title" th:text="${aniDetailInfo.name}"></span>
+        </h3>
+        <div class="grade">
+          <img th:src="'/images/AgeLimit/' + (${aniDetailInfo.rating.description == '성인 관람가' ? 'Age_19' : (aniDetailInfo.rating.description == '15세 관람가' ? 'Age_15' : (aniDetailInfo.rating.description == '12세 관람가' ? 'Age_12' : 'Age_ALL'))}) + '.png'" alt="age" class="grade" />
+        </div>
+      </div>
+      <div class="tag-list">
+        <ul class="tags">
+          <li th:each="aniGenre : ${aniDetailInfo.animationGenres}" class="tag-name" th:text="${aniGenre.genre.name}"></li>
+        </ul>
+        <span class="is-complete" th:text="${aniDetailInfo.isFinished ? '완결' : '진행중'}"></span>
+      </div>
+      <div class="ani-info-box2">
+        <p class="author-name"><b th:text="${aniDetailInfo.author}">작가 이름</b></p>
+        <p class="broad-date" th:text="${aniDetailInfo.firstDate}">방영 시작일</p>
+      </div>
+      <div class="synopsis" th:text="${aniDetailInfo.description}"></div>
+      <div class="score-box">
+        <i class="fa-solid fa-star"></i>
+
+        <div class="score">
+          <span class="ani-score" th:text="${totalReviews[0].score} + ' / 5.0'">
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="review-count">
+    <i class="fa-solid fa-comment"></i>
+    <span th:text="${totalReviews[0].reviewCount}"></span>
+  </p>
+  <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box" th:if="${isAuthenticated}">
+    <input type="hidden" name="userId" th:value="${userId}" />
+    <input type="hidden" name="nickname" th:value="${nickname}"/>
+    <div class="row-box">
+      <h3  th:text="${nickname}" class="review-user" id="review-user" ></h3>
+      <div class="row-box">
+        <p>스포일러 포함</p>
+        <input  name="isSpoiler" type="checkbox" id="check-spoiler" class="check-spoiler"  />
+        <input type="hidden" name="_isSpoiler" value="on"/>
+        <label for="check-spoiler" class="check-switch">
+          <span class="change-check-btn"></span>
+        </label>
+      </div>
+    </div>
+    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content" >
+    </textarea>
+    <div class="letter-count" id="count">0/500</div>
+    <div class="row-box review-write-box">
+      <div class="stars-container"></div>
+      <input type="hidden" name="score" id="score-number" value="0"/>
+      <input type="submit" value="등록" class="write-review-submit-btn" />
+    </div>
+  </form>
+  <div class="order-box" th:if="${reviewCount != 0}">
+    <div class="row-box">
+      <button id="recent" class="order-btn" >최신 순</button>
+      <button id="like" class="order-btn" >좋아요 순</button>
+    </div>
+    <div class="row-box">
+      <p>스포일러 포함</p>
+      <input type="checkbox" id="show-spoiler" class="check-spoiler" />
+      <label for="show-spoiler" class="check-switch">
+        <span class="change-check-btn"></span>
+      </label>
+    </div>
+  </div>
+  <div class="reviews-container">
+    <div id="recent-reviews" th:if="${#lists.size(recentReviews) > 0}">
+      <div th:each="review, iterStat : ${recentReviews}" class="review-list" th:id="'review-' + ${review.id}">
+        <div class="row-box">
+          <input type="hidden" th:value="${review.id}" class="review-id"/>
+          <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
+          <p th:text="${review.user.nickname}" class="review-writer"></p>
+          <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
+          <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
+            <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
+            <hr />
+            <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
+          </div>
+        </div>
+        <p th:text="${review.content}" class="review-comment"></p>
+        <div class="row-box">
+          <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
+          <div th:if="${isAuthenticated}">
+            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
+              <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
+            </button>
+            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
+              <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}">
+      <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'review-' + ${review.id}">
+        <div class="row-box">
+          <input type="hidden" th:value="${review.id}" class="review-id"/>
+          <input type="hidden" th:value="${review.getUser().id}"/>
+          <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
+          <p th:text="${review.user.nickname}" class="review-writer">
+            <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span>
+          </p>
+          <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
+          <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
+            <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
+            <hr />
+            <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
+          </div>
+        </div>
+        <p th:text="${review.content}" class="review-comment"></p>
+        <div class="row-box">
+          <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
+          <div th:if="${isAuthenticated}">
+            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
+              <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
+            </button>
+            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
+              <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
+  <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
+</div>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -5,11 +5,14 @@ import hello.entity.animation.Animation;
 import hello.entity.board.Announcement;
 import hello.entity.genre.AnimationGenre;
 import hello.entity.genre.Genre;
+import hello.entity.popup.PopupStore;
 import hello.entity.prize.Prize;
 import hello.entity.request.Request;
 import hello.entity.request.RequestStatus;
+import hello.entity.user.Address;
 import hello.repository.db.*;
 import hello.repository.server.FileStore;
+import hello.service.basic.AlarmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +25,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import static hello.entity.request.RequestStatus.*;
+import static hello.entity.request.RequestStatus.APPROVED;
+import static hello.entity.request.RequestStatus.REJECTED;
 
 @Service
 @Transactional
@@ -36,6 +40,9 @@ public class AdminService {
     private final PrizeRepository prizeRepository;
     private final GenreRepository genreRepository;
     private final AnnouncementRepository announcementRepository;
+    private final PopupStoreRepository popupStoreRepository;
+    private final GeocodingService geocodingService;
+    private final AlarmService alarmService;
 
     public Page<UserInfoDTO> getUserInfoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -70,6 +77,7 @@ public class AdminService {
         }
 
         animationRepository.save(animation);
+        alarmService.animationAlarmService(findGenres, animation);
     }
 
     public Page<RequestListDTO> getRequestsByStatus(RequestStatus status, int page, int size) {
@@ -86,6 +94,8 @@ public class AdminService {
         if (request != null) {
             request.setStatus(APPROVED);
             request.setResponseDate(LocalDate.now());
+
+            alarmService.requestAlarmService(request);
         }
     }
 
@@ -95,6 +105,8 @@ public class AdminService {
             request.setResponse(requestRejectDTO.getResponse());
             request.setStatus(REJECTED);
             request.setResponseDate(LocalDate.now());
+
+            alarmService.requestAlarmService(request);
         }
     }
 
@@ -166,5 +178,31 @@ public class AdminService {
 
             animationRepository.save(animation); // 변경된 애니메이션 저장 (매핑 정보 포함)
         }
+    }
+
+    public void addPopupStore(PopupStoreAddDTO dto) throws IOException {
+        PopupStore popupStore = new PopupStore();
+        popupStore.setName(dto.getName());
+        popupStore.setOpenTime(dto.getOpenTime());
+        popupStore.setCloseTime(dto.getCloseTime());
+        popupStore.setStartDate(dto.getStartDate());
+        popupStore.setEndDate(dto.getEndDate());
+
+        Address address = new Address(dto.getZipcode(), dto.getAddress(), dto.getDetailedAddress());
+        popupStore.setAddress(address);
+
+        // 주소를 위도와 경도로 변환
+        GeocodingService.GeoLocation geoLocation = geocodingService.getCoordinates(dto.getAddress());
+        popupStore.setLongitude(geoLocation.getLongitude());
+        popupStore.setLatitude(geoLocation.getLatitude());
+
+        if (!dto.getImage().isEmpty()) {
+            String fullPath = fileStore.storePopupImage(dto.getImage());
+            popupStore.setImagePath(fullPath);
+            String imageName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
+            popupStore.setImageName(imageName);
+        }
+
+        popupStoreRepository.save(popupStore);
     }
 }

@@ -1,0 +1,154 @@
+.edit-board-form-container {
+    max-width: 600px;
+    margin: 90px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-board-form-container h2 {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #ff8b00;
+}
+
+.edit-form-group {
+    margin-bottom: 20px;
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-form-group label {
+    display: flex;
+    text-align:center;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ff8b00;
+}
+
+.edit-file-label-title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ff8b00;
+}
+
+.edit-form-group input[type="text"],
+.edit-form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.edit-form-group textarea {
+    height: 150px;
+}
+
+.edit-image-preview-container {
+    position: relative;
+    display: inline-block;
+}
+
+.edit-board-img {
+    max-width: 500px;
+    height: 400px;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.edit-delete-image-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    background-color: #FFC60B;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-delete-image-button:hover {
+    background-color: red;
+}
+
+.edit-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+.edit-board-edit-button {
+    padding: 10px 20px;
+    background-color: #ff8b00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-board-edit-button:hover {
+    background-color: #e67e00;
+}
+
+.edit-board-edit-reset {
+    padding: 10px 20px;
+    background-color: #ffc60b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-board-edit-reset:hover {
+    background-color: #ffae00;
+}
+
+
+.edit-file-button-container {
+    text-align: center;
+}
+
+.edit-file-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff8b00;
+    margin-bottom:20px;
+    color: #fff;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-file-button:hover {
+    background-color: #e67e00;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.edit-board-write-file-input {
+    display: none;
+}
+
+.edit-file-name {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #555;
+}

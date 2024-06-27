@@ -1,0 +1,304 @@
+
+
+.community-page{
+  margin: 0 auto;
+}
+
+.title-container {
+  font-size: 3rem;
+  color: #ff8b00;
+  width: 87.5rem;
+  height: 5.25rem;
+  line-height: 6.25rem;
+  display: flex;
+  margin-top: 11rem;
+  justify-content: space-between;
+  padding: 0 3rem;
+  align-items: center;
+}
+
+.ani-list-page-title {
+  font-size: 3rem;
+  color: #ff8b00;
+  margin:0;
+}
+
+.order-container{
+  display: flex;
+}
+
+.community-container {
+  width: 87.5rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.genre-title{
+  position:sticky;
+  top:0;
+  background-color: #FFFFFF;
+  font-size: 1.7rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+}
+
+.genre-container{
+  color: black;
+  /*color:#ff8b00;*/
+  width: 20rem;
+  height: 30rem;
+  border: 1px solid #ff8b00;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  padding: 0 2rem 2rem 2rem;
+  position: absolute;
+  top:2%;
+  left: -30%;
+  z-index: 99;
+  list-style: none;
+}
+
+.genre-title-list{
+  margin:0;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.genre-list-container{
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #FEC02E #FEFFDA ;
+  scrollbar-width :thin;
+  height: 21rem; /* 스크롤바 영역 설정 */
+}
+
+
+
+.genre-list-container input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+/*장르 테이블 부모 포지션*/
+.body-container{
+  position: relative;
+}
+
+.order-btn{
+  width: 8rem;
+  height: 5rem;
+  border: 1px solid #d1d1d1;
+  border-radius: 20px;
+  background-color: #feffdb;
+}
+
+.order-btn.active,
+.order-btn:hover,
+.order-btn:active,
+.order-btn:focus {
+  background-color: #ff8b00;
+  color: white;
+}
+
+
+.ani-list-container {
+  /*width: 64.125rem;*/
+  width: 78rem;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  place-content: center;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.ani-info-container {
+  width: 17.4rem;
+  height: 28.063rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  margin: 0;
+  position:relative;
+  overflow: hidden;
+}
+
+.ani-list-title-container{
+  background-color: #FFFFFF;
+  width:100%;
+  height: 4rem;
+  position:absolute;
+  text-align: center;
+  color:black;
+  bottom: -5rem;
+  border-radius:10px 10px 0 0;
+  line-height: 4rem;
+  transition: bottom 0.3s ease;
+}
+
+.ani-info-container:hover .ani-list-title-container {
+  bottom: -0.3rem;
+}
+
+.row-list-container {
+  width: 64.125rem;
+  height: 29.063rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ani-info-container {
+  width: 18.75rem;
+  height: 29.063rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.img-container {
+  border-radius: 1.875rem;
+  overflow: hidden;
+  cursor: pointer;
+  height:26rem;
+}
+
+.ani-poster {
+  width: 18.75rem;
+  height: 24rem;
+  border-radius: 1.875rem;
+  transition: transform 0.3s ease;
+}
+
+.ani-poster:hover {
+  transform: scale(1.1);
+}
+
+#animation-id{
+  display: none;
+}
+
+.recommend-container {
+  width: 100%;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.ani-list-title{
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* hover 효과 줬었나?*/
+.current-page {
+  background-color: #ff8b00;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+
+/* ////////  하단부 버튼  ////////*/
+.page-button-wrapper{
+  list-style: none;
+  display: flex;
+}
+
+.page-btn-box {
+  width: 100%;
+  height: 3.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+i,
+.page-number {
+  margin: 0 0.5rem;
+}
+
+.page-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.7rem;
+  color:#D9D9D9;
+  background-color: #FEFFDB;
+  width:3.375rem;
+  height: 3.375rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+}
+
+.page-btn:hover {
+  border-radius:50%;
+  background-color: #ff8b00;
+  color:#FFFFFF;
+}
+
+i.fa-solid{
+  display: flex;
+}
+
+.fa-comment:before{
+  margin-right: 0.8rem;
+}
+
+.fa-star:before{
+  margin-right: 0.8rem;
+}
+
+/*  //////// 수호신 이미지 ///////  */
+.left-img {
+  width: 52.406rem;
+  height: 104.625rem;
+  position: absolute;
+  top: 15%;
+  left: -6%;
+  z-index: -1;
+}
+
+@media (max-width: 1400px) {
+  .community-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .genre-container{
+    width: 75.5rem;
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 2rem;
+    height: 22rem;
+  }
+
+  .genre-list-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 14rem;
+  }
+
+  .ani-list-container {
+    width: 100%;
+  }
+
+}

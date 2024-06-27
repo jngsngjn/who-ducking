@@ -16,7 +16,7 @@
     <!-- Animate -->
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/Common.css" />
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
@@ -61,18 +61,18 @@
                         <a href="/board">커뮤니티</a>
                     </li>
                     <li>
-                        <a href="/popup">소식</a>
+                        <a href="/popup">팝업</a>
                     </li>
                     <li>
                         <a href="/playground">놀이터</a>
                     </li>
                     <!-- Alarm Dropdown -->
                     <div class="h-alarm">
-                        <div class="h-alarm_btn" sec:authorize="isAuthenticated()">
+                        <div id="h-alarm_btn" class="h-alarm_btn" sec:authorize="isAuthenticated()">
                             <li>
-                                <a href="#none">
+                                <a class="alarm_btn" id="alarm_btn">
                                     알림
-                                    <!-- <span class="h-alarm_count">12</span> -->
+                                     <span class="h-alarm_count" id="alarm_count"></span>
                                 </a>
                             </li>
                         </div>
@@ -81,34 +81,13 @@
                             <li>
                                 <a href="/login" style="color: var(--mainColor)">
                                     로그인
-                                    <!-- <span class="h-alarm_count">12</span> -->
                                 </a>
                             </li>
                         </div>
 
                         <!-- Alarm List -->
-                        <ul class="h-alarm_list" sec:authorize="isAuthenticated()">
-                            <!-- Alarm X -->
-                            <li>
-                                <a href="#none">알림이 없습니다.</a>
-                            </li>
-                            <!-- Alarm O -->
-                            <li>
-                                <a href="#none">
-                                    ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#none">
-                                    ~~ 건의에 대한 답변이 등록되었습니다.
-                                </a>
-                            </li>
-                            <!-- 리스트 추가 시, 양식대로 추가
-                            <li>
-                                <a href="#none">
-
-                                </a>
-                            </li> -->
+                        <ul id="h-alarm_list" class="h-alarm_list" sec:authorize="isAuthenticated()">
+                            <!-- JS로 동적으로 추가 -->
                         </ul>
                     </div>
                 </ul>
@@ -209,7 +188,7 @@
                                 <div class="h-mobile_alarm">
                                     <div class="h-mobile_alarm-btn">
                                         <li>
-                                            <a href="#none">
+                                            <a>
                                                 알림
                                                 <!-- <span class="h-mobile_alarm_count">12</span> -->
                                             </a>
@@ -255,7 +234,7 @@
                                     <a href="/board">커뮤니티</a>
                                 </li>
                                 <li>
-                                    <a href="/news">소식</a>
+                                    <a href="/popup">팝업</a>
                                 </li>
                                 <li>
                                     <a href="/playground">놀이터</a>

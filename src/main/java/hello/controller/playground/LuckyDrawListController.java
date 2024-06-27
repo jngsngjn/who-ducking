@@ -1,7 +1,7 @@
 package hello.controller.playground;
 
 import hello.dto.playground.prize.PrizeBasicDTO;
-import hello.service.playgroud.PrizeService;
+import hello.service.playground.PrizeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +34,6 @@ public class LuckyDrawListController {
         model.addAttribute("n", n);
         model.addAttribute("currentType", type);
 
-        return "luckyDrawList";
+        return "playground/luckyDrawList";
     }
 }

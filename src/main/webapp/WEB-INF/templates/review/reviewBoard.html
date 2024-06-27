@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css" />
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css" />
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script
+      src="https://kit.fontawesome.com/2f3ee9d12e.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/review/reviewBoard.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script>
+      $(document).ready(function () {
+        $(".ani-poster").click(function () {
+           let imageId = $(this).siblings("#animation-id").text().trim();
+          console.log("url = /animations/" + imageId);
+
+          $.ajax({
+            type: "GET",
+            url: "/animations/" + imageId,
+            success: function (response) {
+              console.log("GET 요청 성공");
+              console.log("Animation data:", response);
+
+              window.location.href = "/animations/" + imageId;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.log("AJAX request failed:", textStatus, errorThrown);
+              console.error("GET 요청 실패");
+            },
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div th:insert="~{fragments/header :: header}"></div>
+    <div class="community-page">
+      <div class="community-container">
+        <div class="title-container">
+          <h1 class="ani-list-page-title">애니메이션</h1>
+          <div class="order-container">
+            <button class="order-btn" id="ordered-recent" onclick="sortByAnimationId()">최신순</button>
+            <button class="order-btn" id="ordered-review" onclick="sortByReviewCount()">리뷰순</button>
+          </div>
+        </div>
+        <div class="body-container">
+          <div class="genre-container">
+            <h3 class="genre-title">장르</h3>
+            <div class="genre-list-container">
+              <div th:each="genre: ${genreLists}" class="genre-title-list">
+                <input  type="checkbox" id="genre" class="genre-list" th:id="'genre-' + ${genre.id}"/>
+                <label for="genre" class="check-genre" th:text="${genre.name}">
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="ani-list-container" id="ani-list-container">
+            <div th:each="animation : ${animationLists}" class="ani-info-container"
+                 th:attr="data-review-count=${animation.reviewCount}, data-animation-id=${animation.animationId}">
+            <div class="img-container">
+                <img th:src="@{/image/ani/{imageName}(imageName=${animation.imageName})}"
+                     alt="애니 포스터"
+                     class="ani-poster"
+                />
+                <div id="animation-id">[[${animation.animationId}]]</div>
+              </div>
+              <div class="row-info-container">
+                <div class="recommend-container">
+                  <i class="fa-solid fa-comment">[[${animation.reviewCount}]]</i>
+                  <i class="fa-solid fa-star"> [[${animation.score}]] / 5.0</i>
+                </div>
+              </div>
+              <div class="ani-list-title-container">
+                <p th:text="${animation.getName()}"  class="ani-list-title">
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="page-btn-box">
+        <i class="fa-solid fa-angles-left page-btn" onclick="changePage(1)"></i>
+        <i class="fa-solid fa-angle-left page-btn" onclick="prevPage()"></i>
+        <ul class="page-button-wrapper" id="button-wrapper">
+          <li class="page-number page-btn" id="current-page">1</li>
+        </ul>
+        <i class="fa-solid fa-angle-right page-btn" onclick="nextPage()"></i>
+        <i
+          class="fa-solid fa-angles-right page-btn"
+          onclick="changePage(totalPages)"
+        ></i>
+      </div>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

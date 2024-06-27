@@ -1,0 +1,707 @@
+/* Container ================================== */
+#header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid var(--borderColor-300);
+    background: #fff;
+}
+
+.h-inner {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.h-left {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+}
+
+.h-right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 7rem;
+}
+
+/* Logo ===================================== */
+.h-logo {
+    width: 100px;
+}
+
+.h-logo a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.h-logo a img {
+    width: 100%;
+}
+
+/* Search Box =============================== */
+.h-search_box {
+    position: relative;
+    width: 583px;
+    height: 45px;
+}
+
+.h-search_bar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10rem;
+    background: var(--primaryColor);
+    border: none;
+    padding: 0 6rem 0 2rem;
+    font-weight: 500;
+    color: var(--titleColor);
+}
+
+.h-search_bar:focus {
+    outline-color: var(--mainColor);
+}
+
+.h-search_btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2rem;
+    font-size: 2rem;
+    color: var(--mainColor);
+}
+
+/* Global Navigation Bar =============== */
+.h-gnb_items {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.h-gnb_items > li > a {
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--titleColor);
+}
+
+/* Global Navigation Bar =>> Alarm ===== */
+.h-alarm_btn > li > a {
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--titleColor);
+}
+
+.alarm_btn {
+    cursor: pointer;
+}
+
+.h-alarm_list {
+    position: absolute;
+    top: calc(100% - 1rem);
+    left: 80%;
+    transform: translateX(-50%);
+    padding: 1.6rem;
+    width: 350px;
+}
+
+.h-alarm_list > li {
+    margin-bottom: 0.8rem;
+}
+
+.h-alarm_list > li:last-child {
+    margin-bottom: 0;
+}
+
+.h-alarm_list > li > a {
+    font-size: 1.4rem;
+}
+
+.h-alarm_list > li > a:hover {
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
+.h-alarm_count {
+    position: absolute;
+    right: -1.7rem;
+    top: -1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 1rem;
+    background: var(--mainColor);
+    border-radius: 10rem;
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* Profile ================================= */
+.h-profile_box {
+    position: relative;
+}
+
+.h-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.h-profile_img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.h-profile i {
+    color: var(--mainColor);
+    transition: 0.3s;
+}
+
+.h-profile.active i {
+    transform: rotate(180deg);
+}
+
+.h-profile_menu {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 95%;
+    transform: translateX(-50%);
+    padding: 1.6rem;
+    width: 260px;
+    background: #fff;
+    box-shadow: var(--box-shadow__A);
+    border-radius: 2rem;
+}
+
+.h-profile_menu > li {
+    margin-bottom: 1.8rem;
+}
+
+.h-profile_menu > li:last-child {
+    margin-bottom: 0;
+}
+
+.h-profile_menu > li > a {
+    font-size: 1.4rem;
+}
+
+.h-profile_menu > li > a:hover {
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
+.h-profile_menu_nickname {
+    color: var(--mainColor);
+}
+
+.h-profile_menu_nickname_comment {
+    color: var(--descColor);
+    font-size: 1.4rem;
+}
+
+/* Level & Point */
+.h-profile_menu_level-point {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.h-profile_menu_level-point i {
+    color: var(--mainColor);
+}
+
+.h-profile_menu_exp_point {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.h-profile_exp_track {
+    margin-top: 0.8rem;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background: #f5f5f5;
+    border-radius: 100rem;
+    overflow: hidden;
+}
+
+.h-profile_exp_thumb {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    height: 100%;
+    background: #ff8b00;
+    border-radius: 100rem;
+    transition: 0.5s;
+    left: 0;
+    top: 0;
+}
+
+/* Mobile ================================= */
+.h-mobile {
+    display: none;
+}
+
+.h-mobile_box {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 8rem;
+}
+
+.h-mobile_menu_box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 8rem;
+}
+
+/* Mobile Btn */
+.h-mobile_btn-open {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2.4rem;
+    color: var(--mainColor);
+    z-index: 0;
+}
+
+.h-mobile_btn-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2.4rem;
+    color: var(--mainColor);
+    z-index: 1;
+}
+
+/* Mobile Logo */
+.mobile-logo {
+    position: absolute;
+    left: 2rem;
+    top: 2.2rem;
+}
+
+/* Mobile Profile */
+.h-mobile_profile-gnb > li {
+    position: relative;
+}
+
+.h-mobile_profile-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 2rem;
+}
+
+.h-mobile_profile-box i {
+    font-size: 2.4rem;
+    color: var(--mainColor);
+    transition: 0.3s;
+}
+
+.h-mobile_profile-box.active i:last-child {
+    transform: rotate(180deg);
+}
+
+.h-mobile_profile {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.h-mobile_profile-img {
+    display: block;
+    width: 54px;
+    height: 54px;
+    border-radius: 100%;
+}
+
+.h-mobile_profile_nickname {
+    font-size: 2rem;
+    color: var(--mainColor);
+}
+
+.h-mobile_profile_nickname_comment {
+    color: var(--descColor);
+    font-size: 1.4rem;
+}
+
+/* Mobile Level & Point */
+.h-mobile_profile_exp_box {
+    width: 35%;
+}
+
+.h-mobile_profile_level-point {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.h-mobile_profile_level-point i {
+    color: var(--mainColor);
+    font-size: 1.6rem;
+}
+
+.h-mobile_profile_exp_point {
+    font-size: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.h-mobile_profile_exp_track {
+    margin-top: 0.8rem;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background: #f5f5f5;
+    border-radius: 100rem;
+    overflow: hidden;
+}
+
+.h-mobile_profile_exp_thumb {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    height: 100%;
+    background: #ff8b00;
+    border-radius: 100rem;
+    transition: 0.5s;
+    left: 0;
+    top: 0;
+}
+
+/* Local Navigation Bar */
+.h-mobile_profile-lnb {
+    position: relative;
+}
+
+.h-mobile_profile-lnb > li > a {
+    display: block;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+}
+
+.h-mobile_profile-lnb > li > a:hover {
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
+/* Mobile Alarm */
+.h-mobile_alarm-btn {
+    display: flex;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding-right: 5rem;
+}
+
+.h-mobile_alarm-btn > li > a:hover {
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
+.h-mobile_alarm-list > li > a {
+    display: block;
+    padding: 0.8rem 4rem;
+    font-size: 1.4rem;
+}
+
+.h-mobile_alarm-list > li > a:hover {
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
+.h-mobile_alarm_count {
+    position: absolute;
+    margin-right: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.8rem;
+    background: var(--mainColor);
+    font-size: 1rem;
+    color: #fff;
+    border-radius: 10rem;
+}
+
+/* Mobile Menu Default */
+.h-mobile_menu > li > a {
+    display: block;
+    padding: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--mainColor);
+    transition: 0.3s;
+}
+
+.h-mobile_menu > li > a:hover {
+    color: #fff;
+    background: var(--mainColor);
+}
+
+/* Before Login Menu */
+.h-mobile_sign {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    justify-content: flex-end;
+}
+
+.h-mobile_sign > li > a {
+    font-weight: 500;
+}
+
+/* Responsive Web Page ====================== */
+/* Media Query Start */
+@media screen and (max-width: 1530px) {
+    /* Profile */
+    .h-profile_menu {
+        left: 90%;
+    }
+}
+
+@media screen and (max-width: 1320px) {
+    /* Left */
+    .h-left {
+        gap: 4rem;
+        padding-left: 2rem;
+    }
+
+    /* Right */
+    .h-right {
+        gap: 5rem;
+        padding-right: 3rem;
+    }
+
+    /* Profile */
+    .h-profile_menu {
+        left: 88%;
+    }
+
+    /* Global Navigation Bar */
+    .h-gnb_items > li > a {
+        font-size: 1.5rem;
+    }
+
+    .h-alarm_btn > li > a {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    /* Container */
+    .h-inner {
+        padding: 0 2rem;
+    }
+
+    .h-left {
+        gap: 4rem;
+    }
+
+    .h-right {
+        gap: 4rem;
+    }
+
+    /* Profile */
+    .h-profile_menu {
+        left: 86%;
+    }
+
+    /* Search Box */
+    .h-search_box {
+        width: 39.0625vw; /* 400px */
+    }
+
+    /* Global Navigation Bar */
+    .h-gnb_items > li > a {
+        font-size: 1.55rem;
+    }
+
+    .h-alarm_btn > li > a {
+        font-size: 1.55rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    /* Container */
+    .h-left {
+        gap: 2rem;
+    }
+
+    .h-right {
+        gap: 2rem;
+    }
+
+    /* Search Box */
+    .h-search_box {
+        width: 31.0625vw;
+    }
+
+    /* Global Navigation Bar */
+    .h-gnb_items > li > a {
+        font-size: 1.3rem;
+    }
+
+    .h-alarm_btn > li > a {
+        font-size: 1.3rem;
+    }
+
+    /* Profile Menu */
+    .h-profile_menu {
+        left: 83%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    /* Global Navigation Bar */
+    .h-gnb_items > li > a {
+        font-size: 1.15rem;
+    }
+
+    .h-alarm_btn > li > a {
+        font-size: 1.15rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Search Box */
+    .h-search_box {
+        width: 52.08333333333333vw; /* 400px */
+    }
+
+    /* Global Navigation Bar */
+    .h-gnb_items {
+        display: none;
+    }
+
+    /* Profile */
+    .h-profile_box {
+        display: none;
+    }
+
+    .h-profile_menu {
+        display: none;
+    }
+
+    /* Mobile */
+    .h-mobile {
+        display: block;
+    }
+
+    .h-mobile_btn-open {
+        right: 2.2rem;
+    }
+
+    .h-mobile_btn-close {
+        right: 4.2rem;
+    }
+
+    .mobile-logo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .h-mobile_profile_nickname_box span {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    /* Container */
+    #header {
+        height: 64px;
+    }
+
+    /* Logo */
+    .h-logo {
+        width: 96px;
+        transform: translateX(-2rem);
+    }
+
+    /* Search Box */
+    .h-search_box {
+        display: none;
+    }
+
+    /* Mobile */
+    .h-mobile_btn {
+        font-size: 2rem;
+    }
+
+    .h-mobile_btn-open {
+        top: 1.2rem;
+        right: 2.2rem;
+    }
+
+    .h-mobile_btn-close {
+        top: 1.2rem;
+        right: 2.2rem;
+    }
+
+    .mobile_logo {
+        top: 2rem;
+    }
+
+    .h-mobile_menu_box {
+        padding: 6.4rem;
+    }
+
+    .h-mobile_profile {
+        gap: 1rem;
+    }
+
+    .h-mobile_profile-img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .h-mobile_profile_nickname_box span {
+        display: none;
+    }
+
+    .h-mobile_profile-nickname {
+        font-size: 1.6rem;
+    }
+
+    .h-mobile_profile-lnb > li > a {
+        font-size: 1.4rem;
+    }
+
+    .h-mobile_menu > li > a {
+        font-size: 1.6rem;
+    }
+
+    .h-mobile_sign > li > a {
+        font-size: 1.4rem;
+    }
+}
+/* Media Query End */

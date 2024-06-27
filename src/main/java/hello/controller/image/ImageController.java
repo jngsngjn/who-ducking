@@ -27,6 +27,9 @@ public class ImageController {
     @Value("${aniPath}")
     private String aniPath;
 
+    @Value("${popupPath}")
+    private String popupPath;
+
     @GetMapping("/image/{type}/{imageName}")
     public Resource renderImage(@PathVariable("type") String type, @PathVariable("imageName") String imageName) throws MalformedURLException {
         String basePath = null;
@@ -40,9 +43,10 @@ public class ImageController {
             basePath = boardPath;
         } else if (type.equals("prize")) {
             basePath = prizePath;
-        }
-        else if (type.equals("ani")){
+        } else if (type.equals("ani")) {
             basePath = aniPath;
+        } else if (type.equals("popup")) {
+            basePath = popupPath;
         }
         return new UrlResource("file:" + basePath + imageName);
     }

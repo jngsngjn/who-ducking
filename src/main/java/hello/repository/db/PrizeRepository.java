@@ -33,8 +33,10 @@ public interface PrizeRepository extends JpaRepository<Prize, Long> {
             "FROM Prize p where p.grade = :grade AND p.endDate > CURRENT_DATE ORDER BY p.startDate ASC")
     List<PrizeBasicDTO> findPrizePageByGrade(@Param("grade") PrizeGrade grade);
 
-    @Query("select new hello.dto.admin.PrizeDrawDTO(p.id, p.name) from Prize p " +
-            "where p.id = :id")
+    @Query("SELECT new hello.dto.admin.PrizeDrawDTO(p.id, p.name, p.imageName, COALESCE(SUM(e.entryCount), 0)) " +
+            "FROM Prize p LEFT JOIN p.entries e " +
+            "WHERE p.id = :id " +
+            "GROUP BY p.id, p.name, p.imageName")
     PrizeDrawDTO findPrizeDrawById(@Param("id") Long id);
 
     @Query("select new hello.dto.playground.prize.PrizeOneDTO(p.id, p.name, p.startDate, p.endDate, p.imageName) from Prize p where p.id = :id")

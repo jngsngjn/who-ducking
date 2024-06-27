@@ -32,7 +32,7 @@ public class AccountDeletionController {
     public String deletePage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
         User loginUser = userService.getLoginUserDetail(user);
         model.addAttribute("email", loginUser.getEmail());
-        return "accountDeletion";
+        return "mypage/accountDeletion";
     }
 
     // 계정 삭제 인증 코드 이메일 전송

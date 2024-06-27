@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+    <link rel="stylesheet" href="/css/playground/EntryPage.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/admin/prizeEntry.js"></script>
+</head>
+<body class="lucky_prize_body">
+<div th:insert="~{fragments/header :: header}"></div>
+<main id="container" class="lucky_prize_main">
+    <div class="lucky_prize_content">
+        <ul class="lucky_prize_ul">
+            <h2 class="lucky_prize_h2">럭키 드로우 상세 정보</h2>
+        </ul>
+        <ul class="lucky_prize_profile">
+            <div>
+                <li class="lucky_prize_photo">`
+                    <img th:src="@{/image/prize/{imageName}(imageName=${prize.imageName})}" alt="">
+                </li>
+            </div>
+            <div class="lucky_prize_line"></div>
+            <li>
+                <div class="lucky_prize_name" th:text="${prize.name}">미츠리 레진 대형 스테츄</div>
+                <div class="lucky_prize_line2"></div>
+
+                <button class="lucky_prize_button" id="entry-button">응모하기</button>
+                <div class="lucky_prize_coin">
+                    <div class="lucky_prize_icon1">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    30P
+                </div>
+                <div class="lucky_prize_date">
+                    <div class="lucky_prize_icon2">
+                        <i class="fa-regular fa-calendar-days"></i>
+                    </div>
+                    응모 기간
+                </div>
+                <div class="lucky_prize_date2"
+                     th:text="${#temporals.format(prize.startDate, 'yyyy.MM.dd (E)')} + ' ~ ' + ${#temporals.format(prize.endDate, 'yyyy.MM.dd (E)')}">
+                    2024.06.24 (월) ~ 2024.06.28 (금)
+                </div>
+                <div class="lucky_prize_announce">
+                    <div class="lucky_prize_icon3">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    당첨자 발표
+                </div>
+                <div class="lucky_prize_announce_date" th:text="${announceDate}">2024.06.29 (토) 20:00</div>
+
+                <div class="lucky_prize_winner">
+                    <div class="lucky_prize_icon3">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    당첨자 인원
+                </div>
+                <div class="lucky_prize_winner_num">1명</div>
+            </li>
+        </ul>
+
+        <div class="lucky_prize_line3"></div>
+        <!-- 다른 럭키 드로우 상품 -->
+        <ul class="lucky_prize_ul">
+            <h2 class="lucky_prize_h2">다른 럭키 드로우 상품</h2>
+        </ul>
+
+        <ul class="lucky_prize_ul">
+            <li class="lucky_prize_item" th:each="randomPrize : ${randomPrizes}">
+                <div class="lucky_prize_img">
+                    <ul class="lucky_prize_img_ul">
+                        <a class="other_prize_a" th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${randomPrize.id})}">
+                            <img class="other_prize_img" th:src="@{/image/prize/{imageName}(imageName=${randomPrize.imageName})}" alt="">
+                        </a>
+                        <li class="lucky_prize_img_box">
+                            <div class="lucky_prize_coin2">
+                                <div class="lucky_prize_icon4">
+                                    <i class="fa-solid fa-coins"></i>
+                                </div>
+                                30P
+                            </div>
+                            <div class="lucky_prize_date3">
+                                <div class="lucky_prize_icon5">
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                </div>
+                                <span th:text="${#temporals.format(randomPrize.endDate, 'yyyy.MM.dd')} + '까지'"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lucky_prize_name2" th:text="${randomPrize.name}">미츠리 레진 대형 스테츄</div>
+            </li>
+        </ul>
+
+        <div class="lucky_prize_line3"></div>
+        <ul class="lucky_prize_ul">
+            <h2 class="lucky_prize_h2">유의 사항</h2>
+        </ul>
+        <ul class="lucky_prize_ul">
+            <li class="lucky_prize_notice">본 럭키 드로우는 Who’s DucKing 회원 전용 이벤트입니다.</li>
+            <li class="lucky_prize_notice">응모 이벤트 참여 완료는 마이페이지 &gt; 응모 내역에서 확인할 수 있습니다.</li>
+            <li class="lucky_prize_notice">당첨자에 한하여 결제 관련 문자 메시지 및 이메일을 발송드리며, 미당첨자에게 별도의 연락을 드리지 않습니다.</li>
+            <li class="lucky_prize_notice">72시간 이내 주소를 입력하지 않거나 최종 확인 절차를 진행하지 않을 시, 자동으로 취소 및 재추첨은 진행하지 않습니다.</li>
+            <li class="lucky_prize_notice">회원 정보가 일치하지 않거나 부당한 방법으로 응모한 고객의 경우 당첨 취소, 추후 이벤트 응모 시 불이익을 받을 수 있습니다.</li>
+            <li class="lucky_prize_notice">모든 절차가 완료된 후, 상품에 문제가 있지 않는 한 교환 및 포인트 환불은 불가합니다.</li>
+        </ul>
+    </div>
+</main>
+<div th:insert="~{fragments/footer :: footer}"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const prizeId = [[${prize.id}]];
+    /*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+/* Container ===============================================*/
+#footer {
+    padding: 4rem 0;
+    border-top: 1px solid #ddd;
+}
+
+.f-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.f-gnb {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 1.5rem;
+}
+
+.f-gnb > li > a {
+    font-size: 1.4rem;
+}
+
+.admin_page {
+    font-weight: 500;
+}
+
+.f-copyright {
+    font-size: 1.4rem;
+    padding-top: 1.5rem;
+}
+
+.f-team {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 1.5rem;
+}
+
+.github-icon {
+    padding-top: 1.5rem;
+}
+
+/* MEDIA QUERY START ===============================================*/
+@media screen and (max-width: 1200px) {
+    #footer {
+        padding: 4rem 2rem;
+    }
+}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 768px) {
+    .f-gnb {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+}
+@media screen and (max-width: 500px) {
+    #footer {
+        padding: 4rem 2rem;
+    }
+    .f-gnb {
+        padding-top: 2.4rem;
+    }
+}
+/* MEDIA QUERY END ===============================================*/
