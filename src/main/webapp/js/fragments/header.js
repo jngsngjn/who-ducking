@@ -106,6 +106,12 @@ $(document).ready(function () {
                 headerAlarm_List.slideUp();
             }
         }
+
+        if (!$(event.target).closest('.h-profile_box').length) {
+            if ($(this).find(".h-profile_box").toggleClass("active")) {
+                headerProfile_Menu.slideUp();
+            }
+        }
     });
 
     // MobileAlarm_DropDownEvent
