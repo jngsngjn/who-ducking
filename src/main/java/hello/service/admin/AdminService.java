@@ -93,6 +93,8 @@ public class AdminService {
         if (request != null) {
             request.setStatus(APPROVED);
             request.setResponseDate(LocalDate.now());
+
+            alarmService.requestAlarmService(request);
         }
     }
 

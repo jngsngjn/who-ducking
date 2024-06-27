@@ -14,4 +14,6 @@ public interface AlarmRepository extends JpaRepository<Alarm, Long> {
     int findCountByUser(@Param("user") User user);
 
     List<Alarm> findAllByUser(User user);
+
+    void deleteByUserId(Long userId);
 }

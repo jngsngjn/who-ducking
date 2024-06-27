@@ -86,7 +86,7 @@ $(document).ready(function () {
     });
 
     // HeaderAlarm_DropDownEvent
-    const headerAlarm_Btn = $(".h-alarm");
+    const headerAlarm_Btn = $("#alarm_btn");
     const headerAlarm_List = $(".h-alarm_list");
 
     headerAlarm_List.hide();
@@ -94,6 +94,17 @@ $(document).ready(function () {
     headerAlarm_Btn.click(function () {
         $(this).find(".h-alarm_btn").toggleClass("active");
         headerAlarm_List.slideToggle();
+    });
+
+    // 외부 클릭 시 닫기
+    $(window).click(function (event) {
+        // 만약 클릭한 요소가 h-alarm_btn이나 headerAlarm_List가 아닐 경우에만 실행
+        if (!$(event.target).closest('.h-alarm_btn, #h-alarm_list').length) {
+            var headerAlarm_List = $('#h-alarm_list'); // 슬라이드 업 할 요소를 선택
+            if ($(this).find(".h-alarm_btn").toggleClass("active")) { // h-alarm_btn에 active 클래스가 있는지 확인
+                headerAlarm_List.slideUp();
+            }
+        }
     });
 
     // MobileAlarm_DropDownEvent
@@ -116,12 +127,15 @@ $(document).ready(function () {
 
             if (response.alarmCount === 0) {
                 $('#alarm_count').hide();
-                alarmList.append('<li><a href="#none">알림이 없습니다.</a></li>');
+                alarmList.append('<li><a>알림이 없습니다.</a></li>');
+                $('#markAllRead').hide();
             } else if (response.alarms && response.alarms.length > 0) {
                 $('#alarm_count').text(response.alarmCount);
+                alarmList.append('<button id="markAllRead">모두 확인</button>')
+                $('#markAllRead').show();
                 response.alarms.forEach(function(alarm) {
                     let link = '<a href="' + alarm.link + '" data-id="' + alarm.id + '">' + alarm.message + '</a>';
-                    let listItem = '<li>' + link + '</li>';
+                    let listItem = '<li>' + link + ' <button class="delete-alarm-btn" data-id="' + alarm.id + '">X</button> </li>';
                     alarmList.append(listItem);
                 });
             }
@@ -135,6 +149,15 @@ $(document).ready(function () {
     });
 });
 
+$(document).on('click', '.delete-alarm-btn', function (event) {
+    event.preventDefault(); // 버튼의 기본 동작을 막음
+    event.stopPropagation(); // 이벤트 전파를 막음
+    var alarmId = $(this).data('id');
+    if (alarmId) {
+        deleteAlarm(alarmId);
+    }
+});
+
 $(document).on('click', 'a', function() {
     var alarmId = $(this).data('id');
     if (alarmId) {
@@ -142,25 +165,47 @@ $(document).on('click', 'a', function() {
     }
 });
 
+// '모두 확인' 버튼 클릭
+$(document).on('click', '#markAllRead', function() {
+    $.ajax({
+        url: '/delete-all-alarms',
+        type: 'POST',
+        success: function() {
+            $('#alarm_count').text(0);
+            $('#alarm_count').hide();
+            let alarmList = $('.h-alarm_list');
+            alarmList.empty();
+            $('#markAllRead').hide();
+            var headerAlarm_List = $('#h-alarm_list');
+            headerAlarm_List.slideUp();
+            alarmList.append('<li><a>알림이 없습니다.</a></li>');
+        },
+        error: function() {
+            console.log('알림을 삭제하는 데 실패했습니다.');
+        }
+    });
+});
+
 function deleteAlarm(alarmId) {
     $.ajax({
-        url: '/delete-alarm', // 서버의 알림 삭제 API 엔드포인트
+        url: '/delete-alarm',
         type: 'POST',
         data: { id: alarmId },
         success: function() {
-            // 알림 삭제 성공 시 알림 항목 제거
             $('a[data-id="' + alarmId + '"]').closest('li').remove();
-            // 알림 카운트 업데이트
             let alarmCount = parseInt($('#alarm_count').text()) - 1;
             if (alarmCount > 0) {
                 $('#alarm_count').text(alarmCount);
             } else {
                 $('#alarm_count').hide();
+                let alarmList = $('.h-alarm_list');
+                alarmList.empty();
                 alarmList.append('<li><a>알림이 없습니다.</a></li>');
+                $('#markAllRead').hide();
             }
         },
         error: function() {
-            alert('알림을 삭제하는 데 실패했습니다.');
+            console.log('알림을 삭제하는 데 실패했습니다.');
         }
     });
 }

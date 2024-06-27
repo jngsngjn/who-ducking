@@ -86,4 +86,15 @@ public class HeaderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @PostMapping("/delete-all-alarms")
+    public ResponseEntity<Void> deleteAllAlarms(@AuthenticationPrincipal CustomOAuth2User oAuth2User) {
+        User loginUser = userService.getLoginUserDetail(oAuth2User);
+        try {
+            alarmService.deleteAllAlarms(loginUser.getId());
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
