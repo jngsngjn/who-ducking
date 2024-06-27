@@ -6,7 +6,6 @@
         opacity: 1;
     }
 }
-
 /*시간나면 할 예정*/
 @keyframes twinkle {
     from {
@@ -23,6 +22,7 @@
     width: 87.5rem; /* 1400px */
     margin: 0 auto;
     position: relative;
+    margin-top:150px;
 }
 
 button {
