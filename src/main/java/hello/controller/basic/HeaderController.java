@@ -55,16 +55,15 @@ public class HeaderController {
             int alarmCount = alarmService.getUserAlarmCount(loginUser);
             List<Alarm> userAlarms = alarmService.getUserAlarms(loginUser);
             List<AlarmDTO.AlarmResponse> alarmResponses = userAlarms.stream().map(alarm -> {
-                String message;
-                String link;
+                String message = "";
+                String link = "";
                 if (alarm.getAlarmType() == AlarmType.REQUEST) {
                     message = "나의 건의 내역 상태가 업데이트 되었습니다.";
                     link = "/myPage/request-list?page=0&requestId=" + alarm.getRequest().getId();
                 }
-                else {
-                    // 다른 타입에 대한 처리를 추가할 수 있습니다.
-                    message = "기타 알림입니다.";
-                    link = "#";
+                else if (alarm.getAlarmType() == AlarmType.ANIMATION){
+                    message = "선호 장르의 새로운 애니가 추가되었습니다.";
+                    link = "/animations/" + alarm.getAnimation().getId();
                 }
                 return new AlarmDTO.AlarmResponse(alarm.getId(), message, link);
             }).collect(Collectors.toList());
