@@ -12,6 +12,7 @@ import hello.entity.request.RequestStatus;
 import hello.entity.user.Address;
 import hello.repository.db.*;
 import hello.repository.server.FileStore;
+import hello.service.basic.AlarmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +42,7 @@ public class AdminService {
     private final AnnouncementRepository announcementRepository;
     private final PopupStoreRepository popupStoreRepository;
     private final GeocodingService geocodingService;
+    private final AlarmService alarmService;
 
     public Page<UserInfoDTO> getUserInfoPage(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -100,6 +102,8 @@ public class AdminService {
             request.setResponse(requestRejectDTO.getResponse());
             request.setStatus(REJECTED);
             request.setResponseDate(LocalDate.now());
+
+            alarmService.requestAlarmService(request);
         }
     }
 

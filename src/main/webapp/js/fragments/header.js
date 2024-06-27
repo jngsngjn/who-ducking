@@ -106,4 +106,30 @@ $(document).ready(function () {
         $(this).toggleClass("active");
         mobileAlarm_List.slideToggle();
     });
+
+    $.ajax({
+        url: '/update-alarm',
+        type: 'POST',
+        success: function(response) {
+            let alarmList = $('.h-alarm_list');
+            alarmList.empty(); // 기존 알림 리스트 비우기
+
+            if (response.alarmCount === 0) {
+                $('#alarm_count').hide();
+                alarmList.append('<li><a href="#none">알림이 없습니다.</a></li>');
+            } else if (response.alarms && response.alarms.length > 0) {
+                $('#alarm_count').text(response.alarmCount);
+                response.alarms.forEach(function(alarm) {
+                    let link = '<a href="' + alarm.link + '">' + alarm.message + '</a>';
+                    alarmList.append('<li onclick="deleteAlarm()">' + link + '</li>');
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('요청이 실패했습니다.');
+            console.error('Status: ' + textStatus);
+            console.error('Error: ' + errorThrown);
+            console.error('Response Text: ' + jqXHR.responseText);
+        }
+    });
 });

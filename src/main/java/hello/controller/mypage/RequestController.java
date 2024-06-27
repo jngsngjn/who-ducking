@@ -21,9 +21,9 @@ public class RequestController {
     private final UserService userService;
     private final RequestService requestService;
 
-    // 건의 내역
     @GetMapping("/request-list")
-    public String requestList(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
+    public String requestListOrDetail(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+                                      @RequestParam(name = "requestId", required = false) Long requestId) {
         Page<MyRequestDTO> requestPage = requestService.getMyRequest(page, 5);
         model.addAttribute("requestPage", requestPage);
         return "mypage/myRequest";

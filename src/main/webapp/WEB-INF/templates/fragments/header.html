@@ -72,7 +72,7 @@
                             <li>
                                 <a href="#none">
                                     알림
-                                    <!-- <span class="h-alarm_count">12</span> -->
+                                     <span class="h-alarm_count" id="alarm_count"></span>
                                 </a>
                             </li>
                         </div>
@@ -81,34 +81,13 @@
                             <li>
                                 <a href="/login" style="color: var(--mainColor)">
                                     로그인
-                                    <!-- <span class="h-alarm_count">12</span> -->
                                 </a>
                             </li>
                         </div>
 
                         <!-- Alarm List -->
                         <ul class="h-alarm_list" sec:authorize="isAuthenticated()">
-                            <!-- Alarm X -->
-                            <li>
-                                <a href="#none">알림이 없습니다.</a>
-                            </li>
-                            <!-- Alarm O -->
-                            <li>
-                                <a href="#none">
-                                    ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#none">
-                                    ~~ 건의에 대한 답변이 등록되었습니다.
-                                </a>
-                            </li>
-                            <!-- 리스트 추가 시, 양식대로 추가
-                            <li>
-                                <a href="#none">
-
-                                </a>
-                            </li> -->
+                            <!-- JS로 동적으로 추가 -->
                         </ul>
                     </div>
                 </ul>

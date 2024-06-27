@@ -1,8 +1,12 @@
 package hello.controller.basic;
 
+import hello.dto.user.AlarmDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.dto.user.HeaderDTO;
+import hello.entity.alarm.Alarm;
+import hello.entity.alarm.AlarmType;
 import hello.entity.user.User;
+import hello.service.basic.AlarmService;
 import hello.service.basic.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -10,26 +14,63 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequiredArgsConstructor
 public class HeaderController {
 
     private final UserService userService;
+    private final AlarmService alarmService;
 
     @PostMapping("/update-header")
     public HeaderDTO handleRequest(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session) {
-        User loginUser = userService.getLoginUserDetail(user);
+        if (user != null) {
+            User loginUser = userService.getLoginUserDetail(user);
 
-        Long level = loginUser.getLevel().getId();
-        int point = loginUser.getPoint();
-        int currentExp = loginUser.getCurrentExp();
-        int maxExp = loginUser.getLevel().getMaxExp();
+            Long level = loginUser.getLevel().getId();
+            int point = loginUser.getPoint();
+            int currentExp = loginUser.getCurrentExp();
+            int maxExp = loginUser.getLevel().getMaxExp();
 
-        session.setAttribute("level", level);
-        session.setAttribute("point", point);
-        session.setAttribute("currentExp", currentExp);
-        session.setAttribute("maxExp", maxExp);
+            session.setAttribute("level", level);
+            session.setAttribute("point", point);
+            session.setAttribute("currentExp", currentExp);
+            session.setAttribute("maxExp", maxExp);
 
-        return new HeaderDTO(point);
+            return new HeaderDTO(point);
+        }
+        return null;
+    }
+
+    @PostMapping("/update-alarm")
+    public AlarmDTO updateAlarm(@AuthenticationPrincipal CustomOAuth2User user) {
+        if (user != null) {
+            User loginUser = userService.getLoginUserDetail(user);
+
+            int alarmCount = alarmService.getUserAlarmCount(loginUser);
+            List<Alarm> userAlarms = alarmService.getUserAlarms(loginUser);
+            List<AlarmDTO.AlarmResponse> alarmResponses = userAlarms.stream().map(alarm -> {
+                String message;
+                String link;
+                if (alarm.getAlarmType() == AlarmType.REQUEST) {
+                    message = "나의 건의 내역 상태가 업데이트 되었습니다.";
+                    link = "/myPage/request-list?page=0&requestId=" + alarm.getRequest().getId();
+                }
+                else {
+                    // 다른 타입에 대한 처리를 추가할 수 있습니다.
+                    message = "기타 알림입니다.";
+                    link = "#";
+                }
+                return new AlarmDTO.AlarmResponse(message, link);
+            }).collect(Collectors.toList());
+
+            AlarmDTO alarmDTO = new AlarmDTO();
+            alarmDTO.setAlarmCount(alarmCount);
+            alarmDTO.setAlarms(alarmResponses);
+            return alarmDTO;
+        }
+        return null;
     }
 }
