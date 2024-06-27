@@ -1,15 +1,20 @@
 package hello.service.basic;
 
 import hello.entity.alarm.Alarm;
+import hello.entity.animation.Animation;
+import hello.entity.genre.Genre;
+import hello.entity.genre.UserGenre;
 import hello.entity.request.Request;
 import hello.entity.user.User;
 import hello.repository.db.AlarmRepository;
+import hello.repository.db.UserGenreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static hello.entity.alarm.AlarmType.ANIMATION;
 import static hello.entity.alarm.AlarmType.REQUEST;
 
 @Service
@@ -18,6 +23,7 @@ import static hello.entity.alarm.AlarmType.REQUEST;
 public class AlarmService {
 
     private final AlarmRepository alarmRepository;
+    private final UserGenreRepository userGenreRepository;
 
     public void requestAlarmService(Request request) {
         User user = request.getUser();
@@ -43,5 +49,21 @@ public class AlarmService {
 
     public void deleteAllAlarms(Long userId) {
         alarmRepository.deleteByUserId(userId);
+    }
+
+    public void animationAlarmService(List<Genre> genres, Animation animation) {
+        List<UserGenre> userGenres = userGenreRepository.findByGenreIn(genres);
+        List<User> users = userGenres.stream()
+                .map(UserGenre::getUser)
+                .distinct()
+                .toList();
+
+        users.forEach(user -> {
+            Alarm alarm = new Alarm();
+            alarm.setAnimation(animation);
+            alarm.setAlarmType(ANIMATION);
+            alarm.setUser(user);
+            alarmRepository.save(alarm);
+        });
     }
 }

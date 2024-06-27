@@ -77,6 +77,7 @@ public class AdminService {
         }
 
         animationRepository.save(animation);
+        alarmService.animationAlarmService(findGenres, animation);
     }
 
     public Page<RequestListDTO> getRequestsByStatus(RequestStatus status, int page, int size) {

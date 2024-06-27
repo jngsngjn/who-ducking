@@ -1,5 +1,6 @@
 package hello.entity.alarm;
 
+import hello.entity.animation.Animation;
 import hello.entity.board.Board;
 import hello.entity.request.Request;
 import hello.entity.user.User;
@@ -26,6 +27,10 @@ public class Alarm {
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
+
+    @ManyToOne
+    @JoinColumn(name = "animation_id")
+    private Animation animation;
 
     @ManyToOne
     @JoinColumn(name = "request_id")
