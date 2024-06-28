@@ -1,0 +1,157 @@
+.myReview_body {
+    background-image: url('/images/Background_Image/itachi.png');
+    background-repeat: no-repeat;
+    background-position: 7% 72%;
+    background-size: 350px 700px;
+}
+
+.myReview_header {
+    transform: scale(0.85714);
+}
+
+.myReview_main {
+    transform: scale(0.85714);
+}
+
+.myReview_head-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    height: 50px;
+    width: 1400px;
+    margin-bottom: 50px;
+}
+
+.myReview_h2 {
+    color: #ff8b00;
+    font-size: 50px;
+}
+
+.myReview_filter {
+    width: 130px;
+    height: 50px;
+    font-size: 28px;
+    background: #ff8b00;
+    color: white;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
+.myReview_filter2 {
+    width: 130px;
+    height: 50px;
+    font-size: 28px;
+    background: white;
+    color: black;
+    border-radius: 15px;
+    border: 1px solid #d9d9d9;
+}
+
+.myReview_menulist {
+    width: 1400px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.myReview_menu {
+    width: 300px;
+    height: 720px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 20px;
+    margin-right: 28px;
+}
+
+.myReview_menuli {
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+
+.myReview_now{
+    color: #ff8b00;
+}
+
+
+.myReview_line {
+    width: 300px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myReview_line2 {
+    width: 1025px;
+    height: 1px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.myReview_ul{
+    width: 1070px;
+    margin-bottom: 100px;
+}
+
+.myReview_content {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.myReview_ani {
+    display: flex;
+}
+
+.myReview_next {
+    width: 424px;
+    height: 54px;
+    gap: 20px;
+    align-items: center;
+    display: flex;
+    margin: auto;
+}
+
+.myReview_next-button {
+    width: 54px;
+    height: 54px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: #feffdb;
+}
+
+.myReview_now-button {
+    width: 54px;
+    height: 54px;
+    border-radius: 100px;
+    background-color: #ffc60b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.myReview_bot {
+    margin-top: 10px;
+    width: 250px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.myReview_comment {
+    color: #91D8E4;
+}
+
+.myReview_star {
+    color: #FFF500;
+}
