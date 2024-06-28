@@ -18,6 +18,9 @@
 .btn-bookmark:hover {
     background-color: #FFC60B;
 }
+.btn-bookmark.bookmarked{
+    background-color: #FFC60B ;
+}
 .board-container {
     max-width: 1400px;
     margin: 0 auto 20px;

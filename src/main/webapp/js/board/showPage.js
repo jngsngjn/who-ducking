@@ -66,8 +66,10 @@ function loadLikesDislikes() {
         }
     });
 }
-//북마크 버튼
 $(document).ready(function() {
+    // 북마크 상태를 로드
+    loadBookmarkState();
+
     var isBookmarked = $('#board-bookmark-button').hasClass('bookmarked');
 
     $('#board-bookmark-button').click(function() {
@@ -81,20 +83,39 @@ $(document).ready(function() {
             success: function(response) {
                 isBookmarked = response.bookmarked;
                 button.toggleClass('bookmarked', isBookmarked);
-                button.text(isBookmarked ? '북마크됨' : '북마크');
-                },
+
+                // 로컬 스토리지에 북마크 상태 저장
+                saveBookmarkState(boardId, isBookmarked);
+            },
             error: function(xhr, status, error) {
                 console.log('Error:', error);
                 alert('북마크 처리 중 오류가 발생했습니다.');
             }
         });
     });
-
-    // 댓글 수정
-    $('.comment-edit-form').each(function() {
-        const editForm = $(this);
-        const originalContent = editForm.closest('.comment-item').find('.comment-writer-result').text().trim();
-        editForm.find('input[name="contentUpdate"]').val(originalContent);
-    });
-
 });
+
+function saveBookmarkState(boardId, isBookmarked) {
+    let bookmarkState = JSON.parse(localStorage.getItem('bookmarkState')) || {};
+    bookmarkState[boardId] = isBookmarked;
+    localStorage.setItem('bookmarkState', JSON.stringify(bookmarkState));
+}
+
+function loadBookmarkState() {
+    let bookmarkState = JSON.parse(localStorage.getItem('bookmarkState')) || {};
+    var boardId = $('#board-bookmark-button').data('board-id');
+
+    if (bookmarkState[boardId]) {
+        $('#board-bookmark-button').addClass('bookmarked');
+    } else {
+        $('#board-bookmark-button').removeClass('bookmarked');
+    }
+}
+
+// 댓글 수정
+$('.comment-edit-form').each(function() {
+    const editForm = $(this);
+    const originalContent = editForm.closest('.comment-item').find('.comment-writer-result').text().trim();
+    editForm.find('input[name="contentUpdate"]').val(originalContent);
+});
+
