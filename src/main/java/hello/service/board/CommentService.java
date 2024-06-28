@@ -45,5 +45,9 @@ public class CommentService {
             return commentRepository.save(updatedComment);
         });
     }
+
+    public int countCommentsByBoardId(Long boardId) {
+        return commentRepository.countByBoardId(boardId);
+    }
 }
 

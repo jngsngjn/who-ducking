@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
@@ -22,4 +24,14 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     //최신순
     Page<Board> findAllByOrderByWriteDateDesc(Pageable pageable);
+
+    //메인화면 게시판 미리보기
+    List<Board> findTop5ByOrderByWriteDateDesc();
+
+    //신고 횟수 증가
+    @Modifying
+    @Query("UPDATE Board b SET b.reportCount = b.reportCount + 1 WHERE b.id = :boardId")
+    @Transactional
+    void incrementReportCount(@Param("boardId") Long boardId);
+
 }

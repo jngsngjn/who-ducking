@@ -583,10 +583,6 @@
     gap: 1rem;
 }
 
-.mainFourthSection_freeboard_bookmarks {
-    color: var(--subColor);
-}
-
 .mainFourthSection_freeboard_comments {
     color: var(--mainColor);
 }
