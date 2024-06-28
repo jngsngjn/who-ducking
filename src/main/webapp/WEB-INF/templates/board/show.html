@@ -143,32 +143,32 @@
 <div th:insert="~{fragments/footer :: footer}"></div>
 
 <div class="modal-overlay" id="reportModalOverlay">
-    <div class="board-show-report-modal">
-        <div class="board-show-report-title">신고하기</div>
-        <div class="report-radio-group">
-            <label class="report-radio-label">
-                <span class="radio-inner-circle"></span>
-                부적절한 게시글
-            </label>
-            <label class="report-radio-label">
-                <span class="radio-inner-circle"></span>
-                중복 게시글 도배
-            </label>
-            <label class="report-radio-label">
-                <span class="radio-inner-circle"></span>
-                욕설
-            </label>
-            <label class="report-radio-label-other">
-                <span class="radio-inner-circle"></span>
-                기타
-            </label>
+        <div class="board-show-report-modal">
+            <div class="board-show-report-title">신고하기</div>
+            <div class="report-radio-group">
+                <label class="report-radio-label">
+                    <span class="radio-inner-circle"></span>
+                    부적절한 게시글
+                </label>
+                <label class="report-radio-label">
+                    <span class="radio-inner-circle"></span>
+                    중복 게시글 도배
+                </label>
+                <label class="report-radio-label">
+                    <span class="radio-inner-circle"></span>
+                    욕설
+                </label>
+                <label class="report-radio-label-other">
+                    <span class="radio-inner-circle"></span>
+                    기타
+                </label>
+            </div>
+            <textarea class="report-other-text" id="otherReasonInput" placeholder="기타 입력"></textarea>
+            <div class="report-modal-button">
+                <button class="board-show-report-modal-submit" type="button" th:onclick="'incrementReportCountAndRedirect(' + ${board.id} + '); return false;'">신고</button>
+                <button class="board-show-report-modal-cancel" type="button">취소</button>
+            </div>
         </div>
-        <textarea class="report-other-text" id="otherReasonInput" placeholder="기타 입력"></textarea>
-        <div class="report-modal-button">
-            <button class="board-show-report-modal-submit">신고</button>
-            <button class="board-show-report-modal-cancel">취소</button>
-        </div>
-    </div>
 </div>
 
 <script>

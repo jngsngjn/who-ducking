@@ -134,3 +134,10 @@ document.querySelectorAll('.report-radio-label, .report-radio-label-other').forE
         }
     });
 });
+
+function incrementReportCountAndRedirect(boardId){
+    $.post('/board/' + boardId + '/report', function (){
+        alert("신고처리가 완료되었습니다.");
+        window.location.href = '/board/' + boardId;
+    });
+}
