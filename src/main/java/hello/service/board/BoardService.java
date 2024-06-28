@@ -9,6 +9,7 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,9 +52,12 @@ public class BoardService {
 
     //상세보기
     public Optional<Board> getBoardById(Long id) {
-        //조회수 업데이트
-        boardRepository.incrementViewCount(id);
         return boardRepository.findById(id);
+    }
+
+    //조회수 업데이트
+    public void updateViewCount(Long id){
+        boardRepository.incrementViewCount(id);
     }
 
     //글 수정
@@ -107,12 +111,14 @@ public class BoardService {
 
     //전체 목록 보기
     //최신순
-    public Page<Board> getBoardsSortedByLatest(Pageable pageable){
+    public Page<Board> getBoardsSortedByLatest(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
         return boardRepository.findAllByOrderByWriteDateDesc(pageable);
     }
 
     //조회순
-    public Page<Board> getBoardsSortedByViewCount(Pageable pageable){
+    public Page<Board> getBoardsSortedByViewCount(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
         return boardRepository.findAllByOrderByViewCountDesc(pageable);
     }
 

@@ -1,16 +1,29 @@
-.bookmark-icon {
-    font-size: 24px;
-    cursor: pointer;
-    color: #FF8B00;
+.btn-bookmark {
+    font-size: 20px;
+        margin: 10px 0;
+        padding: 8px 16px;
+        width: 120px;
+        border-radius: 15px;
+        background-color: #FF8B00;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 }
 
-.bookmark-icon.fa-solid {
-    color: #FFC60B;
+.btn-bookmark i {
+    margin-right: 10px;
 }
 
+.btn-bookmark:hover {
+    background-color: #FFC60B;
+}
+.btn-bookmark.bookmarked{
+    background-color: #FFC60B ;
+}
 .board-container {
     max-width: 1400px;
-    margin: 0px auto 20px;
+    margin: 0 auto 20px;
     padding: 20px;
     background-color: #fff;
 }
@@ -46,7 +59,7 @@
 }
 
 .board-title-line span {
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .board-title-second {
@@ -58,17 +71,16 @@
     margin: 20px auto 10px;
 }
 
-.board-title {
-    font-size: 10px;
-}
-
 .board-title-group {
+    font-size: 20px;
     color: #FFC60B;
     font-weight: 500;
     margin-top: 25px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .board-menu-toggle {
@@ -83,7 +95,7 @@
 }
 
 .board-author {
-    font-size: 25px;
+    font-size: 20px;
     margin-right: 10px;
 }
 
@@ -98,7 +110,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 .board-author-group {
@@ -133,7 +145,7 @@
     background-color: #f0f0f0;
 }
 
-.board-menu-item {
+.board-menu-item-report {
     font-size: 25px;
     color: red;
 }
@@ -146,6 +158,7 @@
     width: 100%;
     max-width: 1400px;
     margin: 20px auto 10px;
+    gap:20px;
 }
 
 .comment-section-orange-line {
@@ -169,14 +182,14 @@
 }
 
 .board-meta-left {
-    font-size:25px;
+    font-size: 20px;
     color: #000;
     display: flex;
     align-items: center;
 }
 
 .board-date {
-    font-size: 25px;
+    font-size: 20px;
     margin-right: 10px;
 }
 
@@ -185,15 +198,8 @@
     font-size: 25px;
     margin-bottom: 20px;
     line-height: 1.5;
-    text-align: flex-start;
     flex: 1;
     margin-right: 20px;
-}
-
-.form-group {
-    text-align: end;
-    justify-content: space-between;
-    margin-bottom: 20px;
 }
 
 .board-img {
@@ -259,6 +265,7 @@
     padding: 8px 16px;
     width: 120px;
     border-radius: 15px;
+    gap:5px;
     background-color: #FF8B00;
     color: #fff;
     display: flex;
@@ -341,8 +348,8 @@
 
 .char-counter {
     position: absolute;
-    bottom: 30px;
-    right: 50px;
+    bottom: 20px;
+    right: 35px;
     font-size: 20px;
     color: #888;
 }
@@ -352,7 +359,7 @@
     align-items: flex-end;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 10px 10px;
+    padding: 10px 20px;
 }
 
 .comment-submit {
@@ -375,9 +382,9 @@
 
 .comment-list {
     display: flex;
-        flex-direction: column-reverse;
-        list-style-type: none;
-        padding: 0;
+    flex-direction: column-reverse;
+    list-style-type: none;
+    padding: 0;
 }
 
 .comment-item {
@@ -465,8 +472,6 @@
 .comment-menu {
     display: none;
     position: absolute;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     z-index: 1000;
     padding: 10px;
@@ -492,16 +497,20 @@
     max-width: 1450px;
     margin: 0 auto 20px;
     border: none;
-    height: 2px;
+    height: 1px;
     border-radius: 5px;
     background-color: #c9c9c9;
 }
 
-.edit-board-content {
-    width: 300px;
+.edit-comment-textarea {
+    width: 100%;
     height: 100px;
     border: 3px solid #FFC60B;
-    border-radius: 5px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    resize: none; /* 크기 조절 기능 비활성화 */
 }
 
 .comment-menu-header {
@@ -530,45 +539,83 @@
     text-align: left;
 }
 
-.comment-edit-form,
-.comment-delete-form {
-    display: inline;
-}
-
 .comment-edit-delete-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 20px;
-    gap: 20px;
+    width: 10rem;
+    height: 8.75rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 1.25rem;
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    left: 200%;
 }
 
-.menu-item-edit {
-    background-color: #FFC60B;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
 
-.menu-item-edit:hover {
-    background-color: #ff8b00;
-    color: #fff;
-}
+.menu-item-edit{
+                   width: 100%;
+                   height: 49%;
+                   border-radius: 20px;
+                   border: none;
+                   font-size: 1.5rem;
+                   cursor: pointer;
+               }
 
 .menu-item-delete {
-    background-color: #FF6347;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+                      display:flex;
+                      width: 100%;
+                      height: 49%;
+                      border-radius: 20px;
+                      border: none;
+                      font-size: 1.5rem;
+                      cursor: pointer;
+                      align-items:center;
+                      text-align:center;
+                      justify-content:center;
+                      margin-top:10px;
+
+                  }
+
+.menu-item-edit:hover,
+.menu-item-delete:hover {
+    color:#FF8B00;
 }
 
-.menu-item-delete:hover {
-    background-color: #ff0000;
-    color: #fff;
+.comment-writer-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top:10px;
+    margin-right:10px;
+    gap: 10px;
+}
+
+.save-edit,
+.cancel-edit {
+    background-color: #ff8b00;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save-edit:hover,
+.cancel-edit:hover {
+    background-color: #ffc60b;
+}
+
+.board-show-report-modal{
+    position: absolute;
+    display: none;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 800px;
+    height: 500px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--box-shadow__A);
+    top: 30%;
+    left: 30%;
+    z-index: 2000;
+
 }

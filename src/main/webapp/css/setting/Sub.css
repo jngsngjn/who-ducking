@@ -1,4 +1,8 @@
 /* SubCommon =============================================== */
+#container {
+    padding-top: 8rem;
+}
+
 .inner_box {
     position: relative;
     max-width: 1200px;

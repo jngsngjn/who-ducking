@@ -27,33 +27,38 @@
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript">
         function editRemoveImage() {
-            document.getElementById('edit-file').value = "";
-            document.getElementById('edit-imagePreview').style.display = 'none';
-            document.querySelector('.edit-delete-image-button').style.display = 'none';
-            document.getElementById('edit-fileName').style.display = 'none';
-        }
+           document.getElementById('edit-file').value = "";
+           document.getElementById('edit-imagePreview').style.display = 'none';
+           document.querySelector('.edit-delete-image-button').style.display = 'none';
+           document.getElementById('edit-fileName').style.display = 'none';
+       }
 
-        $(document).ready(function() {
-            $('#edit-file').change(function() {
-                var input = this;
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#edit-imagePreview').attr('src', e.target.result);
-                        $('#edit-imagePreview').show();
-                        $('.edit-delete-image-button').show();
-                        $('#edit-fileName').text(input.files[0].name).show();
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
-            });
-        });
-        function editRemoveImage() {
-            $('#edit-imagePreview').attr('src', '').hide();
-            $('#edit-file').val('');
-            $('.edit-delete-image-button').hide();
-            $('#edit-fileName').hide();
-}
+       $(document).ready(function() {
+           $('#edit-file').change(function() {
+               var input = this;
+               if (input.files && input.files[0]) {
+                   var reader = new FileReader();
+                   reader.onload = function(e) {
+                       $('#edit-imagePreview').attr('src', e.target.result);
+                       $('#edit-imagePreview').show();
+                       $('.edit-delete-image-button').show();
+                       $('#edit-fileName').text(input.files[0].name).show();
+                   }
+                   reader.readAsDataURL(input.files[0]);
+               }
+           });
+       });
+
+       function goBack() {
+           window.history.back();
+       }
+
+       function checkFileInput() {
+           const fileInput = document.getElementById('edit-file');
+           if (fileInput.value === "") {
+               fileInput.disabled = true;
+           }
+       }
     </script>
 </head>
 <body>
@@ -62,6 +67,7 @@
 <div class="edit-board-form-container">
     <h2>게시글 수정</h2>
     <form th:action="@{/board/{boardId}/edit(boardId=${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="redirectUrl" th:value="${param.redirectUrl}"/>
         <div class="edit-form-group">
             <div class="edit-file-label-title">사진 첨부</div>
             <div class="edit-image-preview-container">
@@ -84,7 +90,7 @@
         </div>
         <div class="edit-button-group">
             <button type="submit" class="edit-board-edit-button ">수정</button>
-            <button type="button" class="edit-board-edit-reset" onclick="window.location.href='/board/list'">취소</button>
+            <button type="button" class="edit-board-edit-reset" onclick="window.location.href='/board'">취소</button>
         </div>
     </form>
 </div>
