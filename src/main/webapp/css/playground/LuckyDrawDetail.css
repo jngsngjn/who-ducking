@@ -1,0 +1,381 @@
+.luckyDrawDetail_backgroundImage {
+    background-image: url("/images/Background_Image/inuyasha.png");
+    background-repeat: no-repeat;
+    background-position: 0% 50%;
+    background-size: 100% 40%;
+}
+
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
+}
+
+/* Section 1 */
+.luckyDrawDetail {
+    padding-bottom: 5rem;
+}
+
+.luckyDrawDetail_product_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 5rem;
+}
+
+/* Left : Image */
+.luckyDrawDetail_item_left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.luckyDrawDetail_item_img_box {
+    width: 55rem;
+    height: 55rem;
+    border-radius: 2rem;
+    border: 1px solid #d9d9d9;
+}
+
+.luckyDrawDetail_item_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.luckyDrawDetail_line1 {
+    height: 600px;
+    width: 1px;
+    background-color: #d9d9d9;
+}
+
+/* Right : Information */
+.luckyDrawDetail_item_right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.luckyDrawDetail_item_title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 3.2rem;
+    font-weight: 800;
+    width: 100%;
+    padding-left: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.luckyDrawDetail_line2 {
+    width: 100%;
+    height: 1px;
+    background-color: #d9d9d9;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.luckyDrawDetail_item_desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    gap: 2rem;
+}
+
+.luckyDrawDetail_item_entry_btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 30%;
+    height: 5rem;
+    background: var(--mainColor);
+    color: #fff;
+    padding: 0.6rem;
+    padding-right: 1.92rem;
+    padding-left: 5.9rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    border-radius: 1.5rem;
+    border: none;
+    letter-spacing: 0.08rem;
+    box-shadow: inset 0 0 2.56rem -0.96rem var(--mainColor);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.luckyDrawDetail_item_entry_btn i {
+    background: #fff;
+    color: var(--mainColor);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 1rem;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #ffc400;
+    left: 0.5rem;
+    transition: all 0.3s;
+}
+
+.luckyDrawDetail_item_entry_btn:hover i {
+    width: calc(100% - 0.9rem);
+    transform: translateX(-0.55rem);
+}
+
+.luckyDrawDetail_item_entry_btn:active i {
+    transform: scale(0.9);
+}
+
+.luckyDrawDetail_item_coin {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.luckyDrawDetail_item_coin i {
+    color: var(--mainColor);
+}
+
+.luckyDrawDetail_item_date_box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.luckyDrawDetail_item_date_title {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-weight: 700;
+}
+
+.luckyDrawDetail_item_date_title i {
+    color: var(--mainColor);
+}
+
+.luckyDrawDetail_item_date_deadline {
+    font-weight: 200;
+    padding-left: 3.8rem;
+}
+
+.luckyDrawDetail_item_announce_box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 2.4rem;
+    font-weight: 500;
+    gap: 1rem;
+}
+
+.luckyDrawDetail_item_announce_title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 700;
+}
+
+.luckyDrawDetail_item_announce_title i {
+    color: var(--mainColor);
+}
+
+.luckyDrawDetail_item_announce_date {
+    font-weight: 200;
+    padding-left: 3.8rem;
+}
+
+.luckyDrawDetail_item_winner_box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 2.4rem;
+    font-weight: 500;
+    gap: 1rem;
+}
+
+.luckyDrawDetail_item_winner_title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 700;
+}
+
+.luckyDrawDetail_item_winner_title i {
+    color: var(--mainColor);
+}
+
+.luckyDrawDetail_item_winner_num {
+    font-weight: 200;
+    padding-left: 3.5rem;
+}
+
+.luckyDrawDetail_line3 {
+    width: 100%;
+    height: 1px;
+    background-color: #d9d9d9;
+    margin-top: 2.5rem;
+}
+
+/* Section 2 */
+.luckyDrawDetail2 {
+    padding-bottom: 5rem;
+}
+
+.luckyDrawDetail_another_product_box {
+    display: block;
+    margin: 5rem auto;
+}
+
+.luckyDrawDetail_another_item_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 3rem;
+}
+
+.luckyDrawDetail_another_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 38rem;
+    background-color: var(--primaryColor);
+    border: 2px solid var(--subColor);
+    border-radius: 2rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.luckyDrawDetail_another_item_img_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    position: relative;
+    margin-top: 2rem;
+}
+
+.luckyDrawDetail_another_item_img_box:hover {
+    transform: scale(1.05);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.luckyDrawDetail_another_item_img {
+    width: 30rem;
+    height: 30rem;
+    border-radius: 1rem;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.luckyDrawDetail_another_item_img_info {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 3%;
+    width: 28.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.luckyDrawDetail_another_item_coin {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.luckyDrawDetail_another_item_coin i {
+    color: var(--mainColor);
+}
+
+.luckyDrawDetail_another_item_item_date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.luckyDrawDetail_another_item_item_date i {
+    color: var(--mainColor);
+}
+
+.luckyDrawDetail_another_item_title {
+    display: block;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 80%;
+    border: 2px solid #d9d9d9;
+    background-color: #fff;
+    border-radius: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Section 3 */
+.luckyDrawDetail3 {
+    padding-bottom: 12rem;
+}
+
+.luckyDrawDetail_notice_list {
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
+
+.luckyDrawDetail_notice {
+    list-style-type: none;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 5rem;
+}
+
+.luckyDrawDetail_notice:last-child {
+    margin-bottom: 0;
+}
+
+.luckyDrawDetail_notice::before {
+    content: "•";
+    color: var(--mainColor);
+    font-size: 3.6rem;
+    font-weight: 900;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 2rem;
+    width: 1rem;
+    margin-left: -2rem;
+    margin-right: 1rem;
+}
+
+.luckyDrawDetail_notice::marker {
+    color: var(--mainColor);
+}

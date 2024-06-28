@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/playground/luckyDrawDetail.js"></script>
+</head>
+
+<body class="luckyDrawDetail_backgroundImage">
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : 1. Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <h2 class="subTitle">럭키 드로우 상세 정보</h2>
+            </div>
+        </section>
+
+        <!-- Sub Component : 1. Lucky Draw Detail -->
+        <section class="luckyDrawDetail">
+            <div class="inner_box" data-aos="fade-up">
+
+                <!-- Top -->
+                <div class="luckyDrawDetail_product_box">
+                    <!-- Left : Image -->
+                    <div class="luckyDrawDetail_item_left">
+                        <div class="luckyDrawDetail_item_img_box">
+                            <img class="luckyDrawDetail_item_img"
+                                 th:src="@{/image/prize/{imageName}(imageName=${prize.imageName})}" alt="상품 이미지">
+                        </div>
+                    </div>
+
+                    <div class="luckyDrawDetail_line1"></div>
+
+                    <!-- Right : Item Information -->
+                    <div class="luckyDrawDetail_item_right">
+                        <!-- 1. Item Title -->
+                        <span class="luckyDrawDetail_item_title" th:text="${prize.name}"></span>
+
+                        <div class="luckyDrawDetail_line2"></div>
+
+                        <!-- 2. Item Description -->
+                        <div class="luckyDrawDetail_item_desc">
+                            <!-- Entry Button -->
+                            <button class="luckyDrawDetail_item_entry_btn" id="entry-button">
+                                <i class="fa-solid fa-clover"></i>
+                                응모하기
+                            </button>
+                            <!-- Coin -->
+                            <div class="luckyDrawDetail_item_coin">
+                                <i class="fa-solid fa-coins"></i>30P
+                            </div>
+                            <!-- Date -->
+                            <div class="luckyDrawDetail_item_date_box">
+                                <div class="luckyDrawDetail_item_date_title">
+                                    <i class="fa-regular fa-calendar-days"></i>응모기간
+                                </div>
+                                <div class="luckyDrawDetail_item_date_deadline"
+                                     th:text="${#temporals.format(prize.startDate, 'yyyy.MM.dd (E)')} + ' ~ ' + ${#temporals.format(prize.endDate, 'yyyy.MM.dd (E)')}">
+                                </div>
+                            </div>
+                            <!-- Announce Date -->
+                            <div class="luckyDrawDetail_item_announce_box">
+                                <div class="luckyDrawDetail_item_announce_title">
+                                    <i class="fa-solid fa-gift"></i>당첨자 발표
+                                </div>
+                                <div class="luckyDrawDetail_item_announce_date"
+                                     th:text="${announceDate}">
+                                </div>
+                            </div>
+                            <!-- Winner -->
+                            <div class="luckyDrawDetail_item_winner_box">
+                                <div class="luckyDrawDetail_item_winner_title">
+                                    <i class="fa-solid fa-user"></i>당첨 인원
+                                </div>
+                                <div class="luckyDrawDetail_item_winner_num">
+                                    1명
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="luckyDrawDetail_line3"></div>
+            </div>
+        </section>
+
+        <!-- Sub Component : 2. Title -->
+        <section class="subCommon2">
+            <div class="inner_box" data-aos="fade-up">
+                <h2 class="subTitle">다른 럭키 드로우 상품</h2>
+            </div>
+        </section>
+
+        <!-- Sub Component : 2. Another Lucky Draw -->
+        <section class="luckyDrawDetail2">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="luckyDrawDetail_another_product_box">
+                    <ul class="luckyDrawDetail_another_item_box">
+                        <!-- Item -->
+                        <li class="luckyDrawDetail_another_item" th:each="randomPrize : ${randomPrizes}">
+                            <a class="luckyDrawDetail_another_item_img_box"
+                               th:href="@{/playground/lucky-draw/entry/{prizeId}(prizeId=${randomPrize.id})}">
+                                <!-- Image -->
+                                <img class="luckyDrawDetail_another_item_img"
+                                     th:src="@{/image/prize/{imageName}(imageName=${randomPrize.imageName})}" alt="상품 이미지">
+                                <!-- Information -->
+                                <div class="luckyDrawDetail_another_item_img_info">
+                                    <!-- Coin -->
+                                    <div class="luckyDrawDetail_another_item_coin">
+                                        <i class="fa-solid fa-coins"></i>30P
+                                    </div>
+                                    <!-- Date -->
+                                    <div class="luckyDrawDetail_another_item_item_date">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                        <span th:text="${#temporals.format(randomPrize.endDate, 'yyyy.MM.dd')} + '까지'"></span>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- Title -->
+                            <span class="luckyDrawDetail_another_item_title" th:text="${randomPrize.name}"></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="luckyDrawDetail_line3"></div>
+            </div>
+        </section>
+
+        <!-- Sub Component : 3. Title -->
+        <section class="subCommon3">
+            <div class="inner_box" data-aos="fade-up">
+                <h2 class="subTitle">유의사항</h2>
+            </div>
+        </section>
+
+        <!-- Sub Component : 3. Notice -->
+        <section class="luckyDrawDetail3">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="luckyDrawDetail_notice_box">
+                    <ul class="luckyDrawDetail_notice_list">
+                        <li class="luckyDrawDetail_notice">
+                            본 럭키 드로우는 Who’s DucKing 회원 전용 이벤트입니다.
+                        </li>
+                        <li class="luckyDrawDetail_notice">
+                            응모 이벤트 참여 완료는 마이페이지 &gt; 응모 내역에서 확인할 수 있습니다.
+                        </li>
+                        <li class="luckyDrawDetail_notice">
+                            당첨자에 한하여 결제 관련 문자 메시지 및 이메일을 발송드리며, 미당첨자에게 별도의
+                            연락을 드리지 않습니다.
+                        </li>
+                        <li class="luckyDrawDetail_notice">
+                            72시간 이내 주소를 입력하지 않거나 최종 확인 절차를 진행하지 않을 시, 자동으로 취소 및 재추첨은 진행하지 않습니다.
+                        </li>
+                        <li class="luckyDrawDetail_notice">
+                            회원 정보가 일치하지 않거나 부당한 방법으로 응모한 고객의 경우 당첨 취소, 추후 이벤트 응모 시 불이익을 받을 수 있습니다.
+                        </li>
+                        <li class="luckyDrawDetail_notice">
+                            모든 절차가 완료된 후, 상품에 문제가 있지 않는 한 교환 및 포인트 환불은 불가합니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const prizeId = [[${prize.id}]];
+    /*]]>*/
+</script>
+</body>
+</html>
