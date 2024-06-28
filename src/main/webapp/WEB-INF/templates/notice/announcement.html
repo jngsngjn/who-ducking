@@ -145,7 +145,7 @@
                 <div class="announcement_pagination">
                     <!-- Double Left Arrow -->
                     <a class="announcement_pagination_btn"
-                       th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/announcement(page=${notices.number - 1})}">
+                       th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/announcement(page=0)}">
                         <!-- Double Left Icon -->
                         <i class="fa-solid fa-angles-left"></i>
                     </a>
@@ -175,7 +175,7 @@
 
                     <!-- Double Right Arrow -->
                     <a class="announcement_pagination_btn"
-                       th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/announcement(page=${notices.number + 1})}">
+                       th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/announcement(page=${notices.totalPages - 1})}">
                         <!-- Double Right Icon -->
                         <i class="fa-solid fa-angles-right"></i>
                     </a>

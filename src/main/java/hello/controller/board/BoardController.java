@@ -14,6 +14,7 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,9 +109,9 @@ public class BoardController {
 
     //조회수 증가
     @PostMapping("/{boardId}/incrementViewCount")
-    @ResponseBody
-    public void incrementViewCount(@PathVariable("boardId") Long boardId) {
+    public ResponseEntity<Void> incrementViewCount(@PathVariable("boardId") Long boardId) {
         boardService.updateViewCount(boardId);
+        return ResponseEntity.ok().build();
     }
 
     //게시글 수정 폼

@@ -5,6 +5,7 @@ import hello.entity.board.Board;
 import hello.entity.user.User;
 import hello.repository.db.BoardRepository;
 import hello.repository.server.FileStore;
+import jakarta.transaction.Transactional;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,6 +58,7 @@ public class BoardService {
     }
 
     //조회수 업데이트
+    @Transactional
     public void updateViewCount(Long id){
         boardRepository.incrementViewCount(id);
     }
