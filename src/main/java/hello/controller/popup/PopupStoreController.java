@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/popup")
+@RequestMapping("/popup-store")
 public class PopupStoreController {
 
     @GetMapping
