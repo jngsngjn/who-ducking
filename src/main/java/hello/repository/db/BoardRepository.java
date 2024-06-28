@@ -26,7 +26,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Page<Board> findAllByOrderByWriteDateDesc(Pageable pageable);
 
     //메인화면 게시판 미리보기
-    List<Board> findAllByOrderByViewCountAsc();
+    List<Board> findAllByOrderByWriteDateDesc();
 
     //신고 횟수 증가
     @Modifying
