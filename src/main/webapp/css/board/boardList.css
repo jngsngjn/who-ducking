@@ -23,7 +23,7 @@
     color: #ff8b00;
     font-size: 48px;
     font-weight: bold;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 .sort-option-box {
@@ -135,19 +135,69 @@
 
 .free-board-write-button {
     display: flex;
-    justify-content: end;
-    margin:20px 10px;
+    justify-content: flex-end; /* 버튼을 오른쪽 끝으로 정렬 */
+    margin: 20px 10px;
 }
 
 .free-board-write-button a {
-    background-color: #ff8b00;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-    font-size: 18px;
+    width: 100px; /* 버튼의 너비 */
+    height: 45px; /* 버튼의 높이 */
+    border-radius: 20px; /* 버튼 테두리 반경 */
+    border: 1px solid rgba(255, 139, 0, 0.349); /* 테두리 색상 */
+    background-color: #FF8B00; /* 버튼 배경 색상 */
+    display: flex; /* 아이콘과 텍스트를 가로로 정렬 */
+    align-items: center; /* 아이콘과 텍스트를 수직으로 가운데 정렬 */
+    justify-content: center; /* 내용 가운데 정렬 */
+    cursor: pointer; /* 커서 포인터 */
+    transition-duration: 0.3s; /* 전환 효과 시간 */
+    overflow: hidden; /* 내용 오버플로우 숨기기 */
+    text-decoration: none; /* 텍스트 밑줄 제거 */
+    color: white; /* 텍스트 색상 */
+    font-size: 1.04em; /* 텍스트 크기 */
+    padding: 0; /* 내부 여백 제거 */
 }
 
+.free-board-Icon {
+    width: 30px; /* 아이콘 컨테이너 너비 */
+    height: 30px; /* 아이콘 컨테이너 높이 */
+    background: linear-gradient(to bottom, #FF8B00, #E07B00); /* 배경 그라데이션 */
+    border-radius: 50px; /* 테두리 반경 */
+    display: flex; /* 아이콘을 가운데 정렬 */
+    align-items: center; /* 아이콘을 수직 가운데 정렬 */
+    justify-content: center; /* 아이콘을 가로 가운데 정렬 */
+    overflow: hidden; /* 내용 오버플로우 숨기기 */
+    z-index: 2; /* z-index 설정 */
+    transition-duration: 0.3s; /* 전환 효과 시간 */
+}
+
+.free-board-text {
+    height: 100%; /* 텍스트 높이 */
+    width: 60px; /* 텍스트 너비 */
+    display: flex; /* 텍스트를 가운데 정렬 */
+    align-items: center; /* 텍스트를 수직 가운데 정렬 */
+    justify-content: center; /* 텍스트를 가로 가운데 정렬 */
+    color: white; /* 텍스트 색상 */
+    z-index: 1; /* z-index 설정 */
+    transition-duration: 0.3s; /* 전환 효과 시간 */
+    font-size: 1.04em; /* 텍스트 크기 */
+}
+
+.free-board-write-button a:hover .free-board-Icon {
+    width: 90px; /* 호버 시 아이콘 컨테이너 너비 */
+    transition-duration: 0.3s; /* 전환 효과 시간 */
+}
+
+.free-board-write-button a:hover .free-board-text {
+    transform: translate(10px); /* 텍스트 이동 */
+    width: 0; /* 텍스트 너비 */
+    font-size: 0; /* 텍스트 크기 */
+    transition-duration: 0.3s; /* 전환 효과 시간 */
+}
+
+.free-board-write-button a:active {
+    transform: scale(0.95); /* 클릭 시 버튼 크기 축소 */
+    transition-duration: 0.3s; /* 전환 효과 시간 */
+}
 
     .free-board-pagination {
         width: 424px;

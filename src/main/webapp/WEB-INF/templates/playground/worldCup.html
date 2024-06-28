@@ -20,8 +20,8 @@
 <div th:insert="~{fragments/header :: header}"></div>
 
 <div id="worldModal" class="world-modal">
-    <div class="world-modal-content">
-        <img src="/images/10duck.ico" class="world-modal-title-img" >
+    <div class="start-modal-content">
+        <img src="/images/10duck.ico" class="world-modal-title-img">
         <h2>후덕이의 이상형 월드컵</h2>
 
         <label for="rounds">총 라운드를 선택하세요</label>
@@ -54,7 +54,7 @@
     </div>
 </div>
 <div id="resultModal" class="world-modal">
-    <div class="world-modal-content">
+    <div class="result-modal-content">
         <h2>🎉선택 결과🎉</h2>
         <img id="finalImage" src="" alt="Final Image">
         <p id="finalCaption"></p>
@@ -63,7 +63,6 @@
     </div>
 </div>
 <div th:insert="~{fragments/footer :: footer}"></div>
-<script src="/js/playground/worldCup.js"></script>
 <script src="/js/playground/worldCup.js"></script>
 </body>
 </html>
