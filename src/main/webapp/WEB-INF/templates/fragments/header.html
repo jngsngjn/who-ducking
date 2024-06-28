@@ -55,16 +55,16 @@
                 <!-- Global Navigation Bar -->
                 <ul class="h-gnb_items">
                     <li>
-                        <a href="/animations">애니</a>
+                        <a class="header-list-a" data-hover="애니" href="/animations"><span class="header-list">애니</span></a>
                     </li>
                     <li>
-                        <a href="/board">커뮤니티</a>
+                        <a class="header-list-a" data-hover="커뮤니티" href="/board"><span class="header-list">커뮤니티</span></a>
                     </li>
                     <li>
-                        <a href="/popup">팝업</a>
+                        <a class="header-list-a" data-hover="팝업" href="/popup-store"><span class="header-list">팝업</span></a>
                     </li>
                     <li>
-                        <a href="/playground">놀이터</a>
+                        <a class="header-list-a" data-hover="놀이터" href="/playground"><span class="header-list">놀이터</span></a>
                     </li>
                     <!-- Alarm Dropdown -->
                     <div class="h-alarm">
@@ -117,11 +117,14 @@
                                 <span th:text="${session.point} + 'P'" id="point"></span>
                             </div>
                         </div>
-                        <div>
+                        <div th:if="${session.level != 10}">
                             <span class="h-profile_menu_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'EXP'"></span>
                         </div>
-                        <div class="h-profile_exp_track">
+                        <div th:if="${session.level != 10}" class="h-profile_exp_track">
                             <div class="h-profile_exp_thumb" th:style="'width:' + (${session.currentExp} > 0 ? (${session.currentExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
+                        </div>
+                        <div th:if="${session.level == 10}" class="max-level-message">
+                            최대 레벨입니다!
                         </div>
                     </li>
                     <li>
@@ -234,7 +237,7 @@
                                     <a href="/board">커뮤니티</a>
                                 </li>
                                 <li>
-                                    <a href="/popup">팝업</a>
+                                    <a href="/popup-store">팝업</a>
                                 </li>
                                 <li>
                                     <a href="/playground">놀이터</a>

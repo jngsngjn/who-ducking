@@ -12,50 +12,52 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-<h1>팝업 스토어 추가</h1>
-<form action="/admin/popup-store/add" method="post" enctype="multipart/form-data">
-    <div>
-        <label for="name">이름:</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-        <label for="openTime">오픈 시간:</label>
-        <input type="time" id="openTime" name="openTime" required>
-    </div>
-    <div>
-        <label for="closeTime">마감 시간:</label>
-        <input type="time" id="closeTime" name="closeTime" required>
-    </div>
-    <div>
-        <label for="startDate">시작 날짜:</label>
-        <input type="date" id="startDate" name="startDate" required>
-    </div>
-    <div>
-        <label for="endDate">종료 날짜:</label>
-        <input type="date" id="endDate" name="endDate" required>
-    </div>
-    <div>
-        <label for="zipcode">우편 번호:</label>
-        <input type="text" id="zipcode" name="zipcode" required readonly>
-        <button type="button" onclick="findPostcode()">우편 번호 찾기</button>
-    </div>
-    <div>
-        <label for="address">주소:</label>
-        <input type="text" id="address" name="address" required readonly>
-    </div>
-    <div>
-        <label for="detailedAddress">상세 주소:</label>
-        <input type="text" id="detailedAddress" name="detailedAddress" required>
-    </div>
-    <div>
-        <label for="image">이미지:</label>
-        <input type="file" id="image" name="image" accept="image/*">
-    </div>
-    <div>
-        <button type="submit">추가</button>
-    </div>
-</form>
-
+<div class="container">
+    <h2>팝업 스토어 추가</h2>
+    <form action="/admin/popup-store/add" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="openTime">오픈 시간:</label>
+            <input type="time" id="openTime" name="openTime" required>
+        </div>
+        <div>
+            <label for="closeTime">마감 시간:</label>
+            <input type="time" id="closeTime" name="closeTime" required>
+        </div>
+        <div>
+            <label for="startDate">시작 날짜:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+        <div>
+            <label for="endDate">종료 날짜:</label>
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <div>
+            <label for="zipcode">우편 번호:</label>
+            <input type="text" id="zipcode" name="zipcode" required readonly>
+            <button type="button" onclick="findPostcode()">우편 번호 찾기</button>
+        </div>
+        <div>
+            <label for="address">주소:</label>
+            <input type="text" id="address" name="address" required readonly>
+        </div>
+        <div>
+            <label for="detailedAddress">상세 주소:</label>
+            <input type="text" id="detailedAddress" name="detailedAddress" required>
+        </div>
+        <div>
+            <label for="image">이미지:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        <div>
+            <button type="button" id="backButton" class="btn">뒤로가기</button>
+            <button class="add-basic" type="submit">추가</button>
+        </div>
+    </form>
+</div>
 <script>
     function findPostcode() {
         new daum.Postcode({
@@ -66,6 +68,9 @@
             }
         }).open();
     }
+    $('#backButton').click(function() {
+        window.history.back();
+    });
 </script>
 </body>
 </html>

@@ -139,8 +139,8 @@ public class PrizeService {
         return prizeRepository.findPrizeOneById(id);
     }
 
-    public List<PrizeOneDTO> getRandomPrizes() {
-        List<Prize> prizes = prizeRepository.findRandomPrizes();
+    public List<PrizeOneDTO> getRandomPrizes(Long prizeId) {
+        List<Prize> prizes = prizeRepository.findRandomPrizes(prizeId);
         return prizes.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 

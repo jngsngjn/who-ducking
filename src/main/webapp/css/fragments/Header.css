@@ -96,6 +96,64 @@
     color: var(--titleColor);
 }
 
+/* 헤더 호버 CSS 시작 */
+.h-gnb_items .header-list-a {
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+}
+
+.h-gnb_items .header-list-a .header-list {
+    display: block;
+    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55), -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.h-gnb_items .header-list-a:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    content: attr(data-hover);
+    display: inline;
+    text-align: center;
+    -webkit-transition: top 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: top 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.h-gnb_items .header-list-a:hover {
+    color: var(--mainColor);
+}
+
+.h-gnb_items .header-list-a:hover .header-list {
+    color: var(--mainColor);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+.h-gnb_items .header-list-a:hover:after {
+    top: 0;
+}
+
+.h-gnb_items .header-list-a:active {
+    -webkit-animation-name: rubberBand;
+    animation-name: rubberBand;
+}
+/* 헤더 호버 CSS 끝 */
+
 /* Global Navigation Bar =>> Alarm ===== */
 .h-alarm_btn > li > a {
     position: relative;
@@ -106,6 +164,10 @@
 
 .alarm_btn {
     cursor: pointer;
+}
+
+/* 성진 추가 */
+.alarm_btn:hover {
 }
 
 .h-alarm_list {
