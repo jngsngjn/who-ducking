@@ -87,6 +87,7 @@
 
 <div class="board-bottom-line">
     <a href="/board" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</a>
+    <a href="#" class="btn-bookmark"><i class="fa-regular fa-bookmark"></i>북마크</a>
 </div>
 <section class="comment-section">
     <hr class="comment-section-orange-line">
@@ -98,8 +99,8 @@
     <div class="comment-container">
         <form action="#" th:action="@{/board/{boardId}/comment(boardId=${board.id})}" method="post" class="comment-box">
             <div class="author-bottom-group">
-            <span class="board-author-bottom"><i class="fa-solid fa-user"></i></span>
-            <span class="board-author-bottom" th:text="${nickname}"></span>
+                <span class="board-author-bottom"><i class="fa-solid fa-user"></i></span>
+                <span class="board-author-bottom" th:text="${nickname}"></span>
             </div>
             <div class="comment-input-wrapper">
                 <textarea class="comment-input" id="comment-input" name="contentWrite" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." maxlength="500"></textarea>
@@ -119,7 +120,14 @@
                         <i class="fa-solid fa-ellipsis-vertical" onclick="toggleCommentMenu(this)"></i>
                     </span>
                 </div>
-                <span class="comment-writer-result" th:text="${comment.content}"></span><br>
+                <div class="comment-writer-container">
+                    <span class="comment-writer-result" th:text="${comment.content}"></span><br>
+                    <textarea class="edit-comment-textarea" style="display:none;"></textarea>
+                    <div class="comment-writer-button">
+                    <button class="save-edit" style="display:none;">수정</button>
+                    <button class="cancel-edit" style="display:none;">취소</button>
+                    </div>
+                </div>
                 <span class="comment-date" th:text="${#temporals.format(comment.writeDate, 'yyyy.MM.dd HH:mm')}"></span>
                 <div class="comment-meta" th:data-comment-id="${comment.id}">
                     <button class="comment-likes" onclick="toggleLike(this)">
@@ -130,16 +138,11 @@
                     </button>
                 </div>
                 <div class="comment-menu">
-                    <div class="comment-menu-header">
-                        <i class="fa-solid fa-xmark" onclick="toggleCommentMenu(this)"></i>
+                    <div class="comment-edit-delete-container">
+                        <button type="button" class="menu-item-edit">수정</button>
+                        <hr />
+                        <button type="submit" formaction="#" th:formaction="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" class="menu-item-delete">삭제</button>
                     </div>
-                    <form action="#" th:action="@{/board/{boardId}/comment/{commentId}/edit(boardId=${board.id}, commentId=${comment.id})}" method="post" class="comment-edit-form">
-                        <input type="text" class="edit-board-content" name="contentUpdate" placeholder="수정할 댓글 내용" />
-                        <div class="comment-edit-delete-container">
-                            <button type="submit" class="menu-item-edit">수정</button>
-                            <button type="submit" formaction="#" th:formaction="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" class="menu-item-delete">삭제</button>
-                        </div>
-                    </form>
                 </div>
             </li>
         </ul>
@@ -149,46 +152,112 @@
 
 <script>
     // 메뉴 기능
-   document.addEventListener('DOMContentLoaded', (event) => {
-       const menuToggle = document.getElementById('board-menu-toggle');
-       const menu = document.getElementById('board-menu');
-       const commentInput = document.getElementById('comment-input');
-       const charCounter = document.getElementById('char-counter');
+ document.addEventListener('DOMContentLoaded', (event) => {
+     const menuToggle = document.getElementById('board-menu-toggle');
 
-       if (menuToggle && menu) {
-           menuToggle.addEventListener('click', function(e) {
-               e.stopPropagation();
-               const rect = menuToggle.getBoundingClientRect();
-               menu.style.top = `${rect.bottom + window.scrollY}px`;
-               menu.style.left = `${rect.right + window.scrollX - menu.offsetWidth}px`;
-               menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-           });
+     const menu = document.getElementById('board-menu');
+     const commentInput = document.getElementById('comment-input');
+     const charCounter = document.getElementById('char-counter');
+     const boardImagePreview = document.getElementById('boardImagePreview');
+        if (!boardImagePreview.src || boardImagePreview.src.endsWith('null')) {
+        boardImagePreview.style.display = 'none';
+     }
 
-           document.addEventListener('click', function(e) {
-               if (!menu.contains(e.target) && e.target !== menuToggle) {
-                   menu.style.display = 'none';
-               }
-           });
-       }
-        // 0/500 내용 카운트
-       if (commentInput && charCounter) {
-           commentInput.addEventListener('input', function() {
-               const maxLength = commentInput.getAttribute('maxlength');
-               const currentLength = commentInput.value.length;
-               charCounter.textContent = `${currentLength} / ${maxLength}`;
-           });
-       }
+     if (menuToggle && menu) {
+         menuToggle.addEventListener('click', function(e) {
+             e.stopPropagation();
+             const rect = menuToggle.getBoundingClientRect();
+             menu.style.top = `${rect.bottom + window.scrollY}px`;
+             menu.style.left = `${rect.right + window.scrollX - menu.offsetWidth}px`;
+             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+         });
 
-       loadLikesDislikes();
-   });
+         document.addEventListener('click', function(e) {
+             if (!menu.contains(e.target) && e.target !== menuToggle) {
+                 menu.style.display = 'none';
+             }
+         });
+     }
 
-   //신고 모달창 열기
-   const modal = document.querySelector('.board-show-report-modal');
-   const openModalBtn = document.querySelector('.board-menu-item-report');
+     // 0/500 내용 카운트
+     if (commentInput && charCounter) {
+         commentInput.addEventListener('input', function() {
+             const maxLength = commentInput.getAttribute('maxlength');
+             const currentLength = commentInput.value.length;
+             charCounter.textContent = `${currentLength} / ${maxLength}`;
+         });
+     }
 
-   openModalBtn.addEventListener('click',function (){
-      modal.style.display='flex';
-   });
+     loadLikesDislikes();
+ });
+
+ // 댓글 수정 기능
+ document.addEventListener('DOMContentLoaded', function () {
+     const editButtons = document.querySelectorAll('.menu-item-edit');
+     editButtons.forEach(button => {
+         button.addEventListener('click', function () {
+             const commentItem = this.closest('.comment-item');
+             const commentText = commentItem.querySelector('.comment-writer-result');
+             const editTextarea = commentItem.querySelector('.edit-comment-textarea');
+             const saveButton = commentItem.querySelector('.save-edit');
+             const cancelButton = commentItem.querySelector('.cancel-edit');
+
+             editTextarea.value = commentText.textContent;
+             commentText.style.display = 'none';
+             editTextarea.style.display = 'block';
+             saveButton.style.display = 'inline-block';
+             cancelButton.style.display = 'inline-block';
+
+             saveButton.addEventListener('click', function () {
+                 const newText = editTextarea.value;
+                 commentText.textContent = newText;
+                 commentText.style.display = 'block';
+                 editTextarea.style.display = 'none';
+                 saveButton.style.display = 'none';
+                 cancelButton.style.display = 'none';
+
+                 // Save changes via AJAX or form submission
+                 // For example:
+                 /*
+                 $.ajax({
+                     url: '/board/' + boardId + '/comment/' + commentId + '/edit',
+                     type: 'POST',
+                     data: { contentUpdate: newText },
+                     success: function(response) {
+                         // Handle success
+                     },
+                     error: function(xhr, status, error) {
+                         // Handle error
+                     }
+                 });
+                 */
+             });
+
+             cancelButton.addEventListener('click', function () {
+                 commentText.style.display = 'block';
+                 editTextarea.style.display = 'none';
+                 saveButton.style.display = 'none';
+                 cancelButton.style.display = 'none';
+             });
+         });
+     });
+     document.addEventListener('click', function (event) {
+         const commentMenus = document.querySelectorAll('.comment-menu');
+         commentMenus.forEach(menu => {
+             if (!menu.contains(event.target) && !menu.closest('.comment-item').contains(event.target)) {
+                 menu.style.display = 'none';
+             }
+         });
+     });
+ });
+    //신고 모달창 열기
+    const modal = document.querySelector('.board-show-report-modal');
+    const openModalBtn = document.querySelector('.board-menu-item-report');
+
+    openModalBtn.addEventListener('click',function (){
+        modal.style.display='flex';
+    });
+
 </script>
 <script type="text/javascript" src="/js/showPage.js"></script>
 </body>
