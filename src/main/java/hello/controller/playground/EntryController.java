@@ -76,7 +76,7 @@ public class EntryController {
         LocalDate resultEndDate = endDate.plus(1, ChronoUnit.DAYS);
         String formattedAnnounceDate = resultEndDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd (E)"));
 
-        List<PrizeOneDTO> randomPrizes = prizeService.getRandomPrizes();
+        List<PrizeOneDTO> randomPrizes = prizeService.getRandomPrizes(prizeId);
 
         model.addAttribute("prize", prizeOne);
         model.addAttribute("announceDate", formattedAnnounceDate + " 12:00");
