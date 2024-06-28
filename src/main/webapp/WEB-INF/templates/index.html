@@ -525,7 +525,7 @@
                         <div class="mainFourthSection_freeboard_box">
                               <ul class="mainFourthSection_freeboard_items">
                                     <li th:each="boardDto : ${boardListToMain}" class="mainFourthSection_freeboard_item">
-                                          <a th:href="@{/board/{boardId}(boardId = ${boardDto.board.id})}">
+                                          <a th:href="@{/board/{boardId}(boardId = ${boardDto.board.id})}" th:onclick="'incrementViewCountAndRedirect(' + ${boardDto.board.id} + '); return false;'">
                                                 <div class="mainFourthSection_freeboard_title">
                                                       <span class="mainFourthSection_freeboard_title_text" th:text="${boardDto.board.title}"></span>
                                                 </div>

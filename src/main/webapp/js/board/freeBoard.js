@@ -3,3 +3,4 @@ function incrementViewCountAndRedirect(boardId) {
         window.location.href = '/board/' + boardId;
     });
 }
+//index.html, freeBoard.html에서 사용됨
