@@ -117,11 +117,14 @@
                                 <span th:text="${session.point} + 'P'" id="point"></span>
                             </div>
                         </div>
-                        <div>
+                        <div th:if="${session.level != 10}">
                             <span class="h-profile_menu_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'EXP'"></span>
                         </div>
-                        <div class="h-profile_exp_track">
+                        <div th:if="${session.level != 10}" class="h-profile_exp_track">
                             <div class="h-profile_exp_thumb" th:style="'width:' + (${session.currentExp} > 0 ? (${session.currentExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
+                        </div>
+                        <div th:if="${session.level == 10}" class="max-level-message">
+                            최대 레벨입니다!
                         </div>
                     </li>
                     <li>
