@@ -1,14 +1,9 @@
-#container {
-  padding-top: 8rem;
-}
-
 .login_section {
   padding: 6rem 0;
   background: #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .login_box {
