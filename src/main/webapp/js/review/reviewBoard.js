@@ -76,7 +76,7 @@ function checkGenre(element) {
     }
 
     currentPage = 1;
-    filterAnimations();
+    totalAnimations();
 }
 
 // 전체 페이지네이션과 장르별 페이지네이션
@@ -91,12 +91,12 @@ function updateURL(page) {
     history.replaceState(null, '', url);
 }
 
-function filterAnimations() {
+function totalAnimations() {
     let animations = document.querySelectorAll('.ani-info-container');
-    let filteredAnimations = [];
+    let selectedAnimations = [];
 
     if (selectedGenres.length === 0) {
-        filteredAnimations = Array.from(animations);
+        selectedAnimations = Array.from(animations);
     } else {
         animations.forEach(function(animation) {
             let genreId1 = animation.querySelector('h4:nth-of-type(1)').textContent.trim();
@@ -104,7 +104,7 @@ function filterAnimations() {
 
             let showAnimation = selectedGenres.includes(genreId1) || selectedGenres.includes(genreId2);
             if (showAnimation) {
-                filteredAnimations.push(animation);
+                selectedAnimations.push(animation);
             }
         });
     }
@@ -113,13 +113,13 @@ function filterAnimations() {
 
     let startIndex = (currentPage - 1) * animationsPerPage;
     let endIndex = startIndex + animationsPerPage;
-    filteredAnimations.forEach((animation, index) => {
+    selectedAnimations.forEach((animation, index) => {
         if (index >= startIndex && index < endIndex) {
             animation.style.display = 'block';
         }
     });
 
-    renderPagination(filteredAnimations.length);
+    renderPagination(selectedAnimations.length);
     window.scrollTo(0, 0);
     updateURL(currentPage);
 }
@@ -140,7 +140,7 @@ function renderPagination(totalAnimations) {
         }
         pageButton.addEventListener('click', function() {
             currentPage = i;
-            filterAnimations();
+            totalAnimations();
         });
         pageNumberBox.appendChild(pageButton);
     }
@@ -149,21 +149,21 @@ function renderPagination(totalAnimations) {
 function changePage(page) {
     if (page >= 1 && page <= totalPages) {
         currentPage = page;
-        filterAnimations();
+        totalAnimations();
     }
 }
 
 function prevPage() {
     if (currentPage > 1) {
         currentPage--;
-        filterAnimations();
+        totalAnimations();
     }
 }
 
 function nextPage() {
     if (currentPage < totalPages) {
         currentPage++;
-        filterAnimations();
+        totalAnimations();
     }
 }
 
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             currentPage = 1;
-            filterAnimations();
+            totalAnimations();
         });
     });
 
@@ -197,5 +197,5 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPage = pageParam;
     }
 
-    filterAnimations();
+    totalAnimations();
 });
