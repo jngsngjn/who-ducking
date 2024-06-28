@@ -94,6 +94,8 @@ function filterAnimations() {
     let animations = document.querySelectorAll('.ani-info-container');
     let filteredAnimations = [];
 
+
+
     if (selectedGenres.length === 0) {
         filteredAnimations = Array.from(animations);
     } else {
@@ -107,6 +109,19 @@ function filterAnimations() {
             }
         });
     }
+
+    // 장르에 일치하는 애니가 없을 경우 보여줄 요소
+    if (filteredAnimations.length === 0) {
+        let emptyContainer = document.getElementById('empty-container');
+        // let pageBtnBox = document.getElementById('page-btn-box');
+        emptyContainer.style.display = "block";
+        // pageBtnBox.style.display="none"
+    } else {
+        let emptyContainer = document.getElementById('empty-container');
+        emptyContainer.style.display = "none";
+        // pageBtnBox.style.display="block";
+    }
+
 
     animations.forEach(animation => animation.style.display = 'none');
 
@@ -175,8 +190,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let index = selectedGenres.indexOf(genreId);
 
             if (checkbox.checked) {
+
                 if (index === -1) {
                     selectedGenres.push(genreId);
+
                 }
             } else {
                 if (index !== -1) {

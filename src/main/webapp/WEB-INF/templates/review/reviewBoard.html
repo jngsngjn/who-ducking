@@ -75,6 +75,10 @@
               </div>
             </div>
           </div>
+          <div class="empty-container" id="empty-container">
+            <h1 class="empty-container-text"> 선택된 장르의 애니메이션이 없습니다.</h1>
+            <button class="go-to-request"> 건의하기 </button>
+          </div>
           <div class="ani-list-container" id="ani-list-container">
             <div th:each="animation : ${animationLists}" class="ani-info-container"
                  th:attr="data-review-count=${animation.reviewCount}, data-animation-id=${animation.animationId}">
@@ -89,8 +93,8 @@
               </div>
               <div class="row-info-container">
                 <div class="recommend-container">
-                  <i class="fa-solid fa-comment">[[${animation.reviewCount}]]</i>
-                  <i class="fa-solid fa-star"> [[${animation.score}]] / 5.0</i>
+                  <i class="fa-solid fa-comment review-comment-icon">[[${animation.reviewCount}]]</i>
+                  <i class="fa-solid fa-star review-star-icon"> [[${animation.score}]] / 5.0</i>
                 </div>
               </div>
               <div class="ani-list-title-container">
@@ -102,7 +106,7 @@
         </div>
       </div>
     </div>
-      <div class="page-btn-box">
+      <div class="page-btn-box" id="page-btn-box">
         <i class="fa-solid fa-angles-left page-btn" onclick="changePage(1)"></i>
         <i class="fa-solid fa-angle-left page-btn" onclick="prevPage()"></i>
         <ul class="page-button-wrapper" id="button-wrapper">

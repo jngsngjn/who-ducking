@@ -437,14 +437,13 @@ hr {
 }
 
 .save-review-btn {
-    margin-left: 10px;
+    margin-left: 93%;
     padding: 5px 10px;
     width: 6.25rem;
     height: 3.125rem;
     color:  #e87e04;
     border:none;
     cursor: pointer;
-
 }
 
 .save-review-btn:hover {
@@ -457,7 +456,6 @@ hr {
     width: 1rem;
     height: 2rem;
     position: relative;
-    /* 모달 연결용 position */
 }
 
 .stars {
@@ -517,9 +515,11 @@ hr {
     animation-fill-mode: forwards;
 }
 
-/*#animaiton-id{*/
-/*    display:none;*/
-/*}*/
+.review-comment{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 
 /****************** 리뷰 토글 *************************/

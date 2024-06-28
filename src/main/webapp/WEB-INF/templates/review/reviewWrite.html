@@ -74,7 +74,7 @@
     </div>
   </div>
   <p class="review-count">
-    <i class="fa-solid fa-comment"></i>
+    <i class="fa-solid fa-comment review-comment-icon"></i>
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
   <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box" th:if="${isAuthenticated}">
@@ -135,8 +135,8 @@
           </div>
         </div>
         <div class="review-comment">
-          <span th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></span>
-          <span class="extra-content" style="display: none;"></span>
+          <p th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></p>
+          <p class="extra-content" style="display: none;"></p>
           <a href="javascript:void(0);" class="toggle-read-on">[더보기]</a>
           <a href="javascript:void(0);" class="toggle-read-off" style="display: none;">[닫기]</a>
         </div>
@@ -179,10 +179,10 @@
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
             <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
-              <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
+              <i class="fa-regular fa-thumbs-up review-like-icon"></i> <span th:text="${review.likeCount}"></span>
             </button>
             <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
-              <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
+              <i class="fa-regular fa-thumbs-down review-dislike-icon"></i> <span th:text="${review.dislikeCount}"></span>
             </button>
           </div>
         </div>

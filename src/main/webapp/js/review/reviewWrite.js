@@ -323,12 +323,12 @@ document.addEventListener("DOMContentLoaded", function() {
             likeBtn.style.display = 'none';
             dislikeBtn.style.display = 'none';
 
-            currentText.addEventListener("keydown", function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    saveButton.click();
-                }
-            });
+            // currentText.addEventListener("keydown", function(event) {
+            //     if (event.keyCode === 13) {
+            //         event.preventDefault();
+            //         saveButton.click();
+            //     }
+            // });
 
             // 글자수 체크 함수
             currentText.addEventListener('input', function(){
