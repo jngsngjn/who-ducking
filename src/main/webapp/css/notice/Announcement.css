@@ -190,6 +190,10 @@
     color: var(--mainColor);
 }
 
+.announcement_pageNum {
+    display: flex;
+}
+
 .announcement_pagination_now_btn {
     display: flex;
     align-items: center;
