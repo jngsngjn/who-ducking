@@ -124,8 +124,8 @@ public class BoardService {
     }
 
     //메인 화면 자유게시판 미리보기
-    public List<Board> getBoardsSortedByViewCountFromMain(){
-        return boardRepository.findAllByOrderByWriteDateDesc();
+    public List<Board> getBoardsSortedByWriteDateToMain(){
+        return boardRepository.findTop5ByOrderByWriteDateDesc();
     }
 
     //신고 횟수 증가
