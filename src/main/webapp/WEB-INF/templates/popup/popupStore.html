@@ -1,39 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
-    <link rel="icon" href="/images/10duck.ico">
+
+    <!-- Naver Map API -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=5y2qd5fi66"></script>
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
     <link rel="stylesheet" href="/css/popup/Popup.css">
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/popup/popup.js"></script>
 </head>
+
 <body>
-<div class="popup-store-box">
-    <div class="popup-store-left-list">
-        <div class="header">
-            <a href="/">
-                <img src="/images/Logo/logo.png" class="header-img">
-            </a>
-            <div class="search-box">
-                <input type="text" placeholder="팝업 스토어 검색" class="search-input" >
-                <button class="search-button"><i class="fa fa-search"></i></button>
+<main class="popUpStore_box">
+    <section class="popUpStore_Left">
+        <div class="popUpStore_header">
+            <div class="popUpStore_logo_box">
+                <a class="popUpStore_logo" href="/">
+                    <img src="/images/Logo/logo.png" class="popUpStore_header_logo-img">
+                </a>
+            </div>
+
+            <div class="popUpStore_search-box">
+                <input type="text" placeholder="팝업 스토어 검색" class="popUpStore_search-input" >
+                <button class="popUpStore_search-button"><i class="fa fa-search"></i></button>
             </div>
         </div>
-        <section class="section-choice">
-            <span class="popup-title" onclick="location.reload();">팝업 스토어</span>
-            <div class="button-group" th:if="${isAuthenticated}">
-                <button class="schedule-button active">일정순</button>
-                <button class="bookmark-button">북마크</button>
+
+        <section class="popUpStore_sectionBar">
+            <span class="popUpStore_Title" onclick="location.reload();">팝업 스토어</span>
+            <div class="popUpStore_btnGroup" th:if="${isAuthenticated}">
+                <button class="popUpStore_schedule_btn active">일정순</button>
+                <button class="popUpStore_bookmark_btn">북마크</button>
             </div>
         </section>
         <ul></ul>
-    </div>
-    <div class="map" id="map"></div>
-</div>
-<script>
+    </section>
+    <section class="map" id="map"></section>
+</main>
+
+<script th:inline="javascript">
     var isAuthenticated = /*[[${isAuthenticated}]]*/ false;
 </script>
-<script src="/js/popup/popup.js"></script>
+
 </body>
 </html>

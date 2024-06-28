@@ -5,220 +5,243 @@ body, html {
     height: 100%;
 }
 
-.popup-store-box {
+.popUpStore_box {
     display: flex;
     height: 100%;
 }
 
-.popup-store-left-list {
+.popUpStore_Left {
     width: 50%;
-    padding: 0 40px;
+    padding: 0 4rem;
     background-color: #fff;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    scrollbar-color: #FEC02E #FEFFDA ;
+    scrollbar-width :thin;
 }
 
-.header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.header-link {
-    display: inline-block;
-    width: 30%;
-    margin-right: 20px;
-}
-.header-img {
-    width: 80%;
-}
-
-.search-box {
-    display: flex;
-    flex: 1;
-    position: relative;
-}
-
-.search-input {
-    background: #feffdb;
-    flex: 1;
-    padding: 10px;
-    height: 30px;
-    border-radius: 15px;
-    border: 1px solid #d9d9d9;
-    outline: none;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.search-input:focus {
-    border-color: #ff8b00;
-}
-
-
-.search-button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #ff8b00;
-}
-
-.search-button i {
-    font-size: 18px;
-}
-
-.section-choice {
+.popUpStore_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 2rem;
 }
 
-.popup-title {
-    font-size: 40px;
-    font-weight: bold;
-    color: #ff8b00;
-    cursor:pointer;
-}
-.popup-title:hover{
-    color:#FFC60B;
+.popUpStore_logo_box {
+    width: 200px;
+    height: 120px;
 }
 
-
-.button-group {
-    display: flex;
-    gap: 10px;
-}
-
-.schedule-button {
-    background-color: #fff;
-    color: #000;
-}
-
-.schedule-button,
-.bookmark-button {
-    border-radius: 15px;
-    padding: 6px 15px;
-    border: 1px solid #d9d9d9;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.schedule-button,
- .bookmark-button {
-    border-radius: 15px;
-    padding: 6px 15px;
-    border: 1px solid #d9d9d9;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.schedule-button.active,
-.bookmark-button.active {
-    background-color: #ff8b00;
-    color: #fff;
-}
-
-.schedule-button:not(.active),
-.bookmark-button:not(.active) {
-    background-color: #fff;
-    color: #000;
-}
-
-.popup-store-left-list ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.popup-store-left-list li {
-    background: #ffffff;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    padding: 20px;
-    display: flex;
-    border: 2px solid #d9d9d9;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-}
-
-.popup-store-img-container {
-    flex: 0 0 250px;
-    padding: 10px;
+.popUpStore_logo_box a {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.popup-store-img {
-    border-radius: 20px;
+.popUpStore_logo_box a img {
     width: 100%;
 }
 
-.popup-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom:30px;
-    flex: 1;
-
+.popUpStore_search-box {
+    position: relative;
+    width: 450px;
+    height: 60px;
 }
 
-.popup-info span {
-    color:#444444;
-    font-size: 22px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    cursor:pointer;
-}
-.popup-info span:hover{
-    color:#ff8b00;
+.popUpStore_search-input {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10rem;
+    background: var(--primaryColor);
+    border: none;
+    padding: 0 6rem 0 2rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--titleColor);
 }
 
-.popup-info span .icon {
-    color: #ff8b00;
+.popUpStore_search-input:focus {
+    outline-color: var(--mainColor);
+}
+
+.popUpStore_search-input::placeholder {
+    color: var(--descColor);
+}
+
+.popUpStore_search-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2rem;
+    font-size: 2.8rem;
+    color: var(--mainColor);
     cursor: pointer;
 }
 
-.popup-dates {
+.popUpStore_sectionBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.popUpStore_Title {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: var(--mainColor);
+    cursor:pointer;
+}
+
+.popUpStore_Title:hover {
+    color: var(--subColor);
+}
+
+.popUpStore_btnGroup {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.popUpStore_schedule_btn {
+    background-color: #fff;
+    color: #000;
+}
+
+.popUpStore_schedule_btn,
+.popUpStore_bookmark_btn {
+    border-radius: 2rem;
+    padding: 0.4rem 1.5rem;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popUpStore_schedule_btn:hover,
+.popUpStore_bookmark_btn:hover {
+    background-color: var(--mainColor);
+    color: #fff;
+    border: 1px solid var(--mainColor);
+}
+
+.popUpStore_schedule_btn.active,
+.popUpStore_bookmark_btn.active {
+    background-color: var(--mainColor);
+    color: #fff;
+}
+
+.popUpStore_schedule_btn:not(.active),
+.popUpStore_bookmark_btn:not(.active) {
+    background-color: #fff;
+    color: var(--mainColor);
+}
+
+.popUpStore_Left ul {
+    padding: 0;
+    margin: 0;
+}
+
+.popUpStore_Left li {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 2rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    gap: 3rem;
+    border: 2px solid #d9d9d9;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.popUpStore_img_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    height: 320px;
+    padding: 1rem;
+}
+
+.popUpStore_img {
+    border-radius: 2rem;
+    border: 1px solid #d9d9d9;
+    width: 100%;
+    height: 100%;
+}
+
+.popUpStore_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.popUpStore_info_title_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popUpStore_info_title {
+    color: #000;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding-right: 2rem;
+    cursor: pointer;
+}
+
+.popUpStore_info_title:hover {
+    color: var(--mainColor);
+}
+
+.popUpStore_info_title_box i {
+    font-size: 2.8rem;
+    cursor: pointer;
+    color: var(--mainColor);
+}
+
+.popUpStore_info_title_box i.fa-solid {
+    color: var(--mainColor);
+}
+
+.popUpStore_subTitle {
+    color: var(--mainColor);
+    padding-right: 2rem;
+    font-size: 2rem;
+}
+
+.popUpStore_dates {
     display: flex;
     flex-direction: column;
 }
 
-
-.date-left-date,
-.date-left-time,
-.date-left-address {
-    font-size: 17px;
-    display: flex;
+.popUpStore_date-left-date,
+.popUpStore_date-left-time,
+.popUpStore_date-left-address {
+    font-size: 1.8rem;
     color: #000;
-    font-weight: bold;
-    margin-bottom:10px;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
-.date-left-date::before,
-.date-left-time::before,
-.date-left-address::before {
-    margin-right: 5px;
-    font-size: 17px;
-    margin-bottom:10px;
+.popUpStore_date-left-date::before,
+.popUpStore_date-left-time::before,
+.popUpStore_date-left-address::before {
+    font-size: 1.8rem;
     color: #000;
-    font-weight: bold;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
-.date-left {
-    font-weight:bold;
-    font-size: 17px;
-    text-align: left;
+.popUpStore_date-left {
+    font-size: 1.8rem;
     color: #000;
-    margin-bottom:10px;
-
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
 .map {
