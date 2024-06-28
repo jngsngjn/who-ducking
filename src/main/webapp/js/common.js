@@ -22,7 +22,6 @@ Promise.all([
     loadScript("/js/board/showPage.js"),
     loadScript("/js/board/freeBoard.js"),
 
-    loadScript("/js/notice/noticePage.js"),
 ])
     .then(() => {
         console.log("All scripts loaded.");
