@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -38,7 +40,7 @@
         <span class="board-title">제목:</span>
         <span class="board-title" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}"></span>
     </div>
-    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${board.user.id == loginUserId}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${isAuthenticated || board.user.id == loginUserId}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
 </div>
 <div class="board-title-second" style="position: relative;">
     <div class="board-author-group">
@@ -51,8 +53,8 @@
                 <i class="fa-solid fa-eye"></i>
                 <span class="board-cnt" th:text="${board.viewCount}"></span>
             </div>
-            <a href="#" class="board-menu-item-report">신고<i class="fas fa-exclamation-circle"></i> </a>
-            <div class="board-show-report-modal">
+            <a href="#" class="board-menu-item-report" th:if="${isAuthenticated}">신고<i class="fas fa-exclamation-circle"></i> </a>
+            <div class="board-show-report-modal" th:if="${isAuthenticated}">
                 <h3 class="board-show-report-title">신고하기</h3>
                 <select class="board-show-report-modal-choice-reason">
                     <option value="1">a</option>
@@ -64,7 +66,7 @@
         </div>
     </div>
 </div>
-<div id="board-menu" class="board-menu-content">
+<div id="board-menu" class="board-menu-content" th:if="${isAuthenticated}">
     <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="menu-item">수정</a>
     <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
         <button type="submit" class="menu-item">삭제</button>
@@ -86,7 +88,7 @@
 
 <div class="board-bottom-line">
     <a href="/board" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</a>
-    <button class="btn-bookmark" id="board-bookmark-button" th:data-board-id="${board.id}"><i class="fa-regular fa-bookmark"></i>북마크</button>
+    <button class="btn-bookmark" id="board-bookmark-button" th:data-board-id="${board.id}" th:if="${isAuthenticated}"><i class="fa-regular fa-bookmark"></i>북마크</button>
 </div>
 <section class="comment-section">
     <hr class="comment-section-orange-line">
@@ -96,7 +98,7 @@
     </div>
 
     <div class="comment-container">
-        <form action="#" th:action="@{/board/{boardId}/comment(boardId=${board.id})}" method="post" class="comment-box">
+        <form action="#" th:action="@{/board/{boardId}/comment(boardId=${board.id})}" method="post" class="comment-box" th:if="${isAuthenticated}">
             <div class="author-bottom-group">
                 <span class="board-author-bottom"><i class="fa-solid fa-user"></i></span>
                 <span class="board-author-bottom" th:text="${nickname}"></span>
@@ -128,7 +130,7 @@
                     </div>
                 </div>
                 <span class="comment-date" th:text="${#temporals.format(comment.writeDate, 'yyyy.MM.dd HH:mm')}"></span>
-                <div class="comment-meta" th:data-comment-id="${comment.id}">
+                <div class="comment-meta" th:data-comment-id="${comment.id}" th:if="${isAuthenticated}">
                     <button class="comment-likes" onclick="toggleLike(this)">
                         <i class="fa-regular fa-thumbs-up"></i>
                     </button>

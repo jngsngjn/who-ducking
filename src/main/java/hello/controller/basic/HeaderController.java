@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static hello.entity.alarm.AlarmType.*;
+
 @RestController
 @RequiredArgsConstructor
 public class HeaderController {
@@ -57,13 +59,18 @@ public class HeaderController {
             List<AlarmDTO.AlarmResponse> alarmResponses = userAlarms.stream().map(alarm -> {
                 String message = "";
                 String link = "";
-                if (alarm.getAlarmType() == AlarmType.REQUEST) {
+                AlarmType alarmType = alarm.getAlarmType();
+                if (alarmType == REQUEST) {
                     message = "나의 건의 내역 상태가 업데이트 되었습니다.";
                     link = "/myPage/request-list?page=0&requestId=" + alarm.getRequest().getId();
                 }
-                else if (alarm.getAlarmType() == AlarmType.ANIMATION){
+                else if (alarmType == ANIMATION){
                     message = "선호 장르의 새로운 애니가 추가되었습니다.";
                     link = "/animations/" + alarm.getAnimation().getId();
+                }
+                else if (alarmType == COMMENT){
+                    message = "나의 게시글에 댓글이 작성되었습니다.";
+                    link = "/board/" + alarm.getBoard().getId();
                 }
                 return new AlarmDTO.AlarmResponse(alarm.getId(), message, link);
             }).collect(Collectors.toList());

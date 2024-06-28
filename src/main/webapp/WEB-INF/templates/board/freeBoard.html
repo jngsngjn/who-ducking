@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <!-- AOS -->
@@ -77,7 +79,7 @@
                 </div>
             </section>
         </div>
-        <div class="free-board-write-button">
+        <div class="free-board-write-button" th:if="${isAuthenticated}">
             <a href="/board/new">
                 <div class="free-board-Icon">
                     <i class="fa fa-edit"></i>

@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/playground").permitAll()
                 .requestMatchers("/animations", "/animations/*").permitAll()
                 .requestMatchers("/update-header", "/update-alarm").permitAll()
+                .requestMatchers("/board", "/board/*").permitAll()
                 .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**", "/images/**", "/image/**", "/vendor/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
