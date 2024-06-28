@@ -2,6 +2,7 @@ package hello.service.basic;
 
 import hello.entity.alarm.Alarm;
 import hello.entity.animation.Animation;
+import hello.entity.board.Board;
 import hello.entity.genre.Genre;
 import hello.entity.genre.UserGenre;
 import hello.entity.request.Request;
@@ -14,8 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static hello.entity.alarm.AlarmType.ANIMATION;
-import static hello.entity.alarm.AlarmType.REQUEST;
+import static hello.entity.alarm.AlarmType.*;
 
 @Service
 @Transactional
@@ -65,5 +65,17 @@ public class AlarmService {
             alarm.setUser(user);
             alarmRepository.save(alarm);
         });
+    }
+
+    public void commentAlarmService(Board board) {
+        User user = board.getUser();
+        if (user != null) {
+            Alarm alarm = new Alarm();
+
+            alarm.setAlarmType(COMMENT);
+            alarm.setUser(user);
+            alarm.setBoard(board);
+            alarmRepository.save(alarm);
+        }
     }
 }

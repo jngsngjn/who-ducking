@@ -1,3 +1,7 @@
+/* Container ================================================ */
+#container {
+    padding-top: 8rem;
+}
 /* Main First Section ======================================= */
 .mainFirstSection {
     display: flex;
@@ -45,6 +49,14 @@
 
 .streamingService_item {
     margin-bottom: 4rem;
+
+}
+
+.streamingService_img:hover{
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .streamingService_item:first-child {
@@ -110,7 +122,6 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.2);
 }
 
 .mv-cnt__text {
@@ -119,9 +130,17 @@
     padding: 12rem 10rem;
 }
 
+
+
 .mv-cnt__desc {
     font-size: 2rem;
     color: #fff;
+    font-weight: 900;
+    text-shadow:
+            -1px -1px 0 #989898,
+            1px -1px 0 #989898,
+            -1px  1px 0 #989898,
+            1px  1px 0 #989898;
 }
 
 .swiper-slide-active .mv-cnt__desc {
@@ -132,6 +151,12 @@
 .mv-cnt__title {
     font-size: 4rem;
     color: #fff;
+    text-shadow:
+            -1px -1px 0 #989898,
+            1px -1px 0 #989898,
+            -1px  1px 0 #989898,
+            1px  1px 0 #989898;
+
 }
 
 .swiper-slide-active .mv-cnt__title {
@@ -198,7 +223,7 @@
     font-size: 3.6rem;
     color: var(--mainColor);
     font-weight: 600;
-    margin: 0 0 0 14.5333rem;
+    margin: 0 0 0 23.9271rem;
 }
 
 .mainSecondSection_popularity_animation_box {
@@ -299,7 +324,7 @@
     font-size: 3.6rem;
     color: var(--mainColor);
     font-weight: 600;
-    margin: 0 0 0 14.5333rem;
+    margin: 0 0 0 23.9271rem;
 }
 
 .mainThirdSection_update_animation_box {
@@ -361,8 +386,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 0 0 4rem 20.5rem;
-    gap: 45.5rem;
+    margin: 0 0 4rem 25.5rem;
+    gap: 54.5rem;
 }
 
 .mainFourthSection_title_First,
@@ -373,6 +398,7 @@
     color: var(--mainColor);
     font-weight: 600;
 }
+
 .mainFourthSection_components {
     display: flex;
     justify-content: center;
@@ -438,7 +464,7 @@
 .mainFourthSection_luckydraw_text {
     position: relative;
     z-index: 1;
-    padding: 34rem 3rem;
+    padding: 39rem 3rem;
 }
 
 .mainFourthSection_luckydraw_desc {
@@ -462,7 +488,7 @@
 }
 
 .mainFourthSection_luckydraw_link {
-    margin-top: 4rem;
+    margin-top: 2rem;
     display: inline-block;
     padding: 0.8rem 1.6rem;
     background: #fff;
