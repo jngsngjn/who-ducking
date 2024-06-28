@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -120,6 +121,16 @@ public class BoardService {
     public Page<Board> getBoardsSortedByViewCount(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
         return boardRepository.findAllByOrderByViewCountDesc(pageable);
+    }
+
+    //메인 화면 자유게시판 미리보기
+    public List<Board> getBoardsSortedByViewCountFromMain(){
+        return boardRepository.findAllByOrderByViewCountAsc();
+    }
+
+    //신고 횟수 증가
+    public void incrementReportCount(Long boardId){
+        boardRepository.incrementReportCount(boardId);
     }
 
 
