@@ -177,7 +177,7 @@ public class BoardController {
             comment.setBoard(board);
             comment.setUser(loginUser);
             comment.setContent(content);
-            commentService.createComment(comment);
+            commentService.createComment(comment, board);
         }
 
         return "redirect:/board/" + boardId;
