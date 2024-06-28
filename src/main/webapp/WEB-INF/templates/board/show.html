@@ -141,7 +141,9 @@
                     <div class="comment-edit-delete-container">
                         <button type="button" class="menu-item-edit">수정</button>
                         <hr />
-                        <button type="submit" formaction="#" th:formaction="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" class="menu-item-delete">삭제</button>
+                        <form th:action="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" method="post">
+                            <button type="submit" class="menu-item-delete">삭제</button>
+                        </form>
                     </div>
                 </div>
             </li>
