@@ -57,6 +57,28 @@ function sortByReviewCount() {
 }
 
 
+// 체크박스 리스트 클릭시 체크박스 활성화
+function checkGenre(element) {
+    const genreCheckbox = element.querySelector('input[type="checkbox"]');
+    genreCheckbox.checked = !genreCheckbox.checked;
+
+    const genreId = genreCheckbox.id.replace('genre-', '');
+    const index = selectedGenres.indexOf(genreId);
+
+    if (genreCheckbox.checked) {
+        if (index === -1) {
+            selectedGenres.push(genreId);
+        }
+    } else {
+        if (index !== -1) {
+            selectedGenres.splice(index, 1);
+        }
+    }
+
+    currentPage = 1;
+    filterAnimations();
+}
+
 // 전체 페이지네이션과 장르별 페이지네이션
 let selectedGenres = [];
 let currentPage = 1;

@@ -54,6 +54,17 @@
         });
       });
     </script>
+    <style>
+      .check-genre,
+      .genre-list,
+      .genre-title-list {
+        cursor: pointer;
+      }
+
+      .genre-title-list:hover {
+      background-color: #FEC02E;
+      }
+    </style>
   </head>
   <body>
     <div th:insert="~{fragments/header :: header}"></div>
@@ -70,7 +81,7 @@
           <div class="genre-container">
             <h3 class="genre-title">장르</h3>
             <div class="genre-list-container">
-              <div th:each="genre: ${genreLists}" class="genre-title-list">
+              <div th:each="genre: ${genreLists}" class="genre-title-list" onclick="checkGenre(this)">
                 <input  type="checkbox" id="genre" class="genre-list" th:id="'genre-' + ${genre.id}"/>
                 <label for="genre" class="check-genre" th:text="${genre.name}">
                 </label>
