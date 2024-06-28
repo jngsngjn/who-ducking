@@ -37,6 +37,26 @@
 
 }
 
+/*************** 장르 컨테이너 관련  *****************/
+
+.check-genre,
+.genre-list,
+.genre-title-list {
+  cursor: pointer;
+}
+
+.check-genre,
+.genre-title-list{
+  padding-left: 0.5rem;
+}
+.genre-title-list {
+  border-radius: 0.5rem;
+}
+
+.genre-title-list:hover {
+  background-color: #FEC02E;
+}
+
 .genre-title{
   position:sticky;
   top:0;
@@ -132,6 +152,8 @@
   margin: 0;
   position:relative;
   overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 2.1rem;
 }
 
 .ani-list-title-container{
@@ -142,13 +164,14 @@
   text-align: center;
   color:black;
   bottom: -5rem;
-  border-radius:10px 10px 0 0;
+  /*border-radius:10px 10px 0 0;*/
   line-height: 4rem;
   transition: bottom 0.3s ease;
 }
 
 .ani-info-container:hover .ani-list-title-container {
-  bottom: -0.3rem;
+  /*bottom: -0.2rem;*/
+  bottom:0.2rem;
 }
 
 .row-list-container {
@@ -168,10 +191,11 @@
 }
 
 .img-container {
-  border-radius: 1.875rem;
+  border-radius: 1.1rem;
   overflow: hidden;
   cursor: pointer;
-  height:26rem;
+  /*height:26rem;*/
+  height: 25.4rem;
 }
 
 .ani-poster {
@@ -228,6 +252,14 @@
   margin: 1rem;
 }
 
+
+i.fa-solid.fa-angle-left.page-btn,
+i.fa-solid.fa-angles-left.page-btn,
+i.fa-solid.fa-angle-right.page-btn,
+i.fa-solid.fa-angles-right.page-btn{
+  display: flex;
+}
+
 .page-btn,
 .page-number {
   margin: 0 0.5rem;
@@ -251,13 +283,6 @@
   border-radius:50%;
   background-color: #ff8b00;
   color:#FFFFFF;
-}
-
-i.fa-solid.fa-angle-left.page-btn,
-i.fa-solid.fa-angles-left.page-btn,
-i.fa-solid.fa-angle-right.page-btn,
-i.fa-solid.fa-angles-right.page-btn{
-  display: flex;
 }
 
 .fa-comment:before{
@@ -303,5 +328,8 @@ i.fa-solid.fa-angles-right.page-btn{
   .ani-list-container {
     width: 100%;
   }
+}
 
+.genre-id {
+  display: none;
 }

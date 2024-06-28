@@ -7,12 +7,14 @@ import hello.entity.user.User;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewRepository;
 import hello.repository.db.UserRepository;
+import hello.service.basic.ExpService;
 import hello.service.basic.PointService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,40 +27,43 @@ public class ReviewService {
     private final AnimationRepository animationRepository;
     private final UserRepository userRepository;
     private final PointService pointService;
+    private final ExpService expService;
 
     public void addReview(AniReviewDTO aniReviewDTO, User user) {
-
         Optional<Animation> animationOpt = animationRepository.findById(aniReviewDTO.getAnimationId());
         Optional<User> userOpt = userRepository.findById(aniReviewDTO.getUserId());
 
-        if (animationOpt.isPresent() && userOpt.isPresent()) {
-            Review review = new Review();
-            review.setAnimation(animationOpt.get());
-            review.setUser(userOpt.get());
-            review.setContent(aniReviewDTO.getContent());
-            review.setScore(aniReviewDTO.getScore());
-            review.setSpoiler(aniReviewDTO.getIsSpoiler());
+        if (animationOpt.isEmpty()) {
+            throw new IllegalArgumentException("Animation id: " + aniReviewDTO.getAnimationId() + " not found.");
+        }
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("user id: " + aniReviewDTO.getUserId() + " not found");
+        }
 
-            reviewRepository.save(review);
+        LocalDate today = LocalDate.now();
+        long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
-            int currentReviewCount = user.getReviewCount();
+        if (reviewCountToday >= 3) {
+            throw new ReviewLimitExceed("하루에 리뷰는 세번만 작성 할 수 있습니다.");
+        }
 
-            if (currentReviewCount == 0) {
-                pointService.increasePoint(user, 3);
-            } else {
-                pointService.increasePoint(user, 1);
-            }
+        Review review = new Review();
+        review.setAnimation(animationOpt.get());
+        review.setUser(userOpt.get());
+        review.setContent(aniReviewDTO.getContent());
+        review.setScore(aniReviewDTO.getScore());
+        review.setSpoiler(aniReviewDTO.getIsSpoiler());
 
-            user.setReviewCount(currentReviewCount + 1);
-            userRepository.save(user);
+        int currentReviewCount = user.getReviewCount();
+        user.setReviewCount(currentReviewCount + 1);
+        reviewRepository.save(review);
+
+        if (reviewCountToday == 0) {
+            pointService.increasePoint(user, 5);
+            expService.increaseExp(user, 5);
         } else {
-            System.out.println("Animation or User not found");
-            if (animationOpt.isEmpty()) {
-                System.out.println("애니메이션 id : " + aniReviewDTO.getAnimationId());
-            }
-            if (userOpt.isEmpty()) {
-                System.out.println("유저 id가: " + aniReviewDTO.getUserId());
-            }
+            pointService.increasePoint(user, 1);
+            expService.increaseExp(user, 3);
         }
     }
 
@@ -66,10 +71,10 @@ public class ReviewService {
     public Review findById(Long id) {
         return reviewRepository.findById(id).orElse(null);
     }
+
     public Review save(Review review) {
         return reviewRepository.save(review);
     }
-
 
     // @ 리뷰 삭제
     public void deleteReview(long reviewId) {
@@ -79,10 +84,12 @@ public class ReviewService {
             Review review = reviewOpt.get();
             User user = review.getUser();
 
-            user.setReviewCount(user.getReviewCount() - 1);
-            userRepository.save(user);
+            // 리뷰를 전부 지울경우 또다시 5포인트를 받게됨 -> 1.첫 리뷰 boolean을 만든다 vs 2.user가 작성했다는 기록은 남겨두고 이름만 익명으로 바꾼다.
+            // user.setReviewCount(user.getReviewCount() - 1);
+            //userRepository.save(user);
 
             reviewRepository.deleteById(reviewId);
+
         } else {
             System.out.println("Review not found for id: " + reviewId);
         }
@@ -100,5 +107,13 @@ public class ReviewService {
 
     public int getReviewCount(Animation animation) {
         return reviewRepository.findReviewCount(animation);
+    }
+
+
+    // 리뷰 작성 횟수 제한
+    public static class ReviewLimitExceed extends RuntimeException {
+        public ReviewLimitExceed(String message) {
+            super(message);
+        }
     }
 }

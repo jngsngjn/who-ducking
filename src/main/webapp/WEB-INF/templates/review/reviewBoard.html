@@ -49,6 +49,9 @@
         });
       });
     </script>
+    <style>
+
+    </style>
   </head>
   <body>
     <div th:insert="~{fragments/header :: header}"></div>
@@ -65,7 +68,7 @@
           <div class="genre-container">
             <h3 class="genre-title">장르</h3>
             <div class="genre-list-container">
-              <div th:each="genre: ${genreLists}" class="genre-title-list">
+              <div th:each="genre: ${genreLists}" class="genre-title-list" onclick="checkGenre(this)">
                 <input  type="checkbox" id="genre" class="genre-list" th:id="'genre-' + ${genre.id}"/>
                 <label for="genre" class="check-genre" th:text="${genre.name}">
                 </label>
@@ -80,6 +83,8 @@
                      alt="애니 포스터"
                      class="ani-poster"
                 />
+              <h4 th:text="${animation.genreId1}" class="genre-id"></h4>
+              <h4 th:text="${animation.genreId2}" class="genre-id"></h4>
                 <div id="animation-id">[[${animation.animationId}]]</div>
               </div>
               <div class="row-info-container">
@@ -110,5 +115,6 @@
         ></i>
       </div>
     <div th:insert="~{fragments/footer :: footer}"></div>
+
   </body>
 </html>
