@@ -22,6 +22,7 @@
 @import url(./playground/Playground.css);
 @import url(./playground/LuckyDraw.css);
 @import url(./playground/LuckyDrawDetail.css);
+@import url(popup/PopUpStore.css);
 
 @import url(./playground/LuckyMain.css);
 @import url(./board/boardList.css);

@@ -5,11 +5,6 @@
     background-size: 100% 40%;
 }
 
-/* Container ================================================ */
-#container {
-    padding-top: 8rem;
-}
-
 /* Section 1 */
 .luckyDrawDetail {
     padding-bottom: 5rem;
@@ -355,7 +350,7 @@
 .luckyDrawDetail_notice {
     list-style-type: none;
     font-size: 2rem;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 5rem;
 }
 

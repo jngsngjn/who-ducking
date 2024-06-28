@@ -228,7 +228,7 @@
   margin: 1rem;
 }
 
-i,
+.page-btn,
 .page-number {
   margin: 0 0.5rem;
 }
@@ -253,7 +253,10 @@ i,
   color:#FFFFFF;
 }
 
-i.fa-solid{
+i.fa-solid.fa-angle-left.page-btn,
+i.fa-solid.fa-angles-left.page-btn,
+i.fa-solid.fa-angle-right.page-btn,
+i.fa-solid.fa-angles-right.page-btn{
   display: flex;
 }
 

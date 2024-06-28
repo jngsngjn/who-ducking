@@ -1,12 +1,134 @@
-body {
-    background: #fff;
-    height: 960px;
-    margin: 10rem 0px;
+.roulette {
+    padding-bottom: 12rem;
 }
 
-canvas {
-    margin-top: 40px;
+.roulette_banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem auto;
 }
+
+.roulette_container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.roulette_side_img.left_img {
+    max-width: 300px;
+    height: 400px;
+    align-self: flex-end;
+}
+
+.roulette_side_img.right_img {
+    max-width: 300px;
+    height: 400px;
+    align-self: flex-end;
+}
+
+.roulette_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    margin: 2rem 0;
+}
+
+.roulette_canvas {
+    margin-top: 4rem;
+}
+
+.roulette_spin_btn {
+    color: #000;
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 3px 3px 6px #c5c5c5, -6px -6px 12px #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    border: 1px solid #ff8b00;
+}
+
+.roulette_spin_btn:before {
+    content: "";
+    width: 100%;
+    height: 0;
+    border-radius: 30em;
+    background-image: linear-gradient(to top, #ff8b00 0%, #ffc60b 100%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: height 0.3s ease;
+}
+
+.roulette_spin_btn:hover:before {
+    height: 100%;
+}
+
+.roulette_spin_btn:hover {
+    color: #fff;
+}
+
+.roulette_notice_box {
+    border-top: 1px solid #000;
+    padding-top: 5rem;
+    text-align: left;
+    font-size: 20px;
+    line-height: 6rem;
+    width: 100%;
+}
+
+.roulette_notice_title {
+    font-size: 3.2rem;
+    color: var(--mainColor);
+}
+
+.roulette_notice_list {
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
+
+.roulette_notice {
+    list-style-type: none;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 5rem;
+}
+
+.roulette_notice:last-child {
+    margin-bottom: 0;
+}
+
+.roulette_notice::before {
+    content: "•";
+    color: var(--mainColor);
+    font-size: 3.6rem;
+    font-weight: 900;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 2rem;
+    width: 1rem;
+    margin-left: -2rem;
+    margin-right: 1rem;
+}
+
+.roulette_notice::marker {
+    color: var(--mainColor);
+}
+
+/* =================================================== */
 
 .header-content {
     display: flex;
@@ -18,7 +140,7 @@ canvas {
 }
 
 .title-wheel {
-    color: #FF8B00;
+    color: #ff8b00;
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -41,12 +163,12 @@ canvas {
 }
 
 .spin-button {
-    color:#000;
+    color: #000;
     width: 200px;
     height: 50px;
     border-radius: 30px;
     font-size: 15px;
-    font-weight:bold;
+    font-weight: bold;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -55,15 +177,15 @@ canvas {
     cursor: pointer;
     transition: all 0.3s ease;
     margin: 10px;
-    border:1px solid #FF8B00;
+    border: 1px solid #ff8b00;
 }
 
 .spin-button:before {
-    content: '';
+    content: "";
     width: 100%;
     height: 0;
     border-radius: 30em;
-    background-image: linear-gradient(to top, #FF8B00 0%, #FFC60B 100%);
+    background-image: linear-gradient(to top, #ff8b00 0%, #ffc60b 100%);
     position: absolute;
     bottom: 0;
     left: 0;
@@ -77,9 +199,7 @@ canvas {
 
 .spin-button:hover {
     color: #fff;
-
 }
-
 
 #menu {
     width: 100%;
@@ -132,21 +252,6 @@ canvas {
     max-width: 300px;
     height: 400px;
     align-self: flex-end;
-}
-
-.notice-title {
-    color: #febf00;
-    font-weight: bold;
-    font-size: 3rem;
-}
-
-.notice {
-    border-top: 1px solid #000;
-    padding-top: 1rem;
-    text-align: left;
-    font-size: 20px;
-    line-height: 6rem;
-    width: 80%;
 }
 
 .button-canvas {

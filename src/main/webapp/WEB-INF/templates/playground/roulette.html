@@ -2,7 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
+
+    <!-- Favicons -->
     <link rel="icon" href="/images/10duck.ico">
     <link rel="stylesheet" href="/css/playground/Roulette.css">
     <!-- Swiper -->
@@ -27,34 +31,56 @@
 </head>
 
 <body>
-<div th:insert="~{fragments/header :: header}"></div>
-<div class="header-content">
-    <span class="title-wheel">룰렛</span>
-    <img src="/images/Roulette/wheelImg.png" class="event-image">
-</div>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
 
-<div id="menu">
-    <div class="bottom-image-container">
-        <img src="/images/Roulette/left.png" class="side-image left-image">
-        <div class="canvas-container">
-            <canvas width="400" height='400'></canvas>
-            <div class="button-canvas">
-                <button id="spin-button" class="spin-button" onclick="rotate()">2P로 룰렛 돌리기</button>
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <h2 class="subTitle">룰렛</h2>
             </div>
-        </div>
-        <img src="/images/Roulette/right.png" class="side-image right-image">
-    </div>
+        </section>
 
-    <div class="notice">
-        <span class="notice-title">유의 사항</span>
-        <ul>
-            <li>본 룰렛 이벤트는 Who's DuckKing 회원 전용 이벤트입니다.</li>
-            <li>룰렛으로 당첨된 포인트는 즉시 지급됩니다.</li>
-            <li>부당한 방법으로 참여한 고객의 경우 포인트 회수 및 추후 이벤트에 불이익이 발생할 수 있습니다.</li>
-        </ul>
-    </div>
-</div>
-<div th:insert="~{fragments/footer :: footer}"></div>
-<script src="/js/playground/roulette.js"></script>
+        <!-- Sub Component : Roulette -->
+        <section class="roulette">
+            <div class="inner_box" data-aos="fade-up">
+                <!-- 1. Banner -->
+                <div class="roulette_banner">
+                    <img src="/images/Roulette/rouletteBanner.png" alt="룰렛 배너" />
+                </div>
+
+                <!-- 2. Roulette -->
+                <div class="roulette_container">
+                    <img src="/images/Roulette/left.png"
+                         class="roulette_side_img left_img" />
+                    <div class="roulette_main">
+                        <canvas width="400" height="400" class="roulette_canvas"></canvas>
+                        <div class="roulette_btn">
+                            <button id="spin-button" class="roulette_spin_btn" onclick="rotate()">2P로 룰렛
+                                돌리기</button>
+                        </div>
+                    </div>
+                    <img src="/images/Roulette/right.png"
+                         class="roulette_side_img right_img" />
+                </div>
+
+                <!-- 3. Notice -->
+                <div class="roulette_notice_box">
+                    <h2 class="roulette_notice_title">유의 사항</h2>
+                    <ul class="roulette_notice_list">
+                        <li class="roulette_notice">본 룰렛 이벤트는 Who's DuckKing 회원 전용 이벤트입니다.</li>
+                        <li class="roulette_notice">룰렛으로 당첨된 포인트는 즉시 지급됩니다.</li>
+                        <li class="roulette_notice">부당한 방법으로 참여한 회원의 경우 포인트 회수 및 추후 이벤트에 불이익이 발생할 수 있습니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+    <script src="/js/playground/roulette.js"></script>
 </body>
 </html>
