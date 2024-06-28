@@ -152,6 +152,9 @@ public class BoardController {
         response.put("bookmarked", bookmarked);
         return response;
     }
+//    //신고
+//    @PostMapping("/{boardId}/report")
+//
 
     //댓글 컨트롤러
 

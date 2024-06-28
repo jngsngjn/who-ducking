@@ -1,14 +1,14 @@
 .btn-bookmark {
     font-size: 20px;
-        margin: 10px 0;
-        padding: 8px 16px;
-        width: 120px;
-        border-radius: 15px;
-        background-color: #FF8B00;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    margin: 10px 0;
+    padding: 8px 16px;
+    width: 120px;
+    border-radius: 15px;
+    background-color: #FF8B00;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-bookmark i {
@@ -18,7 +18,7 @@
 .btn-bookmark:hover {
     background-color: #FFC60B;
 }
-.btn-bookmark.bookmarked{
+.btn-bookmark.bookmarked {
     background-color: #FFC60B ;
 }
 .board-container {
@@ -552,28 +552,27 @@
 
 
 .menu-item-edit{
-                   width: 100%;
-                   height: 49%;
-                   border-radius: 20px;
-                   border: none;
-                   font-size: 1.5rem;
-                   cursor: pointer;
-               }
+    width: 100%;
+    height: 49%;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
 
 .menu-item-delete {
-                      display:flex;
-                      width: 100%;
-                      height: 49%;
-                      border-radius: 20px;
-                      border: none;
-                      font-size: 1.5rem;
-                      cursor: pointer;
-                      align-items:center;
-                      text-align:center;
-                      justify-content:center;
-                      margin-top:10px;
-
-                  }
+    display:flex;
+    width: 100%;
+    height: 49%;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    align-items:center;
+    text-align:center;
+    justify-content:center;
+    margin-top:10px;
+}
 
 .menu-item-edit:hover,
 .menu-item-delete:hover {
@@ -604,18 +603,144 @@
     background-color: #ffc60b;
 }
 
-.board-show-report-modal{
-    position: absolute;
-    display: none;
+.modal-overlay {
+    display: none; /* 초기 상태에서는 보이지 않도록 설정 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
     justify-content: center;
-    background-color: #ffffff;
-    width: 800px;
-    height: 500px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: var(--box-shadow__A);
-    top: 30%;
-    left: 30%;
-    z-index: 2000;
-
+    align-items: center;
+    z-index: 1000;
 }
+
+.board-show-report-modal {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 60rem;
+    height: 50rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.board-show-report-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: red;
+}
+
+.report-radio-group {
+    display: flex;
+    flex-direction: column;
+    width:30rem;
+    height:40rem;
+}
+
+.report-radio-label,
+.report-radio-label-other {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #FEFFDB;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.2s, border-color 0.2s;
+    color: #000;
+    cursor: pointer;
+}
+
+.report-radio-label-other:hover,
+.report-radio-label:hover {
+    background-color: #FF5555;
+}
+
+.radio-inner-circle {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid #000;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    transition: border-color 0.2s;
+    position: relative;
+}
+
+.report-radio-label:hover .radio-inner-circle,
+.report-radio-label-other:hover .radio-inner-circle {
+    border-color: rgb(233, 233, 233);
+}
+
+.report-radio-label.selected,
+.report-radio-label-other.selected {
+    background-color: #D30303;
+    border-color: #ff1111;
+    color:#fff;
+}
+
+.report-radio-label.selected .radio-inner-circle,
+.report-radio-label-other.selected .radio-inner-circle {
+    border-color: #ff1111;
+}
+
+.report-radio-label.selected .radio-inner-circle::after,
+.report-radio-label-other.selected .radio-inner-circle::after {
+    content: '';
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    background-color: #ff1111;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.board-show-report-modal-submit {
+    background-color: #b80000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.board-show-report-modal-submit:hover {
+    background-color: #ff1111;
+}
+
+.board-show-report-modal-cancel {
+    background-color: #FF8B00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.board-show-report-modal-cancel:hover {
+    background-color: #FFC60B;
+}
+
+.report-other-text {
+    display: none;
+    width: 30rem;
+    height: 20rem;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    resize:none;
+}
+
