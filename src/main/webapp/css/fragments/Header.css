@@ -207,7 +207,7 @@
     margin-left: 265px;
 }
 
-.fa-solid{
+.delete-alarm-btn > i {
     color: var(--mainColor);
     font-size: 20px;
 }
