@@ -6,7 +6,6 @@
         opacity: 1;
     }
 }
-
 /*시간나면 할 예정*/
 @keyframes twinkle {
     from {
@@ -21,8 +20,9 @@
 
 .review-body {
     width: 87.5rem; /* 1400px */
-    margin: 0 auto;
+    margin: 100 auto;
     position: relative;
+
 }
 
 button {

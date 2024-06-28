@@ -20,6 +20,8 @@ Promise.all([
 
     loadScript("/js/board/boardWritePage.js"),
     loadScript("/js/board/showPage.js"),
+    loadScript("/js/board/freeBoard.js"),
+
     loadScript("/js/notice/noticePage.js"),
 ])
     .then(() => {
