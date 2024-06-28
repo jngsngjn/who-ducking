@@ -112,11 +112,11 @@
             </div>
 
             <!-- Bottom : Pagination -->
-            <div class="myRequest_pagination_box">
+            <div class="myRequest_pagination_box" style="display: flex; align-items: center;">
                 <!-- Double Left Arrow -->
                 <a class="myRequest_pagination_btn"
                    th:classappend="${requestPage.first} ? 'disabled' : ''"
-                   th:href="@{/myPage/requests(page=${requestPage.number - 1})}">
+                   th:href="@{/myPage/requests(page=0)}">
                     <!-- Double Left Icon -->
                     <i class="fa-solid fa-angles-left"></i>
                 </a>
@@ -130,14 +130,15 @@
                 </a>
 
                 <!-- Page Number -->
-                <span th:if="${requestPage.totalPages > 0}"
-                      th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
-                                    <a th:classappend="${i == requestPage.number + 1} ? 'myRequest_pagination_now_btn' : 'myRequest_pagination_btn'"
-                                       th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}">1</a>
-                              </span>
+                <div th:if="${requestPage.totalPages > 0}" style="display: flex;">
+                    <span th:each="i : ${#numbers.sequence(((requestPage.number / 10) * 10) + 1, (((requestPage.number / 10) + 1) * 10))}">
+                        <a th:if="${i <= requestPage.totalPages}" th:classappend="${i == requestPage.number + 1} ? 'myRequest_pagination_now_btn' : 'myRequest_pagination_btn'"
+                           th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}" style="margin: 0 3px;">1</a>
+                    </span>
+                </div>
                 <span th:if="${requestPage.totalPages == 0}">
-                                    <a class="myRequest_pagination_now_btn" href="#">1</a>
-                              </span>
+                    <a class="myRequest_pagination_now_btn" href="#">1</a>
+                </span>
 
                 <!-- Right Arrow -->
                 <a class="myRequest_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
@@ -148,7 +149,7 @@
 
                 <!-- Double Right Arrow -->
                 <a class="myRequest_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
-                   th:href="@{/myPage/requests(page=${requestPage.number + 1})}">
+                   th:href="@{/myPage/requests(page=${requestPage.totalPages - 1})}">
                     <!-- Double Right Icon -->
                     <i class="fa-solid fa-angles-right"></i>
                 </a>
