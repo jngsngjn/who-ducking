@@ -10,6 +10,7 @@ import hello.entity.prize.Entry;
 import hello.entity.prize.Prize;
 import hello.entity.request.Request;
 import hello.entity.review.Review;
+import hello.entity.review.ReviewLike;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -111,6 +112,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserPopupStore> userPopupStores = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReviewLike> reviewLikes = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Alarm> alarms = new ArrayList<>();

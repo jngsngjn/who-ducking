@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/board/freeBoard.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/board" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/board/show.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/board" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/popupStore.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/review/reviewWrite.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/review" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/userInfoEdit.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/templates" />
       </map>
     </option>

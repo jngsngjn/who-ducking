@@ -19,84 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-/* @ 페이지 네이션 */
-let currentPage = 1;
-let totalAni;
-let totalPages;
-
-function renderPage(page) {
-    const aniListContainer = document.getElementById('ani-list-container');
-    const animations = aniListContainer.querySelectorAll('.ani-info-container');
-    const buttonWrapper = document.getElementById('button-wrapper');
-
-    currentPage = page;
-
-    buttonWrapper.innerHTML = '';
-
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement('li');
-        pageButton.className = 'page-number page-btn';
-        pageButton.innerText = i;
-        pageButton.onclick = () => changePage(i);
-
-        console.log(pageButton.innerText)
-        if (i === currentPage) {
-            pageButton.style.backgroundColor = '#ff8b00';
-            pageButton.style.color='white'
-        }
-
-        buttonWrapper.appendChild(pageButton);
-    }
-
-    animations.forEach(animation => {
-        animation.style.display = 'none';
-    });
-
-    const start = (page - 1) * 12;
-    const end = page * 12;
-    for (let i = start; i < end && i < animations.length; i++) {
-        animations[i].style.display = 'block';
-    }
-    window.scrollTo(0, 0);
-}
-
-function nextPage() {
-    if (currentPage < totalPages) {
-        renderPage(currentPage + 1);
-    }
-}
-
-function prevPage() {
-    if (currentPage > 1) {
-        renderPage(currentPage - 1);
-    }
-}
-
-function changePage(page) {
-    renderPage(page);
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const aniListContainer = document.getElementById('ani-list-container');
-    totalAni = aniListContainer.querySelectorAll('.ani-info-container').length;
-    totalPages = Math.ceil(totalAni / 12);
-    renderPage(currentPage);
-});
-
-
-
 // 최신순 정렬 함수
 function sortByAnimationId() {
-    console.log("최신순 정렬 버튼 클릭");
+
     const aniListContainer = document.getElementById('ani-list-container');
     const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
     const totalAniCount = arrayAnimations.length;
-    console.log(typeof totalAniCount)
-
-        console.log("최신순 정렬")
-    arrayAnimations.map(e => {
-        console.log(e)
-    })
 
     arrayAnimations.sort((a, b) => {
         let aAnimationId = parseInt(a.getAttribute('data-animation-id'), 10);
@@ -107,7 +35,6 @@ function sortByAnimationId() {
     aniListContainer.innerHTML = '';
     arrayAnimations.forEach(container => aniListContainer.appendChild(container));
 
-    renderPage(currentPage);
 }
 
 // 리뷰순 정렬 함수
@@ -115,12 +42,7 @@ function sortByReviewCount() {
 
     const aniListContainer = document.getElementById('ani-list-container');
     const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
-    const totalAniCount = arrayAnimations.length;
 
-    console.log("리뷰순 정렬")
-    arrayAnimations.map(e => {
-        console.log(e)
-    })
 
     arrayAnimations.sort((a, b) => {
         let aReviewCount = parseInt(a.getAttribute('data-review-count'), 10);
@@ -131,6 +53,148 @@ function sortByReviewCount() {
     aniListContainer.innerHTML = '';
     arrayAnimations.forEach(container => aniListContainer.appendChild(container));
 
-    renderPage(currentPage);
 }
 
+
+// 체크박스 리스트 클릭시 체크박스 활성화
+function checkGenre(element) {
+    const genreCheckbox = element.querySelector('input[type="checkbox"]');
+    genreCheckbox.checked = !genreCheckbox.checked;
+
+    const genreId = genreCheckbox.id.replace('genre-', '');
+    const index = selectedGenres.indexOf(genreId);
+
+    if (genreCheckbox.checked) {
+        if (index === -1) {
+            selectedGenres.push(genreId);
+        }
+    } else {
+        if (index !== -1) {
+            selectedGenres.splice(index, 1);
+        }
+    }
+
+    currentPage = 1;
+    filterAnimations();
+}
+
+// 전체 페이지네이션과 장르별 페이지네이션
+let selectedGenres = [];
+let currentPage = 1;
+const animationsPerPage = 12;
+let totalPages = 0;
+
+function updateURL(page) {
+    const url = new URL(window.location);
+    url.searchParams.set('page', page);
+    history.replaceState(null, '', url);
+}
+
+function filterAnimations() {
+    let animations = document.querySelectorAll('.ani-info-container');
+    let filteredAnimations = [];
+
+    if (selectedGenres.length === 0) {
+        filteredAnimations = Array.from(animations);
+    } else {
+        animations.forEach(function(animation) {
+            let genreId1 = animation.querySelector('h4:nth-of-type(1)').textContent.trim();
+            let genreId2 = animation.querySelector('h4:nth-of-type(2)').textContent.trim();
+
+            let showAnimation = selectedGenres.includes(genreId1) || selectedGenres.includes(genreId2);
+            if (showAnimation) {
+                filteredAnimations.push(animation);
+            }
+        });
+    }
+
+    animations.forEach(animation => animation.style.display = 'none');
+
+    let startIndex = (currentPage - 1) * animationsPerPage;
+    let endIndex = startIndex + animationsPerPage;
+    filteredAnimations.forEach((animation, index) => {
+        if (index >= startIndex && index < endIndex) {
+            animation.style.display = 'block';
+        }
+    });
+
+    renderPagination(filteredAnimations.length);
+    window.scrollTo(0, 0);
+    updateURL(currentPage);
+}
+
+function renderPagination(totalAnimations) {
+    let pageNumberBox = document.querySelector('.page-button-wrapper');
+    pageNumberBox.innerHTML = '';
+
+    totalPages = Math.ceil(totalAnimations / animationsPerPage);
+
+    for (let i = 1; i <= totalPages; i++) {
+        let pageButton = document.createElement('li');
+        pageButton.textContent = i;
+        pageButton.classList.add('page-number', 'page-btn');
+        if (i === currentPage) {
+            pageButton.style.backgroundColor = '#ff8b00';
+            pageButton.style.color = 'white';
+        }
+        pageButton.addEventListener('click', function() {
+            currentPage = i;
+            filterAnimations();
+        });
+        pageNumberBox.appendChild(pageButton);
+    }
+}
+
+function changePage(page) {
+    if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        filterAnimations();
+    }
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        filterAnimations();
+    }
+}
+
+function nextPage() {
+    if (currentPage < totalPages) {
+        currentPage++;
+        filterAnimations();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    let genreCheckboxes = document.querySelectorAll('.genre-list');
+
+    genreCheckboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            let genreId = checkbox.id.replace('genre-', '');
+            let index = selectedGenres.indexOf(genreId);
+
+            if (checkbox.checked) {
+                if (index === -1) {
+                    selectedGenres.push(genreId);
+                }
+            } else {
+                if (index !== -1) {
+                    selectedGenres.splice(index, 1);
+                }
+            }
+
+            currentPage = 1;
+            filterAnimations();
+        });
+    });
+
+    // 이전페이지 기억용
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = parseInt(urlParams.get('page'));
+    if (!isNaN(pageParam) && pageParam > 0) {
+        currentPage = pageParam;
+    }
+
+    filterAnimations();
+});

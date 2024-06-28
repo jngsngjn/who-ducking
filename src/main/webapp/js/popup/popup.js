@@ -7,13 +7,13 @@ $(document).ready(function() {
     loadPopupStores();
 
     // 일정순, 북마크순 버튼 클릭
-    $('.schedule-button, .bookmark-button').on('click', function() {
-        $('.schedule-button, .bookmark-button').removeClass('active');
+    $('.popUpStore_schedule_btn, .popUpStore_bookmark_btn').on('click', function() {
+        $('.popUpStore_schedule_btn, .popUpStore_bookmark_btn').removeClass('active');
         $(this).addClass('active');
 
-        if ($(this).hasClass('bookmark-button')) {
+        if ($(this).hasClass('popUpStore_bookmark_btn')) {
             displayBookmarkedStores(); // 북마크된 정보만 표시
-        } else if ($(this).hasClass('schedule-button')) {
+        } else if ($(this).hasClass('popUpStore_schedule_btn')) {
             location.reload(); // 페이지 새로고침
         } else {
             displaySearchResults(areaArr); // 전체 정보 표시
@@ -21,8 +21,8 @@ $(document).ready(function() {
     });
 
     // 검색 버튼 클릭
-    $('.search-button').on('click', function() {
-        var query = $('.search-input').val();
+    $('.popUpStore_search-button').on('click', function() {
+        var query = $('.popUpStore_search-input').val();
         if (query) {
             searchPopupStores(query);
         } else {
@@ -31,7 +31,7 @@ $(document).ready(function() {
     });
 
     // 검색 버튼 엔터키
-    $('.search-input').on('keypress', function(e) {
+    $('.popUpStore_search-input').on('keypress', function(e) {
         if (e.which == 13) {
             var query = $(this).val();
             if (query) {
@@ -50,7 +50,7 @@ $(document).ready(function() {
         }
 
         var $icon = $(this);
-        var storeTitle = $icon.closest('li').find('span').text().trim();
+        var storeTitle = $icon.closest('li').find('span.popUpStore_info_title').text().trim();
         var store = areaArr.find(function(item) {
             return item.title === storeTitle;
         });
@@ -81,9 +81,9 @@ function loadPopupStores() {
                     title: store.name,
                     lat: store.latitude,
                     lng: store.longitude,
-                    address: "장소: " + store.address,
-                    date: "기간 : " + formatDate(store.startDate) + " ~ " + formatDate(store.endDate),
-                    time: "시간: " + store.openTime + " ~ " + store.closeTime,
+                    address: store.address,
+                    date: formatDate(store.startDate) + " - " + formatDate(store.endDate),
+                    time: store.openTime + " - " + store.closeTime,
                     image: "/image/popup/" + store.imageName,
                     bookmarked: store.bookmarked || false // 서버에서 북마크 상태를 반환, 인증되지 않은 경우 기본값으로 false 사용
                 };
@@ -106,7 +106,7 @@ function initMap() {
 }
 
 function setMarkers() {
-    var resultsContainer = $('.popup-store-left-list ul');
+    var resultsContainer = $('.popUpStore_Left ul');
     resultsContainer.empty();
 
     // 마커와 인포윈도우 초기화
@@ -117,11 +117,18 @@ function setMarkers() {
         var marker = new naver.maps.Marker({
             map: map,
             title: areaArr[i].title,
-            position: new naver.maps.LatLng(areaArr[i].lat, areaArr[i].lng)
+            position: new naver.maps.LatLng(areaArr[i].lat, areaArr[i].lng),
+            icon: {
+                content: `
+                    <div style="background-color: var(--mainColor); width: 24px; height: 24px; border-radius: 50%; border: 2px solid white;"></div>
+                `,
+                anchor: new naver.maps.Point(12, 12),
+                zIndex: 100
+            }
         });
 
-        var infoWindow = new naver.maps.InfoWindow({
-            content: '<div style="width:250px;text-align:center;padding:10px;"><b>' + areaArr[i].title + '</div>'
+        var infoWindow = new naver.maps.InfoWindow ({
+           content: '<div style="width:250px;text-align:center;padding:10px;"><b>' + areaArr[i].title + '</div>'
         });
 
         markers.push(marker);
@@ -129,15 +136,24 @@ function setMarkers() {
 
         var listItem = `
             <li data-index="${i}">
-                <div class="popup-store-img-container">
-                    <img src="${areaArr[i].image}" class="popup-store-img">
+                <div class="popUpStore_img_box">
+                    <img src="${areaArr[i].image}" class="popUpStore_img">
                 </div>
-                <div class="popup-info">
-                    <span>${areaArr[i].title} ${isAuthenticated ? `<i class="${areaArr[i].bookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark icon bookmark-icon"></i>` : ''}</span>
-                    <div class="popup-dates">
-                        <div class="date-left">${areaArr[i].date}</div>
-                        <div class="date-left">${areaArr[i].time}</div>
-                        <div class="date-left">${areaArr[i].address}</div>
+                <div class="popUpStore_info">
+                    <div class="popUpStore_info_title_box">
+                        <span class="popUpStore_info_title">${areaArr[i].title}</span>
+                        ${isAuthenticated ? `<i class="${areaArr[i].bookmarked ? 'fa-solid' : 'fa-regular'} fa-bookmark icon bookmark-icon"></i>` : ''}
+                    </div>
+                    <div class="popUpStore_dates">
+                        <div class="popUpStore_date-left">
+                            <span class="popUpStore_subTitle">기간</span>${areaArr[i].date}
+                        </div>
+                        <div class="popUpStore_date-left">
+                            <span class="popUpStore_subTitle">시간</span>${areaArr[i].time}
+                        </div>
+                        <div class="popUpStore_date-left">
+                            <span class="popUpStore_subTitle">주소</span>${areaArr[i].address}
+                        </div>
                     </div>
                 </div>
             </li>
@@ -156,7 +172,7 @@ function setMarkers() {
         naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
     }
 
-    $(document).on('click', '.popup-info span', function() {
+    $(document).on('click', '.popUpStore_info span.popUpStore_info_title', function() {
         var storeTitle = $(this).text().trim();
         var store = areaArr.find(function(item) {
             return item.title === storeTitle;
@@ -211,15 +227,15 @@ function searchPopupStores(query) {
     var results = areaArr.filter(function(store) {
         return store.title.includes(query);
     });
-    displaySearchResults(results); //검색 결과
+    displaySearchResults(results); // 검색 결과
     if (results.length > 0) {
-        moveToLocation(results[0]); //위치 이동
+        moveToLocation(results[0]); // 위치 이동
     }
 }
 
 // 검색 결과 표시 함수
 function displaySearchResults(results) {
-    var resultsContainer = $('.popup-store-left-list ul');
+    var resultsContainer = $('.popUpStore_Left ul');
     resultsContainer.empty();
 
     if (results.length === 0) {
@@ -229,15 +245,24 @@ function displaySearchResults(results) {
             var bookmarkClass = store.bookmarked ? 'fa-solid' : 'fa-regular';
             var listItem = `
                 <li data-index="${index}">
-                    <div class="popup-store-img-container">
-                        <img src="${store.image}" class="popup-store-img">
+                    <div class="popUpStore_img_box">
+                        <img src="${store.image}" class="popUpStore_img">
                     </div>
-                    <div class="popup-info">
-                        <span>${store.title} ${isAuthenticated ? `<i class="${bookmarkClass} fa-bookmark icon bookmark-icon"></i>` : ''}</span>
-                        <div class="popup-dates">
-                            <div class="date-left-date" data-label="기간:">${store.date}</div>
-                            <div class="date-left-time" data-label="시간:">${store.time}</div>
-                            <div class="date-left-address" data-label="장소:">${store.address}</div>
+                    <div class="popUpStore_info">
+                        <div class="popUpStore_info_title_box">
+                            <span class="popUpStore_info_title">${store.title}</span>
+                            ${isAuthenticated ? `<i class="${bookmarkClass} fa-bookmark icon bookmark-icon"></i>` : ''}
+                        </div>
+                        <div class="popUpStore_dates">
+                            <div class="popUpStore_date-left-date" data-label="기간">
+                                <span class="popUpStore_subTitle">기간</span>${store.date}
+                            </div>
+                            <div class="popUpStore_date-left-time" data-label="시간">
+                                <span class="popUpStore_subTitle">시간</span>${store.time}
+                            </div>
+                            <div class="popUpStore_date-left-address" data-label="장소">
+                                <span class="popUpStore_subTitle">장소</span>${store.address}
+                            </div>
                         </div>
                     </div>
                 </li>
@@ -253,7 +278,7 @@ function displayBookmarkedStores() {
         return store.bookmarked;
     });
 
-    var resultsContainer = $('.popup-store-left-list ul');
+    var resultsContainer = $('.popUpStore_Left ul');
     resultsContainer.empty();
 
     if (bookmarkedStores.length === 0) {
@@ -271,8 +296,8 @@ function toggleBookmark(store, bookmarked, $icon) {
         url: url,
         method: method,
         success: function() {
-            $icon.toggleClass('fa-regular', !bookmarked);
-            $icon.toggleClass('fa-solid', bookmarked);
+            $icon.toggleClass(bookmarked ? 'fa-regular' : 'fa-solid');
+            $icon.toggleClass(bookmarked ? 'fa-solid' : 'fa-regular');
         },
         error: function(error) {
             console.error('Error updating bookmark:', error);

@@ -91,12 +91,16 @@
         </label>
       </div>
     </div>
-    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content" >
+    <textarea th:name="content" id="review-content" placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다." rows="5" cols="50" class="review-content">
     </textarea>
+    <div th:if="${param.error}" class="alert alert-danger">
+      <p th:text="${param.error}"></p>
+    </div>
     <div class="letter-count" id="count">0/500</div>
     <div class="row-box review-write-box">
-      <div class="stars-container"></div>
+      <div class="stars-container">
       <input type="hidden" name="score" id="score-number" value="0"/>
+      </div>
       <input type="submit" value="등록" class="write-review-submit-btn" />
     </div>
   </form>
@@ -120,6 +124,9 @@
           <input type="hidden" th:value="${review.id}" class="review-id"/>
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
           <p th:text="${review.user.nickname}" class="review-writer"></p>
+
+<!--          <p th:text="${review.getUser() != null ? review.getUser().getNickname() : '익명의 리뷰어'}" class="review-writer"></p>-->
+
           <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
           <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
             <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
@@ -127,7 +134,12 @@
             <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
           </div>
         </div>
-        <p th:text="${review.content}" class="review-comment"></p>
+        <div class="review-comment">
+          <span th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></span>
+          <span class="extra-content" style="display: none;"></span>
+          <a href="javascript:void(0);" class="toggle-read-on">[더보기]</a>
+          <a href="javascript:void(0);" class="toggle-read-off" style="display: none;">[닫기]</a>
+        </div>
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
@@ -145,10 +157,10 @@
       <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'review-' + ${review.id}">
         <div class="row-box">
           <input type="hidden" th:value="${review.id}" class="review-id"/>
-          <input type="hidden" th:value="${review.getUser().id}"/>
+<!--          <input type="hidden" th:value="${review.getUser().id}"/>-->
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
           <p th:text="${review.user.nickname}" class="review-writer">
-            <span th:if="${iterStat.index < 3}" class="best-icon">BEST</span>
+            <span th:if="${iterStat.index < 3 && review.likeCount > 5}" class="best-icon">BEST</span>
           </p>
           <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
           <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
@@ -157,7 +169,12 @@
             <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
           </div>
         </div>
-        <p th:text="${review.content}" class="review-comment"></p>
+        <div class="review-comment">
+          <span th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></span>
+          <span class="extra-content" style="display: none;"></span>
+          <a href="javascript:void(0);" class="toggle-read-on">[더보기]</a>
+          <a href="javascript:void(0);" class="toggle-read-off" style="display: none;">[닫기]</a>
+        </div>
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">

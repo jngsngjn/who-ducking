@@ -12,7 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriUtils;
+
+import java.nio.charset.StandardCharsets;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,13 +26,26 @@ public class ReviewController {
     private final ReviewRepository reviewRepository;
     private final UserService userService;
 
-    /* POST : 리뷰 작성 */
+    /* @ POST 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
-    public String writeReview (@PathVariable long AnimationId, @ModelAttribute AniReviewDTO aniReviewDTO, @AuthenticationPrincipal CustomOAuth2User user){
+    public ResponseEntity<String> writeReview(
+            @PathVariable long AnimationId,
+            @ModelAttribute AniReviewDTO aniReviewDTO,
+            @AuthenticationPrincipal CustomOAuth2User user, Model model) {
+
         aniReviewDTO.setAnimationId(AnimationId);
         User loginUser = userService.getLoginUserDetail(user);
-        reviewService.addReview(aniReviewDTO, loginUser);
-        return "redirect:/animations/" + AnimationId;
+
+        try {
+            reviewService.addReview(aniReviewDTO, loginUser);
+            return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/animations/" + AnimationId).build();
+        } catch (ReviewService.ReviewLimitExceed e) {
+            String errorMessage = e.getMessage();
+            String encodedErrorMessage = UriUtils.encode(errorMessage, StandardCharsets.UTF_8);
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header("Location", "/animations/" + AnimationId + "?error=" + encodedErrorMessage)
+                    .build();
+        }
     }
 
     /* @ 리뷰 수정
@@ -60,13 +77,19 @@ public class ReviewController {
     }
 
     /* @ 좋아요 클릭시 요청 */
-    @PatchMapping("/reviews/{id}/like")
-    public ResponseEntity<?> likeReview(@PathVariable("id") Long id) {
+    @PatchMapping("/reviews/{reviewId}/like")
+    public ResponseEntity<?> likeReview(@PathVariable("reviewId") Long id) {
         Review reviewId = reviewRepository.findById(id).orElse(null);
         if (reviewId == null) {
             return ResponseEntity.notFound().build();
         }
+
+        reviewId.getReviewLikes().size();
+
+
         reviewId.setLikeCount(reviewId.getLikeCount() + 1);
+//        reviewId.setReviewLikes(reviewId.getReviewLikes());
+//        System.out.println(reviewId.getReviewLikes());
         reviewRepository.save(reviewId);
 
         return ResponseEntity.ok().body(reviewId.getLikeCount());
@@ -74,8 +97,8 @@ public class ReviewController {
 
 
     /* @ 싫어요 클릭시 요청 */
-    @PatchMapping("/reviews/{id}/dislike")
-    public ResponseEntity<?> dislikeReview(@PathVariable("id") Long id) {
+    @PatchMapping("/reviews/{reviewId}/dislike")
+    public ResponseEntity<?> dislikeReview(@PathVariable("reviewId") Long id) {
         Review reviewId = reviewRepository.findById(id).orElse(null);
         if (reviewId == null) {
             return ResponseEntity.notFound().build();
