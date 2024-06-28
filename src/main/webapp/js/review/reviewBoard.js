@@ -53,7 +53,6 @@ function sortByReviewCount() {
     aniListContainer.innerHTML = '';
     arrayAnimations.forEach(container => aniListContainer.appendChild(container));
 
-    renderPage(currentPage);
 }
 
 
