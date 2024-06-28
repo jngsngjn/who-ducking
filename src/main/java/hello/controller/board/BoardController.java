@@ -6,15 +6,13 @@ import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
 import hello.entity.board.Comment;
 import hello.entity.user.User;
+import hello.service.basic.UserService;
 import hello.service.board.BoardService;
 import hello.service.board.BookmarkService;
 import hello.service.board.CommentService;
-import hello.service.basic.UserService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -40,7 +38,8 @@ public class BoardController {
     @GetMapping
     public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "writeDate") String sort,
                             Model model,
-                            @RequestParam(name = "page", defaultValue = "0") int page) {
+                            @RequestParam(name = "page", defaultValue = "0") int page,
+                            @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
 
         Page<Board> boardList;
 
@@ -55,6 +54,12 @@ public class BoardController {
         model.addAttribute("sort", sort);
         model.addAttribute("currentPage", page);
         model.addAttribute("pageSize", 10);
+
+        if (oAuth2User == null) {
+            model.addAttribute("isAuthenticated", false);
+        } else {
+            model.addAttribute("isAuthenticated", true);
+        }
 
         return "/board/freeBoard";
     }
@@ -78,20 +83,26 @@ public class BoardController {
     @GetMapping("/{boardId}")
     public String showBoard(@PathVariable("boardId") Long boardId, Model model, @AuthenticationPrincipal CustomOAuth2User loginUser) {
         Board board = boardService.getBoardById(boardId).orElse(null);
-        User user = userService.getLoginUserDetail(loginUser);
 
         //null일경우 페이지 이동안함
-        if(board == null) {
+        if (board == null) {
             return "redirect:/board";
         }
 
-        List<Comment>comments = commentService.getCommentsByBoardId(boardId);
+        if (loginUser == null) {
+            model.addAttribute("isAuthenticated", false);
+        } else {
+            model.addAttribute("isAuthenticated", true);
+            User user = userService.getLoginUserDetail(loginUser);
+            model.addAttribute("loginUserId", user.getId());
+            model.addAttribute("isBookmarked", bookmarkService.isBookmarked(user, board));
+            model.addAttribute("nickname", user.getNickname());
+        }
+
+        List<Comment> comments = commentService.getCommentsByBoardId(boardId);
 
         model.addAttribute("board", board);
         model.addAttribute("comments", comments);
-        model.addAttribute("loginUserId", user.getId());
-        model.addAttribute("isBookmarked", bookmarkService.isBookmarked(user, board));
-        model.addAttribute("nickname", user.getNickname());
         return "board/show";
     }
 
