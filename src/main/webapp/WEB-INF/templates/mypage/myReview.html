@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/mypage/MyPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Who's DucKing</title>
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+    <link rel="stylesheet" href="/css/mypage/myReview.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body class="myReview_body">
+<div th:insert="~{fragments/header :: header}"></div>
+<!-- Container -->
+<main id="container" class="myReview_main">
+
+    <ul class="myReview_head-title">
+        <li>
+            <h2 class="myReview_h2">나의 리뷰</h2>
+        </li>
+        <li>
+            <button class="myReview_filter">최신 순</button>
+            <button class="myReview_filter2">리뷰 순</button>
+        </li>
+    </ul>
+    <div class="myReview_menulist">
+        <div class="myReview_menu">
+            <ul>
+                <li class="myReview_menuli">
+                    <a href="" class="myReview_now">나의 리뷰</a>
+                </li>
+                <div class="myReview_line"></div>
+                <li class="myReview_menuli">
+                    <a href="">나의 게시글</a>
+                </li>
+                <div class="myReview_line"></div>
+                <li class="myReview_menuli">
+                    <a href="">나의 건의 내역</a>
+                </li>
+                <div class="myReview_line"></div>
+                <li class="myReview_menuli">
+                    <a href="">나의 북마크</a>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="myReview_ul">
+            <ul class="myReview_content">
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+                <li class="myReview_ani">
+                    <div class="mainThirdSection_update_animation_img">
+                        <a href="https://www.netflix.com/browse">
+                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
+                        </a>
+                        <div class="myReview_bot">
+                            <div class="myReview_comment">
+                                <i class="fa-solid fa-comment"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 1,580
+                            <div class="myReview_star">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <!-- 실제 데이터 --> 4.7 / 5.0
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </ul>
+
+<!--        <div class="myReview_next">-->
+<!--            <a class="myReview_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''"-->
+<!--               th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>-->
+<!--            <a class="myReview_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''"-->
+<!--               th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>-->
+<!--            <span th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">-->
+<!--                    <a th:classappend="${i == requestPage.number + 1} ? 'myReview_now-button' : 'myReview_next-button'"-->
+<!--                       th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>-->
+<!--                </span>-->
+<!--            <a class="myReview_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''"-->
+<!--               th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>-->
+<!--            <a class="myReview_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''"-->
+<!--               th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>-->
+<!--        </div>-->
+    </div>
+</main>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

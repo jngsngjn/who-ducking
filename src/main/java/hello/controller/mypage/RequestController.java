@@ -21,7 +21,7 @@ public class RequestController {
     private final UserService userService;
     private final RequestService requestService;
 
-    @GetMapping("/request-list")
+    @GetMapping("/requests")
     public String requestListOrDetail(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                                       @RequestParam(name = "requestId", required = false) Long requestId) {
         Page<MyRequestDTO> requestPage = requestService.getMyRequest(page, 5);
@@ -33,12 +33,12 @@ public class RequestController {
     public String request(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute RequestDTO requestDTO) {
         User loginUser = userService.getLoginUserDetail(user);
         requestService.writeRequest(requestDTO, loginUser);
-        return "redirect:/myPage/request-list";
+        return "redirect:/myPage/requests";
     }
 
     @PostMapping("/request-delete")
     public String deleteRequest(@RequestParam("requestId") Long requestId) {
         requestService.deleteRequest(requestId);
-        return "redirect:/myPage/request-list";
+        return "redirect:/myPage/requests";
     }
 }

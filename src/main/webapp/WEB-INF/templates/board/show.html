@@ -53,7 +53,7 @@
                 <i class="fa-solid fa-eye"></i>
                 <span class="board-cnt" th:text="${board.viewCount}"></span>
             </div>
-            <a href="#" class="board-menu-item-report">신고<i class="fas fa-exclamation-circle"></i> </a>
+            <a href="#" class="board-menu-item-report" th:if="${isAuthenticated}">신고<i class="fas fa-exclamation-circle"></i> </a>
         </div>
     </div>
 </div>
