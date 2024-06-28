@@ -80,12 +80,15 @@
                                             <span th:text="${loginUser.getPoint()} + 'P'">50000P</span>
                                         </div>
                                     </div>
-                                    <div>
+                                    <span th:if="${loginUser.getLevel().getId() == 10}" class="mypage_profile_level">
+                                            최대 레벨입니다!
+                                    </span>
+                                    <div th:if="${loginUser.getLevel().getId() != 10}">
                                         <span class="mypage_profile_exp_point"
                                               th:text="${loginUser.getCurrentExp()} + ' / ' + ${loginUser.getLevel().getMaxExp()} + ' EXP'">16
                                             / 20 EXP</span>
                                     </div>
-                                    <div class="mypage_profile_exp_track">
+                                    <div class="mypage_profile_exp_track" th:if="${loginUser.getLevel().getId() != 10}">
                                         <div class="mypage_profile_exp_thumb"
                                              th:style="'width:' + (${loginUser.getLevel().getMaxExp()} > 0 ? (${loginUser.getCurrentExp()} / ${loginUser.getLevel().getMaxExp()} * 100) : 0) + '%;'">
                                         </div>

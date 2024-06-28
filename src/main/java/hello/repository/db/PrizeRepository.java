@@ -42,6 +42,6 @@ public interface PrizeRepository extends JpaRepository<Prize, Long> {
     @Query("select new hello.dto.playground.prize.PrizeOneDTO(p.id, p.name, p.startDate, p.endDate, p.imageName) from Prize p where p.id = :id")
     PrizeOneDTO findPrizeOneById(@Param("id") Long id);
 
-    @Query(value = "SELECT * FROM prize WHERE end_date > CURRENT_DATE ORDER BY RAND() LIMIT 6", nativeQuery = true)
-    List<Prize> findRandomPrizes();
+    @Query(value = "SELECT * FROM prize WHERE end_date > CURRENT_DATE AND id != :prizeId ORDER BY RAND() LIMIT 6", nativeQuery = true)
+    List<Prize> findRandomPrizes(@Param("prizeId") Long prizeId);
 }

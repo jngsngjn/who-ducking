@@ -55,24 +55,24 @@
                 <!-- Global Navigation Bar -->
                 <ul class="h-gnb_items">
                     <li>
-                        <a href="/animations">애니</a>
+                        <a class="header-list-a" data-hover="애니" href="/animations"><span class="header-list">애니</span></a>
                     </li>
                     <li>
-                        <a href="/board">커뮤니티</a>
+                        <a class="header-list-a" data-hover="커뮤니티" href="/board"><span class="header-list">커뮤니티</span></a>
                     </li>
                     <li>
-                        <a href="/popup">팝업</a>
+                        <a class="header-list-a" data-hover="팝업" href="/popup-store"><span class="header-list">팝업</span></a>
                     </li>
                     <li>
-                        <a href="/playground">놀이터</a>
+                        <a class="header-list-a" data-hover="놀이터" href="/playground"><span class="header-list">놀이터</span></a>
                     </li>
                     <!-- Alarm Dropdown -->
                     <div class="h-alarm">
-                        <div class="h-alarm_btn" sec:authorize="isAuthenticated()">
+                        <div id="h-alarm_btn" class="h-alarm_btn" sec:authorize="isAuthenticated()">
                             <li>
-                                <a href="#none">
+                                <a class="alarm_btn" id="alarm_btn">
                                     알림
-                                    <!-- <span class="h-alarm_count">12</span> -->
+                                     <span class="h-alarm_count" id="alarm_count"></span>
                                 </a>
                             </li>
                         </div>
@@ -81,34 +81,13 @@
                             <li>
                                 <a href="/login" style="color: var(--mainColor)">
                                     로그인
-                                    <!-- <span class="h-alarm_count">12</span> -->
                                 </a>
                             </li>
                         </div>
 
                         <!-- Alarm List -->
-                        <ul class="h-alarm_list" sec:authorize="isAuthenticated()">
-                            <!-- Alarm X -->
-                            <li>
-                                <a href="#none">알림이 없습니다.</a>
-                            </li>
-                            <!-- Alarm O -->
-                            <li>
-                                <a href="#none">
-                                    ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#none">
-                                    ~~ 건의에 대한 답변이 등록되었습니다.
-                                </a>
-                            </li>
-                            <!-- 리스트 추가 시, 양식대로 추가
-                            <li>
-                                <a href="#none">
-
-                                </a>
-                            </li> -->
+                        <ul id="h-alarm_list" class="h-alarm_list" sec:authorize="isAuthenticated()">
+                            <!-- JS로 동적으로 추가 -->
                         </ul>
                     </div>
                 </ul>
@@ -138,11 +117,14 @@
                                 <span th:text="${session.point} + 'P'" id="point"></span>
                             </div>
                         </div>
-                        <div>
+                        <div th:if="${session.level != 10}">
                             <span class="h-profile_menu_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'EXP'"></span>
                         </div>
-                        <div class="h-profile_exp_track">
+                        <div th:if="${session.level != 10}" class="h-profile_exp_track">
                             <div class="h-profile_exp_thumb" th:style="'width:' + (${session.currentExp} > 0 ? (${session.currentExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
+                        </div>
+                        <div th:if="${session.level == 10}" class="max-level-message">
+                            최대 레벨입니다!
                         </div>
                     </li>
                     <li>
@@ -209,7 +191,7 @@
                                 <div class="h-mobile_alarm">
                                     <div class="h-mobile_alarm-btn">
                                         <li>
-                                            <a href="#none">
+                                            <a>
                                                 알림
                                                 <!-- <span class="h-mobile_alarm_count">12</span> -->
                                             </a>
@@ -255,7 +237,7 @@
                                     <a href="/board">커뮤니티</a>
                                 </li>
                                 <li>
-                                    <a href="/popup">팝업</a>
+                                    <a href="/popup-store">팝업</a>
                                 </li>
                                 <li>
                                     <a href="/playground">놀이터</a>

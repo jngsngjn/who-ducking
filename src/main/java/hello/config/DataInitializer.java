@@ -146,7 +146,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
             levels.add(new Level(1300, level7));
             levels.add(new Level(3200, level8));
             levels.add(new Level(8700, level9));
-            levels.add(new Level(20000, level10));
+            levels.add(new Level(0, level10));
 
             levelRepository.saveAll(levels);
         }

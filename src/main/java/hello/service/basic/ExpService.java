@@ -15,6 +15,12 @@ public class ExpService {
     private final LevelRepository levelRepository;
 
     public void increaseExp(User user, int exp) {
+
+        // 최대 레벨 : 10
+        if (user.getLevel().getId().equals(10L)) {
+            return;
+        }
+
         int currentExp = user.getCurrentExp();
         int totalExp = currentExp + exp;
         int maxExp = user.getLevel().getMaxExp();
