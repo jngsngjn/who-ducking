@@ -212,7 +212,6 @@
   border-radius: 1.1rem;
   overflow: hidden;
   cursor: pointer;
-  /*height:26rem;*/
   height: 25.4rem;
 }
 
@@ -268,6 +267,11 @@
   align-items: center;
   justify-content: center;
   margin: 1rem;
+}
+
+.page-align-row-box{
+  display: flex;
+  justify-content: center;
 }
 
 

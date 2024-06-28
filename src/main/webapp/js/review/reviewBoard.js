@@ -94,8 +94,6 @@ function filterAnimations() {
     let animations = document.querySelectorAll('.ani-info-container');
     let filteredAnimations = [];
 
-
-
     if (selectedGenres.length === 0) {
         filteredAnimations = Array.from(animations);
     } else {
@@ -111,17 +109,19 @@ function filterAnimations() {
     }
 
     // 장르에 일치하는 애니가 없을 경우 보여줄 요소
-    if (filteredAnimations.length === 0) {
-        let emptyContainer = document.getElementById('empty-container');
-        // let pageBtnBox = document.getElementById('page-btn-box');
-        emptyContainer.style.display = "block";
-        // pageBtnBox.style.display="none"
-    } else {
-        let emptyContainer = document.getElementById('empty-container');
-        emptyContainer.style.display = "none";
-        // pageBtnBox.style.display="block";
-    }
+    let emptyContainer = document.getElementById('empty-container');
+    let pageBtnBox = document.getElementById('page-btn-box');
+    let orderContainer = document.querySelector('.order-container');
 
+    if (filteredAnimations.length === 0) {
+        emptyContainer.style.display = "block";
+        pageBtnBox.style.display = "none";
+        orderContainer.style.display = "none";
+    } else {
+        emptyContainer.style.display = "none";
+        pageBtnBox.style.display = "flex";
+        orderContainer.style.display = "flex";
+    }
 
     animations.forEach(animation => animation.style.display = 'none');
 
@@ -158,6 +158,7 @@ function renderPagination(totalAnimations) {
         });
         pageNumberBox.appendChild(pageButton);
     }
+    updateNavigationButtons();
 }
 
 function changePage(page) {
@@ -181,6 +182,50 @@ function nextPage() {
     }
 }
 
+// 페이지에 따라 버튼 disabled -> 이게 최선입니까 ????? 아니요
+function updateNavigationButtons() {
+    let firstPageBtn = document.getElementById('to-first');
+    let prevPageBtn = document.getElementById('to-prev');
+    let nextPageBtn = document.getElementById('to-next');
+    let lastPageBtn = document.getElementById('to-end');
+
+    if (currentPage === 1) {
+        firstPageBtn.style.backgroundColor = 'lightgray';
+        firstPageBtn.style.color = '#fff';
+        prevPageBtn.style.backgroundColor = 'lightgray';
+        prevPageBtn.style.color = '#fff';
+        firstPageBtn.style.pointerEvents = 'none';
+        prevPageBtn.style.pointerEvents = 'none';
+    } else {
+        firstPageBtn.style.backgroundColor = '';
+        firstPageBtn.style.color = '';
+        prevPageBtn.style.backgroundColor = '';
+        prevPageBtn.style.color = '';
+
+        firstPageBtn.style.pointerEvents = '';
+        prevPageBtn.style.pointerEvents = '';
+    }
+
+
+    if (currentPage === totalPages) {
+        nextPageBtn.style.backgroundColor = 'lightgray';
+        nextPageBtn.style.color = '#fff';
+        lastPageBtn.style.backgroundColor = 'lightgray';
+        lastPageBtn.style.color = '#fff';
+        nextPageBtn.style.pointerEvents = 'none';
+        lastPageBtn.style.pointerEvents = 'none';
+    } else {
+        nextPageBtn.style.backgroundColor = '';
+        nextPageBtn.style.color='';
+        lastPageBtn.style.backgroundColor = '';
+        lastPageBtn.style.color='';
+        nextPageBtn.style.pointerEvents = '';
+        lastPageBtn.style.pointerEvents = '';
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     let genreCheckboxes = document.querySelectorAll('.genre-list');
 
@@ -190,10 +235,8 @@ document.addEventListener('DOMContentLoaded', function() {
             let index = selectedGenres.indexOf(genreId);
 
             if (checkbox.checked) {
-
                 if (index === -1) {
                     selectedGenres.push(genreId);
-
                 }
             } else {
                 if (index !== -1) {
