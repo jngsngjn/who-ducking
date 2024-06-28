@@ -91,6 +91,7 @@
                     <div class="myRequest_list_data_box" th:each="request : ${requestPage.content}">
                         <ul class="myRequest_list">
                             <li class="myRequest_list_title" th:text="${request.title}"
+                                th:data-title="${request.title}"
                                 th:data-content="${request.content}"
                                 th:data-status="${request.status}"
                                 th:data-request-id="${request.id}"

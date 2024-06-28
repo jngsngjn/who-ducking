@@ -1,5 +1,6 @@
 package hello.entity.user;
 
+import hello.entity.alarm.Alarm;
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
 import hello.entity.board.Comment;
@@ -110,4 +111,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserPopupStore> userPopupStores = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Alarm> alarms = new ArrayList<>();
 }

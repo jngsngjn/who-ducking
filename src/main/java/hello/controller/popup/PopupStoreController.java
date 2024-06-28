@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/popup")
 public class PopupStoreController {
 
-    @GetMapping()
+    @GetMapping
     public String popupStore(@AuthenticationPrincipal CustomOAuth2User oAuth2User,
                              Model model) {
-        model.addAttribute("isAuthenticated", oAuth2User != null);
+
+        if (oAuth2User == null) {
+            model.addAttribute("isAuthenticated", false);
+        } else {
+            model.addAttribute("isAuthenticated", true);
+        }
         return "popup/popupStore";
     }
 }

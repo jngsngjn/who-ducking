@@ -104,6 +104,10 @@
     color: var(--titleColor);
 }
 
+.alarm_btn {
+    cursor: pointer;
+}
+
 .h-alarm_list {
     position: absolute;
     top: calc(100% - 1rem);
