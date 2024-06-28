@@ -142,8 +142,8 @@
     background-color: #f0f0f0;
 }
 
-.board-menu-item {
-    font-size: 20px;
+.board-menu-item-report {
+    font-size: 25px;
     color: red;
 }
 
@@ -586,4 +586,20 @@
 .save-edit:hover,
 .cancel-edit:hover {
     background-color: #ffc60b;
+}
+
+.board-show-report-modal{
+    position: absolute;
+    display: none;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 800px;
+    height: 500px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--box-shadow__A);
+    top: 30%;
+    left: 30%;
+    z-index: 2000;
+
 }

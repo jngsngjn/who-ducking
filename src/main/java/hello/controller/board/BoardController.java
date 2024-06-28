@@ -40,30 +40,23 @@ public class BoardController {
     @GetMapping
     public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "writeDate") String sort,
                             Model model,
-                            @PageableDefault(page = 0, size = 10) Pageable pageable) {
+                            @RequestParam(name = "page", defaultValue = "0") int page) {
 
         Page<Board> boardList;
-        int nowPage;
-        int startPage;
-        int endPage;
 
         if ("viewCount".equals(sort)) {
-            boardList = boardService.getBoardsSortedByViewCount(pageable);
+            boardList = boardService.getBoardsSortedByViewCount(page, 10);
         } else {
-            boardList = boardService.getBoardsSortedByLatest(pageable);
+            boardList = boardService.getBoardsSortedByLatest(page, 10);
         }
 
-        nowPage = boardList.getPageable().getPageNumber() + 1;
-        startPage = Math.max(nowPage-4,1);
-        endPage = Math.min(nowPage+5,boardList.getTotalPages());
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("sort", sort);
-        model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", 10);
 
-        return "board/freeBoard";
+        return "/board/freeBoard";
     }
 
     //freeBoard -> 작성 폼을 띄워주는 역할
@@ -102,6 +95,13 @@ public class BoardController {
         return "board/show";
     }
 
+    //조회수 증가
+    @PostMapping("/{boardId}/incrementViewCount")
+    @ResponseBody
+    public void incrementViewCount(@PathVariable("boardId") Long boardId) {
+        boardService.updateViewCount(boardId);
+    }
+
     //게시글 수정 폼
     @GetMapping("/{boardId}/edit")
     public String showEditBoard(@PathVariable("boardId") Long boardId, Model model) {
@@ -110,7 +110,6 @@ public class BoardController {
             return "redirect:/board";
         }
         model.addAttribute("board", board);
-        System.out.println(board.getImageName());
         return "board/edit";
     }
 
@@ -119,7 +118,7 @@ public class BoardController {
     public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file) throws Exception {
         User loginUser = userService.getLoginUserDetail(user);
         boardService.updateBoard(boardId,updatedBoard,loginUser,file);
-        return "redirect:/board";
+        return "redirect:/board/"+boardId;
     }
 
     //게시글 삭제 동작
