@@ -130,23 +130,25 @@ $(document).ready(function () {
         url: '/update-alarm',
         type: 'POST',
         success: function(response) {
-            let alarmList = $('.h-alarm_list');
+            let alarmList = $('#alarm_list');
             alarmList.empty(); // 기존 알림 리스트 비우기
 
             if (response.alarmCount === 0) { // 알림이 없을 때
                 $('#alarm_count').hide();
                 alarmList.append('<li><a>알림이 없습니다.</a></li>');
-                $('#markAllRead').hide();
+                var list = document.querySelector('.h-alarm_list');
+                list.classList.replace('h-alarm_list', 'no-alarm_list');
 
+                $('#markAllRead').hide();
             } else if (response.alarms && response.alarms.length > 0) {
                 $('#alarm_count').text(response.alarmCount);
-                alarmList.append('<button id="markAllRead">모두 확인</button>')
+                alarmList.append('<button id="markAllRead" class="h-button-allcheck">모두 확인</button>')
                 $('#markAllRead').show();
 
                 response.alarms.forEach(function(alarm) {
                     let link = '<a href="' + alarm.link + '" data-id="' + alarm.id + '">' + alarm.message + '</a>';
-                    let listItem = '<li>' + link + ' <button class="delete-alarm-btn" data-id="' + alarm.id + '">X</button> </li>';
-                    alarmList.append(listItem);
+                    let listItem = '<li>' + link + ' <button class="delete-alarm-btn" data-id="' + alarm.id + '"><i class="fa-solid fa-square-xmark"></i></button> </li>';
+                    alarmList.append('<div class="h-line"></div>' + listItem);
                 });
             }
         },
@@ -185,12 +187,14 @@ $(document).on('click', '#markAllRead', function() {
         success: function() {
             $('#alarm_count').text(0);
             $('#alarm_count').hide();
-            let alarmList = $('.h-alarm_list');
+            let alarmList = $('#alarm_list');
             alarmList.empty();
             $('#markAllRead').hide();
             var headerAlarm_List = $('#h-alarm_list');
             headerAlarm_List.slideUp();
             alarmList.append('<li><a>알림이 없습니다.</a></li>');
+            var list = document.querySelector('.h-alarm_list');
+            list.classList.replace('h-alarm_list', 'no-alarm_list');
         },
         error: function() {
             console.log('알림을 삭제하는 데 실패했습니다.');
@@ -199,24 +203,29 @@ $(document).on('click', '#markAllRead', function() {
 });
 
 function deleteAlarm(alarmId) {
+
     $.ajax({
         url: '/delete-alarm',
         type: 'POST',
-        data: { id: alarmId },
-        success: function() {
+        data: {id: alarmId},
+        success: function () {
             $('a[data-id="' + alarmId + '"]').closest('li').remove();
+            var hLine = document.querySelector('.h-line');
+            hLine.remove();
             let alarmCount = parseInt($('#alarm_count').text()) - 1;
             if (alarmCount > 0) {
                 $('#alarm_count').text(alarmCount);
             } else {
                 $('#alarm_count').hide();
-                let alarmList = $('.h-alarm_list');
+                let alarmList = $('#alarm_list');
                 alarmList.empty();
                 alarmList.append('<li><a>알림이 없습니다.</a></li>');
                 $('#markAllRead').hide();
+                var list = document.querySelector('.h-alarm_list');
+                list.classList.replace('h-alarm_list', 'no-alarm_list');
             }
         },
-        error: function() {
+        error: function () {
             console.log('알림을 삭제하는 데 실패했습니다.');
         }
     });

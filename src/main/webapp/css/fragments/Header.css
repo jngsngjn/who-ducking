@@ -162,38 +162,96 @@
     color: var(--titleColor);
 }
 
+.h-alarm_list {
+    position: absolute;
+    top: calc(100% - 0rem);
+    left: 80%;
+    transform: translateX(-50%);
+    width: 360px;
+    background-color: #ffffff;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.no-alarm_list {
+    position: absolute;
+    top: calc(100% - 0rem);
+    left: 88%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 2rem 4rem;
+}
+
+.h-line{
+    border-top: 1px solid #d9d9d9;
+    width: 350px;
+    height: 1px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.h-button-allcheck{
+    background-color: var(--mainColor);
+    color: white;
+    border-radius: 1rem;
+    width: 80px;
+    margin-top: 0.5rem;
+    margin-left: 265px;
+}
+
+.fa-solid{
+    color: var(--mainColor);
+    font-size: 20px;
+}
+
+.h-alarm_list > div{
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.h-alarm_list > div > li{
+    display: flex;
+    justify-content: space-between;
+}
+
+.h-alarm_list > li:last-child {
+    margin-bottom: 100px;
+}
+
+.h-alarm_list > div > li > a {
+    font-size: 1.7rem;
+    color: black;
+}
+
+.h-alarm_list > div > li > a:hover {
+    font-weight: 500;
+    color: var(--mainColor);
+}
+
 .alarm_btn {
     cursor: pointer;
 }
 
 /* 성진 추가 */
 .alarm_btn:hover {
-}
-
-.h-alarm_list {
-    position: absolute;
-    top: calc(100% - 1rem);
-    left: 80%;
-    transform: translateX(-50%);
-    padding: 1.6rem;
-    width: 350px;
-}
-
-.h-alarm_list > li {
-    margin-bottom: 0.8rem;
-}
-
-.h-alarm_list > li:last-child {
-    margin-bottom: 0;
-}
-
-.h-alarm_list > li > a {
-    font-size: 1.4rem;
-}
-
-.h-alarm_list > li > a:hover {
-    font-weight: 500;
     color: var(--mainColor);
+}
+
+.delete-alarm-btn > i:hover {
+    color: #e37c01;
+    font-size: 20px;
+}
+
+.h-button-allcheck:hover {
+    background-color: #e37c01;
 }
 
 .h-alarm_count {

@@ -33,12 +33,12 @@ public class RequestController {
     public String request(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute RequestDTO requestDTO) {
         User loginUser = userService.getLoginUserDetail(user);
         requestService.writeRequest(requestDTO, loginUser);
-        return "redirect:/myPage/request-list";
+        return "redirect:/myPage/requests";
     }
 
     @PostMapping("/request-delete")
     public String deleteRequest(@RequestParam("requestId") Long requestId) {
         requestService.deleteRequest(requestId);
-        return "redirect:/myPage/request-list";
+        return "redirect:/myPage/requests";
     }
 }
