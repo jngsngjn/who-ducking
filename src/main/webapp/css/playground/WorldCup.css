@@ -1,4 +1,174 @@
 
+.world-modal {
+    display: none;
+    justify-content: center;
+    text-align: center;
+    padding-top: 150px;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.world-modal.show .start-modal-content,
+.world-modal.show .result-modal-content {
+    transform: translateY(0);
+}
+
+/* 시작 모달 스타일 */
+.start-modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 550px;
+    height: 500px;
+    text-align: center;
+}
+
+.start-modal-content .world-modal-title-img {
+    max-width: 100px;
+    height: auto;
+}
+
+.start-modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FF8B00;
+}
+
+.start-modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #FFC60B;
+}
+
+.start-modal-content select {
+    height: 60px;
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 결과 모달 스타일 */
+.result-modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 550px;
+    height: 700px;
+    max-width: 80%;
+    text-align: center;
+}
+
+.result-modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FF8B00;
+}
+
+.result-modal-content #finalImage {
+    width: 450px;
+    height: 350px;
+    max-width: 80%;
+    max-height: 400px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.result-modal-content #finalCaption {
+    color: #444444;
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+button.world-start, button.world-home, button.world-reset, button.world-review {
+    width: 144px;
+    height: 48px;
+    border-radius: 300px;
+    font-size: 20px;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+button.world-start:before, button.world-home:before, button.world-reset:before, button.world-review:before {
+    content: '';
+    width: 0;
+    height: 48px;
+    border-radius: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+button.world-start:before {
+    background-image: linear-gradient(to right, #FF8B00 0%, #FFC60B 100%);
+}
+
+button.world-start:hover:before {
+    width: 144px;
+}
+
+button.world-start:hover {
+    color: #fff;
+}
+
+button.world-home:before {
+    background-image: linear-gradient(to right, #3498db 0%, #8e44ad 100%);
+}
+
+button.world-home:hover:before {
+    width: 144px;
+}
+
+button.world-home:hover {
+    color: #fff;
+}
+
+button.world-reset:before {
+    background-image: linear-gradient(to right, #2ecc71 0%, #27ae60 100%);
+}
+
+button.world-reset:hover:before {
+    width: 144px;
+}
+
+button.world-reset:hover {
+    color: #fff;
+}
+
+button.world-review:before {
+    background-image: linear-gradient(to right, #FFA726 0%, #FFB74D 100%);
+}
+
+button.world-review:hover:before {
+    width: 144px;
+}
+
+button.world-review:hover {
+    color: #fff;
+}
+
+/* 기타 스타일 */
 .world-header {
     width: 100%;
     text-align: center;
@@ -21,29 +191,26 @@
     text-align: center;
     font-weight: bold;
 }
-/*=====이상형 이미지 선택 css=========*/
+
+/* 이상형 이미지 선택 css */
 .world-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding-top: 60px;
-    padding-right: 60px;
-    padding-left: 60px;
-    padding-bottom: 60px;
-
+    padding: 60px;
 }
 
 .world-image-container {
     margin: 10px;
     flex: 1;
     display: flex;
-    height:500px;
+    height: 500px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border:3px solid #FFC60B;
-    border-radius:10px;
+    border: 3px solid #FFC60B;
+    border-radius: 10px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -52,7 +219,7 @@
     max-height: 70%;
     cursor: pointer;
     border-radius: 10px;
-    filter:drop-shadow(12px 8px 10px orange);
+    filter: drop-shadow(12px 8px 10px orange);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -70,10 +237,11 @@
     font-weight: bold;
     color: #FF8B00;
     background-color: #fff;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .vs-text {
     font-size: 3em;
     font-weight: bold;
@@ -82,236 +250,9 @@
 }
 
 .world-caption {
-    color:#444444;
+    color: #444444;
     margin-top: 40px;
     font-size: 35px;
-    font-weight:400;
+    font-weight: 400;
     text-align: center;
-}
-/*===========모달창===============*/
-.world-modal {
-    display: none;
-    justify-content:center;
-    text-align:center;
-    padding-top: 150px;
-    width: 100%;
-    height: 100vh;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.world-modal-content {
-    background-color: #fff;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 550px;
-    height:500px;
-    text-align: center;
-}
-
-.world-modal-title-img {
-    max-width: 100px;
-    height: auto;
-}
-.world-modal.show .world-modal-content {
-
-    transform: translateY(0);
-}
-
-.world-modal h2 {
-    margin-bottom: 15px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #FF8B00;
-}
-
-.world-modal label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #FFC60B;
-}
-
-.world-modal select {
-    height: 60px;
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-/*============버튼 영역 인스타 릴스에서 본걸로 꾸며보기====================*/
-button.world-start { /*시작하기*/
-  width: 144px;
-  height: 48px;
-  border-radius: 300px;
-  font-size: 20px;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #fff;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 10px;
-}
-
-button.world-start:before {
-  content: '';
-  width: 0;
-  height: 48px;
-  border-radius: 300px;
-  background-image: linear-gradient(to right, #FF8B00 0%, #FFC60B 100%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: width 0.3s ease;
-}
-
-button.world-start:hover:before {
-  width: 144px;
-}
-button.world-start:hover {
-  color: #fff;
-}
-
-/* 홈페이지 */
-button.world-home {
-  width: 144px;
-  height: 48px;
-  border-radius: 300px;
-  font-size: 20px;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #fff;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 10px;
-}
-
-button.world-home:before {
-  content: '';
-  width: 0;
-  height: 48px;
-  border-radius: 300px;
-  background-image: linear-gradient(to right, #3498db 0%, #8e44ad 100%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: width 0.3s ease;
-}
-
-button.world-home:hover:before {
-  width: 144px;
-}
-button.world-home:hover {
-  color: #fff;
-}
-
-/* 다시하기 */
-button.world-reset {
-  width: 144px;
-  height: 48px;
-  border-radius: 300px;
-  font-size: 20px;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #fff;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 10px;
-}
-
-button.world-reset:before {
-  content: '';
-  width: 0;
-  height: 48px;
-  border-radius: 300px;
-  background-image: linear-gradient(to right, #2ecc71 0%, #27ae60 100%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: width 0.3s ease;
-}
-
-button.world-reset:hover:before {
-  width: 144px;
-}
-button.world-reset:hover {
-  color: #fff;
-}
-
-/* 리뷰게시판 */
-button.world-review {
-  width: 144px;
-  height: 48px;
-  border-radius: 300px;
-  font-size: 20px;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #fff;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 10px;
-}
-
-button.world-review:before {
-  content: '';
-  width: 0;
-  height: 48px;
-  border-radius: 300px;
-  background-image: linear-gradient(to right, #FFA726 0%, #FFB74D 100%);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: width 0.3s ease;
-}
-
-button.world-review:hover:before {
-  width: 144px;
-}
-button.world-review:hover {
-  color: #fff;
-}
-
-/*=========결과==========*/
-#resultModal .world-modal-content {
-    height:700px;
-    max-width: 80%;
-}
-
-#resultModal.show .world-modal-content {
-    margin-top: 0;
-}
-
-#finalImage {
-    width:450px;
-    height:350px;
-    max-width: 80%;
-    max-height: 400px;
-    object-fit: contain;
-    margin-bottom: 10px;
-}
-
-#finalCaption {
-    color:#444444;
-    font-weight:bold;
-    font-size: 2em;
-    margin-bottom: 20px;
 }
