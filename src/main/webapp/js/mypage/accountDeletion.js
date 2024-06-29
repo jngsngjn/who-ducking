@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // 메일 전송
     $("#sendCodeButton").click(function () {
-        const email = $("#emailHidden").val(); // text-> val값으로 변경
+        const email = $("#emailHidden").val();
         const button = $(this);
         button.addClass("loading");
         button.prop("disabled", true);
@@ -35,22 +35,22 @@ $(document).ready(function () {
             return;
         }
 
-        console.log("Verifying code for email:", email); // 디버깅 출력
-
         $.ajax({
             url: "/myPage/account-deletion/verifyCode-ajax",
             type: "POST",
             data: { email: email, code: code },
             success: function (response) {
-                console.log("Server response:", response); // 디버깅 출력
                 if (response) {
-                    $("form")[1].submit();
+                    var confirmation = confirm("정말로 계정을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.");
+                    if (confirmation) {
+                        $("form")[1].submit();
+                    }
                 } else {
                     alert("유효하지 않은 코드이거나 시간이 만료되었습니다.");
                 }
             },
             error: function (response) {
-                console.error("AJAX error:", response); // 디버깅 출력
+                console.error("AJAX error:", response);
                 alert("서버 오류가 발생했습니다. 나중에 다시 시도해주세요.");
             },
         });
