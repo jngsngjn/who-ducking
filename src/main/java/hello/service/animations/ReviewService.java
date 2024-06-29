@@ -1,6 +1,7 @@
 package hello.service.animations;
 
 import hello.dto.animation.AniReviewDTO;
+import hello.dto.animation.MyReviewDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.User;
@@ -12,6 +13,8 @@ import hello.service.basic.ExpService;
 import hello.service.basic.PointService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,5 +112,15 @@ public class ReviewService {
 
     public int getReviewCount(Animation animation) {
         return reviewRepository.findReviewCount(animation);
+    }
+
+    public Page<MyReviewDTO> getMyReviews(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyReviewDTO> myReviews = reviewRepository.findMyReviews(user, pageRequest);
+        for (MyReviewDTO myReview : myReviews) {
+            int reviewCounts = reviewRepository.findReviewCountByAnimationId(myReview.getAnimationId());
+            myReview.setTotalComment(reviewCounts);
+        }
+        return myReviews;
     }
 }

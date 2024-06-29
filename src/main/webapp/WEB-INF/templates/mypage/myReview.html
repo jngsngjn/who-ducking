@@ -56,26 +56,22 @@
                         <ul class="myReview_menu">
                             <!-- First Tab -->
                             <li class="myReview_menu_tab">
-                                <!-- 경로 추가 -->
-                                <a href="/" class="myReview_selected_tab">나의 리뷰</a>
+                                <a href="/myPage/reviews" class="myReview_selected_tab">나의 리뷰</a>
                             </li>
 
                             <!-- Second Tab -->
                             <li class="myReview_menu_tab">
-                                <!-- 경로 추가 -->
-                                <a href="/">나의 게시글</a>
+                                <a href="/myPage/boards">나의 게시글</a>
                             </li>
 
                             <!-- Third Tab -->
                             <li class="myReview_menu_tab">
-                                <!-- 경로 추가 -->
-                                <a href="/myPage/request-list">나의 건의 내역</a>
+                                <a href="/myPage/requests">나의 건의 내역</a>
                             </li>
 
                             <!-- Fourth Tab -->
                             <li class="myReview_menu_tab">
-                                <!-- 경로 추가 -->
-                                <a href="/">나의 북마크</a>
+                                <a href="/myPage/bookmarks">나의 북마크</a>
                             </li>
                         </ul>
                     </div>
@@ -83,30 +79,32 @@
                     <!-- Right : My Review List -->
                     <div class="myReview_list_box">
                         <!-- Data Empty -->
-                        <div th:if="" class="myReview_list_data_empty">
+                        <div th:if="${myReviews.content.isEmpty()}" class="myReview_list_data_empty">
                             <span class="myReview_list_data_empty_text">나의 리뷰가 없습니다.</span>
                         </div>
 
                         <!-- Data Exist -->
-                        <div th:if="" class="myReview_list_data_exist">
-                            <div class="myReview_list_data_box" th:each="">
-                                <ul class="myReview_list_item">
+                        <div th:if="${!myReviews.content.isEmpty()}" class="myReview_list_data_exist">
+                            <div class="myReview_list_data_box">
+                                <ul class="myReview_list_item" th:each="review : ${myReviews}">
                                     <li class="myReview_list_img_box">
-                                        <img src="/who-ducking/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
-                                             alt="애니메이션 포스터">
+                                        <a th:href="@{/animations/{animationId}(animationId=${review.animationId})}">
+                                            <img th:src="@{/image/ani/{imageName}(imageName=${review.imageName})}"
+                                                 alt="애니메이션 포스터">
+                                        </a>
                                     </li>
                                     <li class="myReview_list_info_box">
                                         <div class="myReview_list_comment">
                                             <i class="fa-solid fa-comment"></i>
-                                            <span><!-- 실제 데이터 -->50</span>
+                                            <span th:text="${review.totalComment}"><!-- 실제 데이터 -->50</span>
                                         </div>
                                         <div class="myReview_list_scoreAvg">
                                             <i class="fa-solid fa-star"></i>
-                                            <span><!-- 실제 데이터 -->4.7 / 5.0</span>
+                                            <span th:text="${review.score} + ' / 5.0'"><!-- 실제 데이터 -->4.7 / 5.0</span>
                                         </div>
                                     </li>
                                     <li class="myReview_list_title_box">
-                                        <span><!-- 실제 데이터-->주술회전</span>
+                                        <span th:text="${review.title}"><!-- 실제 데이터-->주술회전</span>
                                     </li>
                                 </ul>
                             </div>
@@ -117,43 +115,43 @@
                 <!-- Bottom : Pagination --> <!-- 타임리프 값 변경 예정 -->
                 <div class="myReview_pagination_box">
                     <!-- Double Left Arrow -->
-                    <a class="myReview_pagination_btn" th:classappend="${requestPage.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=0)}">
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=0)}">
                         <!-- Double Left Icon -->
                         <i class="fa-solid fa-angles-left"></i>
                     </a>
 
                     <!-- Left Arrow -->
-                    <a class="myReview_pagination_btn" th:classappend="${requestPage.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=${requestPage.number - 1})}">
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=${myReviews.number - 1})}">
                         <!-- Left Icon -->
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
 
                     <!-- Page Number -->
-                    <div th:if="${requestPage.totalPages > 0}" class="myReview_pageNum">
+                    <div th:if="${myReviews.totalPages > 0}" class="myReview_pageNum">
                                     <span
-                                            th:each="i : ${#numbers.sequence(((requestPage.number / 10) * 10) + 1, (((requestPage.number / 10) + 1) * 10))}">
-                                          <a th:if="${i <= requestPage.totalPages}"
-                                             th:classappend="${i == requestPage.number + 1} ? 'myReview_pagination_now_btn' : 'myReview_pagination_btn'"
-                                             th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}"
+                                            th:each="i : ${#numbers.sequence(((myReviews.number / 10) * 10) + 1, (((myReviews.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= myReviews.totalPages}"
+                                             th:classappend="${i == myReviews.number + 1} ? 'myReview_pagination_now_btn' : 'myReview_pagination_btn'"
+                                             th:href="@{/myPage/reviews(page=${i - 1})}" th:text="${i}"
                                              style="margin: 0 3px;">1</a>
                                     </span>
                     </div>
-                    <span th:if="${requestPage.totalPages == 0}">
+                    <span th:if="${myReviews.totalPages == 0}">
                                     <a class="myReview_pagination_now_btn" href="#">1</a>
                               </span>
 
                     <!-- Right Arrow -->
-                    <a class="myReview_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=${requestPage.number + 1})}">
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=${myReviews.number + 1})}">
                         <!-- Right Icon -->
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
 
                     <!-- Double Right Arrow -->
-                    <a class="myReview_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=${requestPage.totalPages - 1})}">
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=${myReviews.totalPages - 1})}">
                         <!-- Double Right Icon -->
                         <i class="fa-solid fa-angles-right"></i>
                     </a>
