@@ -44,7 +44,7 @@ public class HeaderController {
             session.setAttribute("currentExp", currentExp);
             session.setAttribute("maxExp", maxExp);
 
-            return new HeaderDTO(point);
+            return new HeaderDTO(point, currentExp, maxExp, level);
         }
         return null;
     }
