@@ -10,7 +10,7 @@ import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
 import hello.repository.db.*;
 import hello.repository.server.FileStore;
-import hello.service.exception.UserNotFoundException;
+import hello.exception.UserNotFoundException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;

@@ -233,6 +233,10 @@
     color: var(--mainColor);
 }
 
+.myRequest_pageNum {
+    display: flex;
+}
+
 .myRequest_pagination_now_btn {
     display: flex;
     align-items: center;

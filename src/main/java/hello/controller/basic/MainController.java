@@ -1,23 +1,34 @@
 package hello.controller.basic;
 
+import hello.dto.board.BoardListMainDTO;
 import hello.dto.user.CustomOAuth2User;
+import hello.entity.board.Board;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
 import hello.service.basic.UserService;
+import hello.service.board.BoardService;
+import hello.service.board.CommentService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class MainController {
 
     private final UserService userService;
+    private final BoardService boardService;
+    private final CommentService commentService;
 
     @GetMapping("/")
-    public String mainPage(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session) {
+    public String mainPage(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session, Model model) {
         if (user != null) {
 
             User loginUser = userService.getLoginUserDetail(user);
@@ -29,7 +40,6 @@ public class MainController {
                 String profileImageName = null;
                 if (profileImage != null) {
                     profileImageName = profileImage.getStoreImageName();
-                    System.out.println("profileImageName = " + profileImageName);
                 }
 
                 session.setAttribute("nickname", nickname);
@@ -46,6 +56,18 @@ public class MainController {
                 }
             }
         }
+
+        // 최신 게시글 5개 가져오기
+        List<Board> boardList = boardService.getBoardsSortedByWriteDateToMain();
+
+        // 각 게시글의 댓글 개수 가져오기
+        List<BoardListMainDTO> boardDtoList = boardList.stream().map(board -> {
+            int commentCount = commentService.countCommentsByBoardId(board.getId());
+            return new BoardListMainDTO(board, commentCount);
+        }).collect(Collectors.toList());
+
+        model.addAttribute("boardListToMain", boardDtoList);
+
         return "index";
     }
 }

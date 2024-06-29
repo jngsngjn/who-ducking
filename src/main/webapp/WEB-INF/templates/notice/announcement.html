@@ -2,9 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/mypage/MyPage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
+
+    <!-- Favicon -->
     <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
@@ -25,125 +27,168 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/notice/announcement.js"></script>
 </head>
-<body>
-<div th:insert="~{fragments/header :: header}"></div>
-    <main class="noticePage-container">
-        <section class="noticePage-top-banner">
-            <div class="mv-cnt swiper noticePage-image-banner">
-                <ul class="mv-cnt__items swiper-wrapper">
-                    <li class="swiper-slide">
-                        <div class="mv-cnt__img-box">
-                                      <span class="mv-cnt__img"
-                                            style="background-image: url(/images/MainCarousel/MainVisual.png);"></span>
-                        </div>
-                        <div class="mv-cnt__text">
-                            <p class="mv-cnt__desc">
-                                리뷰와 럭키드로우를 한번에?!
-                            </p>
-                            <h2 class="mv-cnt__title">
-                                진격의 거인
-                            </h2>
-                            <a href="#none" class="mv-cnt__link">
-                                바로가기
-                            </a>
-                        </div>
-                    </li>
-                    <li class="swiper-slide">
-                        <div class="mv-cnt__img-box">
-                                      <span class="mv-cnt__img"
-                                            style="background-image: url(/images/MainCarousel/MainVisual2.png);"></span>
-                        </div>
-                        <div class="mv-cnt__text">
-                            <p class="mv-cnt__desc">
-                                머구와 함께하는 지구 지키기 프로젝트
-                            </p>
-                            <h2 class="mv-cnt__title">
-                                머구를 통해 환경을 지켜봐요!
-                            </h2>
-                            <a href="#none" class="mv-cnt__link">
-                                바로가기
-                            </a>
-                        </div>
-                    </li>
-                    <li class="swiper-slide">
-                        <div class="mv-cnt__img-box">
-                                      <span class="mv-cnt__img"
-                                            style="background-image: url(/images/MainCarousel/MainVisual3.png);"></span>
-                        </div>
-                        <div class="mv-cnt__text">
-                            <p class="mv-cnt__desc">
-                                머구와 함께하는 지구 지키기 프로젝트
-                            </p>
-                            <h2 class="mv-cnt__title">
-                                머구를 통해 환경을 지켜봐요!
-                            </h2>
-                            <a href="#none" class="mv-cnt__link">
-                                바로가기
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <!-- Pagination -->
-                <div class="swiper-pagination"></div>
 
-                <!-- Navigation -->
-                <div class="swiper-button-next mainFirstSection_swiper-next_btn"></div>
-                <div class="swiper-button-prev mainFirstSection_swiper-prev_btn"></div>
-            </div>
-        </section>
-        <section class="noticePage-atag-searchbar-section">
-            <div class="notidePage-main-top">
-                <div class="noticePage-main-top-atag">
-                    <a href="#" class="selected">공지사항</a>
-                    <a href="/faq" class="">자주 묻는 질문</a>
-                </div>
-                <div class="noticPage-main-top-searchbar">
-                    <form action="/search" method="get" class="h-search_box">
-                        <input type="text" id="" name="name" class="h-search_bar" />
-                        <button type="submit" class="h-search_btn">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <section class="noticePage-main-content-section">
-            <div class="noticePage-main-content">
-                <ul class="noticePage-main-content-list">
-                    <li class="noticePage-main-content-list-elements" th:each="notice : ${notices}">
-                        <div class="noticePage-main-content-list-elements-box">
-                            <div class="noticePage-main-content-list-elements-left">
-                                <span class="noticePage-main-content-list-elements-title">공지</span>
-                                <span class="noticePage-main-content-list-elements-subject" th:text="${notice.title}">공지사항 제목</span>
+<body>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <!-- Container -->
+    <main id="container">
+        <!-- 1. Main Carousel -->
+        <section class="announcement_carousel">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="mv-cnt__announcement swiper">
+                    <ul class="mv-cnt__items swiper-wrapper">
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                                <span class="mv-cnt__img"
+                                                      style="background-image: url(/images/MainCarousel/MainVisual.png);"></span>
                             </div>
-                            <div class="noticePage-main-content-list-elements-right">
-                                <span class="noticePage-main-content-list-elements-date" th:text="${notice.writeDate}">2024-06-19</span>
-                                <button class="noticePage-main-content-list-elements-moreview">+</button>
+                            <div class="mv-cnt__text">
+                                <p class="mv-cnt__desc">
+                                    리뷰와 럭키드로우를 한번에?!
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    진격의 거인
+                                </h2>
+                                <a href="#none" class="mv-cnt__link">
+                                    바로가기
+                                </a>
                             </div>
-                        </div>
-                        <div class="noticePage-main-content-dropdown">
-                            <p th:text="${notice.content}">여기에 추가적인 공지사항 내용을 입력하세요.</p>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                                <span class="mv-cnt__img"
+                                                      style="background-image: url(/images/MainCarousel/MainVisual2.png);"></span>
+                            </div>
+                            <div class="mv-cnt__text">
+                                <p class="mv-cnt__desc">
+                                    머구와 함께하는 지구 지키기 프로젝트
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    머구를 통해 환경을 지켜봐요!
+                                </h2>
+                                <a href="#none" class="mv-cnt__link">
+                                    바로가기
+                                </a>
+                            </div>
+                        </li>
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                                <span class="mv-cnt__img"
+                                                      style="background-image: url(/images/MainCarousel/MainVisual3.png);"></span>
+                            </div>
+                            <div class="mv-cnt__text">
+                                <p class="mv-cnt__desc">
+                                    머구와 함께하는 지구 지키기 프로젝트
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    머구를 통해 환경을 지켜봐요!
+                                </h2>
+                                <a href="#none" class="mv-cnt__link">
+                                    바로가기
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
+
+                    <!-- Navigation -->
+                    <div class="swiper-button-next swiper-next_btn"></div>
+                    <div class="swiper-button-prev swiper-prev_btn"></div>
+                </div>
             </div>
         </section>
-        <section class="noticePage-main-pagination-section">
-            <div class="noticePage-pagination">
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;&lt;</a>
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.first} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number - 1})}">&lt;</a>
-                <span th:if="${notices.totalPages > 0}" th:each="i : ${#numbers.sequence(1, notices.totalPages)}">
-                    <a th:classappend="${i == notices.number + 1} ? 'noticePage-pagination-now-button' : 'noticePage-pagination-move-button'" th:href="@{/notice(page=${i - 1})}" th:text="${i}">1</a>
-                </span>
-                <span th:if="${notices.totalPages == 0}">
-                     <a class="noticePage-pagination-now-button" href="#">1</a>
-                </span>
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;</a>
-                <a class="noticePage-pagination-move-button" th:classappend="${notices.last} ? 'noticePage-disabled' : ''" th:href="@{/notice(page=${notices.number + 1})}">&gt;&gt;</a>
+
+        <section class="announcement_main">
+            <div class="inner_box" data-aos="fade-up">
+                <!-- 2. Announcement Tab -->
+                <div class="announcement_tab">
+                    <a href="#" class="announcement_tab_item active">공지사항</a>
+                    <a href="/faq"
+                       class="announcement_tab_item">자주 묻는 질문</a>
+                </div>
+
+                <!-- 3. Announcement List -->
+                <div class="announcement_list">
+                    <div class="announcement_list_box">
+                        <ul class="announcement_list_items">
+                            <!--  공지사항 리스트 -->
+                            <li class="announcement_list_item" th:each="notice : ${notices}">
+                                <div class="announcement_list_item_box">
+                                    <div class="announcement_list_item_box_left">
+                                        <span class="announcement_list_item_box_notice">공지</span>
+                                        <span class="announcement_list_item_box_title"
+                                              th:text="${notice.title}">공지사항 제목</span>
+                                    </div>
+                                    <div class="announcement_list_item_box_right">
+                                                            <span class="announcement_list_item_box_date"
+                                                                  th:text="${notice.writeDate}">2024-06-30</span>
+                                        <button class="announcement_list_item_box_moreBtn">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="announcement_list_item_detail">
+                                                      <span class="announcement_list_item_detail_content"
+                                                            th:text="${notice.content}">공지사항 내용</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4. Pagination -->
+                <div class="announcement_pagination">
+                    <!-- Double Left Arrow -->
+                    <a class="announcement_pagination_btn" th:classappend="${notices.first} ? 'disabled' : ''"
+                       th:href="@{/announcement(page = 0)}">
+                        <!-- Double Left Icon -->
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+
+                    <!-- Left Arrow -->
+                    <a class="announcement_pagination_btn" th:classappend="${notices.first} ? 'disabled' : ''"
+                       th:href="@{/announcement(page=${notices.number - 1})}">
+                        <!-- Left Icon -->
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!-- Page Number -->
+                    <div th:if="${notices.totalPages > 0}" class="announcement_pageNum">
+                        <span th:each="i : ${#numbers.sequence(((notices.number / 10) * 10) + 1, (((notices.number / 10) + 1) * 10))}">
+                              <a th:if="${i <= notices.totalPages}"
+                                 th:classappend="${i == notices.number + 1} ? 'announcement_pagination_now_btn' : 'announcement_pagination_btn'"
+                                 th:href="@{/announcement(page=${i - 1})}" th:text="${i}"
+                                 style="margin: 0 3px;">1</a>
+                        </span>
+                    </div>
+                    <span th:if="${notices.totalPages == 0}">
+                        <a class="announcement_pagination_now_btn" href="#">1</a>
+                    </span>
+
+                    <!-- Right Arrow -->
+                    <a class="announcement_pagination_btn" th:classappend="${notices.last} ? 'disabled' : ''"
+                       th:href="@{/announcement(page=${notices.number + 1})}">
+                        <!-- Right Icon -->
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <!-- Double Right Arrow -->
+                    <a class="announcement_pagination_btn" th:classappend="${notices.last} ? 'disabled' : ''"
+                       th:href="@{/announcement(page=${notices.totalPages - 1})}">
+                        <!-- Double Right Icon -->
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
     <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class HeaderController {
     private final AlarmService alarmService;
 
     @PostMapping("/update-header")
-    public HeaderDTO handleRequest(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session) {
+    public HeaderDTO updateHeader(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session) {
         if (user != null) {
             User loginUser = userService.getLoginUserDetail(user);
 
@@ -44,7 +44,7 @@ public class HeaderController {
             session.setAttribute("currentExp", currentExp);
             session.setAttribute("maxExp", maxExp);
 
-            return new HeaderDTO(point);
+            return new HeaderDTO(point, currentExp, maxExp, level);
         }
         return null;
     }
@@ -62,7 +62,7 @@ public class HeaderController {
                 AlarmType alarmType = alarm.getAlarmType();
                 if (alarmType == REQUEST) {
                     message = "나의 건의 내역 상태가 업데이트 되었습니다.";
-                    link = "/myPage/request-list?page=0&requestId=" + alarm.getRequest().getId();
+                    link = "/myPage/requests?page=0&requestId=" + alarm.getRequest().getId();
                 }
                 else if (alarmType == ANIMATION){
                     message = "선호 장르의 새로운 애니가 추가되었습니다.";

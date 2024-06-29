@@ -164,6 +164,13 @@ public class BoardController {
         return response;
     }
 
+    //신고
+    @PostMapping("/{boardId}/report")
+    @ResponseBody
+    public void incrementReport(@PathVariable("boardId") Long boardId) {
+        boardService.incrementReportCount(boardId);
+    }
+
     //댓글 컨트롤러
 
     //댓글작성

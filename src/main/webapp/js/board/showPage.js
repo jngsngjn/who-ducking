@@ -119,3 +119,25 @@ $('.comment-edit-form').each(function() {
     editForm.find('input[name="contentUpdate"]').val(originalContent);
 });
 
+document.querySelectorAll('.report-radio-label, .report-radio-label-other').forEach(label => {
+    label.addEventListener('click', function() {
+        document.querySelectorAll('.report-radio-label, .report-radio-label-other').forEach(lbl => {
+            lbl.classList.remove('selected');
+        });
+        this.classList.add('selected');
+
+        const otherReasonInput = document.getElementById('otherReasonInput');
+        if (this.classList.contains('report-radio-label-other')) {
+            otherReasonInput.style.display = 'block';
+        } else {
+            otherReasonInput.style.display = 'none';
+        }
+    });
+});
+
+function incrementReportCountAndRedirect(boardId){
+    $.post('/board/' + boardId + '/report', function (){
+        alert("신고처리가 완료되었습니다.");
+        window.location.href = '/board/' + boardId;
+    });
+}

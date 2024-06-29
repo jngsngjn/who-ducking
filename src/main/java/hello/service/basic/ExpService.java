@@ -3,6 +3,7 @@ package hello.service.basic;
 import hello.entity.user.Level;
 import hello.entity.user.User;
 import hello.repository.db.LevelRepository;
+import hello.repository.db.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ExpService {
 
     private final LevelRepository levelRepository;
+    private final UserRepository userRepository;
 
     public void increaseExp(User user, int exp) {
 
@@ -32,6 +34,7 @@ public class ExpService {
         }
 
         user.setCurrentExp(totalExp);
+        userRepository.save(user);
     }
 
     public void levelUp(User user) {
@@ -42,6 +45,7 @@ public class ExpService {
             Level nextLevelEntity = levelRepository.findById(nextLevel)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid level id: " + nextLevel));
             user.setLevel(nextLevelEntity);
+            userRepository.save(user);
         }
     }
 }

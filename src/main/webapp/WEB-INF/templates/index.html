@@ -524,145 +524,27 @@
                         <!-- Free Board -->
                         <div class="mainFourthSection_freeboard_box">
                               <ul class="mainFourthSection_freeboard_items">
-                                    <!-- First List -->
-                                    <li class="mainFourthSection_freeboard_item">
-                                          <div class="mainFourthSection_freeboard_title">
-                                                <span class="mainFourthSection_freeboard_title_text"><!-- 실제 데이터 -->미미짱
-                                                      이번 주
-                                                      출연시간 너무 적은 거 아님..?</span>
-                                          </div>
-                                          <div class="mainFourthSection_freeboard_subData">
-                                                <div class="mainFourthSection_freeboard_writeDate">
-                                                      <span
-                                                              class="mainFourthSection_freeboard_writeDate_text"><!-- 실제 데이터 -->2024.06.19</span>
+                                    <li th:each="boardDto : ${boardListToMain}" class="mainFourthSection_freeboard_item">
+                                          <a th:href="@{/board/{boardId}(boardId = ${boardDto.board.id})}">
+                                                <div class="mainFourthSection_freeboard_title">
+                                                      <span class="mainFourthSection_freeboard_title_text" th:text="${boardDto.board.title}"></span>
                                                 </div>
-                                                <div class="mainFourthSection_freeboard_icon">
-                                                      <div class="mainFourthSection_freeboard_views">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            <!-- 실제 데이터 -->148
+                                                <div class="mainFourthSection_freeboard_subData">
+                                                      <div class="mainFourthSection_freeboard_writeDate">
+                                                            <span class="mainFourthSection_freeboard_writeDate_text" th:text="${#temporals.format(boardDto.board.writeDate, 'yyyy.MM.dd')}"></span>
                                                       </div>
-                                                      <div class="mainFourthSection_freeboard_bookmarks">
-                                                            <i class="fa-regular fa-star"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_comments">
-                                                            <i class="fa-regular fa-comment"></i>
-                                                            <!-- 실제 데이터 -->148
+                                                      <div class="mainFourthSection_freeboard_icon">
+                                                            <div class="mainFourthSection_freeboard_views">
+                                                                  <i class="fa-regular fa-eye"></i>
+                                                                  <span th:text="${boardDto.board.viewCount}"></span>
+                                                            </div>
+                                                            <div class="mainFourthSection_freeboard_comments">
+                                                                  <i class="fa-regular fa-comment"></i>
+                                                                  <span th:text="${boardDto.commentCount}"></span>
+                                                            </div>
                                                       </div>
                                                 </div>
-                                          </div>
-                                    </li>
-                                    <!-- Second List -->
-                                    <li class="mainFourthSection_freeboard_item">
-                                          <div class="mainFourthSection_freeboard_title">
-                                                <span class="mainFourthSection_freeboard_title_text"><!-- 실제 데이터 -->미미짱
-                                                      이번 주
-                                                      출연시간 너무 적은 거 아님..?</span>
-                                          </div>
-                                          <div class="mainFourthSection_freeboard_subData">
-                                                <div class="mainFourthSection_freeboard_writeDate">
-                                                      <span
-                                                              class="mainFourthSection_freeboard_writeDate_text"><!-- 실제 데이터 -->2024.06.19</span>
-                                                </div>
-                                                <div class="mainFourthSection_freeboard_icon">
-                                                      <div class="mainFourthSection_freeboard_views">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_bookmarks">
-                                                            <i class="fa-regular fa-star"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_comments">
-                                                            <i class="fa-regular fa-comment"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </li>
-                                    <!-- Third List -->
-                                    <li class="mainFourthSection_freeboard_item">
-                                          <div class="mainFourthSection_freeboard_title">
-                                                <span class="mainFourthSection_freeboard_title_text"><!-- 실제 데이터 -->미미짱
-                                                      이번 주
-                                                      출연시간 너무 적은 거 아님..?</span>
-                                          </div>
-                                          <div class="mainFourthSection_freeboard_subData">
-                                                <div class="mainFourthSection_freeboard_writeDate">
-                                                      <span
-                                                              class="mainFourthSection_freeboard_writeDate_text"><!-- 실제 데이터 -->2024.06.19</span>
-                                                </div>
-                                                <div class="mainFourthSection_freeboard_icon">
-                                                      <div class="mainFourthSection_freeboard_views">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_bookmarks">
-                                                            <i class="fa-regular fa-star"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_comments">
-                                                            <i class="fa-regular fa-comment"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </li>
-                                    <!-- Fourth List -->
-                                    <li class="mainFourthSection_freeboard_item">
-                                          <div class="mainFourthSection_freeboard_title">
-                                                <span class="mainFourthSection_freeboard_title_text"><!-- 실제 데이터 -->미미짱
-                                                      이번 주
-                                                      출연시간 너무 적은 거 아님..?</span>
-                                          </div>
-                                          <div class="mainFourthSection_freeboard_subData">
-                                                <div class="mainFourthSection_freeboard_writeDate">
-                                                      <span
-                                                              class="mainFourthSection_freeboard_writeDate_text"><!-- 실제 데이터 -->2024.06.19</span>
-                                                </div>
-                                                <div class="mainFourthSection_freeboard_icon">
-                                                      <div class="mainFourthSection_freeboard_views">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_bookmarks">
-                                                            <i class="fa-regular fa-star"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_comments">
-                                                            <i class="fa-regular fa-comment"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </li>
-                                    <!-- Fifth List -->
-                                    <li class="mainFourthSection_freeboard_item">
-                                          <div class="mainFourthSection_freeboard_title">
-                                                <span class="mainFourthSection_freeboard_title_text"><!-- 실제 데이터 -->미미짱
-                                                      이번 주
-                                                      출연시간 너무 적은 거 아님..?</span>
-                                          </div>
-                                          <div class="mainFourthSection_freeboard_subData">
-                                                <div class="mainFourthSection_freeboard_writeDate">
-                                                      <span
-                                                              class="mainFourthSection_freeboard_writeDate_text"><!-- 실제 데이터 -->2024.06.19</span>
-                                                </div>
-                                                <div class="mainFourthSection_freeboard_icon">
-                                                      <div class="mainFourthSection_freeboard_views">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_bookmarks">
-                                                            <i class="fa-regular fa-star"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                      <div class="mainFourthSection_freeboard_comments">
-                                                            <i class="fa-regular fa-comment"></i>
-                                                            <!-- 실제 데이터 -->148
-                                                      </div>
-                                                </div>
-                                          </div>
+                                          </a>
                                     </li>
                               </ul>
                         </div>

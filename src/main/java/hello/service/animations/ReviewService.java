@@ -44,7 +44,7 @@ public class ReviewService {
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
         if (reviewCountToday >= 3) {
-            throw new ReviewLimitExceed("하루에 리뷰는 세번만 작성 할 수 있습니다.");
+            throw new ReviewLimitExceed("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
         }
 
         Review review = new Review();

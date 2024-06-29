@@ -1,4 +1,4 @@
-package hello.security.exception;
+package hello.exception;
 
 import hello.dto.oauth2.OAuth2Response;
 import lombok.Getter;
