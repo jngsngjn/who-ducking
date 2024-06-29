@@ -5,6 +5,7 @@ import hello.dto.user.CustomOAuth2User;
 import hello.entity.review.Review;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
+import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
 import hello.service.basic.UserService;
@@ -49,7 +50,7 @@ public class ReviewController {
             session.setAttribute("levelImageName", levelImageName);
             session.setAttribute("profileImageName", profileImageName);
             return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/animations/" + AnimationId).build();
-        } catch (ReviewService.ReviewLimitExceed e) {
+        } catch (ReviewLimitExceedException e) {
             String errorMessage = e.getMessage();
             String encodedErrorMessage = UriUtils.encode(errorMessage, StandardCharsets.UTF_8);
             return ResponseEntity.status(HttpStatus.FOUND)
