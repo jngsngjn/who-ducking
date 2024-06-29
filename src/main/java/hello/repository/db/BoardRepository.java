@@ -33,5 +33,4 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("UPDATE Board b SET b.reportCount = b.reportCount + 1 WHERE b.id = :boardId")
     @Transactional
     void incrementReportCount(@Param("boardId") Long boardId);
-
 }
