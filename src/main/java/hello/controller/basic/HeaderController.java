@@ -30,7 +30,7 @@ public class HeaderController {
     private final AlarmService alarmService;
 
     @PostMapping("/update-header")
-    public HeaderDTO handleRequest(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session) {
+    public HeaderDTO updateHeader(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session) {
         if (user != null) {
             User loginUser = userService.getLoginUserDetail(user);
 
