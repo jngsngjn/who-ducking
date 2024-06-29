@@ -130,10 +130,13 @@
                 </a>
 
                 <!-- Page Number -->
-                <div th:if="${requestPage.totalPages > 0}" style="display: flex;">
-                    <span th:each="i : ${#numbers.sequence(((requestPage.number / 10) * 10) + 1, (((requestPage.number / 10) + 1) * 10))}">
-                        <a th:if="${i <= requestPage.totalPages}" th:classappend="${i == requestPage.number + 1} ? 'myRequest_pagination_now_btn' : 'myRequest_pagination_btn'"
-                           th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}" style="margin: 0 3px;">1</a>
+                <div th:if="${requestPage.totalPages > 0}" class="myRequest_pageNum">
+                    <span
+                            th:each="i : ${#numbers.sequence(((requestPage.number / 10) * 10) + 1, (((requestPage.number / 10) + 1) * 10))}">
+                          <a th:if="${i <= requestPage.totalPages}"
+                             th:classappend="${i == requestPage.number + 1} ? 'myRequest_pagination_now_btn' : 'myRequest_pagination_btn'"
+                             th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}"
+                             style="margin: 0 3px;">1</a>
                     </span>
                 </div>
                 <span th:if="${requestPage.totalPages == 0}">
