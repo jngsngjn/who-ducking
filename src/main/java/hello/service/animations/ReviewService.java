@@ -10,6 +10,7 @@ import hello.repository.db.ReviewRepository;
 import hello.repository.db.UserRepository;
 import hello.service.basic.ExpService;
 import hello.service.basic.PointService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class ReviewService {
     private final PointService pointService;
     private final ExpService expService;
 
-    public void addReview(AniReviewDTO aniReviewDTO, User user) {
+    public void addReview(AniReviewDTO aniReviewDTO, User user, HttpSession session) {
         Optional<Animation> animationOpt = animationRepository.findById(aniReviewDTO.getAnimationId());
         Optional<User> userOpt = userRepository.findById(aniReviewDTO.getUserId());
 
@@ -61,10 +62,10 @@ public class ReviewService {
 
         if (reviewCountToday == 0) {
             pointService.increasePoint(user, 5);
-            expService.increaseExp(user, 5);
+            expService.increaseExp(user, 5, session);
         } else {
             pointService.increasePoint(user, 1);
-            expService.increaseExp(user, 3);
+            expService.increaseExp(user, 3, session);
         }
     }
 

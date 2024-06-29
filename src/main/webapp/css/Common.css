@@ -32,7 +32,6 @@
 @import url(./board/EditBoard.css);
 @import url(./review/ReviewBoard.css);
 @import url(./review/ReviewWrite.css);
-@import url(notice/Announcement.css);
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {

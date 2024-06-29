@@ -40,7 +40,7 @@ public class ReviewController {
         User loginUser = userService.getLoginUserDetail(user);
 
         try {
-            reviewService.addReview(aniReviewDTO, loginUser);
+            reviewService.addReview(aniReviewDTO, loginUser, session);
             String levelImageName = loginUser.getLevel().getImageName();
             ProfileImage profileImage = loginUser.getProfileImage();
             String profileImageName = null;
