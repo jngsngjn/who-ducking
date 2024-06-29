@@ -25,7 +25,16 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/review/reviewBoard.js"></script>
+    <style>
+      .page-btn[disabled] {
+        background-color: lightgray;
+        pointer-events: none; /* 클릭 이벤트 비활성화 */
+      }
 
+      .page-btn[disabled]:hover {
+        background-color: lightgray; /* hover 효과 없애기 */
+      }
+    </style>
     <script>
       $(document).ready(function () {
         $(".ani-poster").click(function () {
@@ -65,15 +74,18 @@
           </div>
         </div>
         <div class="body-container">
-          <div class="genre-container">
-            <h3 class="genre-title">장르</h3>
-            <div class="genre-list-container">
-              <div th:each="genre: ${genreLists}" class="genre-title-list" onclick="checkGenre(this)">
-                <input  type="checkbox" id="genre" class="genre-list" th:id="'genre-' + ${genre.id}"/>
-                <label for="genre" class="check-genre" th:text="${genre.name}">
-                </label>
+              <div class="genre-container">
+                <h3 class="genre-title">장르</h3>
+                <div class="genre-list-container">
+                  <label th:each="genre: ${genreLists}" class="genre-title-list" >
+                    <input type="checkbox" class="genre-list" th:id="'genre-' + ${genre.id}" onclick="checkGenre(this)"/>
+                      <span th:text="${genre.name}"></span>
+                  </label>
+                </div>
               </div>
-            </div>
+          <div class="empty-container" id="empty-container">
+            <h1 class="empty-container-text"> 선택된 장르의 애니메이션이 없습니다.</h1>
+            <button class="go-to-request"> 건의하기 </button>
           </div>
           <div class="ani-list-container" id="ani-list-container">
             <div th:each="animation : ${animationLists}" class="ani-info-container"
@@ -89,8 +101,8 @@
               </div>
               <div class="row-info-container">
                 <div class="recommend-container">
-                  <i class="fa-solid fa-comment">[[${animation.reviewCount}]]</i>
-                  <i class="fa-solid fa-star"> [[${animation.score}]] / 5.0</i>
+                  <i class="fa-solid fa-comment review-comment-icon">[[${animation.reviewCount}]]</i>
+                  <i class="fa-solid fa-star review-star-icon"> [[${animation.score}]] / 5.0</i>
                 </div>
               </div>
               <div class="ani-list-title-container">
@@ -102,17 +114,19 @@
         </div>
       </div>
     </div>
-      <div class="page-btn-box">
-        <i class="fa-solid fa-angles-left page-btn" onclick="changePage(1)"></i>
-        <i class="fa-solid fa-angle-left page-btn" onclick="prevPage()"></i>
+      <div class="page-btn-box" id="page-btn-box">
+        <div class="page-align-row-box">
+          <i class="fa-solid fa-angles-left page-btn" id="to-first" onclick="changePage(1)" ></i>
+        <i class="fa-solid fa-angle-left page-btn" id="to-prev" onclick="prevPage()" ></i>
         <ul class="page-button-wrapper" id="button-wrapper">
           <li class="page-number page-btn" id="current-page">1</li>
         </ul>
-        <i class="fa-solid fa-angle-right page-btn" onclick="nextPage()"></i>
+        <i class="fa-solid fa-angle-right page-btn" id="to-next" onclick="nextPage()"></i>
         <i
-          class="fa-solid fa-angles-right page-btn"
+          class="fa-solid fa-angles-right page-btn" id="to-end"
           onclick="changePage(totalPages)"
         ></i>
+        </div>
       </div>
     <div th:insert="~{fragments/footer :: footer}"></div>
 
