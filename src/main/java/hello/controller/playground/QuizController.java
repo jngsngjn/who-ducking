@@ -1,22 +1,29 @@
 package hello.controller.playground;
 
+import hello.dto.playground.QuizDTO;
 import hello.service.playground.QuizService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class QuizController {
 
-    @Autowired
-    private QuizService quizService;
+    private final QuizService quizService;
 
-    @GetMapping("/quiz")
-    public String quiz(Model model) {
-        model.addAttribute("quizzes");
+    @GetMapping("/playground/quiz")
+    public String quiz() {
         return "playground/quiz";
+    }
+
+    @ResponseBody
+    @PostMapping("/api/quizzes")
+    public List<QuizDTO> getQuizzes() {
+        return quizService.getRandomQuizzes();
     }
 }

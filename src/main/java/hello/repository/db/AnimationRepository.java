@@ -35,4 +35,6 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
             "ORDER BY a.id DESC")
     List<WorldCupDTO> findWorldCupAnimations();
 
+    @Query(value = "SELECT a.name AS answer, a.image_name AS imageName FROM Animation a ORDER BY RAND() LIMIT 5", nativeQuery = true)
+    List<Object[]> findRandomQuizzes();
 }
