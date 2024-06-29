@@ -58,11 +58,13 @@
                     <ul class="myRequest_menu">
                         <!-- First Tab -->
                         <li class="myRequest_menu_tab">
+                            <!-- 경로 추가 -->
                             <a href="/">나의 리뷰</a>
                         </li>
                         <div class="myRequest_menu_line"></div>
                         <!-- Second Tab -->
                         <li class="myRequest_menu_tab">
+                            <!-- 경로 추가 -->
                             <a href="/">나의 게시글</a>
                         </li>
                         <div class="myRequest_menu_line"></div>
@@ -74,6 +76,7 @@
                         <div class="myRequest_menu_line"></div>
                         <!-- Fourth Tab -->
                         <li class="myRequest_menu_tab">
+                            <!-- 경로 추가 -->
                             <a href="/">나의 북마크</a>
                         </li>
                     </ul>
@@ -89,7 +92,7 @@
 
                     <!-- Data Exist -->
                     <div class="myRequest_list_data_box" th:each="request : ${requestPage.content}">
-                        <ul class="myRequest_list">
+                        <ul class="myRequest_list_item">
                             <li class="myRequest_list_title" th:text="${request.title}"
                                 th:data-title="${request.title}"
                                 th:data-content="${request.content}"
