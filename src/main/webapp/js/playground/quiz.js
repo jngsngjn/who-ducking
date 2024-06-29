@@ -15,22 +15,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const quizResult = document.getElementById("quiz-result");
     const totalQuestions = document.getElementById("quiz-total-questions");
     const currentQuestion = document.getElementById("quiz-current-question");
-    const quizTime = document.getElementById("quiz-time"); // 타이머
-    const correctCountElement = document.getElementById("correct-count"); // 맞춘 문제 수 요소
+    const quizTime = document.getElementById("quiz-time");
+    const correctCountElement = document.getElementById("correct-count");
+
+    // 타이머와 맞춘 문제 수를 저장하는 변수
     let timer;
     let timeLeft;
-    let correctCount = 0; // 맞춘 문제 수 저장 변수
+    let correctCount = 0;
 
-    // 퀴즈 데이터 배열
+    // 퀴즈 데이터 배열 -> 대성진의 손길이 필요함
     let quizzes = [
-        { imageName: "quiz1.jpg", question: "애니메이션의 이름은?", answer: "주술회전" },
-        { imageName: "quiz2.jpg", question: "애니메이션의 이름은?", answer: "귀멸의 칼날" },
-        { imageName: "quiz3.jpg", question: "애니메이션의 이름은?", answer: "원피스" },
-        { imageName: "quiz4.jpg", question: "애니메이션의 이름은?", answer: "나루토" },
-        { imageName: "quiz5.jpg", question: "애니메이션의 이름은?", answer: "도라에몽" }
+        { imageName: "quiz1.jpg", question: "애니메이션의 제목은?", answer: "주술회전" },
+        { imageName: "quiz2.jpg", question: "애니메이션의 제목은?", answer: "귀멸의 칼날" },
+        { imageName: "quiz3.jpg", question: "애니메이션의 제목은?", answer: "원피스" },
+        { imageName: "quiz4.jpg", question: "애니메이션의 제목은?", answer: "나루토" },
+        { imageName: "quiz5.jpg", question: "애니메이션의 제목은?", answer: "도라에몽" }
     ];
     let currentQuizIndex = 0;
 
+    // 퀴즈를 화면에 표시
     function showQuiz(index) {
         if (index >= 0 && index < quizzes.length) {
             const quiz = quizzes[index];
@@ -39,6 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
             quizAnswerInput.value = '';
             quizResult.textContent = '';
             currentQuestion.textContent = index + 1;
+
+            // 타이머 리셋 및 시작
             clearInterval(timer);
             timeLeft = 10;
             quizSubmitAnswer.disabled = false;
@@ -47,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // 타이머 시작 함수
     function startTimer() {
         updateTimerDisplay();
         timer = setInterval(() => {
@@ -59,10 +65,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1000);
     }
 
+    // 타이머 디스플레이 업데이트 함수
     function updateTimerDisplay() {
         quizTime.textContent = timeLeft;
     }
 
+    // 시간초과 처리 함수
     function timeOut() {
         const correctAnswer = quizzes[currentQuizIndex].answer;
         quizResult.textContent = `시간 초과! 정답은 ${correctAnswer}입니다.`;
@@ -71,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         quizAnswerInput.removeEventListener('keypress', handleKeyPress);
     }
 
+    // 퀴즈 시작 버튼 클릭
     startQuizButton.addEventListener('click', function() {
         startScreen.style.display = 'none';
         quizScreen.style.display = 'block';
@@ -78,8 +87,13 @@ document.addEventListener("DOMContentLoaded", function () {
         showQuiz(currentQuizIndex);
     });
 
+    // 정답 제출 버튼
     quizSubmitAnswer.addEventListener('click', submitAnswer);
 
+    // 엔터 키로 정답 제출
+    quizAnswerInput.addEventListener('keypress', handleKeyPress);
+
+    // 엔터 키 입력
     function handleKeyPress(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -87,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // 정답 제출
     function submitAnswer() {
         if (quizSubmitAnswer.disabled) return;
         clearInterval(timer);
@@ -104,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         quizAnswerInput.removeEventListener('keypress', handleKeyPress);
     }
 
+    // 다음 문제 버튼
     quizNext.addEventListener('click', function () {
         if (currentQuizIndex < quizzes.length - 1) {
             currentQuizIndex++;
@@ -113,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // 결과 표시
     function showResults() {
         quizScreen.style.display = 'none';
         resultScreen.style.display = 'block';
@@ -129,19 +146,22 @@ document.addEventListener("DOMContentLoaded", function () {
         correctCountElement.textContent = `맞춘 문제 수: ${correctCount} / ${quizzes.length}`;
     }
 
+    // 다시하기 버튼
     retryQuizButton.addEventListener('click', function() {
         currentQuizIndex = 0;
         correctCount = 0;
         resultScreen.style.display = 'none';
         quizScreen.style.display = 'block';
         showQuiz(currentQuizIndex);
-        window.location.href = '/quiz'; //첫 화면으로 돌아가지만 버그가 있음
+        window.location.href = '/quiz'; // 첫 화면으로 돌아가지만 중간에 거쳐가는 버그가 있음
     });
 
+    // 홈 버튼
     goHomeButton.addEventListener('click', function() {
-        window.location.href = '/'; //홈페이지
+        window.location.href = '/'; // 홈페이지
     });
 
+    // 놀이터 버튼
     goPlaygroundButton.addEventListener('click', function() {
         window.location.href = '/playground';  // 놀이터 페이지
     });
