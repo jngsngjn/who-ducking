@@ -35,4 +35,8 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
             "ORDER BY a.id DESC")
     List<WorldCupDTO> findWorldCupAnimations();
 
+    // 애니메이션의 리뷰만 가져오기 - 리뷰 없는 애니에 포인트 추가용
+    @Query("SELECT COUNT(r.id) FROM Review r WHERE r.animation.id = :animationId")
+    int countReviewsByAnimationId(Long animationId);
+
 }

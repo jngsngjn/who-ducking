@@ -37,32 +37,39 @@ public class ReviewService {
             throw new IllegalArgumentException("Animation id: " + aniReviewDTO.getAnimationId() + " not found.");
         }
         if (userOpt.isEmpty()) {
-            throw new IllegalArgumentException("user id: " + aniReviewDTO.getUserId() + " not found");
+            throw new IllegalArgumentException("User id: " + aniReviewDTO.getUserId() + " not found.");
         }
 
+        Animation animation = animationOpt.get();
         LocalDate today = LocalDate.now();
+
+        long aniReviewCount =  animationRepository.countReviewsByAnimationId(aniReviewDTO.getAnimationId());
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
         if (reviewCountToday >= 3) {
-            throw new ReviewLimitExceed("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
+            throw new ReviewLimitExceed("하루에 리뷰는 세 번만 작성할 수 있습니다.");
         }
 
         Review review = new Review();
-        review.setAnimation(animationOpt.get());
+        review.setAnimation(animation);
         review.setUser(userOpt.get());
         review.setContent(aniReviewDTO.getContent());
         review.setScore(aniReviewDTO.getScore());
         review.setSpoiler(aniReviewDTO.getIsSpoiler());
 
-        int currentReviewCount = user.getReviewCount();
-        user.setReviewCount(currentReviewCount + 1);
         reviewRepository.save(review);
 
-        if (reviewCountToday == 0) {
+        int userReviewCount = user.getReviewCount();
+        user.setReviewCount(userReviewCount + 1);
+
+        System.out.println("애니메이션의 리뷰 수는 " + aniReviewCount);
+        System.out.println("유저가 작성한  리뷰 수는 " + userReviewCount);
+
+        if (aniReviewCount == 0 || user.getReviewCount() == 0) {
             pointService.increasePoint(user, 5);
-            expService.increaseExp(user, 5);
+            expService.increaseExp(user, 3);
         } else {
-            pointService.increasePoint(user, 1);
+            pointService.increasePoint(user, 3);
             expService.increaseExp(user, 3);
         }
     }
@@ -76,7 +83,7 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    // @ 리뷰 삭제
+    // @ 리뷰 삭제 -> (x)
     public void deleteReview(long reviewId) {
         Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
 
