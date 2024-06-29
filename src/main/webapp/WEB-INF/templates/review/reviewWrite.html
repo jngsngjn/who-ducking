@@ -75,10 +75,15 @@
       </div>
     </div>
   </div>
+  <div class="review-count-container">
   <p class="review-count">
     <i class="fa-solid fa-comment review-comment-icon"></i>
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
+  <h1 class="recommend-write-text" th:if="${totalReviews[0].reviewCount} == 0 and ${isAuthenticated}">
+    첫 댓글을 작성하고 추가 포인트 받아가세요!
+  </h1>
+  </div>
   <div th:if="${not #strings.isEmpty(param.error)}" class="alert alert-danger review-count-alert">
     <p th:text="${param.error}"></p>
   </div>

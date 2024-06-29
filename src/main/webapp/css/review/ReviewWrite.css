@@ -479,6 +479,17 @@ hr {
     font-size: 1.2em;
 }
 
+/* 리뷰 카운트 메세지 */
+.review-count-container{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    justify-content: flex-start;
+}
+
+.recommend-write-text{
+    color: #FF8B00;
+}
 
 /* 경고 메세지 */
 .review-count-alert{
