@@ -37,7 +37,7 @@ public class BoardService {
     @Value("${boardPath}")
     private String serverBoardImagePath;
 
-    //글작성
+    // 글 작성
     public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception {
         // 첫 글일 때만!
         boolean hasPosted = loginUser.isHasPosted();
