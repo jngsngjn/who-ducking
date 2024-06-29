@@ -264,15 +264,6 @@ textarea:focus {
     margin-top: 0.5rem;
 }
 
-.alert-danger {
-    color: red;
-    font-weight: bold;
-    position: absolute;
-    font-size:2rem;
-    top: 30%;
-    left:4%;
-}
-
 .write-review-submit-btn {
     width: 6.25rem;
     height: 3.125rem;
@@ -487,6 +478,19 @@ hr {
     margin-left: 8px;
     font-size: 1.2em;
 }
+
+
+/* 경고 메세지 */
+.review-count-alert{
+    font-size: 3rem;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    color: red;
+    font-weight: bold;
+    padding: 5rem;
+}
+
 
 /* //////// 사이드 이미지 /////// */
 .left-img {
