@@ -419,7 +419,7 @@
     left: 0%;
     transform: translate(-50%, -50%);
     width: 1000px;
-    height: 750px;
+    height: 800px;
     background: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 6rem 4rem;
@@ -434,6 +434,15 @@
     font-size: 3.6rem;
     color: var(--mainColor);
     text-align: center;
+}
+
+.request_info_text {
+    color: var(--subColor);
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 2.3rem;
+    margin-top: 1rem;
 }
 
 .myRequest_modal_write_content {
