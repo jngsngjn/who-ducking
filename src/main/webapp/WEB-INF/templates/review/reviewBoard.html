@@ -74,16 +74,15 @@
           </div>
         </div>
         <div class="body-container">
-          <div class="genre-container">
-            <h3 class="genre-title">장르</h3>
-            <div class="genre-list-container">
-              <div th:each="genre: ${genreLists}" class="genre-title-list" onclick="checkGenre(this)">
-                <input  type="checkbox" id="genre" class="genre-list" th:id="'genre-' + ${genre.id}"/>
-                <label for="genre" class="check-genre" th:text="${genre.name}">
-                </label>
+<              <div class="genre-container">
+                <h3 class="genre-title">장르</h3>
+                <div class="genre-list-container">
+                  <label th:each="genre: ${genreLists}" class="genre-title-list" >
+                    <input type="checkbox" class="genre-list" th:id="'genre-' + ${genre.id}" onclick="checkGenre(this)"/>
+                      <span th:text="${genre.name}"></span>
+                  </label>
+                </div>
               </div>
-            </div>
-          </div>
           <div class="empty-container" id="empty-container">
             <h1 class="empty-container-text"> 선택된 장르의 애니메이션이 없습니다.</h1>
             <button class="go-to-request"> 건의하기 </button>

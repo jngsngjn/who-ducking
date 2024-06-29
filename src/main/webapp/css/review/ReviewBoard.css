@@ -345,7 +345,9 @@ i.fa-solid.fa-angles-right.page-btn{
     flex-wrap: wrap;
     justify-content: center;
     height: 14rem;
+    cursor: pointer;
   }
+
 
   .ani-list-container {
     width: 100%;

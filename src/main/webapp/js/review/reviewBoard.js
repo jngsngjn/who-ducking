@@ -56,8 +56,9 @@ function sortByReviewCount() {
 }
 
 
-// 체크박스 리스트 클릭시 체크박스 활성화
+// // 체크박스 리스트 클릭시 체크박스 활성화
 function checkGenre(element) {
+    console.log(element)
     const genreCheckbox = element.querySelector('input[type="checkbox"]');
     genreCheckbox.checked = !genreCheckbox.checked;
 
@@ -77,6 +78,7 @@ function checkGenre(element) {
     currentPage = 1;
     filterAnimations();
 }
+
 
 // 전체 페이지네이션과 장르별 페이지네이션
 let selectedGenres = [];
