@@ -1,7 +1,5 @@
 package hello.config;
 
-import hello.entity.animation.Animation;
-import hello.entity.genre.AnimationGenre;
 import hello.entity.genre.Genre;
 import hello.entity.user.Level;
 import hello.repository.db.*;
@@ -150,6 +148,5 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
             levelRepository.saveAll(levels);
         }
-
     }
 }
