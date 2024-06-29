@@ -1,0 +1,366 @@
+.quiz-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 200px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.quiz-title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #f79a92;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quiz-title i {
+    font-size: 35px;
+    color: #FF80;
+    margin: 0 10px;
+}
+
+.quiz-number {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.quiz-label {
+    font-size: 25px;
+    font-weight: bold;
+    color: #79aff8;
+}
+
+.quiz-problem {
+    margin-bottom: 30px;
+}
+
+.quiz-problem-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#quiz-question {
+    font-size: 25px;
+    font-weight:bold;
+    margin-top: 10px;
+    color: #FF8B00;
+
+}
+
+.quiz-answer {
+    margin-bottom: 20px;
+}
+
+#quiz-answer-input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #FF8B00;
+    border-radius: 5px;
+}
+
+.quiz-submit {
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background: #FF8B00;
+    width: 100px;
+}
+.quiz-submit:hover{
+    background:#FFC60B;
+}
+.quiz-next,
+.quiz-review,
+.quiz-home {
+    width: 150px;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.quiz-next {
+    background:#79aff8;
+}
+
+.quiz-review {
+    background:  #f88379;
+}
+
+.quiz-home {
+    background: #8e44ad;
+}
+
+#quiz-result {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #f88379;
+}
+
+.quiz-navigation {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.quiz-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #FF8B00;
+    margin-bottom: 20px;
+}
+
+.hourglassBackground {
+    position: relative;
+    height: 65px;
+    width: 65px;
+    margin-right: 10px;
+}
+
+.hourglassContainer {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 25px;
+    height: 35px;
+    animation: hourglassRotate 2s ease-in 0s infinite;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.hourglassContainer div,
+.hourglassContainer div:before,
+.hourglassContainer div:after {
+    transform-style: preserve-3d;
+}
+
+.hourglassCapTop,
+.hourglassCapBottom {
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background-color: #333;
+}
+
+.hourglassCapTop { top: 0; }
+.hourglassCapBottom { bottom: 0; }
+
+.hourglassGlass {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+    width: 5px;
+    height: 3px;
+    background-color: #999999;
+    opacity: 0.5;
+}
+
+.hourglassGlass:before,
+.hourglassGlass:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: #FF8B00;
+    left: -8.5px;
+    width: 22px;
+    height: 14px;
+}
+
+.hourglassGlass:before {
+    top: -13.5px;
+    border-radius: 0 0 12.5px 12.5px;
+}
+
+.hourglassGlass:after {
+    bottom: -13.5px;
+    border-radius: 12.5px 12.5px 0 0;
+}
+
+.hourglassCurves:before,
+.hourglassCurves:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 16px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: #333;
+    animation: hideCurves 2s ease-in 0s infinite;
+}
+
+.hourglassCurves:before { left: 7.5px; }
+.hourglassCurves:after { left: 14.5px; }
+
+.hourglassSandStream:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 12px;
+    width: 1.5px;
+    background-color: white;
+    animation: sandStream1 2s ease-in 0s infinite;
+}
+
+.hourglassSandStream:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 18px;
+    left: 9.5px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid #fff;
+    animation: sandStream2 2s ease-in 0s infinite;
+}
+
+.hourglassSand:before,
+.hourglassSand:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 3px;
+    background-color: white;
+    perspective: 250px;
+}
+
+.hourglassSand:before {
+    top: 4px;
+    width: 19.5px;
+    border-radius: 1.5px 1.5px 15px 15px;
+    animation: sandFillup 2s ease-in 0s infinite;
+}
+
+.hourglassSand:after {
+    border-radius: 15px 15px 1.5px 1.5px;
+    animation: sandDeplete 2s ease-in 0s infinite;
+}
+
+@keyframes hourglassRotate {
+    50% { transform: rotateX(180deg); }
+    100% { transform: rotateX(180deg); }
+}
+
+@keyframes hideCurves {
+    0%, 100% { opacity: 1; }
+    25%, 30% { opacity: 0; }
+    40%, 90% { opacity: 1; }
+}
+
+@keyframes sandStream1 {
+    50% { height: 0; top: 22.5px; }
+    60% { height: 17.5px; top: 4px; }
+    85% { height: 0; top: 4px; }
+}
+
+@keyframes sandStream2 {
+    0%, 50%, 100% { opacity: 0; }
+    51%, 90% { opacity: 1; }
+}
+
+@keyframes sandFillup {
+    0%, 50% { opacity: 0; height: 0; }
+    60% { opacity: 1; height: 0; }
+    100% { opacity: 1; height: 8.5px; }
+}
+
+@keyframes sandDeplete {
+    0% { opacity: 0; top: 22.5px; height: 8.5px; width: 19px; left: 3px; }
+    1% { opacity: 1; top: 22.5px; height: 8.5px; width: 19px; left: 3px; }
+    24% { opacity: 1; top: 22.5px; height: 8.5px; width: 19px; left: 3px; }
+    25% { opacity: 1; top: 20.5px; height: 8.5px; width: 19px; left: 3px; }
+    50% { opacity: 1; top: 20.5px; height: 8.5px; width: 19px; left: 3px; }
+    90% { opacity: 1; top: 20.5px; height: 0; width: 5px; left: 10px; }
+}
+
+
+.result-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.result-images-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.result-images-grid img:hover {
+    transform: scale(1.05);
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.result-buttons .quiz-retry {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #FF8B00;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.result-buttons .quiz-retry:hover {
+    background: #FFC60B;
+}
+
+.result-buttons .quiz-home {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #8e44ad;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.result-buttons .quiz-home:hover {
+    background: #a85ec1;
+}
+
+.result-buttons .quiz-playground {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #79aff8;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.result-buttons .quiz-playground:hover {
+    background: #a3d1f9;
+}
