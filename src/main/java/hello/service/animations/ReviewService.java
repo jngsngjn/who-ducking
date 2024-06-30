@@ -222,8 +222,6 @@ public class ReviewService {
             reviewLikeRepository.save(existingLike);
 
             updateLikeAndDislikeCounts(reviewId);
-        }else{
-
         }
     }
 

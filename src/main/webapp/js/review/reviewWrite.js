@@ -154,51 +154,69 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // 좋아요 요청 함수 ->(o)
-function likeReview(reviewId) {
-    let url = `/reviews/${reviewId}/like`;
+function likeReview(reviewId, reviewUserId) {
+    const url = `/reviews/${reviewId}/like`;
+    let userId = document.getElementById("userId").value;
 
-    fetch(url, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(res => {
-        if (!res.ok) {
-            return res.text().then(text => {
-                let error = new Error(text);
-                error.status = res.status;
-                throw error;
-            });
-        }
-        return res.text();
-    }).then(data => {
-        window.location.reload();
-    }).catch(error => {
-        console.error('서버 에러: 좋아요 액션 중 오류 발생', error);
-    });
+    let userIdNum = parseInt(userId, 10);
+    let reviewUserIdInt = parseInt(reviewUserId, 10);
+
+    if(userIdNum === reviewUserIdInt){
+        alert("자신의 댓글에는 '좋아요'를 할 수 없습니다.");
+    } else {
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (!res.ok) {
+                return res.text().then(text => {
+                    let error = new Error(text);
+                    error.status = res.status;
+                    throw error;
+                });
+            }
+            return res.text();
+        }).then(data => {
+            window.location.reload();
+        }).catch(error => {
+            console.error('서버 에러: 좋아요 액션 중 오류 발생', error);
+        });
+    }
 }
 
 // 싫어요 요청 함수 -> (o)
-function dislikeReview(reviewId) {
-    let url = `/reviews/${reviewId}/dislike`;
+function dislikeReview(reviewId, reviewUserId) {
+    const url = `/reviews/${reviewId}/dislike`;
+    let userId = document.getElementById("userId").value;
 
-    fetch(url, {
-        method: 'PATCH',
-    }).then(res => {
-        if (!res.ok) {
-            return res.text().then(text => {
-                let error = new Error(text);
-                error.status = res.status;
-                throw error;
-            });
-        }
-        return res.text();
-    }).then(data => {
-        console.log("성공");
-        window.location.reload();
-    }).catch(error => {
-        console.error('서버 에러: 싫어요 액션 중 오류 발생', error.status);
-    });
+    let userIdNum = parseInt(userId, 10);
+    let reviewUserIdInt = parseInt(reviewUserId, 10);
+
+    if(userIdNum === reviewUserIdInt){
+        alert("자신의 댓글에는 '싫어요'를 할 수 없습니다.");
+    } else {
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (!res.ok) {
+                return res.text().then(text => {
+                    let error = new Error(text);
+                    error.status = res.status;
+                    throw error;
+                });
+            }
+            return res.text();
+        }).then(data => {
+            window.location.reload();
+        }).catch(error => {
+            console.error('서버 에러: 좋아요 액션 중 오류 발생', error);
+        });
+    }
 }
 
 
@@ -419,8 +437,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const showMoreReview = reviewComment.querySelector('.toggle-read-on');
         const hideReview = reviewComment.querySelector('.toggle-read-off');
         const fullContent = shortReview.getAttribute('data-full-content');
-
-        console.log("fullContent" +fullContent)
 
         if (fullContent.length > 200) {
             shortReview.innerText = fullContent.substring(0, 200) + '...';

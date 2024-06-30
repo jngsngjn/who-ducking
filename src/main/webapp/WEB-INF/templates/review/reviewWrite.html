@@ -89,7 +89,7 @@
   </div>
   <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box"
         th:if="${isAuthenticated and #strings.isEmpty(param.error)}">
-    <input type="hidden" name="userId" th:value="${userId}" />
+    <input type="hidden" name="userId" th:value="${userId}" id="userId"/>
     <input type="hidden" name="nickname" th:value="${nickname}"/>
     <div class="row-box">
       <h3 th:text="${nickname}" class="review-user" id="review-user"></h3>
@@ -154,10 +154,10 @@
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
-            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
+            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
             </button>
-            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
+            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
             </button>
           </div>
@@ -188,10 +188,10 @@
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
-            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
+            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-up review-like-icon"></i> <span th:text="${review.likeCount}"></span>
             </button>
-            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
+            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-down review-dislike-icon"></i> <span th:text="${review.dislikeCount}"></span>
             </button>
           </div>
