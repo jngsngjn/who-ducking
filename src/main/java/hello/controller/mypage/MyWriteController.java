@@ -39,6 +39,6 @@ public class MyWriteController {
         User loginUser = userService.getLoginUserDetail(oAuth2User);
         Page<MyBoardDTO> myBoardsSortedViewCount = boardService.getMyBoardsOrderByViewCount(loginUser, page, 5);
         model.addAttribute("myBoardsView", myBoardsSortedViewCount);
-        return "mypage/myWriteOrderByView";
+        return "mypage/myWriteOrderByViewCount";
     }
 }
