@@ -55,3 +55,30 @@ h2 {
 .btn:hover {
     background-color: #cc6e00;
 }
+
+.back-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    background-color: dimgray;
+    margin: 10px 0;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 10px 20px;
+    border: 1px solid dimgray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background-color: #595959;
+}
+
+#drawButton.loading {
+    cursor: not-allowed;
+}
+
+#drawButton.loading::after {
+    content: "(추첨 중…)";
+    color: #fff;
+}

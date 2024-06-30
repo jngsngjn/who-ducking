@@ -20,7 +20,7 @@
         <p><strong>응모 횟수:</strong> <span th:text="${prizeDraw.entryCount} + '회'"></span></p>
         <p><img th:src="@{/image/prize/{imageName}(imageName=${prizeDraw.imageName})}" style="width: 100%; height: auto;"></p>
     </div>
-    <button type="button" id="backButton" class="btn">뒤로가기</button>
+    <button type="button" id="backButton" class="back-btn">뒤로가기</button>
     <button type="button" id="drawButton" class="btn">추첨하기</button>
 </div>
 <script th:inline="javascript">

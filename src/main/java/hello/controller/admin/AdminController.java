@@ -109,8 +109,8 @@ public class AdminController {
         return "admin/adminPrizeDraw";
     }
 
-    @PostMapping("/prize-draw/random")
     @ResponseBody
+    @PostMapping("/prize-draw/random")
     public boolean drawUser(@RequestParam("prizeId") Long prizeId) throws MessagingException, URISyntaxException, IOException {
         User user = prizeService.randomDraw(prizeId);
         return user != null;
