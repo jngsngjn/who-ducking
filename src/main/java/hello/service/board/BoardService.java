@@ -1,9 +1,11 @@
 package hello.service.board;
 
 import hello.dto.board.BoardDTO;
+import hello.dto.board.MyBoardDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
 import hello.repository.db.BoardRepository;
+import hello.repository.db.CommentRepository;
 import hello.repository.db.UserRepository;
 import hello.repository.server.FileStore;
 import hello.service.basic.ExpService;
@@ -33,6 +35,7 @@ public class BoardService {
     private final FileStore fileStore;
     private final PointService pointService;
     private final ExpService expService;
+    private final CommentRepository commentRepository;
 
     @Value("${boardPath}")
     private String serverBoardImagePath;
@@ -148,5 +151,25 @@ public class BoardService {
     //신고 횟수 증가
     public void incrementReportCount(Long boardId){
         boardRepository.incrementReportCount(boardId);
+    }
+
+    public Page<MyBoardDTO> getMyBoardsOrderByWriteDate(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyBoardDTO> myBoards = boardRepository.findMyBoardsOrderByWriteDate(user, pageRequest);
+        for (MyBoardDTO myBoard : myBoards) {
+            Integer commentCount = commentRepository.countByBoardId(myBoard.getId());
+            myBoard.setCommentCount(commentCount);
+        }
+        return myBoards;
+    }
+
+    public Page<MyBoardDTO> getMyBoardsOrderByViewCount(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyBoardDTO> myBoards = boardRepository.findMyBoardsOrderByViewCount(user, pageRequest);
+        for (MyBoardDTO myBoard : myBoards) {
+            Integer commentCount = commentRepository.countByBoardId(myBoard.getId());
+            myBoard.setCommentCount(commentCount);
+        }
+        return myBoards;
     }
 }
