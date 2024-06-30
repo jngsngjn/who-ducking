@@ -77,6 +77,7 @@ public class BoardService {
     @Transactional
     public void updateViewCount(Long id){
         boardRepository.incrementViewCount(id);
+        System.out.println("조회수 업데이트");
     }
 
     //글 수정

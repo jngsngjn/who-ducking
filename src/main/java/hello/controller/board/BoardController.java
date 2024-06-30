@@ -127,6 +127,7 @@ public class BoardController {
     @PostMapping("/{boardId}/incrementViewCount")
     public ResponseEntity<Void> incrementViewCount(@PathVariable("boardId") Long boardId) {
         boardService.updateViewCount(boardId);
+        System.out.println("조회수 업데이트 성공");
         return ResponseEntity.ok().build();
     }
 
