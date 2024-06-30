@@ -3,8 +3,10 @@ package hello.service.animations;
 import hello.dto.animation.AniReviewDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
+import hello.entity.review.ReviewLike;
 import hello.entity.user.User;
 import hello.repository.db.AnimationRepository;
+import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import hello.repository.db.UserRepository;
 import hello.service.basic.ExpService;
@@ -28,7 +30,9 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final PointService pointService;
     private final ExpService expService;
+    private  final ReviewLikeRepository reviewLikeRepository;
 
+    // @ 리뷰 작성
     public void addReview(AniReviewDTO aniReviewDTO, User user) {
         Optional<Animation> animationOpt = animationRepository.findById(aniReviewDTO.getAnimationId());
         Optional<User> userOpt = userRepository.findById(aniReviewDTO.getUserId());
@@ -123,4 +127,119 @@ public class ReviewService {
             super(message);
         }
     }
+
+
+//    좋아요 싫어요 기능 구현 6월 29일 밤
+// public void likeReview(Long reviewId, Long userId) {
+//        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+//        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        Optional<ReviewLike> existingReviewLike = reviewLikeRepository.findByReviewIdAndUserId(review, user);
+//
+//        ReviewLike reviewLike;
+//        if (existingReviewLike.isPresent()) {
+//            reviewLike = existingReviewLike.get();
+//            reviewLike.setIsLike(1);
+//            reviewLike.setIsDislike(0);
+//        } else {
+//            reviewLike = new ReviewLike();
+//            reviewLike.setReviewId(review);
+//            reviewLike.setUserId(user);
+//            reviewLike.setIsLike(1);
+//            reviewLike.setIsDislike(0);
+//        }
+//
+//        reviewLikeRepository.save(reviewLike);
+//    }
+//
+//    public void dislikeReview(Long reviewId, User user) {
+//
+//        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+//        User loginUser = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        // 기존 리뷰 좋아요 객체 확인
+//        Optional<ReviewLike> existingReviewLike = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
+//
+//        System.out.println("싫어요 클릭시 들어오는 유저 아이디는 " + loginUser.getId());// 잘 들어옴
+//
+//        // 새로운 리뷰 좋아요 객체 생성 또는 기존 객체 업데이트
+//        ReviewLike reviewLike;
+//        if (existingReviewLike.isPresent()) {
+//            reviewLike = existingReviewLike.get();
+//            reviewLike.setIsLike(0);
+//            reviewLike.setIsDislike(1);
+//        } else {
+//            reviewLike = new ReviewLike();
+//            reviewLike.setReviewId(review);
+//            reviewLike.setUserId(loginUser);
+//            reviewLike.setIsLike(0);
+//            reviewLike.setIsDislike(1);
+//        }
+//
+//        // 리뷰 좋아요 객체 저장
+//        reviewLikeRepository.save(reviewLike);
+//    }
+
+    // 좋아요
+    @Transactional
+    public void isReviewLike(Long reviewId, Long userId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+        User loginUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User reviewWriteUser = review.getUser();
+
+        if (!reviewWriteUser.equals(loginUser)) {
+            Optional<ReviewLike> existingLikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
+            ReviewLike existingLike = existingLikeOpt.orElse(new ReviewLike());
+
+            existingLike.setUserId(loginUser);
+            existingLike.setReviewId(review);
+            existingLike.setIsLike(true);
+            existingLike.setIsDislike(false);
+
+            reviewLikeRepository.save(existingLike);
+
+            updateLikeAndDislikeCounts(reviewId);
+        }
+    }
+
+
+    // 싫어요
+    @Transactional
+    public void isReviewDisLike(Long reviewId, Long userId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+        User loginUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User reviewWriteUser = review.getUser();
+
+        if (!reviewWriteUser.equals(loginUser)) {
+            Optional<ReviewLike> existingDislikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
+            ReviewLike existingLike = existingDislikeOpt.orElse(new ReviewLike());
+
+            existingLike.setUserId(loginUser);
+            existingLike.setReviewId(review);
+            existingLike.setIsLike(false);
+            existingLike.setIsDislike(true);
+
+            reviewLikeRepository.save(existingLike);
+
+            updateLikeAndDislikeCounts(reviewId);
+        }else{
+
+        }
+    }
+
+    public void updateLikeAndDislikeCounts(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+
+        int likeCount = reviewLikeRepository.countReviewLike(review);
+        review.setLikeCount(likeCount);
+
+        int dislikeCount = reviewLikeRepository.countReviewDislike(review);
+        review.setDislikeCount(dislikeCount);
+
+        reviewRepository.save(review);
+    }
+
+
 }
+
+

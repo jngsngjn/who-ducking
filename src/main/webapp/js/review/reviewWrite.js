@@ -170,7 +170,7 @@ function likeReview(reviewId) {
                 throw error;
             });
         }
-        return res.json();
+        return res.text();
     }).then(data => {
         window.location.reload();
     }).catch(error => {
@@ -178,16 +178,12 @@ function likeReview(reviewId) {
     });
 }
 
-
-// 싫어요 요청 함수
+// 싫어요 요청 함수 -> (o)
 function dislikeReview(reviewId) {
     let url = `/reviews/${reviewId}/dislike`;
 
     fetch(url, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        }
     }).then(res => {
         if (!res.ok) {
             return res.text().then(text => {
@@ -196,13 +192,15 @@ function dislikeReview(reviewId) {
                 throw error;
             });
         }
-        return res.json();
+        return res.text();
     }).then(data => {
+        console.log("성공");
         window.location.reload();
     }).catch(error => {
         console.error('서버 에러: 싫어요 액션 중 오류 발생', error.status);
     });
 }
+
 
 
 // 리뷰 작성 시 빈 값 요청 불가

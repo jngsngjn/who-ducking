@@ -3,8 +3,10 @@ package hello.controller.animations;
 import hello.dto.animation.AniReviewDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.review.Review;
+import hello.entity.review.ReviewLike;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
+import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
 import hello.service.basic.UserService;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
@@ -26,6 +29,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewRepository reviewRepository;
     private final UserService userService;
+
 
     /* @ POST 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
@@ -87,35 +91,72 @@ public class ReviewController {
     }
 
     /* @ 좋아요 클릭시 요청 */
+//    @PatchMapping("/reviews/{reviewId}/like")
+//    public ResponseEntity<?> likeReview(@PathVariable("reviewId") Long id) {
+//        Review reviewId = reviewRepository.findById(id).orElse(null);
+//        if (reviewId == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        reviewId.setLikeCount(reviewId.getLikeCount() + 1);
+//        reviewRepository.save(reviewId);
+//
+//        return ResponseEntity.ok().body(reviewId.getLikeCount());
+//    }
+//
+//
+//    /* @ 싫어요 클릭시 요청 */
+//    @PatchMapping("/reviews/{reviewId}/dislike")
+//    public ResponseEntity<?> dislikeReview(@PathVariable("reviewId") Long id) {
+//        Review reviewId = reviewRepository.findById(id).orElse(null);
+//        if (reviewId == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        reviewId.setDislikeCount(reviewId.getDislikeCount() + 1);
+//        reviewRepository.save(reviewId);
+//
+//        return ResponseEntity.ok().body(reviewId.getDislikeCount());
+//    }
+
+
+// 좋아요 html 작동확인
     @PatchMapping("/reviews/{reviewId}/like")
-    public ResponseEntity<?> likeReview(@PathVariable("reviewId") Long id) {
-        Review reviewId = reviewRepository.findById(id).orElse(null);
-        if (reviewId == null) {
+    public ResponseEntity<Integer> likeReview(@PathVariable("reviewId") Long id, @AuthenticationPrincipal CustomOAuth2User user) {
+        Review review = reviewRepository.findById(id).orElse(null);
+        if (review == null) {
             return ResponseEntity.notFound().build();
         }
 
-        reviewId.getReviewLikes().size();
-
-
+        Review reviewId = reviewRepository.findById(id).orElse(null);
         reviewId.setLikeCount(reviewId.getLikeCount() + 1);
-//        reviewId.setReviewLikes(reviewId.getReviewLikes());
-//        System.out.println(reviewId.getReviewLikes());
         reviewRepository.save(reviewId);
 
-        return ResponseEntity.ok().body(reviewId.getLikeCount());
+        User loginUser = userService.getLoginUserDetail(user);
+        Long userId = loginUser.getId();
+
+        reviewService.isReviewLike(id, userId);
+
+        return ResponseEntity.ok().body(review.getLikeCount());
     }
 
-
-    /* @ 싫어요 클릭시 요청 */
+    // 싫어요
     @PatchMapping("/reviews/{reviewId}/dislike")
-    public ResponseEntity<?> dislikeReview(@PathVariable("reviewId") Long id) {
-        Review reviewId = reviewRepository.findById(id).orElse(null);
-        if (reviewId == null) {
+    public ResponseEntity<Integer> dislikeReview(@PathVariable("reviewId") Long id, @AuthenticationPrincipal CustomOAuth2User user) {
+        Review review = reviewRepository.findById(id).orElse(null);
+        if (review == null) {
             return ResponseEntity.notFound().build();
         }
+
+        Review reviewId = reviewRepository.findById(id).orElse(null);
         reviewId.setDislikeCount(reviewId.getDislikeCount() + 1);
         reviewRepository.save(reviewId);
 
-        return ResponseEntity.ok().body(reviewId.getDislikeCount());
+        User loginUser = userService.getLoginUserDetail(user);
+        Long userId = loginUser.getId();
+
+        reviewService.isReviewDisLike(id, userId);
+
+        return ResponseEntity.ok().body(review.getDislikeCount());
     }
+
 }
