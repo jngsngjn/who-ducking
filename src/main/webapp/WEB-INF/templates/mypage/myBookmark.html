@@ -79,20 +79,15 @@
                     <!-- Right : My Write List -->
                     <div class="myBookmark_list_box">
                         <!-- Data Empty -->
-                        <div th:if="" class="myBookmark_list_data_empty">
+                        <div th:if="${myBookmarks.content.isEmpty()}" class="myBookmark_list_data_empty">
                             <span class="myBookmark_list_data_empty_text">북마크한 게시글이 없습니다.</span>
                         </div>
 
                         <!-- Data Exist -->
-                        <div class="myBookmark_list_data_box" th:each="">
+                        <div th:if="${!myBookmarks.content.isEmpty()}" class="myBookmark_list_data_box" th:each="bookmark : ${myBookmarks}">
                             <ul class="myBookmark_list_item">
                                 <div class="myBookmark_list_top_box">
-                                    <li class="myBookmark_list_title" th:text="" th:data-content=""
-                                        th:data-status="" th:data-request-id=""
-                                        th:data-response-date="" th:data-write-date=""
-                                        th:data-response="" id="title">제목
-                                    </li>
-                                    <!-- 스크립트 짜야 될 듯.. -->
+                                    <a th:href="@{/board/{boardId}(boardId=${bookmark.id})}"><li class="myWrite_list_title" th:text="${bookmark.title}"></li></a>
                                     <li class="myBookmark_list_btn_box">
                                         <button class="myBookmark_list_bookmark_btn">
                                             <i class="fa-regular fa-bookmark"></i>
@@ -100,17 +95,17 @@
                                     </li>
                                 </div>
                                 <li class="myBookmark_list_info">
-                                    <span class="myBookmark_list_date" th:text="">작성일</span>
+                                    <span class="myBookmark_list_date" th:text="${#temporals.format(bookmark.writeDateTime, 'yyyy.MM.dd')}">작성일</span>
                                     <div class="myBookmark_list_icon">
                                         <!-- 조회 수 -->
                                         <div class="myBookmark_list_views">
                                             <i class="fa-regular fa-eye"></i>
-                                            <!-- 실제 데이터 -->148
+                                            <span th:text="${bookmark.viewCount}"></span>
                                         </div>
                                         <!-- 댓글 수 -->
                                         <div class="myBookmark_list_comments">
                                             <i class="fa-regular fa-comment"></i>
-                                            <!-- 실제 데이터 -->148
+                                            <span th:text="${bookmark.commentCount}"></span>
                                         </div>
                                     </div>
                                 </li>
@@ -124,46 +119,46 @@
                 <div class="myBookmark_pagination_box">
                     <!-- Double Left Arrow -->
                     <a class="myBookmark_pagination_btn"
-                       th:classappend="${requestPage.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=0)}">
+                       th:classappend="${myBookmarks.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=0)}">
                         <!-- Double Left Icon -->
                         <i class="fa-solid fa-angles-left"></i>
                     </a>
 
                     <!-- Left Arrow -->
                     <a class="myBookmark_pagination_btn"
-                       th:classappend="${requestPage.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=${requestPage.number - 1})}">
+                       th:classappend="${myBookmarks.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=${myBookmarks.number - 1})}">
                         <!-- Left Icon -->
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
 
                     <!-- Page Number -->
-                    <div th:if="${requestPage.totalPages > 0}" class="myBookmark_pageNum">
+                    <div th:if="${myBookmarks.totalPages > 0}" class="myBookmark_pageNum">
                                     <span
-                                            th:each="i : ${#numbers.sequence(((requestPage.number / 10) * 10) + 1, (((requestPage.number / 10) + 1) * 10))}">
-                                          <a th:if="${i <= requestPage.totalPages}"
-                                             th:classappend="${i == requestPage.number + 1} ? 'myBookmark_pagination_now_btn' : 'myBookmark_pagination_btn'"
-                                             th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}"
+                                            th:each="i : ${#numbers.sequence(((myBookmarks.number / 10) * 10) + 1, (((myBookmarks.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= myBookmarks.totalPages}"
+                                             th:classappend="${i == myBookmarks.number + 1} ? 'myBookmark_pagination_now_btn' : 'myBookmark_pagination_btn'"
+                                             th:href="@{/myPage/bookmarks(page=${i - 1})}" th:text="${i}"
                                              style="margin: 0 3px;">1</a>
                                     </span>
                     </div>
-                    <span th:if="${requestPage.totalPages == 0}">
+                    <span th:if="${myBookmarks.totalPages == 0}">
                                     <a class="myBookmark_pagination_now_btn" href="#">1</a>
                               </span>
 
                     <!-- Right Arrow -->
                     <a class="myBookmark_pagination_btn"
-                       th:classappend="${requestPage.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=${requestPage.number + 1})}">
+                       th:classappend="${myBookmarks.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=${myBookmarks.number + 1})}">
                         <!-- Right Icon -->
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
 
                     <!-- Double Right Arrow -->
                     <a class="myBookmark_pagination_btn"
-                       th:classappend="${requestPage.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/requests(page=${requestPage.totalPages - 1})}">
+                       th:classappend="${myBookmarks.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=${myBookmarks.totalPages - 1})}">
                         <!-- Double Right Icon -->
                         <i class="fa-solid fa-angles-right"></i>
                     </a>

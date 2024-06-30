@@ -1,6 +1,7 @@
 package hello.repository.db;
 
 import hello.dto.board.MyBoardDTO;
+import hello.dto.board.MyBookmarkDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
 import jakarta.transaction.Transactional;
@@ -41,4 +42,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     @Query("select new hello.dto.board.MyBoardDTO(b.id, b.title, b.writeDate, b.viewCount) from Board b where b.user = :user order by b.viewCount desc")
     Page<MyBoardDTO> findMyBoardsOrderByViewCount(@Param("user") User user, Pageable pageable);
+
+    @Query("select new hello.dto.board.MyBookmarkDTO(b.id, b.title, b.writeDate, b.viewCount) from Board b join Bookmark bm on b.id = bm.board.id where bm.user = :user order by b.writeDate desc")
+    Page<MyBookmarkDTO> findBookmark(@Param("user") User user, Pageable pageable);
+
 }

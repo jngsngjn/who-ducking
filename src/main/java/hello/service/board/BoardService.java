@@ -2,6 +2,7 @@ package hello.service.board;
 
 import hello.dto.board.BoardDTO;
 import hello.dto.board.MyBoardDTO;
+import hello.dto.board.MyBookmarkDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
 import hello.repository.db.BoardRepository;
@@ -171,5 +172,15 @@ public class BoardService {
             myBoard.setCommentCount(commentCount);
         }
         return myBoards;
+    }
+
+    public Page<MyBookmarkDTO> getMyBookmarks(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyBookmarkDTO> myBookmarks = boardRepository.findBookmark(user, pageRequest);
+        for (MyBookmarkDTO myBookmark : myBookmarks) {
+            Integer commentCount = commentRepository.countByBoardId(myBookmark.getId());
+            myBookmark.setCommentCount(commentCount);
+        }
+        return myBookmarks;
     }
 }
