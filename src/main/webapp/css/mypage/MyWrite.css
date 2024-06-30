@@ -1,0 +1,277 @@
+.myReview_backgroundImage {
+    background-image: url("/images/Background_Image/marin.png");
+    background-repeat: no-repeat;
+    background-position: right bottom 267px;
+    background-size: 450px 1000px;
+}
+
+.myReview_title_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.myReview_btn_box {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.myReview_new_btn {
+    background-color: #fff;
+    color: #000;
+}
+
+.myReview_new_btn,
+.myReview_view_btn {
+    border-radius: 2rem;
+    padding: 0.4rem 1.5rem;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.myReview_new_btn:hover,
+.myReview_view_btn:hover {
+    background-color: var(--mainColor);
+    color: #fff;
+    border: 1px solid var(--mainColor);
+}
+
+.myReview_new_btn.active,
+.myReview_view_btn.active {
+    background-color: var(--mainColor);
+    color: #fff;
+}
+
+.myReview_new_btn:not(.active),
+.myReview_view_btn:not(.active) {
+    background-color: #fff;
+    color: var(--mainColor);
+}
+
+/* Contents */
+.myWrite_content_box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2.5rem;
+}
+
+/* Left */
+.myWrite_menu_box {
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+    height: 610px;
+    border: 2px solid #d9d9d9;
+    border-radius: 2rem;
+}
+
+.myWrite_menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.myWrite_menu_tab {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    padding: 5rem 0;
+    text-align: center;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.myWrite_menu_tab:last-of-type {
+    border-bottom-style: none;
+}
+
+.myWrite_menu_tab > a {
+    font-size: 2.8rem;
+    font-weight: 500;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.myWrite_menu_tab > a:hover {
+    color: var(--subColor);
+}
+
+.myWrite_selected_tab {
+    color: var(--mainColor);
+}
+
+/* Right */
+.myWrite_list_box {
+    width: 925px;
+    height: 1000px;
+    border: 2px solid #d9d9d9;
+    border-radius: 2rem;
+}
+
+/* Data Empty */
+.myWrite_list_data_empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.myWrite_list_data_empty_text {
+    font-size: 3.6rem;
+    color: var(--descColor);
+}
+
+/* Data Exist */
+.myWrite_list_item {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 3rem 4rem;
+    height: 19.75rem;
+}
+
+.myWrite_list_title {
+    font-size: 3.6rem;
+    font-weight: 500;
+    color: var(--descColor);
+}
+
+.myWrite_list_title:hover {
+    color: var(--mainColor);
+    transition: 0.3s;
+}
+
+.myWrite_list_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.6rem;
+    color: var(--descColor);
+}
+
+.myWrite_list_date {
+    color: #d1d1d1;
+    font-size: 1.8rem;
+}
+
+.myWrite_list_icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.myWrite_list_views {
+    color: var(--subColor);
+}
+
+.myWrite_list_comments {
+    color: var(--mainColor);
+}
+
+.myWrite_list_line {
+    width: 96%;
+    height: 2px;
+    background-color: #d9d9d9;
+}
+
+.myWrite_list_data_box > .myWrite_list_line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/* Pagination */
+.myWrite_pagination_box {
+    padding-top: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.myWrite_pagination_box > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--mainColor);
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    border: 1px solid var(--mainColor);
+    transition: 0.3s;
+}
+
+.myWrite_pagination_box > a.active {
+    background: var(--mainColor);
+    color: #fff;
+}
+
+.myWrite_pagination_box > a:hover {
+    background: var(--mainColor);
+    color: #fff;
+    cursor: pointer;
+}
+
+.myWrite_pagination_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    color: var(--mainColor);
+    border-radius: 100%;
+    border: 1px solid var(--mainColor);
+}
+
+.myWrite_pagination_btn:hover {
+    background-color: var(--mainColor);
+    color: #fff;
+    cursor: pointer;
+}
+
+.myWrite_pagination_btn:hover > i {
+    color: #fff;
+}
+
+.myWrite_pagination_btn > i {
+    color: var(--mainColor);
+}
+
+.myWrite_pageNum {
+    display: flex;
+}
+
+.myWrite_pagination_now_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    width: 32px;
+    height: 32px;
+    background: var(--mainColor);
+    color: #fff;
+    border-radius: 100%;
+    border: 1px solid var(--mainColor);
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    color: grey;
+}

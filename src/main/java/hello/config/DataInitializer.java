@@ -1,6 +1,7 @@
 package hello.config;
 
 import hello.entity.genre.Genre;
+import hello.entity.prize.Prize;
 import hello.entity.user.Level;
 import hello.repository.db.*;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +11,11 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static hello.entity.prize.PrizeGrade.*;
 
 @Component
 @Transactional
@@ -147,6 +151,22 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
             levels.add(new Level(0, level10));
 
             levelRepository.saveAll(levels);
+        }
+
+        if (prizeRepository.count() == 0) {
+            List<Prize> prizes = new ArrayList<>();
+            prizes.add(new Prize("아이언맨 스태츄", "iron.png", SR, LocalDate.now(), LocalDate.now().plusDays(12)));
+            prizes.add(new Prize("배트맨 스태츄", "batman.jpg", N, LocalDate.now(), LocalDate.now().plusDays(10)));
+            prizes.add(new Prize("젤다의 전설 링크 스태츄", "rink.png", UR, LocalDate.now(), LocalDate.now().plusDays(15)));
+            prizes.add(new Prize("헐크 스태츄", "hul.jpg", N, LocalDate.now(), LocalDate.now().plusDays(20)));
+            prizes.add(new Prize("손흥민 피규어", "son.jpg", R, LocalDate.now(), LocalDate.now().plusDays(10)));
+            prizes.add(new Prize("제드 피규어", "zed.jpg", R, LocalDate.now(), LocalDate.now().plusDays(11)));
+            prizes.add(new Prize("그루트 피규어", "groot.jpg", SR, LocalDate.now(), LocalDate.now().plusDays(14)));
+            prizes.add(new Prize("앤트맨 피규어", "ant.png", R, LocalDate.now(), LocalDate.now().plusDays(15)));
+            prizes.add(new Prize("캡틴 아메리카 피규어", "cap.jpg", R, LocalDate.now(), LocalDate.now().plusDays(11)));
+            prizes.add(new Prize("스파이더맨 피규어", "spider.jpeg", N, LocalDate.now(), LocalDate.now().plusDays(10)));
+
+            prizeRepository.saveAll(prizes);
         }
     }
 }

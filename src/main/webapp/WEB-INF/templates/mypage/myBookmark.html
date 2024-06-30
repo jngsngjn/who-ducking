@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/mypage/myBookmark.js"></script>
+</head>
+
+<body class="myBookmark_backgroundImage">
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="myBookmark_title_box">
+                    <h2 class="subTitle">나의 글 목록</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+                <!-- My Review Content Box -->
+                <div class="myBookmark_content_box">
+
+                    <!-- Left : Menu List -->
+                    <div class="myBookmark_menu_box">
+                        <ul class="myBookmark_menu">
+                            <!-- First Tab -->
+                            <li class="myBookmark_menu_tab">
+                                <a href="/myPage/reviews">나의 리뷰</a>
+                            </li>
+
+                            <!-- Second Tab -->
+                            <li class="myBookmark_menu_tab">
+                                <a href="/myPage/boards">나의 게시글</a>
+                            </li>
+
+                            <!-- Third Tab -->
+                            <li class="myBookmark_menu_tab">
+                                <a href="/myPage/bookmarks" class="myBookmark_selected_tab">나의 북마크</a>
+                            </li>
+
+                            <!-- Fourth Tab -->
+                            <li class="myBookmark_menu_tab">
+                                <a href="/myPage/requests">나의 건의 내역</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right : My Write List -->
+                    <div class="myBookmark_list_box">
+                        <!-- Data Empty -->
+                        <div th:if="${myBookmarks.content.isEmpty()}" class="myBookmark_list_data_empty">
+                            <span class="myBookmark_list_data_empty_text">북마크한 게시글이 없습니다.</span>
+                        </div>
+
+                        <!-- Data Exist -->
+                        <div th:if="${!myBookmarks.content.isEmpty()}" class="myBookmark_list_data_box" th:each="bookmark : ${myBookmarks}">
+                            <ul class="myBookmark_list_item">
+                                <div class="myBookmark_list_top_box">
+                                    <a th:href="@{/board/{boardId}(boardId=${bookmark.id})}"><li class="myWrite_list_title" th:text="${bookmark.title}"></li></a>
+                                    <li class="myBookmark_list_btn_box">
+                                        <button class="myBookmark_list_bookmark_btn">
+                                            <i class="fa-solid fa-bookmark"></i>
+                                        </button>
+                                    </li>
+                                </div>
+                                <li class="myBookmark_list_info">
+                                    <span class="myBookmark_list_date" th:text="${#temporals.format(bookmark.writeDateTime, 'yyyy.MM.dd')}">작성일</span>
+                                    <div class="myBookmark_list_icon">
+                                        <!-- 조회 수 -->
+                                        <div class="myBookmark_list_views">
+                                            <i class="fa-regular fa-eye"></i>
+                                            <span th:text="${bookmark.viewCount}"></span>
+                                        </div>
+                                        <!-- 댓글 수 -->
+                                        <div class="myBookmark_list_comments">
+                                            <i class="fa-regular fa-comment"></i>
+                                            <span th:text="${bookmark.commentCount}"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="myBookmark_list_line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom : Pagination --> <!-- 타임리프 값 변경 예정 -->
+                <div class="myBookmark_pagination_box">
+                    <!-- Double Left Arrow -->
+                    <a class="myBookmark_pagination_btn"
+                       th:classappend="${myBookmarks.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=0)}">
+                        <!-- Double Left Icon -->
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+
+                    <!-- Left Arrow -->
+                    <a class="myBookmark_pagination_btn"
+                       th:classappend="${myBookmarks.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=${myBookmarks.number - 1})}">
+                        <!-- Left Icon -->
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!-- Page Number -->
+                    <div th:if="${myBookmarks.totalPages > 0}" class="myBookmark_pageNum">
+                                    <span
+                                            th:each="i : ${#numbers.sequence(((myBookmarks.number / 10) * 10) + 1, (((myBookmarks.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= myBookmarks.totalPages}"
+                                             th:classappend="${i == myBookmarks.number + 1} ? 'myBookmark_pagination_now_btn' : 'myBookmark_pagination_btn'"
+                                             th:href="@{/myPage/bookmarks(page=${i - 1})}" th:text="${i}"
+                                             style="margin: 0 3px;">1</a>
+                                    </span>
+                    </div>
+                    <span th:if="${myBookmarks.totalPages == 0}">
+                                    <a class="myBookmark_pagination_now_btn" href="#">1</a>
+                              </span>
+
+                    <!-- Right Arrow -->
+                    <a class="myBookmark_pagination_btn"
+                       th:classappend="${myBookmarks.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=${myBookmarks.number + 1})}">
+                        <!-- Right Icon -->
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <!-- Double Right Arrow -->
+                    <a class="myBookmark_pagination_btn"
+                       th:classappend="${myBookmarks.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/bookmarks(page=${myBookmarks.totalPages - 1})}">
+                        <!-- Double Right Icon -->
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

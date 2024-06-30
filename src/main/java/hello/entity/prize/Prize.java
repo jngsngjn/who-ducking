@@ -41,4 +41,15 @@ public class Prize {
 
     @OneToMany(mappedBy = "prize")
     private List<Entry> entries = new ArrayList<>();
+
+    public Prize(String name, String imageName, PrizeGrade grade, LocalDate startDate, LocalDate endDate) {
+        this.name = name;
+        this.imageName = imageName;
+        this.grade = grade;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Prize() {
+    }
 }

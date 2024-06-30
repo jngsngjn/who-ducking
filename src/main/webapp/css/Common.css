@@ -17,7 +17,10 @@
 @import url(./basic/RegisterGenre.css);
 @import url(./mypage/MyPage.css);
 @import url(./mypage/UserInfoEdit.css);
+@import url(./mypage/MyReview.css);
+@import url(./mypage/MyWrite.css);
 @import url(./mypage/MyRequest.css);
+@import url(./mypage/MyBookmark.css);
 @import url(./mypage/AccountDeletion.css);
 @import url(./playground/Playground.css);
 @import url(./playground/LuckyDraw.css);

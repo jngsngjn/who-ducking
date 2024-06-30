@@ -113,7 +113,7 @@
 }
 
 /* Data Exist */
-.myRequest_list {
+.myRequest_list_item {
     display: flex;
     flex-direction: column;
     gap: 4rem;
