@@ -112,7 +112,7 @@ $(document).ready(function () {
             }
         }
 
-        if (!$(event.target).closest('.h-profile_box').length) {
+        if (!$(event.target).closest('.h-profile_box, .h-profile_menu').length) {
             if ($(this).find(".h-profile_box").toggleClass("active")) {
                 headerProfile_Menu.slideUp();
             }

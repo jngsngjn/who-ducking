@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/mypage/myWrite.js"></script>
+</head>
+<body class="myWrite_backgroundImage">
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="myReview_title_box">
+                    <h2 class="subTitle">나의 글 목록</h2>
+                    <div class="myReview_btn_box" th:if="${!myBoardsDate.content.isEmpty()}">
+                        <button class="myReview_new_btn active">최신순</button>
+                        <button class="myReview_view_btn" id="viewCountBtn">조회수순</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+
+                <!-- My Review Content Box -->
+                <div class="myWrite_content_box">
+
+                    <!-- Left : Menu List -->
+                    <div class="myWrite_menu_box">
+                        <ul class="myWrite_menu">
+                            <!-- First Tab -->
+                            <li class="myWrite_menu_tab">
+                                <a href="/myPage/reviews">나의 리뷰</a>
+                            </li>
+
+                            <!-- Second Tab -->
+                            <li class="myWrite_menu_tab">
+                                <a href="/myPage/boards" class="myWrite_selected_tab">나의 게시글</a>
+                            </li>
+
+                            <!-- Third Tab -->
+                            <li class="myWrite_menu_tab">
+                                <a href="/myPage/bookmarks">나의 북마크</a>
+                            </li>
+
+                            <!-- Fourth Tab -->
+                            <li class="myWrite_menu_tab">
+                                <a href="/myPage/requests">나의 건의 내역</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right : My Write List -->
+                    <div class="myWrite_list_box" id="orderByWriteDate">
+                        <!-- Data Empty -->
+                        <div th:if="${myBoardsDate.content.isEmpty()}" class="myWrite_list_data_empty">
+                            <span class="myWrite_list_data_empty_text">작성한 게시글이 없습니다.</span>
+                        </div>
+
+                        <!-- Data Exist -->
+                        <div th:if="${!myBoardsDate.content.isEmpty()}" class="myWrite_list_data_box" th:each="board : ${myBoardsDate}">
+                            <ul class="myWrite_list_item">
+                                <a th:href="@{/board/{boardId}(boardId=${board.id})}"><li class="myWrite_list_title" th:text="${board.title}"></li></a>
+                                <li class="myWrite_list_info">
+                                    <span class="myWrite_list_date" th:text="${#temporals.format(board.writeDateTime, 'yyyy.MM.dd')}">작성일</span>
+                                    <div class="myWrite_list_icon">
+                                        <!-- 조회 수 -->
+                                        <div class="myWrite_list_views">
+                                            <i class="fa-regular fa-eye"></i>
+                                            <span th:text="${board.viewCount}"></span>
+                                        </div>
+                                        <!-- 댓글 수 -->
+                                        <div class="myWrite_list_comments">
+                                            <i class="fa-regular fa-comment"></i>
+                                            <span th:text="${board.commentCount}"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="myWrite_list_line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom : Pagination --> <!-- 타임리프 값 변경 예정 -->
+                <div class="myWrite_pagination_box" id="orderByWriteDatePage">
+                    <!-- Double Left Arrow -->
+                    <a class="myWrite_pagination_btn" th:classappend="${myBoardsDate.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/boards(page=0)}">
+                        <!-- Double Left Icon -->
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+
+                    <!-- Left Arrow -->
+                    <a class="myWrite_pagination_btn" th:classappend="${myBoardsDate.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/boards(page=${myBoardsDate.number - 1})}">
+                        <!-- Left Icon -->
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!-- Page Number -->
+                    <div th:if="${myBoardsDate.totalPages > 0}" class="myWrite_pageNum">
+                                    <span
+                                            th:each="i : ${#numbers.sequence(((myBoardsDate.number / 10) * 10) + 1, (((myBoardsDate.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= myBoardsDate.totalPages}"
+                                             th:classappend="${i == myBoardsDate.number + 1} ? 'myWrite_pagination_now_btn' : 'myWrite_pagination_btn'"
+                                             th:href="@{/myPage/boards(page=${i - 1})}" th:text="${i}"
+                                             style="margin: 0 3px;">1</a>
+                                    </span>
+                    </div>
+                    <span th:if="${myBoardsDate.totalPages == 0}">
+                                    <a class="myWrite_pagination_now_btn" href="#">1</a>
+                              </span>
+
+                    <!-- Right Arrow -->
+                    <a class="myWrite_pagination_btn" th:classappend="${myBoardsDate.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/boards(page=${myBoardsDate.number + 1})}">
+                        <!-- Right Icon -->
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <!-- Double Right Arrow -->
+                    <a class="myWrite_pagination_btn" th:classappend="${myBoardsDate.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/boards(page=${myBoardsDate.totalPages - 1})}">
+                        <!-- Double Right Icon -->
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
