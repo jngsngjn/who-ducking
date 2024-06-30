@@ -13,11 +13,11 @@ public interface ReviewLikeRepository extends JpaRepository<ReviewLike, Long> {
 
     Optional<ReviewLike> findByReviewIdAndUserId(Review review, User user);
 
-    // 리뷰의 좋아요 개수 가져오기
+    // 리뷰의 좋아요
     @Query("SELECT COUNT(rl) FROM ReviewLike rl WHERE rl.reviewId = :review AND rl.isLike = true")
     int countReviewLike(@Param("review") Review review);
 
-    // 리뷰의 싫어요 개수 가져오기
+    // 리뷰의 싫어요
     @Query("SELECT COUNT(rl) FROM ReviewLike rl WHERE rl.reviewId = :review AND rl.isDislike = true")
     int countReviewDislike(@Param("review") Review review);
 }

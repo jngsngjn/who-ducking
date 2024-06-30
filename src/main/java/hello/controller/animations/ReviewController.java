@@ -90,36 +90,7 @@ public class ReviewController {
         return ResponseEntity.noContent().build();
     }
 
-    /* @ 좋아요 클릭시 요청 */
-//    @PatchMapping("/reviews/{reviewId}/like")
-//    public ResponseEntity<?> likeReview(@PathVariable("reviewId") Long id) {
-//        Review reviewId = reviewRepository.findById(id).orElse(null);
-//        if (reviewId == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        reviewId.setLikeCount(reviewId.getLikeCount() + 1);
-//        reviewRepository.save(reviewId);
-//
-//        return ResponseEntity.ok().body(reviewId.getLikeCount());
-//    }
-//
-//
-//    /* @ 싫어요 클릭시 요청 */
-//    @PatchMapping("/reviews/{reviewId}/dislike")
-//    public ResponseEntity<?> dislikeReview(@PathVariable("reviewId") Long id) {
-//        Review reviewId = reviewRepository.findById(id).orElse(null);
-//        if (reviewId == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        reviewId.setDislikeCount(reviewId.getDislikeCount() + 1);
-//        reviewRepository.save(reviewId);
-//
-//        return ResponseEntity.ok().body(reviewId.getDislikeCount());
-//    }
-
-
-// 좋아요 html 작동확인
+    /* 좋아요 요청 */
     @PatchMapping("/reviews/{reviewId}/like")
     public ResponseEntity<Integer> likeReview(@PathVariable("reviewId") Long id, @AuthenticationPrincipal CustomOAuth2User user) {
         Review review = reviewRepository.findById(id).orElse(null);
@@ -127,19 +98,15 @@ public class ReviewController {
             return ResponseEntity.notFound().build();
         }
 
-        Review reviewId = reviewRepository.findById(id).orElse(null);
-        reviewId.setLikeCount(reviewId.getLikeCount() + 1);
-        reviewRepository.save(reviewId);
-
         User loginUser = userService.getLoginUserDetail(user);
         Long userId = loginUser.getId();
 
-        reviewService.isReviewLike(id, userId);
+        reviewService.likeReview(id, userId);
 
         return ResponseEntity.ok().body(review.getLikeCount());
     }
 
-    // 싫어요
+    /* 싫어요 요청 */
     @PatchMapping("/reviews/{reviewId}/dislike")
     public ResponseEntity<Integer> dislikeReview(@PathVariable("reviewId") Long id, @AuthenticationPrincipal CustomOAuth2User user) {
         Review review = reviewRepository.findById(id).orElse(null);
@@ -147,16 +114,14 @@ public class ReviewController {
             return ResponseEntity.notFound().build();
         }
 
-        Review reviewId = reviewRepository.findById(id).orElse(null);
-        reviewId.setDislikeCount(reviewId.getDislikeCount() + 1);
-        reviewRepository.save(reviewId);
-
         User loginUser = userService.getLoginUserDetail(user);
         Long userId = loginUser.getId();
 
-        reviewService.isReviewDisLike(id, userId);
+        reviewService.dislikeReview(id, userId);
 
         return ResponseEntity.ok().body(review.getDislikeCount());
     }
+
+
 
 }

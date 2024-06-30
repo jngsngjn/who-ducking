@@ -128,103 +128,65 @@ public class ReviewService {
         }
     }
 
-
-//    좋아요 싫어요 기능 구현 6월 29일 밤
-// public void likeReview(Long reviewId, Long userId) {
-//        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
-//        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        Optional<ReviewLike> existingReviewLike = reviewLikeRepository.findByReviewIdAndUserId(review, user);
-//
-//        ReviewLike reviewLike;
-//        if (existingReviewLike.isPresent()) {
-//            reviewLike = existingReviewLike.get();
-//            reviewLike.setIsLike(1);
-//            reviewLike.setIsDislike(0);
-//        } else {
-//            reviewLike = new ReviewLike();
-//            reviewLike.setReviewId(review);
-//            reviewLike.setUserId(user);
-//            reviewLike.setIsLike(1);
-//            reviewLike.setIsDislike(0);
-//        }
-//
-//        reviewLikeRepository.save(reviewLike);
-//    }
-//
-//    public void dislikeReview(Long reviewId, User user) {
-//
-//        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
-//        User loginUser = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        // 기존 리뷰 좋아요 객체 확인
-//        Optional<ReviewLike> existingReviewLike = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
-//
-//        System.out.println("싫어요 클릭시 들어오는 유저 아이디는 " + loginUser.getId());// 잘 들어옴
-//
-//        // 새로운 리뷰 좋아요 객체 생성 또는 기존 객체 업데이트
-//        ReviewLike reviewLike;
-//        if (existingReviewLike.isPresent()) {
-//            reviewLike = existingReviewLike.get();
-//            reviewLike.setIsLike(0);
-//            reviewLike.setIsDislike(1);
-//        } else {
-//            reviewLike = new ReviewLike();
-//            reviewLike.setReviewId(review);
-//            reviewLike.setUserId(loginUser);
-//            reviewLike.setIsLike(0);
-//            reviewLike.setIsDislike(1);
-//        }
-//
-//        // 리뷰 좋아요 객체 저장
-//        reviewLikeRepository.save(reviewLike);
-//    }
-
     // 좋아요
     @Transactional
-    public void isReviewLike(Long reviewId, Long userId) {
+    public void likeReview(Long reviewId, Long userId) {
         Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
         User loginUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        User reviewWriteUser = review.getUser();
 
-        if (!reviewWriteUser.equals(loginUser)) {
-            Optional<ReviewLike> existingLikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
-            ReviewLike existingLike = existingLikeOpt.orElse(new ReviewLike());
+        Optional<ReviewLike> existingLikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
 
-            existingLike.setUserId(loginUser);
-            existingLike.setReviewId(review);
-            existingLike.setIsLike(true);
-            existingLike.setIsDislike(false);
-
-            reviewLikeRepository.save(existingLike);
-
-            updateLikeAndDislikeCounts(reviewId);
+        if (existingLikeOpt.isPresent()) {
+            ReviewLike existingLike = existingLikeOpt.get();
+            if (existingLike.getIsLike()) {
+                reviewLikeRepository.delete(existingLike);
+            } else {
+                existingLike.setIsLike(true);
+                existingLike.setIsDislike(false);
+                reviewLikeRepository.save(existingLike);
+            }
+        } else {
+            ReviewLike newLike = new ReviewLike();
+            newLike.setUserId(loginUser);
+            newLike.setReviewId(review);
+            newLike.setIsLike(true);
+            newLike.setIsDislike(false);
+            reviewLikeRepository.save(newLike);
         }
-    }
 
+        updateLikeAndDislikeCounts(reviewId);
+    }
 
     // 싫어요
     @Transactional
-    public void isReviewDisLike(Long reviewId, Long userId) {
+    public void dislikeReview(Long reviewId, Long userId) {
         Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
         User loginUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        User reviewWriteUser = review.getUser();
 
-        if (!reviewWriteUser.equals(loginUser)) {
-            Optional<ReviewLike> existingDislikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
-            ReviewLike existingLike = existingDislikeOpt.orElse(new ReviewLike());
+        Optional<ReviewLike> existingDislikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
 
-            existingLike.setUserId(loginUser);
-            existingLike.setReviewId(review);
-            existingLike.setIsLike(false);
-            existingLike.setIsDislike(true);
-
-            reviewLikeRepository.save(existingLike);
-
-            updateLikeAndDislikeCounts(reviewId);
+        if (existingDislikeOpt.isPresent()) {
+            ReviewLike existingDislike = existingDislikeOpt.get();
+            if (existingDislike.getIsDislike()) {
+                reviewLikeRepository.delete(existingDislike);
+            } else {
+                existingDislike.setIsLike(false);
+                existingDislike.setIsDislike(true);
+                reviewLikeRepository.save(existingDislike);
+            }
+        } else {
+            ReviewLike newDislike = new ReviewLike();
+            newDislike.setUserId(loginUser);
+            newDislike.setReviewId(review);
+            newDislike.setIsLike(false);
+            newDislike.setIsDislike(true);
+            reviewLikeRepository.save(newDislike);
         }
+
+        updateLikeAndDislikeCounts(reviewId);
     }
 
+    // 좋아요 싫어요 없데이트 
     public void updateLikeAndDislikeCounts(Long reviewId) {
         Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
 
@@ -236,6 +198,7 @@ public class ReviewService {
 
         reviewRepository.save(review);
     }
+
 
 
 }
