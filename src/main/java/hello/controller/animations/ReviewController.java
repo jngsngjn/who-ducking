@@ -3,16 +3,18 @@ package hello.controller.animations;
 import hello.dto.animation.AniReviewDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.review.Review;
+import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
+import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
 import hello.service.basic.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
@@ -31,15 +33,24 @@ public class ReviewController {
     public ResponseEntity<String> writeReview(
             @PathVariable long AnimationId,
             @ModelAttribute AniReviewDTO aniReviewDTO,
-            @AuthenticationPrincipal CustomOAuth2User user, Model model) {
+            @AuthenticationPrincipal CustomOAuth2User user,
+            HttpSession session) {
 
         aniReviewDTO.setAnimationId(AnimationId);
         User loginUser = userService.getLoginUserDetail(user);
 
         try {
-            reviewService.addReview(aniReviewDTO, loginUser);
+            reviewService.addReview(aniReviewDTO, loginUser, session);
+            String levelImageName = loginUser.getLevel().getImageName();
+            ProfileImage profileImage = loginUser.getProfileImage();
+            String profileImageName = null;
+            if (profileImage != null) {
+                profileImageName = profileImage.getStoreImageName();
+            }
+            session.setAttribute("levelImageName", levelImageName);
+            session.setAttribute("profileImageName", profileImageName);
             return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/animations/" + AnimationId).build();
-        } catch (ReviewService.ReviewLimitExceed e) {
+        } catch (ReviewLimitExceedException e) {
             String errorMessage = e.getMessage();
             String encodedErrorMessage = UriUtils.encode(errorMessage, StandardCharsets.UTF_8);
             return ResponseEntity.status(HttpStatus.FOUND)

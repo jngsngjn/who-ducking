@@ -264,15 +264,6 @@ textarea:focus {
     margin-top: 0.5rem;
 }
 
-.alert-danger {
-    color: red;
-    font-weight: bold;
-    position: absolute;
-    font-size:2rem;
-    top: 30%;
-    left:4%;
-}
-
 .write-review-submit-btn {
     width: 6.25rem;
     height: 3.125rem;
@@ -437,14 +428,13 @@ hr {
 }
 
 .save-review-btn {
-    margin-left: 10px;
+    margin-left: 93%;
     padding: 5px 10px;
     width: 6.25rem;
     height: 3.125rem;
     color:  #e87e04;
     border:none;
     cursor: pointer;
-
 }
 
 .save-review-btn:hover {
@@ -457,7 +447,6 @@ hr {
     width: 1rem;
     height: 2rem;
     position: relative;
-    /* 모달 연결용 position */
 }
 
 .stars {
@@ -490,6 +479,19 @@ hr {
     font-size: 1.2em;
 }
 
+
+/* 경고 메세지 */
+.review-count-alert{
+    font-size: 3rem;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    color: red;
+    font-weight: bold;
+    padding: 5rem;
+}
+
+
 /* //////// 사이드 이미지 /////// */
 .left-img {
     position: absolute;
@@ -517,9 +519,11 @@ hr {
     animation-fill-mode: forwards;
 }
 
-/*#animaiton-id{*/
-/*    display:none;*/
-/*}*/
+.review-comment{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 
 /****************** 리뷰 토글 *************************/

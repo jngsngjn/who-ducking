@@ -144,38 +144,42 @@
                 <!-- 4. Pagination -->
                 <div class="announcement_pagination">
                     <!-- Double Left Arrow -->
-                    <a class="announcement_pagination_btn"
-                       th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/announcement(page=0)}">
+                    <a class="announcement_pagination_btn" th:classappend="${notices.first} ? 'disabled' : ''"
+                       th:href="@{/announcement(page = 0)}">
                         <!-- Double Left Icon -->
                         <i class="fa-solid fa-angles-left"></i>
                     </a>
 
                     <!-- Left Arrow -->
-                    <a class="announcement_pagination_btn"
-                       th:classappend="${notices.first} ? 'disabled' : ''" th:href="@{/announcement(page=${notices.number - 1})}">
+                    <a class="announcement_pagination_btn" th:classappend="${notices.first} ? 'disabled' : ''"
+                       th:href="@{/announcement(page=${notices.number - 1})}">
                         <!-- Left Icon -->
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
 
                     <!-- Page Number -->
-                    <span th:if="${notices.totalPages > 0}" th:each="i : ${#numbers.sequence(1, notices.totalPages)}">
-                                    <a th:classappend="${i == notices.number + 1} ? 'announcement_pagination_now_btn' : 'announcement_pagination_btn'"
-                                       th:href="@{/announcement(page=${i - 1})}" th:text="${i}">1</a>
-                              </span>
+                    <div th:if="${notices.totalPages > 0}" class="announcement_pageNum">
+                        <span th:each="i : ${#numbers.sequence(((notices.number / 10) * 10) + 1, (((notices.number / 10) + 1) * 10))}">
+                              <a th:if="${i <= notices.totalPages}"
+                                 th:classappend="${i == notices.number + 1} ? 'announcement_pagination_now_btn' : 'announcement_pagination_btn'"
+                                 th:href="@{/announcement(page=${i - 1})}" th:text="${i}"
+                                 style="margin: 0 3px;">1</a>
+                        </span>
+                    </div>
                     <span th:if="${notices.totalPages == 0}">
-                                    <a class="announcement_pagination_now_btn" href="#">1</a>
-                              </span>
+                        <a class="announcement_pagination_now_btn" href="#">1</a>
+                    </span>
 
                     <!-- Right Arrow -->
-                    <a class="announcement_pagination_btn"
-                       th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/announcement(page=${notices.number + 1})}">
+                    <a class="announcement_pagination_btn" th:classappend="${notices.last} ? 'disabled' : ''"
+                       th:href="@{/announcement(page=${notices.number + 1})}">
                         <!-- Right Icon -->
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
 
                     <!-- Double Right Arrow -->
-                    <a class="announcement_pagination_btn"
-                       th:classappend="${notices.last} ? 'disabled' : ''" th:href="@{/announcement(page=${notices.totalPages - 1})}">
+                    <a class="announcement_pagination_btn" th:classappend="${notices.last} ? 'disabled' : ''"
+                       th:href="@{/announcement(page=${notices.totalPages - 1})}">
                         <!-- Double Right Icon -->
                         <i class="fa-solid fa-angles-right"></i>
                     </a>

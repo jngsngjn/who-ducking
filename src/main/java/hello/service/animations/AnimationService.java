@@ -41,7 +41,7 @@ public class AnimationService {
         return animationOptional.orElseThrow(() -> new RuntimeException("Animation not found with id " + id));
     }
 
-    // 애니 리뷰수&평점 조회
+    // 애니 상세페이지의  리뷰수 & 평점 조회
     public List<GetAniListDTO> getCountReviewAndScore(Long id){
         return animationRepository.findAnimationDetailsById(id);
     }

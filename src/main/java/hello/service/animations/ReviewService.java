@@ -1,15 +1,20 @@
 package hello.service.animations;
 
 import hello.dto.animation.AniReviewDTO;
+import hello.dto.animation.MyReviewDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.User;
+import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewRepository;
 import hello.repository.db.UserRepository;
 import hello.service.basic.ExpService;
 import hello.service.basic.PointService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +34,7 @@ public class ReviewService {
     private final PointService pointService;
     private final ExpService expService;
 
-    public void addReview(AniReviewDTO aniReviewDTO, User user) {
+    public void addReview(AniReviewDTO aniReviewDTO, User user, HttpSession session) {
         Optional<Animation> animationOpt = animationRepository.findById(aniReviewDTO.getAnimationId());
         Optional<User> userOpt = userRepository.findById(aniReviewDTO.getUserId());
 
@@ -44,7 +49,7 @@ public class ReviewService {
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
         if (reviewCountToday >= 3) {
-            throw new ReviewLimitExceed("하루에 리뷰는 세번만 작성 할 수 있습니다.");
+            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
         }
 
         Review review = new Review();
@@ -60,10 +65,10 @@ public class ReviewService {
 
         if (reviewCountToday == 0) {
             pointService.increasePoint(user, 5);
-            expService.increaseExp(user, 5);
+            expService.increaseExp(user, 5, session);
         } else {
             pointService.increasePoint(user, 1);
-            expService.increaseExp(user, 3);
+            expService.increaseExp(user, 3, session);
         }
     }
 
@@ -109,11 +114,13 @@ public class ReviewService {
         return reviewRepository.findReviewCount(animation);
     }
 
-
-    // 리뷰 작성 횟수 제한
-    public static class ReviewLimitExceed extends RuntimeException {
-        public ReviewLimitExceed(String message) {
-            super(message);
+    public Page<MyReviewDTO> getMyReviews(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyReviewDTO> myReviews = reviewRepository.findMyReviews(user, pageRequest);
+        for (MyReviewDTO myReview : myReviews) {
+            int reviewCounts = reviewRepository.findReviewCountByAnimationId(myReview.getAnimationId());
+            myReview.setTotalComment(reviewCounts);
         }
+        return myReviews;
     }
 }

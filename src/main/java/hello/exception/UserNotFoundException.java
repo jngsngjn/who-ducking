@@ -1,4 +1,4 @@
-package hello.service.exception;
+package hello.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

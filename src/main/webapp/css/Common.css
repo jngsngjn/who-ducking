@@ -18,12 +18,14 @@
 @import url(./mypage/MyPage.css);
 @import url(./mypage/UserInfoEdit.css);
 @import url(./mypage/MyRequest.css);
+@import url(./mypage/MyReview.css);
 @import url(./mypage/AccountDeletion.css);
 @import url(./playground/Playground.css);
 @import url(./playground/LuckyDraw.css);
 @import url(./playground/LuckyDrawDetail.css);
 @import url(./popup/PopUpStore.css);
 @import url(./notice/Announcement.css);
+@import url(./notice/Faq.css);
 
 @import url(./board/boardList.css);
 @import url(./board/CreateAndEdit.css);
@@ -31,7 +33,6 @@
 @import url(./board/EditBoard.css);
 @import url(./review/ReviewBoard.css);
 @import url(./review/ReviewWrite.css);
-@import url(notice/Announcement.css);
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {

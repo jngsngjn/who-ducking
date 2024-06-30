@@ -56,8 +56,9 @@ function sortByReviewCount() {
 }
 
 
-// 체크박스 리스트 클릭시 체크박스 활성화
+// // 체크박스 리스트 클릭시 체크박스 활성화
 function checkGenre(element) {
+    console.log(element)
     const genreCheckbox = element.querySelector('input[type="checkbox"]');
     genreCheckbox.checked = !genreCheckbox.checked;
 
@@ -77,6 +78,7 @@ function checkGenre(element) {
     currentPage = 1;
     filterAnimations();
 }
+
 
 // 전체 페이지네이션과 장르별 페이지네이션
 let selectedGenres = [];
@@ -106,6 +108,21 @@ function filterAnimations() {
                 filteredAnimations.push(animation);
             }
         });
+    }
+
+    // 장르에 일치하는 애니가 없을 경우 보여줄 요소
+    let emptyContainer = document.getElementById('empty-container');
+    let pageBtnBox = document.getElementById('page-btn-box');
+    let orderContainer = document.querySelector('.order-container');
+
+    if (filteredAnimations.length === 0) {
+        emptyContainer.style.display = "block";
+        pageBtnBox.style.display = "none";
+        orderContainer.style.display = "none";
+    } else {
+        emptyContainer.style.display = "none";
+        pageBtnBox.style.display = "flex";
+        orderContainer.style.display = "flex";
     }
 
     animations.forEach(animation => animation.style.display = 'none');
@@ -143,6 +160,7 @@ function renderPagination(totalAnimations) {
         });
         pageNumberBox.appendChild(pageButton);
     }
+    updateNavigationButtons();
 }
 
 function changePage(page) {
@@ -165,6 +183,50 @@ function nextPage() {
         filterAnimations();
     }
 }
+
+// 페이지에 따라 버튼 disabled -> 이게 최선입니까 ????? 아니요
+function updateNavigationButtons() {
+    let firstPageBtn = document.getElementById('to-first');
+    let prevPageBtn = document.getElementById('to-prev');
+    let nextPageBtn = document.getElementById('to-next');
+    let lastPageBtn = document.getElementById('to-end');
+
+    if (currentPage === 1) {
+        firstPageBtn.style.backgroundColor = 'lightgray';
+        firstPageBtn.style.color = '#fff';
+        prevPageBtn.style.backgroundColor = 'lightgray';
+        prevPageBtn.style.color = '#fff';
+        firstPageBtn.style.pointerEvents = 'none';
+        prevPageBtn.style.pointerEvents = 'none';
+    } else {
+        firstPageBtn.style.backgroundColor = '';
+        firstPageBtn.style.color = '';
+        prevPageBtn.style.backgroundColor = '';
+        prevPageBtn.style.color = '';
+
+        firstPageBtn.style.pointerEvents = '';
+        prevPageBtn.style.pointerEvents = '';
+    }
+
+
+    if (currentPage === totalPages) {
+        nextPageBtn.style.backgroundColor = 'lightgray';
+        nextPageBtn.style.color = '#fff';
+        lastPageBtn.style.backgroundColor = 'lightgray';
+        lastPageBtn.style.color = '#fff';
+        nextPageBtn.style.pointerEvents = 'none';
+        lastPageBtn.style.pointerEvents = 'none';
+    } else {
+        nextPageBtn.style.backgroundColor = '';
+        nextPageBtn.style.color='';
+        lastPageBtn.style.backgroundColor = '';
+        lastPageBtn.style.color='';
+        nextPageBtn.style.pointerEvents = '';
+        lastPageBtn.style.pointerEvents = '';
+    }
+}
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     let genreCheckboxes = document.querySelectorAll('.genre-list');

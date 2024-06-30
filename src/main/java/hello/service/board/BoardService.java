@@ -4,8 +4,10 @@ import hello.dto.board.BoardDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
 import hello.repository.db.BoardRepository;
+import hello.repository.db.UserRepository;
 import hello.repository.server.FileStore;
-import jakarta.transaction.Transactional;
+import hello.service.basic.ExpService;
+import hello.service.basic.PointService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -21,17 +24,30 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
     private final FileStore fileStore;
+    private final PointService pointService;
+    private final ExpService expService;
 
     @Value("${boardPath}")
     private String serverBoardImagePath;
 
-    //글작성
-    public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception  {
+    // 글 작성
+    public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception {
+        // 첫 글일 때만!
+        boolean hasPosted = loginUser.isHasPosted();
+        if (!hasPosted) {
+            pointService.increasePoint(loginUser, 5);
+            expService.increaseExp(loginUser, 5, null);
+            loginUser.setHasPosted(true);
+            userRepository.save(loginUser);
+        }
+
         Board board = new Board();
 
         if (!file.isEmpty()) {
@@ -134,6 +150,4 @@ public class BoardService {
     public void incrementReportCount(Long boardId){
         boardRepository.incrementReportCount(boardId);
     }
-
-
 }

@@ -23,6 +23,11 @@ $(document).ready(function () {
                 console.log(response);
 
                 $('#point').text(response.point + "P");
+                $('#expText').text(response.currentExp + " / " + response.maxExp + " EXP");
+                // 진행 바의 너비 계산 및 설정
+                var expWidth = (response.currentExp > 0 ? (response.currentExp / response.maxExp * 100) : 0) + '%';
+                $('#expBar').css('width', expWidth);
+                $('#levelText').text('Lv.' + response.level);
             },
             error: function() {
                 // 요청이 실패했을 때 실행할 코드

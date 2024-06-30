@@ -1,6 +1,6 @@
 package hello.security.handler;
 
-import hello.security.exception.AdditionalInfoRequiredException;
+import hello.exception.AdditionalInfoRequiredException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

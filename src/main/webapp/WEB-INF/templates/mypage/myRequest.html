@@ -58,23 +58,26 @@
                     <ul class="myRequest_menu">
                         <!-- First Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/">나의 리뷰</a>
+                            <!-- 경로 추가 -->
+                            <a href="/myPage/reviews">나의 리뷰</a>
                         </li>
                         <div class="myRequest_menu_line"></div>
                         <!-- Second Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/">나의 게시글</a>
+                            <!-- 경로 추가 -->
+                            <a href="/myPage/boards">나의 게시글</a>
                         </li>
                         <div class="myRequest_menu_line"></div>
                         <!-- Third Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/myPage/request-list" class="myRequest_selected_tab">나의 건의
+                            <a href="/myPage/requests" class="myRequest_selected_tab">나의 건의
                                 내역</a>
                         </li>
                         <div class="myRequest_menu_line"></div>
                         <!-- Fourth Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/">나의 북마크</a>
+                            <!-- 경로 추가 -->
+                            <a href="/myPage/bookmarks">나의 북마크</a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +92,7 @@
 
                     <!-- Data Exist -->
                     <div class="myRequest_list_data_box" th:each="request : ${requestPage.content}">
-                        <ul class="myRequest_list">
+                        <ul class="myRequest_list_item">
                             <li class="myRequest_list_title" th:text="${request.title}"
                                 th:data-title="${request.title}"
                                 th:data-content="${request.content}"
@@ -112,11 +115,11 @@
             </div>
 
             <!-- Bottom : Pagination -->
-            <div class="myRequest_pagination_box">
+            <div class="myRequest_pagination_box" style="display: flex; align-items: center;">
                 <!-- Double Left Arrow -->
                 <a class="myRequest_pagination_btn"
                    th:classappend="${requestPage.first} ? 'disabled' : ''"
-                   th:href="@{/myPage/requests(page=${requestPage.number - 1})}">
+                   th:href="@{/myPage/requests(page=0)}">
                     <!-- Double Left Icon -->
                     <i class="fa-solid fa-angles-left"></i>
                 </a>
@@ -130,14 +133,18 @@
                 </a>
 
                 <!-- Page Number -->
-                <span th:if="${requestPage.totalPages > 0}"
-                      th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
-                                    <a th:classappend="${i == requestPage.number + 1} ? 'myRequest_pagination_now_btn' : 'myRequest_pagination_btn'"
-                                       th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}">1</a>
-                              </span>
+                <div th:if="${requestPage.totalPages > 0}" class="myRequest_pageNum">
+                    <span
+                            th:each="i : ${#numbers.sequence(((requestPage.number / 10) * 10) + 1, (((requestPage.number / 10) + 1) * 10))}">
+                          <a th:if="${i <= requestPage.totalPages}"
+                             th:classappend="${i == requestPage.number + 1} ? 'myRequest_pagination_now_btn' : 'myRequest_pagination_btn'"
+                             th:href="@{/myPage/requests(page=${i - 1})}" th:text="${i}"
+                             style="margin: 0 3px;">1</a>
+                    </span>
+                </div>
                 <span th:if="${requestPage.totalPages == 0}">
-                                    <a class="myRequest_pagination_now_btn" href="#">1</a>
-                              </span>
+                    <a class="myRequest_pagination_now_btn" href="#">1</a>
+                </span>
 
                 <!-- Right Arrow -->
                 <a class="myRequest_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
@@ -148,7 +155,7 @@
 
                 <!-- Double Right Arrow -->
                 <a class="myRequest_pagination_btn" th:classappend="${requestPage.last} ? 'disabled' : ''"
-                   th:href="@{/myPage/requests(page=${requestPage.number + 1})}">
+                   th:href="@{/myPage/requests(page=${requestPage.totalPages - 1})}">
                     <!-- Double Right Icon -->
                     <i class="fa-solid fa-angles-right"></i>
                 </a>
@@ -218,6 +225,7 @@
 
             <!-- Modal Title -->
             <h3 class="myRequest_modal_write_title">건의하기</h3>
+            <span class="request_info_text">존재하지 않는 애니를 추가하기 위한 용도로만 이용해 주세요.</span>
 
             <!-- Modal Content -->
             <div class="myRequest_modal_write_content">

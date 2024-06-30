@@ -2,9 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/mypage/MyPage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
+
+    <!-- Favicon -->
     <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
@@ -14,7 +16,6 @@
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="/css/Common.css" />
-    <link rel="stylesheet" href="/css/mypage/myReview.css" />
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
@@ -27,215 +28,139 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
 </head>
-<body class="myReview_body">
-<div th:insert="~{fragments/header :: header}"></div>
-<!-- Container -->
-<main id="container" class="myReview_main">
 
-    <ul class="myReview_head-title">
-        <li>
-            <h2 class="myReview_h2">나의 리뷰</h2>
-        </li>
-        <li>
-            <button class="myReview_filter">최신 순</button>
-            <button class="myReview_filter2">리뷰 순</button>
-        </li>
-    </ul>
-    <div class="myReview_menulist">
-        <div class="myReview_menu">
-            <ul>
-                <li class="myReview_menuli">
-                    <a href="" class="myReview_now">나의 리뷰</a>
-                </li>
-                <div class="myReview_line"></div>
-                <li class="myReview_menuli">
-                    <a href="">나의 게시글</a>
-                </li>
-                <div class="myReview_line"></div>
-                <li class="myReview_menuli">
-                    <a href="">나의 건의 내역</a>
-                </li>
-                <div class="myReview_line"></div>
-                <li class="myReview_menuli">
-                    <a href="">나의 북마크</a>
-                </li>
-            </ul>
-        </div>
+<body class="myReview_backgroundImage">
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
 
-        <ul class="myReview_ul">
-            <ul class="myReview_content">
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-                <li class="myReview_ani">
-                    <div class="mainThirdSection_update_animation_img">
-                        <a href="https://www.netflix.com/browse">
-                            <img src="/images/AnimationPoster/JujutsuKaisen.jpg" alt="/">
-                        </a>
-                        <div class="myReview_bot">
-                            <div class="myReview_comment">
-                                <i class="fa-solid fa-comment"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 1,580
-                            <div class="myReview_star">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <!-- 실제 데이터 --> 4.7 / 5.0
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </ul>
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="myReview_title_box">
+                    <h2 class="subTitle">나의 글 목록</h2>
+                </div>
+            </div>
+        </section>
 
-<!--        <div class="myReview_next">-->
-<!--            <a class="myReview_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''"-->
-<!--               th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>-->
-<!--            <a class="myReview_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''"-->
-<!--               th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>-->
-<!--            <span th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">-->
-<!--                    <a th:classappend="${i == requestPage.number + 1} ? 'myReview_now-button' : 'myReview_next-button'"-->
-<!--                       th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>-->
-<!--                </span>-->
-<!--            <a class="myReview_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''"-->
-<!--               th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>-->
-<!--            <a class="myReview_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''"-->
-<!--               th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>-->
-<!--        </div>-->
-    </div>
-</main>
-<div th:insert="~{fragments/footer :: footer}"></div>
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+
+                <!-- My Review Content Box -->
+                <div class="myReview_content_box">
+
+                    <!-- Left : Menu List -->
+                    <div class="myReview_menu_box">
+                        <ul class="myReview_menu">
+                            <!-- First Tab -->
+                            <li class="myReview_menu_tab">
+                                <a href="/myPage/reviews" class="myReview_selected_tab">나의 리뷰</a>
+                            </li>
+
+                            <!-- Second Tab -->
+                            <li class="myReview_menu_tab">
+                                <a href="/myPage/boards">나의 게시글</a>
+                            </li>
+
+                            <!-- Third Tab -->
+                            <li class="myReview_menu_tab">
+                                <a href="/myPage/requests">나의 건의 내역</a>
+                            </li>
+
+                            <!-- Fourth Tab -->
+                            <li class="myReview_menu_tab">
+                                <a href="/myPage/bookmarks">나의 북마크</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right : My Review List -->
+                    <div class="myReview_list_box">
+                        <!-- Data Empty -->
+                        <div th:if="${myReviews.content.isEmpty()}" class="myReview_list_data_empty">
+                            <span class="myReview_list_data_empty_text">나의 리뷰가 없습니다.</span>
+                        </div>
+
+                        <!-- Data Exist -->
+                        <div th:if="${!myReviews.content.isEmpty()}" class="myReview_list_data_exist">
+                            <div class="myReview_list_data_box">
+                                <ul class="myReview_list_item" th:each="review : ${myReviews}">
+                                    <li class="myReview_list_img_box">
+                                        <a th:href="@{/animations/{animationId}(animationId=${review.animationId})}">
+                                            <img th:src="@{/image/ani/{imageName}(imageName=${review.imageName})}"
+                                                 alt="애니메이션 포스터">
+                                        </a>
+                                    </li>
+                                    <li class="myReview_list_info_box">
+                                        <div class="myReview_list_comment">
+                                            <i class="fa-solid fa-comment"></i>
+                                            <span th:text="${review.totalComment}"><!-- 실제 데이터 -->50</span>
+                                        </div>
+                                        <div class="myReview_list_scoreAvg">
+                                            <i class="fa-solid fa-star"></i>
+                                            <span th:text="${review.score} + ' / 5.0'"><!-- 실제 데이터 -->4.7 / 5.0</span>
+                                        </div>
+                                    </li>
+                                    <li class="myReview_list_title_box">
+                                        <span th:text="${review.title}"><!-- 실제 데이터-->주술회전</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom : Pagination --> <!-- 타임리프 값 변경 예정 -->
+                <div class="myReview_pagination_box">
+                    <!-- Double Left Arrow -->
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=0)}">
+                        <!-- Double Left Icon -->
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+
+                    <!-- Left Arrow -->
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=${myReviews.number - 1})}">
+                        <!-- Left Icon -->
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!-- Page Number -->
+                    <div th:if="${myReviews.totalPages > 0}" class="myReview_pageNum">
+                                    <span
+                                            th:each="i : ${#numbers.sequence(((myReviews.number / 10) * 10) + 1, (((myReviews.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= myReviews.totalPages}"
+                                             th:classappend="${i == myReviews.number + 1} ? 'myReview_pagination_now_btn' : 'myReview_pagination_btn'"
+                                             th:href="@{/myPage/reviews(page=${i - 1})}" th:text="${i}"
+                                             style="margin: 0 3px;">1</a>
+                                    </span>
+                    </div>
+                    <span th:if="${myReviews.totalPages == 0}">
+                                    <a class="myReview_pagination_now_btn" href="#">1</a>
+                              </span>
+
+                    <!-- Right Arrow -->
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=${myReviews.number + 1})}">
+                        <!-- Right Icon -->
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <!-- Double Right Arrow -->
+                    <a class="myReview_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
+                       th:href="@{/myPage/reviews(page=${myReviews.totalPages - 1})}">
+                        <!-- Double Right Icon -->
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

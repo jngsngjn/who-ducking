@@ -70,6 +70,9 @@ public class User {
     @Column(name = "last_draw_date")
     private LocalDate lastDrawDate;
 
+    @Column(name = "has_posted", nullable = false)
+    private boolean hasPosted;
+
     @Column(nullable = false)
     private String role;
 

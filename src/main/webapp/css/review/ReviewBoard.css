@@ -95,9 +95,9 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-color: #FEC02E #FEFFDA ;
+  scrollbar-color: #FEC02E transparent ;
   scrollbar-width :thin;
-  height: 21rem; /* 스크롤바 영역 설정 */
+  height: 21rem;
 }
 
 
@@ -129,9 +129,29 @@
   color: white;
 }
 
+.empty-container{
+  width:75.5rem;
+  height: 29.8rem;
+  border-radius: 1.5rem;
+  margin: 0.8rem 0;
+  padding:9rem;
+  text-align: center;
+}
+
+.empty-container-text{
+  color: #FF8B00;
+}
+
+.go-to-request{
+  background-color: #ff8b00;
+  color: white;
+  font-weight: bold;
+  padding:1rem;
+  border-radius: 1rem;
+  margin:3rem;
+}
 
 .ani-list-container {
-  /*width: 64.125rem;*/
   width: 78rem;
   margin-top: 2rem;
   display: grid;
@@ -164,13 +184,11 @@
   text-align: center;
   color:black;
   bottom: -5rem;
-  /*border-radius:10px 10px 0 0;*/
   line-height: 4rem;
   transition: bottom 0.3s ease;
 }
 
 .ani-info-container:hover .ani-list-title-container {
-  /*bottom: -0.2rem;*/
   bottom:0.2rem;
 }
 
@@ -194,7 +212,6 @@
   border-radius: 1.1rem;
   overflow: hidden;
   cursor: pointer;
-  /*height:26rem;*/
   height: 25.4rem;
 }
 
@@ -252,6 +269,11 @@
   margin: 1rem;
 }
 
+.page-align-row-box{
+  display: flex;
+  justify-content: center;
+}
+
 
 i.fa-solid.fa-angle-left.page-btn,
 i.fa-solid.fa-angles-left.page-btn,
@@ -285,11 +307,11 @@ i.fa-solid.fa-angles-right.page-btn{
   color:#FFFFFF;
 }
 
-.fa-comment:before{
+.review-comment-icon:before{
   margin-right: 0.8rem;
 }
 
-.fa-star:before{
+.review-star-icon:before{
   margin-right: 0.8rem;
 }
 
@@ -323,7 +345,9 @@ i.fa-solid.fa-angles-right.page-btn{
     flex-wrap: wrap;
     justify-content: center;
     height: 14rem;
+    cursor: pointer;
   }
+
 
   .ani-list-container {
     width: 100%;

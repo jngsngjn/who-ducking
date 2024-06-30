@@ -5,11 +5,13 @@ import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
 import hello.entity.board.Comment;
+import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
 import hello.service.basic.UserService;
 import hello.service.board.BoardService;
 import hello.service.board.BookmarkService;
 import hello.service.board.CommentService;
+import jakarta.servlet.http.HttpSession;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -74,9 +76,23 @@ public class BoardController {
 
     //작성된 폼을 가지고 새로운 게시글 작성
     @PostMapping("/create")
-    public String createBoard(@AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("board") BoardDTO board, @RequestParam("file")MultipartFile file) throws Exception {
+    public String createBoard(@AuthenticationPrincipal CustomOAuth2User user,
+                              @ModelAttribute("board") BoardDTO board,
+                              @RequestParam("file")MultipartFile file,
+                              HttpSession session) throws Exception {
+
         User loginUser = userService.getLoginUserDetail(user);
         boardService.createBoard(board,loginUser,file);
+
+        String levelImageName = loginUser.getLevel().getImageName();
+        ProfileImage profileImage = loginUser.getProfileImage();
+        String profileImageName = null;
+        if (profileImage != null) {
+            profileImageName = profileImage.getStoreImageName();
+        }
+        session.setAttribute("levelImageName", levelImageName);
+        session.setAttribute("profileImageName", profileImageName);
+
         return "redirect:/board";
     }
 
