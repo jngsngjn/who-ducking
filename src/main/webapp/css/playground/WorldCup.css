@@ -181,6 +181,7 @@
     padding: 1rem;
     border-radius: 2rem;
     box-shadow: var(--box-shadow__A);
+    border: 3px solid var(--subColor);
 }
 
 .worldCup_game_list {
@@ -201,6 +202,7 @@
     border: 3px solid var(--subColor);
     border-radius: 2rem;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
 }
 
 .worldCup_img {
