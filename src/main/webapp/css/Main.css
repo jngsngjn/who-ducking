@@ -1,9 +1,10 @@
 /* 배경 이미지 ================================================ */
-.main_body {
-    background-image: url(/images/Background_Image/hosino.png);
+.index_main {
+    background-image: url('/images/Background_Image/hosino.png');
     background-repeat: no-repeat;
-    background-position: 7% -140%;
-    background-size: 100%;
+    background-size:contain;
+    background-position:100% 580px;
+    width: 100%;
 }
 
 /* Container ================================================ */

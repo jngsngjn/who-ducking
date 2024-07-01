@@ -36,8 +36,8 @@
             </thead>
             <tbody id="currentPrizes">
             <tr th:each="prize, stat : ${currentPrizes.content}">
-                <td><a th:href="@{/admin/prize/{id}(id=${prize.id})}" th:text="${stat.index + 1 + (currentPrizes.number * currentPrizes.size)}"></a></td>
-                <td><a th:href="@{/admin/prize/{id}(id=${prize.id})}" th:text="${prize.name}"></a></td>
+                <td th:text="${stat.index + 1 + (currentPrizes.number * currentPrizes.size)}"></td>
+                <td th:text="${prize.name}"></td>
                 <td th:text="${prize.startDate}"></td>
                 <td th:text="${prize.endDate}"></td>
                 <td th:text="${prize.grade}"></td>
