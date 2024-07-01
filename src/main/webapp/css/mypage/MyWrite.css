@@ -1,8 +1,8 @@
 .myWrite_backgroundImage {
     background-image: url("/images/Background_Image/marin.png");
     background-repeat: no-repeat;
-    background-position: right bottom 267px;
-    background-size: 450px 1000px;
+    background-size:contain;
+    background-position:center;
 }
 
 .myWrite_title_box {
@@ -113,6 +113,7 @@
     height: 1000px;
     border: 2px solid #d9d9d9;
     border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 /* Data Empty */

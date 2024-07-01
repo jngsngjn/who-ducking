@@ -54,8 +54,12 @@ public class AdminPrizeController {
 
     @ResponseBody
     @PostMapping("/prize-draw/random")
-    public boolean drawUser(@RequestParam("prizeId") Long prizeId) throws MessagingException, URISyntaxException, IOException {
+    public String drawUser(@RequestParam("prizeId") Long prizeId) throws MessagingException, URISyntaxException, IOException {
         User user = prizeService.randomDraw(prizeId);
-        return user != null;
+        if (user == null) {
+            return "fail";
+        } else {
+            return user.getNickname();
+        }
     }
 }
