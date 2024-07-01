@@ -1,8 +1,8 @@
 .myRequest_backgroundImage {
-    background-image: url("/images/Background_Image/umaru.png");
+    background-image: url('/images/Background_Image/umaru.png');
     background-repeat: no-repeat;
-    background-position: 10% 70%; /* 재조정 필요 */
-    background-size: 400px 500px;
+    background-size:contain;
+    background-position:center;
 }
 
 /* Title */
