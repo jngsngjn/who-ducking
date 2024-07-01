@@ -26,12 +26,10 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/src/main/webapp/js/common.js"></script>
-
-
 </head>
 
-<body class="myWrite_body">
-    <header id="header" th:fragment="header" class="myWrite_header">
+<body class="myBookmark_body">
+    <header id="header" th:fragment="header">
         <div class="h-inner">
             <!-- Left -->
             <div class="h-left">
@@ -39,7 +37,6 @@
                 <h1 class="h-logo">
                     <a class="navbar-brand" href="/">
                         <img src="/src/main/webapp/images/Logo/logo.png" alt="로고">
-
                     </a>
                 </h1>
                 <!-- Search Box -->
@@ -85,8 +82,6 @@
                                 </a>
                             </li>
                         </div>
-
-
                     </div>
                 </ul>
                 <!-- Profile -->
@@ -94,14 +89,12 @@
                     <!-- Profile Btn -->
                     <div class="h-profile" sec:authorize="isAuthenticated()">
                         <div>
-                            <img class="h-mobile_profile-img"
-                                th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
+                            <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
                         </div>
                         <i class="fa-solid fa-caret-down"></i>
                     </div>
                 </div>
                 <!-- Profile Menu -->
-
             </div>
         </div>
 
@@ -130,11 +123,9 @@
                             <div class="h-mobile_profile-box" sec:authorize="isAuthenticated()">
                                 <div class="h-mobile_profile">
                                     <div>
-                                        <img class="h-mobile_profile-img"
-                                            th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
+                                        <img class="h-mobile_profile-img" th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
                                     </div>
-                                    <strong href="/myPage" class="h-mobile_profile-nickname"
-                                        th:value="${session.nickname}">UserNickname</strong>
+                                    <strong href="/myPage" class="h-mobile_profile-nickname" th:value="${session.nickname}">UserNickname</strong>
                                 </div>
                                 <div class="h-mobile_profile_exp_box">
                                     <div class="h-mobile_profile_level-point">
@@ -222,204 +213,97 @@
             </div>
         </div>
     </header>
-    <main id="container" class="myWrite_main">
-        <div class="myWrite_head-title">
-
-            <h2 class="myWrite_h2">나의 글 목록</h2>
-
-            <div>
-                <button class="myWrite_filter">최신 순</button>
-                <button class="myWrite_filter2">조회수 순</button>
-            </div>
+    <main id="container" class="myBookmark_main">
+        <div class="myBookmark_head-title">
+            <h2 class="myBookmark_h2">나의 북마크</h2>
         </div>
-        <div class="myWrite_menulist">
-            <div class="myWrite_menu">
+        <div class="myBookmark_menulist">
+            <div class="myBookmark_menu">
                 <ul>
-                    <li class="myWrite_menuli">
+                    <li class="myBookmark_menuli">
                         <a href="">나의 리뷰</a>
                     </li>
-                    <div class="myWrite_line"></div>
-                    <li class="myWrite_menuli">
+                    <div class="myBookmark_line"></div>
+                    <li class="myBookmark_menuli">
                         <a href="">나의 게시글</a>
                     </li>
-                    <div class="myWrite_line"></div>
-                    <li class="myWrite_menuli">
+                    <div class="myBookmark_line"></div>
+                    <li class="myBookmark_menuli">
                         <a href="">나의 건의 내역</a>
                     </li>
-                    <div class="myWrite_line"></div>
-                    <li class="myWrite_menuli">
-                        <a href="">나의 북마크</a>
+                    <div class="myBookmark_line"></div>
+                    <li class="myBookmark_menuli">
+                        <a href="" class="myBookmark_now">나의 북마크</a>
                     </li>
                 </ul>
             </div>
 
-            <div class="myWrite_writelist">
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        미미짱 이번주 출연시간 너무 적은거아님?
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        마린짱...나도 옷 잘 만들 수 있는데
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        이 애니 추가해주세요ㅋ
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        이 애니 추가해주세요ㅋ
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        이 애니 추가해주세요ㅋ
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <ul class="myBookmark_ul">
+                
+                <div class="myBookmark_line3"></div>
 
-            <div class="myWrite_next">
-                <a class="myWrite_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>
-                <a class="myWrite_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>
+                <li class="myBookmark_post">
+                    <div class="myBookmark_result_title">
+                        <a href="">호날두</a>
+                    </div>
+                    <div class="myBookmark_result_content" data-max-length="200">
+                        오늘부로 호날두지지를 철회한다
+
+                        오늘부터 지지관계에서 벗어나
+                        호날두와 나는 한몸으로 일체가 된다
+                        호날두에 대한 공격은 나에 대한 공격으로 간주한다
+
+                        세상에 70억 명의 호날두 팬이 있다면, 나는 그들 중 한 명일 것이다.
+                        세상에 1억 명의 호날두 팬이 있다면, 나 또한 그들 중 한 명일 것이다.
+                        세상에 천만 명의 호날두 팬이 있다면, 나는 여전히 그들 중 한 명일 것이다.
+                        세상에 백 명의 호날두 팬이 있다면, 나는 아직도 그들 중 한 명일 것이다.
+                        세상에 한 명의 호날두 팬이 있다면, 그 사람은 아마도 나일 것이다.
+                        세상에 단 한 명의 호날두팬도 없다면, 나는 그제서야 이 세상에 없는 것이다.
+
+                        호날두, 나의 사랑.
+                        호날두, 나의 빛.
+                        호날두, 나의 어둠.
+                        세상에 70억 명의 호날두 팬이 있다면, 나는 그들 중 한 명일 것이다.
+                        세상에 1억 명의 호날두 팬이 있다면, 나 또한 그들 중 한 명일 것이다.
+                        세상에 천만 명의 호날두 팬이 있다면, 나는 여전히 그들 중 한 명일 것이다.
+                        세상에 백 명의 호날두 팬이 있다면, 나는 아직도 그들 중 한 명일 것이다.
+                        세상에 한 명의 호날두 팬이 있다면, 그 사람이 나다.
+                        세상에 단 한 명의 호날두 팬도 없다면, 나는 그제서야 이 세상에 없는 것이다.
+                        호날두, 나의 삶.
+                        호날두, 나의 기쁨.
+                        호날두, 나의 슬픔.
+                        호날두, 나의 안식.
+                        호날두, 나의 영혼.
+                        호날두, 나.
+                    </div>
+                    <div class="myBookmark_line3"></div>
+                </li>
+            </ul>
+
+            <div class="myBookmark_next">
+                <a class="myBookmark_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>
+                <a class="myBookmark_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>
                 <span th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
-                    <a th:classappend="${i == requestPage.number + 1} ? 'myWrite_now-button' : 'next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
+                    <a th:classappend="${i == requestPage.number + 1} ? 'myBookmark_now-button' : 'myBookmark_next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
                 </span>
-                <a class="next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>
-                <a class="next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>
+                <a class="myBookmark_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>
+                <a class="myBookmark_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>
             </div>
         </div>
     </main>
+    <div th:insert="~{fragment/footer :: footer}"></div>
+    <script>
+        // 게시글 길이 길면 더보기 표시ㅋㅋ
+        document.querySelectorAll('.myBookmark_result_content').forEach(function (item) {
+            const maxLength = parseInt(item.getAttribute('data-max-length'));
+            const text = item.textContent.trim();
 
-    <footer id="footer" th:fragment="footer">
-        <div class="f-box">
-            <div class="h-logo">
-                <a class="navbar-brand" href="/">
-                    <img src="/images/Logo/logoblack.png" alt="로고">
-                </a>
-            </div>
-            <ul class="f-gnb">
-                <li>
-                    <a href="#none">이용약관</a>
-                </li>
-                <li>
-                    <a href="#none">개인정보처리방침</a>
-                </li>
-                <li>
-                    <a href="#none">공지사항</a>
-                </li>
-                <li>
-                    <a href="#none">자주 묻는 질문</a>
-                </li>
-                <!-- Admin Page Link -->
-                <li th:if="${session.isAdmin}">
-                    <a href="/admin">관리자 페이지</a>
-                </li>
-            </ul>
-            <p class="f-copyright">
-                COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
-            </p>
-            <div class="f-team">
-                <span>정성진</span>
-                <span>노승빈</span>
-                <span>김승민</span>
-                <span>서준명</span>
-                <span>김수정</span>
-                <span>안성민</span>
-            </div>
-            <a class="github-icon" href="/">
-                <img src="/images/SNS_Icon/github.png" alt="github">
-            </a>
-        </div>
-    </footer>
+            if (text.length > maxLength) {
+                item.textContent = text.slice(0, maxLength) + ' . . . 더보기';
+            }
+        });
 
 
+    </script>
 </body>
-
 </html>

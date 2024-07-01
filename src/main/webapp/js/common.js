@@ -13,9 +13,9 @@ function loadScript(url) {
 
 /* 새로운 JavaScript 파일 생성 시 loadScript 추가. [Ex. loadScript("/경로/header.js")] */
 Promise.all([
-    loadScript("/js/header.js"),
-    loadScript("/js/main.js"),
-    loadScript("/js/editPage.js"),
+    loadScript("/src/main/webapp/js/header.js"),
+    loadScript("/src/main/webapp/js/main.js"),
+    loadScript("/src/main/webapp/js/editPage.js"),
 ])
     .then(() => {
         console.log("All scripts loaded.");

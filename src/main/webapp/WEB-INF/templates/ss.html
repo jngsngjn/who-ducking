@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+
+
+.h-gnb_items a {
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+  }
+  
+  .h-gnb_items a span {
+    display: block;
+    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55), -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .h-gnb_items a:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    content: attr(data-hover);
+    display: inline;
+    text-align: center;
+    -webkit-transition: top 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: top 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .h-gnb_items a:hover {
+    color: #cc8e35;
+  }
+  
+  .h-gnb_items a:hover span {
+    color: #cc8e35;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+  
+  .h-gnb_items a:hover:after {
+    top: 0;
+  }
+  
+  .h-gnb_items a:active {
+    -webkit-animation-name: rubberBand;
+    animation-name: rubberBand;
+  }
+    </style>
+</head>
+<body>
+    <ul class="h-gnb_items">
+                              
+
+        <li>
+              <a href="/genre" data-hover="장르"><span>장르</span></a>
+        </li>
+        <li>
+              <a href="/community">커뮤니티</a>
+        </li>
+        <li>
+              <a href="/news">소식</a>
+        </li>
+        <li>
+              <a href="/playground">놀이터</a>
+        </li>
+        </ul>
+</body>
+</html>

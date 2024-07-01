@@ -96,6 +96,72 @@
     color: var(--titleColor);
 }
 
+
+/* 헤더 호버 CSS 시작 */
+.h-gnb_items .header-list-a {
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+}
+
+.h-gnb_items .header-list-a .header-list {
+    display: block;
+    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55), -webkit-transform 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.h-gnb_items .header-list-a:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    content: attr(data-hover);
+    display: inline;
+    text-align: center;
+    -webkit-transition: top 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: top 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.h-gnb_items .header-list-a:hover {
+    color: var(--mainColor);
+}
+
+.h-gnb_items .header-list-a:hover .header-list {
+    color: var(--mainColor);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+.h-gnb_items .header-list-a:hover:after {
+    top: 0;
+}
+
+.h-gnb_items .header-list-a:active {
+    -webkit-animation-name: rubberBand;
+    animation-name: rubberBand;
+}
+.alarm_btn {
+    cursor: pointer;
+}
+
+/* 성진 추가 */
+.alarm_btn:hover {
+    color: var(--mainColor);
+}
+/* 헤더 호버 CSS 끝 */
 /* Global Navigation Bar =>> Alarm ===== */
 .h-alarm_btn > li > a {
     position: relative;
@@ -106,26 +172,77 @@
 
 .h-alarm_list {
     position: absolute;
-    top: calc(100% - 1rem);
-    left: 80%;
+    top: calc(100% - 0rem);
+    left: 0%;
     transform: translateX(-50%);
-    padding: 1.6rem;
-    width: 350px;
+    width: 360px;
+    background-color: #ffffff;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
-.h-alarm_list > li {
-    margin-bottom: 0.8rem;
+
+
+.h-line{
+    border-top: 1px solid #d9d9d9;
+    width: 350px;
+    height: 1px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.h-button-allcheck{
+    background-color: var(--mainColor);
+    color: white;
+    border-radius: 1rem;
+    width: 80px;
+    margin-top: 0.5rem;
+    margin-left: auto;
+}
+
+.h-button-allcheck:hover{
+    background-color: white;
+    color: var(--mainColor);
+    border-radius: 1rem;
+    width: 80px;
+    margin-top: 0.5rem;
+    margin-left: auto;
+}
+
+
+.dd > i{
+    color: var(--mainColor) !important;
+    font-size: 20px !important;
+}
+
+.dd > i:hover{
+    color: #d9d9d9 !important;
+    font-size: 20px !important;
+}
+
+.h-alarm_list > div{
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.h-alarm_list > div > li{
+    display: flex;
+    justify-content: space-between;
 }
 
 .h-alarm_list > li:last-child {
-    margin-bottom: 0;
+    margin-bottom: 100px;
 }
 
-.h-alarm_list > li > a {
-    font-size: 1.4rem;
+.h-alarm_list > div > li > a {
+    font-size: 1.7rem;
+    color: black;
 }
 
-.h-alarm_list > li > a:hover {
+.h-alarm_list > div > li > a:hover {
     font-weight: 500;
     color: var(--mainColor);
 }

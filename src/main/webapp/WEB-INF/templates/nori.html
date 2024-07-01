@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -27,11 +27,215 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/src/main/webapp/js/common.js"></script>
 
+    <style>
+        .nori_body {
+            background-image: url('/src/main/webapp/images/Background_Image/naruto.png');
+            background-repeat: no-repeat;
+            background-position: 0% 40%;
+            background-size: 100% 52.08%;
+        }       
 
+        .nori_header {
+            transform: scale(0.85714);
+        }
+
+        .nori_main {
+            transform: scale(0.85714);
+        }
+
+        .nori_content {
+            width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nori_h2 {
+            color: #ff8b00;
+            font-size: 50px;
+        }
+
+        .nori_ul {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nori_draw {
+            color: #ff8b00;
+            font-size: 50px;
+        }
+
+        .nori_drawgo {
+            color: #ff8b00;
+            font-size: 30px;
+        }
+
+        .nori_draw_item {
+            width: 445px;
+            height: 740px;
+            border-radius: 10px;
+            background-color: #FEFFDB;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        }
+
+        .nori_draw_img {
+            width: 400px;
+            height: 400px;
+        }
+
+        .nori_draw_img_ul {
+            width: 400px;
+            height: 400px;
+            display: flex;
+        }
+
+        .nori_draw_img_box {
+            position: absolute;
+            display: flex;
+            width: 400px;
+            margin-bottom: 10px;
+            margin-bottom: 15px;
+            justify-content: space-between;
+            align-self: flex-end;
+        }
+
+        .nori_draw_coin {
+            font-size: 24px;
+            background-color: white;
+            width: 100px;
+            height: 35px;
+            border-radius: 10px;
+            margin-left: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nori_draw_icon1 {
+            color: #FFC60B;
+            margin-right: 10px;
+        }
+
+        .nori_draw_date {
+            font-size: 18px;
+            background-color: white;
+            width: 170px;
+            height: 35px;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nori_draw_icon2 {
+            margin-right: 10px;
+        }
+
+        .nori_draw_name {
+            font-size: 32px;
+            align-self: flex-start;
+            margin-left: 30px;
+            color: black;
+        }
+
+        .nori_draw_button {
+            width: 400px;
+            height: 95px;
+            border-radius: 20px;
+            background-color: #ff8b00;
+            color: white;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nori_ur {
+            color: #e50e0e;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 900;
+            position: relative;
+            height: 40px;
+            -webkit-text-stroke: 3px #ff9696;
+            text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+        
+        .nori_sr {
+            color: #0C22EE;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 900;
+            position: relative;
+            height: 40px;
+            -webkit-text-stroke: 3px #8481FF;
+            text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+        
+        .nori_r {
+            color: #24B329;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 900;
+            position: relative;
+            height: 40px;
+            -webkit-text-stroke: 3px #05FF00;
+            text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .nori_line{
+            width: 1400px;
+            height: 1px;
+            border-top: 1px solid #d9d9d9;
+            margin-bottom: 100px;
+            margin-top: 100px;
+        }
+
+        .nori_content2{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nori_worldcup{
+            display: block;
+            width: 650px;
+            height: 650px;
+        }
+        
+        .nori_roulette{
+            display: block;
+            width: 720px;
+            height: 240px;
+        }
+        
+        .nori_quiz{
+            display: block;
+            width: 720px;
+            height: 380px;
+        }
+
+        .nori_banner2{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 
-<body class="myWrite_body">
-    <header id="header" th:fragment="header" class="myWrite_header">
+<body class="nori_body">
+    <header id="header" th:fragment="header" class="nori_header">
         <div class="h-inner">
             <!-- Left -->
             <div class="h-left">
@@ -222,161 +426,125 @@
             </div>
         </div>
     </header>
-    <main id="container" class="myWrite_main">
-        <div class="myWrite_head-title">
+    <main id="container" class="nori_main">
+        <div class="nori_content">
+            <ul class="nori_ul">
+                <li>
+                    <h2 class="nori_h2">놀이터</h2>
+                </li>
+            </ul>
+            <ul class="nori_ul">
+                <li>
+                    <h2 class="nori_draw">WHO's DUCK 럭키 드로우</h2>
+                </li>
+                <li>
+                    <a href="" class="nori_drawgo">더 보기 <i class="fa-solid fa-arrow-right"></i></a>
+                </li>
+            </ul>
+            <!-- 럭키드로우 상품 -->
+            <ul class="nori_ul">
+                <li class="nori_draw_item">
+                    <div class="nori_ur">UR</div>
+                    <div class="nori_draw_img">
+                        <ul class="nori_draw_img_ul">
+                            <img src="/src/main/webapp/images/Figure/Mitsuri.png" alt="">
+                            <li class="nori_draw_img_box">
+                                <div class="nori_draw_coin">
+                                    <div class="nori_draw_icon1">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="nori_draw_date">
+                                    <div class="nori_draw_icon2">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nori_draw_name">귀멸의 칼날</div>
+                    <div class="nori_draw_name">미츠리 레진 대형 스테츄</div>
+                    <button class="nori_draw_button">응모하기</button>
+                </li>
+                <li class="nori_draw_item">
+                    <div class="nori_sr">SR</div>
+                    <div class="nori_draw_img">
+                        <ul class="nori_draw_img_ul">
+                            <img src="/src/main/webapp/images/Figure/Mitsuri.png" alt="">
+                            <li class="nori_draw_img_box">
+                                <div class="nori_draw_coin">
+                                    <div class="nori_draw_icon1">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="nori_draw_date">
+                                    <div class="nori_draw_icon2">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nori_draw_name">귀멸의 칼날</div>
+                    <div class="nori_draw_name">미츠리 레진 대형 스테츄</div>
+                    <button class="nori_draw_button">응모하기</button>
+                </li>
+                <li class="nori_draw_item">
+                    <div class="nori_r">R</div>
+                    <div class="nori_draw_img">
+                        <ul class="nori_draw_img_ul">
+                            <img src="/src/main/webapp/images/Figure/Mitsuri.png" alt="">
+                            <li class="nori_draw_img_box">
+                                <div class="nori_draw_coin">
+                                    <div class="nori_draw_icon1">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="nori_draw_date">
+                                    <div class="nori_draw_icon2">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                        </div>
+                                        <span>
+                                        2024.06.28까지
 
-            <h2 class="myWrite_h2">나의 글 목록</h2>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nori_draw_name">귀멸의 칼날</div>
+                    <div class="nori_draw_name">미츠리 레진 대형 스테츄</div>
+                    <a href="" class="nori_draw_button">응모하기</a>
+                </li>
+            </ul>
+            <!-- 하단 배너 -->
+            <div class="nori_line"></div>
+            <ul class="nori_content2">
+                <li>
+                    <a href="" class="nori_worldcup">
+                        <img src="/src/main/webapp/images/Worldcup.png" alt="">
+                    </a>
+                </li>
 
-            <div>
-                <button class="myWrite_filter">최신 순</button>
-                <button class="myWrite_filter2">조회수 순</button>
-            </div>
+                <li class="nori_banner2">
+                    <a href="" class="nori_roulette">
+                        <img src="/src/main/webapp/images/Roulette.png" alt="">
+                    </a>
+                    <a href="" class="nori_quiz">
+                        <img src="/src/main/webapp/images/Quiz.png" alt="">
+                     </a>
+                </li>
+                
+            </ul>
+            
         </div>
-        <div class="myWrite_menulist">
-            <div class="myWrite_menu">
-                <ul>
-                    <li class="myWrite_menuli">
-                        <a href="">나의 리뷰</a>
-                    </li>
-                    <div class="myWrite_line"></div>
-                    <li class="myWrite_menuli">
-                        <a href="">나의 게시글</a>
-                    </li>
-                    <div class="myWrite_line"></div>
-                    <li class="myWrite_menuli">
-                        <a href="">나의 건의 내역</a>
-                    </li>
-                    <div class="myWrite_line"></div>
-                    <li class="myWrite_menuli">
-                        <a href="">나의 북마크</a>
-                    </li>
-                </ul>
-            </div>
 
-            <div class="myWrite_writelist">
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        미미짱 이번주 출연시간 너무 적은거아님?
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        마린짱...나도 옷 잘 만들 수 있는데
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        이 애니 추가해주세요ㅋ
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        이 애니 추가해주세요ㅋ
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="myWrite_line2"></div>
-                <ul class="myWrite_content">
-                    <li class="myWrite_title">
-                        이 애니 추가해주세요ㅋ
-                    </li>
-                    <li class="myWrite_time">2024-06-02 15:33
-                        <div class="mainFourthSection_freeboard_icon">
-                            <div class="mainFourthSection_freeboard_views">
-                                <i class="fa-regular fa-eye"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_bookmarks">
-                                <i class="fa-regular fa-star"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                            <div class="mainFourthSection_freeboard_comments">
-                                <i class="fa-regular fa-comment"></i>
-                                <!-- 실제 데이터 -->148
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="myWrite_next">
-                <a class="myWrite_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;&lt;</a>
-                <a class="myWrite_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number - 1})}">&lt;</a>
-                <span th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
-                    <a th:classappend="${i == requestPage.number + 1} ? 'myWrite_now-button' : 'next-button'" th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
-                </span>
-                <a class="next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;</a>
-                <a class="next-button" th:classappend="${requestPage.last} ? 'disabled' : ''" th:href="@{/myPage/request-list(page=${requestPage.number + 1})}">&gt;&gt;</a>
-            </div>
-        </div>
     </main>
-
     <footer id="footer" th:fragment="footer">
         <div class="f-box">
             <div class="h-logo">
@@ -418,8 +586,6 @@
             </a>
         </div>
     </footer>
-
-
 </body>
 
 </html>

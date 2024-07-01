@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/src/main/webapp/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/src/main/webapp/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/src/main/webapp/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/src/main/webapp/css/common.css" />
+
+    <!-- jQuery -->
+    <script src="/src/main/webapp/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/src/main/webapp/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/src/main/webapp/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/src/main/webapp/js/common.js"></script>
+
+    <style>
+        .lucky_prize_body {
+            background-image: url('/src/main/webapp/images/Background_Image/inuyasha.png');
+            background-repeat: no-repeat;
+            background-position: 0% 50%;
+            background-size: 100% 40%;
+        }
+
+        .lucky_prize_header {
+            transform: scale(0.85714);
+        }
+
+        .lucky_prize_main {
+            transform: scale(0.85714);
+        }
+
+        .lucky_prize_content {
+            width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lucky_prize_h2 {
+            color: #ff8b00;
+            font-size: 50px;
+        }
+
+        .lucky_prize_ul {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .lucky_prize_profile {
+            width: 1350px;
+            height: 607px;
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-self: center;
+        }
+
+
+
+        .lucky_prize_photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .lucky_prize_line {
+            height: 600px;
+            border-left: 1px solid #d9d9d9;
+        }
+
+        .lucky_prize_line2 {
+            width: 617px;
+            border-top: 1px solid #d9d9d9;
+            margin-top: 20px;
+        }
+
+        .lucky_prize_name {
+            font-size: 40px;
+            align-items: flex-start;
+            display: flex;
+            color: black;
+            font-weight: 900;
+        }
+
+        .lucky_prize_button {
+            width: 375px;
+            height: 50px;
+            background-color: #ffc60b;
+            border-radius: 10px;
+            font-size: 28px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        .lucky_prize_coin {
+            font-size: 36px;
+            width: 617px;
+            border-radius: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .lucky_prize_icon1 {
+            color: #FFC60B;
+            margin-right: 10px;
+        }
+
+        .lucky_prize_date {
+            font-size: 28px;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .lucky_prize_icon2 {
+            margin-right: 10px;
+        }
+
+        .lucky_prize_date2 {
+            font-size: 28px;
+            color: black;
+            font-weight: 900;
+            display: flex;
+        }
+
+        .lucky_prize_announce {
+            font-size: 28px;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .lucky_prize_icon3 {
+            margin-right: 10px;
+        }
+
+        .lucky_prize_announce_date {
+            font-size: 28px;
+            color: black;
+            font-weight: 900;
+            display: flex;
+        }
+
+        .lucky_prize_winner {
+            font-size: 28px;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .lucky_prize_winner_num {
+            font-size: 28px;
+            color: black;
+            font-weight: 900;
+            display: flex;
+        }
+
+        .lucky_prize_line3 {
+            width: 1400px;
+            border-top: 1px solid #d9d9d9;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        /* 다른 드로우 상품 */
+
+        .lucky_prize_item {
+            width: 445px;
+            height: 518px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lucky_prize_img {
+            width: 400px;
+            height: 400px;
+        }
+
+        .lucky_prize_img_ul {
+            width: 400px;
+            height: 400px;
+            display: flex;
+        }
+
+        .lucky_prize_img_box {
+            position: absolute;
+            display: flex;
+            width: 400px;
+            margin-bottom: 10px;
+            margin-bottom: 15px;
+            justify-content: space-between;
+            align-self: flex-end;
+        }
+        /* 코인 */
+        .lucky_prize_coin2 {
+            font-size: 24px;
+            background-color: white;
+            width: 100px;
+            height: 35px;
+            border-radius: 10px;
+            margin-left: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lucky_prize_icon4 {
+            color: #FFC60B;
+            margin-right: 10px;
+        }
+        /* 달력 */
+        .lucky_prize_date3 {
+            font-size: 18px;
+            background-color: white;
+            width: 180px;
+            height: 35px;
+            border-radius: 10px;
+            margin-right: 10px;
+            font-weight: 900;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lucky_prize_icon5 {
+            margin-right: 10px;
+        }
+
+        .lucky_prize_name2 {
+            font-size: 32px;
+            align-self: flex-start;
+            margin-left: 30px;
+            color: black;
+        }
+
+        /* 페이지 버튼 */
+        .lucky_prize_next {
+            width: 424px;
+            height: 54px;
+            gap: 20px;
+            align-items: center;
+            display: flex;
+            align-self: center;
+        }
+
+        .lucky_prize_next-button {
+            width: 54px;
+            height: 54px;
+            border-radius: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background-color: #feffdb;
+        }
+
+        .lucky_Prize_now-button {
+            width: 54px;
+            height: 54px;
+            border-radius: 100px;
+            background-color: #ffc60b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .lucky_prize_notice{
+            list-style-type: disc;
+            font-size: 24px;
+            margin-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+    </style>
+</head>
+
+<body class="lucky_prize_body">
+    <header id="header" th:fragment="header" class="lucky_prize_header">
+        <div class="h-inner">
+            <!-- Left -->
+            <div class="h-left">
+                <!-- Logo -->
+                <h1 class="h-logo">
+                    <a class="navbar-brand" href="/">
+                        <img src="/src/main/webapp/images/Logo/logo.png" alt="로고">
+
+                    </a>
+                </h1>
+                <!-- Search Box -->
+                <form action="/search" method="get" class="h-search_box">
+                    <input type="text" id="" name="name" class="h-search_bar" />
+                    <button type="submit" class="h-search_btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+            <!-- Right -->
+            <div class="h-right">
+                <!-- Global Navigation Bar -->
+                <ul class="h-gnb_items">
+                    <li>
+                        <a href="/genre">장르</a>
+                    </li>
+                    <li>
+                        <a href="/community">커뮤니티</a>
+                    </li>
+                    <li>
+                        <a href="/news">소식</a>
+                    </li>
+                    <li>
+                        <a href="/playground">놀이터</a>
+                    </li>
+                    <!-- Alarm Dropdown -->
+                    <div class="h-alarm">
+                        <div class="h-alarm_btn" sec:authorize="isAuthenticated()">
+                            <li>
+                                <a href="#none">
+                                    알림
+                                    <!-- <span class="h-alarm_count">12</span> -->
+                                </a>
+                            </li>
+                        </div>
+
+                        <div class="h-alarm_btn" sec:authorize="!isAuthenticated()">
+                            <li>
+                                <a href="/login" style="color: var(--mainColor)">
+                                    로그인
+                                    <!-- <span class="h-alarm_count">12</span> -->
+                                </a>
+                            </li>
+                        </div>
+
+
+                    </div>
+                </ul>
+                <!-- Profile -->
+                <div class="h-profile_box">
+                    <!-- Profile Btn -->
+                    <div class="h-profile" sec:authorize="isAuthenticated()">
+                        <div>
+                            <img class="h-mobile_profile-img"
+                                th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
+                        </div>
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                </div>
+                <!-- Profile Menu -->
+
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="h-mobile">
+            <!-- Open Btn -->
+            <button class="h-mobile_btn-open">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="h-mobile_box">
+                <!-- Close Btn -->
+                <button class="h-mobile_btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <!-- Mobile Menu -->
+                <div class="h-mobile_menu_box">
+                    <!-- Logo -->
+                    <div class="h-logo mobile-logo">
+                        <a href="/">
+                            <img src="/images/Logo/logo.png" alt="로고">
+                        </a>
+                    </div>
+                    <!-- Mobile Profile (비로그인 시, 주석) -->
+                    <ul class="h-mobile_profile-gnb">
+                        <li>
+                            <div class="h-mobile_profile-box" sec:authorize="isAuthenticated()">
+                                <div class="h-mobile_profile">
+                                    <div>
+                                        <img class="h-mobile_profile-img"
+                                            th:src="${session.profileImageName != null} ? @{/image/{profileImageName}(profileImageName=${session.profileImageName})} : @{/image/{levelImageName}(levelImageName=${session.levelImageName})}" />
+                                    </div>
+                                    <strong href="/myPage" class="h-mobile_profile-nickname"
+                                        th:value="${session.nickname}">UserNickname</strong>
+                                </div>
+                                <div class="h-mobile_profile_exp_box">
+                                    <div class="h-mobile_profile_level-point">
+                                        <span class="h-mobile_profile_level" th:text="Lv. + ${session.level}"></span>
+                                        <div class="h-mobile_profile_point">
+                                            <i class="fa-solid fa-coins"></i>
+                                            <span th:text="${session.point}"></span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="h-mobile_profile_exp_point">16 / 20 EXP</span>
+                                    </div>
+                                    <div class="h-mobile_profile_menu_exp">
+                                        <span class="h-mobile_profile_exp_track"></span>
+                                        <span class="h-mobile_profile_exp_thumb" style="width: 80%;"></span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                            <ul class="h-mobile_profile-lnb" sec:authorize="isAuthenticated()">
+                                <div class="h-mobile_alarm">
+                                    <div class="h-mobile_alarm-btn">
+                                        <li>
+                                            <a href="#none">
+                                                알림
+                                                <!-- <span class="h-mobile_alarm_count">12</span> -->
+                                            </a>
+                                        </li>
+                                    </div>
+                                    <ul class="h-mobile_alarm-list">
+                                        <!-- Alarm X -->
+                                        <li>
+                                            <a href="#none">알림이 없습니다.</a>
+                                        </li>
+                                        <!-- Alarm O -->
+                                        <li>
+                                            <a href="#none">
+                                                ~~ 게시글에 ~~ 님이 새로운 댓글을 등록하였습니다.
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#none">
+                                                ~~ 건의에 대한 답변이 등록되었습니다.
+                                            </a>
+                                        </li>
+                                        <!-- 리스트 추가 시, 양식대로 추가
+                                        <li>
+                                            <a href="#none">
+            
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                                <li>
+                                    <a href="/mypage">마이페이지</a>
+                                </li>
+                                <li>
+                                    <a href="/logout">로그아웃</a>
+                                </li>
+                            </ul>
+                            <!-- Mobile Menu Default -->
+                            <ul class="h-mobile_menu">
+                                <li>
+                                    <a href="/genre">장르</a>
+                                </li>
+                                <li>
+                                    <a href="/community">커뮤니티</a>
+                                </li>
+                                <li>
+                                    <a href="/news">소식</a>
+                                </li>
+                                <li>
+                                    <a href="/playground">놀이터</a>
+                                </li>
+                            </ul>
+                            <!-- Before Login Menu -->
+                            <ul class="h-mobile_sign">
+                                <li>
+                                    <a class="nav-link" href="/login">로그인</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id="container" class="lucky_prize_main">
+        <div class="lucky_prize_content">
+            <ul class="lucky_prize_ul">
+                <h2 class="lucky_prize_h2">럭키 드로우 상세 정보</h2>
+            </ul>
+            <ul class="lucky_prize_profile">
+                <div>
+                    <li class="lucky_prize_photo">
+                        <img src="/src/main/webapp/images/Figure/mitsuri.png" alt="">
+                    </li>
+                </div>
+                <div class="lucky_prize_line"></div>
+                <li>
+                    <div class="lucky_prize_name">미츠리 레진 대형 스테츄</div>
+                    <div class="lucky_prize_line2"></div>
+
+                    <button class="lucky_prize_button">응모하기</button>
+                    <div class="lucky_prize_coin">
+                        <div class="lucky_prize_icon1">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        30P
+                    </div>
+                    <div class="lucky_prize_date">
+                        <div class="lucky_prize_icon2">
+                            <i class="fa-regular fa-calendar-days"></i>
+                        </div>
+                        응모 기간
+                    </div>
+                    <div class="lucky_prize_date2">2024.06.24 (월) ~ 2024.06.28 (금) 까지</div>
+
+                    <div class="lucky_prize_announce">
+                        <div class="lucky_prize_icon3">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        당첨자 발표
+                    </div>
+                    <div class="lucky_prize_announce_date">2024.06.29 (토) 20:00</div>
+
+                    <div class="lucky_prize_winner">
+                        <div class="lucky_prize_icon3">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        당첨자 인원
+                    </div>
+                    <div class="lucky_prize_winner_num">1명</div>
+
+                </li>
+            </ul>
+
+            <div class="lucky_prize_line3"></div>
+
+            <ul class="lucky_prize_ul">
+                <h2 class="lucky_prize_h2">다른 럭키 드로우 상품</h2>
+            </ul>
+
+            <ul class="lucky_prize_ul">
+                <li class="lucky_prize_item">
+                    <div class="lucky_prize_img">
+                        <ul class="lucky_prize_img_ul">
+                            <img src="/src/main/webapp/images/Figure/mitsuri.png" alt="">
+                            <li class="lucky_prize_img_box">
+                                <div class="lucky_prize_coin2">
+                                    <div class="lucky_prize_icon4">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="lucky_prize_date3">
+                                    <div class="lucky_prize_icon5">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lucky_prize_name2">미츠리 레진 대형 스테츄</div>
+                </li>
+                <li class="lucky_prize_item">
+                    <div class="lucky_prize_img">
+                        <ul class="lucky_prize_img_ul">
+                            <img src="/src/main/webapp/images/Figure/mitsuri.png" alt="">
+                            <li class="lucky_prize_img_box">
+                                <div class="lucky_prize_coin2">
+                                    <div class="lucky_prize_icon4">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="lucky_prize_date3">
+                                    <div class="lucky_prize_icon5">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lucky_prize_name2">미츠리 레진 대형 스테츄</div>
+                <li class="lucky_prize_item">
+                    <div class="lucky_prize_img">
+                        <ul class="lucky_prize_img_ul">
+                            <img src="/src/main/webapp/images/Figure/mitsuri.png" alt="">
+                            <li class="lucky_prize_img_box">
+                                <div class="lucky_prize_coin2">
+                                    <div class="lucky_prize_icon4">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="lucky_prize_date3">
+                                    <div class="lucky_prize_icon5">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lucky_prize_name2">미츠리 레진 대형 스테츄</div>
+                <li class="lucky_prize_item">
+                    <div class="lucky_prize_img">
+                        <ul class="lucky_prize_img_ul">
+                            <img src="/src/main/webapp/images/Figure/mitsuri.png" alt="">
+                            <li class="lucky_prize_img_box">
+                                <div class="lucky_prize_coin2">
+                                    <div class="lucky_prize_icon4">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="lucky_prize_date3">
+                                    <div class="lucky_prize_icon5">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lucky_prize_name2">미츠리 레진 대형 스테츄</div>
+                <li class="lucky_prize_item">
+                    <div class="lucky_prize_img">
+                        <ul class="lucky_prize_img_ul">
+                            <img src="/src/main/webapp/images/Figure/mitsuri.png" alt="">
+                            <li class="lucky_prize_img_box">
+                                <div class="lucky_prize_coin2">
+                                    <div class="lucky_prize_icon4">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="lucky_prize_date3">
+                                    <div class="lucky_prize_icon5">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lucky_prize_name2">미츠리 레진 대형 스테츄</div>
+                <li class="lucky_prize_item">
+                    <div class="lucky_prize_img">
+                        <ul class="lucky_prize_img_ul">
+                            <img src="/src/main/webapp/images/Figure/mitsuri.png" alt="">
+                            <li class="lucky_prize_img_box">
+                                <div class="lucky_prize_coin2">
+                                    <div class="lucky_prize_icon4">
+                                        <i class="fa-solid fa-coins"></i>
+                                    </div>
+                                    30P
+                                </div>
+                                <div class="lucky_prize_date3">
+                                    <div class="lucky_prize_icon5">
+                                        <i class="fa-regular fa-calendar-days"></i>
+                                    </div>
+                                    2024.06.28까지
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lucky_prize_name2">미츠리 레진 대형 스테츄</div>
+                
+                
+
+            </ul>
+
+            
+                <div class="lucky_prize_next">
+                    <a class="lucky_prize_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''"
+                        th:href="">&lt;&lt;</a>
+                    <a class="lucky_prize_next-button" th:classappend="${requestPage.first} ? 'disabled' : ''"
+                        th:href="">&lt;</a>
+                    <span th:each="i : ${#numbers.sequence(1, requestPage.totalPages)}">
+                        <a th:classappend="${i == requestPage.number + 1} ? 'lucky_prize_now-button' : 'lucky_prize_next-button'"
+                            th:href="@{/myPage/request-list(page=${i - 1})}" th:text="${i}">1</a>
+                    </span>
+                    <a class="lucky_prize_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''"
+                        th:href="">&gt;</a>
+                    <a class="lucky_prize_next-button" th:classappend="${requestPage.last} ? 'disabled' : ''"
+                        th:href="">&gt;&gt;</a>
+                </div>
+            
+                <div class="lucky_prize_line3"></div>
+
+                <ul class="lucky_prize_ul">
+                    <h2 class="lucky_prize_h2">유의 사항</h2>
+                </ul>
+                
+
+                
+                <ul class="lucky_prize_ul">
+                    <li class="lucky_prize_notice">본 럭키 드로우는 Who’s DucKing 회원 전용 이벤트입니다.</li>
+                    <li class="lucky_prize_notice">응모 이벤트 참여 완료는 마이페이지 &gt; 응모 내역에서 확인할 수 있습니다.</li>
+                    <li class="lucky_prize_notice">당첨자에 한하여 결제 관련 문자 메시지 및 이메일을 발송드리며, 미당첨자에게 별도의 연락을 드리지 않습니다.</li>
+                    <li class="lucky_prize_notice">72시간 이내 주소를 입력하지 않거나 최종 확인 절차를 진행하지 않을 시, 자동으로 취소 및 재추첨은 진행하지 않습니다.</li>
+                    <li class="lucky_prize_notice">회원 정보가 일치하지 않거나 부당한 방법으로 응모한 고객의 경우 당첨 취소, 추후 이벤트 응모 시 불이익을 받을 수 있습니다.</li>
+                    <li class="lucky_prize_notice">모든 절차가 완료된 후, 상품에 문제가 있지 않는 한 교환 및 포인트 환불은 불가합니다.</li>
+
+                </ul>
+                
+        </div>
+    </main>
+
+    <footer id="footer" th:fragment="footer">
+        <div class="f-box">
+            <div class="h-logo">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/Logo/logoblack.png" alt="로고">
+                </a>
+            </div>
+            <ul class="f-gnb">
+                <li>
+                    <a href="#none">이용약관</a>
+                </li>
+                <li>
+                    <a href="#none">개인정보처리방침</a>
+                </li>
+                <li>
+                    <a href="#none">공지사항</a>
+                </li>
+                <li>
+                    <a href="#none">자주 묻는 질문</a>
+                </li>
+                <!-- Admin Page Link -->
+                <li th:if="${session.isAdmin}">
+                    <a href="/admin">관리자 페이지</a>
+                </li>
+            </ul>
+            <p class="f-copyright">
+                COPYRIGHT ⓒ Who’s DucKing, ALL RIGHTS RESERVED.
+            </p>
+            <div class="f-team">
+                <span>정성진</span>
+                <span>노승빈</span>
+                <span>김승민</span>
+                <span>서준명</span>
+                <span>김수정</span>
+                <span>안성민</span>
+            </div>
+            <a class="github-icon" href="/">
+                <img src="/images/SNS_Icon/github.png" alt="github">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>

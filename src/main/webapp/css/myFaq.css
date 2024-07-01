@@ -119,12 +119,25 @@
 
 .myFaq_next-button {
     width: 54px;
+    height: 54px;
     border-radius: 100px;
     background-color: #feffdb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
 }
 
 .myFaq_now-button {
     width: 54px;
+    height: 54px;
     border-radius: 100px;
     background-color: #ffc60b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
 }
+
+
+
