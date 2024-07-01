@@ -128,7 +128,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
             genres.add(new Genre("백합"));
             genres.add(new Genre("호러"));
             genres.add(new Genre("아동"));
-            genres.add(new Genre("가상"));
+            genres.add(new Genre("이세계"));
             genres.add(new Genre("멘붕"));
             genres.add(new Genre("메카"));
             genres.add(new Genre("능력자"));

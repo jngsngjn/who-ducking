@@ -39,4 +39,8 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select new hello.dto.animation.MyReviewDTO(r.animation.id, r.animation.name, r.animation.imageName, r.score) from Review r" +
             " where r.user = :user order by r.writeDate")
     Page<MyReviewDTO> findMyReviews(@Param("user") User user, Pageable pageable);
+
+    /* @ 애니메이션 리뷰 평점 조회 */
+    @Query("select ROUND(COALESCE(AVG(r.score), 0.0), 1) from Review r where r.animation = :animation")
+    double findReviewScore(@Param("animation") Animation animation);
 }

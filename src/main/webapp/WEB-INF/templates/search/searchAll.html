@@ -77,7 +77,6 @@
                         </ul>
                     </div>
 
-
                     <!-- Right : All Search Result -->
                     <div class="searchAll_list_box">
 
@@ -87,7 +86,7 @@
                             <!-- Title -->
                             <div class="searchAll_ani_title_box">
                                 <h2 class="searchAll_ani_title">애니</h2>
-                                <a href="" class="searchAll_ani_more_btn" th:if=""
+                                <a href="" class="searchAll_ani_more_btn" th:if="${!animations.isEmpty()}"
                                    style="display: none;">
                                     더보기
                                     <i class="fa-solid fa-arrow-right"></i>
@@ -96,33 +95,32 @@
                             <div class="searchAll_ani_list_line"></div>
 
                             <!-- Data Empty -->
-                            <div class="searchAll_ani_list_data_empty">
+                            <div class="searchAll_ani_list_data_empty" th:if="${animations.isEmpty()}">
                                 <span class="searchAll_ani_list_data_empty_text">검색한 애니 결과가 없습니다.</span>
                             </div>
 
                             <!-- Data Exist -->
-                            <div th:if="" class="searchAll_ani_list_data_exist">
+                            <div th:if="${!animations.isEmpty()}" class="searchAll_ani_list_data_exist">
                                 <div class="searchAll_ani_list_data_box">
-                                    <ul class="searchAll_ani_list_item" th:each="">
+                                    <ul class="searchAll_ani_list_item" th:each="animation : ${animations}">
                                         <li class="searchAll_ani_list_img_box">
-                                            <a th:href="">
-                                                <img th:src=""
-                                                     src="/who-ducking/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                            <a th:href="@{/animations/{id}(id=${animation.id})}">
+                                                <img th:src="@{/image/ani/{imageName}(imageName=${animation.imageName})}"
                                                      alt="애니메이션 포스터">
                                             </a>
                                         </li>
                                         <li class="searchAll_ani_list_info_box">
                                             <div class="searchAll_ani_list_comment">
                                                 <i class="fa-solid fa-comment"></i>
-                                                <span th:text=""><!-- 실제 데이터 -->50</span>
+                                                <span th:text="${animation.reviewCount}">50</span>
                                             </div>
                                             <div class="searchAll_ani_list_scoreAvg">
                                                 <i class="fa-solid fa-star"></i>
-                                                <span th:text=""><!-- 실제 데이터 -->4.7 / 5.0</span>
+                                                <span th:text="${animation.score} + ' / 5.0'">4.7 / 5.0</span>
                                             </div>
                                         </li>
                                         <li class="searchAll_ani_list_title_box">
-                                            <span th:text=""><!-- 실제 데이터-->주술회전</span>
+                                            <span th:text="${animation.title}">주술회전</span>
                                         </li>
                                     </ul>
                                 </div>
