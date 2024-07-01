@@ -89,10 +89,15 @@ public class AdminController {
     @GetMapping("/prize")
     public String prizePage(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<AdminPrizeListDTO> currentPrizes = adminService.getCurrentPrizes(page, 10);
-        Page<AdminPrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
         model.addAttribute("currentPrizes", currentPrizes);
-        model.addAttribute("expiredPrizes", expiredPrizes);
         return "admin/adminPrize";
+    }
+
+    @GetMapping("/prize/expired")
+    public String prizeExpiredPage(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<AdminPrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
+        model.addAttribute("expiredPrizes", expiredPrizes);
+        return "admin/adminPrizeExpired";
     }
 
     @PostMapping("/add-prize")

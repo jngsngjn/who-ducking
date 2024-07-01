@@ -22,8 +22,9 @@ body {
 }
 h2 {
     font-size: 2em;
-    margin-bottom: 20px;
-    color: #333;
+    margin-top: -10px;
+    margin-bottom: 0px;
+    color: #333
 }
 .nav-link {
     display: inline-block;

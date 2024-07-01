@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Who's DucKing</title>
     <link rel="icon" href="/images/10duck.ico">
-    <link rel="stylesheet" href="/css/admin/adminPrize.css"/>
+    <link rel="stylesheet" href="/css/admin/adminPrizeExpired.css"/>
     <link rel="stylesheet" href="/css/admin/AdminHeader.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/admin/adminPrize.js"></script>
@@ -23,8 +23,8 @@
         <button id="openModalBtn" class="register-button">경품 등록</button>
     </div>
     <div class="table-container">
-        <!-- 현재 진행 중인 경품 테이블 -->
-        <table id="currentPrizesTable">
+        <!-- 만료된 경품 테이블 -->
+        <table id="expiredPrizesTable">
             <thead>
             <tr>
                 <th>번호</th>
@@ -32,24 +32,34 @@
                 <th>시작일자</th>
                 <th>종료일자</th>
                 <th>등급</th>
+                <th>당첨자 닉네임</th>
             </tr>
             </thead>
-            <tbody id="currentPrizes">
-            <tr th:each="prize, stat : ${currentPrizes.content}">
-                <td><a th:href="@{/admin/prize/{id}(id=${prize.id})}" th:text="${stat.index + 1 + (currentPrizes.number * currentPrizes.size)}"></a></td>
-                <td><a th:href="@{/admin/prize/{id}(id=${prize.id})}" th:text="${prize.name}"></a></td>
+            <tbody id="expiredPrizes">
+            <tr th:each="prize, stat : ${expiredPrizes.content}">
+                <td th:if="${prize.nickname == null}">
+                    <a th:href="@{/admin/prize/draw/{id}(id=${prize.id})}" th:text="${stat.index + 1 + (expiredPrizes.number * expiredPrizes.size)}"></a>
+                </td>
+                <td th:unless="${prize.nickname == null}" th:text="${stat.index + 1 + (expiredPrizes.number * expiredPrizes.size)}"></td>
+
+                <td th:if="${prize.nickname == null}">
+                    <a th:href="@{/admin/prize/draw/{id}(id=${prize.id})}" th:text="${prize.name}"></a>
+                </td>
+                <td th:unless="${prize.nickname == null}" th:text="${prize.name}"></td>
+
                 <td th:text="${prize.startDate}"></td>
                 <td th:text="${prize.endDate}"></td>
                 <td th:text="${prize.grade}"></td>
+                <td th:text="${prize.nickname}"></td> <!-- 당첨자 닉네임 데이터 추가 -->
             </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="pagination" th:if="${!currentPrizes.isEmpty()}">
-        <a class="paging" th:if="${currentPrizes.hasPrevious()}" th:href="@{/admin/prize(page=${currentPrizes.number - 1})}">이전</a>
-        <span>페이지 <span th:text="${currentPrizes.number + 1}">1</span> / <span th:text="${currentPrizes.totalPages}">1</span></span>
-        <a class="paging" th:if="${currentPrizes.hasNext()}" th:href="@{/admin/prize(page=${currentPrizes.number + 1})}">다음</a>
+    <div class="pagination" th:if="${!expiredPrizes.isEmpty()}">
+        <a class="paging" th:if="${expiredPrizes.hasPrevious()}" th:href="@{/admin/prize/expired(page=${expiredPrizes.number - 1})}">이전</a>
+        <span>페이지 <span th:text="${expiredPrizes.number + 1}">1</span> / <span th:text="${expiredPrizes.totalPages}">1</span></span>
+        <a class="paging" th:if="${expiredPrizes.hasNext()}" th:href="@{/admin/prize/expired(page=${expiredPrizes.number + 1})}">다음</a>
     </div>
 </div>
 
