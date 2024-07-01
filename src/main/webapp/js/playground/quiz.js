@@ -81,7 +81,7 @@ $(document).ready(function() {
             currentQuestion.text(index + 1);
 
             clearInterval(timer);
-            timeLeft = 10;
+            timeLeft = 12; // 12초
             quizSubmitAnswer.prop('disabled', false);
             quizAnswerInput.on('keypress', handleKeyPress);
             startTimer();
@@ -99,7 +99,7 @@ $(document).ready(function() {
                 clearInterval(timer);
                 timeOut();
             }
-        }, 1000);
+        }, 1000); //1초
     }
 
     function updateTimerDisplay() {
@@ -191,7 +191,7 @@ $(document).ready(function() {
                 "#ff0000", "#ffcc00", "#00ff00", "#0000ff", "#800080", "#ffa500"
             ],
             confettiRadius: 5,
-            confettiNumber: 1000,
+            confettiNumber: 800,
         });
 
         // 맞춘 개수 표시 + 포인트 지급
