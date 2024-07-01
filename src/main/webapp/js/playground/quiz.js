@@ -51,20 +51,15 @@ $(document).ready(function() {
             sliderContainer.append(img);
         });
 
-        // 무한 슬라이드
+        // 무한 슬라이드를 위해 컨텐츠 복제
         const clonedContent = sliderContainer.html();
         sliderContainer.append(clonedContent);
 
-        let position = 0;
-        const slideWidth = sliderContainer.find('img').first().width() + 20; // 이미지 너비 + 마진
-
-        setInterval(() => {
-            position -= slideWidth;
-            if (Math.abs(position) >= sliderContainer.width() / 2) {
-                position = 0;
-            }
-            sliderContainer.css('transform', `translateX(${position}px)`);
-        }, 2000);
+        // 슬라이드 지속 시간 설정
+        setSlideDuration(120);  // 5초 동안 모든 이미지가 한 번씩 지나감
+    }
+    function setSlideDuration(duration) {
+        document.documentElement.style.setProperty('--slide-duration', `${duration}s`);
     }
 
     function startQuiz() {
@@ -88,6 +83,7 @@ $(document).ready(function() {
             quizAnswerInput.on('keypress', handleKeyPress);
             startTimer();
             quizTimer.show(); // 타이머와 모래시계 표시
+            quizNext.hide();
         }
     }
 
@@ -147,6 +143,7 @@ $(document).ready(function() {
         }
         quizSubmitAnswer.prop('disabled', true);
         quizAnswerInput.off('keypress', handleKeyPress);
+        quizNext.show();
     }
 
     quizNext.click(function() {
@@ -156,7 +153,6 @@ $(document).ready(function() {
         } else if (currentQuizIndex === quizzes.length - 1) {
             showResults();
         }
-        quizTimer.show(); // 다음 문제로 넘어갈 때 타이머와 모래시계 표시
     });
 
     function truncateTitle(title) {
@@ -175,7 +171,12 @@ $(document).ready(function() {
         resultImages.empty();
         quizzes.forEach((quiz, index) => {
             const container = $('<div>').addClass('image-container');
-            const img = $('<img>').attr('src', `/image/ani/${quiz.imageName}`).attr('alt', `Quiz ${index + 1}`);
+            const img = $('<img>')
+                        .attr('src', `/image/ani/${quiz.imageName}`)
+                        .attr('alt', `Quiz ${index + 1}`)
+                        .click(function() { // 클릭시 id에 대한 애니메이션 리뷰게시판 이동
+                            window.location.href = `/animations/${quiz.id}`;
+                        });
             const title = $('<div>').addClass('anime-title').text(truncateTitle(quiz.answer)); // 애니메이션 제목 추가
             const link = $('<a>').text('리뷰 보기').attr('href', `/animations/${quiz.id}`); // 리뷰 링크 설정
             container.append(img, title, link);
