@@ -41,6 +41,7 @@
     background-color: #fff;
     text-align: center;
     max-width: 20rem;
+    opacity: 0.8;
 }
 
 .streamingService_title {
@@ -227,6 +228,7 @@
     position: relative;
     height: 100%;
     padding-right: 3rem;
+    opacity: 0.8;
 }
 
 .attendanceCheck_item {
