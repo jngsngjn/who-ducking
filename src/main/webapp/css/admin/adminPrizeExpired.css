@@ -60,13 +60,13 @@ button {
 }
 
 #currentPrizesBtn {
-    color: #fff;
-    background-color: #ff8b00;
+    color: #ff8b00;
+    background-color: #fff;
 }
 
 #expiredPrizesBtn {
-    background-color: #fff;
-    color: #ff8b00;
+    background-color: #ff8b00;
+    color: #fff;
 }
 
 .modal {

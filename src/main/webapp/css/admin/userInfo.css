@@ -25,7 +25,7 @@ h2 {
     margin-bottom: 20px;
     color: #333;
 }
-a {
+.page_a {
     display: inline-block;
     text-decoration: none;
     color: #ff8b00;
@@ -36,7 +36,7 @@ a {
     border: 1px solid #ff8b00;
     border-radius: 5px;
 }
-a:hover {
+.page_a:hover {
     color: #fff;
     background-color: #ff8b00;
 }

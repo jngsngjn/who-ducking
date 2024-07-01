@@ -6,6 +6,7 @@ import hello.repository.db.EmailCodeRepository;
 import hello.repository.db.ProfileImageRepository;
 import hello.repository.db.UserRepository;
 import hello.repository.server.FileStore;
+import hello.service.basic.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -8,9 +8,11 @@
     <title>Who's DucKing</title>
     <link rel="icon" href="/images/10duck.ico">
     <link rel="stylesheet" href="/css/admin/RequestList.css">
+    <link rel="stylesheet" href="/css/admin/AdminHeader.css" />
 </head>
 <body>
 <div class="container">
+    <div th:insert="~{admin/adminHeader :: header}"></div>
     <h2>건의 목록</h2>
     <div class="table-container">
         <table>
@@ -38,7 +40,7 @@
             </tbody>
         </table>
     </div>
-    <div class="pagination">
+    <div class="pagination" th:if="${!requestPage.isEmpty()}">
         <a th:if="${requestPage.hasPrevious()}" th:href="@{/admin/request-list(page=${requestPage.number - 1})}" class="nav-link">이전</a>
         <span>페이지 <span th:text="${requestPage.number + 1}">1</span> / <span th:text="${requestPage.totalPages}">1</span></span>
         <a th:if="${requestPage.hasNext()}" th:href="@{/admin/request-list(page=${requestPage.number + 1})}" class="nav-link">다음</a>
