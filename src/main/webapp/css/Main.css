@@ -1,3 +1,11 @@
+/* 배경 이미지 ================================================ */
+.main_body {
+    background-image: url(/images/Background_Image/hosino.png);
+    background-repeat: no-repeat;
+    background-position: 7% -140%;
+    background-size: 100%;
+}
+
 /* Container ================================================ */
 #container {
     padding-top: 8rem;
