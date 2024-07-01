@@ -185,15 +185,6 @@ $(document).ready(function() {
         correctCountElement.text(`맞춘 문제 수: ${correctCount} / ${quizzes.length}`); // 맞춘 문제 표시
         correctCountElement.addClass('correct-count'); // css 입히기 위해 생성함
 
-        jsConfetti.addConfetti({
-            confettiColors: [
-                "#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd", "#f9bec7",
-                "#ff0000", "#ffcc00", "#00ff00", "#0000ff", "#800080", "#ffa500"
-            ],
-            confettiRadius: 5,
-            confettiNumber: 800,
-        });
-
         // 맞춘 개수 표시 + 포인트 지급
         if (correctCount === 5) {
             modal.css('display', 'flex');
@@ -206,6 +197,14 @@ $(document).ready(function() {
                 error: function(xhr, status, error) {
                     console.error("Error occurred:", status, error);
                 }
+            });
+            jsConfetti.addConfetti({
+                confettiColors: [
+                 "#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd", "#f9bec7",
+                 "#ff0000", "#ffcc00", "#00ff00", "#0000ff", "#800080", "#ffa500"
+                ],
+              confettiRadius: 5,
+              confettiNumber: 800,
             });
         } else {
             modal.css('display', 'none');
