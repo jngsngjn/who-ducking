@@ -194,25 +194,28 @@ $(document).ready(function() {
             confettiNumber: 1000,
         });
 
-        // 맞춘개수 표시 ex)1개 맞추면 포인트 지급
-        if (correctCount === 1) {
+        // 맞춘 개수 표시 + 포인트 지급
+        if (correctCount === 5) {
             modal.css('display', 'flex');
+            $.ajax({
+                url: '/playground/quiz/perfect',
+                type: 'POST',
+                success: function() {
+                    console.log("포인트 지급 성공")
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error occurred:", status, error);
+                }
+            });
         } else {
             modal.css('display', 'none');
         }
     }
 
-    // 모달 닫기 버튼 ->확인 누르면 됨
+    // 모달 닫기 버튼 -> 확인 누르면 됨
     closeModal.click(function() {
         modal.css('display', 'none');
     });
-
-//    // 모달 외부 클릭 시 닫기
-//    $(window).click(function(event) {
-//        if (event.target == modal[0]) {
-//            modal.css('display', 'none');
-//        }
-//    });
 
     //버튼  href 설정
     $('#quiz-prev').click(function() {
