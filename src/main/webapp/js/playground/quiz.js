@@ -109,6 +109,7 @@ $(document).ready(function() {
         quizSubmitAnswer.prop('disabled', true);
         quizAnswerInput.off('keypress', handleKeyPress);
         quizTimer.hide(); // 타이머와 모래시계 숨기기
+        quizNext.show();
     }
 
     startQuizButton.click(function() {
