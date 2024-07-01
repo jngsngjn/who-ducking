@@ -29,7 +29,7 @@ $(document).ready(function() {
     function loadQuizzes() {
         $.ajax({
             url: '/api/quizzes',  // 서버의 API 엔드포인트
-            method: 'POST',
+            method: 'GET',  // GET 요청으로 변경
             dataType: 'json',
             success: function(data) {
                 quizzes = data;
@@ -162,7 +162,6 @@ $(document).ready(function() {
     }
 
     function showResults() {
-
         quizScreen.hide();
         quizTitle.hide();
         resultScreen.show();
@@ -171,32 +170,21 @@ $(document).ready(function() {
             const container = $('<div>').addClass('image-container');
             const img = $('<img>').attr('src', `/image/ani/${quiz.imageName}`).attr('alt', `Quiz ${index + 1}`);
             const title = $('<div>').addClass('anime-title').text(truncateTitle(quiz.answer)); // 애니메이션 제목 추가
-            const link = $('<a>').text('리뷰 보기').attr('href', `/animations/${quiz.id}`); //
+            const link = $('<a>').text('리뷰 보기').attr('href', `/animations/${quiz.id}`); // 리뷰 링크 설정
             container.append(img, title, link);
             resultImages.append(container);
         });
-        correctCountElement.text(`맞춘 문제 수: ${correctCount} / ${quizzes.length}`) ;
+        correctCountElement.text(`맞춘 문제 수: ${correctCount} / ${quizzes.length}`);
         correctCountElement.addClass('correct-count');
         jsConfetti.addConfetti({
-                    confettiColors: [
-                        "#ff0a54", // 핑크
-                        "#ff477e", // 밝은 핑크
-                        "#ff7096", // 밝은 빨강
-                        "#ff85a1", // 살구색
-                        "#fbb1bd", // 밝은 살구색
-                        "#f9bec7", // 연한 핑크
-                        "#ff0000", // 빨강
-                        "#ffcc00", // 노랑
-                        "#00ff00", // 초록
-                        "#0000ff", // 파랑
-                        "#800080", // 보라
-                        "#ffa500"  // 주황
-                    ],
-                    confettiRadius: 5,
-                    confettiNumber: 1000,
-                });
+            confettiColors: [
+                "#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd", "#f9bec7",
+                "#ff0000", "#ffcc00", "#00ff00", "#0000ff", "#800080", "#ffa500"
+            ],
+            confettiRadius: 5,
+            confettiNumber: 1000,
+        });
     }
-
 
     $('#quiz-prev').click(function() {
         window.location.href = '/playground/quiz';
