@@ -40,8 +40,7 @@
                if (input.files && input.files[0]) {
                    var reader = new FileReader();
                    reader.onload = function(e) {
-                       $('#edit-imagePreview').attr('src', e.target.result);
-                       $('#edit-imagePreview').show();
+                       $('#edit-imagePreview').attr('src', e.target.result).show();
                        $('.edit-delete-image-button').show();
                        $('#edit-fileName').text(input.files[0].name).show();
                    }
@@ -72,7 +71,7 @@
         <div class="edit-form-group">
             <div class="edit-file-label-title">사진 첨부</div>
             <div class="edit-image-preview-container">
-                <img id="edit-imagePreview" class="edit-board-img" style="display:none;">
+                <img id="edit-imagePreview" class="edit-board-img" th:src="${board.imageName != null ? '/image/board/' + board.imageName : ''}" style="display:none;">
                 <button type="button" class="edit-delete-image-button" style="display:none;" onclick="editRemoveImage()">삭제</button>
                 <div id="edit-fileName" class="edit-file-name" style="display:none;"></div>
             </div>
@@ -91,7 +90,7 @@
         </div>
         <div class="edit-button-group">
             <button type="submit" class="edit-board-edit-button ">수정</button>
-            <button type="button" class="edit-board-edit-reset" onclick="window.location.href='/board'">취소</button>
+            <button type="button" class="edit-board-edit-reset" onclick=goBack()>취소</button>
         </div>
     </form>
 </div>

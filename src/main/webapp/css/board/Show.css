@@ -744,3 +744,11 @@
     resize:none;
 }
 
+.comment-profile-img { /*댓글 프로필*/
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #FFC60B;
+    margin-right: 20px;
+    vertical-align: middle;
+}
