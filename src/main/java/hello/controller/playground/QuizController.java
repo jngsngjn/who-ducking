@@ -22,7 +22,7 @@ public class QuizController {
     }
 
     @ResponseBody
-    @PostMapping("/api/quizzes")
+    @GetMapping("/api/quizzes")
     public List<QuizDTO> getQuizzes() {
         return quizService.getRandomQuizzes();
     }

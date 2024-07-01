@@ -40,7 +40,8 @@
         <span class="board-title">제목:</span>
         <span class="board-title" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}"></span>
     </div>
-    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${isAuthenticated || board.user.id == loginUserId}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${isAuthenticated && (board.user.id == loginUserId)}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+
 </div>
 <div class="board-title-second" style="position: relative;">
     <div class="board-author-group">
@@ -107,10 +108,18 @@
         <ul class="comment-list">
             <li class="comment-item" th:each="comment : ${comments}">
                 <div class="comment-content">
+                    <!-- 댓글 프로필 생성-->
+                    <img class="comment-profile-img" th:if="${comment.user.profileImage != null}"
+                         th:src="@{'/image/profile/' + ${comment.user.profileImage.storeImageName}}"
+                         alt="Profile Image" />
+                    <!-- 댓글 프로필 기본이미지 생성-->
+                    <img class="comment-profile-img" th:unless="${comment.user.profileImage != null}"
+                         th:src="@{'/image/level/' + ${comment.user.level.imageName}}"
+                         alt="Level Image" />
                     <span class="comment-writer" th:text="${comment.user.nickname}"></span>
                     <span class="board-menu-toggle" th:if="${comment.user != null && loginUserId != null && comment.user.id == loginUserId}">
-                        <i class="fa-solid fa-ellipsis-vertical" onclick="toggleCommentMenu(this)"></i>
-                    </span>
+                <i class="fa-solid fa-ellipsis-vertical" onclick="toggleCommentMenu(this)"></i>
+            </span>
                 </div>
                 <div class="comment-writer-container">
                     <span class="comment-writer-result" th:text="${comment.content}"></span><br>
@@ -140,6 +149,7 @@
                 </div>
             </li>
         </ul>
+
     </div>
 </section>
 <div th:insert="~{fragments/footer :: footer}"></div>
@@ -175,7 +185,7 @@
 
 <script>
     // 메뉴 기능
- document.addEventListener('DOMContentLoaded', (event) => {
+    document.addEventListener('DOMContentLoaded', (event) => {
      const menuToggle = document.getElementById('board-menu-toggle');
 
      const menu = document.getElementById('board-menu');

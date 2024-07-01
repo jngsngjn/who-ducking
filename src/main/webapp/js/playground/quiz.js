@@ -3,6 +3,7 @@ $(document).ready(function() {
     const quizScreen = $('#quiz-screen');
     const resultScreen = $('#result-screen');
     const resultImages = $('#result-images');
+    const quizTitle = $('.quiz-title');
     const startQuizButton = $('#start-quiz');
     const retryQuizButton = $('#retry-quiz');
     const goHomeButton = $('#go-home');
@@ -16,6 +17,8 @@ $(document).ready(function() {
     const currentQuestion = $('#quiz-current-question');
     const quizTime = $('#quiz-time');
     const correctCountElement = $('#correct-count');
+    const quizTimer = $('.quiz-timer'); // 타이머와 모래시계 컨테이너 선택자 추가
+    const jsConfetti = new JSConfetti(); // 폭죽
 
     let timer;
     let timeLeft;
@@ -25,17 +28,43 @@ $(document).ready(function() {
 
     function loadQuizzes() {
         $.ajax({
-            url: '/api/quizzes',
-            method: 'POST',
+            url: '/api/quizzes',  // 서버의 API 엔드포인트
+            method: 'GET',  // GET 요청으로 변경
             dataType: 'json',
             success: function(data) {
                 quizzes = data;
                 totalQuestions.text(quizzes.length);
+                initSlider();
             },
             error: function(error) {
                 console.error('Error fetching quizzes:', error);
             }
         });
+    }
+
+    function initSlider() {
+        const sliderContainer = $('.slider-container');
+        quizzes.forEach((quiz, index) => {
+            const img = $('<img>')
+                .attr('src', `/image/ani/${quiz.imageName}`)
+                .attr('alt', `Quiz ${index + 1}`);
+            sliderContainer.append(img);
+        });
+
+        // 무한 슬라이드
+        const clonedContent = sliderContainer.html();
+        sliderContainer.append(clonedContent);
+
+        let position = 0;
+        const slideWidth = sliderContainer.find('img').first().width() + 20; // 이미지 너비 + 마진
+
+        setInterval(() => {
+            position -= slideWidth;
+            if (Math.abs(position) >= sliderContainer.width() / 2) {
+                position = 0;
+            }
+            sliderContainer.css('transform', `translateX(${position}px)`);
+        }, 2000);
     }
 
     function showQuiz(index) {
@@ -51,6 +80,7 @@ $(document).ready(function() {
             quizSubmitAnswer.prop('disabled', false);
             quizAnswerInput.on('keypress', handleKeyPress);
             startTimer();
+            quizTimer.show(); // 타이머와 모래시계 표시
         }
     }
 
@@ -72,14 +102,17 @@ $(document).ready(function() {
 
     function timeOut() {
         const correctAnswer = quizzes[currentQuizIndex].answer;
-        quizResult.text(`시간 초과! 정답은 ${correctAnswer}입니다.`).css('color', '#f44336');
+        quizResult.html(`시간 초과!<br> 정답은 <span style="color: #FFC60B">"${correctAnswer}"</span>입니다.`).css('color', '#f44336');
         quizSubmitAnswer.prop('disabled', true);
         quizAnswerInput.off('keypress', handleKeyPress);
+        quizTimer.hide(); // 타이머와 모래시계 숨기기
     }
 
     startQuizButton.click(function() {
         startScreen.hide();
+        resultScreen.hide();
         quizScreen.show();
+        quizTitle.show();
         showQuiz(currentQuizIndex);
     });
 
@@ -96,13 +129,14 @@ $(document).ready(function() {
     function submitAnswer() {
         if (quizSubmitAnswer.prop('disabled')) return;
         clearInterval(timer);
-        const userAnswer = quizAnswerInput.val();
-        const correctAnswer = quizzes[currentQuizIndex].answer;
-        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        quizTimer.hide(); // 타이머와 모래시계 숨기기
+        const userAnswer = quizAnswerInput.val().replace(/\s+/g, '').toLowerCase(); //띄어쓰기 비교
+        const correctAnswer = quizzes[currentQuizIndex].answer.replace(/\s+/g, '').toLowerCase(); //띄어쓰기 비교
+        if (userAnswer === correctAnswer) {
             quizResult.text('정답입니다!').css('color', '#4CAF50');
             correctCount++;
         } else {
-            quizResult.text(`틀렸습니다. 정답은 ${correctAnswer}입니다.`).css('color', '#f44336');
+            quizResult.html(`틀렸습니다.<br> 정답은 <span style="color: #FFC60B">"${correctAnswer}"</span>입니다.`).css('color', '#f44336');
         }
         quizSubmitAnswer.prop('disabled', true);
         quizAnswerInput.off('keypress', handleKeyPress);
@@ -115,19 +149,46 @@ $(document).ready(function() {
         } else if (currentQuizIndex === quizzes.length - 1) {
             showResults();
         }
+        quizTimer.show(); // 다음 문제로 넘어갈 때 타이머와 모래시계 표시
     });
+
+    function truncateTitle(title) {
+        const maxLength = 15;
+        if (title.length > maxLength) {
+            return title.substring(0, maxLength) + '...';
+        } else {
+            return title;
+        }
+    }
 
     function showResults() {
         quizScreen.hide();
+        quizTitle.hide();
         resultScreen.show();
         resultImages.empty();
         quizzes.forEach((quiz, index) => {
+            const container = $('<div>').addClass('image-container');
             const img = $('<img>').attr('src', `/image/ani/${quiz.imageName}`).attr('alt', `Quiz ${index + 1}`);
-            img.click(() => window.location.href = '/');
-            resultImages.append(img);
+            const title = $('<div>').addClass('anime-title').text(truncateTitle(quiz.answer)); // 애니메이션 제목 추가
+            const link = $('<a>').text('리뷰 보기').attr('href', `/animations/${quiz.id}`); // 리뷰 링크 설정
+            container.append(img, title, link);
+            resultImages.append(container);
         });
         correctCountElement.text(`맞춘 문제 수: ${correctCount} / ${quizzes.length}`);
+        correctCountElement.addClass('correct-count');
+        jsConfetti.addConfetti({
+            confettiColors: [
+                "#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd", "#f9bec7",
+                "#ff0000", "#ffcc00", "#00ff00", "#0000ff", "#800080", "#ffa500"
+            ],
+            confettiRadius: 5,
+            confettiNumber: 1000,
+        });
     }
+
+    $('#quiz-prev').click(function() {
+        window.location.href = '/playground/quiz';
+    });
 
     retryQuizButton.click(function() {
         window.location.href = '/playground/quiz';
