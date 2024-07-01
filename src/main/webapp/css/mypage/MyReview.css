@@ -185,7 +185,7 @@
     background: #fff;
     color: var(--mainColor);
     transition: 0.7s;
-    bottom: 0.3rem;
+    bottom: -0.2rem;
 }
 
 /* Pagination */
