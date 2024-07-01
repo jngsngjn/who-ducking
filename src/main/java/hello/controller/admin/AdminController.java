@@ -89,10 +89,15 @@ public class AdminController {
     @GetMapping("/prize")
     public String prizePage(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<AdminPrizeListDTO> currentPrizes = adminService.getCurrentPrizes(page, 10);
-        Page<AdminPrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
         model.addAttribute("currentPrizes", currentPrizes);
-        model.addAttribute("expiredPrizes", expiredPrizes);
         return "admin/adminPrize";
+    }
+
+    @GetMapping("/prize/expired")
+    public String prizeExpiredPage(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<AdminPrizeListDTO> expiredPrizes = adminService.getExpiredPrizes(page, 10);
+        model.addAttribute("expiredPrizes", expiredPrizes);
+        return "admin/adminPrizeExpired";
     }
 
     @PostMapping("/add-prize")
@@ -109,8 +114,8 @@ public class AdminController {
         return "admin/adminPrizeDraw";
     }
 
-    @PostMapping("/prize-draw/random")
     @ResponseBody
+    @PostMapping("/prize-draw/random")
     public boolean drawUser(@RequestParam("prizeId") Long prizeId) throws MessagingException, URISyntaxException, IOException {
         User user = prizeService.randomDraw(prizeId);
         return user != null;

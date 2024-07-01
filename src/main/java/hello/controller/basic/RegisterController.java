@@ -5,7 +5,7 @@ import hello.dto.user.RegisterBasicDTO;
 import hello.dto.user.SmsCodeVerificationRequest;
 import hello.repository.memory.CodeStore;
 import hello.service.register.RegisterService;
-import hello.service.register.SmsService;
+import hello.service.basic.SmsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

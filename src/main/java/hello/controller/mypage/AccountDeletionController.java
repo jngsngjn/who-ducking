@@ -3,7 +3,7 @@ package hello.controller.mypage;
 import hello.dto.user.AccountDeletionDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.user.User;
-import hello.service.account.EmailService;
+import hello.service.basic.EmailService;
 import hello.service.basic.UserService;
 import hello.service.account.AccountService;
 import jakarta.mail.MessagingException;
