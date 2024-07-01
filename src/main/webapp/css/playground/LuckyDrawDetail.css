@@ -1,8 +1,9 @@
-.luckyDrawDetail_backgroundImage {
+.lucky_detail_background_img {
     background-image: url("/images/Background_Image/inuyasha.png");
     background-repeat: no-repeat;
-    background-position: 0% 50%;
-    background-size: 100% 40%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* Section 1 */

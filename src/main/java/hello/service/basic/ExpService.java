@@ -16,6 +16,7 @@ public class ExpService {
 
     private final LevelRepository levelRepository;
     private final UserRepository userRepository;
+    private final PointService pointService;
 
     public void increaseExp(User user, int exp, HttpSession session) {
 
@@ -46,8 +47,11 @@ public class ExpService {
             Level nextLevelEntity = levelRepository.findById(nextLevel)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid level id: " + nextLevel));
             user.setLevel(nextLevelEntity);
-            userRepository.save(user);
 
+            // 레벨업 시 20포인트 지급
+            pointService.increasePoint(user, 20);
+
+            userRepository.save(user);
             if (session != null) {
                 session.setAttribute("levelUp", true);
             }

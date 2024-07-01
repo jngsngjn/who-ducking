@@ -29,7 +29,7 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 
-<main id="board-container">
+<main id="board-container" class="freeBoard_background_img">
     <div class="free-board">
         <section class="subCommon-freeBoard">
             <h2 class="sub_title"><i class="fa fa-comment-dots" style="margin-right:30px"></i>자유 게시판</h2>
@@ -90,7 +90,6 @@
         <section class="pagination"> <!--승빈이 형꺼 pagination으로 교체 필요-->
         </section>
     </div>
-    <img class="background-image" src="/images/freeBoard-eren.png" />
 </main>
 
 <div th:insert="~{fragments/footer :: footer}"></div>

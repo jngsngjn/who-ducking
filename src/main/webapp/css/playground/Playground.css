@@ -1,8 +1,9 @@
 .playground_backgroundImage {
     background-image: url("/images/Background_Image/naruto.png");
     background-repeat: no-repeat;
-    background-position: 0% 40%;
-    background-size: 100% 52.08%;
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
 }
 
 /* Lucky Draw ================================================ */
