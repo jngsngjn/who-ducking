@@ -37,7 +37,7 @@
         <!-- Sub Component : Title -->
         <section class="subCommon">
             <div class="inner_box" data-aos="fade-up">
-                <div class="searchAni_title_box">
+                <div class="searchFreeBoard_title_box">
                     <h2 class="subTitle">검색 결과</h2>
                 </div>
             </div>
@@ -47,121 +47,119 @@
         <section class="subContents">
             <div class="inner_box" data-aos="fade-up">
 
-                <!-- Search Ani Content Box -->
-                <div class="searchAni_content_box">
+                <!-- My Request Content Box -->
+                <div class="searchFreeBoard_content_box">
 
                     <!-- Left : Menu List -->
-                    <div class="searchAni_menu_box">
-                        <ul class="searchAni_menu">
+                    <div class="searchFreeBoard_menu_box">
+                        <ul class="searchFreeBoard_menu">
                             <!-- First Tab -->
-                            <li class="searchAni_menu_tab">
+                            <li class="searchFreeBoard_menu_tab">
                                 <a href="/">전체 검색</a>
                             </li>
 
                             <!-- Second Tab -->
-                            <li class="searchAni_menu_tab">
-                                <a href="/" class="searchAni_selected_tab">애니</a>
+                            <li class="searchFreeBoard_menu_tab">
+                                <a href="/">애니</a>
                             </li>
 
                             <!-- Third Tab -->
-                            <li class="searchAni_menu_tab">
-                                <a href="/">커뮤니티</a>
+                            <li class="searchFreeBoard_menu_tab">
+                                <a href="/" class="searchFreeBoard_selected_tab">커뮤니티</a>
                             </li>
 
                             <!-- Fourth Tab -->
-                            <li class="searchAni_menu_tab">
+                            <li class="searchFreeBoard_menu_tab">
                                 <a href="/">공지사항</a>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Right : Search Result -->
-                    <div class="searchAni_list_box">
+                    <div class="searchFreeBoard_list_box">
+
                         <!-- Data Empty -->
-                        <div class="searchAni_list_data_empty">
-                            <span class="searchAni_list_data_empty_text">검색한 애니 결과가 없습니다.</span>
+                        <div class="searchFreeBoard_list_data_empty">
+                            <span class="searchFreeBoard_list_data_empty_text">검색한 애니 결과가 없습니다.</span>
                         </div>
 
                         <!-- Data Exist -->
-                        <div th:if="" class="searchAni_list_data_exist">
-                            <div class="searchAni_list_data_box">
-                                <ul class="searchAni_list_item" th:each="">
-                                    <li class="searchAni_list_img_box">
-                                        <a th:href="">
-                                            <img th:src=""
-                                                 src="/who-ducking/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
-                                                 alt="애니메이션 포스터">
-                                        </a>
+                        <div class="searchFreeBoard_list_data_box" th:each="">
+                            <ul class="searchFreeBoard_list_item">
+                                <a th:href="" class="searchFreeBoard_list_item_one">
+                                    <li class="searchFreeBoard_list_title search_result_title"
+                                        th:text="" th:data-content="" th:data-status=""
+                                        th:data-request-id="" th:data-response-date=""
+                                        th:data-write-data="" th:data-response="" id="title">
+                                        제목
+                                        <button class="searchAll_more_title_btn"
+                                                style="display: none;">더보기</button>
                                     </li>
-                                    <li class="searchAni_list_info_box">
-                                        <div class="searchAni_list_comment">
-                                            <i class="fa-solid fa-comment"></i>
-                                            <span th:text=""><!-- 실제 데이터 -->50</span>
-                                        </div>
-                                        <div class="searchAni_list_scoreAvg">
-                                            <i class="fa-solid fa-star"></i>
-                                            <span th:text=""><!-- 실제 데이터 -->4.7 / 5.0</span>
-                                        </div>
-                                    </li>
-                                    <li class="searchAni_list_title_box">
-                                        <span th:text=""><!-- 실제 데이터-->주술회전</span>
-                                    </li>
-                                </ul>
-                            </div>
+                                </a>
+                                <li class="searchFreeBoard_list_info">
+                                                      <span class="searchFreeBoard_list_content search_result_content"
+                                                            th:text="">게시글 내용</span>
+                                    <button class="searchAll_more_content_btn"
+                                            style="display: none;">더보기</button>
+                                </li>
+                            </ul>
+                            <div class="searchFreeBoard_list_line"></div>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Bottom : Pagination --> <!-- 타임리프 값 변경 예정 -->
-                <div class="searchAni_pagination_box">
+                <div class="searchFreeBoard_pagination_box">
                     <!-- Double Left Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
+                    <a class="searchFreeBoard_pagination_btn"
+                       th:classappend="${myReviews.first} ? 'disabled' : ''"
                        th:href="@{/myPage/reviews(page=0)}">
                         <!-- Double Left Icon -->
                         <i class="fa-solid fa-angles-left"></i>
                     </a>
 
                     <!-- Left Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
+                    <a class="searchFreeBoard_pagination_btn"
+                       th:classappend="${myReviews.first} ? 'disabled' : ''"
                        th:href="@{/myPage/reviews(page=${myReviews.number - 1})}">
                         <!-- Left Icon -->
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
 
                     <!-- Page Number -->
-                    <div th:if="${myReviews.totalPages > 0}" class="searchAni_pageNum">
+                    <div th:if="${myReviews.totalPages > 0}" class="searchFreeBoard_pageNum">
                                     <span
                                             th:each="i : ${#numbers.sequence(((myReviews.number / 10) * 10) + 1, (((myReviews.number / 10) + 1) * 10))}">
                                           <a th:if="${i <= myReviews.totalPages}"
-                                             th:classappend="${i == myReviews.number + 1} ? 'searchAni_pagination_now_btn' : 'searchAni_pagination_btn'"
+                                             th:classappend="${i == myReviews.number + 1} ? 'searchFreeBoard_pagination_now_btn' : 'searchFreeBoard_pagination_btn'"
                                              th:href="@{/myPage/reviews(page=${i - 1})}" th:text="${i}"
                                              style="margin: 0 3px;">1</a>
                                     </span>
                     </div>
                     <span th:if="${myReviews.totalPages == 0}">
-                                    <a class="searchAni_pagination_now_btn" href="#">1</a>
+                                    <a class="searchFreeBoard_pagination_now_btn" href="#">1</a>
                               </span>
 
                     <!-- Right Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
+                    <a class="searchFreeBoard_pagination_btn"
+                       th:classappend="${myReviews.last} ? 'disabled' : ''"
                        th:href="@{/myPage/reviews(page=${myReviews.number + 1})}">
                         <!-- Right Icon -->
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
 
                     <!-- Double Right Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
+                    <a class="searchFreeBoard_pagination_btn"
+                       th:classappend="${myReviews.last} ? 'disabled' : ''"
                        th:href="@{/myPage/reviews(page=${myReviews.totalPages - 1})}">
                         <!-- Double Right Icon -->
                         <i class="fa-solid fa-angles-right"></i>
                     </a>
                 </div>
-
             </div>
         </section>
     </main>
-
+    
     <!-- Footer -->
     <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
