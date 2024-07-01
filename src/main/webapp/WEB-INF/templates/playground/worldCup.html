@@ -2,67 +2,122 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>이상형 월드컵</title>
-    <link rel="stylesheet" href="/css/playground/WorldCup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
     <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
-    <link rel="stylesheet" href="/css/Common.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
     <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
     <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
-    <!--폭죽-->
+    <!-- FireWork -->
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 </head>
 <body>
-<div th:insert="~{fragments/header :: header}"></div>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
 
-<div id="worldModal" class="world-modal">
-    <div class="start-modal-content">
-        <img src="/images/10duck.ico" class="world-modal-title-img">
-        <h2>후덕이의 이상형 월드컵</h2>
+    <!-- Container -->
+    <main id="container">
+        <!-- Section : World Cup -->
+        <section class="worldCup_section">
+            <!-- World Cup Setting -->
+            <div id="worldModal" class="worldCup_setting_box">
+                <div class="worldCup_setting_list">
+                    <div class="worldCup_setting_title_box">
+                        <img src="/images/Level/10duck.png" alt="로고">
+                        <h2 class="worldCup_setting_title">후덕이의 이상형 월드컵</h2>
+                    </div>
 
-        <label for="rounds">총 라운드를 선택하세요</label>
-        <select id="rounds">
-            <option value="4">4강</option>
-            <option value="8">8강</option>
-            <option value="16">16강</option>
-            <option value="32">32강</option>
-        </select>
-        <button id="startGameBtn" class="world-start">시작하기</button>
-        <a href="/"><button class="world-home">홈페이지</button></a>
-    </div>
-</div>
+                    <div class="worldCup_setting_select_box">
+                        <label for="rounds" class="worldCup_setting_subtitle">총 라운드를 선택하세요!</label>
+                        <select id="rounds">
+                            <option value="4">4강</option>
+                            <option value="8">8강</option>
+                            <option value="16">16강</option>
+                            <option value="32">32강</option>
+                        </select>
+                    </div>
 
-<div class="world-header">
-    <h1 id="roundInfo"></h1>
-</div>
+                    <div class="worldCup_setting_btn_box">
+                        <button id="startGameBtn" class="worldCup_setting_start_btn">시작하기</button>
+                        <a href="/"><button class="worldCup_setting_home_btn">메인으로</button></a>
+                    </div>
+                </div>
+            </div>
 
-<div class="world-container">
-    <div class="vs-title">애니 이상형 월드컵</div>
-    <div class="world-image-container" id="world-left-container">
-        <img src="" id="world-left-image" alt="Left Image">
-        <div class="world-caption" id="world-left-caption"></div>
-    </div>
+            <!-- World Cup Main -->
+            <div class="worldCup_main_title_box">
+                <h1 id="roundInfo" class="worldCup_main_title"></h1>
+            </div>
 
-    <div class="vs-text">VS</div>
-    <div class="world-image-container" id="world-right-container">
-        <img src="" id="world-right-image" alt="Right Image">
-        <div class="world-caption" id="world-right-caption"></div>
-    </div>
-</div>
-<div id="resultModal" class="world-modal">
-    <div class="result-modal-content">
-        <h2>🎉선택 결과🎉</h2>
-        <img id="finalImage" src="" alt="Final Image">
-        <p id="finalCaption"></p>
-        <button onclick="restartGame()" class="world-reset">다시 시작</button>
-        <a id="reviewLink" href="/"><button class="world-review">리뷰 게시판</button></a>
-    </div>
-</div>
-<div th:insert="~{fragments/footer :: footer}"></div>
-<script src="/js/playground/worldCup.js"></script>
+            <!-- World Cup Game -->
+            <div class="worldCup_game_box">
+                <div class="worldCup_game_vs_title">16강 (1/2)</div>
+                <div class="worldCup_game_list">
+                    <!-- Left -->
+                    <div id="world-left-container" class="worldCup_img_box">
+                        <div class="worldCup_img">
+                            <img src="" id="world-left-image" alt="Left Image" />
+                        </div>
+                        <div id="world-left-caption" class="worldCup_caption"></div>
+                    </div>
+
+                    <!-- VS -->
+                    <h2 class="worldCup_vs_text">VS</h2>
+
+                    <!-- Right -->
+                    <div id="world-right-container" class="worldCup_img_box">
+                        <div class="worldCup_img">
+                            <img src="" id="world-right-image" alt="Right Image" />
+                        </div>
+                        <div id="world-right-caption" class="worldCup_caption"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- World Cup Result -->
+            <div id="resultModal" class="worldCup_result_box">
+                <div class="worldCup_result_list">
+                    <div class="worldCup_result_title_box">
+                        <img src="/images/Level/10duck.png" alt="로고">
+                        <h2 class="worldCup_result_title">🎉선택 결과🎉</h2>
+                    </div>
+                    <div class="worldCup_result_img_box">
+                        <div class="worldCup_result_img">
+                            <img src="" id="finalImage" alt="Final Image" />
+                        </div>
+                        <span id="finalCaption"></span>
+                    </div>
+                    <div class="worldCup_result_btn_box">
+                        <button onclick="restartGame()" class="worldCup_result_restart_btn">다시 시작</button>
+                        <a id="reviewLink" href="/"><button class="worldCup_result_review_btn">리뷰
+                            게시판</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+    <script type="text/javascript" src="/js/playground/worldCup.js"></script>
 </body>
 </html>
