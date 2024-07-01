@@ -133,7 +133,7 @@
                             <!-- Title -->
                             <div class="searchAll_freeBoard_title_box">
                                 <h2 class="searchAll_freeBoard_title">커뮤니티</h2>
-                                <a href="" class="searchAll_freeBoard_more_btn" th:if=""
+                                <a href="" class="searchAll_freeBoard_more_btn" th:if="${!boards.isEmpty()}"
                                    style="display: none;">
                                     더보기
                                     <i class="fa-solid fa-arrow-right"></i>
@@ -142,19 +142,17 @@
                             <div class="searchAll_freeBoard_list_line"></div>
 
                             <!-- Data Empty -->
-                            <div class="searchAll_freeBoard_list_data_empty">
+                            <div class="searchAll_freeBoard_list_data_empty" th:if="${boards.isEmpty()}">
                                                 <span class="searchAll_freeBoard_list_data_empty_text">검색한 게시글 결과가
                                                       없습니다.</span>
                             </div>
 
                             <!-- Data Exist -->
-                            <div class="searchAll_freeBoard_list_data_box" th:each="">
+                            <div th:if="${!boards.isEmpty()}" class="searchAll_freeBoard_list_data_box" th:each="board : ${boards}">
                                 <ul class="searchAll_freeBoard_list_item">
-                                    <a th:href="" class="searchAll_freeBoard_list_item_one">
+                                    <a th:href="@{/board/{id}(id=${board.id})}" class="searchAll_freeBoard_list_item_one">
                                         <li class="searchAll_freeBoard_list_title search_result_title"
-                                            th:text="" th:data-content="" th:data-status=""
-                                            th:data-request-id="" th:data-response-date=""
-                                            th:data-write-data="" th:data-response="" id="title">
+                                            th:text="${board.title}">
                                             제목
                                             <button class="searchAll_more_title_btn"
                                                     style="display: none;">더보기</button>
@@ -162,7 +160,7 @@
                                     </a>
                                     <li class="searchAll_freeBoard_list_info">
                                                             <span class="searchAll_freeBoard_list_content search_result_content"
-                                                                  th:text="">게시글 내용</span>
+                                                                  th:text="${board.content}">게시글 내용</span>
                                         <button class="searchAll_more_content_btn"
                                                 style="display: none;">더보기</button>
                                     </li>
@@ -177,7 +175,7 @@
                             <!-- Title -->
                             <div class="searchAll_notice_title_box">
                                 <h2 class="searchAll_notice_title">공지사항</h2>
-                                <a href="" class="searchAll_notice_more_btn" th:if=""
+                                <a href="" class="searchAll_notice_more_btn" th:if="${!announcements.isEmpty()}"
                                    style="display: none;">
                                     더보기
                                     <i class="fa-solid fa-arrow-right"></i>
@@ -186,19 +184,17 @@
                             <div class="searchAll_notice_list_line"></div>
 
                             <!-- Data Empty -->
-                            <div class="searchAll_notice_list_data_empty">
+                            <div class="searchAll_notice_list_data_empty" th:if="${announcements.isEmpty()}">
                                                 <span class="searchAll_notice_list_data_empty_text">검색한 공지사항 결과가
                                                       없습니다.</span>
                             </div>
 
                             <!-- Data Exist -->
-                            <div class="searchAll_notice_list_data_box" th:each="">
+                            <div th:if="${!announcements.isEmpty()}" class="searchAll_notice_list_data_box" th:each="announcement : ${announcements}">
                                 <ul class="searchAll_notice_list_item">
-                                    <a th:href="" class="searchAll_notice_list_item_one">
+                                    <a th:href="@{/announcement}" class="searchAll_notice_list_item_one">
                                         <li class="searchAll_notice_list_title search_result_title"
-                                            th:text="" th:data-content="" th:data-status=""
-                                            th:data-request-id="" th:data-response-date=""
-                                            th:data-write-data="" th:data-response="" id="title">
+                                            th:text="${announcement.title}">
                                             제목
                                             <button class="searchAll_more_title_btn"
                                                     style="display: none;">더보기</button>
@@ -207,7 +203,7 @@
                                     </a>
                                     <li class="searchAll_notice_list_info">
                                                             <span class="searchAll_notice_list_content search_result_content"
-                                                                  th:text="">공지사항 내용</span>
+                                                                  th:text="${announcement.content}">공지사항 내용</span>
                                         <button class="searchAll_more_content_btn"
                                                 style="display: none;">더보기</button>
                                     </li>
@@ -215,13 +211,11 @@
                                 <div class="searchAll_notice_list_line"></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
     <!-- Footer -->
     <div th:insert="~{fragments/footer :: footer}"></div>
 </body>

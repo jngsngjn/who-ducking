@@ -2,6 +2,7 @@ package hello.repository.db;
 
 import hello.dto.board.MyBoardDTO;
 import hello.dto.board.MyBookmarkDTO;
+import hello.dto.search.SearchBoardDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
 import jakarta.transaction.Transactional;
@@ -46,4 +47,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("select new hello.dto.board.MyBookmarkDTO(b.id, b.title, b.writeDate, b.viewCount) from Board b join Bookmark bm on b.id = bm.board.id where bm.user = :user order by b.writeDate desc")
     Page<MyBookmarkDTO> findBookmark(@Param("user") User user, Pageable pageable);
 
+    @Query("SELECT new hello.dto.search.SearchBoardDTO(b.id, b.title, b.content) FROM Board b WHERE b.title LIKE %:name% OR b.content LIKE %:name%")
+    List<SearchBoardDTO> findByTitleOrContentContaining(@Param("name") String name);
 }
