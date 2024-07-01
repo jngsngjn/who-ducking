@@ -16,6 +16,7 @@ main#container {
 }
 
 .image-slider {
+    background:#FEFFDB;
     width: 100%;
     overflow: hidden;
     margin: 70px 0;

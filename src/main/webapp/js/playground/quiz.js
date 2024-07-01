@@ -18,6 +18,7 @@ $(document).ready(function() {
     const quizTime = $('#quiz-time');
     const correctCountElement = $('#correct-count');
     const quizTimer = $('.quiz-timer');
+     const quizSubTitle = $('.quiz-sub-title');
     const jsConfetti = new JSConfetti();
 
     // 모달 관련 요소 추가
@@ -70,6 +71,7 @@ $(document).ready(function() {
         quizzes = quizzes.sort(() => 0.5 - Math.random()).slice(0, 5);
         totalQuestions.text(quizzes.length);
         showQuiz(currentQuizIndex);
+        quizSubTitle.hide();
     }
 
     function showQuiz(index) {
@@ -167,6 +169,7 @@ $(document).ready(function() {
     function showResults() {
         quizScreen.hide();
         quizTitle.hide();
+        quizSubTitle.hide();
         resultScreen.show();
         resultImages.empty();
         quizzes.forEach((quiz, index) => {
