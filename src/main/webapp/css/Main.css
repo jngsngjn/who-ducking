@@ -1,3 +1,12 @@
+/* 배경 이미지 ================================================ */
+.index_main {
+    background-image: url('/images/Background_Image/hosino.png');
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position:100% 580px;
+    width: 100%;
+}
+
 /* Container ================================================ */
 #container {
     padding-top: 8rem;
@@ -78,7 +87,6 @@
     width: 1200px;
     height: 450px;
     overflow: hidden;
-    transform: translateX(-11.5rem);
 }
 
 .mv-cnt__items {
@@ -210,6 +218,40 @@
     align-items: center;
     cursor: pointer;
     transition: opacity 0.3s;
+}
+
+/* Attendance Check */
+.attendanceCheck_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    padding-right: 3rem;
+}
+
+.attendanceCheck_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 44rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 3rem;
+    padding: 2rem 0;
+    background-color: #fff;
+    text-align: center;
+    max-width: 20rem;
+}
+
+.attendanceCheck_item > img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 20rem;
+    height: 44rem;
 }
 
 /* Main Second Section ======================================= */
@@ -581,6 +623,10 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
+}
+
+.mainFourthSection_freeboard_views {
+    color: var(--subColor);
 }
 
 .mainFourthSection_freeboard_comments {

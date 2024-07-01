@@ -43,7 +43,7 @@ public class LoginService {
             }
 
             if (!userService.isLevelOne(user)) {
-                expService.increaseExp(user, 5);
+                expService.increaseExp(user, 5, null);
             }
             userRepository.save(user);
         }

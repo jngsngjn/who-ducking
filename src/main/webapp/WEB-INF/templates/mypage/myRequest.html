@@ -31,11 +31,11 @@
     <script type="text/javascript" src="/js/mypage/myRequest.js"></script>
 </head>
 
-<body class="myRequest_backgroundImage">
+<body>
 <div th:insert="~{fragments/header :: header}"></div>
 
 <!-- Container -->
-<main id="container">
+<main id="container" class="myRequest_backgroundImage">
     <!-- Sub Component : Title -->
     <section class="subCommon">
         <div class="inner_box" data-aos="fade-up">
@@ -58,23 +58,22 @@
                     <ul class="myRequest_menu">
                         <!-- First Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/">나의 리뷰</a>
+                            <a href="/myPage/reviews">나의 리뷰</a>
                         </li>
-                        <div class="myRequest_menu_line"></div>
+
                         <!-- Second Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/">나의 게시글</a>
+                            <a href="/myPage/boards">나의 게시글</a>
                         </li>
-                        <div class="myRequest_menu_line"></div>
+
                         <!-- Third Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/myPage/request-list" class="myRequest_selected_tab">나의 건의
-                                내역</a>
+                            <a href="/myPage/bookmarks">나의 북마크</a>
                         </li>
-                        <div class="myRequest_menu_line"></div>
+
                         <!-- Fourth Tab -->
                         <li class="myRequest_menu_tab">
-                            <a href="/">나의 북마크</a>
+                            <a href="/myPage/requests" class="myRequest_selected_tab">나의 건의 내역</a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +88,7 @@
 
                     <!-- Data Exist -->
                     <div class="myRequest_list_data_box" th:each="request : ${requestPage.content}">
-                        <ul class="myRequest_list">
+                        <ul class="myRequest_list_item">
                             <li class="myRequest_list_title" th:text="${request.title}"
                                 th:data-title="${request.title}"
                                 th:data-content="${request.content}"
@@ -222,6 +221,7 @@
 
             <!-- Modal Title -->
             <h3 class="myRequest_modal_write_title">건의하기</h3>
+            <span class="request_info_text">존재하지 않는 애니를 추가하기 위한 용도로만 이용해 주세요.</span>
 
             <!-- Modal Content -->
             <div class="myRequest_modal_write_content">

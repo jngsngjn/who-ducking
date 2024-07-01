@@ -1,10 +1,16 @@
 package hello.service.board;
 
 import hello.dto.board.BoardDTO;
+import hello.dto.board.MyBoardDTO;
+import hello.dto.board.MyBookmarkDTO;
 import hello.entity.board.Board;
 import hello.entity.user.User;
 import hello.repository.db.BoardRepository;
+import hello.repository.db.CommentRepository;
+import hello.repository.db.UserRepository;
 import hello.repository.server.FileStore;
+import hello.service.basic.ExpService;
+import hello.service.basic.PointService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -20,17 +27,31 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
     private final FileStore fileStore;
+    private final PointService pointService;
+    private final ExpService expService;
+    private final CommentRepository commentRepository;
 
     @Value("${boardPath}")
     private String serverBoardImagePath;
 
-    //글작성
-    public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception  {
+    // 글 작성
+    public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception {
+        // 첫 글일 때만!
+        boolean hasPosted = loginUser.isHasPosted();
+        if (!hasPosted) {
+            pointService.increasePoint(loginUser, 5);
+            expService.increaseExp(loginUser, 5, null);
+            loginUser.setHasPosted(true);
+            userRepository.save(loginUser);
+        }
+
         Board board = new Board();
 
         if (!file.isEmpty()) {
@@ -133,5 +154,33 @@ public class BoardService {
         boardRepository.incrementReportCount(boardId);
     }
 
+    public Page<MyBoardDTO> getMyBoardsOrderByWriteDate(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyBoardDTO> myBoards = boardRepository.findMyBoardsOrderByWriteDate(user, pageRequest);
+        for (MyBoardDTO myBoard : myBoards) {
+            Integer commentCount = commentRepository.countByBoardId(myBoard.getId());
+            myBoard.setCommentCount(commentCount);
+        }
+        return myBoards;
+    }
 
+    public Page<MyBoardDTO> getMyBoardsOrderByViewCount(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyBoardDTO> myBoards = boardRepository.findMyBoardsOrderByViewCount(user, pageRequest);
+        for (MyBoardDTO myBoard : myBoards) {
+            Integer commentCount = commentRepository.countByBoardId(myBoard.getId());
+            myBoard.setCommentCount(commentCount);
+        }
+        return myBoards;
+    }
+
+    public Page<MyBookmarkDTO> getMyBookmarks(User user, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<MyBookmarkDTO> myBookmarks = boardRepository.findBookmark(user, pageRequest);
+        for (MyBookmarkDTO myBookmark : myBookmarks) {
+            Integer commentCount = commentRepository.countByBoardId(myBookmark.getId());
+            myBookmark.setCommentCount(commentCount);
+        }
+        return myBookmarks;
+    }
 }

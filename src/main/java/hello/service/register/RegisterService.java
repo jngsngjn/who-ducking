@@ -10,6 +10,7 @@ import hello.repository.db.GenreRepository;
 import hello.repository.db.LevelRepository;
 import hello.repository.db.UserRepository;
 import hello.service.basic.PointService;
+import hello.service.basic.SmsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +46,7 @@ public class RegisterService {
         user.setRole("ROLE_USER");
         user.setLevel(levelRepository.findById(1L).get());
         user.setHomeAddress(new Address("", "", ""));
+        user.setHasPosted(false);
 
         // 추천인 로직
         String recommender = registerBasicDTO.getRecommender();

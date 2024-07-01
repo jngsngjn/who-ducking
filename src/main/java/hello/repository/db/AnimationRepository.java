@@ -43,13 +43,12 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
 
 
     // 좋아요 여부 확인용
-//    @Query("SELECT rl.id, rl.reviewId.id, rl.userId.id, rl.isLike, rl.isDislike FROM ReviewLike rl JOIN rl.reviewId r JOIN r.animation a WHERE a.id = :animationId")
-//    List<Object[]> findReviewLikesByAnimationId(@Param("animationId") Long animationId);
-
     @Query("SELECT new hello.dto.animation.ReviewLikeDTO(rl.id , rl.reviewId.id, rl.userId.id, rl.isLike, rl.isDislike) " +
             "FROM ReviewLike rl JOIN rl.reviewId r JOIN r.animation a " +
             "WHERE a.id = :animationId")
     List<ReviewLikeDTO> findReviewLikesByAnimationId(@Param("animationId") Long animationId);
 
 
+    @Query(value = "SELECT a.id, a.name AS answer, a.image_name AS imageName FROM Animation a ORDER BY RAND()", nativeQuery = true)
+    List<Object[]> findRandomQuizzes();
 }

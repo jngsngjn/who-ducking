@@ -5,6 +5,7 @@ import hello.dto.user.CustomOAuth2User;
 import hello.entity.review.Review;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
+import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
@@ -43,7 +44,7 @@ public class ReviewController {
         User loginUser = userService.getLoginUserDetail(user);
 
         try {
-            reviewService.addReview(aniReviewDTO, loginUser);
+            reviewService.addReview(aniReviewDTO, loginUser, session);
             String levelImageName = loginUser.getLevel().getImageName();
             ProfileImage profileImage = loginUser.getProfileImage();
             String profileImageName = null;
@@ -53,7 +54,7 @@ public class ReviewController {
             session.setAttribute("levelImageName", levelImageName);
             session.setAttribute("profileImageName", profileImageName);
             return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/animations/" + AnimationId).build();
-        } catch (ReviewService.ReviewLimitExceed e) {
+        } catch (ReviewLimitExceedException e) {
             String errorMessage = e.getMessage();
             String encodedErrorMessage = UriUtils.encode(errorMessage, StandardCharsets.UTF_8);
             return ResponseEntity.status(HttpStatus.FOUND)
@@ -121,5 +122,4 @@ public class ReviewController {
 
         return ResponseEntity.ok().body(review.getDislikeCount());
     }
-
 }

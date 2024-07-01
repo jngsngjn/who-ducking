@@ -1,4 +1,4 @@
-package hello.service.register;
+package hello.service.basic;
 
 import hello.repository.memory.CodeStore;
 import jakarta.annotation.PostConstruct;

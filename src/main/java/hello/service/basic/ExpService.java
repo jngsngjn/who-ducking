@@ -4,6 +4,7 @@ import hello.entity.user.Level;
 import hello.entity.user.User;
 import hello.repository.db.LevelRepository;
 import hello.repository.db.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ public class ExpService {
     private final LevelRepository levelRepository;
     private final UserRepository userRepository;
 
-    public void increaseExp(User user, int exp) {
+    public void increaseExp(User user, int exp, HttpSession session) {
 
         // 최대 레벨 : 10
         if (user.getLevel().getId().equals(10L)) {
@@ -28,7 +29,7 @@ public class ExpService {
         int maxExp = user.getLevel().getMaxExp();
 
         while (totalExp >= maxExp) {
-            levelUp(user);
+            levelUp(user, session);
             totalExp -= maxExp;
             maxExp = user.getLevel().getMaxExp();
         }
@@ -37,7 +38,7 @@ public class ExpService {
         userRepository.save(user);
     }
 
-    public void levelUp(User user) {
+    public void levelUp(User user, HttpSession session) {
         Long currentLevel = user.getLevel().getId();
 
         if (currentLevel < 10) {
@@ -46,6 +47,10 @@ public class ExpService {
                     .orElseThrow(() -> new IllegalArgumentException("Invalid level id: " + nextLevel));
             user.setLevel(nextLevelEntity);
             userRepository.save(user);
+
+            if (session != null) {
+                session.setAttribute("levelUp", true);
+            }
         }
     }
 }

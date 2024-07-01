@@ -38,15 +38,15 @@ public class Animation {
     @Column(name = "image_path")
     private String imagePath;
 
+    @Column(name = "is_finished")
     private Boolean isFinished;
 
-    @Column(insertable = false)
-    private Boolean existReview;
+    @Column(name = "exist_review")
+    private Boolean existReview = false;
 
     @OneToMany(mappedBy = "animation")
     private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "animation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AnimationGenre> animationGenres = new HashSet<>();
-
 }

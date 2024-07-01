@@ -39,9 +39,9 @@ public class ExcelService {
             }
 
             Animation animation = new Animation();
-            animation.setName(getCellValueAsString(currentRow.getCell(0)));
-            animation.setAuthor(getCellValueAsString(currentRow.getCell(1)));
-            animation.setDescription(getCellValueAsString(currentRow.getCell(2)));
+            animation.setName(getCellValueAsString(currentRow.getCell(0))); // 제목
+            animation.setAuthor(getCellValueAsString(currentRow.getCell(1))); // 작가
+            animation.setDescription(getCellValueAsString(currentRow.getCell(2))); // 설명
 
             String ratingValue = getCellValueAsString(currentRow.getCell(3)).trim().toUpperCase();
 
@@ -50,19 +50,18 @@ public class ExcelService {
             }
 
             try {
-                animation.setRating(AnimationRating.valueOf(ratingValue));
+                animation.setRating(AnimationRating.valueOf(ratingValue)); // 등급
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid Rating Value: " + ratingValue);
                 continue;
             }
 
-            animation.setFirstDate(LocalDate.parse(getCellValueAsString(currentRow.getCell(4))));
-            animation.setImageName(getCellValueAsString(currentRow.getCell(5)));
-            animation.setImagePath(getCellValueAsString(currentRow.getCell(6)));
-            animation.setIsFinished(Boolean.parseBoolean(getCellValueAsString(currentRow.getCell(7))));
+            animation.setFirstDate(LocalDate.parse(getCellValueAsString(currentRow.getCell(4)))); // 시작일
+            animation.setImageName(getCellValueAsString(currentRow.getCell(5))); // 이미지명
+            animation.setIsFinished(Boolean.parseBoolean(getCellValueAsString(currentRow.getCell(6)))); // 끝났는지
 
             animations.add(animation);
-            String genresCell = getCellValueAsString(currentRow.getCell(8));
+            String genresCell = getCellValueAsString(currentRow.getCell(7)); // 장르
             List<String> genres = Arrays.asList(genresCell.split(","));
             genreNames.add(genres);
         }

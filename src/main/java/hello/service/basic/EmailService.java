@@ -1,4 +1,4 @@
-package hello.service.account;
+package hello.service.basic;
 
 import hello.entity.prize.Prize;
 import hello.entity.user.EmailCode;
@@ -8,6 +8,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.util.ByteArrayDataSource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -41,6 +42,9 @@ public class EmailService {
     private static final String DIGITS = "0123456789";
     private static final int ALPHABET_COUNT = 3;
     private static final int DIGIT_COUNT = 3;
+
+    @Value("${prizePath}")
+    private String prizePath;
 
     public void sendVerificationCode(String to) throws MessagingException, IOException, URISyntaxException {
         String verificationCode = generateVerificationCode();
@@ -136,14 +140,21 @@ public class EmailService {
         byte[] logoImageBytes = Files.readAllBytes(logoPath);
         DataSource logoImageData = new ByteArrayDataSource(logoImageBytes, "image/jpeg");
 
-        Path prizePath = Paths.get(prize.getImagePath());
+        String prizeImagePath = prizePath + prize.getImageName();
+
+        Path prizePath = Paths.get(prizeImagePath);
         byte[] prizeImageBytes = Files.readAllBytes(prizePath);
         DataSource prizeImageData = new ByteArrayDataSource(prizeImageBytes, "image/jpeg");
 
         Context context = new Context();
         context.setVariable("nickname", nickname);
         context.setVariable("prizeName", prize.getName());
-        String html = templateEngine.process("email/prizeWinnerEmail", context);
+        String html = "";
+        if (to.contains("gmail")) {
+            html = templateEngine.process("email/prizeWinnerEmailGoogle", context);
+        } else {
+            html = templateEngine.process("email/prizeWinnerEmail", context);
+        }
 
         helper.setTo(to);
         helper.setSubject("[Who's Ducking] 럭키드로우 당첨 알림");

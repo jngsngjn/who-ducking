@@ -32,10 +32,10 @@
 <body>
       <div th:insert="~{fragments/header :: header}"></div>
       <!-- Container -->
-      <main id="container">
+      <main id="container" class="index_main">
             <!-- Main First Section -->
             <section class="mainFirstSection" data-aos="fade-up">
-                  <!-- Streaming Service -->
+                  <!-- 1. Streaming Service -->
                   <div class="streamingService_lists">
                         <div class="streamingService_list">
                               <ul class="streamingService_items">
@@ -78,7 +78,7 @@
                         </div>
                   </div>
 
-                  <!-- Main Carousel -->
+                  <!-- 2. Main Carousel -->
                   <div class="mv-cnt swiper">
                         <ul class="mv-cnt__items swiper-wrapper">
                               <li class="swiper-slide">
@@ -177,6 +177,13 @@
                         <!-- Navigation -->
                         <div class="swiper-button-next mainFirstSection_swiper-next_btn"></div>
                         <div class="swiper-button-prev mainFirstSection_swiper-prev_btn"></div>
+                  </div>
+
+                  <!-- 3. Attendance Check -->
+                  <div class="attendanceCheck_box">
+                        <a href="/" class="attendanceCheck_item">
+                              <img src="/images/AttendanceCheck/attendanceBanner.png" alt="출석 배너"/>
+                        </a>
                   </div>
             </section>
             <!-- Main Second Section -->

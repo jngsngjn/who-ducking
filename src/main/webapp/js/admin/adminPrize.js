@@ -4,13 +4,6 @@ $(document).ready(function() {
     var span = $('.close');
     var currentPrizesBtn = $('#currentPrizesBtn');
     var expiredPrizesBtn = $('#expiredPrizesBtn');
-    var currentPrizesTable = $('#currentPrizesTable');
-    var expiredPrizesTable = $('#expiredPrizesTable');
-    var currentPrizes = $('#currentPrizes');
-    var expiredPrizes = $('#expiredPrizes');
-
-    currentPrizesBtn.css('background-color', '#ff8b00');
-    currentPrizesBtn.css('color', '#fff');
 
     btn.click(function() {
         modal.show();
@@ -27,8 +20,7 @@ $(document).ready(function() {
     });
 
     currentPrizesBtn.click(function() {
-        currentPrizesTable.show();
-        expiredPrizesTable.hide();
+        window.location.href = 'http://localhost:8080/admin/prize';
         $(this).css('background-color', '#ff8b00');
         $(this).css('color', '#fff');
         expiredPrizesBtn.css('background-color', '#fff');
@@ -36,8 +28,7 @@ $(document).ready(function() {
     });
 
     expiredPrizesBtn.click(function() {
-        expiredPrizesTable.show();
-        currentPrizesTable.hide();
+        window.location.href = 'http://localhost:8080/admin/prize/expired';
         $(this).css('background-color', '#ff8b00');
         $(this).css('color', '#fff');
         currentPrizesBtn.css('background-color', '#fff');

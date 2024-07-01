@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultModal = document.getElementById("resultModal");
     const startGameBtn = document.getElementById("startGameBtn");
     const roundInfo = document.getElementById("roundInfo");
-    const vsTitle = document.querySelector(".vs-title");
-    const worldContainer = document.querySelector(".world-container");
+    const vsTitle = document.querySelector(".worldCup_game_vs_title");
+    const worldContainer = document.querySelector(".worldCup_game_box");
     const worldLeftImage = document.getElementById("world-left-image");
     const worldRightImage = document.getElementById("world-right-image");
     const worldLeftCaption = document.getElementById("world-left-caption");
@@ -18,15 +18,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function fetchData() {
         try {
-            const response = await fetch('/api/world-cup');
+            const response = await fetch("/api/world-cup");
             worldImages = await response.json();
         } catch (error) {
-            console.error('Error fetching world cup data:', error);
+            console.error("Error fetching world cup data:", error);
         }
     }
 
     modal.style.display = "block";
-    modal.classList.add("show");
+    modal.classList.add("showModal");
     worldContainer.style.display = "none";
 
     let currentRound = [];
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             16: "16강",
             8: "8강",
             4: "4강",
-            2: "결승"
+            2: "결승",
         };
         const stageText = stageMap[currentStage] || "결승";
         const roundText = `애니 ${stageText} (${currentRoundNum}/${currentStage / 2})`;
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loadImages();
         updateRoundInfo();
         modal.style.display = "none";
-        modal.classList.remove("show");
+        modal.classList.remove("showModal");
         worldContainer.style.display = "flex";
     }
 
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finalCaption.textContent = winner.name;
         reviewLink.href = `/animations/${winner.id}`;
         resultModal.style.display = "block";
-        resultModal.classList.add("show");
+        resultModal.classList.add("showModal");
         worldContainer.style.display = "none";
 
         // 폭죽 효과 추가
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "#00ff00", // 초록
                 "#0000ff", // 파랑
                 "#800080", // 보라
-                "#ffa500"  // 주황
+                "#ffa500", // 주황
             ],
             confettiRadius: 5,
             confettiNumber: 1000,
@@ -138,8 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function restartGame() {
         resultModal.style.display = "none";
-        resultModal.classList.remove("show");
-        modal.classList.add("show");
+        resultModal.classList.remove("showModal");
+        modal.classList.add("showModal");
         modal.style.display = "block";
         worldContainer.style.display = "none";
     }
@@ -167,9 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    startGameBtn.onclick = function() {
+    startGameBtn.onclick = function () {
         startGame();
-    }
+    };
 
     fetchData();
     window.restartGame = restartGame;
