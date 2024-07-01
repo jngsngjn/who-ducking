@@ -67,6 +67,13 @@ $(document).ready(function() {
         }, 2000);
     }
 
+    function startQuiz() {
+        // 퀴즈 시작 시 5개의 무작위 퀴즈 선택
+        quizzes = quizzes.sort(() => 0.5 - Math.random()).slice(0, 5);
+        totalQuestions.text(quizzes.length);
+        showQuiz(currentQuizIndex);
+    }
+
     function showQuiz(index) {
         if (index >= 0 && index < quizzes.length) {
             const quiz = quizzes[index];
@@ -113,7 +120,7 @@ $(document).ready(function() {
         resultScreen.hide();
         quizScreen.show();
         quizTitle.show();
-        showQuiz(currentQuizIndex);
+        startQuiz(); // 퀴즈 시작 함수 호출
     });
 
     quizSubmitAnswer.click(submitAnswer);
