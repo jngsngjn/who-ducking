@@ -1,7 +1,9 @@
 package hello.controller.basic;
 
+import hello.dto.user.CustomOAuth2User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,7 +14,11 @@ public class SessionController {
 
     @ResponseBody
     @PostMapping("/check-levelUp-session")
-    public boolean checkLevelUpSession(HttpSession session) {
+    public boolean checkLevelUpSession(HttpSession session, @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
+        if (oAuth2User == null) {
+            return false;
+        }
+
         Boolean isLevelUp = (Boolean) session.getAttribute("levelUp");
 
         if (isLevelUp != null && isLevelUp) {
