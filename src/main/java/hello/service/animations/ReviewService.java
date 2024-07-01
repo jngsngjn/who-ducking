@@ -186,7 +186,7 @@ public class ReviewService {
         updateLikeAndDislikeCounts(reviewId);
     }
 
-    // 좋아요 싫어요 없데이트 
+    // 좋아요 싫어요 없데이트
     public void updateLikeAndDislikeCounts(Long reviewId) {
         Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
 
@@ -200,7 +200,10 @@ public class ReviewService {
     }
 
 
-
+    // 리뷰에 좋야요한 유저의 id get (아오 머리야)
+//    public List<ReviewLike> findByReviewId(Long reviewId) {
+//        return reviewLikeRepository.findByReviewId(reviewId);
+//    }
 }
 
 

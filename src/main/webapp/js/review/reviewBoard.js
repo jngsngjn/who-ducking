@@ -60,11 +60,11 @@ function sortByReviewCount() {
 }
 
 // reviewCount를 마지막에 랜더링해야 모든 리뷰순으로 불러오는데 흠..어떡할까
-document.addEventListener('DOMContentLoaded', function() {
-    sortByReviewCount();
-    sortByAnimationId();
-    // sortByReviewCount();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     // sortByReviewCount();
+//     sortByAnimationId();
+//     sortByReviewCount();
+// });
 
 
 // // 체크박스 리스트 클릭시 체크박스 활성화

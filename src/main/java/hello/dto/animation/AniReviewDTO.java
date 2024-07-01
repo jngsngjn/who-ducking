@@ -1,6 +1,7 @@
 package hello.dto.animation;
 
 import lombok.Data;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -18,9 +19,9 @@ public class AniReviewDTO {
     private Double averageScore;
     private Boolean isSpoiler;
 
-    public AniReviewDTO() {}
 
-// 리뷰 작성 dto
+
+    // 리뷰 작성 dto
     public AniReviewDTO(Long animationId, Long userId, String nickname, String content, Double score, Boolean isSpoiler){
         this.animationId = animationId;
         this.userId = userId;

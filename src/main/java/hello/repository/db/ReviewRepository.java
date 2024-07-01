@@ -27,4 +27,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     /* @ 애니메이션 리뷰 개수 조회 */
     @Query("select count(r) from Review r where r.animation = :animation")
     int findReviewCount(@Param("animation") Animation animation);
+
 }

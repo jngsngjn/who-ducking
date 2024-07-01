@@ -177,9 +177,13 @@ function likeReview(reviewId, reviewUserId) {
                     throw error;
                 });
             }
-            return res.text();
+            return res.json();
         }).then(data => {
             window.location.reload();
+            const likeButton = document.getElementById(`likeButton-${reviewId}`);
+            likeButton.style.backgroundColor = 'orange'; // 배경색 변경
+            const likeCountSpan = likeButton.querySelector('span');
+            likeCountSpan.textContent = data.likeCount; // 좋아요 수 업데이트
         }).catch(error => {
             console.error('서버 에러: 좋아요 액션 중 오류 발생', error);
         });
@@ -282,12 +286,19 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('recent-reviews').style.display = 'none';
             document.getElementById('like-reviews').style.display = 'block';
         }
+
+        // url 파람주니까 되돌아가기 두번 클릭해야함..
+        // const urlParams = new URLSearchParams(window.location.search);
+        // urlParams.set('order', order);
+        // const newUrl = window.location.pathname + '?' + urlParams.toString();
+        // window.history.pushState({ path: newUrl }, '', newUrl);
+
     }
 
     document.body.addEventListener("click", function(event) {
         if (event.target.classList.contains("order-btn")) {
             let order = event.target.id;
-            console.log(order);
+
             showReviews(order);
         }
 
@@ -306,8 +317,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 리뷰 업데이트 처리 함수
     function reviewUpdate(reviewId) {
-        let reviewBox = document.querySelector(`#recent-reviews #review-${reviewId}`);
-        let reviewLikeBox = document.querySelector(`#like-reviews #review-${reviewId}`);
+        let reviewBox = document.querySelector(`#recent-reviews #review-id-${reviewId}`);
+        let reviewLikeBox = document.querySelector(`#like-reviews #review-id-${reviewId}`);
 
         if (!reviewBox || !reviewLikeBox) {
             console.error('Review box not found for review ID:', reviewId);
@@ -462,4 +473,56 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    let likeUserElements = document.querySelectorAll(".liked-user");
+    const loginUserId = document.getElementById("userId").value; // 현재 로그인 중인 유저의 id
+
+    likeUserElements.forEach(function (element) {
+        // 각 요소에서 사용자 ID와 좋아요 여부 가져오기
+        let userIdElement = element.querySelector(".like-user-id");
+        let reviewLikeElement = userIdElement.nextElementSibling;
+        let reviewElement = reviewLikeElement.nextElementSibling;
+        let isLikeElement = reviewElement.nextElementSibling;
+        let isDislikeElement = isLikeElement.nextElementSibling;
+
+        let likedUserId = userIdElement.textContent.trim();
+        let reviewLikeId = reviewLikeElement.textContent.trim();
+        let writeReviewId = reviewElement.textContent.trim(); // 숫자.
+        let  isLike= isLikeElement.textContent.trim();
+        let  isDislike= isDislikeElement.textContent.trim();
+
+        const reviewLists = document.querySelectorAll(".review-list");
+
+        reviewLists.forEach(review => {
+            const reviewContainer = review.id; // review-id-${review.id}
+            let reviewId = reviewContainer.replace('review-id-','');
+            let likeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-like');
+            let dislikeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-dislike');
+
+
+            if (likedUserId === loginUserId && writeReviewId === reviewId) {
+
+            if(isLike === "true") {
+
+                likeBtn.style.backgroundColor='orange';
+                likeBtn.style.color='white';
+                dislikeBtn.style.color='black';
+                dislikeBtn.style.backgroundColor='white';
+
+            }else if(isDislike === "true"){
+
+                dislikeBtn.style.backgroundColor='orange';
+                dislikeBtn.style.color='white';
+                likeBtn.style.color='black';
+                likeBtn.style.backgroundColor='white';
+            }
+        }
+
+        });
+    });
+});
+
 

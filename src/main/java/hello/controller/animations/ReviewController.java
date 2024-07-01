@@ -3,7 +3,6 @@ package hello.controller.animations;
 import hello.dto.animation.AniReviewDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.review.Review;
-import hello.entity.review.ReviewLike;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
 import hello.repository.db.ReviewLikeRepository;
@@ -15,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
@@ -29,6 +28,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewRepository reviewRepository;
     private final UserService userService;
+    private final ReviewLikeRepository reviewLikeRepository;
 
 
     /* @ POST 리뷰 작성 */
@@ -121,7 +121,5 @@ public class ReviewController {
 
         return ResponseEntity.ok().body(review.getDislikeCount());
     }
-
-
 
 }

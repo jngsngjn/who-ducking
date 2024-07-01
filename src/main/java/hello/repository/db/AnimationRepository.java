@@ -2,10 +2,12 @@ package hello.repository.db;
 
 
 import hello.dto.animation.GetAniListDTO;
+import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.playground.WorldCupDTO;
 import hello.entity.animation.Animation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -35,8 +37,19 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
             "ORDER BY a.id DESC")
     List<WorldCupDTO> findWorldCupAnimations();
 
-    // 애니메이션의 리뷰만 가져오기 - 리뷰 없는 애니에 포인트 추가용
+    // 애니메이션의 리뷰만 가져오기
     @Query("SELECT COUNT(r.id) FROM Review r WHERE r.animation.id = :animationId")
     int countReviewsByAnimationId(Long animationId);
+
+
+    // 좋아요 여부 확인용
+//    @Query("SELECT rl.id, rl.reviewId.id, rl.userId.id, rl.isLike, rl.isDislike FROM ReviewLike rl JOIN rl.reviewId r JOIN r.animation a WHERE a.id = :animationId")
+//    List<Object[]> findReviewLikesByAnimationId(@Param("animationId") Long animationId);
+
+    @Query("SELECT new hello.dto.animation.ReviewLikeDTO(rl.id , rl.reviewId.id, rl.userId.id, rl.isLike, rl.isDislike) " +
+            "FROM ReviewLike rl JOIN rl.reviewId r JOIN r.animation a " +
+            "WHERE a.id = :animationId")
+    List<ReviewLikeDTO> findReviewLikesByAnimationId(@Param("animationId") Long animationId);
+
 
 }

@@ -129,14 +129,11 @@
   </div>
   <div class="reviews-container">
     <div id="recent-reviews" th:if="${#lists.size(recentReviews) > 0}">
-      <div th:each="review, iterStat : ${recentReviews}" class="review-list" th:id="'review-' + ${review.id}">
+      <div th:each="review, iterStat : ${recentReviews}" class="review-list" th:id="'review-id-' + ${review.id}">
         <div class="row-box">
           <input type="hidden" th:value="${review.id}" class="review-id"/>
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
           <p th:text="${review.user.nickname}" class="review-writer"></p>
-
-<!--          <p th:text="${review.getUser() != null ? review.getUser().getNickname() : '익명의 리뷰어'}" class="review-writer"></p>-->
-
           <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
           <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
             <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
@@ -150,11 +147,10 @@
           <div class="toggle-read-on">[더보기]</div>
           <div class="toggle-read-off" style="display: none;">[닫기]</div>
         </div>
-
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
-            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
+            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
             </button>
             <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
@@ -164,8 +160,17 @@
         </div>
       </div>
     </div>
+    <div th:each="el : ${reviewLikes}" class="liked-user" style="display: none">
+      <div class="review-likes-container" style="display: flex">
+        <p th:text="${el.getUserId()}" th:id="'like-user-id'+${el.getUserId()}" class="like-user-id"></p>
+        <p th:text="${el.getReviewLikeId()}"></p>
+        <p th:text="${el.getReviewId()}"></p>
+        <p th:text="${el.getIsLike()}"></p>
+        <p th:text="${el.getIsDislike()}"></p>
+      </div>
+    </div>
     <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}">
-      <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'review-' + ${review.id}">
+      <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'review-id-' + ${review.id}">
         <div class="row-box">
           <input type="hidden" th:value="${review.id}" class="review-id"/>
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
@@ -188,7 +193,7 @@
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
-            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
+              <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-up review-like-icon"></i> <span th:text="${review.likeCount}"></span>
             </button>
             <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
@@ -198,8 +203,8 @@
         </div>
       </div>
     </div>
-  </div>
-  <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
+
+    <img src="/images/r-saotome.png" alt="left-img" class="left-img" />
   <img src="/images/l-umeco.png" alt="right-img" class="right-img" />
 </div>
 <div th:insert="~{fragments/footer :: footer}"></div>
