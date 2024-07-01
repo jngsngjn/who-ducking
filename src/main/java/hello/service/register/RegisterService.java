@@ -10,6 +10,7 @@ import hello.repository.db.GenreRepository;
 import hello.repository.db.LevelRepository;
 import hello.repository.db.UserRepository;
 import hello.service.basic.PointService;
+import hello.service.basic.SmsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

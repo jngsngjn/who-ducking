@@ -1,4 +1,4 @@
-package hello.service.account;
+package hello.service.basic;
 
 import hello.entity.prize.Prize;
 import hello.entity.user.EmailCode;
