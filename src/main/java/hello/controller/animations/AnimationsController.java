@@ -71,8 +71,7 @@ public class AnimationsController {
             model.addAttribute("nickname", loginUser.getNickname());
             model.addAttribute("userId", loginUser.getId());
 
-            // 좋아요 해내고 만다......
-            // 좋아요 싫어요 정보 가져오기 조건문을 어떻게 줘야하지..
+            // 좋아요&싫어요
              List<ReviewLikeDTO> reviewLikes = animationService.getReviewLikesByAnimationId(id);
              model.addAttribute("reviewLikes", reviewLikes);
         }
@@ -83,17 +82,8 @@ public class AnimationsController {
             model.addAttribute("recentReviews", recentReviews);
             model.addAttribute("topReviews", topReviews);
 
-            // 유저가 좋아요나 싫어요시 어떻게 배경 색을  남길까?
-            // -> userId로 reviewLike 테이블을 조회하고 -> 거기에 존재한다면  -> reviewId를 이용 ->  animation의 reviewId와 일치하면 배경색을 변경
-
             int reviewCount = reviewService.getReviewCount(animation);
             model.addAttribute("reviewCount", reviewCount);
             return "review/reviewWrite";
         }
-
-//        @GetMapping("/reviews/{reviewId}")
-//        public Long getLikeUserId(@PathVariable Long reviewId) {
-//
-//        }
-
     }

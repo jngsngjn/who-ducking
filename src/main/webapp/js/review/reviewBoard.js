@@ -19,55 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// 최신순 정렬 함수
-function sortByAnimationId() {
 
-    const aniListContainer = document.getElementById('ani-list-container');
-    const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
-
-    arrayAnimations.sort((a, b) => {
-        let aAnimationId = parseInt(a.getAttribute('data-animation-id'), 10);
-        let bAnimationId = parseInt(b.getAttribute('data-animation-id'), 10);
-        return bAnimationId - aAnimationId;
-    });
-
-    console.log(arrayAnimations.map(el => {
-        console.log(el) // 처음 로딩시 undefined 버튼 클릭시 92개 데이터
-    }))
-
-    aniListContainer.innerHTML = '';
-    arrayAnimations.forEach(container => aniListContainer.appendChild(container));
-}
-
-// 리뷰순 정렬 함수
-function sortByReviewCount() {
-
-    const aniListContainer = document.getElementById('ani-list-container');
-    const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
-
-    arrayAnimations.sort((a, b) => {
-        let aReviewCount = parseInt(a.getAttribute('data-review-count'), 10);
-        let bReviewCount = parseInt(b.getAttribute('data-review-count'), 10);
-        return bReviewCount - aReviewCount;
-    });
-
-    console.log(arrayAnimations.map(el => {
-        console.log(el) //92개의 anumation이 다 들어옴
-    }))
-
-    aniListContainer.innerHTML = '';
-    arrayAnimations.forEach(container => aniListContainer.appendChild(container));
-}
-
-// reviewCount를 마지막에 랜더링해야 모든 리뷰순으로 불러오는데 흠..어떡할까
-// document.addEventListener('DOMContentLoaded', function() {
-//     // sortByReviewCount();
-//     sortByAnimationId();
-//     sortByReviewCount();
-// });
-
-
-// // 체크박스 리스트 클릭시 체크박스 활성화
+// 체크박스 리스트 클릭시 체크박스 활성화
 function checkGenre(element) {
     console.log(element)
     const genreCheckbox = element.querySelector('input[type="checkbox"]');
@@ -91,7 +44,7 @@ function checkGenre(element) {
 }
 
 
-// 전체 페이지네이션과 장르별 페이지네이션
+// 전체 페이지네이션과 장르별 페이지네이션 + 최신순, 리뷰순 합침
 let selectedGenres = [];
 let currentPage = 1;
 const animationsPerPage = 12;
@@ -121,7 +74,6 @@ function filterAnimations() {
         });
     }
 
-    // 장르에 일치하는 애니가 없을 경우 보여줄 요소
     let emptyContainer = document.getElementById('empty-container');
     let pageBtnBox = document.getElementById('page-btn-box');
     let orderContainer = document.querySelector('.order-container');
@@ -195,7 +147,6 @@ function nextPage() {
     }
 }
 
-// 페이지에 따라 버튼 disabled -> 이게 최선입니까 ????? 아니요
 function updateNavigationButtons() {
     let firstPageBtn = document.getElementById('to-first');
     let prevPageBtn = document.getElementById('to-prev');
@@ -219,7 +170,6 @@ function updateNavigationButtons() {
         prevPageBtn.style.pointerEvents = '';
     }
 
-
     if (currentPage === totalPages) {
         nextPageBtn.style.backgroundColor = 'lightgray';
         nextPageBtn.style.color = '#fff';
@@ -229,15 +179,39 @@ function updateNavigationButtons() {
         lastPageBtn.style.pointerEvents = 'none';
     } else {
         nextPageBtn.style.backgroundColor = '';
-        nextPageBtn.style.color='';
+        nextPageBtn.style.color = '';
         lastPageBtn.style.backgroundColor = '';
-        lastPageBtn.style.color='';
+        lastPageBtn.style.color = '';
         nextPageBtn.style.pointerEvents = '';
         lastPageBtn.style.pointerEvents = '';
     }
 }
 
+function sortByAnimationId() {
+    let animations = Array.from(document.querySelectorAll('.ani-info-container'));
+    animations.sort((a, b) => {
+        return parseInt(b.getAttribute('data-animation-id')) - parseInt(a.getAttribute('data-animation-id'));
+    });
+    updateAnimationOrder(animations);
+}
 
+function sortByReviewCount() {
+    let animations = Array.from(document.querySelectorAll('.ani-info-container'));
+    animations.sort((a, b) => {
+        return parseInt(b.getAttribute('data-review-count')) - parseInt(a.getAttribute('data-review-count'));
+    });
+    updateAnimationOrder(animations);
+}
+
+function updateAnimationOrder(sortedAnimations) {
+    let container = document.querySelector('.ani-list-container');
+    container.innerHTML = '';
+    sortedAnimations.forEach(animation => {
+        container.appendChild(animation);
+    });
+    currentPage = 1;
+    filterAnimations();
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     let genreCheckboxes = document.querySelectorAll('.genre-list');
@@ -262,7 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 이전페이지 기억용
     const urlParams = new URLSearchParams(window.location.search);
     const pageParam = parseInt(urlParams.get('page'));
     if (!isNaN(pageParam) && pageParam > 0) {
@@ -270,7 +243,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     filterAnimations();
-
 });
-
-
