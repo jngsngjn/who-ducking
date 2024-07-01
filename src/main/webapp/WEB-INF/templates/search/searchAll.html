@@ -192,7 +192,7 @@
                             <!-- Data Exist -->
                             <div th:if="${!announcements.isEmpty()}" class="searchAll_notice_list_data_box" th:each="announcement : ${announcements}">
                                 <ul class="searchAll_notice_list_item">
-                                    <a th:href="@{/announcement}" class="searchAll_notice_list_item_one">
+                                    <a th:href="@{/announcement(id=${announcement.id})}" class="searchAll_notice_list_item_one">
                                         <li class="searchAll_notice_list_title search_result_title"
                                             th:text="${announcement.title}">
                                             제목
