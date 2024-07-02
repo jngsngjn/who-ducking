@@ -413,12 +413,42 @@ hr {
     border: 0;
 }
 
+.review-comment{
+    margin-bottom: 1rem;
+}
+
+.update-comment-container{
+    position:relative;
+}
+
+.review-star-container{
+    font-size:2rem;
+    margin-bottom: 1rem;
+    position:absolute;
+    bottom: 0;
+    z-index:10;
+}
+
+.gray-star-container{
+    font-size: 2rem;
+    margin-bottom:1rem;
+    color: gray;
+    position:absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+.gray-star{
+    color:gray;
+}
+
+
 .update-comment-textarea{
     position:relative;
     border: none;
     resize: none;
     border-radius: 5px;
-    width:100%;
+    width:80rem;
     height: 23rem;
     padding: 1rem;
 }
@@ -550,6 +580,7 @@ hr {
     display: inline;
     font-weight: 700;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 .review-comment .toggle-read-less {
@@ -564,6 +595,7 @@ hr {
     display: inline;
     font-weight: 700;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 

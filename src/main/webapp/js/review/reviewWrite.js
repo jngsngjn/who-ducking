@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('like-reviews').style.display = 'block';
         }
 
-        // url 파람주니까 되돌아가기 두번 클릭해야함..
+        // url 파람주니까 되돌아가기 두번 클릭해야함
         // const urlParams = new URLSearchParams(window.location.search);
         // urlParams.set('order', order);
         // const newUrl = window.location.pathname + '?' + urlParams.toString();
@@ -326,24 +326,99 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         function updateReview(reviewBox) {
+                // 수정시 별점 기능을 넣어보는중 ( 테스트 )
+            // let reviewComment = reviewBox.querySelector(".review-comment .short-content");
+            // let fullContent = reviewComment.getAttribute('data-full-content');
+            //
+            // let currentTextContainer = document.createElement("div");
+            // currentTextContainer.className = "update-comment-container";
+            //
+            // let currentText = document.createElement("textarea");
+            // currentText.value = fullContent;
+            // currentText.className = "update-comment-textarea";
+            //
+            // currentTextContainer.appendChild(currentText);
+            //
+            // let starContainer = document.createElement("div");
+            // starContainer.className = "review-star-container";
+            //
+            // for (let i = 0; i < 3; i++) { // 나중에 3를 백에서 받아온 숫자로 바꾸자 -> 선택시 유저가 선택한 별 숫자는 어떻게 하지
+            //     let starIcon = document.createElement("i");
+            //     starIcon.className = "fas fa-star update-review-star";
+            //     starContainer.appendChild(starIcon);
+            // }
+            //
+            // currentTextContainer.appendChild(starContainer);
+            //
+            // let grayStarContainer = document.createElement("div");
+            // grayStarContainer.className = "gray-star-container";
+            // grayStarContainer.innerHTML = '<i class="fas fa-star gray-star"></i>'.repeat(5);
+            //
+            // currentTextContainer.appendChild(grayStarContainer);
+            //
+            //
+            // let saveButton = document.createElement("button");
+            // saveButton.innerText = "수정";
+            // saveButton.className = "save-review-btn";
+            //
+            // currentTextContainer.appendChild(saveButton);
+            // reviewComment.replaceWith(currentTextContainer);
+            // 위는 그냥 백에서 받아온 별점 만 보여줄까 싶은 코드
+
+            // 아래는 선택해서 별점을 넘기는 코드
             let reviewComment = reviewBox.querySelector(".review-comment .short-content");
             let fullContent = reviewComment.getAttribute('data-full-content');
+
+            let currentTextContainer = document.createElement("div");
+            currentTextContainer.className = "update-comment-container";
 
             let currentText = document.createElement("textarea");
             currentText.value = fullContent;
             currentText.className = "update-comment-textarea";
 
-            reviewComment.replaceWith(currentText);
+            currentTextContainer.appendChild(currentText);
+
+            let starContainer = document.createElement("div");
+            starContainer.className = "review-star-container";
+            currentTextContainer.appendChild(starContainer);
+
+            function createGrayStars(starCount) {
+                starContainer.innerHTML = '';
+                for (let i = 0; i < 5; i++) {
+                    let starIcon = document.createElement("i");
+                    starIcon.className = "fas fa-star" + (i < starCount ? " update-review-star" : " gray-star");
+                    starIcon.addEventListener('click', function() {
+                        updateStars(i + 1);
+                    });
+                    starContainer.appendChild(starIcon);
+                }
+            }
 
             let saveButton = document.createElement("button");
             saveButton.innerText = "수정";
             saveButton.className = "save-review-btn";
+            currentTextContainer.appendChild(saveButton);
+
+            reviewComment.replaceWith(currentTextContainer);
+
+            function updateStars(starCount) {
+                createGrayStars(starCount);
+            }
+
+            createGrayStars(0);
+
+            // 여기까지 별점 테스트
 
             let showMoreBtn = reviewBox.querySelector(".toggle-read-on");
             let offMoreBtn = reviewBox.querySelector(".toggle-read-off");
             let updateModalContainer = reviewBox.querySelector(".update-modal-container");
-            let likeBtn = reviewBox.querySelector("#recommend-like");
-            let dislikeBtn = reviewBox.querySelector("#recommend-dislike");
+            // let likeBtn = reviewBox.querySelector("#recommend-like");
+            // let dislikeBtn = reviewBox.querySelector("#recommend-dislike");
+
+            let likeBtn = reviewBox.querySelector(".recommend-btn");
+            let dislikeBtn = reviewBox.querySelector(".recommend-btn");
+
+
             showMoreBtn.style.display = 'none';
             offMoreBtn.style.display = 'none';
             updateModalContainer.style.display = 'none';
@@ -434,24 +509,26 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     const params = getQueryParams();
+
     if (params.error) {
-        // 에러 메시지가 있으면 textarea를 비활성화
         document.getElementById("review-content").disabled = true;
     }
 });
 
 // 보여지는 리뷰의 글자수에따라 토글 활성화
 document.addEventListener('DOMContentLoaded', function() {
+
     document.querySelectorAll('.review-comment').forEach(function(reviewComment) {
+
         const shortReview = reviewComment.querySelector('.short-content');
         const hiddenReview = reviewComment.querySelector('.extra-content');
         const showMoreReview = reviewComment.querySelector('.toggle-read-on');
         const hideReview = reviewComment.querySelector('.toggle-read-off');
         const fullContent = shortReview.getAttribute('data-full-content');
 
-        if (fullContent.length > 200) {
-            shortReview.innerText = fullContent.substring(0, 200) + '...';
-            hiddenReview.innerText = fullContent.substring(200);
+        if (fullContent.length > 100) {
+            shortReview.innerText = fullContent.substring(0, 100) + '...';
+            hiddenReview.innerText = fullContent.substring(100);
         } else {
             showMoreReview.style.display = 'none';
         }
@@ -466,13 +543,65 @@ document.addEventListener('DOMContentLoaded', function() {
 
         hideReview.addEventListener('click', function() {
             reviewComment.classList.remove('expanded');
-            shortReview.innerText = fullContent.substring(0, 200) + '...';
+            shortReview.innerText = fullContent.substring(0, 100) + '...';
             hiddenReview.style.display = 'none';
             showMoreReview.style.display = 'inline';
             hideReview.style.display = 'none';
         });
     });
 });
+
+
+// document.addEventListener("DOMContentLoaded", function() {
+//
+//     let likeUserElements = document.querySelectorAll(".liked-user");
+//     const loginUserId = document.getElementById("userId").value; // 현재 로그인 중인 유저의 id
+//
+//     likeUserElements.forEach(function (element) {
+//         // 각 요소에서 사용자 ID와 좋아요 여부 가져오기
+//         let userIdElement = element.querySelector(".like-user-id");
+//         let reviewLikeElement = userIdElement.nextElementSibling;
+//         let reviewElement = reviewLikeElement.nextElementSibling;
+//         let isLikeElement = reviewElement.nextElementSibling;
+//         let isDislikeElement = isLikeElement.nextElementSibling;
+//
+//         let likedUserId = userIdElement.textContent.trim();
+//         let reviewLikeId = reviewLikeElement.textContent.trim();
+//         let writeReviewId = reviewElement.textContent.trim(); // 숫자.
+//         let  isLike= isLikeElement.textContent.trim();
+//         let  isDislike= isDislikeElement.textContent.trim();
+//
+//         const reviewLists = document.querySelectorAll(".review-list");
+//
+//         reviewLists.forEach(review => {
+//             const reviewContainer = review.id; // review-id-${review.id}
+//             let reviewId = reviewContainer.replace('review-id-','');
+//             let likeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-like');
+//             let dislikeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-dislike');
+//
+//
+//             if (likedUserId === loginUserId && writeReviewId === reviewId) {
+//
+//             if(isLike === "true") {
+//
+//                 likeBtn.style.backgroundColor='orange';
+//                 likeBtn.style.color='white';
+//                 dislikeBtn.style.color='black';
+//                 dislikeBtn.style.backgroundColor='white';
+//
+//             }else if(isDislike === "true"){
+//
+//                 dislikeBtn.style.backgroundColor='orange';
+//                 dislikeBtn.style.color='white';
+//                 likeBtn.style.color='black';
+//                 likeBtn.style.backgroundColor='white';
+//             }
+//         }
+//
+//         });
+//     });
+// });
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -505,24 +634,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (likedUserId === loginUserId && writeReviewId === reviewId) {
 
-            if(isLike === "true") {
+                if(isLike === "true") {
 
-                likeBtn.style.backgroundColor='orange';
-                likeBtn.style.color='white';
-                dislikeBtn.style.color='black';
-                dislikeBtn.style.backgroundColor='white';
+                    likeBtn.style.backgroundColor='orange';
+                    likeBtn.style.color='white';
+                    dislikeBtn.style.color='black';
+                    dislikeBtn.style.backgroundColor='white';
 
-            }else if(isDislike === "true"){
+                }else if(isDislike === "true"){
 
-                dislikeBtn.style.backgroundColor='orange';
-                dislikeBtn.style.color='white';
-                likeBtn.style.color='black';
-                likeBtn.style.backgroundColor='white';
+                    dislikeBtn.style.backgroundColor='orange';
+                    dislikeBtn.style.color='white';
+                    likeBtn.style.color='black';
+                    likeBtn.style.backgroundColor='white';
+                }
             }
-        }
 
         });
     });
 });
-
 

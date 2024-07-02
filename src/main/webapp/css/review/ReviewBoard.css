@@ -245,6 +245,10 @@
   text-overflow: ellipsis;
 }
 
+.inquiry-btn{
+  color:white;
+}
+
 /* hover 효과 줬었나?*/
 .current-page {
   background-color: #ff8b00;
