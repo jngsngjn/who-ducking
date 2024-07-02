@@ -314,7 +314,7 @@ textarea:focus {
 
 
 .review-list {
-    border-top: 0.0625rem solid #d9d9d9;
+    border-bottom: 0.0625rem solid #d9d9d9;
     padding: 1em 2em;
     font-size: 1.75rem;
     width: 87rem;

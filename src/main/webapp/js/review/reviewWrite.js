@@ -315,46 +315,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         function updateReview(reviewBox) {
-                // 수정시 별점 기능을 넣어보는중 ( 테스트 )
-            // let reviewComment = reviewBox.querySelector(".review-comment .short-content");
-            // let fullContent = reviewComment.getAttribute('data-full-content');
-            //
-            // let currentTextContainer = document.createElement("div");
-            // currentTextContainer.className = "update-comment-container";
-            //
-            // let currentText = document.createElement("textarea");
-            // currentText.value = fullContent;
-            // currentText.className = "update-comment-textarea";
-            //
-            // currentTextContainer.appendChild(currentText);
-            //
-            // let starContainer = document.createElement("div");
-            // starContainer.className = "review-star-container";
-            //
-            // for (let i = 0; i < 3; i++) { // 나중에 3를 백에서 받아온 숫자로 바꾸자 -> 선택시 유저가 선택한 별 숫자는 어떻게 하지
-            //     let starIcon = document.createElement("i");
-            //     starIcon.className = "fas fa-star update-review-star";
-            //     starContainer.appendChild(starIcon);
-            // }
-            //
-            // currentTextContainer.appendChild(starContainer);
-            //
-            // let grayStarContainer = document.createElement("div");
-            // grayStarContainer.className = "gray-star-container";
-            // grayStarContainer.innerHTML = '<i class="fas fa-star gray-star"></i>'.repeat(5);
-            //
-            // currentTextContainer.appendChild(grayStarContainer);
-            //
-            //
-            // let saveButton = document.createElement("button");
-            // saveButton.innerText = "수정";
-            // saveButton.className = "save-review-btn";
-            //
-            // currentTextContainer.appendChild(saveButton);
-            // reviewComment.replaceWith(currentTextContainer);
-            // 위는 그냥 백에서 받아온 별점 만 보여줄까 싶은 코드
 
-            // 아래는 선택해서 별점을 넘기는 코드
             let reviewComment = reviewBox.querySelector(".review-comment .short-content");
             let fullContent = reviewComment.getAttribute('data-full-content');
 
@@ -371,6 +332,8 @@ document.addEventListener("DOMContentLoaded", function() {
             starContainer.className = "review-star-container";
             currentTextContainer.appendChild(starContainer);
 
+            let selectedScore = 0
+
             function createGrayStars(starCount) {
                 starContainer.innerHTML = '';
                 for (let i = 0; i < 5; i++) {
@@ -378,6 +341,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     starIcon.className = "fas fa-star" + (i < starCount ? " update-review-star" : " gray-star");
                     starIcon.addEventListener('click', function() {
                         updateStars(i + 1);
+                        selectedScore = i + 1;
                     });
                     starContainer.appendChild(starIcon);
                 }
@@ -396,7 +360,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             createGrayStars(0);
 
-            // 여기까지 별점 테스트
+            ///////////////////////////
+
+
+
+            ///////////////////////////
 
             let showMoreBtn = reviewBox.querySelector(".toggle-read-on");
             let offMoreBtn = reviewBox.querySelector(".toggle-read-off");
@@ -442,7 +410,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        content: updatedContent
+                        content: updatedContent,
+                        score: selectedScore
                     })
                 })
                     .then(res => res.text())
