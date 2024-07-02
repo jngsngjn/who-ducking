@@ -1,9 +1,15 @@
+<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Who's DucKing</title>
+
+  <!-- Favicon -->
   <link rel="icon" href="/images/10duck.ico">
+  <!-- Swiper -->
   <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css" />
   <!-- AOS -->
   <link rel="stylesheet" href="/vendor/aos/aos.css" />
@@ -11,7 +17,7 @@
   <link rel="stylesheet" href="/vendor/animate/animate.min.css" />
   <!-- CSS -->
   <link rel="stylesheet" href="/css/Common.css" />
-  <link rel="stylesheet" href="/css/modal/LevelUpModal.css" />
+
   <!-- jQuery -->
   <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
   <!-- swiper -->
@@ -19,193 +25,133 @@
   <!-- AOS -->
   <script src="/vendor/aos/aos.js"></script>
   <!-- FontAwesome -->
-  <script
-          src="https://kit.fontawesome.com/2f3ee9d12e.js"
-          crossorigin="anonymous"
-  ></script>
+  <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
   <!-- JavaScript -->
   <script type="text/javascript" src="/js/common.js"></script>
-  <script type="text/javascript" src="/js/review/reviewWrite.js"></script>
-  <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-  />
+  <script type="text/javascript" src="/js/review/reviewBoard.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(".ani-poster").click(function () {
+        let imageId = $(this).siblings("#animation-id").text().trim();
+        console.log("url = /animations/" + imageId);
+
+        $.ajax({
+          type: "GET",
+          url: "/animations/" + imageId,
+          success: function (response) {
+            console.log("GET 요청 성공");
+            console.log("Animation data:", response);
+
+            window.location.href = "/animations/" + imageId;
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log("AJAX request failed:", textStatus, errorThrown);
+            console.error("GET 요청 실패");
+          },
+        });
+      });
+    });
+  </script>
   <style>
-    .hidden {
-      display: none;
+    .page-btn[disabled] {
+      background-color: lightgray;
+      pointer-events: none;
+      /* 클릭 이벤트 비활성화 */
     }
-    .short-content {
-      white-space: pre-line;
+
+    .page-btn[disabled]:hover {
+      background-color: lightgray;
+      /* hover 효과 없애기 */
     }
   </style>
-  <link rel="stylesheet" href="/css/modal/LevelUpModal.css">
 </head>
-<body class="reviewWrite_background_img">
-<div th:insert="~{fragments/header :: header}"></div>
-<div id="modalContainer"></div>
-<div class="review-body">
-  <h1 class="page-title">리뷰 게시판</h1>
-  <div class="ani-container">
-    <img th:src="@{/image/ani/{imageName}(imageName=${aniDetailInfo.imageName})}" alt="애니 포스터" class="ani-img" />
-    <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>
-    <div class="ani-info-box">
-      <div class="title-bar">
-        <h3 class="ani-title-box">
-          <span class="ani-title" th:text="${aniDetailInfo.name}"></span>
-        </h3>
-        <div class="grade">
-          <img th:src="'/images/AgeLimit/' + (${aniDetailInfo.rating.description == '성인 관람가' ? 'Age_19' : (aniDetailInfo.rating.description == '15세 관람가' ? 'Age_15' : (aniDetailInfo.rating.description == '12세 관람가' ? 'Age_12' : 'Age_ALL'))}) + '.png'" alt="age" class="grade" />
+
+<body>
+  <!-- Header -->
+  <div th:insert="~{fragments/header :: header}"></div>
+
+  <!-- Container -->
+  <div class="community-page">
+    <div class="community-container">
+      <!-- Title -->
+      <div class="title-container">
+        <h1 class="ani-list-page-title">애니메이션</h1>
+        <div class="order-container">
+          <button class="order-btn" id="ordered-recent" onclick="sortByAnimationId()">최신순</button>
+          <button class="order-btn" id="ordered-recent" onclick="sortByReviewCount()">리뷰순</button>
         </div>
       </div>
-      <div class="tag-list">
-        <ul class="tags">
-          <li th:each="aniGenre : ${aniDetailInfo.animationGenres}" class="tag-name" th:text="${aniGenre.genre.name}"></li>
-        </ul>
-        <span class="is-complete" th:text="${aniDetailInfo.isFinished ? '완결' : '진행중'}"></span>
-      </div>
-      <div class="ani-info-box2">
-        <p class="author-name"><b th:text="${aniDetailInfo.author}">작가 이름</b></p>
-        <p class="broad-date" th:text="${aniDetailInfo.firstDate}">방영 시작일</p>
-      </div>
-      <div class="synopsis" th:text="${aniDetailInfo.description}"></div>
-      <div class="score-box">
-        <i class="fa-solid fa-star"></i>
-        <div class="score">
-          <span class="ani-score" th:text="${totalReviews[0].score} + ' / 5.0'">
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <p class="review-count">
-    <i class="fa-solid fa-comment review-comment-icon"></i>
-    <span th:text="${totalReviews[0].reviewCount}"></span>
-  </p>
-  <div th:if="${not #strings.isEmpty(param.error)}" class="alert alert-danger review-count-alert">
-    <p th:text="${param.error}"></p>
-  </div>
-  <form th:action="@{/animations/{id}/review(id=${aniDetailInfo.id})}" method="post" class="write-box"
-        th:if="${isAuthenticated and #strings.isEmpty(param.error)}">
-    <input type="hidden" name="userId" th:value="${userId}" />
-    <input type="hidden" name="nickname" th:value="${nickname}"/>
-    <div class="row-box">
-      <h3 th:text="${nickname}" class="review-user" id="review-user"></h3>
-      <div class="row-box">
-        <p>스포일러 포함</p>
-        <input name="isSpoiler" type="checkbox" id="check-spoiler" class="check-spoiler"/>
-        <input type="hidden" name="_isSpoiler" value="on"/>
-        <label for="check-spoiler" class="check-switch">
-          <span class="change-check-btn"></span>
-        </label>
-      </div>
-    </div>
-    <textarea th:name="content" id="review-content"
-              placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다."
-              rows="5" cols="50" class="review-content"></textarea>
-    <div class="letter-count" id="count">0/500</div>
-    <div class="row-box review-write-box">
-      <div class="stars-container">
-        <input type="hidden" name="score" id="score-number" value="0"/>
-      </div>
-      <input type="submit" value="등록" class="write-review-submit-btn"/>
-    </div>
-  </form>
 
-  <div class="order-box" th:if="${reviewCount != 0}">
-    <div class="row-box">
-      <button id="recent" class="order-btn" >최신 순</button>
-      <button id="like" class="order-btn" >좋아요 순</button>
-    </div>
-    <div class="row-box">
-      <p>스포일러 포함</p>
-      <input type="checkbox" id="show-spoiler" class="check-spoiler" />
-      <label for="show-spoiler" class="check-switch">
-        <span class="change-check-btn"></span>
-      </label>
-    </div>
-  </div>
-  <div class="reviews-container">
-    <div id="recent-reviews" th:if="${#lists.size(recentReviews) > 0}">
-      <div th:each="review, iterStat : ${recentReviews}" class="review-list" th:id="'review-' + ${review.id}">
-        <div class="row-box">
-          <input type="hidden" th:value="${review.id}" class="review-id"/>
-          <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
-          <p th:text="${review.user.nickname}" class="review-writer"></p>
-
-<!--          <p th:text="${review.getUser() != null ? review.getUser().getNickname() : '익명의 리뷰어'}" class="review-writer"></p>-->
-
-          <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
-          <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
-            <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
-            <hr />
-            <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
+      <!-- Contents -->
+      <div class="body-container">
+        <!-- Left : Genre -->
+        <div class="genre-container">
+          <h3 class="genre-title">장르</h3>
+          <div class="genre-list-container">
+            <label th:each="genre: ${genreLists}" class="genre-title-list">
+              <input type="checkbox" class="genre-list" th:id="'genre-' + ${genre.id}"
+                     onclick="checkGenre(this)" />
+              <span th:text="${genre.name}"></span>
+            </label>
           </div>
         </div>
-        <div class="review-comment">
-          <div th:text="${review.content}" th:attr="data-full-content=${review.content}" class="short-content"></div>
-          <div class="extra-content" style="display: none;"></div>
-          <div class="toggle-read-on">[더보기]</div>
-          <div class="toggle-read-off" style="display: none;">[닫기]</div>
+
+        <!-- Right : Ani List -->
+        <!-- Data Empty -->
+        <div class="empty-container" id="empty-container">
+          <h1 class="empty-container-text"> 선택된 장르의 애니메이션이 없습니다.</h1>
+          <button class="go-to-request"> 건의하기 </button>
         </div>
 
-        <div class="row-box">
-          <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
-          <div th:if="${isAuthenticated}">
-            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
-              <i class="fa-regular fa-thumbs-up"></i> <span th:text="${review.likeCount}"></span>
-            </button>
-            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
-              <i class="fa-regular fa-thumbs-down"></i> <span th:text="${review.dislikeCount}"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}">
-      <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'review-' + ${review.id}">
-        <div class="row-box">
-          <input type="hidden" th:value="${review.id}" class="review-id"/>
-          <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
-          <p th:text="${review.user.nickname}" class="review-writer">
-            <span th:if="${iterStat.index < 3 && review.likeCount > 5}" class="best-icon">BEST</span>
-          </p>
-          <i class="fa-solid fa-ellipsis-vertical" th:id="'show-modal-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}"></i>
-          <div class="update-modal-container" th:id="'modal-container-' + ${iterStat.index}" th:if="${review.getUser().id} == ${userId}">
-            <button class="update-review-btn" th:data-index="${iterStat.index}" th:data-review-id="${review.id}">수정</button>
-            <hr />
-            <button class="delete-review-btn" th:data-review-id="${review.id}">삭제</button>
-          </div>
-        </div>
-        <div class="review-comment">
-          <div th:utext="${review.content.replace('\n', '<br/>')}" th:attr="data-full-content=${review.content}" class="short-content"></div>
-          <div class="extra-content" style="display: none;"></div>
-          <div class="toggle-read-on">[더보기]</div>
-          <div class="toggle-read-off" style="display: none;">[닫기]</div>
-        </div>
-        <div class="row-box">
-          <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
-          <div th:if="${isAuthenticated}">
-            <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ');'">
-              <i class="fa-regular fa-thumbs-up review-like-icon"></i> <span th:text="${review.likeCount}"></span>
-            </button>
-            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ');'">
-              <i class="fa-regular fa-thumbs-down review-dislike-icon"></i> <span th:text="${review.dislikeCount}"></span>
-            </button>
+        <!-- Data Exist -->
+        <div class="ani-list-container" id="ani-list-container">
+          <!-- Ani Item -->
+          <div th:each="animation : ${animationLists}" class="ani-info-container"
+               th:attr="data-review-count=${animation.reviewCount}, data-animation-id=${animation.animationId}">
+            <!-- Image -->
+            <div class="img-container">
+              <img th:src="@{/image/ani/{imageName}(imageName=${animation.imageName})}"
+                   alt="애니 포스터" class="ani-poster" />
+              <h4 th:text="${animation.genreId1}" class="genre-id"></h4>
+              <h4 th:text="${animation.genreId2}" class="genre-id"></h4>
+              <div id="animation-id">[[${animation.animationId}]]</div>
+            </div>
+            <!-- Information -->
+            <div class="row-info-container">
+              <div class="recommend-container">
+                <i
+                        class="fa-solid fa-comment review-comment-icon">[[${animation.reviewCount}]]</i>
+                <i class="fa-solid fa-star review-star-icon"> [[${animation.score}]] /
+                  5.0</i>
+              </div>
+            </div>
+            <!-- Title -->
+            <div class="ani-list-title-container">
+              <p th:text="${animation.getName()}" class="ani-list-title">
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div th:insert="~{fragments/footer :: footer}"></div>
 
-<!-- 레벨업 모달 -->
-<div id="levelUp_modal" class="levelUp_modal">
-  <div class="levelUp_modal_content">
-    <span class="levelUp_modal_close">&times;</span>
-    <p>레벨업을 축하드립니다!</p>
+  <!-- Pagination -->
+  <div class="page-btn-box" id="page-btn-box">
+    <div class="page-align-row-box">
+      <i class="fa-solid fa-angles-left page-btn" id="to-first" onclick="changePage(1)"></i>
+      <i class="fa-solid fa-angle-left page-btn" id="to-prev" onclick="prevPage()"></i>
+      <ul class="page-button-wrapper" id="button-wrapper">
+        <li class="page-number page-btn" id="current-page">1</li>
+      </ul>
+      <i class="fa-solid fa-angle-right page-btn" id="to-next" onclick="nextPage()"></i>
+      <i class="fa-solid fa-angles-right page-btn" id="to-end" onclick="changePage(totalPages)"></i>
+    </div>
   </div>
-</div>
-<script type="text/javascript" src="/js/modal/levelUpModal.js"></script>
+
+  <!-- Footer -->
+  <div th:insert="~{fragments/footer :: footer}"></div>
+
 </body>
+
 </html>

@@ -70,50 +70,52 @@
           <h1 class="ani-list-page-title">애니메이션</h1>
           <div class="order-container">
             <button class="order-btn" id="ordered-recent" onclick="sortByAnimationId()">최신순</button>
-            <button class="order-btn" id="ordered-review" onclick="sortByReviewCount()">리뷰순</button>
+            <button class="order-btn" id="ordered-recent" onclick="sortByReviewCount()">리뷰순</button>
           </div>
         </div>
         <div class="body-container">
-              <div class="genre-container">
-                <h3 class="genre-title">장르</h3>
-                <div class="genre-list-container">
-                  <label th:each="genre: ${genreLists}" class="genre-title-list" >
-                    <input type="checkbox" class="genre-list" th:id="'genre-' + ${genre.id}" onclick="checkGenre(this)"/>
-                      <span th:text="${genre.name}"></span>
-                  </label>
-                </div>
-              </div>
+          <div class="genre-container">
+            <h3 class="genre-title">장르</h3>
+            <div class="genre-list-container">
+              <label th:each="genre: ${genreLists}" class="genre-title-list" >
+                <input type="checkbox" class="genre-list" th:id="'genre-' + ${genre.id}" onclick="checkGenre(this)"/>
+                  <span th:text="${genre.name}"></span>
+              </label>
+            </div>
+          </div>
+
           <div class="empty-container" id="empty-container">
             <h1 class="empty-container-text"> 선택된 장르의 애니메이션이 없습니다.</h1>
             <button class="go-to-request"> 건의하기 </button>
           </div>
+
           <div class="ani-list-container" id="ani-list-container">
             <div th:each="animation : ${animationLists}" class="ani-info-container"
                  th:attr="data-review-count=${animation.reviewCount}, data-animation-id=${animation.animationId}">
-            <div class="img-container">
-                <img th:src="@{/image/ani/{imageName}(imageName=${animation.imageName})}"
-                     alt="애니 포스터"
-                     class="ani-poster"
-                />
-              <h4 th:text="${animation.genreId1}" class="genre-id"></h4>
-              <h4 th:text="${animation.genreId2}" class="genre-id"></h4>
-                <div id="animation-id">[[${animation.animationId}]]</div>
+              <div class="img-container">
+                  <img th:src="@{/image/ani/{imageName}(imageName=${animation.imageName})}"
+                       alt="애니 포스터"
+                       class="ani-poster"
+                  />
+                <h4 th:text="${animation.genreId1}" class="genre-id"></h4>
+                <h4 th:text="${animation.genreId2}" class="genre-id"></h4>
+                  <div id="animation-id">[[${animation.animationId}]]</div>
               </div>
-              <div class="row-info-container">
-                <div class="recommend-container">
-                  <i class="fa-solid fa-comment review-comment-icon">[[${animation.reviewCount}]]</i>
-                  <i class="fa-solid fa-star review-star-icon"> [[${animation.score}]] / 5.0</i>
+                <div class="row-info-container">
+                  <div class="recommend-container">
+                    <i class="fa-solid fa-comment review-comment-icon">[[${animation.reviewCount}]]</i>
+                    <i class="fa-solid fa-star review-star-icon"> [[${animation.score}]] / 5.0</i>
+                  </div>
                 </div>
-              </div>
-              <div class="ani-list-title-container">
-                <p th:text="${animation.getName()}"  class="ani-list-title">
-                </p>
+                <div class="ani-list-title-container">
+                  <p th:text="${animation.getName()}"  class="ani-list-title">
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
       <div class="page-btn-box" id="page-btn-box">
         <div class="page-align-row-box">
           <i class="fa-solid fa-angles-left page-btn" id="to-first" onclick="changePage(1)" ></i>
