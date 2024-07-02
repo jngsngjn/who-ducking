@@ -1,5 +1,6 @@
 //댓글
 $(document).ready(function (){
+    localStorage.removeItem('searchInput');
    loadLikesDislikes();
 });
 
