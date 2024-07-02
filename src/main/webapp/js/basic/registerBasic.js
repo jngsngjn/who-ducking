@@ -5,20 +5,20 @@ function checkDuplicate() {
     const nickname = $("#nickname").val().trim();
 
     if (nickname === "") {
-        alert("닉네임을 입력해주세요.");
+        swal("닉네임을 입력해주세요.");
         duplicateChecked = false;
         return;
     }
 
     if (nickname.length < 2 || nickname.length > 12) {
-        alert("닉네임은 2자에서 12자 사이여야 합니다.");
+        swal("닉네임은 2자에서 12자 사이여야 합니다.");
         duplicateChecked = false;
         return;
     }
 
     const regex = /^[가-힣a-zA-Z0-9]+$/;
     if (!regex.test(nickname)) {
-        alert("닉네임은 한글, 영어, 숫자만 사용할 수 있습니다.");
+        swal("닉네임은 한글, 영어, 숫자만 사용할 수 있습니다.");
         duplicateChecked = false;
         return;
     }
@@ -37,12 +37,12 @@ function checkDuplicate() {
                     duplicateChecked = true;
                 }
             } else {
-                alert("이미 사용 중인 닉네임입니다.");
+                swal("이미 사용 중인 닉네임입니다.");
                 duplicateChecked = false;
             }
         },
         error: function() {
-            alert("중복 확인 중 오류가 발생했습니다.");
+            swal("중복 확인 중 오류가 발생했습니다.");
             duplicateChecked = false;
         }
     });
@@ -74,13 +74,13 @@ function sendCode() {
     const phone = $('#phone').val().trim();
 
     if (phone === "") {
-        alert("전화번호를 입력해 주세요.");
+        swal("전화번호를 입력해 주세요.");
         return;
     }
 
     const regex = /^010\d{8}$/;
     if (!regex.test(phone)) {
-        alert("전화번호 형식이 올바르지 않습니다.");
+        swal("전화번호 형식이 올바르지 않습니다.");
         verifyPhone = false;
         return;
     }
@@ -93,15 +93,15 @@ function sendCode() {
         success: function(result) {
             if (result.isDuplicate) {
                 const socialType = result.socialType;
-                alert("이미 " + socialType + " 계정으로 가입되어 있습니다.");
+                swal("이미 " + socialType + " 계정으로 가입되어 있습니다.");
                 verifyPhone = false;
             } else {
-                alert("인증 코드가 발송되었습니다.");
+                swal("인증 코드가 발송되었습니다.");
                 verifyPhone = false;
             }
         },
         error: function() {
-            alert("인증 코드 발송에 실패했습니다.");
+            swal("인증 코드 발송에 실패했습니다.");
             verifyPhone = false;
         }
     });
@@ -112,7 +112,7 @@ function checkCode() {
     const phone = $('#phone').val();
 
     if (verificationCode === "") {
-        alert("인증번호를 입력해 주세요.");
+        swal("인증번호를 입력해 주세요.");
         return;
     }
 
@@ -123,20 +123,20 @@ function checkCode() {
         data: JSON.stringify({ phone: phone, code: verificationCode }),
         success: function(response) {
             if (response === true) {
-                alert("인증이 성공적으로 완료되었습니다.");
+                swal("인증이 성공적으로 완료되었습니다.");
                 $("#phone").prop("readonly", true);
                 $("#verification-code").prop("readonly", true);
                 $("#sendCodeButton").hide();
                 $("#checkCodeButton").hide();
                 verifyPhone = true;
             } else {
-                alert("인증 실패. 다시 시도해 주세요.");
+                swal("인증 실패. 다시 시도해 주세요.");
                 verifyPhone = false;
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("Request failed:", textStatus, errorThrown);
-            alert("인증번호 확인 중 오류가 발생했습니다.");
+            swal("인증번호 확인 중 오류가 발생했습니다.");
             verifyPhone = false;
         }
     });
@@ -150,7 +150,7 @@ function checkRecommender() {
     const referrer = $('#referrer').val().trim();
 
     if (referrer === "") {
-        alert("추천인의 닉네임을 입력해 주세요.");
+        swal("추천인의 닉네임을 입력해 주세요.");
         return;
     }
 
@@ -161,10 +161,10 @@ function checkRecommender() {
         data: referrer,
         success: function(response) {
             if (response) {
-                alert("추천인 닉네임이 확인되었습니다.");
+                swal("추천인 닉네임이 확인되었습니다.");
                 recommenderChecked = true;
             } else {
-                alert("존재하지 않는 회원입니다.");
+                swal("존재하지 않는 회원입니다.");
                 recommenderChecked = false;
             }
         }
@@ -176,18 +176,18 @@ function checkRecommender() {
 // 폼 제출 검증
 function validateForm() {
     if (!duplicateChecked) {
-        alert("닉네임 중복 검사를 완료해 주세요.");
+        swal("닉네임 중복 검사를 완료해 주세요.");
         return false;
     }
 
     if (!verifyPhone) {
-        alert("전화번호 인증을 완료해 주세요.");
+        swal("전화번호 인증을 완료해 주세요.");
         return false;
     }
 
     const referrer = $('#referrer').val().trim();
     if (referrer !== "" && !recommenderChecked) {
-        alert("추천인 확인을 완료해 주세요.");
+        swal("추천인 확인을 완료해 주세요.");
         return false;
     }
 
@@ -195,7 +195,7 @@ function validateForm() {
     let privacyChecked = document.getElementById('privacy').checked;
 
     if (!termsChecked || !privacyChecked) {
-        alert('모든 약관에 동의해 주세요.');
+        swal('모든 약관에 동의해 주세요.');
         return false;
     }
 

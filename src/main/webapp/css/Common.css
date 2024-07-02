@@ -12,6 +12,7 @@
 @import url(./fragments/Header.css);
 @import url(./fragments/Footer.css);
 @import url(./Main.css);
+@import url(./Swal.css);
 @import url(./basic/Login.css);
 @import url(./basic/RegisterBasic.css);
 @import url(./basic/RegisterGenre.css);
