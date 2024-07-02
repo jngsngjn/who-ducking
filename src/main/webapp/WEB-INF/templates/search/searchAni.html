@@ -55,22 +55,22 @@
                         <ul class="searchAni_menu">
                             <!-- First Tab -->
                             <li class="searchAni_menu_tab">
-                                <a href="/">전체 검색</a>
+                                <a th:href="@{/search(name=${name})}">전체 검색</a>
                             </li>
 
                             <!-- Second Tab -->
                             <li class="searchAni_menu_tab">
-                                <a href="/" class="searchAni_selected_tab">애니</a>
+                                <a class="searchAni_selected_tab">애니</a>
                             </li>
 
                             <!-- Third Tab -->
                             <li class="searchAni_menu_tab">
-                                <a href="/">커뮤니티</a>
+                                <a th:href="@{/search/board(name=${name}, page=0)}">커뮤니티</a>
                             </li>
 
                             <!-- Fourth Tab -->
                             <li class="searchAni_menu_tab">
-                                <a href="/">공지사항</a>
+                                <a th:href="@{/search/announcement(name=${name})}">공지사항</a>
                             </li>
                         </ul>
                     </div>
@@ -78,33 +78,32 @@
                     <!-- Right : Search Result -->
                     <div class="searchAni_list_box">
                         <!-- Data Empty -->
-                        <div class="searchAni_list_data_empty">
+                        <div class="searchAni_list_data_empty" th:if="${animations.content.isEmpty()}">
                             <span class="searchAni_list_data_empty_text">검색한 애니 결과가 없습니다.</span>
                         </div>
 
                         <!-- Data Exist -->
-                        <div th:if="" class="searchAni_list_data_exist">
+                        <div th:if="${!animations.content.isEmpty()}" class="searchAni_list_data_exist">
                             <div class="searchAni_list_data_box">
-                                <ul class="searchAni_list_item" th:each="">
+                                <ul class="searchAni_list_item" th:each="animation : ${animations.content}">
                                     <li class="searchAni_list_img_box">
-                                        <a th:href="">
-                                            <img th:src=""
-                                                 src="/who-ducking/src/main/webapp/images/AnimationPoster/JujutsuKaisen.jpg"
+                                        <a th:href="@{/animations/{id}(id=${animation.id})}">
+                                            <img th:src="@{/image/ani/{imageName}(imageName=${animation.imageName})}"
                                                  alt="애니메이션 포스터">
                                         </a>
                                     </li>
                                     <li class="searchAni_list_info_box">
                                         <div class="searchAni_list_comment">
                                             <i class="fa-solid fa-comment"></i>
-                                            <span th:text=""><!-- 실제 데이터 -->50</span>
+                                            <span th:text="${animation.reviewCount}">50</span>
                                         </div>
                                         <div class="searchAni_list_scoreAvg">
                                             <i class="fa-solid fa-star"></i>
-                                            <span th:text=""><!-- 실제 데이터 -->4.7 / 5.0</span>
+                                            <span th:text="${animation.score} + ' / 5.0'">4.7 / 5.0</span>
                                         </div>
                                     </li>
                                     <li class="searchAni_list_title_box">
-                                        <span th:text=""><!-- 실제 데이터-->주술회전</span>
+                                        <span th:text="${animation.title}">주술회전</span>
                                     </li>
                                 </ul>
                             </div>
@@ -116,43 +115,43 @@
                 <!-- Bottom : Pagination --> <!-- 타임리프 값 변경 예정 -->
                 <div class="searchAni_pagination_box">
                     <!-- Double Left Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=0)}">
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.first} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.number + 1})}">
                         <!-- Double Left Icon -->
                         <i class="fa-solid fa-angles-left"></i>
                     </a>
 
                     <!-- Left Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=${myReviews.number - 1})}">
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.first} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.number - 1})}">
                         <!-- Left Icon -->
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
 
                     <!-- Page Number -->
-                    <div th:if="${myReviews.totalPages > 0}" class="searchAni_pageNum">
+                    <div th:if="${animations.totalPages > 0}" class="searchAni_pageNum">
                                     <span
-                                            th:each="i : ${#numbers.sequence(((myReviews.number / 10) * 10) + 1, (((myReviews.number / 10) + 1) * 10))}">
-                                          <a th:if="${i <= myReviews.totalPages}"
-                                             th:classappend="${i == myReviews.number + 1} ? 'searchAni_pagination_now_btn' : 'searchAni_pagination_btn'"
-                                             th:href="@{/myPage/reviews(page=${i - 1})}" th:text="${i}"
+                                            th:each="i : ${#numbers.sequence(((animations.number / 10) * 10) + 1, (((animations.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= animations.totalPages}"
+                                             th:classappend="${i == animations.number + 1} ? 'searchAni_pagination_now_btn' : 'searchAni_pagination_btn'"
+                                             th:href="@{/search/animation(name=${name}, page=${i - 1})}" th:text="${i}"
                                              style="margin: 0 3px;">1</a>
                                     </span>
                     </div>
-                    <span th:if="${myReviews.totalPages == 0}">
+                    <span th:if="${animations.totalPages == 0}">
                                     <a class="searchAni_pagination_now_btn" href="#">1</a>
                               </span>
 
                     <!-- Right Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=${myReviews.number + 1})}">
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.last} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.number + 1})}">
                         <!-- Right Icon -->
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
 
                     <!-- Double Right Arrow -->
-                    <a class="searchAni_pagination_btn" th:classappend="${myReviews.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=${myReviews.totalPages - 1})}">
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.last} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.totalPages - 1})}">
                         <!-- Double Right Icon -->
                         <i class="fa-solid fa-angles-right"></i>
                     </a>

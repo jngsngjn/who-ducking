@@ -34,11 +34,20 @@ public class SearchController {
     }
 
     @GetMapping("/board")
-    public String searchBoard(@RequestParam String name, Model model,
+    public String searchBoards(@RequestParam String name, Model model,
                               @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<SearchBoardDTO> boards = searchService.searchBoardPage(name, page, 10);
         model.addAttribute("boards", boards);
         model.addAttribute("name", name);
         return "search/searchFreeBoard";
+    }
+
+    @GetMapping("/animation")
+    public String searchAnimations(@RequestParam String name, Model model,
+                                   @RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<SearchAnimationDTO> animations = searchService.searchAnimationsPage(name, page, 12);
+        model.addAttribute("animations", animations);
+        model.addAttribute("name", name);
+        return "search/searchAni";
     }
 }

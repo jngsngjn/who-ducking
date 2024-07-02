@@ -86,7 +86,7 @@
                             <!-- Title -->
                             <div class="searchAll_ani_title_box">
                                 <h2 class="searchAll_ani_title">애니</h2>
-                                <a href="" class="searchAll_ani_more_btn" th:if="${!animations.isEmpty()}"
+                                <a th:href="@{/search/animation(name=${name})}" class="searchAll_ani_more_btn" th:if="${!animations.isEmpty()}"
                                    style="display: none;">
                                     더보기
                                     <i class="fa-solid fa-arrow-right"></i>
@@ -133,7 +133,7 @@
                             <!-- Title -->
                             <div class="searchAll_freeBoard_title_box">
                                 <h2 class="searchAll_freeBoard_title">커뮤니티</h2>
-                                <a href="" class="searchAll_freeBoard_more_btn" th:if="${!boards.isEmpty()}"
+                                <a th:href="@{/search/board(name=${name}, page=0)}" class="searchAll_freeBoard_more_btn" th:if="${!boards.isEmpty()}"
                                    style="display: none;">
                                     더보기
                                     <i class="fa-solid fa-arrow-right"></i>
@@ -169,13 +169,13 @@
                             </div>
                         </div>
 
-                        <!-- 3. announcement Search Result -->
+                        <!-- 3. Announcement Search Result -->
                         <div class="searchAll_announcement_list">
 
                             <!-- Title -->
                             <div class="searchAll_announcement_title_box">
                                 <h2 class="searchAll_announcement_title">공지사항</h2>
-                                <a href="" class="searchAll_announcement_more_btn" th:if="${!announcements.isEmpty()}"
+                                <a th:href="@{/search/announcement(name=${name})}" class="searchAll_announcement_more_btn" th:if="${!announcements.isEmpty()}"
                                    style="display: none;">
                                     더보기
                                     <i class="fa-solid fa-arrow-right"></i>

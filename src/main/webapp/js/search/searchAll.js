@@ -1,128 +1,125 @@
-document.addEventListener("DOMContentLoaded", function () {
+$(document).ready(function() {
     // 제목 글자 수 제한 및 더보기 버튼 추가
-    document.querySelectorAll(".search_result_title").forEach(function (item) {
+    $(".search_result_title").each(function() {
         const maxLength = 15; // 제목에 대한 최대 길이 설정
-        const text = item.childNodes[0].textContent.trim(); // 텍스트를 가져옵니다.
-        const moreBtnTitle = item.querySelector(".searchAll_more_title_btn");
+        const text = $(this).contents().filter(function() { return this.nodeType === 3; }).text().trim(); // 텍스트를 가져옵니다.
+        const moreBtnTitle = $(this).find(".searchAll_more_title_btn");
 
         if (text.length > maxLength) {
             const shortText = text.slice(0, maxLength) + " . . .";
-            item.childNodes[0].textContent = shortText; // 텍스트를 자른 텍스트로 설정합니다.
-            moreBtnTitle.style.display = "inline"; // 더보기 버튼을 표시합니다.
+            $(this).contents().filter(function() { return this.nodeType === 3; }).get(0).nodeValue = shortText; // 텍스트를 자른 텍스트로 설정합니다.
+            moreBtnTitle.show(); // 더보기 버튼을 표시합니다.
 
-            moreBtnTitle.addEventListener("click", function () {
-                if (moreBtnTitle.textContent === "더보기") {
-                    item.childNodes[0].textContent = text;
-                    moreBtnTitle.textContent = "간단히";
+            moreBtnTitle.on("click", function() {
+                if ($(this).text() === "더보기") {
+                    $(this).siblings().filter(function() { return this.nodeType === 3; }).get(0).nodeValue = text;
+                    $(this).text("간단히");
                 } else {
-                    item.childNodes[0].textContent = shortText;
-                    moreBtnTitle.textContent = "더보기";
+                    $(this).siblings().filter(function() { return this.nodeType === 3; }).get(0).nodeValue = shortText;
+                    $(this).text("더보기");
                 }
             });
         }
     });
 
     // 내용 글자 수 제한 및 더보기 버튼 추가
-    document.querySelectorAll(".search_result_content").forEach(function (item) {
+    $(".search_result_content").each(function() {
         const maxLength = 100; // 내용에 대한 최대 길이 설정
-        const text = item.textContent.trim();
-        const moreBtnContent = item.nextElementSibling;
+        const text = $(this).text().trim();
+        const moreBtnContent = $(this).next();
 
         if (text.length > maxLength) {
             const shortText = text.slice(0, maxLength) + " . . .";
-            item.textContent = shortText;
-            moreBtnContent.style.display = "inline"; // 더보기 버튼을 표시합니다.
+            $(this).text(shortText);
+            moreBtnContent.show(); // 더보기 버튼을 표시합니다.
 
-            moreBtnContent.addEventListener("click", function () {
-                if (moreBtnContent.textContent === "더보기") {
-                    item.textContent = text;
-                    moreBtnContent.textContent = "간단히";
+            moreBtnContent.on("click", function() {
+                if ($(this).text() === "더보기") {
+                    $(this).prev().text(text);
+                    $(this).text("간단히");
                 } else {
-                    item.textContent = shortText;
-                    moreBtnContent.textContent = "더보기";
+                    $(this).prev().text(shortText);
+                    $(this).text("더보기");
                 }
             });
         }
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    const items = document.querySelectorAll(".searchAll_ani_list_item");
-    const moreBtn = document.querySelector(".searchAll_ani_more_btn");
-    const dataEmpty = document.querySelector(".searchAll_ani_list_data_empty");
-    const dataExist = document.querySelector(".searchAll_ani_list_data_exist");
+    // 애니메이션 항목 처리
+    const aniItems = $(".searchAll_ani_list_item");
+    const aniMoreBtn = $(".searchAll_ani_more_btn");
+    const aniDataEmpty = $(".searchAll_ani_list_data_empty");
+    const aniDataExist = $(".searchAll_ani_list_data_exist");
 
-    if (items.length === 0) {
-        dataEmpty.style.display = "block";
-        dataExist.style.display = "none";
+    if (aniItems.length === 0) {
+        aniDataEmpty.show();
+        aniDataExist.hide();
     } else {
-        dataEmpty.style.display = "none";
-        dataExist.style.display = "block";
+        aniDataEmpty.hide();
+        aniDataExist.show();
 
-        if (items.length > 4) {
+        if (aniItems.length > 4) {
             // 처음 4개의 항목만 표시
-            items.forEach((item, index) => {
+            aniItems.each(function(index) {
                 if (index >= 4) {
-                    item.style.display = "none";
+                    $(this).hide();
                 }
             });
 
             // '더보기' 버튼 표시
-            moreBtn.style.display = "inline";
+            aniMoreBtn.show();
         }
     }
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    const items = document.querySelectorAll(".searchAll_freeBoard_list_item");
-    const moreBtn = document.querySelector(".searchAll_freeBoard_more_btn");
-    const dataEmpty = document.querySelector(".searchAll_freeBoard_list_data_empty");
-    const dataExist = document.querySelector(".searchAll_freeBoard_list_data_box");
+    // 자유게시판 항목 처리
+    const freeBoardItems = $(".searchAll_freeBoard_list_item");
+    const freeBoardMoreBtn = $(".searchAll_freeBoard_more_btn");
+    const freeBoardDataEmpty = $(".searchAll_freeBoard_list_data_empty");
+    const freeBoardDataExist = $(".searchAll_freeBoard_list_data_box");
 
-    if (items.length === 0) {
-        dataEmpty.style.display = "block";
-        dataExist.style.display = "none";
+    if (freeBoardItems.length === 0) {
+        freeBoardDataEmpty.show();
+        freeBoardDataExist.hide();
     } else {
-        dataEmpty.style.display = "none";
-        dataExist.style.display = "block";
+        freeBoardDataEmpty.hide();
+        freeBoardDataExist.show();
 
-        if (items.length > 3) {
+        if (freeBoardItems.length > 3) {
             // 처음 3개의 항목만 표시
-            items.forEach((item, index) => {
+            freeBoardItems.each(function(index) {
                 if (index >= 3) {
-                    item.style.display = "none";
+                    $(this).hide();
                 }
             });
 
             // '더보기' 버튼 표시
-            moreBtn.style.display = "inline";
+            freeBoardMoreBtn.show();
         }
     }
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    const items = document.querySelectorAll(".searchAll_notice_list_item");
-    const moreBtn = document.querySelector(".searchAll_notice_more_btn");
-    const dataEmpty = document.querySelector(".searchAll_notice_list_data_empty");
-    const dataExist = document.querySelector(".searchAll_notice_list_data_box");
+    // 공지사항 항목 처리
+    const noticeItems = $(".searchAll_notice_list_item");
+    const noticeMoreBtn = $(".searchAll_notice_more_btn");
+    const noticeDataEmpty = $(".searchAll_notice_list_data_empty");
+    const noticeDataExist = $(".searchAll_notice_list_data_box");
 
-    if (items.length === 0) {
-        dataEmpty.style.display = "block";
-        dataExist.style.display = "none";
+    if (noticeItems.length === 0) {
+        noticeDataEmpty.show();
+        noticeDataExist.hide();
     } else {
-        dataEmpty.style.display = "none";
-        dataExist.style.display = "block";
+        noticeDataEmpty.hide();
+        noticeDataExist.show();
 
-        if (items.length > 3) {
+        if (noticeItems.length > 3) {
             // 처음 3개의 항목만 표시
-            items.forEach((item, index) => {
+            noticeItems.each(function(index) {
                 if (index >= 3) {
-                    item.style.display = "none";
+                    $(this).hide();
                 }
             });
 
             // '더보기' 버튼 표시
-            moreBtn.style.display = "inline";
+            noticeMoreBtn.show();
         }
     }
 });
