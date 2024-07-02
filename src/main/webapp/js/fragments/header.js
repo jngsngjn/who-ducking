@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    $('.h-search_box').on('submit', function(e) {
+        var keyword = $('.h-search_bar').val();
+        if (keyword === "") {
+            alert('검색어를 입력해 주세요.');
+            e.preventDefault();
+        }
+    });
+
     // AOS
     AOS.init({
         once: true,
@@ -235,3 +243,26 @@ function deleteAlarm(alarmId) {
         }
     });
 }
+
+$(document).ready(function() {
+    // 페이지 로드 시 검색 인풋에 로컬 스토리지 값을 설정
+    var searchInput = localStorage.getItem('searchInput');
+    if (searchInput) {
+        $('#searchInput').val(searchInput);
+    }
+
+    // 검색 폼 제출 시 검색 인풋 값을 로컬 스토리지에 저장
+    $('.h-search_box').on('submit', function() {
+        var searchValue = $('#searchInput').val();
+        localStorage.setItem('searchInput', searchValue);
+    });
+
+    // 특정 탭 클릭 시 로컬 스토리지의 검색 인풋 값을 삭제
+    $('.h-gnb_items a').on('click', function() {
+        localStorage.removeItem('searchInput');
+    });
+
+    $('.navbar-brand').on('click', function() {
+        localStorage.removeItem('searchInput');
+    });
+});

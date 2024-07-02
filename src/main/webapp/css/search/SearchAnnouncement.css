@@ -1,20 +1,11 @@
-.myReview_backgroundImages {
-    background-image: url("/images/Background_Image/itachi.png");
-    background-repeat: no-repeat;
-    background-size:contain;
-    background-position:center;
-}
-
-/* Title */
-.myReview_title_box {
+.searchAnnouncement_title_box {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5rem;
 }
 
-/* Content */
-.myReview_content_box {
+.searchAnnouncement_content_box {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -22,7 +13,7 @@
 }
 
 /* Left */
-.myReview_menu_box {
+.searchAnnouncement_menu_box {
     display: flex;
     flex-direction: column;
     width: 225px;
@@ -31,7 +22,7 @@
     border-radius: 2rem;
 }
 
-.myReview_menu {
+.searchAnnouncement_menu {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -41,7 +32,7 @@
     cursor: pointer;
 }
 
-.myReview_menu_tab {
+.searchAnnouncement_menu_tab {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -51,33 +42,31 @@
     border-bottom: 2px solid #d9d9d9;
 }
 
-.myReview_menu_tab:last-of-type {
+.searchAnnouncement_menu_tab:last-of-type {
     border-bottom-style: none;
 }
 
-.myReview_menu_tab > a {
+.searchAnnouncement_menu_tab > a {
     font-size: 2.8rem;
     font-weight: 500;
     vertical-align: middle;
     text-align: center;
 }
 
-.myReview_menu_tab > a:hover {
+.searchAnnouncement_menu_tab > a:hover {
     color: var(--subColor);
 }
 
-.myReview_selected_tab {
+.searchAnnouncement_selected_tab {
     color: var(--mainColor);
 }
 
-/* Right */
-.myReview_list_box {
-    display: grid;
+.searchAnnouncement_list_box {
     width: 925px;
 }
 
 /* Data Empty */
-.myReview_list_data_empty {
+.searchAnnouncement_list_data_empty {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,111 +74,57 @@
     height: 100%;
 }
 
-.myReview_list_data_empty_text {
+.searchAnnouncement_list_data_empty_text {
     font-size: 3.6rem;
     color: var(--descColor);
 }
 
 /* Data Exist */
-.myReview_list_data_box {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
-.myReview_list_item {
+.searchAnnouncement_list_item {
     display: flex;
     flex-direction: column;
-    position: relative;
-    width: 216.25px;
-    height: 320px;
-    gap: 1rem;
-    overflow: hidden;
+    padding: 3rem 4rem;
 }
 
-.myReview_list_img_box {
-    width: 216.25px;
-    height: 275px;
-    border-radius: 1rem;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.myReview_list_img_box > a > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 1.5rem;
-    transition: transform 0.5s ease;
-}
-
-.myReview_list_img_box > a > img:hover {
-    transform: scale(1.1);
-    transition: 0.5s;
-}
-
-.myReview_list_info_box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.myReview_list_comment {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 2rem;
-    color: #91d8e4;
-}
-
-.myReview_list_comment > span {
-    color: var(--descColor);
+.searchAnnouncement_list_title {
+    font-size: 3.6rem;
     font-weight: 500;
-}
-
-.myReview_list_scoreAvg {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 2rem;
-    color: #fff500;
-}
-
-.myReview_list_scoreAvg > span {
     color: var(--descColor);
-    font-weight: 500;
-}
-
-.myReview_list_title_box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 2rem;
-    color: var(--mainColor);
-    position: absolute;
-    width: 100%;
-    bottom: -3.7rem;
-    border: 2px solid var(--mainColor);
-    border-radius: 1rem 1rem 0 0;
-    transition: bottom 0.5s ease;
-}
-
-.myReview_list_title_box > span {
-    width: 90%;
-    text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.myReview_list_item:hover .myReview_list_title_box {
-    background: #fff;
+.searchAnnouncement_list_title:hover {
     color: var(--mainColor);
-    transition: 0.7s;
-    bottom: -0.2rem;
+    transition: 0.3s;
+}
+
+.searchAnnouncement_list_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.6rem;
+    color: var(--descColor);
+}
+
+.searchAnnouncement_list_content {
+    font-size: 2rem;
+    color: var(--descColor);
+    margin-top: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.searchAnnouncement_list_line {
+    width: 100%;
+    height: 1px;
+    background-color: #d9d9d9;
 }
 
 /* Pagination */
-.myReview_pagination_box {
+.searchAnnouncement_pagination_box {
     padding-top: 6rem;
     display: flex;
     align-items: center;
@@ -197,7 +132,7 @@
     gap: 1rem;
 }
 
-.myReview_pagination_box > a {
+.searchAnnouncement_pagination_box > a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -211,18 +146,18 @@
     transition: 0.3s;
 }
 
-.myReview_pagination_box > a.active {
+.searchAnnouncement_pagination_box > a.active {
     background: var(--mainColor);
     color: #fff;
 }
 
-.myReview_pagination_box > a:hover {
+.searchAnnouncement_pagination_box > a:hover {
     background: var(--mainColor);
     color: #fff;
     cursor: pointer;
 }
 
-.myReview_pagination_btn {
+.searchAnnouncement_pagination_btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -236,25 +171,25 @@
     border: 1px solid var(--mainColor);
 }
 
-.myReview_pagination_btn:hover {
+.searchAnnouncement_pagination_btn:hover {
     background-color: var(--mainColor);
     color: #fff;
     cursor: pointer;
 }
 
-.myReview_pagination_btn:hover > i {
+.searchAnnouncement_pagination_btn:hover > i {
     color: #fff;
 }
 
-.myReview_pagination_btn > i {
+.searchAnnouncement_pagination_btn > i {
     color: var(--mainColor);
 }
 
-.myReview_pageNum {
+.searchAnnouncement_pageNum {
     display: flex;
 }
 
-.myReview_pagination_now_btn {
+.searchAnnouncement_pagination_now_btn {
     display: flex;
     align-items: center;
     justify-content: center;

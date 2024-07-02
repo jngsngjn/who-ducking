@@ -213,3 +213,11 @@
     cursor: not-allowed;
     color: grey;
 }
+/* 배경 이미지 추가 */
+.announcement_background-image {
+    background-image: url('/images/Background_Image/academia.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+}

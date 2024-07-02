@@ -286,13 +286,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('recent-reviews').style.display = 'none';
             document.getElementById('like-reviews').style.display = 'block';
         }
-
-        // url 파람주니까 되돌아가기 두번 클릭해야함
-        // const urlParams = new URLSearchParams(window.location.search);
-        // urlParams.set('order', order);
-        // const newUrl = window.location.pathname + '?' + urlParams.toString();
-        // window.history.pushState({ path: newUrl }, '', newUrl);
-
     }
 
     document.body.addEventListener("click", function(event) {
@@ -654,3 +647,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+$(document).ready(function () {
+    localStorage.removeItem('searchInput');
+});

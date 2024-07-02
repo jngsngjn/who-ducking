@@ -5,6 +5,8 @@ import hello.dto.animation.GetAniListDTO;
 import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.playground.WorldCupDTO;
 import hello.entity.animation.Animation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -51,4 +53,10 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
 
     @Query(value = "SELECT a.id, a.name AS answer, a.image_name AS imageName FROM Animation a ORDER BY RAND()", nativeQuery = true)
     List<Object[]> findRandomQuizzes();
+
+    @Query("SELECT a FROM Animation a WHERE REPLACE(a.name, ' ', '') LIKE %:name%")
+    List<Animation> findByNameIgnoringSpaces(@Param("name") String name);
+
+    @Query("SELECT a FROM Animation a WHERE REPLACE(a.name, ' ', '') LIKE %:name%")
+    Page<Animation> findByNameIgnoringSpaces(@Param("name") String name, Pageable pageable);
 }

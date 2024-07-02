@@ -43,11 +43,13 @@ $(document).ready(function() {
 
     // 서버에서 세션 상태를 확인하는 함수
     function checkSessionStatus() {
+        console.log('checkSessionStatus');
         $.ajax({
             url: '/check-levelUp-session',
             type: 'POST',
             success: function(response) {
                 if (response) {
+                    console.log('openModal()')
                     openModal();
                 } else {
                     console.log('세션이 유효하지 않습니다.');

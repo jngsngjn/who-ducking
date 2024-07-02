@@ -532,40 +532,11 @@ hr {
     padding: 5rem;
 }
 
-
-/* //////// 사이드 이미지 /////// */
-.left-img {
-    position: absolute;
-    opacity: 0.6;
-    top: 10%;
-    left: 0;
-    width: 50.8125rem;
-    height: 70.1875rem;
-    z-index: -1;
-}
-
-.right-img {
-    position: absolute;
-    width: 34.8125rem;
-    height: 46.1875rem;
-    top: 10%;
-    right: 0;
-    z-index: -1;
-    opacity: 0.6;
-}
-
-.left-img,
-.right-img {
-    animation: fadeInOut 3s ease-in-out;
-    animation-fill-mode: forwards;
-}
-
 .review-comment{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
-
 
 /****************** 리뷰 토글 *************************/
 .review-comment .extra-content {
@@ -597,7 +568,13 @@ hr {
     margin-bottom: 1rem;
     cursor: pointer;
 }
-
+.reviewWrite_background_img {
+    background-image: url('/images/Background_Image/kakegurui.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
 /********************* 반응형 ************************/
 /* 반응형 레이아웃 */

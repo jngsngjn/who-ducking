@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="searchAni_title_box">
+                    <h2 class="subTitle">검색 결과</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+
+                <!-- Search Ani Content Box -->
+                <div class="searchAni_content_box">
+
+                    <!-- Left : Menu List -->
+                    <div class="searchAni_menu_box">
+                        <ul class="searchAni_menu">
+                            <!-- First Tab -->
+                            <li class="searchAni_menu_tab">
+                                <a th:href="@{/search(name=${name})}">전체 검색</a>
+                            </li>
+
+                            <!-- Second Tab -->
+                            <li class="searchAni_menu_tab">
+                                <a class="searchAni_selected_tab">애니</a>
+                            </li>
+
+                            <!-- Third Tab -->
+                            <li class="searchAni_menu_tab">
+                                <a th:href="@{/search/board(name=${name}, page=0)}">커뮤니티</a>
+                            </li>
+
+                            <!-- Fourth Tab -->
+                            <li class="searchAni_menu_tab">
+                                <a th:href="@{/search/announcement(name=${name})}">공지사항</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right : Search Result -->
+                    <div class="searchAni_list_box">
+                        <!-- Data Empty -->
+                        <div class="searchAni_list_data_empty" th:if="${animations.content.isEmpty()}">
+                            <span class="searchAni_list_data_empty_text">검색한 애니 결과가 없습니다.</span>
+                        </div>
+
+                        <!-- Data Exist -->
+                        <div th:if="${!animations.content.isEmpty()}" class="searchAni_list_data_exist">
+                            <div class="searchAni_list_data_box">
+                                <ul class="searchAni_list_item" th:each="animation : ${animations.content}">
+                                    <li class="searchAni_list_img_box">
+                                        <a th:href="@{/animations/{id}(id=${animation.id})}">
+                                            <img th:src="@{/image/ani/{imageName}(imageName=${animation.imageName})}"
+                                                 alt="애니메이션 포스터">
+                                        </a>
+                                    </li>
+                                    <li class="searchAni_list_info_box">
+                                        <div class="searchAni_list_comment">
+                                            <i class="fa-solid fa-comment"></i>
+                                            <span th:text="${animation.reviewCount}">50</span>
+                                        </div>
+                                        <div class="searchAni_list_scoreAvg">
+                                            <i class="fa-solid fa-star"></i>
+                                            <span th:text="${animation.score} + ' / 5.0'">4.7 / 5.0</span>
+                                        </div>
+                                    </li>
+                                    <li class="searchAni_list_title_box">
+                                        <span th:text="${animation.title}">주술회전</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bottom : Pagination --> <!-- 타임리프 값 변경 예정 -->
+                <div class="searchAni_pagination_box">
+                    <!-- Double Left Arrow -->
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.first} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.number + 1})}">
+                        <!-- Double Left Icon -->
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+
+                    <!-- Left Arrow -->
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.first} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.number - 1})}">
+                        <!-- Left Icon -->
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!-- Page Number -->
+                    <div th:if="${animations.totalPages > 0}" class="searchAni_pageNum">
+                                    <span
+                                            th:each="i : ${#numbers.sequence(((animations.number / 10) * 10) + 1, (((animations.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= animations.totalPages}"
+                                             th:classappend="${i == animations.number + 1} ? 'searchAni_pagination_now_btn' : 'searchAni_pagination_btn'"
+                                             th:href="@{/search/animation(name=${name}, page=${i - 1})}" th:text="${i}"
+                                             style="margin: 0 3px;">1</a>
+                                    </span>
+                    </div>
+                    <span th:if="${animations.totalPages == 0}">
+                                    <a class="searchAni_pagination_now_btn" href="#">1</a>
+                              </span>
+
+                    <!-- Right Arrow -->
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.last} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.number + 1})}">
+                        <!-- Right Icon -->
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <!-- Double Right Arrow -->
+                    <a class="searchAni_pagination_btn" th:classappend="${animations.last} ? 'disabled' : ''"
+                       th:href="@{/search/animation(name=${name}, page=${animations.totalPages - 1})}">
+                        <!-- Double Right Icon -->
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
