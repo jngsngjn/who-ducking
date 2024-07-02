@@ -81,7 +81,6 @@
 /* Ani */
 .searchAll_ani_list {
     display: grid;
-    height: 500px;
 }
 
 .searchAll_ani_title_box {
@@ -136,9 +135,14 @@
 .searchAll_ani_list_data_empty_text {
     font-size: 3.6rem;
     color: var(--descColor);
+    padding-top: 5rem;
 }
 
 /* Data Exist */
+.searchAll_ani_list_data_exist {
+    padding-top: 3rem;
+}
+
 .searchAll_ani_list_data_box {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -288,6 +292,7 @@
 .searchAll_freeBoard_list_data_empty_text {
     font-size: 3.6rem;
     color: var(--descColor);
+    padding-top: 5rem;
 }
 
 /* Data Exist */
@@ -383,6 +388,7 @@
 .searchAll_announcement_list_data_empty_text {
     font-size: 3.6rem;
     color: var(--descColor);
+    padding-top: 5rem;
 }
 
 /* Data Exist */

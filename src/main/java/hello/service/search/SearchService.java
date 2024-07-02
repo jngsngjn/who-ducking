@@ -64,4 +64,9 @@ public class SearchService {
     public List<SearchAnnouncementDTO> searchAnnouncementList(String name) {
         return announcementRepository.findByTitleOrContentContaining(name);
     }
+
+    public Page<SearchAnnouncementDTO> searchAnnouncementList(String name, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return announcementRepository.findByTitleOrContentContainingPage(name, pageRequest);
+    }
 }

@@ -35,7 +35,7 @@ public class SearchController {
 
     @GetMapping("/board")
     public String searchBoards(@RequestParam String name, Model model,
-                              @RequestParam(name = "page", defaultValue = "0") int page) {
+                               @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<SearchBoardDTO> boards = searchService.searchBoardPage(name, page, 10);
         model.addAttribute("boards", boards);
         model.addAttribute("name", name);
@@ -49,5 +49,14 @@ public class SearchController {
         model.addAttribute("animations", animations);
         model.addAttribute("name", name);
         return "search/searchAni";
+    }
+
+    @GetMapping("/announcement")
+    public String searchAnnouncements(@RequestParam String name, Model model,
+                                      @RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<SearchAnnouncementDTO> announcements = searchService.searchAnnouncementList(name, page, 5);
+        model.addAttribute("announcements", announcements);
+        model.addAttribute("name", name);
+        return "search/searchAnnouncement";
     }
 }
