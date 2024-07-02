@@ -1,4 +1,4 @@
-.swal-footer{
+.swal-footer {
     text-align: center;
     padding-top: 13px;
     margin-top: 13px;
@@ -18,30 +18,44 @@
     margin: 0;
     cursor: pointer;
 }
-.swal-button:focus{
-    box-shadow:0 0 0 1px #ff8b00;
+.swal-button:focus {
+    box-shadow: none;
 }
 .swal-button:not([disabled]):hover {
     background-color: #ff8b00;
 }
-.swal-modal{
+.swal-modal {
     width: 600px;
 }
-.swal-text{
+.swal-text {
     font-size: 25px;
-    font-weight:bold;
-    color:#444444;
+    font-weight: bold;
+    color: #444444;
     position: relative;
     float: none;
     line-height: normal;
     vertical-align: top;
-    text-align: left;
+    text-align: center;
     display: inline-block;
     margin: 0;
     padding: 0 10px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, .64);
     max-width: calc(100% - 20px);
     overflow-wrap: break-word;
     box-sizing: border-box;
+}
+.swal-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+.swal-icon--error ~ .swal-title {
+    color: #FF0000;
+}
+.swal-icon--warning ~ .swal-title {
+    color: #ff8b00;
+}
+.swal-icon--success ~ .swal-title {
+    color: #008000;
+}
+.swal-icon--info ~ .swal-title {
+    color: #00BFFF;
 }
