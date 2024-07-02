@@ -150,7 +150,7 @@
                             <!-- Data Exist -->
                             <div th:if="${!boards.isEmpty()}" class="searchAll_freeBoard_list_data_box" th:each="board : ${boards}">
                                 <ul class="searchAll_freeBoard_list_item">
-                                    <a th:href="@{/board/{id}(id=${board.id})}" class="searchAll_freeBoard_list_item_one">
+                                    <a href="#" class="searchAll_freeBoard_list_item_one" th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'">
                                         <li class="searchAll_freeBoard_list_title search_result_title"
                                             th:text="${board.title}">
                                             제목

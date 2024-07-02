@@ -40,22 +40,19 @@ public class BoardController {
     private final CommentService commentService;
 
     @GetMapping
-    public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "writeDate") String sort,
+    public String freeBoard(
                             Model model,
                             @RequestParam(name = "page", defaultValue = "0") int page,
                             @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
 
         Page<Board> boardList;
 
-        if ("viewCount".equals(sort)) {
-            boardList = boardService.getBoardsSortedByViewCount(page, 10);
-        } else {
-            boardList = boardService.getBoardsSortedByLatest(page, 10);
-        }
+        boardList = boardService.getBoardsSortedByLatest(page, 10);
 
+        //boardList = boardService.getBoardsSortedByViewCount(page, 10);
 
         model.addAttribute("boardList", boardList);
-        model.addAttribute("sort", sort);
+        model.addAttribute("sort", "writeDate");
         model.addAttribute("currentPage", page);
         model.addAttribute("pageSize", 10);
 
@@ -66,6 +63,30 @@ public class BoardController {
         }
 
         return "/board/freeBoard";
+    }
+
+    @GetMapping("/viewCount")
+    public String freeBoardSortByViewCount(
+                            Model model,
+                            @RequestParam(name = "page", defaultValue = "0") int page,
+                            @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
+
+        Page<Board> boardList;
+
+        boardList = boardService.getBoardsSortedByViewCount(page, 10);
+
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("sort", "viewCount");
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", 10);
+
+        if (oAuth2User == null) {
+            model.addAttribute("isAuthenticated", false);
+        } else {
+            model.addAttribute("isAuthenticated", true);
+        }
+
+        return "/board/freeBoardSortByViewCount";
     }
 
     //freeBoard -> 작성 폼을 띄워주는 역할

@@ -66,16 +66,16 @@
                     </ul>
                 </div>
                 <div class="free-board-pagination">
-                    <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'free-board-disabled' : ''" th:href="@{/board(page=0)}">&lt;&lt;</a>
-                    <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'free-board-disabled' : ''" th:href="@{/board(page=${boardList.number - 1})}">&lt;</a>
+                    <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'free-board-disabled' : ''" th:href="@{/board/viewCount(page=0)}">&lt;&lt;</a>
+                    <a class="free-board-pagination-move-button" th:classappend="${boardList.first} ? 'free-board-disabled' : ''" th:href="@{/board/viewCount(page=${boardList.number - 1})}">&lt;</a>
                     <span th:if="${boardList.totalPages > 0}" th:each="i : ${#numbers.sequence(1, boardList.totalPages)}">
-                    <a th:classappend="${i == boardList.number + 1} ? 'free-board-pagination-now-button' : 'free-board-pagination-move-button'" th:href="@{/board(page=${i - 1})}" th:text="${i}">1</a>
+                    <a th:classappend="${i == boardList.number + 1} ? 'free-board-pagination-now-button' : 'free-board-pagination-move-button'" th:href="@{/board/viewCount(page=${i - 1})}" th:text="${i}">1</a>
                 </span>
                     <span th:if="${boardList.totalPages == 0}">
                      <a class="free-board-pagination-now-button" href="#">1</a>
                 </span>
-                    <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'free-board-disabled' : ''" th:href="@{/board(page=${boardList.number + 1})}">&gt;</a>
-                    <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'free-board-disabled' : ''" th:href="@{/board(page=${boardList.totalPages - 1})}">&gt;&gt;</a>
+                    <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'free-board-disabled' : ''" th:href="@{/board/viewCount(page=${boardList.number + 1})}">&gt;</a>
+                    <a class="free-board-pagination-move-button" th:classappend="${boardList.last} ? 'free-board-disabled' : ''" th:href="@{/board/viewCount(page=${boardList.totalPages - 1})}">&gt;&gt;</a>
                 </div>
             </section>
         </div>
