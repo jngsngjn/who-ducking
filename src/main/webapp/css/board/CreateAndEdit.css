@@ -47,6 +47,7 @@
 
 .create-form-group textarea {
     height: 150px;
+    resize:none;
 }
 
 .create-image-preview-container {

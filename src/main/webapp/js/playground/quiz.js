@@ -18,6 +18,7 @@ $(document).ready(function() {
     const quizTime = $('#quiz-time');
     const correctCountElement = $('#correct-count');
     const quizTimer = $('.quiz-timer');
+     const quizSubTitle = $('.quiz-sub-title');
     const jsConfetti = new JSConfetti();
 
     // 모달 관련 요소 추가
@@ -70,6 +71,7 @@ $(document).ready(function() {
         quizzes = quizzes.sort(() => 0.5 - Math.random()).slice(0, 5);
         totalQuestions.text(quizzes.length);
         showQuiz(currentQuizIndex);
+        quizSubTitle.hide();
     }
 
     function showQuiz(index) {
@@ -81,7 +83,7 @@ $(document).ready(function() {
             currentQuestion.text(index + 1);
 
             clearInterval(timer);
-            timeLeft = 10;
+            timeLeft = 12; // 12초
             quizSubmitAnswer.prop('disabled', false);
             quizAnswerInput.on('keypress', handleKeyPress);
             startTimer();
@@ -99,7 +101,7 @@ $(document).ready(function() {
                 clearInterval(timer);
                 timeOut();
             }
-        }, 1000);
+        }, 1000); //1초
     }
 
     function updateTimerDisplay() {
@@ -167,6 +169,7 @@ $(document).ready(function() {
     function showResults() {
         quizScreen.hide();
         quizTitle.hide();
+        quizSubTitle.hide();
         resultScreen.show();
         resultImages.empty();
         quizzes.forEach((quiz, index) => {
@@ -185,15 +188,6 @@ $(document).ready(function() {
         correctCountElement.text(`맞춘 문제 수: ${correctCount} / ${quizzes.length}`); // 맞춘 문제 표시
         correctCountElement.addClass('correct-count'); // css 입히기 위해 생성함
 
-        jsConfetti.addConfetti({
-            confettiColors: [
-                "#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd", "#f9bec7",
-                "#ff0000", "#ffcc00", "#00ff00", "#0000ff", "#800080", "#ffa500"
-            ],
-            confettiRadius: 5,
-            confettiNumber: 1000,
-        });
-
         // 맞춘 개수 표시 + 포인트 지급
         if (correctCount === 5) {
             modal.css('display', 'flex');
@@ -206,6 +200,14 @@ $(document).ready(function() {
                 error: function(xhr, status, error) {
                     console.error("Error occurred:", status, error);
                 }
+            });
+            jsConfetti.addConfetti({
+                confettiColors: [
+                 "#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd", "#f9bec7",
+                 "#ff0000", "#ffcc00", "#00ff00", "#0000ff", "#800080", "#ffa500"
+                ],
+              confettiRadius: 5,
+              confettiNumber: 800,
             });
         } else {
             modal.css('display', 'none');
