@@ -305,18 +305,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 리뷰 업데이트 처리 함수
     function reviewUpdate(reviewId) {
-
         let reviewBox = document.querySelector(`#recent-reviews #review-id-${reviewId}`);
         let reviewLikeBox = document.querySelector(`#like-reviews #like-review-id-${reviewId}`);
 
-        if (!reviewBox || !reviewLikeBox) {
+        if (!reviewBox && !reviewLikeBox) {
             console.error('Review box not found for review ID:', reviewId);
             return;
         }
 
         function updateReview(reviewBox) {
-
             let reviewComment = reviewBox.querySelector(".review-comment .short-content");
+
+            if (!reviewComment) {
+                reviewComment = reviewBox.querySelector(".short-content");
+            }
+
+            if (!reviewComment) {
+                console.error('Review comment not found for review ID:', reviewId);
+                return;
+            }
+
             let fullContent = reviewComment.getAttribute('data-full-content');
 
             let currentTextContainer = document.createElement("div");
@@ -332,14 +340,14 @@ document.addEventListener("DOMContentLoaded", function() {
             starContainer.className = "review-star-container";
             currentTextContainer.appendChild(starContainer);
 
-            let selectedScore = 0
+            let selectedScore = 0;
 
             function createGrayStars(starCount) {
                 starContainer.innerHTML = '';
                 for (let i = 0; i < 5; i++) {
                     let starIcon = document.createElement("i");
                     starIcon.className = "fas fa-star" + (i < starCount ? " update-review-star" : " gray-star");
-                    starIcon.addEventListener('click', function() {
+                    starIcon.addEventListener('click', function () {
                         updateStars(i + 1);
                         selectedScore = i + 1;
                     });
@@ -360,31 +368,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
             createGrayStars(0);
 
-            ///////////////////////////
-
-
-
-            ///////////////////////////
-
             let showMoreBtn = reviewBox.querySelector(".toggle-read-on");
             let offMoreBtn = reviewBox.querySelector(".toggle-read-off");
             let updateModalContainer = reviewBox.querySelector(".update-modal-container");
             let likeBtn = reviewBox.querySelector("#recommend-like");
             let dislikeBtn = reviewBox.querySelector("#recommend-dislike");
-            let likeRecLikeBtn = reviewLikeBox.querySelector("#like-reviews-recommend-like");
-            let likeRecDislikeBtn =reviewLikeBox.querySelector("#like-review-recommend-dislike");
+            let likeRecLikeBtn = reviewLikeBox ? reviewLikeBox.querySelector("#like-reviews-recommend-like") : null;
+            let likeRecDislikeBtn = reviewLikeBox ? reviewLikeBox.querySelector("#like-review-recommend-dislike") : null;
 
-
-            showMoreBtn.style.display = 'none';
-            offMoreBtn.style.display = 'none';
-            updateModalContainer.style.display = 'none';
-            likeBtn.style.display = 'none';
-            dislikeBtn.style.display = 'none';
-            likeRecLikeBtn.style.display='none';
-            likeRecDislikeBtn.style.display='none';
+            if (showMoreBtn) showMoreBtn.style.display = 'none';
+            if (offMoreBtn) offMoreBtn.style.display = 'none';
+            if (updateModalContainer) updateModalContainer.style.display = 'none';
+            if (likeBtn) likeBtn.style.display = 'none';
+            if (dislikeBtn) dislikeBtn.style.display = 'none';
+            if (likeRecLikeBtn) likeRecLikeBtn.style.display = 'none';
+            if (likeRecDislikeBtn) likeRecDislikeBtn.style.display = 'none';
 
             // 글자수 체크 함수
-            currentText.addEventListener('input', function(){
+            currentText.addEventListener('input', function () {
                 let updatedContent = currentText.value.trim();
                 let saveBtn = reviewBox.querySelector(".save-review-btn");
 
@@ -392,8 +393,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     alert("내용을 입력하세요.");
                     currentText.focus();
                     saveBtn.disabled = true;
-                } else if(updatedContent.length > 500) {
-                    alert("500자를 초과할 수 없습니다. 현재 글자수 : " + updatedContent.length)
+                } else if (updatedContent.length > 500) {
+                    alert("500자를 초과할 수 없습니다. 현재 글자수 : " + updatedContent.length);
                     currentText.focus();
                     saveBtn.disabled = true;
                 } else {
@@ -401,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            saveButton.addEventListener("click", function() {
+            saveButton.addEventListener("click", function () {
                 let updatedContent = currentText.value;
 
                 fetch(`/reviews/patch/${reviewId}`, {
@@ -432,10 +433,17 @@ document.addEventListener("DOMContentLoaded", function() {
             currentText.after(saveButton);
         }
 
-        updateReview(reviewBox);
+        if (reviewBox) {
+            updateReview(reviewBox);
+        }
 
-        updateReview(reviewLikeBox);
+        if (reviewLikeBox) {
+            updateReview(reviewLikeBox);
+        }
     }
+
+
+
 
     let likeReviewUpdateButtons = document.querySelectorAll('#like-reviews .update-review-btn');
     likeReviewUpdateButtons.forEach(button => {
