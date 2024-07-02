@@ -83,7 +83,6 @@ const renderCalendar = () => {
               </div>`;
   }).join('');
 
-
   const today = new Date();
   // 오늘 날짜 하이라이트
   if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
@@ -94,14 +93,34 @@ const renderCalendar = () => {
     });
   }
 
-  // 출석 체크된 날짜 표시
-  document.querySelectorAll('.calendar-date').forEach(dateElement => {
-    const dateKey = dateElement.getAttribute('data-date');
-    if (attendance[dateKey]) {
-      dateElement.classList.add('filled');
-      dateElement.querySelector('.calendar-date-stamp').style.display = 'block';
+  calculatePoints();
+}
+
+const calculatePoints = () => {
+  let newPoints = 0;
+  let weeklyAttendance = 0;
+  const today = new Date();
+  const yearMonth = `${calendarDate.getFullYear()}-${String(calendarDate.getMonth() + 1).padStart(2, '0')}`;
+
+  Object.keys(attendance).forEach(dateKey => {
+    if (dateKey.startsWith(yearMonth)) {
+      newPoints += 1;
+      weeklyAttendance += 1;
+
+      // Check if a full week has passed and reset the weekly attendance count
+      const date = new Date(dateKey);
+      if (date.getDay() === 0) { // Sunday (end of the week)
+        if (weeklyAttendance === 7) {
+          newPoints += 3; // Full week attendance bonus
+        }
+        weeklyAttendance = 0; // Reset weekly attendance counter
+      }
     }
   });
+
+  points = newPoints;
+  pointsElement.innerText = points;
+  localStorage.setItem("points", points);
 }
 
 const calendarPrevMonth = () => {
