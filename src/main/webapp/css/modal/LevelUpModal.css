@@ -1,8 +1,7 @@
 /* LevelUpModal.css */
 .levelUp_modal {
-    display: none; /* 기본적으로 모달은 숨김 상태 */
+    display: none;
     position: fixed;
-    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -13,13 +12,28 @@
 
 .levelUp_modal_content {
     background-color: #fefefe;
-    width: 50%; /* 모달의 너비를 설정하세요 */
-    max-width: 600px; /* 모달의 최대 너비를 설정하세요 */
-    margin: 15% auto;
-    padding: 20px;
+    width: 50%;
+    /* 모달의 너비를 설정하세요 */
+    height: 500px;
+    max-width: 600px;
+    /* 모달의 최대 너비를 설정하세요 */
+    margin: 10% auto;
+    padding: 10px 20px;
     border: 1px solid #888;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center; /* 모달 내용을 가운데 정렬 */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal_content {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    font-size: 24px;
+    gap: 10px;
+    margin-bottom: 50px;
 }
 
 .levelUp_modal_close {
@@ -28,10 +42,64 @@
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    align-self: flex-end;
 }
 
 .levelUp_modal_close:hover,
 .levelUp_modal_close:focus {
     color: #000;
     text-decoration: none;
+}
+
+.next {
+    border: 1px solid var(--mainColor);
+    width: 200px;
+    height: 50px;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.level_img {
+    width: 200px;
+    height: 200px;
+    align-self: center;
+    z-index: 1;
+    position: relative;
+}
+
+.level_img_star {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    /* 배경 이미지가 아래에 오도록 설정 */
+    transform: scale(1.5);
+}
+
+.image-container {
+    position: relative;
+    margin: auto;
+    width: 200px;
+    /* level_img와 동일한 너비로 설정 */
+    height: 200px;
+    /* level_img와 동일한 높이로 설정 */
+}
+
+
+/* 폭죽 */
+
+body {
+    overflow: hidden;
+}
+
+particule {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    box-shadow: 1px 1px 4px #eb6383;
 }
