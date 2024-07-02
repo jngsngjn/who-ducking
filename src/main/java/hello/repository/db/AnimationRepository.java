@@ -4,6 +4,8 @@ package hello.repository.db;
 import hello.dto.animation.GetAniListDTO;
 import hello.dto.playground.WorldCupDTO;
 import hello.entity.animation.Animation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -39,4 +41,6 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
     List<Object[]> findRandomQuizzes();
 
     List<Animation> findByNameContaining(String name);
+
+    Page<Animation> findByNameContaining(String name, Pageable pageable);
 }
