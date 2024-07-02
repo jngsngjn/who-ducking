@@ -78,7 +78,7 @@
 <div class="show-line"></div>
 
 <div class="board-bottom-line">
-    <a href="/board" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</a>
+    <button onclick="window.history.back()" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</button>
     <button class="btn-bookmark" id="board-bookmark-button" th:data-board-id="${board.id}" th:if="${isAuthenticated}"><i class="fa-regular fa-bookmark"></i>북마크</button>
 </div>
 <section class="comment-section">
