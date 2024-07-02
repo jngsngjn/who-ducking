@@ -57,22 +57,22 @@
                         <ul class="searchAll_menu">
                             <!-- First Tab -->
                             <li class="searchAll_menu_tab">
-                                <a href="/" class="searchAll_selected_tab">전체 검색</a>
+                                <a class="searchAll_selected_tab">전체 검색</a>
                             </li>
 
                             <!-- Second Tab -->
                             <li class="searchAll_menu_tab">
-                                <a href="/">애니</a>
+                                <a th:href="@{/search/animation(name=${name})}">애니</a>
                             </li>
 
                             <!-- Third Tab -->
                             <li class="searchAll_menu_tab">
-                                <a href="/">커뮤니티</a>
+                                <a th:href="@{/search/board(name=${name}, page=0)}">커뮤니티</a>
                             </li>
 
                             <!-- Fourth Tab -->
                             <li class="searchAll_menu_tab">
-                                <a href="/">공지사항</a>
+                                <a th:href="@{/search/announcement(name=${name})}">공지사항</a>
                             </li>
                         </ul>
                     </div>

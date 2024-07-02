@@ -8,6 +8,8 @@ import hello.repository.db.AnnouncementRepository;
 import hello.repository.db.BoardRepository;
 import hello.repository.db.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,11 +40,16 @@ public class SearchService {
                 .collect(Collectors.toList());
     }
 
-    public List<SearchBoardDTO> searchBoards(String name) {
+    public List<SearchBoardDTO> searchBoardList(String name) {
         return boardRepository.findByTitleOrContentContaining(name);
     }
 
-    public List<SearchAnnouncementDTO> searchAnnouncements(String name) {
+    public Page<SearchBoardDTO> searchBoardPage(String name, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return boardRepository.findByTitleOrContentContainingPage(name, pageRequest);
+    }
+
+    public List<SearchAnnouncementDTO> searchAnnouncementList(String name) {
         return announcementRepository.findByTitleOrContentContaining(name);
     }
 }

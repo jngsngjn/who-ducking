@@ -49,4 +49,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     @Query("SELECT new hello.dto.search.SearchBoardDTO(b.id, b.title, b.content) FROM Board b WHERE b.title LIKE %:name% OR b.content LIKE %:name%")
     List<SearchBoardDTO> findByTitleOrContentContaining(@Param("name") String name);
+
+    @Query("SELECT new hello.dto.search.SearchBoardDTO(b.id, b.title, b.content) FROM Board b WHERE b.title LIKE %:name% OR b.content LIKE %:name%")
+    Page<SearchBoardDTO> findByTitleOrContentContainingPage(@Param("name") String name, Pageable pageable);
 }
