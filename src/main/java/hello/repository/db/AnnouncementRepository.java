@@ -20,9 +20,9 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Long
     @Query("select new hello.dto.notice.NoticeDTO(a.id, a.title, a.content, a.writeDate) from Announcement a order by a.id desc")
     Page<NoticeDTO> findNoticePage(Pageable pageable);
 
-    @Query("SELECT new hello.dto.search.SearchAnnouncementDTO(a.id, a.title, a.content) FROM Announcement a WHERE a.title LIKE %:name% OR a.content LIKE %:name% order by a.writeDate desc")
+    @Query("SELECT new hello.dto.search.SearchAnnouncementDTO(a.id, a.title, a.content) FROM Announcement a WHERE a.title LIKE %:name% OR a.content LIKE %:name% order by a.id desc")
     List<SearchAnnouncementDTO> findByTitleOrContentContaining(@Param("name") String name);
 
-    @Query("SELECT new hello.dto.search.SearchAnnouncementDTO(a.id, a.title, a.content) FROM Announcement a WHERE a.title LIKE %:name% OR a.content LIKE %:name% order by a.writeDate desc")
+    @Query("SELECT new hello.dto.search.SearchAnnouncementDTO(a.id, a.title, a.content) FROM Announcement a WHERE a.title LIKE %:name% OR a.content LIKE %:name% order by a.id desc")
     Page<SearchAnnouncementDTO> findByTitleOrContentContainingPage(@Param("name") String name, Pageable pageable);
 }
