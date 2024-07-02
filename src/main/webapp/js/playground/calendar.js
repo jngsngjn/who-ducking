@@ -55,34 +55,33 @@ const renderCalendar = () => {
   const dates = [...prevDates, ...thisDates, ...nextDates];
 
   document.querySelector('.calendar-dates').innerHTML = dates.map((date, i) => {
-      let condition;
-      let dateKey;
+    let condition;
+    let dateKey;
 
-      if (i < prevDates.length) {
-        // 이전 달의 날짜 처리
-        condition = 'calendar-other';
-        dateKey = new Date(viewYear, viewMonth - 1, date);
-      } else if (i < prevDates.length + thisDates.length) {
-        // 현재 달의 날짜 처리
-        condition = 'calendar-this';
-        dateKey = new Date(viewYear, viewMonth, date);
-      } else {
-        // 다음 달의 날짜 처리
-        condition = 'calendar-other';
-        dateKey = new Date(viewYear, viewMonth + 1, date);
-      }
+    if (i < prevDates.length) {
+      // 이전 달의 날짜 처리
+      condition = 'calendar-other';
+      dateKey = new Date(viewYear, viewMonth - 1, date);
+    } else if (i < prevDates.length + thisDates.length) {
+      // 현재 달의 날짜 처리
+      condition = 'calendar-this';
+      dateKey = new Date(viewYear, viewMonth, date);
+    } else {
+      // 다음 달의 날짜 처리
+      condition = 'calendar-other';
+      dateKey = new Date(viewYear, viewMonth + 1, date);
+    }
 
-      // 로컬 시간 기준으로 날짜 문자열 생성
-      const localDateString = `${dateKey.getFullYear()}-${String(dateKey.getMonth() + 1).padStart(2, '0')}-${String(dateKey.getDate()).padStart(2, '0')}`;
+    // 로컬 시간 기준으로 날짜 문자열 생성
+    const localDateString = `${dateKey.getFullYear()}-${String(dateKey.getMonth() + 1).padStart(2, '0')}-${String(dateKey.getDate()).padStart(2, '0')}`;
 
-      const isAttendanceChecked = attendance[localDateString] ? 'block' : 'none';
+    const isAttendanceChecked = attendance[localDateString] ? 'block' : 'none';
 
-      return `<div class="calendar-date ${condition}" data-date="${localDateString}">
+    return `<div class="calendar-date ${condition}" data-date="${localDateString}">
                   ${date}
                   <img class="calendar-date-stamp" src="/images/Playground/CalendarStamp.png" style="display: ${isAttendanceChecked};"/>
               </div>`;
-    }).join('');
-
+  }).join('');
 
   const today = new Date();
   // 오늘 날짜 하이라이트
@@ -94,14 +93,34 @@ const renderCalendar = () => {
     });
   }
 
-  // 출석 체크된 날짜 표시
-  document.querySelectorAll('.calendar-date').forEach(dateElement => {
-    const dateKey = dateElement.getAttribute('data-date');
-    if (attendance[dateKey]) {
-      dateElement.classList.add('filled');
-      dateElement.querySelector('.calendar-date-stamp').style.display = 'block';
+  calculatePoints();
+}
+
+const calculatePoints = () => {
+  let newPoints = 0;
+  let weeklyAttendance = 0;
+  const today = new Date();
+  const yearMonth = `${calendarDate.getFullYear()}-${String(calendarDate.getMonth() + 1).padStart(2, '0')}`;
+
+  Object.keys(attendance).forEach(dateKey => {
+    if (dateKey.startsWith(yearMonth)) {
+      newPoints += 1;
+      weeklyAttendance += 1;
+
+      // Check if a full week has passed and reset the weekly attendance count
+      const date = new Date(dateKey);
+      if (date.getDay() === 0) { // Sunday (end of the week)
+        if (weeklyAttendance === 7) {
+          newPoints += 3; // Full week attendance bonus
+        }
+        weeklyAttendance = 0; // Reset weekly attendance counter
+      }
     }
   });
+
+  points = newPoints;
+  pointsElement.innerText = points;
+  localStorage.setItem("points", points);
 }
 
 const calendarPrevMonth = () => {
