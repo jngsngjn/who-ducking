@@ -27,6 +27,7 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/search/searchFreeBoard.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -47,7 +48,7 @@
         <section class="subContents">
             <div class="inner_box" data-aos="fade-up">
 
-                <!-- My Request Content Box -->
+                <!-- Search FreeBoard Content Box -->
                 <div class="searchFreeBoard_content_box">
 
                     <!-- Left : Menu List -->
@@ -89,14 +90,14 @@
                                 <a th:href="@{/board/{id}(id=${board.id})}" class="searchFreeBoard_list_item_one">
                                     <li class="searchFreeBoard_list_title search_result_title"
                                         th:text="${board.title}">제목
-                                        <button class="searchAll_more_title_btn"
+                                        <button class="searchFreeBoard_more_title_btn"
                                                 style="display: none;">더보기</button>
                                     </li>
                                 </a>
                                 <li class="searchFreeBoard_list_info">
                                                       <span class="searchFreeBoard_list_content search_result_content"
                                                             th:text="${board.content}">게시글 내용</span>
-                                    <button class="searchAll_more_content_btn"
+                                    <button class="searchFreeBoard_more_content_btn"
                                             style="display: none;">더보기</button>
                                 </li>
                             </ul>
