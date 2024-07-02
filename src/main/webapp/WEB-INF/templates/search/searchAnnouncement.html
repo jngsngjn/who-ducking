@@ -27,6 +27,7 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/search/searchAnnouncement.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -87,7 +88,7 @@
                         <!-- Data Exist -->
                         <div th:if="${!announcements.content.isEmpty()}" class="searchAnnouncement_list_data_box" th:each="announcement : ${announcements.content}">
                             <ul class="searchAnnouncement_list_item">
-                                <a th:href="@{/announcement(id=${announcement.id})}" class="searchAnnouncement_list_item_one">
+                                <a href="#" class="searchAnnouncement_list_item_one" th:attr="data-id=${announcement.id}">
                                     <li class="searchAnnouncement_list_title search_result_title"
                                         th:text="${announcement.title}">
                                         제목

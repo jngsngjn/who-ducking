@@ -192,18 +192,17 @@
                             <!-- Data Exist -->
                             <div th:if="${!announcements.isEmpty()}" class="searchAll_announcement_list_data_box" th:each="announcement : ${announcements}">
                                 <ul class="searchAll_announcement_list_item">
-                                    <a th:href="@{/announcement(id=${announcement.id})}" class="searchAll_announcement_list_item_one">
+                                    <a href="#" class="searchAll_announcement_list_item_one" th:attr="data-id=${announcement.id}">
                                         <li class="searchAll_announcement_list_title search_result_title"
                                             th:text="${announcement.title}">
                                             제목
                                             <button class="searchAll_more_title_btn"
                                                     style="display: none;">더보기</button>
                                         </li>
-
                                     </a>
                                     <li class="searchAll_announcement_list_info">
-                                                            <span class="searchAll_announcement_list_content search_result_content"
-                                                                  th:text="${announcement.content}">공지사항 내용</span>
+            <span class="searchAll_announcement_list_content search_result_content"
+                  th:text="${announcement.content}">공지사항 내용</span>
                                         <button class="searchAll_more_content_btn"
                                                 style="display: none;">더보기</button>
                                     </li>
