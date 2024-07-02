@@ -127,3 +127,12 @@
     font-size: 2.4rem;
     color: var(--descColor);
 }
+
+/* 배경 이미지 추가 */
+.faq_background_img {
+    background-image: url('/images/Background_Image/academia.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+}

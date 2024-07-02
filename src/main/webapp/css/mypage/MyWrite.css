@@ -1,29 +1,29 @@
-.myReview_backgroundImage {
+.myWrite_backgroundImage {
     background-image: url("/images/Background_Image/marin.png");
     background-repeat: no-repeat;
-    background-position: right bottom 267px;
-    background-size: 450px 1000px;
+    background-size:contain;
+    background-position:center;
 }
 
-.myReview_title_box {
+.myWrite_title_box {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 5rem;
 }
 
-.myReview_btn_box {
+.myWrite_btn_box {
     display: flex;
     gap: 1.5rem;
 }
 
-.myReview_new_btn {
+.myWrite_new_btn {
     background-color: #fff;
     color: #000;
 }
 
-.myReview_new_btn,
-.myReview_view_btn {
+.myWrite_new_btn,
+.myWrite_view_btn {
     border-radius: 2rem;
     padding: 0.4rem 1.5rem;
     border: 1px solid #d9d9d9;
@@ -31,21 +31,21 @@
     transition: background-color 0.3s ease;
 }
 
-.myReview_new_btn:hover,
-.myReview_view_btn:hover {
+.myWrite_new_btn:hover,
+.myWrite_view_btn:hover {
     background-color: var(--mainColor);
     color: #fff;
     border: 1px solid var(--mainColor);
 }
 
-.myReview_new_btn.active,
-.myReview_view_btn.active {
+.myWrite_new_btn.active,
+.myWrite_view_btn.active {
     background-color: var(--mainColor);
     color: #fff;
 }
 
-.myReview_new_btn:not(.active),
-.myReview_view_btn:not(.active) {
+.myWrite_new_btn:not(.active),
+.myWrite_view_btn:not(.active) {
     background-color: #fff;
     color: var(--mainColor);
 }
@@ -113,6 +113,7 @@
     height: 1000px;
     border: 2px solid #d9d9d9;
     border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 /* Data Empty */

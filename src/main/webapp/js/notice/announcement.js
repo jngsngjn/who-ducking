@@ -1,5 +1,6 @@
-// Swiper
 $(document).ready(function () {
+    localStorage.removeItem('searchInput');
+
     // AOS
     AOS.init({
         once: true,
@@ -25,10 +26,24 @@ $(document).ready(function () {
             prevEl: ".swiper-button-prev",
         },
     });
-});
 
-// Dropdown
-$(document).ready(function () {
+    // Extract id from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    // If id exists, open the corresponding announcement
+    if (id) {
+        console.log('쿼리파라미터 포함!');
+        const targetAnnouncement = $(`.announcement_list_item_box_title[data-id='${id}']`).closest(".announcement_list_item");
+        const dropdown = targetAnnouncement.find(".announcement_list_item_detail");
+        const icon = targetAnnouncement.find(".announcement_list_item_box_moreBtn i");
+
+        // Open the detail and change the icon
+        dropdown.slideDown();
+        icon.removeClass("fa-plus").addClass("fa-minus");
+    }
+
+    // Dropdown
     $(".announcement_list_item_box_moreBtn").on("click", function () {
         // 모든 드롭다운 닫기 및 버튼 아이콘 +로 변경
         $(".announcement_list_item_detail").slideUp();

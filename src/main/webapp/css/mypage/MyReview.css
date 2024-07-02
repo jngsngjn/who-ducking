@@ -1,8 +1,8 @@
-.myReview_backgroundImage {
+.myReview_backgroundImages {
     background-image: url("/images/Background_Image/itachi.png");
     background-repeat: no-repeat;
-    background-position: 7% 72%;
-    background-size: 350px 700px;
+    background-size:contain;
+    background-position:center;
 }
 
 /* Title */
@@ -185,7 +185,7 @@
     background: #fff;
     color: var(--mainColor);
     transition: 0.7s;
-    bottom: 0.3rem;
+    bottom: -0.2rem;
 }
 
 /* Pagination */

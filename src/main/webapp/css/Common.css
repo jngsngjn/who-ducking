@@ -31,6 +31,10 @@
 @import url(./popup/PopUpStore.css);
 @import url(./notice/Announcement.css);
 @import url(./notice/Faq.css);
+@import url(./search/SearchAll.css);
+@import url(./search/SearchAni.css);
+@import url(./search/SearchFreeBoard.css);
+@import url(./search/SearchAnnouncement.css);
 
 @import url(./board/boardList.css);
 @import url(./board/CreateAndEdit.css);

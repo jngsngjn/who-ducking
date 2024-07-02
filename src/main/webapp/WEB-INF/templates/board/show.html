@@ -117,8 +117,8 @@
                          alt="Level Image" />
                     <span class="comment-writer" th:text="${comment.user.nickname}"></span>
                     <span class="board-menu-toggle" th:if="${comment.user != null && loginUserId != null && comment.user.id == loginUserId}">
-                <i class="fa-solid fa-ellipsis-vertical" onclick="toggleCommentMenu(this)"></i>
-            </span>
+                        <i class="fa-solid fa-ellipsis-vertical" onclick="toggleCommentMenu(this)"></i>
+                    </span>
                 </div>
                 <div class="comment-writer-container">
                     <span class="comment-writer-result" th:text="${comment.content}"></span><br>
@@ -148,7 +148,6 @@
                 </div>
             </li>
         </ul>
-
     </div>
 </section>
 <div th:insert="~{fragments/footer :: footer}"></div>

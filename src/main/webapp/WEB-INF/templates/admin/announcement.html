@@ -34,9 +34,9 @@
                 <td th:text="${announcement.title}">제목</td>
                 <td th:text="${announcement.writeDate}">작성일</td>
                 <td>
-                    <form action="/admin/announcement-delete" method="post">
+                    <form action="/admin/announcement-delete" method="post" class="delete_form" onsubmit="return confirmDelete()">
                         <input type="hidden" name="id" th:value="${announcement.id}">
-                        <button type="submit">삭제</button>
+                        <button class="delete-btn" type="submit">삭제</button>
                     </form>
                 </td>
             </tr>
@@ -64,10 +64,15 @@
                 <label for="content">내용:</label>
                 <textarea id="content" name="content" required></textarea>
 
-                <button type="submit">저장</button>
+                <button class="save-btn" type="submit">저장</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    function confirmDelete() {
+        return confirm("정말로 삭제하시겠습니까?");
+    }
+</script>
 </body>
 </html>

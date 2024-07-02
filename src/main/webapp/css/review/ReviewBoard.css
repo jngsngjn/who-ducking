@@ -1,7 +1,11 @@
-
-
 .community-page{
   margin: 0 auto;
+
+  /* 배경 이미지 추가 */
+  background-image: url('/images/Background_Image/kakasi.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .title-container {

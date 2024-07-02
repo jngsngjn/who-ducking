@@ -1,5 +1,7 @@
 // Swiper
 $(document).ready(function () {
+    localStorage.removeItem('searchInput');
+
     // AOS
     AOS.init({
         once: true,

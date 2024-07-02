@@ -17,7 +17,7 @@ public class QuizService {
     public List<QuizDTO> getRandomQuizzes() {
         List<Object[]> quizzes = animationRepository.findRandomQuizzes();
         return quizzes.stream()
-                .map(quiz -> new QuizDTO((String) quiz[0], (String) quiz[1]))
+                .map(quiz -> new QuizDTO((Long) quiz[0], (String) quiz[1], (String) quiz[2])) // id 포함
                 .collect(Collectors.toList());
     }
 }

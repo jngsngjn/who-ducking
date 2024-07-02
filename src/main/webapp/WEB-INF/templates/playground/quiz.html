@@ -15,58 +15,89 @@
     <script src="/vendor/aos/aos.js"></script>
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/js/common.js"></script>
+    <!--폭죽-->
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="quiz-container">
+<main id="container">
+    <section class="quiz-background">
+        <div class="quiz-container">
     <span class="quiz-title">
-        <i class="fas fa-question-circle"></i>애니메이션 퀴즈<i class="fas fa-question-circle"></i>
+       <i class="fas fa-question"></i>애니메이션 제목 퀴즈<i class="fas fa-question"></i></i><br>
     </span>
-    <div id="start-screen">
-        <button id="start-quiz" class="quiz-submit">퀴즈 시작</button>
-    </div>
-    <div id="quiz-screen" style="display: none;">
-        <div class="quiz-number">
-            <span class="quiz-label">문제 <span id="quiz-current-question">1</span> / <span id="quiz-total-questions">5</span></span>
-        </div>
-        <div class="quiz-problem">
-            <img id="quiz-image" src="" class="quiz-problem-img">
-            <p id="quiz-question">애니메이션의 제목은?</p>
-        </div>
-        <div class="quiz-timer">
-            <div class="hourglassBackground">
-                <div class="hourglassContainer">
-                    <div class="hourglassCapTop"></div>
-                    <div class="hourglassCapBottom"></div>
-                    <div class="hourglassGlass"></div>
-                    <div class="hourglassSandStream"></div>
-                    <div class="hourglassSand"></div>
-                    <div class="hourglassCurves"></div>
+            <span class="quiz-sub-title">💰5문제 모두 맞출 시 15포인트 지급💰</span>
+            <div id="start-screen">
+                <div class="image-slider">
+                    <div class="slider-container">
+                    </div>
+                </div>
+                <button id="start-quiz" class="quiz-start">퀴즈 시작</button>
+            </div>
+            <div id="quiz-screen" style="display: none;">
+                <div class="quiz-number">
+                    <span class="quiz-label">문제 <span id="quiz-current-question">1</span> / <span id="quiz-total-questions">5</span></span>
+                </div>
+                <div class="quiz-problem">
+                    <img id="quiz-image" src="" class="quiz-problem-img">
+                    <p id="quiz-question">애니메이션의 제목은?</p>
+                </div>
+                <div class="quiz-timer">
+                    <div class="hourglassBackground">
+                        <div class="hourglassContainer">
+                            <div class="hourglassCapTop"></div>
+                            <div class="hourglassCapBottom"></div>
+                            <div class="hourglassGlass"></div>
+                            <div class="hourglassSandStream"></div>
+                            <div class="hourglassSand"></div>
+                            <div class="hourglassCurves"></div>
+                        </div>
+                    </div>
+                    <span id="quiz-time"></span>초
+                </div>
+                <div class="quiz-answer">
+                    <input type="text" id="quiz-answer-input" placeholder="정답을 입력하세요">
+                    <button id="quiz-submit-answer" class="quiz-submit">정답 확인</button>
+                </div>
+                <div class="quiz-result-container">
+                    <div id="quiz-result">
+                    </div>
+                    <button id="quiz-next" class="quiz-next btn" style="display: none;">
+                        <div class="icon"><i class="fas fa-arrow-right"></i></div>
+                        <span class="text">다음</span>
+                    </button>
                 </div>
             </div>
-            <span id="quiz-time"></span>초
+            <div id="result-screen" style="display: none;">
+                <span class="result-title" >결과 화면</span>
+                <div id="correct-count"></div>
+                <div class="result-images-grid" id="result-images"></div>
+                <div class="result-buttons">
+                    <button id="retry-quiz" class="quiz-retry btn">
+                        <div class="icon"><i class="fas fa-redo"></i></div>
+                        <span class="text">다시하기</span>
+                    </button>
+                    <button id="go-home" class="quiz-home btn">
+                        <div class="icon"><i class="fas fa-home"></i></div>
+                        <span class="text">홈으로</span>
+                    </button>
+                    <button id="go-playground" class="quiz-playground btn">
+                        <div class="icon"><i class="fas fa-child"></i></div>
+                        <span class="text">놀이터</span>
+                    </button>
+                    <div id="pointModal" class="modal">
+                        <div class="quiz-modal-content">
+                            <span class ="quiz-point-modal">✨문제를 모두 맞춘 당신,, 축하드려요!✨</span><br>
+                            <span class ="quiz-point-modal">💰15포인트💰가 지급되었습니다!</span><br>
+                            <button id="closeModal">확인</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="quiz-answer">
-            <input type="text" id="quiz-answer-input" placeholder="정답을 입력하세요">
-            <button id="quiz-submit-answer" class="quiz-submit">제출</button>
-        </div>
-        <div id="quiz-result"></div>
-        <div class="quiz-navigation">
-            <button id="quiz-prev" class="quiz-review">이전</button>
-            <button id="quiz-next" class="quiz-next">다음</button>
-        </div>
-    </div>
-    <div id="result-screen" style="display: none;">
-        <div id="correct-count"></div>
-        <div class="result-images" id="result-images"></div>
-        <div class="result-buttons">
-            <button id="retry-quiz" class="quiz-retry">다시하기</button>
-            <button id="go-home" class="quiz-home">홈으로</button>
-            <button id="go-playground" class="quiz-playground">놀이터로</button>
-        </div>
-    </div>
-</div>
-<div th:insert="~{fragments/footer :: footer}"></div>
+    </section>
+</main>
 <script src="/js/playground/quiz.js"></script>
+<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

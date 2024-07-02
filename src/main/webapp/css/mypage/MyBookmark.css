@@ -1,8 +1,8 @@
 .myBookmark_backgroundImage {
     background-image: url("/images/Background_Image/levi.png");
     background-repeat: no-repeat;
-    background-position: 7% 80%;
-    background-size: 600px 700px;
+    background-size:cover;
+    background-position:center;
 }
 
 .myBookmark_title_box {
