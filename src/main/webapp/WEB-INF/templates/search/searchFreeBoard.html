@@ -86,7 +86,7 @@
                         <!-- Data Exist -->
                         <div th:if="${!boards.content.isEmpty()}" class="searchFreeBoard_list_data_box" th:each="board : ${boards.content}">
                             <ul class="searchFreeBoard_list_item">
-                                <a th:href="@{/board/{id}(id=${board.id})}" class="searchFreeBoard_list_item_one">
+                                <a href="#" class="searchFreeBoard_list_item_one" th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'">
                                     <li class="searchFreeBoard_list_title search_result_title"
                                         th:text="${board.title}">제목
                                         <button class="searchFreeBoard_more_title_btn"

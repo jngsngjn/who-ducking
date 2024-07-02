@@ -78,38 +78,68 @@ public class BoardService {
     }
 
     //조회수 업데이트
+    @Transactional
     public void updateViewCount(Long id){
         boardRepository.incrementViewCount(id);
+        System.out.println("조회수 업데이트");
     }
 
     //글 수정
-    public void updateBoard(Long boardId, BoardDTO updateboard, User loginUser, MultipartFile file) throws Exception {
+    public void updateBoardWithNewImage(Long boardId, BoardDTO updateboard, User loginUser, MultipartFile file) throws Exception {
         Optional<Board> optionalBoard = boardRepository.findById(boardId);
         if (optionalBoard.isPresent()) {
             Board board = optionalBoard.get();
 
             UUID uuid = UUID.randomUUID();
 
-            String filename = uuid + "_" + file.getOriginalFilename();
+            if (!file.isEmpty()) {
+                String filename = uuid + "_" + file.getOriginalFilename();
 
-            File saveFile = new File(serverBoardImagePath + "/" + filename);
+                File saveFile = new File(serverBoardImagePath + "/" + filename);
 
-            file.transferTo(saveFile);
+                file.transferTo(saveFile);
 
-            updateboard.setImageName(filename);
-            updateboard.setImagePath(serverBoardImagePath + "/" + filename);
+                updateboard.setImageName(filename);
+                updateboard.setImagePath(serverBoardImagePath + "/" + filename);
+
+                // 사진 수정 시 기존 사진 삭제
+                String imageName = board.getImageName();
+                fileStore.deleteBoardImage(imageName);
+            }
 
             board.setTitle(updateboard.getTitle());
             board.setContent(updateboard.getContent());
-            board.setImageName(updateboard.getImageName());
-            board.setImagePath(updateboard.getImagePath());
             board.setUser(loginUser);
 
+            if (file != null && !file.isEmpty()) {
+                board.setImageName(updateboard.getImageName());
+                board.setImagePath(updateboard.getImagePath());
+            }
+            else {
+                // 글 수정 + 사진 삭제 시 서버에서도 사진 삭제
+                String imageName = board.getImageName();
+                fileStore.deleteBoardImage(imageName);
+                board.setImageName(null);
+                board.setImagePath(null);
+            }
 
             boardRepository.save(board);
         }
         else{
             throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
+        }
+    }
+
+    //기존 이미지를 유지하면서 게시글 업데이트
+    public void updateBoardWithoutChangingImage(Long boardId, BoardDTO updatedBoard, User loginUser) throws Exception {
+        Board board = boardRepository.findById(boardId).orElse(null);
+
+        if (board != null) {
+
+            board.setTitle(updatedBoard.getTitle());
+            board.setContent(updatedBoard.getContent());
+            board.setUser(loginUser);
+            boardRepository.save(board);
         }
     }
 
@@ -122,7 +152,7 @@ public class BoardService {
             // 게시글 이미지 삭제 추가
             Board board = optionalBoard.get();
             String imageName = board.getImageName();
-            if (!imageName.isEmpty()) {
+            if (imageName != null) {
                 fileStore.deleteBoardImage(imageName);
             }
         }

@@ -1,3 +1,7 @@
+.faq_list_item_box_title {
+    cursor: pointer;
+}
+
 .faq_carousel {
     padding-top: 5rem;
 }

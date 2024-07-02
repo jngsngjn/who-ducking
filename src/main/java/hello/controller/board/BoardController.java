@@ -16,6 +16,8 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,22 +40,19 @@ public class BoardController {
     private final CommentService commentService;
 
     @GetMapping
-    public String freeBoard(@RequestParam(value = "sort", required = false, defaultValue = "writeDate") String sort,
+    public String freeBoard(
                             Model model,
                             @RequestParam(name = "page", defaultValue = "0") int page,
                             @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
 
         Page<Board> boardList;
 
-        if ("viewCount".equals(sort)) {
-            boardList = boardService.getBoardsSortedByViewCount(page, 10);
-        } else {
-            boardList = boardService.getBoardsSortedByLatest(page, 10);
-        }
+        boardList = boardService.getBoardsSortedByLatest(page, 10);
 
+        //boardList = boardService.getBoardsSortedByViewCount(page, 10);
 
         model.addAttribute("boardList", boardList);
-        model.addAttribute("sort", sort);
+        model.addAttribute("sort", "writeDate");
         model.addAttribute("currentPage", page);
         model.addAttribute("pageSize", 10);
 
@@ -64,6 +63,30 @@ public class BoardController {
         }
 
         return "/board/freeBoard";
+    }
+
+    @GetMapping("/viewCount")
+    public String freeBoardSortByViewCount(
+                            Model model,
+                            @RequestParam(name = "page", defaultValue = "0") int page,
+                            @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
+
+        Page<Board> boardList;
+
+        boardList = boardService.getBoardsSortedByViewCount(page, 10);
+
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("sort", "viewCount");
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", 10);
+
+        if (oAuth2User == null) {
+            model.addAttribute("isAuthenticated", false);
+        } else {
+            model.addAttribute("isAuthenticated", true);
+        }
+
+        return "/board/freeBoardSortByViewCount";
     }
 
     //freeBoard -> 작성 폼을 띄워주는 역할
@@ -124,9 +147,10 @@ public class BoardController {
 
     //조회수 증가
     @PostMapping("/{boardId}/incrementViewCount")
-    @ResponseBody
-    public void incrementViewCount(@PathVariable("boardId") Long boardId) {
+    public ResponseEntity<Void> incrementViewCount(@PathVariable("boardId") Long boardId) {
         boardService.updateViewCount(boardId);
+        System.out.println("조회수 업데이트 성공");
+        return ResponseEntity.ok().build();
     }
 
     //게시글 수정 폼
@@ -142,11 +166,19 @@ public class BoardController {
 
     //게시글 수정 동작
     @PostMapping("/{boardId}/edit")
-    public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file) throws Exception {
+    public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file,
+                            @RequestParam("useExistingImage") boolean useExistingImage) throws Exception {
         User loginUser = userService.getLoginUserDetail(user);
-        boardService.updateBoard(boardId,updatedBoard,loginUser,file);
+
+        if(useExistingImage){
+            boardService.updateBoardWithoutChangingImage(boardId, updatedBoard, loginUser);
+        }
+        else{
+            boardService.updateBoardWithNewImage(boardId, updatedBoard, loginUser, file);
+        }
         return "redirect:/board/"+boardId;
     }
+
 
     //게시글 삭제 동작
     @PostMapping("/{boardId}/delete")
@@ -161,22 +193,38 @@ public class BoardController {
     public Map<String, Boolean> toggleBookmark(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User loginUser) {
         User user = userService.getLoginUserDetail(loginUser);
         Board board = boardService.getBoardById(boardId).orElse(null);
-        boolean bookmarked;
+        boolean bookmarked = false;
 
-        if (!bookmarkService.isBookmarked(user, board)) {
-            Bookmark bookmark = new Bookmark();
-            bookmark.setUser(user);
-            bookmark.setBoard(board);
-            bookmarkService.addBookmark(bookmark);
-            bookmarked = true;
-        } else {
-            assert board != null;
-            bookmarkService.removeBookmark(user.getId(), board.getId());
-            bookmarked = false;
+        if (board != null) {
+            if (!bookmarkService.isBookmarked(user, board)) {
+                Bookmark bookmark = new Bookmark();
+                bookmark.setUser(user);
+                bookmark.setBoard(board);
+                bookmarkService.addBookmark(bookmark);
+                bookmarked = true;
+            } else {
+                bookmarkService.removeBookmark(user.getId(), board.getId());
+            }
         }
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("bookmarked", bookmarked);
+        return response;
+    }
+
+    @GetMapping("/{boardId}/bookmark/status")
+    @ResponseBody
+    public Map<String, Boolean> getBookmarkStatus(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User loginUser) {
+        User user = userService.getLoginUserDetail(loginUser);
+        Board board = boardService.getBoardById(boardId).orElse(null);
+        boolean isBookmarked = false;
+
+        if (board != null && bookmarkService.isBookmarked(user, board)) {
+            isBookmarked = true;
+        }
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("bookmarked", isBookmarked);
         return response;
     }
 

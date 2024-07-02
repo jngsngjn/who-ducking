@@ -150,7 +150,7 @@
                             <!-- Data Exist -->
                             <div th:if="${!boards.isEmpty()}" class="searchAll_freeBoard_list_data_box" th:each="board : ${boards}">
                                 <ul class="searchAll_freeBoard_list_item">
-                                    <a th:href="@{/board/{id}(id=${board.id})}" class="searchAll_freeBoard_list_item_one">
+                                    <a href="#" class="searchAll_freeBoard_list_item_one" th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'">
                                         <li class="searchAll_freeBoard_list_title search_result_title"
                                             th:text="${board.title}">
                                             제목
@@ -175,7 +175,7 @@
                             <!-- Title -->
                             <div class="searchAll_announcement_title_box">
                                 <h2 class="searchAll_announcement_title">공지사항</h2>
-                                <a th:href="@{/search/announcement(name=${name})}" class="searchAll_announcement_more_btn" th:if="${!announcements.isEmpty()}"
+                                <a th:href="@{/search/announcement(name=${name}, page=0)}" class="searchAll_announcement_more_btn" th:if="${!announcements.isEmpty()}"
                                    style="display: none;">
                                     더보기
                                     <i class="fa-solid fa-arrow-right"></i>
@@ -192,7 +192,7 @@
                             <!-- Data Exist -->
                             <div th:if="${!announcements.isEmpty()}" class="searchAll_announcement_list_data_box" th:each="announcement : ${announcements}">
                                 <ul class="searchAll_announcement_list_item">
-                                    <a th:href="@{/announcement(id=${announcement.id})}" class="searchAll_announcement_list_item_one">
+                                    <a href="#" class="searchAll_announcement_list_item_one" th:attr="data-id=${announcement.id}">
                                         <li class="searchAll_announcement_list_title search_result_title"
                                             th:text="${announcement.title}">
                                             제목
@@ -202,8 +202,8 @@
 
                                     </a>
                                     <li class="searchAll_announcement_list_info">
-                                                            <span class="searchAll_announcement_list_content search_result_content"
-                                                                  th:text="${announcement.content}">공지사항 내용</span>
+            <span class="searchAll_announcement_list_content search_result_content"
+                  th:text="${announcement.content}">공지사항 내용</span>
                                         <button class="searchAll_more_content_btn"
                                                 style="display: none;">더보기</button>
                                     </li>
