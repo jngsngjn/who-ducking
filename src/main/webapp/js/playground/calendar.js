@@ -35,12 +35,11 @@ const renderCalendar = () => {
   const nextDates = [];
 
   // 이전 달 날짜 생성
-  const prevMonthDays = lastDayOfPrevMonth.getDate();
-  const prevMonthEndDay = lastDayOfPrevMonth.getDay();
-
-  for (let i = prevMonthEndDay; i >= 0; i--) {
-    prevDates.push(prevMonthDays - i);
+  const prevMonthEndDay = firstDayOfMonth.getDay();
+  for (let i = prevMonthEndDay - 1; i >= 0; i--) {
+    prevDates.unshift(lastDayOfPrevMonth.getDate() - i);
   }
+  prevDates.reverse();
 
   // 현재 달 날짜 생성
   for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
@@ -48,7 +47,7 @@ const renderCalendar = () => {
   }
 
   // 다음 달 날짜 생성
-  const nextMonthDays = 6 - lastDayOfMonth.getDay();
+  const nextMonthDays = 42 - prevDates.length - thisDates.length;
   for (let i = 1; i <= nextMonthDays; i++) {
     nextDates.push(i);
   }
@@ -62,24 +61,28 @@ const renderCalendar = () => {
     if (i < prevDates.length) {
       // 이전 달의 날짜 처리
       condition = 'calendar-other';
-      dateKey = new Date(viewYear, viewMonth - 1, date).toISOString().split('T')[0];
+      dateKey = new Date(viewYear, viewMonth - 1, date);
     } else if (i < prevDates.length + thisDates.length) {
       // 현재 달의 날짜 처리
       condition = 'calendar-this';
-      dateKey = new Date(viewYear, viewMonth, date).toISOString().split('T')[0];
+      dateKey = new Date(viewYear, viewMonth, date);
     } else {
       // 다음 달의 날짜 처리
       condition = 'calendar-other';
-      dateKey = new Date(viewYear, viewMonth + 1, date).toISOString().split('T')[0];
+      dateKey = new Date(viewYear, viewMonth + 1, date);
     }
 
-    const isAttendanceChecked = attendance[dateKey] ? 'block' : 'none';
+    // 로컬 시간 기준으로 날짜 문자열 생성
+    const localDateString = `${dateKey.getFullYear()}-${String(dateKey.getMonth() + 1).padStart(2, '0')}-${String(dateKey.getDate()).padStart(2, '0')}`;
 
-    return `<div class="calendar-date ${condition}" data-date="${dateKey}">
-                ${date}
-                <img class="calendar-date-stamp" src="/images/Playground/CalendarStamp.png" style="display: ${isAttendanceChecked};"/>
-            </div>`;
+    const isAttendanceChecked = attendance[localDateString] ? 'block' : 'none';
+
+    return `<div class="calendar-date ${condition}" data-date="${localDateString}">
+                  ${date}
+                  <img class="calendar-date-stamp" src="/images/Playground/CalendarStamp.png" style="display: ${isAttendanceChecked};"/>
+              </div>`;
   }).join('');
+
 
   const today = new Date();
   // 오늘 날짜 하이라이트
@@ -90,21 +93,31 @@ const renderCalendar = () => {
       }
     });
   }
-};
+
+  // 출석 체크된 날짜 표시
+  document.querySelectorAll('.calendar-date').forEach(dateElement => {
+    const dateKey = dateElement.getAttribute('data-date');
+    if (attendance[dateKey]) {
+      dateElement.classList.add('filled');
+      dateElement.querySelector('.calendar-date-stamp').style.display = 'block';
+    }
+  });
+}
 
 const calendarPrevMonth = () => {
   calendarDate.setMonth(calendarDate.getMonth() - 1);
   fetchAttendance(); // 이전 달의 출석 데이터를 다시 가져옵니다.
-};
+}
 
 const calendarNextMonth = () => {
   calendarDate.setMonth(calendarDate.getMonth() + 1);
   fetchAttendance(); // 다음 달의 출석 데이터를 다시 가져옵니다.
-};
+}
 
 const calendarGoToday = () => {
   calendarDate = new Date();
   fetchAttendance(); // 오늘의 출석 데이터를 다시 가져옵니다.
-};
+}
 
-document.addEventListener('DOMContentLoaded', fetchAttendance); // 페이지 로드 시 출석 데이터 가져오기
+// 페이지 로드 시 출석 데이터 가져오기
+document.addEventListener('DOMContentLoaded', fetchAttendance);
