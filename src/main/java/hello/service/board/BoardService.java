@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -78,12 +79,14 @@ public class BoardService {
     }
 
     //조회수 업데이트
+    @Transactional
     public void updateViewCount(Long id){
         boardRepository.incrementViewCount(id);
+        System.out.println("조회수 업데이트");
     }
 
     //글 수정
-    public void updateBoard(Long boardId, BoardDTO updateboard, User loginUser, MultipartFile file) throws Exception {
+    public void updateBoardWithNewImage(Long boardId, BoardDTO updateboard, User loginUser, MultipartFile file) throws Exception {
         Optional<Board> optionalBoard = boardRepository.findById(boardId);
         if (optionalBoard.isPresent()) {
             Board board = optionalBoard.get();
@@ -101,15 +104,36 @@ public class BoardService {
 
             board.setTitle(updateboard.getTitle());
             board.setContent(updateboard.getContent());
-            board.setImageName(updateboard.getImageName());
-            board.setImagePath(updateboard.getImagePath());
             board.setUser(loginUser);
+
+            if (file != null && !file.isEmpty()) {
+                board.setImageName(updateboard.getImageName());
+                board.setImagePath(updateboard.getImagePath());
+            }
+            else{
+                board.setImageName(null);
+                board.setImagePath(null);
+            }
+
 
 
             boardRepository.save(board);
         }
         else{
             throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
+        }
+    }
+
+    //기존 이미지를 유지하면서 게시글 업데이트
+    public void updateBoardWithoutChangingImage(Long boardId, BoardDTO updatedBoard, User loginUser) throws Exception {
+        Board board = boardRepository.findById(boardId).orElse(null);
+
+        if (board != null) {
+
+            board.setTitle(updatedBoard.getTitle());
+            board.setContent(updatedBoard.getContent());
+            board.setUser(loginUser);
+            boardRepository.save(board);
         }
     }
 

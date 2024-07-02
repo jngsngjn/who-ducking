@@ -181,7 +181,7 @@
 
                   <!-- 3. Attendance Check -->
                   <div class="attendanceCheck_box">
-                        <a href="/" class="attendanceCheck_item">
+                        <a href="/calendar" class="attendanceCheck_item">
                               <img src="/images/AttendanceCheck/attendanceBanner.png" alt="출석 배너"/>
                         </a>
                   </div>
@@ -532,7 +532,7 @@
                         <div class="mainFourthSection_freeboard_box">
                               <ul class="mainFourthSection_freeboard_items">
                                     <li th:each="boardDto : ${boardListToMain}" class="mainFourthSection_freeboard_item">
-                                          <a th:href="@{/board/{boardId}(boardId = ${boardDto.board.id})}">
+                                          <a href="#" th:onclick="'incrementViewCountAndRedirect(' + ${boardDto.board.id} + '); return false;'">
                                                 <div class="mainFourthSection_freeboard_title">
                                                       <span class="mainFourthSection_freeboard_title_text" th:text="${boardDto.board.title}"></span>
                                                 </div>

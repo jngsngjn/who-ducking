@@ -13,6 +13,7 @@ $(document).ready(function(){
                 success: function(response) {
                     $button.find('i').removeClass('fa-solid').addClass('fa-regular');
                     console.log('북마크 삭제 성공');
+                    saveBookmarkState(boardId, false);
                 },
                 error: function() {
                     console.log('북마크 삭제 실패');
@@ -27,6 +28,7 @@ $(document).ready(function(){
                 success: function(response) {
                     $button.find('i').removeClass('fa-regular').addClass('fa-solid');
                     console.log('북마크 등록 성공');
+                    saveBookmarkState(boardId, true);
                 },
                 error: function() {
                     console.log('북마크 등록 실패');

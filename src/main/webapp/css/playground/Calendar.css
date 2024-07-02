@@ -119,6 +119,25 @@
   padding: 5px;
 }
 
+.calendar-date::before {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.calendar-date-stamp{
+  object-fit: cover; /* 이미지가 찌그러지지 않게 */
+  position: absolute;
+  top: 50%; /* 수직 가운데 정렬 */
+  left: 50%; /* 수평 가운데 정렬 */
+  transform: translate(-50%, -50%); /* 가운데로 위치를 조정 */
+  width: 80%; /* 이미지 크기 조정 */
+  height: 80%; /* 이미지 크기 조정 */
+  display: none; /* 기본적으로 숨김 */
+}
+
 .calendar-date.today {
   background: #d13e3e;
   color: #ffffff;
@@ -157,28 +176,4 @@
 .calendar-notice ul {
   list-style-type: disc;
 }
-.calendar_notice_list{
-        margin-top: 3rem;
-        margin-left: 3rem;
-}
-.calendar_notice-line::before{
-    content: "•";
-    color: var(--mainColor);
-    font-size: 3.6rem;
-    font-weight: 900;
-    display: inline-block;
-    vertical-align: middle;
-    padding-right: 2rem;
-    width: 1rem;
-    margin-left: -2rem;
-    margin-right: 1rem;
 
-}
-
-.calendar-date.filled {
-
-  background: url('/images/Playground/CalendarStamp.png') no-repeat center center;
-
-  background-size: cover;
-  color: white;
-}
