@@ -47,6 +47,7 @@
 
 .edit-form-group textarea {
     height: 150px;
+    resize:none;
 }
 
 .edit-image-preview-container {
