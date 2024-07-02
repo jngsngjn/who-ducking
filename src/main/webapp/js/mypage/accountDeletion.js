@@ -55,7 +55,7 @@ $(document).ready(function () {
                     if (response) {
                         swal({
                             title: "계정 삭제",
-                            text: "정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+                            text: "정말로 계정을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.",
                             icon: "warning",
                             buttons: {
                                  confirm: {
