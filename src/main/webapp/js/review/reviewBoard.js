@@ -44,11 +44,14 @@ function checkGenre(element) {
 }
 
 
-// 전체 페이지네이션과 장르별 페이지네이션 + 최신순, 리뷰순 합침
+// 전체 페이지네이션과 장르별 페이지네이션 10개씩  + 최신순, 리뷰순 합침
 let selectedGenres = [];
 let currentPage = 1;
 const animationsPerPage = 12;
 let totalPages = 0;
+
+// 최대 보여줄 페이지네이션 개수
+const showMaxPageNum = 10;
 
 function updateURL(page) {
     const url = new URL(window.location);
@@ -92,6 +95,7 @@ function filterAnimations() {
 
     let startIndex = (currentPage - 1) * animationsPerPage;
     let endIndex = startIndex + animationsPerPage;
+
     filteredAnimations.forEach((animation, index) => {
         if (index >= startIndex && index < endIndex) {
             animation.style.display = 'block';
@@ -109,7 +113,10 @@ function renderPagination(totalAnimations) {
 
     totalPages = Math.ceil(totalAnimations / animationsPerPage);
 
-    for (let i = 1; i <= totalPages; i++) {
+    let startPage = Math.floor((currentPage - 1) / showMaxPageNum) * showMaxPageNum + 1;
+    let endPage = Math.min(startPage + showMaxPageNum - 1, totalPages);
+
+    for (let i = startPage; i <= endPage; i++) {
         let pageButton = document.createElement('li');
         pageButton.textContent = i;
         pageButton.classList.add('page-number', 'page-btn');
@@ -117,6 +124,7 @@ function renderPagination(totalAnimations) {
             pageButton.style.backgroundColor = '#ff8b00';
             pageButton.style.color = 'white';
         }
+
         pageButton.addEventListener('click', function() {
             currentPage = i;
             filterAnimations();
@@ -153,35 +161,21 @@ function updateNavigationButtons() {
     let nextPageBtn = document.getElementById('to-next');
     let lastPageBtn = document.getElementById('to-end');
 
+    let startPage = Math.floor((currentPage - 1) / showMaxPageNum) * showMaxPageNum + 1;
+    let endPage = Math.min(startPage + showMaxPageNum - 1, totalPages);
+
     if (currentPage === 1) {
-        firstPageBtn.style.backgroundColor = 'lightgray';
-        firstPageBtn.style.color = '#fff';
-        prevPageBtn.style.backgroundColor = 'lightgray';
-        prevPageBtn.style.color = '#fff';
         firstPageBtn.style.pointerEvents = 'none';
         prevPageBtn.style.pointerEvents = 'none';
     } else {
-        firstPageBtn.style.backgroundColor = '';
-        firstPageBtn.style.color = '';
-        prevPageBtn.style.backgroundColor = '';
-        prevPageBtn.style.color = '';
-
         firstPageBtn.style.pointerEvents = '';
         prevPageBtn.style.pointerEvents = '';
     }
 
     if (currentPage === totalPages) {
-        nextPageBtn.style.backgroundColor = 'lightgray';
-        nextPageBtn.style.color = '#fff';
-        lastPageBtn.style.backgroundColor = 'lightgray';
-        lastPageBtn.style.color = '#fff';
         nextPageBtn.style.pointerEvents = 'none';
         lastPageBtn.style.pointerEvents = 'none';
     } else {
-        nextPageBtn.style.backgroundColor = '';
-        nextPageBtn.style.color = '';
-        lastPageBtn.style.backgroundColor = '';
-        lastPageBtn.style.color = '';
         nextPageBtn.style.pointerEvents = '';
         lastPageBtn.style.pointerEvents = '';
     }
