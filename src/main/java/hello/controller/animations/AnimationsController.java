@@ -4,6 +4,7 @@ import hello.dto.animation.GetAniListDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
+import hello.entity.user.Level;
 import hello.entity.user.User;
 import hello.repository.db.LevelRepository;
 import hello.service.animations.AnimationService;
@@ -68,12 +69,14 @@ public class AnimationsController {
             model.addAttribute("nickname", loginUser.getNickname());
             model.addAttribute("userId", loginUser.getId());
 
-            Long currentLevel = loginUser.getLevel().getId() - 1L;
+            Level level = loginUser.getLevel();
+            Long afterLevel = level.getId();
+            Long beforeLevel = afterLevel - 1L;
 
-            if (currentLevel > 0) {
-                model.addAttribute("beforeLevelImage", levelRepository.findById(currentLevel).get().getImageName());
-                model.addAttribute("afterLevelImage", loginUser.getLevel().getImageName());
-                model.addAttribute("afterLevel", loginUser.getLevel().getId());
+            if (beforeLevel > 0) {
+                model.addAttribute("beforeLevelImage", levelRepository.findById(beforeLevel).get().getImageName());
+                model.addAttribute("afterLevelImage", level.getImageName());
+                model.addAttribute("afterLevel", afterLevel);
             }
         }
 
