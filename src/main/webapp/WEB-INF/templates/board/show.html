@@ -40,8 +40,13 @@
         <span class="board-title">제목:</span>
         <span class="board-title" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}"></span>
     </div>
-    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${isAuthenticated && (board.user.id == loginUserId)}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
-
+    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${isAuthenticated && (board.user.id == loginUserId)}" onclick="toggleBoardMenu(this)"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+</div>
+<div id="board-menu" class="board-menu-content" th:if="${isAuthenticated}">
+    <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="menu-item">수정</a>
+    <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
+        <button type="submit" class="menu-item">삭제</button>
+    </form>
 </div>
 <div class="board-title-second" style="position: relative;">
     <div class="board-author-group">
@@ -57,12 +62,6 @@
             <a href="#" class="board-menu-item-report" th:if="${isAuthenticated}">신고<i class="fas fa-exclamation-circle"></i> </a>
         </div>
     </div>
-</div>
-<div id="board-menu" class="board-menu-content" th:if="${isAuthenticated}">
-    <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="menu-item">수정</a>
-    <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
-        <button type="submit" class="menu-item">삭제</button>
-    </form>
 </div>
 <div class="show-line"></div>
 <div class="board-container">
@@ -118,8 +117,8 @@
                          alt="Level Image" />
                     <span class="comment-writer" th:text="${comment.user.nickname}"></span>
                     <span class="board-menu-toggle" th:if="${comment.user != null && loginUserId != null && comment.user.id == loginUserId}">
-                <i class="fa-solid fa-ellipsis-vertical" onclick="toggleCommentMenu(this)"></i>
-            </span>
+                        <i class="fa-solid fa-ellipsis-vertical" onclick="toggleCommentMenu(this)"></i>
+                    </span>
                 </div>
                 <div class="comment-writer-container">
                     <span class="comment-writer-result" th:text="${comment.content}"></span><br>
@@ -149,124 +148,126 @@
                 </div>
             </li>
         </ul>
-
     </div>
 </section>
 <div th:insert="~{fragments/footer :: footer}"></div>
 
 <div class="modal-overlay" id="reportModalOverlay">
-        <div class="board-show-report-modal">
-            <div class="board-show-report-title">신고하기</div>
-            <div class="report-radio-group">
-                <label class="report-radio-label">
-                    <span class="radio-inner-circle"></span>
-                    부적절한 게시글
-                </label>
-                <label class="report-radio-label">
-                    <span class="radio-inner-circle"></span>
-                    중복 게시글 도배
-                </label>
-                <label class="report-radio-label">
-                    <span class="radio-inner-circle"></span>
-                    욕설
-                </label>
-                <label class="report-radio-label-other">
-                    <span class="radio-inner-circle"></span>
-                    기타
-                </label>
-            </div>
-            <textarea class="report-other-text" id="otherReasonInput" placeholder="기타 입력"></textarea>
-            <div class="report-modal-button">
-                <button class="board-show-report-modal-submit" type="button" th:onclick="'incrementReportCountAndRedirect(' + ${board.id} + '); return false;'">신고</button>
-                <button class="board-show-report-modal-cancel" type="button">취소</button>
-            </div>
+    <div class="board-show-report-modal">
+        <div class="board-show-report-title">신고하기</div>
+        <div class="report-radio-group">
+            <label class="report-radio-label">
+                <span class="radio-inner-circle"></span>
+                부적절한 게시글
+            </label>
+            <label class="report-radio-label">
+                <span class="radio-inner-circle"></span>
+                중복 게시글 도배
+            </label>
+            <label class="report-radio-label">
+                <span class="radio-inner-circle"></span>
+                욕설
+            </label>
+            <label class="report-radio-label-other">
+                <span class="radio-inner-circle"></span>
+                기타
+            </label>
         </div>
+        <textarea class="report-other-text" id="otherReasonInput" placeholder="기타 입력"></textarea>
+        <div class="report-modal-button">
+            <button class="board-show-report-modal-submit" type="button" th:onclick="'incrementReportCountAndRedirect(' + ${board.id} + '); return false;'">신고</button>
+            <button class="board-show-report-modal-cancel" type="button">취소</button>
+        </div>
+    </div>
 </div>
 
 <script>
     // 메뉴 기능
     document.addEventListener('DOMContentLoaded', (event) => {
-     const menuToggle = document.getElementById('board-menu-toggle');
 
-     const menu = document.getElementById('board-menu');
-     const commentInput = document.getElementById('comment-input');
-     const charCounter = document.getElementById('char-counter');
-     const boardImagePreview = document.getElementById('boardImagePreview');
+        const commentInput = document.getElementById('comment-input');
+        const charCounter = document.getElementById('char-counter');
+        const boardImagePreview = document.getElementById('boardImagePreview');
+
         if (!boardImagePreview.src || boardImagePreview.src.endsWith('null')) {
-        boardImagePreview.style.display = 'none';
-     }
+            boardImagePreview.style.display = 'none';
+        }
 
-     if (menuToggle && menu) {
-         menuToggle.addEventListener('click', function(e) {
-             e.stopPropagation();
-             const rect = menuToggle.getBoundingClientRect();
-             menu.style.top = `${rect.bottom + window.scrollY}px`;
-             menu.style.left = `${rect.right + window.scrollX - menu.offsetWidth}px`;
-             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-         });
 
-         document.addEventListener('click', function(e) {
-             if (!menu.contains(e.target) && e.target !== menuToggle) {
-                 menu.style.display = 'none';
-             }
-         });
-     }
+        // 0/500 내용 카운트
+        if (commentInput && charCounter) {
+            commentInput.addEventListener('input', function() {
+                const maxLength = commentInput.getAttribute('maxlength');
+                const currentLength = commentInput.value.length;
+                charCounter.textContent = `${currentLength} / 500`;
+            });
+        }
 
-     // 0/500 내용 카운트
-     if (commentInput && charCounter) {
-         commentInput.addEventListener('input', function() {
-             const maxLength = commentInput.getAttribute('maxlength');
-             const currentLength = commentInput.value.length;
-             charCounter.textContent = `${currentLength} / 500`;
-         });
-     }
+        loadLikesDislikes();
+    });
 
-     loadLikesDislikes();
- });
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleButtons = document.querySelectorAll('.board-menu-toggle');
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                toggleBoardMenu(this);
+            });
+        });
+    });
 
- // 댓글 수정 기능
- document.addEventListener('DOMContentLoaded', function () {
-     const editButtons = document.querySelectorAll('.menu-item-edit');
-     editButtons.forEach(button => {
-         button.addEventListener('click', function () {
-             const commentItem = this.closest('.comment-item');
-             const commentText = commentItem.querySelector('.comment-writer-result');
-             const editTextarea = commentItem.querySelector('.edit-comment-textarea');
-             const saveButton = commentItem.querySelector('.save-edit');
-             const cancelButton = commentItem.querySelector('.cancel-edit');
+    function toggleBoardMenu(icon) {
+        const boardMenu = icon.closest('.board-title-line').querySelector('#board-menu');
+        if (boardMenu) {
+            boardMenu.style.display = boardMenu.style.display === 'block' ? 'none' : 'block';
+        } else {
+            console.error('Board menu not found');
+        }
+    }
 
-             editTextarea.value = commentText.textContent;
-             commentText.style.display = 'none';
-             editTextarea.style.display = 'block';
-             saveButton.style.display = 'inline-block';
-             cancelButton.style.display = 'inline-block';
 
-             saveButton.addEventListener('click', function () {
-                 const newText = editTextarea.value;
-                 commentText.textContent = newText;
-                 commentText.style.display = 'block';
-                 editTextarea.style.display = 'none';
-                 saveButton.style.display = 'none';
-                 cancelButton.style.display = 'none';
-             });
+    // 댓글 수정 기능
+    document.addEventListener('DOMContentLoaded', function () {
+        const editButtons = document.querySelectorAll('.menu-item-edit');
+        editButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const commentItem = this.closest('.comment-item');
+                const commentText = commentItem.querySelector('.comment-writer-result');
+                const editTextarea = commentItem.querySelector('.edit-comment-textarea');
+                const saveButton = commentItem.querySelector('.save-edit');
+                const cancelButton = commentItem.querySelector('.cancel-edit');
 
-             cancelButton.addEventListener('click', function () {
-                 commentText.style.display = 'block';
-                 editTextarea.style.display = 'none';
-                 saveButton.style.display = 'none';
-                 cancelButton.style.display = 'none';
-             });
-         });
-     });
-     document.addEventListener('click', function (event) {
-         const commentMenus = document.querySelectorAll('.comment-menu');
-         commentMenus.forEach(menu => {
-             if (!menu.contains(event.target) && !menu.closest('.comment-item').contains(event.target)) {
-                 menu.style.display = 'none';
-             }
-         });
-     });
- });
+                editTextarea.value = commentText.textContent;
+                commentText.style.display = 'none';
+                editTextarea.style.display = 'block';
+                saveButton.style.display = 'inline-block';
+                cancelButton.style.display = 'inline-block';
+
+                saveButton.addEventListener('click', function () {
+                    const newText = editTextarea.value;
+                    commentText.textContent = newText;
+                    commentText.style.display = 'block';
+                    editTextarea.style.display = 'none';
+                    saveButton.style.display = 'none';
+                    cancelButton.style.display = 'none';
+                });
+
+                cancelButton.addEventListener('click', function () {
+                    commentText.style.display = 'block';
+                    editTextarea.style.display = 'none';
+                    saveButton.style.display = 'none';
+                    cancelButton.style.display = 'none';
+                });
+            });
+        });
+        document.addEventListener('click', function (event) {
+            const commentMenus = document.querySelectorAll('.comment-menu');
+            commentMenus.forEach(menu => {
+                if (!menu.contains(event.target) && !menu.closest('.comment-item').contains(event.target)) {
+                    menu.style.display = 'none';
+                }
+            });
+        });
+    });
 
     //신고 모달창 열기 및 닫기 기능 추가
     const modal = document.getElementById('reportModalOverlay');
@@ -290,13 +291,13 @@
     });
     //신고 선택
     document.querySelectorAll('.report-radio-label').forEach(label => {
-    label.addEventListener('click', function() {
-        document.querySelectorAll('.report-radio-label').forEach(lbl => {
-            lbl.classList.remove('selected');
+        label.addEventListener('click', function() {
+            document.querySelectorAll('.report-radio-label').forEach(lbl => {
+                lbl.classList.remove('selected');
+            });
+            this.classList.add('selected');
         });
-        this.classList.add('selected');
     });
-});
 
 </script>
 <script type="text/javascript" src="/js/showPage.js"></script>

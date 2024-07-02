@@ -120,12 +120,22 @@
 }
 
 .calendar-date::before {
-  content: attr(data-date);
   position: absolute;
   top: 5px;
   left: 5px;
   font-size: 16px;
   font-weight: bold;
+}
+
+.calendar-date-stamp{
+  object-fit: cover; /* 이미지가 찌그러지지 않게 */
+  position: absolute;
+  top: 50%; /* 수직 가운데 정렬 */
+  left: 50%; /* 수평 가운데 정렬 */
+  transform: translate(-50%, -50%); /* 가운데로 위치를 조정 */
+  width: 80%; /* 이미지 크기 조정 */
+  height: 80%; /* 이미지 크기 조정 */
+  display: none; /* 기본적으로 숨김 */
 }
 
 .calendar-date.today {

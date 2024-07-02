@@ -21,18 +21,3 @@ $(document).ready(function (){
     });
 });
 
-$(document).ready(function (){
-   const fileInput = document.getElementById('file');
-   const imagePreview = document.getElementById('imagePreview');
-
-   fileInput.addEventListener('change', function (e){
-      const file = e.target.file[0];
-      if(file){
-          const reader = new FileReader();
-          reader.onload = function (e){
-              imagePreview.src = e.target.result;
-          }
-          reader.readAsDataURL(file);
-      }
-   });
-});
