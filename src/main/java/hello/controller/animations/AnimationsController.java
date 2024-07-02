@@ -4,6 +4,7 @@ import hello.dto.animation.GetAniListDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
+import hello.entity.user.Level;
 import hello.entity.user.User;
 import hello.repository.db.LevelRepository;
 import hello.service.animations.AnimationService;
@@ -67,10 +68,16 @@ public class AnimationsController {
             User loginUser = userService.getLoginUserDetail(user); // -> dto의 CustomOauth2User로 받아와야해
             model.addAttribute("nickname", loginUser.getNickname());
             model.addAttribute("userId", loginUser.getId());
-            Long currentLevel = loginUser.getLevel().getId() - 1L;
-            model.addAttribute("beforeLevelImage", levelRepository.findById(currentLevel).get().getImageName());
-            model.addAttribute("afterLevelImage", loginUser.getLevel().getImageName());
-            model.addAttribute("afterLevel", loginUser.getLevel().getId());
+
+            Level level = loginUser.getLevel();
+            Long afterLevel = level.getId();
+            Long beforeLevel = afterLevel - 1L;
+
+            if (beforeLevel > 0) {
+                model.addAttribute("beforeLevelImage", levelRepository.findById(beforeLevel).get().getImageName());
+                model.addAttribute("afterLevelImage", level.getImageName());
+                model.addAttribute("afterLevel", afterLevel);
+            }
         }
 
         /* @ 애니의 리뷰 데이터 조회 (최신순&좋아요순) */
