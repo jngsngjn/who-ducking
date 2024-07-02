@@ -29,10 +29,18 @@ public class SearchService {
     private final AnnouncementRepository announcementRepository;
 
     public List<SearchAnimationDTO> searchAnimations(String name) {
-        return animationRepository.findByNameContaining(name)
+        String processedName = name.replace(" ", "");
+        return animationRepository.findByNameIgnoringSpaces(processedName)
                 .stream()
                 .map(this::getSearchAnimationDTO)
                 .collect(Collectors.toList());
+    }
+
+    public Page<SearchAnimationDTO> searchAnimationsPage(String name, int page, int size) {
+        String processedName = name.replace(" ", "");
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return animationRepository.findByNameIgnoringSpaces(processedName, pageRequest)
+                .map(this::getSearchAnimationDTO);
     }
 
     private @NotNull SearchAnimationDTO getSearchAnimationDTO(Animation animation) {
@@ -42,12 +50,6 @@ public class SearchService {
         dto.setReviewCount(reviewCount);
         dto.setScore(reviewScore);
         return dto;
-    }
-
-    public Page<SearchAnimationDTO> searchAnimationsPage(String name, int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        return animationRepository.findByNameContaining(name, pageRequest)
-                .map(this::getSearchAnimationDTO);
     }
 
     public List<SearchBoardDTO> searchBoardList(String name) {
