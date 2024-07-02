@@ -172,7 +172,7 @@
       </div>
     </div>
     <div id="like-reviews" th:if="${#lists.size(topReviews) > 0}">
-      <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'review-id-' + ${review.id}">
+      <div th:each="review, iterStat : ${topReviews}" class="review-list" th:id="'like-review-id-' + ${review.id}">
         <div class="row-box">
           <input type="hidden" th:value="${review.id}" class="review-id"/>
           <input type="hidden" th:value="${review.isSpoiler()}" class="is-reviews-spoiler"/>
@@ -195,10 +195,10 @@
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
-              <button id="recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
+              <button id="like-reviews-recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-up review-like-icon"></i> <span th:text="${review.likeCount}"></span>
             </button>
-            <button id="recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
+            <button id="like-review-recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-down review-dislike-icon"></i> <span th:text="${review.dislikeCount}"></span>
             </button>
           </div>
