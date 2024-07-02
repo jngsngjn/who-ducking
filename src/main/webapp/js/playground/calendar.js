@@ -4,6 +4,28 @@ let points = localStorage.getItem("points") || 0;
 pointsElement.innerText = points;
 let attendance = JSON.parse(localStorage.getItem("attendance")) || {};
 
+// 출석 체크 로직
+const checkAttendance = () => {
+  const today = new Date();
+  const todayDate = today.getDate();
+  const todayMonth = today.getMonth();
+  const todayYear = today.getFullYear();
+
+  const currentMonthKey = `${todayYear}-${todayMonth + 1}`;
+  if (!attendance[currentMonthKey]) {
+    attendance[currentMonthKey] = {};
+  }
+
+  if (!attendance[currentMonthKey][todayDate]) {
+    attendance[currentMonthKey][todayDate] = true;
+    points++;
+    localStorage.setItem("points", points);
+    localStorage.setItem("attendance", JSON.stringify(attendance));
+    pointsElement.innerText = points;
+    renderCalendar();
+  }
+};
+
 const renderCalendar = () => {
   const viewYear = calendarDate.getFullYear();
   const viewMonth = calendarDate.getMonth();
@@ -35,7 +57,7 @@ const renderCalendar = () => {
 
   // nextDates 계산
   for (let i = 1; i < 7 - TLDay; i++) {
-    nextDates.push(i)
+    nextDates.push(i);
   }
 
   // Dates 합치기
@@ -49,7 +71,7 @@ const renderCalendar = () => {
                       ? 'calendar-this'
                       : 'calendar-other';
 
-    dates[i] = `<div class="calendar-date ${condition}">${date}</div>`;
+    dates[i] = `<div class="calendar-date ${condition}" data-date="${date}">${date}</div>`;
   });
 
   // Dates 그리기
@@ -67,14 +89,19 @@ const renderCalendar = () => {
   }
 
   // 출석 체크된 날짜 표시
-  document.querySelectorAll('.calendar-date').forEach(date => {
-    if (attendance[date.textContent]) {
+  const currentMonthKey = `${viewYear}-${viewMonth + 1}`;
+  document.querySelectorAll('.calendar-this').forEach(date => {
+    if (attendance[currentMonthKey] && attendance[currentMonthKey][date.textContent]) {
       date.classList.add('filled');
     }
   });
 }
 
-renderCalendar();
+// 페이지 로드 시 출석 체크
+document.addEventListener("DOMContentLoaded", () => {
+  checkAttendance();
+  renderCalendar();
+});
 
 const calendarPrevMonth = () => {
   calendarDate.setDate(1);

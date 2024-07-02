@@ -119,15 +119,6 @@
   padding: 5px;
 }
 
-.calendar-date::before {
-  content: attr(data-date);
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
 .calendar-date.today {
   background: #d13e3e;
   color: #ffffff;
@@ -166,4 +157,28 @@
 .calendar-notice ul {
   list-style-type: disc;
 }
+.calendar_notice_list{
+        margin-top: 3rem;
+        margin-left: 3rem;
+}
+.calendar_notice-line::before{
+    content: "•";
+    color: var(--mainColor);
+    font-size: 3.6rem;
+    font-weight: 900;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 2rem;
+    width: 1rem;
+    margin-left: -2rem;
+    margin-right: 1rem;
 
+}
+
+.calendar-date.filled {
+
+  background: url('/images/Playground/CalendarStamp.png') no-repeat center center;
+
+  background-size: cover;
+  color: white;
+}
