@@ -67,10 +67,14 @@ public class AnimationsController {
             User loginUser = userService.getLoginUserDetail(user); // -> dto의 CustomOauth2User로 받아와야해
             model.addAttribute("nickname", loginUser.getNickname());
             model.addAttribute("userId", loginUser.getId());
+
             Long currentLevel = loginUser.getLevel().getId() - 1L;
-            model.addAttribute("beforeLevelImage", levelRepository.findById(currentLevel).get().getImageName());
-            model.addAttribute("afterLevelImage", loginUser.getLevel().getImageName());
-            model.addAttribute("afterLevel", loginUser.getLevel().getId());
+
+            if (currentLevel > 0) {
+                model.addAttribute("beforeLevelImage", levelRepository.findById(currentLevel).get().getImageName());
+                model.addAttribute("afterLevelImage", loginUser.getLevel().getImageName());
+                model.addAttribute("afterLevel", loginUser.getLevel().getId());
+            }
         }
 
         /* @ 애니의 리뷰 데이터 조회 (최신순&좋아요순) */
