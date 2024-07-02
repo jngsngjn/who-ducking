@@ -178,7 +178,7 @@
             link.addEventListener('click', function(event) {
                 if (!isAuthenticated) {
                     event.preventDefault();
-                    alert('로그인 후 이용해 주세요.');
+                    swal('로그인 후 이용해 주세요.');
                 }
             });
         });

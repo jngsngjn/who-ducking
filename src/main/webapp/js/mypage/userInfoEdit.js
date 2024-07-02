@@ -57,7 +57,7 @@ $(document).ready(function () {
                     useDefaultImageButton.hide();
                 },
                 error: function (xhr, status, error) {
-                    alert("기본 이미지 로드에 실패했습니다.");
+                    swal("기본 이미지 로드에 실패했습니다.");
                 },
             });
         }

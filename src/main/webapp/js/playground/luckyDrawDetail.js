@@ -13,31 +13,69 @@ $(document).ready(function () {
             type: "POST",
             success: function (response) {
                 if (response.alreadyEntry) {
-                    alert("이미 오늘 경품에 응모하셨습니다.");
+                    swal({
+                        title: "알림",
+                        text: "이미 오늘 경품에 응모하셨습니다.",
+                        icon: "info"
+                    });
                 } else if (!response.validGradeAndLevel) {
-                    alert("해당 경품에 응모할 수 있는 레벨이 아닙니다.");
+                    swal({
+                        title: "금지",
+                        text: "해당 경품에 응모할 수 있는 레벨이 아닙니다.",
+                        icon: "error"
+                    });
                 } else if (!response.hasEnoughPoints) {
-                    alert("포인트가 부족합니다.");
+                    swal({
+                        title: "경고",
+                        text: "포인트가 부족합니다.",
+                        icon: "warning"
+                    });
                 } else if (response.addressEmpty) {
-                    alert("경품에 응모하기 전, 마이페이지에서 주소를 입력해 주세요.\n마이페이지로 이동합니다.");
-                    window.location.href = "/myPage";
+                    swal({
+                        title: "알림",
+                        text: "경품에 응모하기 전, 마이페이지에서 주소를 입력해 주세요.\n마이페이지로 이동합니다.",
+                        icon: "info"
+                    }).then((value) => {
+                        window.location.href = "/myPage";
+                    });
                 } else {
-                    if (confirm("해당 경품에 응모하시겠습니까? (30P 차감)\n응모는 하루에 한 번만 가능합니다.")) {
-                        $.ajax({
-                            url: "/entry-prize/" + prizeId,
-                            type: "POST",
-                            success: function (response) {
-                                alert(response);
-                            },
-                            error: function (error) {
-                                alert("응모 처리 중 오류가 발생했습니다. 나중에 다시 시도해주세요.");
-                            },
-                        });
-                    }
+                    swal({
+                        title: "확인",
+                        text: "해당 경품에 응모하시겠습니까? (30P 차감)\n응모는 하루에 한 번만 가능합니다.",
+                        icon: "question",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willEntry) => {
+                        if (willEntry) {
+                            $.ajax({
+                                url: "/entry-prize/" + prizeId,
+                                type: "POST",
+                                success: function (response) {
+                                    swal({
+                                        title: "응모 성공",
+                                        text: response,
+                                        icon: "success"
+                                    });
+                                },
+                                error: function (error) {
+                                    swal({
+                                        title: "응모 실패",
+                                        text: "응모 처리 중 오류가 발생했습니다. 나중에 다시 시도해주세요.",
+                                        icon: "error"
+                                    });
+                                },
+                            });
+                        }
+                    });
                 }
             },
             error: function (error) {
-                alert("서버 오류가 발생했습니다. 나중에 다시 시도해주세요.");
+                swal({
+                    title: "오류",
+                    text: "서버 오류가 발생했습니다. 나중에 다시 시도해주세요.",
+                    icon: "error"
+                });
             },
         });
     });
