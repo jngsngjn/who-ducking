@@ -138,9 +138,8 @@
   display: none; /* 기본적으로 숨김 */
 }
 
-.calendar-date.today {
-  background: #d13e3e;
-  color: #ffffff;
+.calendar-today{
+  border: 5px solid #FF8B00;
 }
 
 .calendar-date.calendar-other {
