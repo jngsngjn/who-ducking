@@ -40,14 +40,15 @@
         <span class="board-title">제목:</span>
         <span class="board-title" th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}"></span>
     </div>
-    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${isAuthenticated && (board.user.id == loginUserId)}" onclick="toggleBoardMenu(this)"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+    <span class="board-menu-toggle" id="board-menu-toggle" th:if="${isAuthenticated && (board.user.id == loginUserId)}"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+    <div id="board-menu" class="board-menu-content">
+        <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="menu-item">수정</a>
+        <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
+            <button type="submit" class="menu-item">삭제</button>
+        </form>
+    </div>
 </div>
-<div id="board-menu" class="board-menu-content" th:if="${isAuthenticated}">
-    <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="menu-item">수정</a>
-    <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
-        <button type="submit" class="menu-item">삭제</button>
-    </form>
-</div>
+
 <div class="board-title-second" style="position: relative;">
     <div class="board-author-group">
         <div class="board-meta">
@@ -78,7 +79,7 @@
 <div class="show-line"></div>
 
 <div class="board-bottom-line">
-    <a href="/board" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</a>
+    <button onclick="window.history.back()" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</button>
     <button class="btn-bookmark" id="board-bookmark-button" th:data-board-id="${board.id}" th:if="${isAuthenticated}"><i class="fa-regular fa-bookmark"></i>북마크</button>
 </div>
 <section class="comment-section">
@@ -193,7 +194,6 @@
             boardImagePreview.style.display = 'none';
         }
 
-
         // 0/500 내용 카운트
         if (commentInput && charCounter) {
             commentInput.addEventListener('input', function() {
@@ -216,14 +216,13 @@
     });
 
     function toggleBoardMenu(icon) {
-        const boardMenu = icon.closest('.board-title-line').querySelector('#board-menu');
+        const boardMenu = icon.nextElementSibling;
         if (boardMenu) {
             boardMenu.style.display = boardMenu.style.display === 'block' ? 'none' : 'block';
         } else {
             console.error('Board menu not found');
         }
     }
-
 
     // 댓글 수정 기능
     document.addEventListener('DOMContentLoaded', function () {

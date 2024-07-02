@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -93,14 +92,20 @@ public class BoardService {
 
             UUID uuid = UUID.randomUUID();
 
-            String filename = uuid + "_" + file.getOriginalFilename();
+            if (!file.isEmpty()) {
+                String filename = uuid + "_" + file.getOriginalFilename();
 
-            File saveFile = new File(serverBoardImagePath + "/" + filename);
+                File saveFile = new File(serverBoardImagePath + "/" + filename);
 
-            file.transferTo(saveFile);
+                file.transferTo(saveFile);
 
-            updateboard.setImageName(filename);
-            updateboard.setImagePath(serverBoardImagePath + "/" + filename);
+                updateboard.setImageName(filename);
+                updateboard.setImagePath(serverBoardImagePath + "/" + filename);
+
+                // 사진 수정 시 기존 사진 삭제
+                String imageName = board.getImageName();
+                fileStore.deleteBoardImage(imageName);
+            }
 
             board.setTitle(updateboard.getTitle());
             board.setContent(updateboard.getContent());
@@ -110,12 +115,13 @@ public class BoardService {
                 board.setImageName(updateboard.getImageName());
                 board.setImagePath(updateboard.getImagePath());
             }
-            else{
+            else {
+                // 글 수정 + 사진 삭제 시 서버에서도 사진 삭제
+                String imageName = board.getImageName();
+                fileStore.deleteBoardImage(imageName);
                 board.setImageName(null);
                 board.setImagePath(null);
             }
-
-
 
             boardRepository.save(board);
         }
@@ -146,7 +152,7 @@ public class BoardService {
             // 게시글 이미지 삭제 추가
             Board board = optionalBoard.get();
             String imageName = board.getImageName();
-            if (!imageName.isEmpty()) {
+            if (imageName != null) {
                 fileStore.deleteBoardImage(imageName);
             }
         }

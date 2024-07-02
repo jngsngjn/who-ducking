@@ -4,6 +4,7 @@ import hello.dto.search.SearchAnimationDTO;
 import hello.dto.search.SearchAnnouncementDTO;
 import hello.dto.search.SearchBoardDTO;
 import hello.entity.animation.Animation;
+import hello.entity.board.Announcement;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.AnnouncementRepository;
 import hello.repository.db.BoardRepository;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,5 +70,20 @@ public class SearchService {
     public Page<SearchAnnouncementDTO> searchAnnouncementList(String name, int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         return announcementRepository.findByTitleOrContentContainingPage(name, pageRequest);
+    }
+
+    public int findAnnouncementPage(Long announcementId, int pageSize) {
+        List<Announcement> announcements = announcementRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        int index = -1;
+        for (int i = 0; i < announcements.size(); i++) {
+            if (announcements.get(i).getId().equals(announcementId)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            throw new IllegalArgumentException("Announcement not found");
+        }
+        return index / pageSize + 1;
     }
 }

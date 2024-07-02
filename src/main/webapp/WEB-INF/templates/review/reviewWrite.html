@@ -203,11 +203,27 @@
 </div>
 <div th:insert="~{fragments/footer :: footer}"></div>
 
+<script th:inline="javascript">
+  let afterLevelImage = /*[[${afterLevelImage}]]*/ 'hello';
+  let afterLevel = /*[[${afterLevel}]]*/ 'hello';
+</script>
+
 <!-- 레벨업 모달 -->
+<!-- 첫 번째 BGM -->
+<audio id="bgm1" src="/mp3/levelup1.mp3"></audio>
+<!-- 두 번째 BGM -->
+<audio id="bgm2" src="/mp3/levelup2.mp3"></audio>
 <div id="levelUp_modal" class="levelUp_modal">
   <div class="levelUp_modal_content">
-    <span class="levelUp_modal_close">&times;</span>
-    <p>레벨업을 축하드립니다!</p>
+    <div>
+      <span class="levelUp_modal_close">&times;</span>
+    </div>
+    <div id="modal_content" class="modal_content">
+      <img th:src="@{/image/{levelImage}(levelImage=${beforeLevelImage})}" class="level_img">
+      <p>.. . . 오잉!?</p>
+      <p>후덕이의 상태가......!</p>
+      <button id="next" class="next">?</button>
+    </div>
   </div>
 </div>
 <script type="text/javascript" src="/js/modal/levelUpModal.js"></script>
