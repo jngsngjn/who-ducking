@@ -67,8 +67,7 @@ public class ReviewController {
     *  @ id = reviewId */
     @PatchMapping("/reviews/patch/{id}")
     public ResponseEntity<String> updateReview(@PathVariable long id, @RequestBody Review review) {
-        System.out.println("수정된 review 내용: " + review.getContent());
-        System.out.println("수정된 review  별점: " + review.getScore());
+
         try {
             Review existingReview = reviewService.findById(id);
             if (existingReview != null) {

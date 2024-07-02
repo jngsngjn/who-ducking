@@ -111,6 +111,26 @@ public class ReviewService {
         }
     }
 
+    //오늘날짜의 리뷰를 삭제 못하게 하는건 좀 그런가
+//    public void deleteReview(long reviewId) {
+//        Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
+//
+//        if (reviewOpt.isPresent()) {
+//            Review review = reviewOpt.get();
+//            User user = review.getUser();
+//            LocalDate today = LocalDate.now();
+//            LocalDate reviewDate = review.getWriteDate().toLocalDate();
+//
+//            if (reviewDate.isEqual(today)) {
+//                System.out.println("cannot delete writing today review");
+//                return;
+//            }
+//            reviewRepository.deleteById(reviewId);
+//        } else {
+//            System.out.println("Review not found for id: " + reviewId);
+//        }
+//    }
+
     // 매일 자정 실행
     @Scheduled(cron = "0 0 0 * * ?")
     public void resetReviewCount() {

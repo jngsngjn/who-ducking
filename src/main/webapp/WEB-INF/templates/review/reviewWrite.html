@@ -195,10 +195,10 @@
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
-              <button id="like-reviews-recommend-like" class="recommend-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
+              <button id="like-reviews-recommend-like" class="recommend-btn like-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-up review-like-icon"></i> <span th:text="${review.likeCount}"></span>
             </button>
-            <button id="like-review-recommend-dislike" class="recommend-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
+            <button id="like-review-recommend-dislike" class="recommend-btn dislike-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-down review-dislike-icon"></i> <span th:text="${review.dislikeCount}"></span>
             </button>
           </div>
