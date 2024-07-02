@@ -87,12 +87,7 @@
     /* level_img와 동일한 높이로 설정 */
 }
 
-
 /* 폭죽 */
-
-body {
-    overflow: hidden;
-}
 
 particule {
     position: absolute;

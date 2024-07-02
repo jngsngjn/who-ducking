@@ -19,7 +19,7 @@ Promise.all([
     loadScript("/js/basic/registerGenre.js"),
 
     loadScript("/js/board/boardWritePage.js"),
-    loadScript("/js/board/showPage.js"),
+    // loadScript("/js/board/showPage.js"),
     loadScript("/js/board/freeBoard.js"),
 
 ])
