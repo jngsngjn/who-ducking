@@ -47,9 +47,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("select new hello.dto.board.MyBookmarkDTO(b.id, b.title, b.writeDate, b.viewCount) from Board b join Bookmark bm on b.id = bm.board.id where bm.user = :user order by b.writeDate desc")
     Page<MyBookmarkDTO> findBookmark(@Param("user") User user, Pageable pageable);
 
-    @Query("SELECT new hello.dto.search.SearchBoardDTO(b.id, b.title, b.content) FROM Board b WHERE b.title LIKE %:name% OR b.content LIKE %:name%")
+    @Query("SELECT new hello.dto.search.SearchBoardDTO(b.id, b.title, b.content) FROM Board b WHERE b.title LIKE %:name% OR b.content LIKE %:name% order by b.writeDate desc")
     List<SearchBoardDTO> findByTitleOrContentContaining(@Param("name") String name);
 
-    @Query("SELECT new hello.dto.search.SearchBoardDTO(b.id, b.title, b.content) FROM Board b WHERE b.title LIKE %:name% OR b.content LIKE %:name%")
+    @Query("SELECT new hello.dto.search.SearchBoardDTO(b.id, b.title, b.content) FROM Board b WHERE b.title LIKE %:name% OR b.content LIKE %:name% order by b.writeDate desc")
     Page<SearchBoardDTO> findByTitleOrContentContainingPage(@Param("name") String name, Pageable pageable);
 }

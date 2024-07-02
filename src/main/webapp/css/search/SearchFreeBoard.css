@@ -62,7 +62,6 @@
 }
 
 .searchFreeBoard_list_box {
-    display: grid;
     width: 925px;
 }
 
@@ -91,6 +90,9 @@
     font-size: 3.6rem;
     font-weight: 500;
     color: var(--descColor);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .searchFreeBoard_list_title:hover {

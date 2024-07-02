@@ -449,3 +449,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+$(document).ready(function () {
+    localStorage.removeItem('searchInput');
+});

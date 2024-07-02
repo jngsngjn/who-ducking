@@ -27,7 +27,6 @@
     <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
-    <script type="text/javascript" src="/js/search/searchAnnouncement.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -56,22 +55,22 @@
                         <ul class="searchAnnouncement_menu">
                             <!-- First Tab -->
                             <li class="searchAnnouncement_menu_tab">
-                                <a href="/">전체 검색</a>
+                                <a th:href="@{/search(name=${name})}">전체 검색</a>
                             </li>
 
                             <!-- Second Tab -->
                             <li class="searchAnnouncement_menu_tab">
-                                <a href="/">애니</a>
+                                <a th:href="@{/search/animation(name=${name})}">애니</a>
                             </li>
 
                             <!-- Third Tab -->
                             <li class="searchAnnouncement_menu_tab">
-                                <a href="/">커뮤니티</a>
+                                <a th:href="@{/search/board(name=${name}, page=0)}">커뮤니티</a>
                             </li>
 
                             <!-- Fourth Tab -->
                             <li class="searchAnnouncement_menu_tab">
-                                <a href="/" class="searchAnnouncement_selected_tab">공지사항</a>
+                                <a class="searchAnnouncement_selected_tab">공지사항</a>
                             </li>
                         </ul>
                     </div>
@@ -80,19 +79,17 @@
                     <div class="searchAnnouncement_list_box">
 
                         <!-- Data Empty -->
-                        <div class="searchAnnouncement_list_data_empty">
+                        <div class="searchAnnouncement_list_data_empty" th:if="${announcements.content.isEmpty()}">
                                           <span class="searchAnnouncement_list_data_empty_text">검색한 공지사항 결과가
                                                 없습니다.</span>
                         </div>
 
                         <!-- Data Exist -->
-                        <div class="searchAnnouncement_list_data_box" th:each="">
+                        <div th:if="${!announcements.content.isEmpty()}" class="searchAnnouncement_list_data_box" th:each="announcement : ${announcements.content}">
                             <ul class="searchAnnouncement_list_item">
-                                <a th:href="" class="searchAnnouncement_list_item_one">
+                                <a th:href="@{/announcement(id=${announcement.id})}" class="searchAnnouncement_list_item_one">
                                     <li class="searchAnnouncement_list_title search_result_title"
-                                        th:text="" th:data-content="" th:data-status=""
-                                        th:data-request-id="" th:data-response-date=""
-                                        th:data-write-data="" th:data-response="" id="title">
+                                        th:text="${announcement.title}">
                                         제목
                                         <button class="searchAnnouncement_more_title_btn"
                                                 style="display: none;">더보기</button>
@@ -100,7 +97,7 @@
                                 </a>
                                 <li class="searchAnnouncement_list_info">
                                                       <span class="searchAnnouncement_list_content search_result_content"
-                                                            th:text="">공지사항 내용</span>
+                                                            th:text="${announcement.content}">공지사항 내용</span>
                                     <button class="searchAnnouncement_more_content_btn"
                                             style="display: none;">더보기</button>
                                 </li>
@@ -114,46 +111,46 @@
                 <div class="searchAnnouncement_pagination_box">
                     <!-- Double Left Arrow -->
                     <a class="searchAnnouncement_pagination_btn"
-                       th:classappend="${myReviews.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=0)}">
+                       th:classappend="${announcements.first} ? 'disabled' : ''"
+                       th:href="@{/search/announcement(name=${name}, page=0)}">
                         <!-- Double Left Icon -->
                         <i class="fa-solid fa-angles-left"></i>
                     </a>
 
                     <!-- Left Arrow -->
                     <a class="searchAnnouncement_pagination_btn"
-                       th:classappend="${myReviews.first} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=${myReviews.number - 1})}">
+                       th:classappend="${announcements.first} ? 'disabled' : ''"
+                       th:href="@{/search/announcement(name=${name}, page=${announcements.number - 1})}">
                         <!-- Left Icon -->
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
 
                     <!-- Page Number -->
-                    <div th:if="${myReviews.totalPages > 0}" class="searchAnnouncement_pageNum">
+                    <div th:if="${announcements.totalPages > 0}" class="searchAnnouncement_pageNum">
                                     <span
-                                            th:each="i : ${#numbers.sequence(((myReviews.number / 10) * 10) + 1, (((myReviews.number / 10) + 1) * 10))}">
-                                          <a th:if="${i <= myReviews.totalPages}"
-                                             th:classappend="${i == myReviews.number + 1} ? 'searchAnnouncement_pagination_now_btn' : 'searchAnnouncement_pagination_btn'"
-                                             th:href="@{/myPage/reviews(page=${i - 1})}" th:text="${i}"
+                                            th:each="i : ${#numbers.sequence(((announcements.number / 10) * 10) + 1, (((announcements.number / 10) + 1) * 10))}">
+                                          <a th:if="${i <= announcements.totalPages}"
+                                             th:classappend="${i == announcements.number + 1} ? 'searchAnnouncement_pagination_now_btn' : 'searchAnnouncement_pagination_btn'"
+                                             th:href="@{/search/announcement(name=${name}, page=${i - 1})}" th:text="${i}"
                                              style="margin: 0 3px;">1</a>
                                     </span>
                     </div>
-                    <span th:if="${myReviews.totalPages == 0}">
+                    <span th:if="${announcements.totalPages == 0}">
                                     <a class="searchAnnouncement_pagination_now_btn" href="#">1</a>
                               </span>
 
                     <!-- Right Arrow -->
                     <a class="searchAnnouncement_pagination_btn"
-                       th:classappend="${myReviews.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=${myReviews.number + 1})}">
+                       th:classappend="${announcements.last} ? 'disabled' : ''"
+                       th:href="@{/search/announcement(name=${name}, page=${announcements.number + 1})}">
                         <!-- Right Icon -->
                         <i class="fa-solid fa-angle-right"></i>
                     </a>
 
                     <!-- Double Right Arrow -->
                     <a class="searchAnnouncement_pagination_btn"
-                       th:classappend="${myReviews.last} ? 'disabled' : ''"
-                       th:href="@{/myPage/reviews(page=${myReviews.totalPages - 1})}">
+                       th:classappend="${announcements.last} ? 'disabled' : ''"
+                       th:href="@{/search/announcement(name=${name}, page=${announcements.totalPages - 1})}">
                         <!-- Double Right Icon -->
                         <i class="fa-solid fa-angles-right"></i>
                     </a>

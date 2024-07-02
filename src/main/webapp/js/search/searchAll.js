@@ -1,47 +1,12 @@
 $(document).ready(function() {
     // 제목 글자 수 제한 및 더보기 버튼 추가
     $(".search_result_title").each(function() {
-        const maxLength = 15; // 제목에 대한 최대 길이 설정
-        const text = $(this).contents().filter(function() { return this.nodeType === 3; }).text().trim(); // 텍스트를 가져옵니다.
-        const moreBtnTitle = $(this).find(".searchAll_more_title_btn");
+        const maxLength = 25; // 제목에 대한 최대 길이 설정
+        const text = $(this).contents().filter(function() { return this.nodeType === 3; }).text().trim();
 
         if (text.length > maxLength) {
-            const shortText = text.slice(0, maxLength) + " . . .";
-            $(this).contents().filter(function() { return this.nodeType === 3; }).get(0).nodeValue = shortText; // 텍스트를 자른 텍스트로 설정합니다.
-            moreBtnTitle.show(); // 더보기 버튼을 표시합니다.
-
-            moreBtnTitle.on("click", function() {
-                if ($(this).text() === "더보기") {
-                    $(this).siblings().filter(function() { return this.nodeType === 3; }).get(0).nodeValue = text;
-                    $(this).text("간단히");
-                } else {
-                    $(this).siblings().filter(function() { return this.nodeType === 3; }).get(0).nodeValue = shortText;
-                    $(this).text("더보기");
-                }
-            });
-        }
-    });
-
-    // 내용 글자 수 제한 및 더보기 버튼 추가
-    $(".search_result_content").each(function() {
-        const maxLength = 100; // 내용에 대한 최대 길이 설정
-        const text = $(this).text().trim();
-        const moreBtnContent = $(this).next();
-
-        if (text.length > maxLength) {
-            const shortText = text.slice(0, maxLength) + " . . .";
-            $(this).text(shortText);
-            moreBtnContent.show(); // 더보기 버튼을 표시합니다.
-
-            moreBtnContent.on("click", function() {
-                if ($(this).text() === "더보기") {
-                    $(this).prev().text(text);
-                    $(this).text("간단히");
-                } else {
-                    $(this).prev().text(shortText);
-                    $(this).text("더보기");
-                }
-            });
+            const shortText = text.slice(0, maxLength) + "...";
+            $(this).contents().filter(function() { return this.nodeType === 3; }).get(0).nodeValue = shortText;
         }
     });
 
@@ -63,6 +28,7 @@ $(document).ready(function() {
             aniItems.each(function(index) {
                 if (index >= 4) {
                     $(this).hide();
+                    $(this).next(".searchAll_ani_list_line").hide(); // 하단 라인도 숨기기
                 }
             });
 
@@ -89,6 +55,7 @@ $(document).ready(function() {
             freeBoardItems.each(function(index) {
                 if (index >= 3) {
                     $(this).hide();
+                    $(this).next(".searchAll_freeBoard_list_line").hide(); // 하단 라인도 숨기기
                 }
             });
 
@@ -98,10 +65,10 @@ $(document).ready(function() {
     }
 
     // 공지사항 항목 처리
-    const noticeItems = $(".searchAll_notice_list_item");
-    const noticeMoreBtn = $(".searchAll_notice_more_btn");
-    const noticeDataEmpty = $(".searchAll_notice_list_data_empty");
-    const noticeDataExist = $(".searchAll_notice_list_data_box");
+    const noticeItems = $(".searchAll_announcement_list_item");
+    const noticeMoreBtn = $(".searchAll_announcement_more_btn");
+    const noticeDataEmpty = $(".searchAll_announcement_list_data_empty");
+    const noticeDataExist = $(".searchAll_announcement_list_data_box");
 
     if (noticeItems.length === 0) {
         noticeDataEmpty.show();
@@ -115,6 +82,7 @@ $(document).ready(function() {
             noticeItems.each(function(index) {
                 if (index >= 3) {
                     $(this).hide();
+                    $(this).next(".searchAll_announcement_list_line").hide(); // 하단 라인도 숨기기
                 }
             });
 
