@@ -28,23 +28,34 @@
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript">
         function editRemoveImage() {
-           document.getElementById('edit-file').value = "";
-           document.getElementById('edit-imagePreview').style.display = 'none';
-           document.querySelector('.edit-delete-image-button').style.display = 'none';
-           document.getElementById('edit-fileName').style.display = 'none';
+            $('#edit-imagePreview').attr('src', '').hide();
+            $('#edit-file').val('');
+            $('.edit-delete-image-button').hide();
+            $('#edit-fileName').hide();
+            $('#useExistingImage').val('false');
+
        }
 
        $(document).ready(function() {
-           $('#edit-file').change(function() {
-               var input = this;
-               if (input.files && input.files[0]) {
-                   var reader = new FileReader();
-                   reader.onload = function(e) {
+
+           // 초기 이미지가 있는 경우 미리보기 설정
+           var initialImageSrc = $('#edit-imagePreview').attr('src');
+           if(initialImageSrc) {
+               $('#edit-imagePreview').show();
+               $('.edit-delete-image-button').show();
+           }
+
+           $('#edit-file').on('change', function (event){
+               let file = event.target.files[0];
+               if(file){
+                   let reader = new FileReader();
+                   reader.onload = function (e){
                        $('#edit-imagePreview').attr('src', e.target.result).show();
                        $('.edit-delete-image-button').show();
-                       $('#edit-fileName').text(input.files[0].name).show();
+                       $('#edit-fileName').text(file.name).show();
+                       $('#useExistingImage').val('false');
                    }
-                   reader.readAsDataURL(input.files[0]);
+                   reader.readAsDataURL(file);
                }
            });
        });
@@ -53,12 +64,6 @@
            window.history.back();
        }
 
-       function checkFileInput() {
-           const fileInput = document.getElementById('edit-file');
-           if (fileInput.value === "") {
-               fileInput.disabled = true;
-           }
-       }
     </script>
 </head>
 <body>
@@ -67,12 +72,12 @@
 <div class="edit-board-form-container">
     <h2>게시글 수정</h2>
     <form th:action="@{/board/{boardId}/edit(boardId=${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="redirectUrl" th:value="${param.redirectUrl}"/>
+        <input type="hidden" id="useExistingImage" name="useExistingImage" value="true"/>
         <div class="edit-form-group">
             <div class="edit-file-label-title">사진 첨부</div>
             <div class="edit-image-preview-container">
                 <img id="edit-imagePreview" class="edit-board-img" th:src="${board.imageName != null ? '/image/board/' + board.imageName : ''}" style="display:none;">
-                <button type="button" class="edit-delete-image-button" style="display:none;" onclick="editRemoveImage()">삭제</button>
+                <button type="button" class="edit-delete-image-button" style="display:none;" onclick="editRemoveImage()" >삭제</button>
                 <div id="edit-fileName" class="edit-file-name" style="display:none;"></div>
             </div>
             <input type="file" id="edit-file" name="file" accept="image/*" class="edit-board-write-file-input">

@@ -32,6 +32,7 @@ public class UserService {
     private final GenreRepository genreRepository;
     private final UserGenreRepository userGenreRepository;
 
+
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
@@ -106,4 +107,6 @@ public class UserService {
         Long level = user.getLevel().getId();
         return level.equals(1L);
     }
+
+
 }

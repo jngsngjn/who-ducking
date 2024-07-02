@@ -16,6 +16,7 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -144,11 +145,19 @@ public class BoardController {
 
     //게시글 수정 동작
     @PostMapping("/{boardId}/edit")
-    public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file) throws Exception {
+    public String editBoard(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User user, @ModelAttribute("updatedBoard") BoardDTO updatedBoard, @RequestParam("file")MultipartFile file,
+                            @RequestParam("useExistingImage") boolean useExistingImage) throws Exception {
         User loginUser = userService.getLoginUserDetail(user);
-        boardService.updateBoard(boardId,updatedBoard,loginUser,file);
+
+        if(useExistingImage){
+            boardService.updateBoardWithoutChangingImage(boardId, updatedBoard, loginUser);
+        }
+        else{
+            boardService.updateBoardWithNewImage(boardId, updatedBoard, loginUser, file);
+        }
         return "redirect:/board/"+boardId;
     }
+
 
     //게시글 삭제 동작
     @PostMapping("/{boardId}/delete")
@@ -163,22 +172,38 @@ public class BoardController {
     public Map<String, Boolean> toggleBookmark(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User loginUser) {
         User user = userService.getLoginUserDetail(loginUser);
         Board board = boardService.getBoardById(boardId).orElse(null);
-        boolean bookmarked;
+        boolean bookmarked = false;
 
-        if (!bookmarkService.isBookmarked(user, board)) {
-            Bookmark bookmark = new Bookmark();
-            bookmark.setUser(user);
-            bookmark.setBoard(board);
-            bookmarkService.addBookmark(bookmark);
-            bookmarked = true;
-        } else {
-            assert board != null;
-            bookmarkService.removeBookmark(user.getId(), board.getId());
-            bookmarked = false;
+        if (board != null) {
+            if (!bookmarkService.isBookmarked(user, board)) {
+                Bookmark bookmark = new Bookmark();
+                bookmark.setUser(user);
+                bookmark.setBoard(board);
+                bookmarkService.addBookmark(bookmark);
+                bookmarked = true;
+            } else {
+                bookmarkService.removeBookmark(user.getId(), board.getId());
+            }
         }
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("bookmarked", bookmarked);
+        return response;
+    }
+
+    @GetMapping("/{boardId}/bookmark/status")
+    @ResponseBody
+    public Map<String, Boolean> getBookmarkStatus(@PathVariable("boardId") Long boardId, @AuthenticationPrincipal CustomOAuth2User loginUser) {
+        User user = userService.getLoginUserDetail(loginUser);
+        Board board = boardService.getBoardById(boardId).orElse(null);
+        boolean isBookmarked = false;
+
+        if (board != null && bookmarkService.isBookmarked(user, board)) {
+            isBookmarked = true;
+        }
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("bookmarked", isBookmarked);
         return response;
     }
 
