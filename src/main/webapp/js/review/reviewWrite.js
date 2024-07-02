@@ -305,6 +305,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 리뷰 업데이트 처리 함수
     function reviewUpdate(reviewId) {
+
         let reviewBox = document.querySelector(`#recent-reviews #review-id-${reviewId}`);
         let reviewLikeBox = document.querySelector(`#like-reviews #like-review-id-${reviewId}`);
 
@@ -400,11 +401,10 @@ document.addEventListener("DOMContentLoaded", function() {
             let showMoreBtn = reviewBox.querySelector(".toggle-read-on");
             let offMoreBtn = reviewBox.querySelector(".toggle-read-off");
             let updateModalContainer = reviewBox.querySelector(".update-modal-container");
-            // let likeBtn = reviewBox.querySelector("#recommend-like");
-            // let dislikeBtn = reviewBox.querySelector("#recommend-dislike");
-
-            let likeBtn = reviewBox.querySelector(".recommend-btn");
-            let dislikeBtn = reviewBox.querySelector(".recommend-btn");
+            let likeBtn = reviewBox.querySelector("#recommend-like");
+            let dislikeBtn = reviewBox.querySelector("#recommend-dislike");
+            let likeRecLikeBtn = reviewLikeBox.querySelector("#like-reviews-recommend-like");
+            let likeRecDislikeBtn =reviewLikeBox.querySelector("#like-review-recommend-dislike");
 
 
             showMoreBtn.style.display = 'none';
@@ -412,6 +412,8 @@ document.addEventListener("DOMContentLoaded", function() {
             updateModalContainer.style.display = 'none';
             likeBtn.style.display = 'none';
             dislikeBtn.style.display = 'none';
+            likeRecLikeBtn.style.display='none';
+            likeRecDislikeBtn.style.display='none';
 
             // 글자수 체크 함수
             currentText.addEventListener('input', function(){
@@ -531,59 +533,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-// document.addEventListener("DOMContentLoaded", function() {
-//
-//     let likeUserElements = document.querySelectorAll(".liked-user");
-//     const loginUserId = document.getElementById("userId").value; // 현재 로그인 중인 유저의 id
-//
-//     likeUserElements.forEach(function (element) {
-//         // 각 요소에서 사용자 ID와 좋아요 여부 가져오기
-//         let userIdElement = element.querySelector(".like-user-id");
-//         let reviewLikeElement = userIdElement.nextElementSibling;
-//         let reviewElement = reviewLikeElement.nextElementSibling;
-//         let isLikeElement = reviewElement.nextElementSibling;
-//         let isDislikeElement = isLikeElement.nextElementSibling;
-//
-//         let likedUserId = userIdElement.textContent.trim();
-//         let reviewLikeId = reviewLikeElement.textContent.trim();
-//         let writeReviewId = reviewElement.textContent.trim(); // 숫자.
-//         let  isLike= isLikeElement.textContent.trim();
-//         let  isDislike= isDislikeElement.textContent.trim();
-//
-//         const reviewLists = document.querySelectorAll(".review-list");
-//
-//         reviewLists.forEach(review => {
-//             const reviewContainer = review.id; // review-id-${review.id}
-//             let reviewId = reviewContainer.replace('review-id-','');
-//             let likeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-like');
-//             let dislikeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-dislike');
-//
-//
-//             if (likedUserId === loginUserId && writeReviewId === reviewId) {
-//
-//             if(isLike === "true") {
-//
-//                 likeBtn.style.backgroundColor='orange';
-//                 likeBtn.style.color='white';
-//                 dislikeBtn.style.color='black';
-//                 dislikeBtn.style.backgroundColor='white';
-//
-//             }else if(isDislike === "true"){
-//
-//                 dislikeBtn.style.backgroundColor='orange';
-//                 dislikeBtn.style.color='white';
-//                 likeBtn.style.color='black';
-//                 likeBtn.style.backgroundColor='white';
-//             }
-//         }
-//
-//         });
-//     });
-// });
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
 
     // 좋아요한 유저정보 관련
@@ -591,7 +540,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const loginUserId = document.getElementById("userId").value;
 
     likeUserElements.forEach(function (element) {
-        // 각 요소에서 사용자 ID와 좋아요 여부 가져오기
+
         let userIdElement = element.querySelector(".like-user-id");
         let reviewLikeElement = userIdElement.nextElementSibling;
         let reviewElement = reviewLikeElement.nextElementSibling;
@@ -604,7 +553,6 @@ document.addEventListener("DOMContentLoaded", function() {
         let  isLike= isLikeElement.textContent.trim();
         let  isDislike= isDislikeElement.textContent.trim();
 
-        // 작성되어있는 리뷰관련
         const reviewLists = document.querySelectorAll("#recent-reviews .review-list");
         const likeReviewLists = document.querySelectorAll("#like-reviews .review-list");
 
@@ -614,7 +562,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log( "리뷰 아이디는 " + reviewId)
             let likeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-like');
             let dislikeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-dislike');
-
 
             if (likedUserId === loginUserId && writeReviewId === reviewId) {
 
@@ -633,7 +580,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     likeBtn.style.backgroundColor='white';
                 }
             }
-
         });
 
 
@@ -643,7 +589,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log( "like 리뷰 아이디는 " + likeReviewId) // -> o
             let likeReviewLikeBtn = document.querySelector('#like-review-id-' + likeReviewId + ' #like-review-recommend-like');
             let likeReviewDislikeBtn = document.querySelector('#like-review-id-' + likeReviewId + ' #like-review-recommend-dislike');
-
 
             if (likedUserId === loginUserId && writeReviewId === likeReviewId) {
 
@@ -662,10 +607,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     likeReviewLikeBtn.style.backgroundColor='white';
                 }
             }
-
         });
-
-
     });
 });
 
