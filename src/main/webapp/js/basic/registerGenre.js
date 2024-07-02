@@ -47,7 +47,7 @@ $(document).ready(function () {
             swal({
                 title: "장르 선택 필요",
                 text: "최소 1개 이상의 장르를 선택해야 합니다.",
-                icon: "warning",
+                icon: "error",
             });
         }
     });
