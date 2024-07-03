@@ -82,7 +82,7 @@
     <i class="fa-solid fa-comment review-comment-icon"></i>
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
-  <h1 class="recommend-write-text" th:if="${totalReviews[0].reviewCount} == 0 and ${isAuthenticated}">
+  <h1 class="recommend-write-text" th:if="${!existReview} and ${isAuthenticated}">
     첫 리뷰를 작성하고 추가 경험치와 포인트를 받아가세요!
   </h1>
   </div>
@@ -219,6 +219,8 @@
 <audio id="bgm1" src="/mp3/levelup1.mp3"></audio>
 <!-- 두 번째 BGM -->
 <audio id="bgm2" src="/mp3/levelup2.mp3"></audio>
+<!-- 달걀 깨지는 BGM -->
+<audio id="hoverSound" src="/mp3/egg.mp3"></audio>
 <div id="levelUp_modal" class="levelUp_modal">
   <div class="levelUp_modal_content">
     <div>

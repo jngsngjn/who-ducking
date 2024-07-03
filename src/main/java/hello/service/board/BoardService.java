@@ -11,6 +11,7 @@ import hello.repository.db.UserRepository;
 import hello.repository.server.FileStore;
 import hello.service.basic.ExpService;
 import hello.service.basic.PointService;
+import jakarta.servlet.http.HttpSession;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,12 +43,12 @@ public class BoardService {
     private String serverBoardImagePath;
 
     // 글 작성
-    public void createBoard(BoardDTO writeboard, User loginUser, MultipartFile file) throws Exception {
+    public void createBoard(BoardDTO writeBoard, User loginUser, MultipartFile file, HttpSession session) throws Exception {
         // 첫 글일 때만!
         boolean hasPosted = loginUser.isHasPosted();
         if (!hasPosted) {
-            pointService.increasePoint(loginUser, 5);
-            expService.increaseExp(loginUser, 5, null);
+            pointService.increasePoint(loginUser, 10);
+            expService.increaseExp(loginUser, 10, session);
             loginUser.setHasPosted(true);
             userRepository.save(loginUser);
         }
@@ -60,14 +61,14 @@ public class BoardService {
             File saveFile = new File(serverBoardImagePath + "/" + filename);
             file.transferTo(saveFile);
 
-            writeboard.setImageName(filename);
-            writeboard.setImagePath(serverBoardImagePath + "/" + filename);
-            board.setImageName(writeboard.getImageName());
-            board.setImagePath(writeboard.getImagePath());
+            writeBoard.setImageName(filename);
+            writeBoard.setImagePath(serverBoardImagePath + "/" + filename);
+            board.setImageName(writeBoard.getImageName());
+            board.setImagePath(writeBoard.getImagePath());
         }
 
-        board.setTitle(writeboard.getTitle());
-        board.setContent(writeboard.getContent());
+        board.setTitle(writeBoard.getTitle());
+        board.setContent(writeBoard.getContent());
         board.setUser(loginUser);
         boardRepository.save(board);
     }

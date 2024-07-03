@@ -57,4 +57,7 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
 
     @Query("SELECT a.id, a.name AS title, a.imageName FROM Animation a ORDER BY a.id DESC")
     List<Object[]> findLatestAnimations();
+
+    @Query("select new hello.dto.animation.AnimationMainDTO(a.id, a.imageName) from Animation a")
+    List<AnimationMainDTO> findAnimationMain();
 }
