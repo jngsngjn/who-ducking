@@ -1,6 +1,7 @@
 package hello.controller.basic;
 
 import hello.dto.board.BoardListMainDTO;
+import hello.dto.main.MainDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
 import hello.entity.user.ProfileImage;
@@ -8,13 +9,14 @@ import hello.entity.user.User;
 import hello.service.basic.UserService;
 import hello.service.board.BoardService;
 import hello.service.board.CommentService;
+import hello.service.main.MainService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,11 +28,11 @@ public class MainController {
     private final UserService userService;
     private final BoardService boardService;
     private final CommentService commentService;
+    private final MainService mainService;
 
     @GetMapping("/")
     public String mainPage(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session, Model model) {
         if (user != null) {
-
             User loginUser = userService.getLoginUserDetail(user);
 
             if (loginUser != null) {
@@ -69,5 +71,11 @@ public class MainController {
         model.addAttribute("boardListToMain", boardDtoList);
 
         return "index";
+    }
+
+    @ResponseBody
+    @GetMapping("/api/animations")
+    public List<MainDTO> getAnimations() {
+        return mainService.getMainAnimations();
     }
 }

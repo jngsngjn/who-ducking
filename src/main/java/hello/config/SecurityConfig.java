@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .requestMatchers("/check-levelUp-session").permitAll()
                 .requestMatchers("/search/**").permitAll()
                 .requestMatchers("/board", "/board/*", "/board/*/incrementViewCount").permitAll()
-                .requestMatchers("/api/announcements/page-number").permitAll()
+                .requestMatchers("/api/announcements/page-number", "/api/animations").permitAll()
                 .requestMatchers("/css/**", "/jpg/**", "/png/**", "/js/**", "/images/**", "/image/**", "/vendor/**", "/gif/**", "/mp3/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()

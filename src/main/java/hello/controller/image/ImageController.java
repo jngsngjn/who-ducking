@@ -30,6 +30,7 @@ public class ImageController {
     @Value("${popupPath}")
     private String popupPath;
 
+    // URL : /aa/bb/cc
     @GetMapping("/image/{type}/{imageName}")
     public Resource renderImage(@PathVariable("type") String type, @PathVariable("imageName") String imageName) throws MalformedURLException {
         String basePath = null;

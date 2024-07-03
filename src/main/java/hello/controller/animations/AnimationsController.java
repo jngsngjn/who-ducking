@@ -99,4 +99,5 @@ public class AnimationsController {
             model.addAttribute("reviewCount", reviewCount);
             return "review/reviewWrite";
         }
+
     }

@@ -1,6 +1,5 @@
 package hello.repository.db;
 
-
 import hello.dto.animation.GetAniListDTO;
 import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.playground.WorldCupDTO;
@@ -25,14 +24,12 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
             "ORDER BY a.id DESC")
     List<GetAniListDTO> findAnimationsWithReviews();
 
-
     // 애니상세리스트 별 평점과 리뷰수 조회
     @Query("SELECT new hello.dto.animation.GetAniListDTO(a.id, NULL, ROUND(COALESCE(AVG(r.score), 0.0), 1), COUNT(r.id), a.name) " +
             "FROM Animation a LEFT JOIN a.reviews r " +
             "WHERE a.id = :animationId " +
             "GROUP BY a.id, a.name")
     List<GetAniListDTO> findAnimationDetailsById(long animationId);
-
 
     @Query("SELECT new hello.dto.playground.WorldCupDTO(a.id, a.name, a.imageName) " +
             "FROM Animation a " +
@@ -43,13 +40,11 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
     @Query("SELECT COUNT(r.id) FROM Review r WHERE r.animation.id = :animationId")
     int countReviewsByAnimationId(Long animationId);
 
-
     // 좋아요 여부 확인용
     @Query("SELECT new hello.dto.animation.ReviewLikeDTO(rl.id , rl.reviewId.id, rl.userId.id, rl.isLike, rl.isDislike) " +
             "FROM ReviewLike rl JOIN rl.reviewId r JOIN r.animation a " +
             "WHERE a.id = :animationId")
     List<ReviewLikeDTO> findReviewLikesByAnimationId(@Param("animationId") Long animationId);
-
 
     @Query(value = "SELECT a.id, a.name AS answer, a.image_name AS imageName FROM Animation a ORDER BY RAND()", nativeQuery = true)
     List<Object[]> findRandomQuizzes();
@@ -59,4 +54,7 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
 
     @Query("SELECT a FROM Animation a WHERE REPLACE(a.name, ' ', '') LIKE %:name%")
     Page<Animation> findByNameIgnoringSpaces(@Param("name") String name, Pageable pageable);
+
+    @Query("SELECT a.id, a.name AS title, a.imageName FROM Animation a ORDER BY a.id DESC")
+    List<Object[]> findLatestAnimations();
 }
