@@ -154,3 +154,17 @@
     font-size: 20px;
     color: #555;
 }
+.textarea-container {
+        position: relative;
+    }
+    #edit-content {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    .char-counter {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        font-size: 0.8em;
+        color: #666;
+    }
