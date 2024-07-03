@@ -367,12 +367,16 @@
 
 .myRequest_modal_detail_contents_responseDate_box {
     display: flex;
-    justify-content: flex-start;
-    position: absolute;
-    bottom: 4rem;
+    flex-direction: column;
+    bottom: 16rem;
     gap: 3rem;
     align-items: baseline;
-    margin-bottom: 3rem;
+}
+
+.myRequest_modal_detail_contents_responseDate {
+    display: flex;
+    gap: 3rem;
+    align-items: baseline;
 }
 
 .myRequest_modal_detail_contents_responseDate_tag {
@@ -385,6 +389,11 @@
     font-size: 2.8rem;
     font-weight: 500;
     color: var(--descColor);
+}
+
+.myRequest_modal_detail_contents_responseText_text {
+    font-size: 2.0rem;
+    word-break: break-all;
 }
 
 .myRequest_modal_detail_delete_form {
