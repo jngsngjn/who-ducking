@@ -194,10 +194,6 @@
         const charCounter = document.getElementById('char-counter');
         const boardImagePreview = document.getElementById('boardImagePreview');
 
-        if (!boardImagePreview.src || boardImagePreview.src.endsWith('null')) {
-            boardImagePreview.style.display = 'none';
-        }
-
         // 0/500 내용 카운트
         if (commentInput && charCounter) {
             commentInput.addEventListener('input', function() {
@@ -205,6 +201,9 @@
                 const currentLength = commentInput.value.length;
                 charCounter.textContent = `${currentLength} / 500`;
             });
+        }
+        if (!boardImagePreview.src || boardImagePreview.src.endsWith('null')) {
+            boardImagePreview.style.display = 'none';
         }
 
         loadLikesDislikes();

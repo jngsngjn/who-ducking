@@ -1,7 +1,3 @@
-function toggleCommentMenu(icon) {
-        const commentMenu = icon.closest('.comment-item').querySelector('.comment-menu');
-        commentMenu.style.display = commentMenu.style.display === 'block' ? 'none' : 'block';
-}
 //좋아요
 $(document).ready(function () {
     localStorage.removeItem('searchInput');
@@ -59,6 +55,11 @@ $(document).ready(function () {
         });
     });
 });
+
+function toggleCommentMenu(icon) {
+    const commentMenu = icon.closest('.comment-item').querySelector('.comment-menu');
+    commentMenu.style.display = commentMenu.style.display === 'block' ? 'none' : 'block';
+}
 
 // 좋아요 토글
 function toggleLike(button) {
@@ -137,7 +138,7 @@ $(document).ready(function() {
     loadBookmarkState();
     loadLikesDislikes();
 
-    $('.menu-item-delete-board').click(function() {
+    $('.menu-item-delete-board').click(function () {
         let boardId = $(this).data('board-id');
 
         // 삭제 전 모든 댓글의 좋아요 및 싫어요 상태와 북마크 상태를 삭제
@@ -149,7 +150,7 @@ $(document).ready(function() {
     });
 
 
-    $('#board-bookmark-button').click(function() {
+    $('#board-bookmark-button').click(function () {
         var boardId = $(this).data('board-id');
         var button = $(this);
 
@@ -157,10 +158,14 @@ $(document).ready(function() {
             url: '/board/' + boardId + '/bookmark',
             type: 'POST',
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 var isBookmarked = response.bookmarked;
                 button.toggleClass('bookmarked', isBookmarked);
 
+            }
+        });
+    });
+});
 // 북마크 상태 저장
 function saveBookmarkState(boardId, isBookmarked) {
     let bookmarkState = JSON.parse(localStorage.getItem('bookmarkState')) || {};
@@ -192,12 +197,6 @@ function loadBookmarkState() {
             console.log('Error:', error);
         }
     });
-}
-
-// 댓글 메뉴 토글
-function toggleCommentMenu(icon) {
-    const commentMenu = icon.closest('.comment-item').querySelector('.comment-menu');
-    commentMenu.style.display = commentMenu.style.display === 'block' ? 'none' : 'block';
 }
 
 // 신고 후 리디렉션
