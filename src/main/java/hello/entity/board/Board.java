@@ -1,5 +1,6 @@
 package hello.entity.board;
 
+import hello.entity.alarm.Alarm;
 import hello.entity.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -57,4 +58,6 @@ public class Board {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Alarm> alarms = new ArrayList<>();
 }

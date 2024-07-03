@@ -6,7 +6,6 @@ import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.review.ReviewLike;
 import hello.entity.user.User;
-import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
@@ -51,12 +50,11 @@ public class ReviewService {
 
         LocalDate today = LocalDate.now();
 
-        long aniReviewCount =  animationRepository.countReviewsByAnimationId(aniReviewDTO.getAnimationId());
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
         int currentReviewCount = user.getReviewCount();
 
         if (reviewCountToday >= 3 || currentReviewCount >= 3) {
-            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
+//            throw new ReviewLimitExceedException("리뷰는 하루에 세 번만 작성 할 수 있습니다.");
         }
 
         Animation animation = animationOpt.get();

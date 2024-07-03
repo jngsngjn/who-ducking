@@ -83,7 +83,7 @@
     <span th:text="${totalReviews[0].reviewCount}"></span>
   </p>
   <h1 class="recommend-write-text" th:if="${totalReviews[0].reviewCount} == 0 and ${isAuthenticated}">
-    첫 댓글을 작성하고 추가 포인트 받아가세요!
+    첫 리뷰를 작성하고 추가 경험치와 포인트를 받아가세요!
   </h1>
   </div>
   <div th:if="${not #strings.isEmpty(param.error)}" class="alert alert-danger review-count-alert">

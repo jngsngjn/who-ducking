@@ -10,6 +10,7 @@ $(document).ready(function () {
     function openModal() {
         modal.show();
         bgm1.play(); // 첫 번째 BGM 재생
+        document.body.style.overflow = 'hidden';
     }
 
     // 모달 창 닫기 함수
@@ -18,6 +19,7 @@ $(document).ready(function () {
         bgm1.pause(); // 첫 번째 BGM 정지
         bgm1.currentTime = 0; // 첫 번째 BGM 재생 위치 초기화
         deleteSession();
+        document.body.style.overflow = '';
     }
 
     // 모달 닫기 버튼에 클릭 이벤트 추가
@@ -95,7 +97,7 @@ function pop() {
 }
 
 function render() {
-    for (let i = particles.length - 1; i--; i > -1) {
+    for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.style.transform = `translate3d(${p.x}px, ${p.y}px, 1px)`;
 

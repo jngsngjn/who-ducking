@@ -24,6 +24,8 @@ public class Comment {
     @JoinColumn(name = "board_id")
     private Board board;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @CreationTimestamp

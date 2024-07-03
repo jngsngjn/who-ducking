@@ -5,7 +5,6 @@
     <title>Who's DucKing</title>
     <!-- Favicon -->
     <link rel="icon" href="/images/10duck.ico">
-    <link rel="stylesheet" href="/css/playground/Quiz.css">
     <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/vendor/aos/aos.css">
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
@@ -91,8 +90,8 @@
                     </button>
                     <div id="pointModal" class="modal">
                         <div class="quiz-modal-content">
-                            <span class ="quiz-point-modal">✨문제를 모두 맞춘 당신,, 축하드려요!✨</span><br>
-                            <span class ="quiz-point-modal">💰15포인트💰가 지급되었습니다!</span><br>
+                            <span class ="quiz-point-modal" id="resultText">✨문제를 모두 맞춘 당신,, 축하드려요!✨</span><br>
+                            <span class ="quiz-point-modal" id="pointText">💰15포인트💰가 지급되었습니다!</span><br>
                             <button id="closeModal">확인</button>
                         </div>
                     </div>
