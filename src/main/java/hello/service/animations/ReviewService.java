@@ -51,7 +51,6 @@ public class ReviewService {
 
         LocalDate today = LocalDate.now();
 
-        long aniReviewCount =  animationRepository.countReviewsByAnimationId(aniReviewDTO.getAnimationId());
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
         int currentReviewCount = user.getReviewCount();
 
