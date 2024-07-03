@@ -77,7 +77,13 @@ $(document).ready(function () {
                             dangerMode: true,
                         }).then((willDelete) => {
                             if (willDelete) {
-                                $("form")[1].submit();
+                                swal({
+                                    title: "알림",
+                                    text: "계정이 정상적으로 삭제되었습니다.",
+                                    icon: "info",
+                                }).then(() => {
+                                    $("form")[1].submit();
+                                });
                             }
                         });
                     } else {
