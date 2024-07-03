@@ -157,12 +157,15 @@
 
 .ani-list-container {
   width: 78rem;
+  height:89rem;
   margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
   place-content: center;
   gap: 1rem;
-  justify-items: center;
+  /*justify-items: center;*/
+  align-content: flex-start;
+
 }
 
 .ani-info-container {
@@ -356,9 +359,9 @@ i.fa-solid.fa-angles-right.page-btn{
   }
 
 
-  .ani-list-container {
-    width: 100%;
-  }
+  /*.ani-list-container {*/
+  /*  width: 100%;*/
+  /*}*/
 }
 
 .genre-id {
