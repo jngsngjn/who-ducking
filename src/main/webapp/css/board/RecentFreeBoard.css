@@ -1,7 +1,7 @@
 .recentFreeBoard_backgroundImage {
     background-image: url("/images/Background_Image/eren.png");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
 }
 
@@ -69,11 +69,13 @@
 .recentFreeBoard_box {
     display: flex;
     flex-direction: column;
+    height: 860px;
     margin: 0 auto;
     width: 100%;
 }
 
 .recentFreeBoard_list {
+    height: 100%;
     flex: 1;
     border: 2px solid #d9d9d9;
     border-radius: 2rem;
@@ -557,11 +559,4 @@
     pointer-events: none;
     color: grey;
 }
-.background-image {
-    position: fixed;
-    bottom: 0;
-    left: 200px;
-    max-width: 20%;
-    height: auto;
-    z-index: -100;
-}
+
