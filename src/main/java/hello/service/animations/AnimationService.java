@@ -1,5 +1,6 @@
 package hello.service.animations;
 
+import hello.dto.animation.AnimationMainDTO;
 import hello.dto.animation.GetAniListDTO;
 import hello.dto.animation.ReviewLikeDTO;
 import hello.entity.animation.Animation;
