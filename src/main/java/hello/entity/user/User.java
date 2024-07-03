@@ -73,6 +73,9 @@ public class User {
     @Column(name = "has_posted", nullable = false)
     private boolean hasPosted;
 
+    @Column(name = "has_review", nullable = false)
+    private boolean hasReview;
+
     @Column(nullable = false)
     private String role;
 

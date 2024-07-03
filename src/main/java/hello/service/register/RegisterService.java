@@ -47,6 +47,7 @@ public class RegisterService {
         user.setLevel(levelRepository.findById(1L).get());
         user.setHomeAddress(new Address("", "", ""));
         user.setHasPosted(false);
+        user.setHasReview(false);
 
         // 추천인 로직
         String recommender = registerBasicDTO.getRecommender();

@@ -19,8 +19,6 @@ public class LoginService {
     private final UserRepository userRepository;
     private final LoginHistoryRepository loginHistoryRepository;
     private final PointService pointService;
-    private final ExpService expService;
-    private final UserService userService;
 
     public void processLogin(User user) {
         LocalDate today = LocalDate.now();
@@ -36,15 +34,12 @@ public class LoginService {
 
             if (consecutiveDays == 7) {
                 // 7일 연속 출석 포인트 추가
-                pointService.increasePoint(user, 3); // 7일째에는 3포인트
+                pointService.increasePoint(user, 4); // 7일째에는 3포인트 추가 지급
             } else {
                 // 일반 출석 포인트 추가
                 pointService.increasePoint(user, 1); // 하루 1포인트
             }
 
-            if (!userService.isLevelOne(user)) {
-                expService.increaseExp(user, 5, null);
-            }
             userRepository.save(user);
         }
     }
