@@ -16,7 +16,6 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -62,7 +61,7 @@ public class BoardController {
             model.addAttribute("isAuthenticated", true);
         }
 
-        return "/board/freeBoard";
+        return "/board/freeBoardWriteDate";
     }
 
     @GetMapping("/viewCount")
@@ -86,7 +85,7 @@ public class BoardController {
             model.addAttribute("isAuthenticated", true);
         }
 
-        return "/board/freeBoardSortByViewCount";
+        return "/board/freeBoardViewCount";
     }
 
     //freeBoard -> 작성 폼을 띄워주는 역할
