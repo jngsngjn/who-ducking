@@ -94,7 +94,7 @@
                         <!-- Data Exist -->
                         <div th:if="${!myBoardsDate.content.isEmpty()}" class="myWrite_list_data_box" th:each="board : ${myBoardsDate}">
                             <ul class="myWrite_list_item">
-                                <a th:href="@{/board/{boardId}(boardId=${board.id})}"><li class="myWrite_list_title" th:text="${board.title}"></li></a>
+                                <a th:href="@{/board/{boardId}(boardId=${board.id})}" th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'"><li class="myWrite_list_title" th:text="${board.title}"></li></a>
                                 <li class="myWrite_list_info">
                                     <span class="myWrite_list_date" th:text="${#temporals.format(board.writeDateTime, 'yyyy.MM.dd')}">작성일</span>
                                     <div class="myWrite_list_icon">
