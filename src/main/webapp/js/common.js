@@ -17,10 +17,10 @@ Promise.all([
     loadScript("/js/main.js"),
     loadScript("/js/basic/registerBasic.js"),
     loadScript("/js/basic/registerGenre.js"),
+    loadScript("/js/board/freeBoard.js"),   /* index.html, recentFreeBoard.html, viewCountFreeBoard.html */
 
     loadScript("/js/board/boardWritePage.js"),
-    // loadScript("/js/board/showPage.js"),
-    loadScript("/js/board/freeBoard.js"),
+    loadScript("/js/board/showPage.js"),
 
 ])
     .then(() => {

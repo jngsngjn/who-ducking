@@ -1,0 +1,173 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <!-- Container -->
+    <main id="container" class="recentFreeBoard_backgroundImage">
+
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="recentFreeBoard_title_box">
+                    <h2 class="subTitle">자유 게시판</h2>
+                    <ul class="recentFreeBoard_sort_option_list">
+                        <li class="recentFreeBoard_sort_new_option active">
+                            <a th:href="@{/board}">최신순</a>
+                        </li>
+                        <li class="recentFreeBoard_sort_viewCount_option">
+                            <a th:href="@{/board/viewCount}">조회수순</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+
+                <!-- Board List -->
+                <div class="recentFreeBoard_box">
+                    <div class="recentFreeBoard_list">
+                        <!-- Board List Top -->
+                        <div class="recentFreeBoard_list_top">
+                            <div class="recentFreeBoard_list_top_items">
+                                <span class="recentFreeBoard_list_top_num">번호</span>
+                                <span class="recentFreeBoard_list_top_title">제목</span>
+                                <span class="recentFreeBoard_list_top_writer">작성자</span>
+                                <span class="recentFreeBoard_list_top_date">작성일</span>
+                                <span class="recentFreeBoard_list_top_view-cnt">조회수</span>
+                            </div>
+                        </div>
+
+                        <!-- Board List Bottom -->
+                        <div class="recentFreeBoard_list_bottom">
+                            <!-- Board List All Items -->
+                            <ul class="recentFreeBoard_list_bottom_items">
+                                <!-- Board List Item -->
+                                <li th:each="board, iterStat : ${boardList}"
+                                    class="recentFreeBoard_list_bottom_item">
+                                    <!-- 1. Number -->
+                                    <span class="recentFreeBoard_list_bottom_num"
+                                          th:text="${currentPage * pageSize + iterStat.index + 1}">1</span>
+                                    <!-- 2. Title -->
+                                    <span class="recentFreeBoard_list_bottom_title">
+                                        <a th:href="@{/board/{boardId}(boardId=${board.id})}"
+                                           th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}"
+                                           th:onclick="'incrementViewCountAndRedirect(' + ${board.id} + '); return false;'">제목없음
+                                        </a>
+                                    </span>
+                                    <!-- 3. Writer -->
+                                    <span class="recentFreeBoard_list_bottom_writer"
+                                          th:text="${board.user.nickname}">쇼진</span>
+                                    <!-- 4. Date -->
+                                    <span class="recentFreeBoard_list_bottom_date"
+                                          th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd')}">2024-07-10</span>
+                                    <!-- 5. View Count -->
+                                    <span class="recentFreeBoard_list_bottom_viewCount"
+                                          th:text="${board.viewCount}">3</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recentFreeBoard_bottom">
+                    <!-- Pagination --> <!-- 타임리프 값 확인 좀요 -->
+                    <div class="recentFreeBoard_pagination_box">
+                        <!-- Double Left Arrow -->
+                        <a class="recentFreeBoard_pagination_btn"
+                           th:classappend="${boardList.first} ? 'disabled' : ''"
+                           th:href="@{/board(page=0)}">
+                            <!-- Double Left Icon -->
+                            <i class="fa-solid fa-angles-left"></i>
+                        </a>
+
+                        <!-- Left Arrow -->
+                        <a class="recentFreeBoard_pagination_btn"
+                           th:classappend="${boardList.first} ? 'disabled' : ''"
+                           th:href="@{/board(page=${boardList.number - 1})}">
+                            <!-- Left Icon -->
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+
+                        <!-- Page Number -->
+                        <div th:if="${boardList.totalPages > 0}" class="recentFreeBoard_pageNum">
+                              <span th:each="i : ${#numbers.sequence(((boardList.number / 10) * 10) + 1, (((boardList.number / 10) + 1) * 10))}">
+                                    <a th:if="${i <= boardList.totalPages}"
+                                       th:classappend="${i == boardList.number + 1} ? 'recentFreeBoard_pagination_now_btn' : 'recentFreeBoard_pagination_btn'"
+                                       th:href="@{/board(page=${i - 1})}" th:text="${i}"
+                                       style="margin: 0 3px;">1
+                                    </a>
+                              </span>
+                        </div>
+                        <span th:if="${boardList.totalPages == 0}">
+                              <a class="recentFreeBoard_pagination_now_btn" href="#">1</a>
+                        </span>
+
+                        <!-- Right Arrow -->
+                        <a class="recentFreeBoard_pagination_btn"
+                           th:classappend="${boardList.last} ? 'disabled' : ''"
+                           th:href="@{/board(page=${boardList.number + 1})}">
+                            <!-- Right Icon -->
+                            <i class="fa-solid fa-angle-right"></i>
+                        </a>
+
+                        <!-- Double Right Arrow -->
+                        <a class="recentFreeBoard_pagination_btn"
+                           th:classappend="${boardList.last} ? 'disabled' : ''"
+                           th:href="@{/board(page=${boardList.totalPages - 1})}">
+                            <!-- Double Right Icon -->
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Write Board Button -->
+                    <div class="recentFreeBoard_write_btn" th:if="${isAuthenticated}">
+                        <a href="/board/new">
+                            <div class="recentFreeBoard_write_btn_icon">
+                                <i class="fa fa-edit"></i>
+                            </div>
+                            <span class="recentFreeBoard_write_btn_text">글쓰기</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
+
