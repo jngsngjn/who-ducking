@@ -27,6 +27,9 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/mypage/accountDeletion.js"></script>
+
+    <!--swal-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <!-- Header -->
@@ -71,7 +74,7 @@
                     <!-- Button -->
                     <div class="accountDeletion_btns">
                         <button type="submit" class="accountDeletion_delete_btn">계정 삭제</button>
-                        <button type="button" class="accountDeletion_cancel_btn">취소</button>
+                        <button type="button" class="accountDeletion_cancel_btn" onclick="window.history.back();">취소</button>
                     </div>
                 </div>
             </form>

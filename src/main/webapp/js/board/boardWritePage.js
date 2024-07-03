@@ -24,10 +24,15 @@ function formValidate() {
     const title = document.getElementById('create-title').value;
     const content = document.getElementById('create-content').value;
 
-    if (!title || !content) {
-        alert('내용을 입력해 주세요.');
+    if (!title) {
+        swal('제목을 입력해 주세요.');
         return false;
     }
-
+    if (!content) {
+        swal("내용을 입력해 주세요");
+        return false;
+    }
     return true;
 }
+
+

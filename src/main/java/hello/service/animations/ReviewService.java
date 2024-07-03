@@ -6,6 +6,7 @@ import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.review.ReviewLike;
 import hello.entity.user.User;
+import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
@@ -53,10 +54,13 @@ public class ReviewService {
 
         long aniReviewCount =  animationRepository.countReviewsByAnimationId(aniReviewDTO.getAnimationId());
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
+        int currentReviewCount = user.getReviewCount();
 
-        if (reviewCountToday >= 3) {
-//            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
+        if (reviewCountToday >= 3 || currentReviewCount >= 3) {
+            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
         }
+
+        Animation animation = animationOpt.get();
 
         Review review = new Review();
         review.setAnimation(animation);
@@ -65,18 +69,40 @@ public class ReviewService {
         review.setScore(aniReviewDTO.getScore());
         review.setSpoiler(aniReviewDTO.getIsSpoiler());
 
+        user.setReviewCount(currentReviewCount + 1);
         reviewRepository.save(review);
 
-        int userReviewCount = user.getReviewCount();
-        user.setReviewCount(userReviewCount + 1);
+        Boolean existReview = animation.getExistReview();
+        boolean hasReview = user.isHasReview();
 
-        if (aniReviewCount == 0 || user.getReviewCount() == 0) {
-            pointService.increasePoint(user, 5);
-            expService.increaseExp(user, 5, session);
-        } else {
-            pointService.increasePoint(user, 1);
-            expService.increaseExp(user, 3, session);
+        // 특정 애니의 첫 리뷰 + 계정 첫 리뷰
+        if (!existReview && !hasReview) {
+            pointService.increasePoint(user, 30);
+            expService.increaseExp(user, 25, session);
+            animation.setExistReview(true);
+            user.setHasReview(true);
+            return;
         }
+
+        // 계정 첫 리뷰일 경우
+        if (!hasReview) {
+            pointService.increasePoint(user, 20);
+            expService.increaseExp(user, 15, session);
+            user.setHasReview(true);
+            return;
+        }
+
+        // 특정 애니 첫 리뷰
+        if (!existReview) {
+            pointService.increasePoint(user, 10);
+            expService.increaseExp(user, 10, session);
+            animation.setExistReview(true);
+            return;
+        }
+
+        // 일반 리뷰 작성 시
+        pointService.increasePoint(user, 3);
+        expService.increaseExp(user, 5, session);
     }
 
     // @ 리뷰 수정

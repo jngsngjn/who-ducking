@@ -2,8 +2,18 @@ $(document).ready(function () {
     $('.h-search_box').on('submit', function(e) {
         var keyword = $('.h-search_bar').val();
         if (keyword === "") {
-            alert('검색어를 입력해 주세요.');
             e.preventDefault();
+            swal({
+                text: "검색어를 입력해 주세요.",
+                icon: "warning",
+                button: {
+                    text: "확인",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: true
+                }
+            });
         }
     });
 

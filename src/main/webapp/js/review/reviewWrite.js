@@ -127,22 +127,51 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function deleteReview(reviewId) {
-        if (confirm("정말로 이 리뷰를 삭제하시겠습니까?")) {
-            fetch(`/deleteReview/${reviewId}`, {
-                method: "DELETE"
-            })
-                .then(res => {
-                    if (res.ok) {
-                        alert("리뷰가 삭제되었습니다.");
-                        window.location.reload();
-                    } else {
-                        alert("리뷰 삭제에 실패했습니다.");
-                    }
+        swal({
+            title: "정말로 이 리뷰를 삭제하시겠습니까?",
+            icon: "warning",
+            buttons: {
+                confirm: {
+                    text: "확인",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: true
+                },
+                cancel: {
+                    text: "취소",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                }
+            },
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                fetch(`/deleteReview/${reviewId}`, {
+                    method: "DELETE"
                 })
-                .catch(error => {
-                    console.error("server Error deleting review:", error);
-                });
-        }
+                    .then(res => {
+                        if (res.ok) {
+                            swal("리뷰가 삭제되었습니다.", {
+                                icon: "success",
+                                button: "확인"
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            swal("리뷰 삭제에 실패했습니다.", {
+                                icon: "error",
+                                button: "확인"
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("server Error deleting review:", error);
+                    });
+            }
+        });
     }
 });
 
@@ -192,7 +221,6 @@ function dislikeReview(reviewId, reviewUserId) {
 
     let userIdNum = parseInt(userId, 10);
     let reviewUserIdInt = parseInt(reviewUserId, 10);
-
     if(userIdNum === reviewUserIdInt){
         alert("자신의 댓글에는 '싫어요'를 할 수 없습니다.");
     } else {
@@ -219,7 +247,6 @@ function dislikeReview(reviewId, reviewUserId) {
 }
 
 
-
 // 리뷰 작성 시 빈 값 요청 불가
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector(".write-box");
@@ -236,7 +263,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (!isValid) {
             event.preventDefault();
-            alert(errorMessage);
+            swal({
+                title: "리뷰 작성 불가",
+                text: errorMessage,
+                icon: "warning",
+                button: "확인"
+            });
         }
     });
 });
@@ -286,7 +318,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.addEventListener("click", function(event) {
         if (event.target.classList.contains("order-btn")) {
             let order = event.target.id;
-
             showReviews(order);
         }
 
@@ -303,7 +334,6 @@ document.addEventListener("DOMContentLoaded", function() {
         reviewUpdate(reviewId);
     }
 
-    // 리뷰 업데이트 처리 함수
     // 리뷰 업데이트 처리 함수
     function reviewUpdate(reviewId) {
         let reviewBox = document.querySelector(`#recent-reviews #review-id-${reviewId}`);
@@ -391,11 +421,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 let saveBtn = reviewBox.querySelector(".save-review-btn");
 
                 if (updatedContent.length === 0) {
-                    alert("내용을 입력하세요.");
+                    swal({
+                        title: "내용 없음",
+                        text: "내용을 입력하세요.",
+                        icon: "warning",
+                        button: "확인"
+                    });
                     currentText.focus();
                     saveBtn.disabled = true;
-                } else if (updatedContent.length > 500) {
-                    alert("500자를 초과할 수 없습니다. 현재 글자수 : " + updatedContent.length);
+                } else if(updatedContent.length > 500) {
+                    swal({
+                        title: "글자수 초과",
+                        text: `500자를 초과할 수 없습니다. 현재 글자수 : ${updatedContent.length}`,
+                        icon: "warning",
+                        button: "확인"
+                    });
                     currentText.focus();
                     saveBtn.disabled = true;
                 } else {
@@ -403,7 +443,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            saveButton.addEventListener("click", function () {
+            saveButton.addEventListener("click", function() {
                 let updatedContent = currentText.value;
 
                 fetch(`/reviews/patch/${reviewId}`, {
@@ -416,7 +456,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         score: selectedScore
                     })
                 })
-            .then(res => res.text())
+                    .then(res => res.text())
                     .then(data => {
                         console.log('Response text:', data);
 
@@ -443,9 +483,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-
-
-
     let likeReviewUpdateButtons = document.querySelectorAll('#like-reviews .update-review-btn');
     likeReviewUpdateButtons.forEach(button => {
         button.addEventListener('click', clickUpdateBtn);
@@ -453,7 +490,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     showReviews('recent');
 });
-
 
 
 // @ 리뷰 작성 불가시 textarea 비활성화
