@@ -60,6 +60,11 @@ public class MainController {
             }
         }
 
+        // 인기순 애니 10개 가져오기
+        List<AnimationMainDTO> top10Animations=  animationService.getAnimationMain();
+        model.addAttribute("top10Animations", top10Animations);
+
+
         // 최신 게시글 5개 가져오기
         List<Board> boardList = boardService.getBoardsSortedByWriteDateToMain();
 

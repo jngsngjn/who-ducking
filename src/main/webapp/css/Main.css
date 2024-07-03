@@ -254,6 +254,10 @@
     height: 44rem;
 }
 
+.mainSecondSection_popularity_animation_img{
+    cursor:pointer;
+}
+
 /* Main Second Section ======================================= */
 .mainSecondSection {
     padding-top: 13rem;

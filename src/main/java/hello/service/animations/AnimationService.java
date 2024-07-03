@@ -74,7 +74,7 @@ public class AnimationService {
         return reviewRepository.findTopReviewsByAnimationId(animationId);
     }
 
-    // 좋아요 여부 확인 해내고 만다......
+    // 좋아요 여부 확인
     public List<ReviewLikeDTO> getReviewLikesByAnimationId(Long animationId) {
         return animationRepository.findReviewLikesByAnimationId(animationId);
     }

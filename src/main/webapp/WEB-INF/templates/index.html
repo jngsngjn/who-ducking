@@ -29,6 +29,13 @@
       <script type="text/javascript" src="/js/common.js"></script>
     <!--swal-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script>
+            function goToAnimation(animationId) {
+                  console.log(animationId)
+                  window.location.href = '/animations/' + animationId;
+            }
+      </script>
+
 </head>
 
 <body>
@@ -205,9 +212,8 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/JujutsuKaisen.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[0].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[0].imageName}}" alt="no1" />
                                     </div>
                               </li>
 
@@ -220,9 +226,9 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/DemonSlayer.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[1].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[1].imageName}}" alt="no2" />
+
                                     </div>
                               </li>
 
@@ -235,9 +241,8 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/Haikyuu.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[2].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[2].imageName}}" alt="no3" />
                                     </div>
                               </li>
 
@@ -250,9 +255,8 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/OnePiece.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[3].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[3].imageName}}" alt="no4" />
                                     </div>
                               </li>
 
@@ -265,9 +269,8 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/AttackOfTitan.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[4].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[4].imageName}}" alt="no5" />
                                     </div>
                               </li>
 
@@ -280,9 +283,9 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/MyHeroAcademia.png"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[5].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[5].imageName}}" alt="no6" />
+
                                     </div>
                               </li>
 
@@ -295,9 +298,9 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/JujutsuKaisen.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[7].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[6].imageName}}" alt="no7" />
+
                                     </div>
                               </li>
 
@@ -310,9 +313,9 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/DemonSlayer.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[7].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[7].imageName}}" alt="no8" />
+
                                     </div>
                               </li>
 
@@ -325,9 +328,8 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/Haikyuu.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[8].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[8].imageName}}" alt="no9" />
                                     </div>
                               </li>
 
@@ -340,9 +342,8 @@
                                                       fill="var(--mainColor)" stroke="#000"></path>
                                           </svg>
                                     </div>
-                                    <div class="mainSecondSection_popularity_animation_img">
-                                          <img src="/images/AnimationPoster/OnePiece.jpg"
-                                               alt="/">
+                                    <div class="mainSecondSection_popularity_animation_img" th:id="'fame-animation-id-'+${top10Animations[9].id}">
+                                          <img th:src="@{'/image/ani/' + ${top10Animations[9].imageName}}" alt="no10"/>
                                     </div>
                               </li>
                         </ul>
