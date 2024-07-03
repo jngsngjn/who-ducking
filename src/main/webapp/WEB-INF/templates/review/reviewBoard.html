@@ -25,6 +25,8 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/review/reviewBoard.js"></script>
+      <!--swal-->
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
       .page-btn[disabled] {
         background-color: lightgray;
@@ -58,9 +60,6 @@
         });
       });
     </script>
-    <style>
-
-    </style>
   </head>
   <body>
     <div th:insert="~{fragments/header :: header}"></div>
@@ -85,7 +84,7 @@
               </div>
           <div class="empty-container" id="empty-container">
             <h1 class="empty-container-text"> 선택된 장르의 애니메이션이 없습니다.</h1>
-            <button class="go-to-request"> 건의하기 </button>
+            <button class="go-to-request"><a href="http://localhost:8080/myPage/requests" class="inquiry-btn"> 건의하기</a> </button>
           </div>
           <div class="ani-list-container" id="ani-list-container">
             <div th:each="animation : ${animationLists}" class="ani-info-container"

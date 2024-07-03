@@ -57,6 +57,7 @@
     height: 50px;
     margin: auto;
     border-radius: 20px;
+    font-size: 3rem;
 }
 
 .level_img {
@@ -87,12 +88,7 @@
     /* level_img와 동일한 높이로 설정 */
 }
 
-
 /* 폭죽 */
-
-body {
-    overflow: hidden;
-}
 
 particule {
     position: absolute;

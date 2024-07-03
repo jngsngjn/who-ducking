@@ -1,9 +1,11 @@
 package hello.service.animations;
 
 import hello.dto.animation.GetAniListDTO;
+import hello.dto.animation.ReviewLikeDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.repository.db.AnimationRepository;
+import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
@@ -24,6 +26,7 @@ public class AnimationService {
     private final ReviewRepository reviewRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(AnimationService.class);
+    private final ReviewLikeRepository reviewLikeRepository;
 
     // 모든 애니 get
     public List<GetAniListDTO> getAllAnimationWithReviewData() {
@@ -68,4 +71,10 @@ public class AnimationService {
     public List<Review> getTopReviewsByAnimationId(Long animationId) {
         return reviewRepository.findTopReviewsByAnimationId(animationId);
     }
+
+    // 좋아요 여부 확인 해내고 만다......
+    public List<ReviewLikeDTO> getReviewLikesByAnimationId(Long animationId) {
+        return animationRepository.findReviewLikesByAnimationId(animationId);
+    }
+
 }

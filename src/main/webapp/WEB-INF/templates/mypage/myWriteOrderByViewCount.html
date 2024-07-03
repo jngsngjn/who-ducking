@@ -16,7 +16,7 @@
     <!-- Animate -->
     <link rel="stylesheet" href="/vendor/animate/animate.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/Common.css" />
+    <link rel="stylesheet" href="/css/Common.css"/>
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
@@ -29,21 +29,24 @@
     <!-- JavaScript -->
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/mypage/myWriteOrderByView.js"></script>
+
+    <!--swal-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body class="myWrite_backgroundImage">
+<body>
     <!-- Header -->
     <div th:insert="~{fragments/header :: header}"></div>
 
     <!-- Container -->
-    <main id="container">
+    <main id="container" class="myWrite_backgroundImage">
         <!-- Sub Component : Title -->
         <section class="subCommon">
             <div class="inner_box" data-aos="fade-up">
-                <div class="myReview_title_box">
+                <div class="myWrite_title_box">
                     <h2 class="subTitle">나의 글 목록</h2>
-                    <div class="myReview_btn_box" th:if="${!myBoardsView.content.isEmpty()}">
-                        <button class="myReview_new_btn active" id="orderByWriteDateBtn">최신순</button>
-                        <button class="myReview_view_btn" id="orderByViewCountBtn">조회수순</button>
+                    <div class="myWrite_btn_box" th:if="${!myBoardsView.content.isEmpty()}">
+                        <button class="myWrite_new_btn" id="orderByWriteDateBtn">최신순</button>
+                        <button class="myWrite_new_btn active" id="orderByViewCountBtn">조회수순</button>
                     </div>
                 </div>
             </div>

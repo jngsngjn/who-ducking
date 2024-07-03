@@ -26,7 +26,10 @@ $(document).ready(function() {
         if (query) {
             searchPopupStores(query);
         } else {
-            alert('검색어를 입력해 주세요.');
+            swal({
+                text: "검색어를 입력해 주세요.",
+                icon: "info"
+            });
         }
     });
 
@@ -37,15 +40,23 @@ $(document).ready(function() {
             if (query) {
                 searchPopupStores(query);
             } else {
-                alert('검색어를 입력해 주세요.');
+                swal({
+                    text: "검색어를 입력해 주세요.",
+                    icon: "info"
+                });
             }
         }
     });
 
     // 북마크 버튼 클릭
+    //굳이 일지도?
     $(document).on('click', '.bookmark-icon', function() {
         if (!isAuthenticated) {
-            alert('로그인이 필요합니다.');
+            swal({
+                title: "로그인 필요",
+                text: "로그인이 필요합니다.",
+                icon: "warning"
+            });
             return;
         }
 
@@ -300,6 +311,11 @@ function toggleBookmark(store, bookmarked, $icon) {
             $icon.toggleClass(bookmarked ? 'fa-solid' : 'fa-regular');
         },
         error: function(error) {
+            swal({
+                title: "오류",
+                text: "북마크 상태를 업데이트하는 중 오류가 발생했습니다.",
+                icon: "error"
+            });
             console.error('Error updating bookmark:', error);
         }
     });
