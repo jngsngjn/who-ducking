@@ -150,4 +150,13 @@ $(document).ready(function () {
             prevEl: ".swiper-button-prev",
         },
     });
+
+    // 인기순위 10위 페이지 이동용
+    const animationElements = document.querySelectorAll('.mainSecondSection_popularity_animation_img');
+    animationElements.forEach(element => {
+        element.addEventListener('click', function() {
+            const id = this.id.replace('fame-animation-id-', '');
+            window.location.href = '/animations/' + id;
+        });
+    });
 });
