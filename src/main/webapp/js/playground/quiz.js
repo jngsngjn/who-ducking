@@ -139,12 +139,10 @@ $(document).ready(function() {
         if (quizSubmitAnswer.prop('disabled')) return;
         clearInterval(timer);
         quizTimer.hide();
-
-        const userAnswer = quizAnswerInput.val().replace(/\s+/g, '').toLowerCase(); // 입력값 공백을 제거하고 소문자로 변환 -> 대소문자 소문자 구분 없이 하기 위해서
-        const correctAnswer = quizzes[currentQuizIndex].answer; // 공백 제거 x = 퀴즈 정답
-        const checkCorrectAnswer = correctAnswer.replace(/\s+/g, '').toLowerCase(); // 정답을 비교할때 공백을 제거
-
-        if (userAnswer === checkCorrectAnswer) { // 공백을 제거하고 비교할때
+        const userAnswer = quizAnswerInput.val().replace(/\s+/g, '').toLowerCase();// s+g의 계산식을 이용하여 공백을 제거하고 입력값을 계산함
+        const correctAnswer = quizzes[currentQuizIndex].answer.toLowerCase();
+        const userInput = quizzes[currentQuizIndex].answer.replace(/\s+/g, '').toLowerCase();
+        if (userAnswer === correctAnswer || userAnswer === userInput) {
             quizResult.text('정답입니다!').css('color', '#4CAF50');
             correctCount++;
         } else {
@@ -192,11 +190,36 @@ $(document).ready(function() {
         correctCountElement.addClass('correct-count'); // css 입히기 위해 생성함
 
         // 맞춘 개수 표시 + 포인트 지급
-        if (correctCount === 5) {
+        if (correctCount > 0) {
             modal.css('display', 'flex');
+            let resultText = $('#resultText');
+            let pointText = $('#pointText');
+            switch (correctCount) {
+                case 1 :
+                    resultText.text('✨많이 분발하셔야겠어요~✨');
+                    pointText.text('💰3포인트💰가 지급되었습니다!');
+                    break;
+                case 2 :
+                    resultText.text('✨아직 만족하기엔 일러요~✨');
+                    pointText.text('💰6포인트💰가 지급되었습니다!');
+                    break;
+                case 3 :
+                    resultText.text('✨조금 더 노력해 보세요~✨');
+                    pointText.text('💰9포인트💰가 지급되었습니다!');
+                    break;
+                case 4 :
+                    resultText.text('✨와우~ 다음엔 만점에 도전해 보세요~✨');
+                    pointText.text('💰12포인트💰가 지급되었습니다!');
+                    break;
+                default :
+                    resultText.text('✨문제를 모두 맞춘 당신,, 대단합니다!✨');
+                    pointText.text('💰15포인트💰가 지급되었습니다!');
+            }
+
             $.ajax({
-                url: '/playground/quiz/perfect',
+                url: '/playground/quiz/result',
                 type: 'POST',
+                data: { correctCount: correctCount },
                 success: function() {
                     console.log("포인트 지급 성공")
                 },
