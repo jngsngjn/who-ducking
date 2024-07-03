@@ -1,3 +1,4 @@
+//좋아요
 $(document).ready(function () {
     localStorage.removeItem('searchInput');
     loadLikesDislikes();
@@ -55,6 +56,11 @@ $(document).ready(function () {
     });
 });
 
+function toggleCommentMenu(icon) {
+    const commentMenu = icon.closest('.comment-item').querySelector('.comment-menu');
+    commentMenu.style.display = commentMenu.style.display === 'block' ? 'none' : 'block';
+}
+
 // 좋아요 토글
 function toggleLike(button) {
     let commentId = button.closest('.comment-meta').dataset.commentId;
@@ -99,6 +105,16 @@ function saveLikeDislikeState(commentId, type, state) {
     localStorage.setItem('likeDislikeState', JSON.stringify(stateData));
 }
 
+function removeLikeDislikeState() {
+    const commentItem = $(this).closest('.comment-item');
+    const commentId = commentItem.find('.comment-meta').data('comment-id');
+    let stateData = JSON.parse(localStorage.getItem('likeDislikeState')) || {};
+    if (stateData.hasOwnProperty(commentId)) {
+        delete stateData[commentId];
+        localStorage.setItem('likeDislikeState', JSON.stringify(stateData));
+        console.log(`Removed like/dislike state for comment ${commentId}`);
+    }
+}
 // 좋아요/싫어요 상태 로드
 function loadLikesDislikes() {
     let stateData = JSON.parse(localStorage.getItem('likeDislikeState')) || {};
@@ -116,12 +132,53 @@ function loadLikesDislikes() {
         }
     });
 }
+$(document).ready(function() {
+    localStorage.removeItem('searchInput');
+    // 북마크 상태를 로드
+    loadBookmarkState();
+    loadLikesDislikes();
 
+    $('.menu-item-delete-board').click(function () {
+        let boardId = $(this).data('board-id');
+
+        // 삭제 전 모든 댓글의 좋아요 및 싫어요 상태와 북마크 상태를 삭제
+        removeLikeDislikeState();
+        removeBookmarkState(boardId);
+
+        // 게시글 삭제 폼 제출
+        $(this).closest('form').submit();
+    });
+
+
+    $('#board-bookmark-button').click(function () {
+        var boardId = $(this).data('board-id');
+        var button = $(this);
+
+        $.ajax({
+            url: '/board/' + boardId + '/bookmark',
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                var isBookmarked = response.bookmarked;
+                button.toggleClass('bookmarked', isBookmarked);
+
+            }
+        });
+    });
+});
 // 북마크 상태 저장
 function saveBookmarkState(boardId, isBookmarked) {
     let bookmarkState = JSON.parse(localStorage.getItem('bookmarkState')) || {};
     bookmarkState[boardId] = isBookmarked;
     localStorage.setItem('bookmarkState', JSON.stringify(bookmarkState));
+}
+
+function removeBookmarkState(boardId) {
+    let bookmarkState = JSON.parse(localStorage.getItem('bookmarkState')) || {};
+    if (bookmarkState.hasOwnProperty(boardId)) {
+        delete bookmarkState[boardId];
+        localStorage.setItem('bookmarkState', JSON.stringify(bookmarkState));
+    }
 }
 
 // 북마크 상태 로드
@@ -140,12 +197,6 @@ function loadBookmarkState() {
             console.log('Error:', error);
         }
     });
-}
-
-// 댓글 메뉴 토글
-function toggleCommentMenu(icon) {
-    const commentMenu = icon.closest('.comment-item').querySelector('.comment-menu');
-    commentMenu.style.display = commentMenu.style.display === 'block' ? 'none' : 'block';
 }
 
 // 신고 후 리디렉션
