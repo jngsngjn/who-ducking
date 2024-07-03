@@ -71,9 +71,6 @@ public class ReviewService {
         int userReviewCount = user.getReviewCount();
         user.setReviewCount(userReviewCount + 1);
 
-        System.out.println("애니메이션의 리뷰 수는 " + aniReviewCount);
-        System.out.println("유저가 작성한  리뷰 수는 " + userReviewCount);
-
         if (aniReviewCount == 0 || user.getReviewCount() == 0) {
             pointService.increasePoint(user, 5);
             expService.increaseExp(user, 5, session);
@@ -110,26 +107,6 @@ public class ReviewService {
             System.out.println("Review not found for id: " + reviewId);
         }
     }
-
-    //오늘날짜의 리뷰를 삭제 못하게 하는건 좀 그런가
-//    public void deleteReview(long reviewId) {
-//        Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
-//
-//        if (reviewOpt.isPresent()) {
-//            Review review = reviewOpt.get();
-//            User user = review.getUser();
-//            LocalDate today = LocalDate.now();
-//            LocalDate reviewDate = review.getWriteDate().toLocalDate();
-//
-//            if (reviewDate.isEqual(today)) {
-//                System.out.println("cannot delete writing today review");
-//                return;
-//            }
-//            reviewRepository.deleteById(reviewId);
-//        } else {
-//            System.out.println("Review not found for id: " + reviewId);
-//        }
-//    }
 
     // 매일 자정 실행
     @Scheduled(cron = "0 0 0 * * ?")
