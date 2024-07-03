@@ -80,7 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (currentIndex >= currentRound.length) {
             if (nextRound.length === 0) {
-                alert("결과 에러");
+                swal({
+                    title: "결과 에러",
+                    text: "다음 라운드가 없습니다.",
+                    icon: "error",
+                    button: "확인"
+                });
                 return;
             }
             currentRound = nextRound.slice();

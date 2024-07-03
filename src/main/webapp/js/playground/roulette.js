@@ -65,41 +65,81 @@ const rotate = () => {
         type: "POST",
         success: function (response) {
             if (response) {
-                if (confirm("룰렛을 돌리시겠습니까? (2P 차감)")) {
-                    spinButton.disabled = true;
-                    $c.style.transform = `initial`;
-                    $c.style.transition = `initial`;
-                    const alpha = Math.floor(Math.random() * 100);
+                swal({
+                    title: "룰렛을 돌리시겠습니까?",
+                    text: "룰렛을 돌리면 2P가 차감됩니다.",
+                    icon: "warning",
+                    buttons: {
+                        cancel: {
+                            text: "돌리기",
+                            value: true,
+                            visible: true,
+                            className: "",
+                            closeModal: true
+                        },
+                        confirm: {
+                            text: "취소",
+                            value: false,
+                            visible: true,
+                            className: "",
+                            closeModal: true
+                        }
+                    },
+                    dangerMode: true,
+                }).then((willSpin) => {
+                    if (willSpin) {
+                        spinButton.disabled = true;
+                        $c.style.transform = `initial`;
+                        $c.style.transition = `initial`;
+                        const alpha = Math.floor(Math.random() * 100);
 
-                    setTimeout(() => {
-                        const ran = Math.floor(Math.random() * product.length); // 무작위 인덱스 선택
-                        const arc = 360 / product.length; // 각 섹션의 각도
-                        const adjustment = Math.random() * (arc - 2) - (arc - 2) / 2; // 각도에 약간의 편차를 추가
-                        const rotate = ran * arc + 3600 + arc * 2 - arc / 3 + alpha + adjustment; // 회전 각도 계산
-                        $c.style.transform = `rotate(-${rotate}deg)`; // 회전 적용
-                        $c.style.transition = `2s`; // 회전 시간 설정
                         setTimeout(() => {
-                            const resultAngle = ((rotate % 360) + 360) % 360; // 360으로 나눈 나머지 계산
-                            const resultIndex = Math.floor(resultAngle / arc); // 각도를 인덱스로 변환
-                            const result = product[(resultIndex + 6) % product.length]; // 결과 계산
-                            alert(`포인트 결과: ${result}`); // 결과 알림
+                            const ran = Math.floor(Math.random() * product.length); // 무작위 인덱스 선택
+                            const arc = 360 / product.length; // 각 섹션의 각도
+                            const adjustment = Math.random() * (arc - 2) - (arc - 2) / 2; // 각도에 약간의 편차를 추가
+                            const rotate = ran * arc + 3600 + arc * 2 - arc / 3 + alpha + adjustment; // 회전 각도 계산
+                            $c.style.transform = `rotate(-${rotate}deg)`; // 회전 적용
+                            $c.style.transition = `2s`; // 회전 시간 설정
+                            setTimeout(() => {
+                                const resultAngle = ((rotate % 360) + 360) % 360; // 360으로 나눈 나머지 계산
+                                const resultIndex = Math.floor(resultAngle / arc); // 각도를 인덱스로 변환
+                                const result = product[(resultIndex + 6) % product.length]; // 결과 계산
+                                swal({
+                                    title: "결과",
+                                    text: `포인트 결과: ${result}`,
+                                    icon: result === "꽝" ? "error" : "info",
+                                    button: {
+                                        text: "확인",
+                                        closeModal: true
+                                    },
 
-                            // 포인트 업데이트
-                            if (result !== "꽝") {
-                                const points = parseInt(result.replace("P", ""));
-                                updatePointsInDB(points); // 포인트를 DB에 바로 업데이트
-                            }
+                                });
 
-                            spinButton.disabled = false; // 버튼 활성화
-                        }, 2000);
-                    }, 1);
-                }
+                                // 포인트 업데이트
+                                if (result !== "꽝") {
+                                    const points = parseInt(result.replace("P", ""));
+                                    updatePointsInDB(points); // 포인트를 DB에 바로 업데이트
+                                }
+
+                                spinButton.disabled = false; // 버튼 활성화
+                            }, 2000);
+                        }, 1);
+                    }
+                });
             } else {
-                alert("포인트가 부족합니다.");
+                swal({
+                    title: "포인트 부족",
+                    text: "포인트가 부족합니다.",
+                    icon: "warning"
+                });
             }
         },
         error: function () {
-            console.log("포인트 확인에 실패했습니다.");
+            swal({
+                title: "오류",
+                text: "포인트 확인에 실패했습니다.",
+                icon: "error"
+            });
         },
     });
 };
