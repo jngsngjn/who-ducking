@@ -55,7 +55,7 @@ public class ReviewService {
         int currentReviewCount = user.getReviewCount();
 
         if (reviewCountToday >= 3 || currentReviewCount >= 3) {
-            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
+//            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
         }
 
         Animation animation = animationOpt.get();
