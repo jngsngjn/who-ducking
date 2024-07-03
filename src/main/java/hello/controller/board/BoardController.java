@@ -5,8 +5,10 @@ import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
 import hello.entity.board.Bookmark;
 import hello.entity.board.Comment;
+import hello.entity.user.Level;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
+import hello.repository.db.LevelRepository;
 import hello.service.basic.UserService;
 import hello.service.board.BoardService;
 import hello.service.board.BookmarkService;
@@ -16,7 +18,6 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ public class BoardController {
     private final UserService userService;
     private final BookmarkService bookmarkService;
     private final CommentService commentService;
+    private final LevelRepository levelRepository;
 
     @GetMapping
     public String freeBoard(
@@ -46,7 +48,6 @@ public class BoardController {
                             @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
 
         Page<Board> boardList;
-
         boardList = boardService.getBoardsSortedByLatest(page, 10);
 
         //boardList = boardService.getBoardsSortedByViewCount(page, 10);
@@ -56,12 +57,21 @@ public class BoardController {
         model.addAttribute("currentPage", page);
         model.addAttribute("pageSize", 10);
 
-        if (oAuth2User == null) {
-            model.addAttribute("isAuthenticated", false);
-        } else {
-            model.addAttribute("isAuthenticated", true);
-        }
+        boolean isAuthenticated = oAuth2User != null;
+        model.addAttribute("isAuthenticated", isAuthenticated);
 
+        if (isAuthenticated) {
+            User loginUser = userService.getLoginUserDetail(oAuth2User);
+            Level level = loginUser.getLevel();
+            Long afterLevel = level.getId();
+            Long beforeLevel = afterLevel - 1L;
+
+            if (beforeLevel > 0) {
+                model.addAttribute("beforeLevelImage", levelRepository.findById(beforeLevel).get().getImageName());
+                model.addAttribute("afterLevelImage", level.getImageName());
+                model.addAttribute("afterLevel", afterLevel);
+            }
+        }
         return "/board/recentFreeBoard";
     }
 
@@ -100,11 +110,11 @@ public class BoardController {
     @PostMapping("/create")
     public String createBoard(@AuthenticationPrincipal CustomOAuth2User user,
                               @ModelAttribute("board") BoardDTO board,
-                              @RequestParam("file")MultipartFile file,
+                              @RequestParam("file") MultipartFile file,
                               HttpSession session) throws Exception {
 
         User loginUser = userService.getLoginUserDetail(user);
-        boardService.createBoard(board,loginUser,file);
+        boardService.createBoard(board, loginUser, file, session);
 
         String levelImageName = loginUser.getLevel().getImageName();
         ProfileImage profileImage = loginUser.getProfileImage();
