@@ -128,6 +128,7 @@ main#container {
 
 .quiz-answer {
     margin-bottom: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 #quiz-answer-input {
@@ -571,7 +572,7 @@ width: 150px;
     width: 180px;
     height: 260px;
     object-fit: cover;
-    padding 10px;
+    padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
 }

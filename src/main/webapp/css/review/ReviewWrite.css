@@ -247,6 +247,7 @@ button {
     background-color: transparent;
     overflow: hidden;
     resize: none;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 textarea:focus {
@@ -322,6 +323,7 @@ textarea:focus {
     flex-direction: column;
     justify-content: space-around;
     position:relative;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .review-writer {
@@ -451,6 +453,7 @@ hr {
     width:80rem;
     height: 23rem;
     padding: 1rem;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .update-comment-textarea:focus{
