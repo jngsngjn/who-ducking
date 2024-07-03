@@ -51,13 +51,17 @@
     text-decoration: none;
 }
 
-.next {
-    border: 1px solid var(--mainColor);
+.levelup_next {
+    border: 1px solid #FFC60B;
     width: 200px;
-    height: 50px;
-    margin: auto;
+    height: 70px;
+    margin: 0 auto;
     border-radius: 20px;
-    font-size: 3rem;
+    align-items: center;
+}
+
+.levelup_next:hover{
+    border: 2px solid #FFC60B;
 }
 
 .level_img {
@@ -98,4 +102,25 @@ particule {
     width: 30px;
     height: 30px;
     box-shadow: 1px 1px 4px #eb6383;
+}
+
+.levelup_egg1{
+    width: 40px;
+    height: 50px;
+    transition: all 0.3s ease;
+}
+
+.levelup_egg2{
+    display: none;
+}
+
+.levelup_next:hover .levelup_egg1{
+    display: none;
+
+}
+
+.levelup_next:hover .levelup_egg2{
+    display: inline;
+    width: 40px;
+    height: 55px;
 }
