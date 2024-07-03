@@ -2,10 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
-
     <!-- Favicon -->
     <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
@@ -30,6 +27,10 @@
     <script type="text/javascript" src="/js/playground/quiz.js"></script>
     <!-- Firework -->
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <!--  GOOGLE FONT-->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <!--swal-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -166,8 +167,8 @@
                         <!-- 3-6. Quiz Result Modal -->
                         <div id="pointModal" class="quiz_result_modal" style="display:none;">
                             <div class="quiz_result_modal_content">
-                                <span class="quiz_result_modal_text">✨문제를 모두 맞춘 당신! 축하드려요!✨</span>
-                                <span class="quiz_result_modal_text"><span>💰15포인트💰</span>가
+                                <span class="quiz_result_modal_text" id="resultText">✨문제를 모두 맞춘 당신! 축하드려요!✨</span>
+                                <span class="quiz_result_modal_text" id="pointText"><span>💰15포인트💰</span>가
                                                       지급되었습니다!</span>
                                 <button id="closeModal" class="quiz_result_modal_btn">확인</button>
                             </div>

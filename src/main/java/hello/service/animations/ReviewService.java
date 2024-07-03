@@ -4,9 +4,10 @@ import hello.dto.animation.AniReviewDTO;
 import hello.dto.animation.MyReviewDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
+import hello.entity.review.ReviewLike;
 import hello.entity.user.User;
-import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.AnimationRepository;
+import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import hello.repository.db.UserRepository;
 import hello.service.basic.ExpService;
@@ -33,7 +34,9 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final PointService pointService;
     private final ExpService expService;
+    private  final ReviewLikeRepository reviewLikeRepository;
 
+    // @ 리뷰 작성
     public void addReview(AniReviewDTO aniReviewDTO, User user, HttpSession session) {
         Optional<Animation> animationOpt = animationRepository.findById(aniReviewDTO.getAnimationId());
         Optional<User> userOpt = userRepository.findById(aniReviewDTO.getUserId());
@@ -42,34 +45,61 @@ public class ReviewService {
             throw new IllegalArgumentException("Animation id: " + aniReviewDTO.getAnimationId() + " not found.");
         }
         if (userOpt.isEmpty()) {
-            throw new IllegalArgumentException("user id: " + aniReviewDTO.getUserId() + " not found");
+            throw new IllegalArgumentException("User id: " + aniReviewDTO.getUserId() + " not found.");
         }
 
         LocalDate today = LocalDate.now();
-        long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
-        if (reviewCountToday >= 3) {
-            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
+        long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
+        int currentReviewCount = user.getReviewCount();
+
+        if (reviewCountToday >= 3 || currentReviewCount >= 3) {
+//            throw new ReviewLimitExceedException("리뷰는 하루에 세 번만 작성 할 수 있습니다.");
         }
 
+        Animation animation = animationOpt.get();
+
         Review review = new Review();
-        review.setAnimation(animationOpt.get());
+        review.setAnimation(animation);
         review.setUser(userOpt.get());
         review.setContent(aniReviewDTO.getContent());
         review.setScore(aniReviewDTO.getScore());
         review.setSpoiler(aniReviewDTO.getIsSpoiler());
 
-        int currentReviewCount = user.getReviewCount();
         user.setReviewCount(currentReviewCount + 1);
         reviewRepository.save(review);
 
-        if (reviewCountToday == 0) {
-            pointService.increasePoint(user, 5);
-            expService.increaseExp(user, 5, session);
-        } else {
-            pointService.increasePoint(user, 1);
-            expService.increaseExp(user, 3, session);
+        Boolean existReview = animation.getExistReview();
+        boolean hasReview = user.isHasReview();
+
+        // 특정 애니의 첫 리뷰 + 계정 첫 리뷰
+        if (!existReview && !hasReview) {
+            pointService.increasePoint(user, 30);
+            expService.increaseExp(user, 25, session);
+            animation.setExistReview(true);
+            user.setHasReview(true);
+            return;
         }
+
+        // 계정 첫 리뷰일 경우
+        if (!hasReview) {
+            pointService.increasePoint(user, 20);
+            expService.increaseExp(user, 15, session);
+            user.setHasReview(true);
+            return;
+        }
+
+        // 특정 애니 첫 리뷰
+        if (!existReview) {
+            pointService.increasePoint(user, 10);
+            expService.increaseExp(user, 10, session);
+            animation.setExistReview(true);
+            return;
+        }
+
+        // 일반 리뷰 작성 시
+        pointService.increasePoint(user, 3);
+        expService.increaseExp(user, 5, session);
     }
 
     // @ 리뷰 수정
@@ -123,4 +153,76 @@ public class ReviewService {
         }
         return myReviews;
     }
+
+    // 좋아요
+    @Transactional
+    public void likeReview(Long reviewId, Long userId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+        User loginUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        Optional<ReviewLike> existingLikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
+
+        if (existingLikeOpt.isPresent()) {
+            ReviewLike existingLike = existingLikeOpt.get();
+            if (existingLike.getIsLike()) {
+                reviewLikeRepository.delete(existingLike);
+            } else {
+                existingLike.setIsLike(true);
+                existingLike.setIsDislike(false);
+                reviewLikeRepository.save(existingLike);
+            }
+        } else {
+            ReviewLike newLike = new ReviewLike();
+            newLike.setUserId(loginUser);
+            newLike.setReviewId(review);
+            newLike.setIsLike(true);
+            newLike.setIsDislike(false);
+            reviewLikeRepository.save(newLike);
+        }
+
+        updateLikeAndDislikeCounts(reviewId);
+    }
+
+    // 싫어요
+    @Transactional
+    public void dislikeReview(Long reviewId, Long userId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+        User loginUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        Optional<ReviewLike> existingDislikeOpt = reviewLikeRepository.findByReviewIdAndUserId(review, loginUser);
+
+        if (existingDislikeOpt.isPresent()) {
+            ReviewLike existingDislike = existingDislikeOpt.get();
+            if (existingDislike.getIsDislike()) {
+                reviewLikeRepository.delete(existingDislike);
+            } else {
+                existingDislike.setIsLike(false);
+                existingDislike.setIsDislike(true);
+                reviewLikeRepository.save(existingDislike);
+            }
+        } else {
+            ReviewLike newDislike = new ReviewLike();
+            newDislike.setUserId(loginUser);
+            newDislike.setReviewId(review);
+            newDislike.setIsLike(false);
+            newDislike.setIsDislike(true);
+            reviewLikeRepository.save(newDislike);
+        }
+
+        updateLikeAndDislikeCounts(reviewId);
+    }
+
+    // 좋아요 싫어요 업데이트
+    public void updateLikeAndDislikeCounts(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+
+        int likeCount = reviewLikeRepository.countReviewLike(review);
+        review.setLikeCount(likeCount);
+
+        int dislikeCount = reviewLikeRepository.countReviewDislike(review);
+        review.setDislikeCount(dislikeCount);
+
+        reviewRepository.save(review);
+    }
+
 }

@@ -21,17 +21,10 @@ public class ReviewLike {
     @JoinColumn(name="user_id")
     private User userId;
 
-    @Column(name="is_like")
-    private Boolean isLike;
+    @Column(name = "is_like")
+    private Boolean isLike = false;
 
-    public void toggleLike() {
-        if (isLike == null) {
-            isLike = true;
-        } else if (isLike) {
-            isLike = null;
-        } else {
-            isLike = true;
-        }
-    }
+    @Column(name = "is_dislike")
+    private Boolean isDislike = false;
 
 }

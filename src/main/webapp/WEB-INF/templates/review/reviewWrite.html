@@ -28,8 +28,8 @@
   <script type="text/javascript" src="/js/review/reviewWrite.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-  <!--swal-->
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--swal-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <style>
     .hidden {
       display: none;
@@ -78,13 +78,13 @@
     </div>
   </div>
   <div class="review-count-container">
-    <p class="review-count">
-      <i class="fa-solid fa-comment review-comment-icon"></i>
-      <span th:text="${totalReviews[0].reviewCount}"></span>
-    </p>
-    <h1 class="recommend-write-text" th:if="${totalReviews[0].reviewCount} == 0 and ${isAuthenticated}">
-      첫 리뷰를 작성하고 추가 경험치와 포인트를 받아가세요!
-    </h1>
+  <p class="review-count">
+    <i class="fa-solid fa-comment review-comment-icon"></i>
+    <span th:text="${totalReviews[0].reviewCount}"></span>
+  </p>
+  <h1 class="recommend-write-text" th:if="${totalReviews[0].reviewCount} == 0 and ${isAuthenticated}">
+    첫 리뷰를 작성하고 추가 경험치와 포인트를 받아가세요!
+  </h1>
   </div>
   <div th:if="${not #strings.isEmpty(param.error)}" class="alert alert-danger review-count-alert">
     <p th:text="${param.error}"></p>
@@ -195,7 +195,7 @@
         <div class="row-box">
           <span th:text="${#temporals.format(review.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
           <div th:if="${isAuthenticated}">
-            <button id="like-reviews-recommend-like" class="recommend-btn like-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
+              <button id="like-reviews-recommend-like" class="recommend-btn like-btn" th:onclick="'javascript:likeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">
               <i class="fa-regular fa-thumbs-up review-like-icon"></i> <span th:text="${review.likeCount}"></span>
             </button>
             <button id="like-review-recommend-dislike" class="recommend-btn dislike-btn" th:onclick="'javascript:dislikeReview(' + ${review.id} + ', ' + ${review.user.id} + ');'">

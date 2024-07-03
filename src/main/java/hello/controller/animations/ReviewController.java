@@ -6,6 +6,7 @@ import hello.entity.review.Review;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
 import hello.exception.ReviewLimitExceedException;
+import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
 import hello.service.basic.UserService;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
@@ -27,6 +29,8 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewRepository reviewRepository;
     private final UserService userService;
+    private final ReviewLikeRepository reviewLikeRepository;
+
 
     /* @ POST 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")
@@ -63,10 +67,12 @@ public class ReviewController {
     *  @ id = reviewId */
     @PatchMapping("/reviews/patch/{id}")
     public ResponseEntity<String> updateReview(@PathVariable long id, @RequestBody Review review) {
+
         try {
             Review existingReview = reviewService.findById(id);
             if (existingReview != null) {
                 existingReview.setContent(review.getContent());
+                existingReview.setScore(review.getScore());
                 reviewService.save(existingReview);
 
                 return ResponseEntity.ok("Review updated successfully");
@@ -87,36 +93,35 @@ public class ReviewController {
         return ResponseEntity.noContent().build();
     }
 
-    /* @ 좋아요 클릭시 요청 */
+    /* 좋아요 요청 */
     @PatchMapping("/reviews/{reviewId}/like")
-    public ResponseEntity<?> likeReview(@PathVariable("reviewId") Long id) {
-        Review reviewId = reviewRepository.findById(id).orElse(null);
-        if (reviewId == null) {
+    public ResponseEntity<Integer> likeReview(@PathVariable("reviewId") Long id, @AuthenticationPrincipal CustomOAuth2User user) {
+        Review review = reviewRepository.findById(id).orElse(null);
+        if (review == null) {
             return ResponseEntity.notFound().build();
         }
 
-        reviewId.getReviewLikes().size();
+        User loginUser = userService.getLoginUserDetail(user);
+        Long userId = loginUser.getId();
 
+        reviewService.likeReview(id, userId);
 
-        reviewId.setLikeCount(reviewId.getLikeCount() + 1);
-//        reviewId.setReviewLikes(reviewId.getReviewLikes());
-//        System.out.println(reviewId.getReviewLikes());
-        reviewRepository.save(reviewId);
-
-        return ResponseEntity.ok().body(reviewId.getLikeCount());
+        return ResponseEntity.ok().body(review.getLikeCount());
     }
 
-
-    /* @ 싫어요 클릭시 요청 */
+    /* 싫어요 요청 */
     @PatchMapping("/reviews/{reviewId}/dislike")
-    public ResponseEntity<?> dislikeReview(@PathVariable("reviewId") Long id) {
-        Review reviewId = reviewRepository.findById(id).orElse(null);
-        if (reviewId == null) {
+    public ResponseEntity<Integer> dislikeReview(@PathVariable("reviewId") Long id, @AuthenticationPrincipal CustomOAuth2User user) {
+        Review review = reviewRepository.findById(id).orElse(null);
+        if (review == null) {
             return ResponseEntity.notFound().build();
         }
-        reviewId.setDislikeCount(reviewId.getDislikeCount() + 1);
-        reviewRepository.save(reviewId);
 
-        return ResponseEntity.ok().body(reviewId.getDislikeCount());
+        User loginUser = userService.getLoginUserDetail(user);
+        Long userId = loginUser.getId();
+
+        reviewService.dislikeReview(id, userId);
+
+        return ResponseEntity.ok().body(review.getDislikeCount());
     }
 }

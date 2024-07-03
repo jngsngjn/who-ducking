@@ -57,7 +57,7 @@ $(document).ready(function () {
                     useDefaultImageButton.hide();
                 },
                 error: function (xhr, status, error) {
-                    alert("기본 이미지 로드에 실패했습니다.");
+                    swal("기본 이미지 로드에 실패했습니다.");
                 },
             });
         }
@@ -93,31 +93,33 @@ $(document).ready(function () {
         }
     });
 
+    // 닉네임 변경 버튼 클릭 이벤트 핸들러는 변경 없음
+
     function checkDuplicate() {
         let $button = $(this);
         let inputValue = $button.siblings('input[type="text"]').val();
 
         if (inputValue === currentNickname) {
-            alert("기존 닉네임과 동일합니다.");
+            swal("알림", "기존 닉네임과 동일합니다.", "info");
             duplicateChecked = false;
             return;
         }
 
         if (inputValue === "") {
-            alert("닉네임을 입력해주세요.");
+            swal("경고", "닉네임을 입력해주세요.", "warning");
             duplicateChecked = false;
             return;
         }
 
         if (inputValue.length < 2 || inputValue.length > 12) {
-            alert("닉네임은 2자에서 12자 사이여야 합니다.");
+            swal("오류", "닉네임은 2자에서 12자 사이여야 합니다.", "error");
             duplicateChecked = false;
             return;
         }
 
         let regex = /^[가-힣a-zA-Z0-9]+$/;
         if (!regex.test(inputValue)) {
-            alert("닉네임은 한글, 영어, 숫자만 사용할 수 있습니다.");
+            swal("오류", "닉네임은 한글, 영어, 숫자만 사용할 수 있습니다.", "error");
             duplicateChecked = false;
             return;
         }
@@ -128,23 +130,33 @@ $(document).ready(function () {
             data: { nickname: inputValue },
             success: function (response) {
                 if (response) {
-                    if (confirm("사용 가능한 닉네임입니다. 사용하시겠습니까?")) {
-                        // 사용 버튼을 클릭한 경우
-                        $("#currentNickname").prop("readonly", true);
-                        $button.remove();
-                        $("#changeNicknameButton").show();
-                        duplicateChecked = true;
-                    }
+                    swal({
+                        title: "사용 가능",
+                        text: "사용 가능한 닉네임입니다. 사용하시겠습니까?",
+                        icon: "success",
+                        buttons: {
+                            cancel: "사용",
+                            confirm: "취소"
+                        }
+                    }).then((willUse) => {
+                        if (!willUse) { // willUse가 false일 때 실행
+                            $("#currentNickname").prop("readonly", true);
+                            $button.remove();
+                            $("#changeNicknameButton").show();
+                            duplicateChecked = true;
+                        }
+                    });
                 } else {
-                    alert("이미 사용 중인 닉네임입니다.");
+                    swal("오류", "이미 사용 중인 닉네임입니다.", "error");
                     duplicateChecked = false;
                 }
             },
             error: function () {
-                alert("중복 확인 중 오류가 발생했습니다.");
+                swal("오류", "중복 확인 중 오류가 발생했습니다.", "error");
                 duplicateChecked = false;
             },
         });
+
     }
 });
 
@@ -180,18 +192,18 @@ $(document).ready(function () {
 
     window.sendCode = function (input, currentPhone) {
         if (input === currentPhone) {
-            alert("기존 전화번호와 동일합니다.");
+            swal("알림", "기존 전화번호와 동일합니다.", "info");
             return;
         }
 
         if (input === "") {
-            alert("전화번호를 입력해 주세요.");
+            swal("경고", "전화번호를 입력해 주세요.", "warning");
             return;
         }
 
         const regex = /^010\d{8}$/;
         if (!regex.test(input)) {
-            alert("전화번호 형식이 올바르지 않습니다.");
+            swal("오류", "전화번호 형식이 올바르지 않습니다.", "error");
             return;
         }
 
@@ -202,16 +214,16 @@ $(document).ready(function () {
             data: input,
             success: function (result) {
                 if (result.isDuplicate) {
-                    alert("사용할 수 없는 번호입니다.");
+                    swal("오류", "사용할 수 없는 번호입니다.", "error");
                 } else {
-                    alert("인증 코드가 발송되었습니다.");
+                    swal("성공", "인증 코드가 발송되었습니다.", "success");
                     $("#verification-code").show();
                     $("#changePhoneFlag").val("true");
                     verifyPhone = false;
                 }
             },
             error: function () {
-                alert("인증 코드 발송에 실패했습니다.");
+                swal("오류", "인증 코드 발송에 실패했습니다.", "error");
             },
         });
     };
@@ -221,7 +233,7 @@ $(document).ready(function () {
         const phone = $("#phone").val();
 
         if (verificationCode === "") {
-            alert("인증번호를 입력해 주세요.");
+            swal("경고", "인증번호를 입력해 주세요.", "warning");
             verifyPhone = false;
             return;
         }
@@ -233,19 +245,19 @@ $(document).ready(function () {
             data: JSON.stringify({ phone: phone, code: verificationCode }),
             success: function (response) {
                 if (response === true) {
-                    alert("인증이 성공적으로 완료되었습니다.");
+                    swal("성공", "인증이 성공적으로 완료되었습니다.", "success");
                     $("#phone").prop("readonly", true);
                     $("#verificationInput").prop("readonly", true);
                     $("#checkCodeButton").hide();
                     $("#sendCodeButton").hide();
                     verifyPhone = true;
                 } else {
-                    alert("인증 실패. 다시 시도해 주세요.");
+                    swal("오류", "인증 실패. 다시 시도해 주세요.", "error");
                     verifyPhone = false;
                 }
             },
             error: function () {
-                alert("인증번호 확인 중 오류가 발생했습니다.");
+                swal("오류", "인증번호 확인 중 오류가 발생했습니다.", "error");
                 verifyPhone = false;
             },
         });
@@ -316,7 +328,7 @@ $(document).ready(function () {
     $('input[name="genres"]').change(function () {
         let selectedCount = $('input[name="genres"]:checked').length; // 체크된 체크박스 개수 확인
         if (selectedCount > 5) {
-            alert("최대 5개의 장르만 선택할 수 있습니다."); // 경고 메시지 표시
+            swal("경고", "최대 5개의 장르만 선택할 수 있습니다.", "warning");
             $(this).prop("checked", false); // 체크 해제
 
             // 체크 해제 시 클래스 변경
@@ -346,7 +358,7 @@ $(document).ready(function () {
         });
 
         if (selectedGenres.length === 0) {
-            alert("최소 1개 이상의 장르를 선택해야 합니다."); // 경고 메시지 표시
+            swal("경고", "최소 1개 이상의 장르를 선택해야 합니다.", "warning");
             return;
         }
 
@@ -514,9 +526,10 @@ function validateForm() {
     let postcode = document.getElementById("postcode").value;
 
     if (!(postcode.trim() === "") && detailAddress.trim() === "") {
-        alert("상세 주소를 입력해주세요.");
+        swal("경고", "상세 주소를 입력해주세요.", "warning");
         return false; // 폼 제출을 막음
     }
 
     return true; // 폼 제출을 허용
 }
+

@@ -1,5 +1,6 @@
 package hello.entity.animation;
 
+import hello.entity.alarm.Alarm;
 import hello.entity.genre.AnimationGenre;
 import hello.entity.review.Review;
 import jakarta.persistence.*;
@@ -49,4 +50,7 @@ public class Animation {
 
     @OneToMany(mappedBy = "animation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AnimationGenre> animationGenres = new HashSet<>();
+
+    @OneToMany(mappedBy = "animation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Alarm> alarms = new ArrayList<>();
 }

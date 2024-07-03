@@ -2,6 +2,7 @@ package hello.repository.db;
 
 
 import hello.dto.animation.GetAniListDTO;
+import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.playground.WorldCupDTO;
 import hello.entity.animation.Animation;
 import org.springframework.data.domain.Page;
@@ -37,6 +38,18 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
             "FROM Animation a " +
             "ORDER BY a.id DESC")
     List<WorldCupDTO> findWorldCupAnimations();
+
+    // 애니메이션의 리뷰만 가져오기
+    @Query("SELECT COUNT(r.id) FROM Review r WHERE r.animation.id = :animationId")
+    int countReviewsByAnimationId(Long animationId);
+
+
+    // 좋아요 여부 확인용
+    @Query("SELECT new hello.dto.animation.ReviewLikeDTO(rl.id , rl.reviewId.id, rl.userId.id, rl.isLike, rl.isDislike) " +
+            "FROM ReviewLike rl JOIN rl.reviewId r JOIN r.animation a " +
+            "WHERE a.id = :animationId")
+    List<ReviewLikeDTO> findReviewLikesByAnimationId(@Param("animationId") Long animationId);
+
 
     @Query(value = "SELECT a.id, a.name AS answer, a.image_name AS imageName FROM Animation a ORDER BY RAND()", nativeQuery = true)
     List<Object[]> findRandomQuizzes();

@@ -1,7 +1,7 @@
 /* Fonts ===============================================*/
 /* 폰트 추가 예정 */
 @import url("https://webfontworld.github.io/SCoreDream/SCoreDream.css");
-
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap");
 /* Normalize ===============================================*/
 @import url(./setting/Reset.css);
 @import url(./setting/Base.css);
@@ -12,6 +12,7 @@
 @import url(./fragments/Header.css);
 @import url(./fragments/Footer.css);
 @import url(./Main.css);
+@import url(./Swal.css);
 @import url(./basic/Login.css);
 @import url(./basic/RegisterBasic.css);
 @import url(./basic/RegisterGenre.css);
