@@ -31,6 +31,8 @@
 
     <!--swal-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -83,7 +85,7 @@
 <div class="show-line"></div>
 
 <div class="board-bottom-line">
-    <button onclick="window.history.back()" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</button>
+    <button onclick="window.location.href='/board'" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</button>
     <button class="btn-bookmark" id="board-bookmark-button" th:data-board-id="${board.id}" th:if="${isAuthenticated}"><i class="fa-regular fa-bookmark"></i>북마크</button>
 </div>
 <section class="comment-section">
@@ -187,26 +189,18 @@
 </div>
 
 <script>
-    // 메뉴 기능
-    document.addEventListener('DOMContentLoaded', (event) => {
-
+    document.addEventListener('DOMContentLoaded', function() {
         const commentInput = document.getElementById('comment-input');
         const charCounter = document.getElementById('char-counter');
         const boardImagePreview = document.getElementById('boardImagePreview');
-
-        if (!boardImagePreview.src || boardImagePreview.src.endsWith('null')) {
-            boardImagePreview.style.display = 'none';
-        }
-
         // 0/500 내용 카운트
         if (commentInput && charCounter) {
             commentInput.addEventListener('input', function() {
                 const maxLength = commentInput.getAttribute('maxlength');
                 const currentLength = commentInput.value.length;
-                charCounter.textContent = `${currentLength} / 500`;
+                charCounter.textContent = `${currentLength} / ${maxLength}`;
             });
         }
-
         loadLikesDislikes();
     });
 
@@ -217,19 +211,7 @@
                 toggleBoardMenu(this);
             });
         });
-    });
 
-    function toggleBoardMenu(icon) {
-        const boardMenu = icon.nextElementSibling;
-        if (boardMenu) {
-            boardMenu.style.display = boardMenu.style.display === 'block' ? 'none' : 'block';
-        } else {
-            console.error('Board menu not found');
-        }
-    }
-
-    // 댓글 수정 기능
-    document.addEventListener('DOMContentLoaded', function () {
         const editButtons = document.querySelectorAll('.menu-item-edit');
         editButtons.forEach(button => {
             button.addEventListener('click', function () {
@@ -262,6 +244,7 @@
                 });
             });
         });
+
         document.addEventListener('click', function (event) {
             const commentMenus = document.querySelectorAll('.comment-menu');
             commentMenus.forEach(menu => {
@@ -270,39 +253,62 @@
                 }
             });
         });
-    });
 
-    //신고 모달창 열기 및 닫기 기능 추가
-    const modal = document.getElementById('reportModalOverlay');
-    const openModalBtn = document.querySelector('.board-menu-item-report');
-    const closeModalBtn = document.querySelector('.board-show-report-modal-cancel');
+        const openModalBtn = document.querySelector('.board-menu-item-report');
+        const closeModalBtn = document.querySelector('.board-show-report-modal-cancel');
+        const modal = document.getElementById('reportModalOverlay');
 
-    openModalBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        modal.style.display = 'flex';
-    });
+        openModalBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
 
-    closeModalBtn.addEventListener('click', function () {
-        modal.style.display = 'none';
-    });
-
-    // 모달 창 외부를 클릭하면 닫기
-    window.addEventListener('click', function (e) {
-        if (e.target === modal) {
+        closeModalBtn.addEventListener('click', function () {
             modal.style.display = 'none';
-        }
-    });
-    //신고 선택
-    document.querySelectorAll('.report-radio-label').forEach(label => {
-        label.addEventListener('click', function() {
-            document.querySelectorAll('.report-radio-label').forEach(lbl => {
-                lbl.classList.remove('selected');
+        });
+
+        window.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        document.querySelectorAll('.report-radio-label').forEach(label => {
+            label.addEventListener('click', function() {
+                document.querySelectorAll('.report-radio-label').forEach(lbl => {
+                    lbl.classList.remove('selected');
+                });
+                this.classList.add('selected');
             });
-            this.classList.add('selected');
         });
     });
 
+    function toggleBoardMenu(icon) {
+        const boardMenu = icon.nextElementSibling;
+        if (boardMenu) {
+            boardMenu.style.display = boardMenu.style.display === 'block' ? 'none' : 'block';
+        } else {
+            console.error('Board menu not found');
+        }
+    }
+
+    function loadLikesDislikes() {
+        // 좋아요/싫어요 상태 로드
+        let stateData = JSON.parse(localStorage.getItem('likeDislikeState')) || {};
+        document.querySelectorAll('.comment-meta').forEach(meta => {
+            let commentId = meta.dataset.commentId;
+            if (stateData[commentId]) {
+                if (stateData[commentId].like) {
+                    let likeButton = meta.querySelector('.comment-likes');
+                    likeButton.classList.add('liked');
+                }
+                if (stateData[commentId].dislike) {
+                    let dislikeButton = meta.querySelector('.comment-dislikes');
+                    dislikeButton.classList.add('disliked');
+                }
+            }
+        });
+    }
 </script>
-<script type="text/javascript" src="/js/showPage.js"></script>
 </body>
 </html>
