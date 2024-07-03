@@ -90,11 +90,16 @@
         </div>
         <div class="edit-form-group">
             <label for="edit-title">제목</label>
-            <input type="text" id="edit-title" name="title" th:field="*{title}" placeholder="제목을 입력하세요">
+            <input type="text" id="edit-title" name="title" th:field="*{title}" placeholder="제목을 입력하세요"maxlength="30">
         </div>
         <div class="edit-form-group">
             <label for="edit-content">내용</label>
-            <textarea name="content" id="edit-content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
+            <div class="textarea-container">
+                <textarea name="content" id="edit-content" th:field="*{content}" placeholder="내용을 입력하세요" maxlength="500"></textarea>
+                <div id="char-counter" class="char-counter">
+                    <span id="current-count">0</span>/<span id="max-count">500</span>
+                </div>
+            </div>
         </div>
         <div class="edit-button-group">
             <button type="submit" class="edit-board-edit-button ">수정</button>
@@ -102,7 +107,39 @@
         </div>
     </form>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const editContent = document.getElementById('edit-content');
+    const currentCount = document.getElementById('current-count');
+    const maxCount = document.getElementById('max-count');
 
+    if (editContent && currentCount && maxCount) {
+        const maxLength = editContent.getAttribute('maxlength');
+        maxCount.textContent = maxLength;
+
+        // 초기 글자 수 설정
+        updateCharCount();
+
+        // 입력 이벤트 리스너 추가
+        editContent.addEventListener('input', updateCharCount);
+
+        editContent.addEventListener('input', function(e) {
+                const currentLength = e.target.value.length;
+                if (currentLength > maxLength) {
+                    e.target.value = e.target.value.slice(0, maxLength);
+                    swal("글자 수 초과", "최대 500자까지 입력 가능합니다.", "warning");
+                } else {
+                    updateCharCount();
+                }
+        });
+    }
+
+    function updateCharCount() {
+        const currentLength = editContent.value.length;
+        currentCount.textContent = currentLength;
+    }
+});
+</script>
 <div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>

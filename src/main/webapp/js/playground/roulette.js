@@ -85,6 +85,7 @@ const rotate = () => {
                             closeModal: true
                         }
                     },
+                    closeOnClickOutside: false,// modal창 닫히는거 방지
                     dangerMode: true,
                 }).then((willSpin) => {
                     if (willSpin) {
@@ -105,14 +106,12 @@ const rotate = () => {
                                 const resultIndex = Math.floor(resultAngle / arc); // 각도를 인덱스로 변환
                                 const result = product[(resultIndex + 6) % product.length]; // 결과 계산
                                 swal({
-                                    title: "결과",
-                                    text: `포인트 결과: ${result}`,
+                                    title: `포인트 결과: ${result}`,
                                     icon: result === "꽝" ? "error" : "info",
                                     button: {
                                         text: "확인",
                                         closeModal: true
-                                    },
-
+                                    }
                                 });
 
                                 // 포인트 업데이트
