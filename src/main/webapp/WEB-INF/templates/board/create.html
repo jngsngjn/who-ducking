@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
+
     <!-- Favicon -->
     <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
@@ -52,21 +53,55 @@
         </div>
         <div class="create-form-group">
             <label for="create-title">제목</label>
-            <input type="text" id="create-title" name="title" th:field="*{title}" placeholder="제목을 입력하세요">
+            <input type="text" id="create-title" name="title" th:field="*{title}" placeholder="제목을 입력하세요"maxlength="30">
         </div>
         <div class="create-form-group">
-        <div class="create-form-group">
             <label for="create-content">내용</label>
-            <textarea name="content" id="create-content" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
+            <div class="textarea-container">
+                <textarea name="content" id="create-content" th:field="*{content}" placeholder="내용을 입력하세요" maxlength="500"></textarea>
+                <div id="char-counter" class="char-counter">
+                    <span id="current-count">0</span>/<span id="max-count">500</span>
+                </div>
+            </div>
         </div>
         <div class="create-button-bottom">
         <button type="submit" class="create-board-create-button">작성</button>
         <button type="reset" class="create-board-create-button-reset" onclick="window.history.back();" >취소</button>
         </div>
-        </div>
     </form>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const createContent = document.getElementById('create-content');
+        const currentCount = document.getElementById('current-count');
+        const maxCount = document.getElementById('max-count');
 
+        if (createContent && currentCount && maxCount) {
+            const maxLength = parseInt(createContent.getAttribute('maxlength'));
+            maxCount.textContent = maxLength;
+
+            // 초기 글자 수 설정
+            updateCharCount();
+
+            // 입력 이벤트 리스너 추가
+            createContent.addEventListener('input', function(e) {
+                const currentLength = e.target.value.length;
+
+                if (currentLength > maxLength) {
+                    e.target.value = e.target.value.slice(0, maxLength);
+                    swal("글자 수 초과", "최대 500자까지 입력 가능합니다.", "warning");
+                } else {
+                    updateCharCount();
+                }
+            });
+        }
+
+        function updateCharCount() {
+            const currentLength = createContent.value.length;
+            currentCount.textContent = currentLength;
+        }
+    });
+</script>
 <div th:insert="~{fragments/footer :: footer}"></div>
 
 </body>

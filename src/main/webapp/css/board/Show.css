@@ -150,6 +150,18 @@
 #board-menu .menu-item:hover {
     background-color: #f0f0f0;
 }
+#board-menu .menu-item-delete-board {
+    display: block;
+    padding: 10px;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+#board-menu .menu-item-delete-board:hover {
+    background-color: #f0f0f0;
+}
 
 .board-menu-item-report {
     font-size: 25px;

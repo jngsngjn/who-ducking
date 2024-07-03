@@ -67,6 +67,7 @@ public class ReviewService {
         review.setSpoiler(aniReviewDTO.getIsSpoiler());
 
         user.setReviewCount(currentReviewCount + 1);
+        userRepository.save(user);
         reviewRepository.save(review);
 
         Boolean existReview = animation.getExistReview();
@@ -74,30 +75,37 @@ public class ReviewService {
 
         // 특정 애니의 첫 리뷰 + 계정 첫 리뷰
         if (!existReview && !hasReview) {
+            System.out.println("특정 애니의 첫 리뷰 + 계정 첫 리뷰");
             pointService.increasePoint(user, 30);
             expService.increaseExp(user, 25, session);
             animation.setExistReview(true);
             user.setHasReview(true);
+            userRepository.save(user);
             return;
         }
 
         // 계정 첫 리뷰일 경우
         if (!hasReview) {
+            System.out.println("계정 첫 리뷰");
             pointService.increasePoint(user, 20);
             expService.increaseExp(user, 15, session);
             user.setHasReview(true);
+            userRepository.save(user);
             return;
         }
 
         // 특정 애니 첫 리뷰
         if (!existReview) {
+            System.out.println("특정 애니의 첫 리뷰");
             pointService.increasePoint(user, 10);
             expService.increaseExp(user, 10, session);
             animation.setExistReview(true);
+            userRepository.save(user);
             return;
         }
 
         // 일반 리뷰 작성 시
+        System.out.println("일반 리뷰");
         pointService.increasePoint(user, 3);
         expService.increaseExp(user, 5, session);
     }

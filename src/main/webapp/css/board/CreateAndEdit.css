@@ -157,3 +157,18 @@
         gap: 20px;
 }
 
+htmlCopy<style>
+    .textarea-container {
+        position: relative;
+    }
+    #create-content {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    .char-counter {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        font-size: 0.8em;
+        color: #666;
+    }

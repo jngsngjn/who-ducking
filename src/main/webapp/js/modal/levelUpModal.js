@@ -137,3 +137,15 @@ document.getElementById('next').addEventListener('click', () => {
     bgm1.currentTime = 0; // 첫 번째 BGM 재생 위치 초기화
     bgm2.play(); // 두 번째 BGM 재생
 });
+
+const nextButton = document.getElementById('next');
+const hoverSound = document.getElementById('hoverSound');
+
+nextButton.addEventListener('mouseover', () => {
+    hoverSound.play();
+});
+
+nextButton.addEventListener('mouseout', () => {
+    hoverSound.pause();
+    hoverSound.currentTime = 0;
+});
