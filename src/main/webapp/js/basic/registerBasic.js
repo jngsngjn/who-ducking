@@ -9,6 +9,7 @@ function checkDuplicate() {
             title: "입력 오류",
             text: "닉네임을 입력해주세요.",
             icon: "warning",
+            buttons:"확인"
         });
         duplicateChecked = false;
         return;
