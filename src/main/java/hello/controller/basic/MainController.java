@@ -1,10 +1,12 @@
 package hello.controller.basic;
 
+import hello.dto.animation.AnimationMainDTO;
 import hello.dto.board.BoardListMainDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
+import hello.service.animations.AnimationService;
 import hello.service.basic.UserService;
 import hello.service.board.BoardService;
 import hello.service.board.CommentService;
@@ -14,7 +16,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ public class MainController {
     private final UserService userService;
     private final BoardService boardService;
     private final CommentService commentService;
+    private final AnimationService animationService;
 
     @GetMapping("/")
     public String mainPage(@AuthenticationPrincipal CustomOAuth2User user, HttpSession session, Model model) {
@@ -67,6 +69,12 @@ public class MainController {
         }).collect(Collectors.toList());
 
         model.addAttribute("boardListToMain", boardDtoList);
+
+
+        List<AnimationMainDTO> animationMain = animationService.getAnimationMain();
+        for (AnimationMainDTO animationMainDTO : animationMain) {
+            System.out.println("animationMainDTO = " + animationMainDTO);
+        }
 
         return "index";
     }

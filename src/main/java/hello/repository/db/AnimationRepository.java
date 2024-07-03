@@ -1,6 +1,7 @@
 package hello.repository.db;
 
 
+import hello.dto.animation.AnimationMainDTO;
 import hello.dto.animation.GetAniListDTO;
 import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.playground.WorldCupDTO;
@@ -59,4 +60,7 @@ public interface AnimationRepository extends JpaRepository<Animation, Long> {
 
     @Query("SELECT a FROM Animation a WHERE REPLACE(a.name, ' ', '') LIKE %:name%")
     Page<Animation> findByNameIgnoringSpaces(@Param("name") String name, Pageable pageable);
+
+    @Query("select new hello.dto.animation.AnimationMainDTO(a.id, a.imageName) from Animation a")
+    List<AnimationMainDTO> findAnimationMain();
 }
