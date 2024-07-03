@@ -140,8 +140,9 @@ $(document).ready(function() {
         clearInterval(timer);
         quizTimer.hide();
         const userAnswer = quizAnswerInput.val().replace(/\s+/g, '').toLowerCase();// s+g의 계산식을 이용하여 공백을 제거하고 입력값을 계산함
-        const correctAnswer = quizzes[currentQuizIndex].answer.replace(/\s+/g, '').toLowerCase();
-        if (userAnswer === correctAnswer) {
+        const correctAnswer = quizzes[currentQuizIndex].answer.toLowerCase();
+        const userInput = quizzes[currentQuizIndex].answer.replace(/\s+/g, '').toLowerCase();
+        if (userAnswer === correctAnswer || userAnswer === userInput) {
             quizResult.text('정답입니다!').css('color', '#4CAF50');
             correctCount++;
         } else {
