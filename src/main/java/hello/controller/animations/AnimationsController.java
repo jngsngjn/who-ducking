@@ -8,15 +8,11 @@ import hello.entity.review.Review;
 import hello.entity.user.Level;
 import hello.entity.user.User;
 import hello.repository.db.LevelRepository;
-import hello.repository.db.AnimationRepository;
-import hello.repository.db.ReviewRepository;
 import hello.service.animations.AnimationService;
 import hello.service.animations.GenreService;
 import hello.service.animations.ReviewService;
 import hello.service.basic.UserService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +29,7 @@ public class AnimationsController {
     private final UserService userService;
     private final GenreService genreService;
     private final ReviewService reviewService;
-    private final AnimationRepository animationRepository;
     private final LevelRepository levelRepository;
-
-    private static final Logger logger = LoggerFactory.getLogger(AnimationsController.class);
-    private final ReviewRepository reviewRepository;
 
     // 전체 애니메이션 데이터 조회
     @GetMapping("/animations")
@@ -59,6 +51,9 @@ public class AnimationsController {
         animation.setId(id); //경로에 있는 애니메이션 id를 animation 클래스의 id필드에 세팅
         model.addAttribute("aniDetailInfo", animation);
 
+        // 애니메이션의 리뷰 존재 여부 추가
+        Boolean existReview = animation.getExistReview();
+        model.addAttribute("existReview", existReview);
 
         /* @ 전체 리뷰수와 평점 */
         List<GetAniListDTO> reviewAndScore = animationService.getCountReviewAndScore(id);
