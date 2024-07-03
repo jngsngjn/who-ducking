@@ -5,7 +5,9 @@ import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
+import hello.entity.user.Level;
 import hello.entity.user.User;
+import hello.repository.db.LevelRepository;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.AnimationService;
@@ -32,6 +34,7 @@ public class AnimationsController {
     private final GenreService genreService;
     private final ReviewService reviewService;
     private final AnimationRepository animationRepository;
+    private final LevelRepository levelRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(AnimationsController.class);
     private final ReviewRepository reviewRepository;
@@ -74,6 +77,16 @@ public class AnimationsController {
             // 좋아요&싫어요
              List<ReviewLikeDTO> reviewLikes = animationService.getReviewLikesByAnimationId(id);
              model.addAttribute("reviewLikes", reviewLikes);
+
+            Level level = loginUser.getLevel();
+            Long afterLevel = level.getId();
+            Long beforeLevel = afterLevel - 1L;
+
+            if (beforeLevel > 0) {
+                model.addAttribute("beforeLevelImage", levelRepository.findById(beforeLevel).get().getImageName());
+                model.addAttribute("afterLevelImage", level.getImageName());
+                model.addAttribute("afterLevel", afterLevel);
+            }
         }
 
             /* @ 애니의 리뷰 데이터 조회 (최신순&좋아요순) */

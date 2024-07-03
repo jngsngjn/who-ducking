@@ -6,7 +6,6 @@ import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.review.ReviewLike;
 import hello.entity.user.User;
-import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
@@ -56,7 +55,7 @@ public class ReviewService {
         long reviewCountToday = reviewRepository.countReviewByUserAndDate(user, today);
 
         if (reviewCountToday >= 3) {
-            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
+//            throw new ReviewLimitExceedException("하루에 리뷰는 세 번만 작성 할 수 있습니다.");
         }
 
         Review review = new Review();

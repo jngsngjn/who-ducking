@@ -1,5 +1,6 @@
 //댓글
 $(document).ready(function (){
+    localStorage.removeItem('searchInput');
    loadLikesDislikes();
 });
 
@@ -70,7 +71,6 @@ $(document).ready(function() {
     // 북마크 상태를 로드
     loadBookmarkState();
 
-    var isBookmarked = $('#board-bookmark-button').hasClass('bookmarked');
 
     $('#board-bookmark-button').click(function() {
         var boardId = $(this).data('board-id');
@@ -81,7 +81,7 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             success: function(response) {
-                isBookmarked = response.bookmarked;
+                var isBookmarked = response.bookmarked;
                 button.toggleClass('bookmarked', isBookmarked);
 
                 // 로컬 스토리지에 북마크 상태 저장
@@ -102,14 +102,20 @@ function saveBookmarkState(boardId, isBookmarked) {
 }
 
 function loadBookmarkState() {
-    let bookmarkState = JSON.parse(localStorage.getItem('bookmarkState')) || {};
     var boardId = $('#board-bookmark-button').data('board-id');
 
-    if (bookmarkState[boardId]) {
-        $('#board-bookmark-button').addClass('bookmarked');
-    } else {
-        $('#board-bookmark-button').removeClass('bookmarked');
-    }
+    $.ajax({
+        url: '/board/' + boardId + '/bookmark/status',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var isBookmarked = response.bookmarked;
+            $('#board-bookmark-button').toggleClass('bookmarked', isBookmarked);
+        },
+        error: function(xhr, status, error) {
+            console.log('Error:', error);
+        }
+    });
 }
 
 // 댓글 수정

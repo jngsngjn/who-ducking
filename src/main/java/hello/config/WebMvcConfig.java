@@ -20,8 +20,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**", "/js/**", "/images/**", "/vendor/**")
-                .addResourceLocations("/css/", "/js/", "/images/", "/vendor/");
+        registry.addResourceHandler("/css/**", "/js/**", "/images/**", "/vendor/**", "/mp3/**", "/gif/**")
+                .addResourceLocations("/css/", "/js/", "/images/", "/vendor/", "/mp3/", "/gif/");
     }
 
     @Bean
