@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity @Getter @Setter
-@Table(name="Review_like")
+@Table(name = "review_like")
 public class ReviewLike {
 
     @Id
@@ -14,11 +14,11 @@ public class ReviewLike {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="review_id")
+    @JoinColumn(name = "review_id")
     private Review reviewId;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User userId;
 
     @Column(name = "is_like")
@@ -26,5 +26,4 @@ public class ReviewLike {
 
     @Column(name = "is_dislike")
     private Boolean isDislike = false;
-
 }
