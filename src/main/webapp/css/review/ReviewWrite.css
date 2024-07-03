@@ -1,11 +1,11 @@
-@keyframes fadeInOut {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+/*@keyframes fadeInOut {*/
+/*    0% {*/
+/*        opacity: 0;*/
+/*    }*/
+/*    100% {*/
+/*        opacity: 1;*/
+/*    }*/
+/*}*/
 
 .review-body {
     width: 87.5rem; /* 1400px */
@@ -314,7 +314,7 @@ textarea:focus {
 
 
 .review-list {
-    border-top: 0.0625rem solid #d9d9d9;
+    border-bottom: 0.0625rem solid #d9d9d9;
     padding: 1em 2em;
     font-size: 1.75rem;
     width: 87rem;
@@ -413,12 +413,42 @@ hr {
     border: 0;
 }
 
+.review-comment{
+    margin-bottom: 1rem;
+}
+
+.update-comment-container{
+    position:relative;
+}
+
+.review-star-container{
+    font-size:2rem;
+    margin-bottom: 1rem;
+    position:absolute;
+    bottom: 0;
+    z-index:10;
+}
+
+.gray-star-container{
+    font-size: 2rem;
+    margin-bottom:1rem;
+    color: gray;
+    position:absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+.gray-star{
+    color:gray;
+}
+
+
 .update-comment-textarea{
     position:relative;
     border: none;
     resize: none;
     border-radius: 5px;
-    width:100%;
+    width:80rem;
     height: 23rem;
     padding: 1rem;
 }
@@ -479,6 +509,19 @@ hr {
     font-size: 1.2em;
 }
 
+/* 리뷰 카운트 메세지 */
+.review-count-container{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    justify-content: flex-start;
+}
+
+.recommend-write-text{
+    color: #FF8B00;
+    font-weight: 400;
+    font-size: 2.5rem;
+}
 
 /* 경고 메세지 */
 .review-count-alert{
@@ -510,6 +553,7 @@ hr {
     display: inline;
     font-weight: 700;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 .review-comment .toggle-read-less {
@@ -524,6 +568,7 @@ hr {
     display: inline;
     font-weight: 700;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 .reviewWrite_background_img {
     background-image: url('/images/Background_Image/kakegurui.png');

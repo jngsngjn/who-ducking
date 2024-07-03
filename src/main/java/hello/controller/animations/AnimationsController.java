@@ -1,12 +1,15 @@
 package hello.controller.animations;
 
 import hello.dto.animation.GetAniListDTO;
+import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.user.Level;
 import hello.entity.user.User;
 import hello.repository.db.LevelRepository;
+import hello.repository.db.AnimationRepository;
+import hello.repository.db.ReviewRepository;
 import hello.service.animations.AnimationService;
 import hello.service.animations.GenreService;
 import hello.service.animations.ReviewService;
@@ -30,9 +33,11 @@ public class AnimationsController {
     private final UserService userService;
     private final GenreService genreService;
     private final ReviewService reviewService;
+    private final AnimationRepository animationRepository;
     private final LevelRepository levelRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(AnimationsController.class);
+    private final ReviewRepository reviewRepository;
 
     // 전체 애니메이션 데이터 조회
     @GetMapping("/animations")
@@ -69,6 +74,10 @@ public class AnimationsController {
             model.addAttribute("nickname", loginUser.getNickname());
             model.addAttribute("userId", loginUser.getId());
 
+            // 좋아요&싫어요
+             List<ReviewLikeDTO> reviewLikes = animationService.getReviewLikesByAnimationId(id);
+             model.addAttribute("reviewLikes", reviewLikes);
+
             Level level = loginUser.getLevel();
             Long afterLevel = level.getId();
             Long beforeLevel = afterLevel - 1L;
@@ -80,15 +89,14 @@ public class AnimationsController {
             }
         }
 
-        /* @ 애니의 리뷰 데이터 조회 (최신순&좋아요순) */
-        List<Review> recentReviews = animationService.getRecentReviewsByAnimationId(id); // 최신순
-        List<Review> topReviews = animationService.getTopReviewsByAnimationId(id); //인기순
-        model.addAttribute("recentReviews", recentReviews);
-        model.addAttribute("topReviews", topReviews);
+            /* @ 애니의 리뷰 데이터 조회 (최신순&좋아요순) */
+            List<Review> recentReviews = animationService.getRecentReviewsByAnimationId(id); // 최신순
+            List<Review> topReviews = animationService.getTopReviewsByAnimationId(id); //인기순
+            model.addAttribute("recentReviews", recentReviews);
+            model.addAttribute("topReviews", topReviews);
 
-        int reviewCount = reviewService.getReviewCount(animation);
-        model.addAttribute("reviewCount", reviewCount);
-        return "review/reviewWrite";
+            int reviewCount = reviewService.getReviewCount(animation);
+            model.addAttribute("reviewCount", reviewCount);
+            return "review/reviewWrite";
+        }
     }
-
-}

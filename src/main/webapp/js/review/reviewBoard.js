@@ -19,44 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// 최신순 정렬 함수
-function sortByAnimationId() {
 
-    const aniListContainer = document.getElementById('ani-list-container');
-    const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
-    const totalAniCount = arrayAnimations.length;
-
-    arrayAnimations.sort((a, b) => {
-        let aAnimationId = parseInt(a.getAttribute('data-animation-id'), 10);
-        let bAnimationId = parseInt(b.getAttribute('data-animation-id'), 10);
-        return bAnimationId - aAnimationId;
-    });
-
-    aniListContainer.innerHTML = '';
-    arrayAnimations.forEach(container => aniListContainer.appendChild(container));
-
-}
-
-// 리뷰순 정렬 함수
-function sortByReviewCount() {
-
-    const aniListContainer = document.getElementById('ani-list-container');
-    const arrayAnimations = Array.from(aniListContainer.getElementsByClassName('ani-info-container'));
-
-
-    arrayAnimations.sort((a, b) => {
-        let aReviewCount = parseInt(a.getAttribute('data-review-count'), 10);
-        let bReviewCount = parseInt(b.getAttribute('data-review-count'), 10);
-        return bReviewCount - aReviewCount;
-    });
-
-    aniListContainer.innerHTML = '';
-    arrayAnimations.forEach(container => aniListContainer.appendChild(container));
-
-}
-
-
-// // 체크박스 리스트 클릭시 체크박스 활성화
+// 체크박스 리스트 클릭시 체크박스 활성화
 function checkGenre(element) {
     console.log(element)
     const genreCheckbox = element.querySelector('input[type="checkbox"]');
@@ -80,11 +44,14 @@ function checkGenre(element) {
 }
 
 
-// 전체 페이지네이션과 장르별 페이지네이션
+// 전체 페이지네이션과 장르별 페이지네이션 10개씩  + 최신순, 리뷰순 합침
 let selectedGenres = [];
 let currentPage = 1;
 const animationsPerPage = 12;
 let totalPages = 0;
+
+// 최대 보여줄 페이지네이션 개수
+const showMaxPageNum = 10;
 
 function updateURL(page) {
     const url = new URL(window.location);
@@ -110,7 +77,6 @@ function filterAnimations() {
         });
     }
 
-    // 장르에 일치하는 애니가 없을 경우 보여줄 요소
     let emptyContainer = document.getElementById('empty-container');
     let pageBtnBox = document.getElementById('page-btn-box');
     let orderContainer = document.querySelector('.order-container');
@@ -129,6 +95,7 @@ function filterAnimations() {
 
     let startIndex = (currentPage - 1) * animationsPerPage;
     let endIndex = startIndex + animationsPerPage;
+
     filteredAnimations.forEach((animation, index) => {
         if (index >= startIndex && index < endIndex) {
             animation.style.display = 'block';
@@ -146,7 +113,10 @@ function renderPagination(totalAnimations) {
 
     totalPages = Math.ceil(totalAnimations / animationsPerPage);
 
-    for (let i = 1; i <= totalPages; i++) {
+    let startPage = Math.floor((currentPage - 1) / showMaxPageNum) * showMaxPageNum + 1;
+    let endPage = Math.min(startPage + showMaxPageNum - 1, totalPages);
+
+    for (let i = startPage; i <= endPage; i++) {
         let pageButton = document.createElement('li');
         pageButton.textContent = i;
         pageButton.classList.add('page-number', 'page-btn');
@@ -154,6 +124,7 @@ function renderPagination(totalAnimations) {
             pageButton.style.backgroundColor = '#ff8b00';
             pageButton.style.color = 'white';
         }
+
         pageButton.addEventListener('click', function() {
             currentPage = i;
             filterAnimations();
@@ -184,49 +155,57 @@ function nextPage() {
     }
 }
 
-// 페이지에 따라 버튼 disabled -> 이게 최선입니까 ????? 아니요
 function updateNavigationButtons() {
     let firstPageBtn = document.getElementById('to-first');
     let prevPageBtn = document.getElementById('to-prev');
     let nextPageBtn = document.getElementById('to-next');
     let lastPageBtn = document.getElementById('to-end');
 
+    let startPage = Math.floor((currentPage - 1) / showMaxPageNum) * showMaxPageNum + 1;
+    let endPage = Math.min(startPage + showMaxPageNum - 1, totalPages);
+
     if (currentPage === 1) {
-        firstPageBtn.style.backgroundColor = 'lightgray';
-        firstPageBtn.style.color = '#fff';
-        prevPageBtn.style.backgroundColor = 'lightgray';
-        prevPageBtn.style.color = '#fff';
         firstPageBtn.style.pointerEvents = 'none';
         prevPageBtn.style.pointerEvents = 'none';
     } else {
-        firstPageBtn.style.backgroundColor = '';
-        firstPageBtn.style.color = '';
-        prevPageBtn.style.backgroundColor = '';
-        prevPageBtn.style.color = '';
-
         firstPageBtn.style.pointerEvents = '';
         prevPageBtn.style.pointerEvents = '';
     }
 
-
     if (currentPage === totalPages) {
-        nextPageBtn.style.backgroundColor = 'lightgray';
-        nextPageBtn.style.color = '#fff';
-        lastPageBtn.style.backgroundColor = 'lightgray';
-        lastPageBtn.style.color = '#fff';
         nextPageBtn.style.pointerEvents = 'none';
         lastPageBtn.style.pointerEvents = 'none';
     } else {
-        nextPageBtn.style.backgroundColor = '';
-        nextPageBtn.style.color='';
-        lastPageBtn.style.backgroundColor = '';
-        lastPageBtn.style.color='';
         nextPageBtn.style.pointerEvents = '';
         lastPageBtn.style.pointerEvents = '';
     }
 }
 
+function sortByAnimationId() {
+    let animations = Array.from(document.querySelectorAll('.ani-info-container'));
+    animations.sort((a, b) => {
+        return parseInt(b.getAttribute('data-animation-id')) - parseInt(a.getAttribute('data-animation-id'));
+    });
+    updateAnimationOrder(animations);
+}
 
+function sortByReviewCount() {
+    let animations = Array.from(document.querySelectorAll('.ani-info-container'));
+    animations.sort((a, b) => {
+        return parseInt(b.getAttribute('data-review-count')) - parseInt(a.getAttribute('data-review-count'));
+    });
+    updateAnimationOrder(animations);
+}
+
+function updateAnimationOrder(sortedAnimations) {
+    let container = document.querySelector('.ani-list-container');
+    container.innerHTML = '';
+    sortedAnimations.forEach(animation => {
+        container.appendChild(animation);
+    });
+    currentPage = 1;
+    filterAnimations();
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     let genreCheckboxes = document.querySelectorAll('.genre-list');
@@ -251,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 이전페이지 기억용
     const urlParams = new URLSearchParams(window.location.search);
     const pageParam = parseInt(urlParams.get('page'));
     if (!isNaN(pageParam) && pageParam > 0) {
