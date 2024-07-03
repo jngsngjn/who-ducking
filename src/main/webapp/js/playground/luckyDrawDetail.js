@@ -16,25 +16,30 @@ $(document).ready(function () {
                     swal({
                         title: "알림",
                         text: "이미 오늘 경품에 응모하셨습니다.",
-                        icon: "info"
+                        icon: "info",
+                        buttons: "확인"
+
                     });
                 } else if (!response.validGradeAndLevel) {
                     swal({
                         title: "금지",
                         text: "해당 경품에 응모할 수 있는 레벨이 아닙니다.",
-                        icon: "error"
+                        icon: "error",
+                        buttons: "확인"
                     });
                 } else if (!response.hasEnoughPoints) {
                     swal({
                         title: "경고",
                         text: "포인트가 부족합니다.",
-                        icon: "warning"
+                        icon: "warning",
+                        buttons: "확인"
                     });
                 } else if (response.addressEmpty) {
                     swal({
                         title: "알림",
                         text: "경품에 응모하기 전, 마이페이지에서 주소를 입력해 주세요.\n마이페이지로 이동합니다.",
-                        icon: "info"
+                        icon: "info",
+                        buttons: "확인"
                     }).then((value) => {
                         window.location.href = "/myPage";
                     });
@@ -55,14 +60,16 @@ $(document).ready(function () {
                                     swal({
                                         title: "응모 성공",
                                         text: response,
-                                        icon: "success"
+                                        icon: "success",
+                                        buttons: "확인"
                                     });
                                 },
                                 error: function (error) {
                                     swal({
                                         title: "응모 실패",
                                         text: "응모 처리 중 오류가 발생했습니다. 나중에 다시 시도해주세요.",
-                                        icon: "error"
+                                        icon: "error",
+                                        buttons: "확인"
                                     });
                                 },
                             });
@@ -74,7 +81,8 @@ $(document).ready(function () {
                 swal({
                     title: "오류",
                     text: "서버 오류가 발생했습니다. 나중에 다시 시도해주세요.",
-                    icon: "error"
+                    icon: "error",
+                    buttons: "확인"
                 });
             },
         });

@@ -1,4 +1,5 @@
 .swal-footer {
+    font-family: "SCoreDream", sans-serif;
     text-align: center;
     padding-top: 13px;
     margin-top: 13px;
@@ -8,6 +9,7 @@
     border-top-right-radius: 0;
 }
 .swal-button {
+    font-family: "SCoreDream", sans-serif;
     background-color: #FFC60B;
     color: #fff;
     box-shadow: none;
@@ -28,6 +30,7 @@
     width: 600px;
 }
 .swal-text {
+    font-family: "SCoreDream", sans-serif;
     font-size: 25px;
     font-weight: bold;
     color: #444444;

@@ -11,6 +11,7 @@ $(document).ready(function () {
                 title: "선택 제한",
                 text: "최대 5개만 선택할 수 있습니다.",
                 icon: "warning",
+                buttons: "확인"
             });
         }
     });
@@ -23,6 +24,7 @@ $('input[name="genres"]').change(function () {
             title: "선택 제한",
             text: "최대 5개의 장르만 선택할 수 있습니다.",
             icon: "warning",
+            buttons: "확인"
         });
         $(this).prop("checked", false);
 
@@ -48,6 +50,7 @@ $(document).ready(function () {
                 title: "장르 선택 필요",
                 text: "최소 1개 이상의 장르를 선택해야 합니다.",
                 icon: "error",
+                buttons: "확인"
             });
         }
     });

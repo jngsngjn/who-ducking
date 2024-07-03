@@ -25,11 +25,17 @@ function formValidate() {
     const content = document.getElementById('create-content').value;
 
     if (!title) {
-        swal('제목을 입력해 주세요.');
+        swal({
+            title: '제목을 입력해 주세요.',
+            buttons: "확인"
+        });
         return false;
     }
     if (!content) {
-        swal("내용을 입력해 주세요");
+        swal({
+            title: '내용을 입력해 주세요.',
+            buttons: "확인"
+        });
         return false;
     }
     return true;
