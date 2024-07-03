@@ -66,8 +66,8 @@ public class JpaConfig {
     private Properties jpaProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", ddlAuto);
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.format_sql", "true");
+//        properties.setProperty("hibernate.show_sql", "true");
+//        properties.setProperty("hibernate.format_sql", "true");
         return properties;
     }
 }
