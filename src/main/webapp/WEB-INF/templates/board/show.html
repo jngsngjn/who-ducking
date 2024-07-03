@@ -44,7 +44,7 @@
     <div id="board-menu" class="board-menu-content">
         <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}" class="menu-item">수정</a>
         <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}" method="post" style="display: inline;">
-            <button type="submit" class="menu-item">삭제</button>
+            <button type="submit" class="menu-item-delete-board"  th:data-board-id="${board.id}">삭제</button>
         </form>
     </div>
 </div>
@@ -79,7 +79,7 @@
 <div class="show-line"></div>
 
 <div class="board-bottom-line">
-    <button onclick="window.history.back()" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</button>
+    <a th:href="@{/board}" class="btn-secondary"><i class="fa-solid fa-bars"></i>목록</a>
     <button class="btn-bookmark" id="board-bookmark-button" th:data-board-id="${board.id}" th:if="${isAuthenticated}"><i class="fa-regular fa-bookmark"></i>북마크</button>
 </div>
 <section class="comment-section">
@@ -296,6 +296,13 @@
             });
             this.classList.add('selected');
         });
+    });
+
+    document.getElementById('delete-board-button').addEventListener('click', function() {
+        const boardId = this.getAttribute('data-board-id');
+        localStorage.removeItem(`board_like_${boardId}`);
+        localStorage.removeItem(`board_bookmark_${boardId}`);
+        this.closest('form').submit();
     });
 
 </script>
