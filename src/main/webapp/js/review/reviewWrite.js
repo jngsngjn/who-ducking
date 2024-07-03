@@ -365,6 +365,7 @@ document.addEventListener("DOMContentLoaded", function() {
             currentText.value = fullContent;
             currentText.className = "update-comment-textarea";
 
+
             currentTextContainer.appendChild(currentText);
 
             let starContainer = document.createElement("div");

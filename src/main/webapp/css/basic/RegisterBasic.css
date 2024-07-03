@@ -278,6 +278,10 @@ input[type="number"] {
   transition: 0.5s;
 }
 
+.userInfoEdit_nickname_input_box{
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
 /* Modal =============================================== */
 .register_modal {
   position: absolute;
