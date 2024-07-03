@@ -49,7 +49,6 @@ public class ReviewService {
             throw new IllegalArgumentException("User id: " + aniReviewDTO.getUserId() + " not found.");
         }
 
-        Animation animation = animationOpt.get();
         LocalDate today = LocalDate.now();
 
         long aniReviewCount =  animationRepository.countReviewsByAnimationId(aniReviewDTO.getAnimationId());
