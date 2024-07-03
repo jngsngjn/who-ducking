@@ -70,8 +70,8 @@ public class AnimationsController {
             model.addAttribute("userId", loginUser.getId());
 
             // 좋아요&싫어요
-             List<ReviewLikeDTO> reviewLikes = animationService.getReviewLikesByAnimationId(id);
-             model.addAttribute("reviewLikes", reviewLikes);
+            List<ReviewLikeDTO> reviewLikes = animationService.getReviewLikesByAnimationId(id);
+            model.addAttribute("reviewLikes", reviewLikes);
 
             Level level = loginUser.getLevel();
             Long afterLevel = level.getId();
@@ -94,4 +94,5 @@ public class AnimationsController {
             model.addAttribute("reviewCount", reviewCount);
             return "review/reviewWrite";
         }
+
     }

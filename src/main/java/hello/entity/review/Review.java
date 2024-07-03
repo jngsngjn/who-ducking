@@ -26,7 +26,7 @@ public class Review {
     @JoinColumn(name = "animation_id")
     private Animation animation;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "reviewId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewLike> reviewLikes = new ArrayList<>();
 
     @Lob

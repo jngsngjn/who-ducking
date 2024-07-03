@@ -23,6 +23,7 @@ public class GetAniListDTO {
         this.name = name;
     }
 
+
     public GetAniListDTO(Long animationId, String imageName, double score, long reviewCount, String name, Long genreId1, Long genreId2) {
         this.animationId = animationId;
         this.imageName = imageName;

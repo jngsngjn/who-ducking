@@ -6,7 +6,6 @@ import hello.entity.review.Review;
 import hello.entity.user.ProfileImage;
 import hello.entity.user.User;
 import hello.exception.ReviewLimitExceedException;
-import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import hello.service.animations.ReviewService;
 import hello.service.basic.UserService;
@@ -16,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
@@ -29,8 +27,6 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewRepository reviewRepository;
     private final UserService userService;
-    private final ReviewLikeRepository reviewLikeRepository;
-
 
     /* @ POST 리뷰 작성 */
     @PostMapping("/animations/{AnimationId}/review")

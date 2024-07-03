@@ -1,4 +1,47 @@
 $(document).ready(function () {
+    function setSlideDuration(duration) {
+        document.documentElement.style.setProperty("--slide-duration", `${duration}s`);
+    }
+
+    setSlideDuration(100); // 100초 설정
+
+    function cloneImages() {
+        const container = $(".mainThirdSection_update_slider_container");
+        $.ajax({
+            url: "/api/animations",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+                data.forEach(function(animation) {
+                    const imgContainer = $("<div>").addClass("animation-item");
+                    const img = $("<img>")
+                        .attr("src", `/image/ani/${animation.imageName}`)
+                        .attr("alt", animation.title)
+                        .css("cursor", "pointer")
+                        .on("click", function() {
+                             window.location.href = `/animations/${animation.id}`;
+                         });
+                    // 제목 요소 생성
+                    const title = $("<div>")
+                        .addClass("animation-title")
+                        .text(animation.title);
+                    // 이미지와 을 imgContainer에 추가
+                    imgContainer.append(img);
+                    // imgContainer를 메인 컨테이너에 추가
+                    container.append(imgContainer);
+                });
+                //이미지 반복
+                const images = container.children().clone();
+                container.append(images);
+            },
+            error: function (error) {
+                console.error("Error fetching animations:", error);
+            }
+        });
+    }
+
+    cloneImages(); // 이미지를 반복하도록 클론
+
     // AOS
     AOS.init({
         once: true,
@@ -27,7 +70,7 @@ $(document).ready(function () {
 
     // Popularity Animation Swiper
     const popularityAnimationSwiper = new Swiper(".mainSecondSection_popularity_animation_box", {
-        slidesPerview: 5,
+        slidesPerView: 5,
         slidesPerGroup: 5,
         speed: 1000,
         autoplay: {
@@ -73,63 +116,6 @@ $(document).ready(function () {
         },
     });
 
-    // Update Animation Swiper
-    const updateAnimationSwiper = document.querySelectorAll(".mainThirdSection_update_animation_box");
-
-    updateAnimationSwiper.forEach(function (element, index) {
-        element.classList.add("swiper-" + index);
-
-        // 슬라이드 요소 동적 생성
-        const swiperWrapper = element.querySelector(".mainThirdSection_update_animation_items");
-        const swiperSlides = swiperWrapper.querySelectorAll(".mainThirdSection_update_animation_item");
-        const swiperSlideCount = swiperSlides.length;
-
-        // 무한 슬라이드 생성
-        function createInfiniteSlides() {
-            swiperSlides.forEach((slide) => {
-                const cloneSlide = slide.cloneNode(true);
-                swiperWrapper.appendChild(cloneSlide);
-            });
-            swiper.update();
-        }
-
-        // 일정 시간마다 무한 생성
-        const addSlidesInterval = setInterval(() => {
-            const currentSlides = swiperWrapper.querySelectorAll(".mainThirdSection_update_animation_item");
-            createInfiniteSlides();
-        }, 100);
-
-        // 슬라이드 제거
-        const removeAllSlidesInterval = setInterval(() => {
-            const slides = swiperWrapper.querySelectorAll(".mainThirdSection_update_animation_item");
-            if (slides.length > swiperSlideCount * 3) {
-                // 화면에 보이지 않는 슬라이드 개수 계산
-                const excessSlides = slides.length - swiperSlideCount * 3;
-                for (let i = 0; i < excessSlides; i++) {
-                    swiperWrapper.removeChild(slides[i]);
-                }
-                swiper.update();
-            }
-        }, 30000);
-
-        let swiper = new Swiper(".swiper-" + index, {
-            autoplay: {
-                delay: 1,
-                desableOnInteraction: false,
-            },
-            speed: 30000,
-            loop: true,
-            loopAdditionalSlides: swiperSlideCount,
-            slidePerView: "auto",
-            spaceBetween: 20,
-            freemode: false,
-            slidesOffsetBefore: 0,
-            slidesOffsetAfter: 0,
-            allowTouchMove: false,
-            touchRatio: 0,
-        });
-    });
-
     // LuckyDrawSwiper
     const LuckyDrawSwiper = new Swiper(".mainFourthSection_luckydraw_box", {
         spaceBetween: 40,
@@ -149,5 +135,14 @@ $(document).ready(function () {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
+    });
+
+    // 인기순위 10위 페이지 이동용
+    const animationElements = document.querySelectorAll('.mainSecondSection_popularity_animation_img');
+    animationElements.forEach(element => {
+        element.addEventListener('click', function() {
+            const id = this.id.replace('fame-animation-id-', '');
+            window.location.href = '/animations/' + id;
+        });
     });
 });

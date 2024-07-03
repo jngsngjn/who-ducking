@@ -254,6 +254,10 @@
     height: 44rem;
 }
 
+.mainSecondSection_popularity_animation_img{
+    cursor:pointer;
+}
+
 /* Main Second Section ======================================= */
 .mainSecondSection {
     padding-top: 13rem;
@@ -370,55 +374,47 @@
 }
 
 .mainThirdSection_update_animation_box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 1rem;
+    width: 100%;
+    margin: 7rem 0;
     overflow: hidden;
-    position: relative;
-    width: 100%;
-    cursor: default;
-    padding-top: 4rem;
+    border-left: none;
+    border-right: none;
 }
 
-.mainThirdSection_update_animation_items {
+.mainThirdSection_update_slider_container {
     display: flex;
-    align-items: center;
-    transition-timing-function: linear;
-    pointer-events: auto;
+    animation: slide 200s linear infinite;
+    margin: 30px auto;
 }
 
-.mainThirdSection_update_animation_item {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s, z-index 0.5s;
-    position: relative;
-    z-index: 0;
-    width: auto;
-    max-width: 250px;
-    margin-right: 20px;
-}
-
-.mainThirdSection_update_animation_item:hover {
-    transform: translateY(-1.5rem);
-    transition: 0.5s;
-    z-index: 10;
-}
-
-.mainThirdSection_update_animation_img img {
-    width: 100%;
-    height: 33.346rem;
-    border: 1px solid #d9d9d9;
-    border-radius: 3rem;
+.mainThirdSection_update_slider_container img {
+    width: 300px;
+    height: 420px;
     object-fit: cover;
-    display: block;
-    position: relative;
-    z-index: 1;
-    pointer-events: none;
+    margin-right: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+.mainThirdSection_update_slider_container img:hover {
+    transform: translateY(-30px);
 }
 
+/* 이미지 아래 제목 스타일 추가
+.mainThirdSection_update_slider_container .animation-title {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 2.5rem;
+    color: #333;
+}*/
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100%));
+    }
+}
 /* Main Fourth Section ======================================= */
 .mainFourthSection {
     padding-top: 13rem;
