@@ -72,9 +72,13 @@ public class AnimationService {
         return reviewRepository.findTopReviewsByAnimationId(animationId);
     }
 
-    // 좋아요 여부 확인 해내고 만다......
+    // 좋아요 여부 확인
     public List<ReviewLikeDTO> getReviewLikesByAnimationId(Long animationId) {
         return animationRepository.findReviewLikesByAnimationId(animationId);
     }
 
+    // 메인페이지 애니 별점순 10개
+    public List<GetAniListDTO> getTop10AnimationsWithReviewData() {
+        return animationRepository.findTopScoreAnimations();
+    }
 }
