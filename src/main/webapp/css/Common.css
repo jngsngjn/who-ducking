@@ -40,7 +40,7 @@
 @import url(./review/ReviewWrite.css);
 @import url(./board/RecentFreeBoard.css);
 @import url(./board/ViewCountFreeBoard.css);
-@import url(board/WriteFreeBoard.css);
+@import url(./board/WriteFreeBoard.css);
 @import url(./board/EditFreeBoard.css);
 
 @import url(./board/Show.css);
