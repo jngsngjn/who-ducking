@@ -1,5 +1,6 @@
 package hello.repository.db;
 
+import hello.dto.animation.AnimationMainDTO;
 import hello.dto.animation.GetAniListDTO;
 import hello.dto.animation.ReviewLikeDTO;
 import hello.dto.playground.WorldCupDTO;
