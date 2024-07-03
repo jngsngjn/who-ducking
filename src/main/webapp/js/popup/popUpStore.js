@@ -27,7 +27,6 @@ $(document).ready(function() {
             searchPopupStores(query);
         } else {
             swal({
-                title: "알림",
                 text: "검색어를 입력해 주세요.",
                 icon: "info"
             });
@@ -42,7 +41,6 @@ $(document).ready(function() {
                 searchPopupStores(query);
             } else {
                 swal({
-                    title: "알림",
                     text: "검색어를 입력해 주세요.",
                     icon: "info"
                 });
@@ -51,6 +49,7 @@ $(document).ready(function() {
     });
 
     // 북마크 버튼 클릭
+    //굳이 일지도?
     $(document).on('click', '.bookmark-icon', function() {
         if (!isAuthenticated) {
             swal({

@@ -1,4 +1,3 @@
-// 별점 -> (o)
 document.addEventListener("DOMContentLoaded", function () {
     const totalStars = 5;
     const starsContainer = document.querySelector(".stars-container");
@@ -50,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// 글자수 체크 -> (o)
 document.addEventListener("DOMContentLoaded", function () {
     function countText() {
         let reviewContent = document.getElementById("review-content");
@@ -74,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("input", countText);
 });
 
-// 최신순 인기순 버튼 활성 -> (o) / 기능 -> (o)
+
 document.addEventListener('DOMContentLoaded', function() {
     const recentBtn = document.getElementById('recent');
     const likeBtn = document.getElementById('like');
@@ -94,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// 클릭시 수정 삭제 모달창 -> (o)
 document.addEventListener("DOMContentLoaded", function () {
     const showModalButtons = document.querySelectorAll("[id^='show-modal-']");
     const modalContainers = document.querySelectorAll("[id^='modal-container-']");
@@ -115,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// 리뷰 삭제 -> (o)
+
 document.addEventListener("DOMContentLoaded", function () {
     const deleteButtons = document.querySelectorAll(".delete-review-btn");
 
@@ -127,28 +124,55 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function deleteReview(reviewId) {
-        if (confirm("정말로 이 리뷰를 삭제하시겠습니까?")) {
-            fetch(`/deleteReview/${reviewId}`, {
-                method: "DELETE"
-            })
-                .then(res => {
-                    if (res.ok) {
-                        alert("리뷰가 삭제되었습니다.");
-                        window.location.reload();
-                    } else {
-                        alert("리뷰 삭제에 실패했습니다.");
-                    }
+        swal({
+            title: "정말로 이 리뷰를 삭제하시겠습니까?",
+            icon: "warning",
+            buttons: {
+                confirm: {
+                    text: "확인",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: true
+                },
+                cancel: {
+                    text: "취소",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                }
+            },
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                fetch(`/deleteReview/${reviewId}`, {
+                    method: "DELETE"
                 })
-                .catch(error => {
-                    console.error("server Error deleting review:", error);
-                });
-        }
+                    .then(res => {
+                        if (res.ok) {
+                            swal("리뷰가 삭제되었습니다.", {
+                                icon: "success",
+                                button: "확인"
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            swal("리뷰 삭제에 실패했습니다.", {
+                                icon: "error",
+                                button: "확인"
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("server Error deleting review:", error);
+                    });
+            }
+        });
     }
 });
 
 
-
-// 좋아요 요청 함수 ->(o)
 function likeReview(reviewId) {
     let url = `/reviews/${reviewId}/like`;
 
@@ -174,7 +198,6 @@ function likeReview(reviewId) {
 }
 
 
-// 싫어요 요청 함수
 function dislikeReview(reviewId) {
     let url = `/reviews/${reviewId}/dislike`;
 
@@ -200,7 +223,6 @@ function dislikeReview(reviewId) {
 }
 
 
-// 리뷰 작성 시 빈 값 요청 불가
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector(".write-box");
     const reviewContent = document.getElementById("review-content");
@@ -216,13 +238,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (!isValid) {
             event.preventDefault();
-            alert(errorMessage);
+            swal({
+                title: "리뷰 작성 불가",
+                text: errorMessage,
+                icon: "warning",
+                button: "확인"
+            });
         }
     });
 });
 
 
-// 스포일러 체크 여부에따라 보여주기
 document.addEventListener('DOMContentLoaded', function () {
     const spoilerCheckbox = document.getElementById('show-spoiler');
 
@@ -248,7 +274,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// 리뷰 정렬하기 &  수정 하기
 document.addEventListener("DOMContentLoaded", function() {
     let currentOrder = 'recent';
 
@@ -276,14 +301,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // 리뷰의 모달창 수정버튼 클릭시 id 찾는 함수
     function clickUpdateBtn(e) {
         let reviewId = e.target.dataset.reviewId;
         console.log("수정 버튼을 눌렀을때의 리뷰 id = " + reviewId)
         reviewUpdate(reviewId);
     }
 
-    // 리뷰 업데이트 처리 함수
     function reviewUpdate(reviewId) {
         let reviewBox = document.querySelector(`#recent-reviews #review-${reviewId}`);
         let reviewLikeBox = document.querySelector(`#like-reviews #review-${reviewId}`);
@@ -318,25 +341,26 @@ document.addEventListener("DOMContentLoaded", function() {
             likeBtn.style.display = 'none';
             dislikeBtn.style.display = 'none';
 
-            // 엔터 입력때문에 임치 주석 처리
-            // currentText.addEventListener("keydown", function(event) {
-            //     if (event.keyCode === 13) {
-            //         event.preventDefault();
-            //         saveButton.click();
-            //     }
-            // });
-
-            // 글자수 체크 함수
             currentText.addEventListener('input', function(){
                 let updatedContent = currentText.value.trim();
                 let saveBtn = reviewBox.querySelector(".save-review-btn");
 
                 if (updatedContent.length === 0) {
-                    alert("내용을 입력하세요.");
+                    swal({
+                        title: "내용 없음",
+                        text: "내용을 입력하세요.",
+                        icon: "warning",
+                        button: "확인"
+                    });
                     currentText.focus();
                     saveBtn.disabled = true;
                 } else if(updatedContent.length > 500) {
-                    alert("500자를 초과할 수 없습니다. 현재 글자수 : " + updatedContent.length)
+                    swal({
+                        title: "글자수 초과",
+                        text: `500자를 초과할 수 없습니다. 현재 글자수 : ${updatedContent.length}`,
+                        icon: "warning",
+                        button: "확인"
+                    });
                     currentText.focus();
                     saveBtn.disabled = true;
                 } else {
@@ -375,7 +399,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateReview(reviewBox);
-
         updateReview(reviewLikeBox);
     }
 
@@ -387,8 +410,6 @@ document.addEventListener("DOMContentLoaded", function() {
     showReviews('recent');
 });
 
-
-// @ 리뷰 작성 불가시 textarea 비활성화
 document.addEventListener("DOMContentLoaded", function() {
     function getQueryParams() {
         const params = {};
@@ -403,12 +424,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const params = getQueryParams();
     if (params.error) {
-        // 에러 메시지가 있으면 textarea를 비활성화
         document.getElementById("review-content").disabled = true;
     }
 });
 
-// 보여지는 리뷰의 글자수에따라 토글 활성화
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.review-comment').forEach(function(reviewComment) {
         const shortReview = reviewComment.querySelector('.short-content');
@@ -417,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const hideReview = reviewComment.querySelector('.toggle-read-off');
         const fullContent = shortReview.getAttribute('data-full-content');
 
-        console.log("fullContent" +fullContent)
+        console.log("fullContent" + fullContent)
 
         if (fullContent.length > 200) {
             shortReview.innerText = fullContent.substring(0, 200) + '...';
