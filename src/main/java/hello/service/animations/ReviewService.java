@@ -67,6 +67,7 @@ public class ReviewService {
         review.setSpoiler(aniReviewDTO.getIsSpoiler());
 
         user.setReviewCount(currentReviewCount + 1);
+        userRepository.save(user);
         reviewRepository.save(review);
 
         Boolean existReview = animation.getExistReview();
@@ -79,6 +80,7 @@ public class ReviewService {
             expService.increaseExp(user, 25, session);
             animation.setExistReview(true);
             user.setHasReview(true);
+            userRepository.save(user);
             return;
         }
 
@@ -88,6 +90,7 @@ public class ReviewService {
             pointService.increasePoint(user, 20);
             expService.increaseExp(user, 15, session);
             user.setHasReview(true);
+            userRepository.save(user);
             return;
         }
 
@@ -97,6 +100,7 @@ public class ReviewService {
             pointService.increasePoint(user, 10);
             expService.increaseExp(user, 10, session);
             animation.setExistReview(true);
+            userRepository.save(user);
             return;
         }
 

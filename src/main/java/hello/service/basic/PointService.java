@@ -14,7 +14,6 @@ public class PointService {
     private final UserRepository userRepository;
 
     public void increasePoint(User user, int point) {
-        System.out.println("increase point : " + point);
         int result = user.getPoint() + point;
         user.setPoint(result);
         userRepository.save(user);
