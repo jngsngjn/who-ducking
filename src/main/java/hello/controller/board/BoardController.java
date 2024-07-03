@@ -61,7 +61,7 @@ public class BoardController {
             model.addAttribute("isAuthenticated", true);
         }
 
-        return "/board/freeBoardWriteDate";
+        return "/board/recentFreeBoard";
     }
 
     @GetMapping("/viewCount")
@@ -85,7 +85,7 @@ public class BoardController {
             model.addAttribute("isAuthenticated", true);
         }
 
-        return "/board/freeBoardViewCount";
+        return "/board/viewCountFreeBoard";
     }
 
     //freeBoard -> 작성 폼을 띄워주는 역할

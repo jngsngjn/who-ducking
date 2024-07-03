@@ -29,6 +29,7 @@
     <script type="text/javascript" src="/js/common.js"></script>
     <script type="text/javascript" src="/js/search/searchAll.js"></script>
 </head>
+
 <body>
     <!-- Header -->
     <div th:insert="~{fragments/header :: header}"></div>
@@ -143,8 +144,8 @@
 
                             <!-- Data Empty -->
                             <div class="searchAll_freeBoard_list_data_empty" th:if="${boards.isEmpty()}">
-                                                <span class="searchAll_freeBoard_list_data_empty_text">검색한 게시글 결과가
-                                                      없습니다.</span>
+                                                    <span class="searchAll_freeBoard_list_data_empty_text">검색한 게시글 결과가
+                                                          없습니다.</span>
                             </div>
 
                             <!-- Data Exist -->
@@ -159,8 +160,8 @@
                                         </li>
                                     </a>
                                     <li class="searchAll_freeBoard_list_info">
-                                                            <span class="searchAll_freeBoard_list_content search_result_content"
-                                                                  th:text="${board.content}">게시글 내용</span>
+                                                                <span class="searchAll_freeBoard_list_content search_result_content"
+                                                                      th:text="${board.content}">게시글 내용</span>
                                         <button class="searchAll_more_content_btn"
                                                 style="display: none;">더보기</button>
                                     </li>
@@ -185,8 +186,8 @@
 
                             <!-- Data Empty -->
                             <div class="searchAll_announcement_list_data_empty" th:if="${announcements.isEmpty()}">
-                                <span class="searchAll_announcement_list_data_empty_text">검색한 공지사항 결과가
-                                                      없습니다.</span>
+                                    <span class="searchAll_announcement_list_data_empty_text">검색한 공지사항 결과가
+                                                          없습니다.</span>
                             </div>
 
                             <!-- Data Exist -->
@@ -201,8 +202,8 @@
                                         </li>
                                     </a>
                                     <li class="searchAll_announcement_list_info">
-            <span class="searchAll_announcement_list_content search_result_content"
-                  th:text="${announcement.content}">공지사항 내용</span>
+                <span class="searchAll_announcement_list_content search_result_content"
+                      th:text="${announcement.content}">공지사항 내용</span>
                                         <button class="searchAll_more_content_btn"
                                                 style="display: none;">더보기</button>
                                     </li>

@@ -40,6 +40,7 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .board-container-title {
@@ -56,6 +57,7 @@
     width: 100%;
     max-width: 1400px;
     margin: 30px auto;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .board-title-line span {
@@ -81,6 +83,7 @@
     transform: translateX(-50%);
     white-space: nowrap;
     max-width: 100%;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .board-menu-toggle {
@@ -97,6 +100,7 @@
 .board-author {
     font-size: 20px;
     margin-right: 10px;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .board-author-bottom {
@@ -358,6 +362,7 @@
     font-size: 20px;
     font-weight: 400;
     resize: none;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .char-counter {
@@ -406,6 +411,7 @@
     padding: 10px 20px;
     margin-bottom: 10px;
     position: relative;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 .comment-content {

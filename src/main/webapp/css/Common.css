@@ -1,7 +1,7 @@
 /* Fonts ===============================================*/
 /* 폰트 추가 예정 */
 @import url("https://webfontworld.github.io/SCoreDream/SCoreDream.css");
-
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap");
 /* Normalize ===============================================*/
 @import url(./setting/Reset.css);
 @import url(./setting/Base.css);
@@ -36,13 +36,15 @@
 @import url(./search/SearchAni.css);
 @import url(./search/SearchFreeBoard.css);
 @import url(./search/SearchAnnouncement.css);
+@import url(./review/ReviewBoard.css);
+@import url(./review/ReviewWrite.css);
+@import url(./board/RecentFreeBoard.css);
+@import url(./board/ViewCountFreeBoard.css);
 
-@import url(./board/boardList.css);
 @import url(./board/CreateAndEdit.css);
 @import url(./board/Show.css);
 @import url(./board/EditBoard.css);
-@import url(./review/ReviewBoard.css);
-@import url(./review/ReviewWrite.css);
+
 
 /* MEDIA QUERY START ===============================================*/
 @media screen and (max-width: 1200px) {
