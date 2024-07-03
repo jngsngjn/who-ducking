@@ -104,21 +104,19 @@ function formValidate() {
 
     if (!title) {
         swal({
-            title: "제목을 입력해 주세요.",
-            buttons: "확인",
+            text: "제목을 입력해 주세요.",
+            icon: "warning",
+            button: "확인",
         });
         return false;
     }
     if (!content) {
         swal({
-            title: "내용을 입력해 주세요.",
-            buttons: "확인",
+            text: "내용을 입력해 주세요.",
+            icon: "warning",
+            button: "확인",
         });
         return false;
     }
     return true;
-}
-
-function goBack() {
-    window.history.back();
 }
