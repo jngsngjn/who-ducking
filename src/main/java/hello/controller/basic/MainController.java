@@ -1,5 +1,6 @@
 package hello.controller.basic;
 
+import hello.dto.animation.AnimationMainDTO;
 import hello.dto.board.BoardListMainDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
@@ -72,6 +73,12 @@ public class MainController {
         }).collect(Collectors.toList());
 
         model.addAttribute("boardListToMain", boardDtoList);
+
+
+        List<AnimationMainDTO> animationMain = animationService.getAnimationMain();
+        for (AnimationMainDTO animationMainDTO : animationMain) {
+            System.out.println("animationMainDTO = " + animationMainDTO);
+        }
 
         return "index";
     }

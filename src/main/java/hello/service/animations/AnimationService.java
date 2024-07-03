@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -77,8 +78,19 @@ public class AnimationService {
         return animationRepository.findReviewLikesByAnimationId(animationId);
     }
 
-    // 메인페이지 애니 별점순 10개
-    public List<GetAniListDTO> getTop10AnimationsWithReviewData() {
-        return animationRepository.findTopScoreAnimations();
+    public List<AnimationMainDTO> getAnimationMain() {
+        List<AnimationMainDTO> animationMain = animationRepository.findAnimationMain();
+
+        for (AnimationMainDTO animationMainDTO : animationMain) {
+            Animation animation = animationRepository.findById(animationMainDTO.getId()).orElse(null);
+            if (animation != null) {
+                double reviewScore = reviewRepository.findReviewScore(animation);
+                animationMainDTO.setScore(reviewScore);
+            }
+        }
+        return animationMain.stream()
+                .sorted((dto1, dto2) -> Double.compare(dto2.getScore(), dto1.getScore())) // 스코어 내림차순 정렬
+                .limit(10) // 상위 10개만 추출
+                .collect(Collectors.toList());
     }
 }
