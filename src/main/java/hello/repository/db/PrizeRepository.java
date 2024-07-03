@@ -2,6 +2,7 @@ package hello.repository.db;
 
 import hello.dto.admin.AdminPrizeListDTO;
 import hello.dto.admin.PrizeDrawDTO;
+import hello.dto.main.PrizeMainDTO;
 import hello.dto.playground.prize.PrizeBasicDTO;
 import hello.dto.playground.prize.PrizeOneDTO;
 import hello.entity.prize.Prize;
@@ -44,4 +45,9 @@ public interface PrizeRepository extends JpaRepository<Prize, Long> {
 
     @Query(value = "SELECT * FROM prize WHERE end_date > CURRENT_DATE AND id != :prizeId ORDER BY RAND() LIMIT 6", nativeQuery = true)
     List<Prize> findRandomPrizes(@Param("prizeId") Long prizeId);
+
+    @Query("SELECT new hello.dto.main.PrizeMainDTO(p.id, p.name, p.imageName) " +
+            "FROM Prize p " +
+            "ORDER BY p.grade DESC")
+    List<PrizeMainDTO> findTopPrizes(Pageable pageable);
 }

@@ -1,23 +1,18 @@
 package hello.service.animations;
 
-import hello.dto.animation.AnimationMainDTO;
 import hello.dto.animation.GetAniListDTO;
 import hello.dto.animation.ReviewLikeDTO;
 import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.repository.db.AnimationRepository;
-import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,9 +21,6 @@ public class AnimationService {
 
     private final AnimationRepository animationRepository;
     private final ReviewRepository reviewRepository;
-
-    private static final Logger logger = LoggerFactory.getLogger(AnimationService.class);
-    private final ReviewLikeRepository reviewLikeRepository;
 
     // 모든 애니 get
     public List<GetAniListDTO> getAllAnimationWithReviewData() {
@@ -51,19 +43,6 @@ public class AnimationService {
         return animationRepository.findAnimationDetailsById(id);
     }
 
-    // 리뷰 정보 get
-    public List<Review> getReviewsByAnimationId(Long id) {
-        logger.info("리뷰 최신순으로 받아오기 서비스 로직 실행");
-        try {
-            List<Review> reviews = reviewRepository.findRecentReviewsByAnimationId(id);
-            logger.info("가져온 리뷰 수: {}", reviews.size());
-            return reviews;
-        } catch (Exception e) {
-            logger.error("리뷰 최신순으로 받아오기 중 에러 발생: {}", e.getMessage(), e);
-            throw e;
-        }
-    }
-
     // 최신순으로 정렬된 리뷰 get
     public List<Review> getRecentReviewsByAnimationId(Long animationId) {
         return reviewRepository.findRecentReviewsByAnimationId(animationId);
@@ -77,21 +56,5 @@ public class AnimationService {
     // 좋아요 여부 확인
     public List<ReviewLikeDTO> getReviewLikesByAnimationId(Long animationId) {
         return animationRepository.findReviewLikesByAnimationId(animationId);
-    }
-
-    public List<AnimationMainDTO> getAnimationMain() {
-        List<AnimationMainDTO> animationMain = animationRepository.findAnimationMain();
-
-        for (AnimationMainDTO animationMainDTO : animationMain) {
-            Animation animation = animationRepository.findById(animationMainDTO.getId()).orElse(null);
-            if (animation != null) {
-                double reviewScore = reviewRepository.findReviewScore(animation);
-                animationMainDTO.setScore(reviewScore);
-            }
-        }
-        return animationMain.stream()
-                .sorted((dto1, dto2) -> Double.compare(dto2.getScore(), dto1.getScore())) // 스코어 내림차순 정렬
-                .limit(10) // 상위 10개만 추출
-                .collect(Collectors.toList());
     }
 }

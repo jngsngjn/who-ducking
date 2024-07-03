@@ -1,7 +1,9 @@
 package hello.controller.basic;
 
 import hello.dto.board.BoardListMainDTO;
-import hello.dto.main.MainDTO;
+import hello.dto.main.LastedAnimationsDTO;
+import hello.dto.main.PrizeMainDTO;
+import hello.dto.main.RankedAnimationsDTO;
 import hello.dto.user.CustomOAuth2User;
 import hello.entity.board.Board;
 import hello.entity.user.ProfileImage;
@@ -61,9 +63,8 @@ public class MainController {
         }
 
         // 인기순 애니 10개 가져오기
-        List<AnimationMainDTO> top10Animations=  animationService.getAnimationMain();
+        List<RankedAnimationsDTO> top10Animations = mainService.getRankedAnimations();
         model.addAttribute("top10Animations", top10Animations);
-
 
         // 최신 게시글 5개 가져오기
         List<Board> boardList = boardService.getBoardsSortedByWriteDateToMain();
@@ -74,13 +75,18 @@ public class MainController {
             return new BoardListMainDTO(board, commentCount);
         }).collect(Collectors.toList());
 
+        // 럭키드로우 3개 가져오기 (등급 높은 순)
+        List<PrizeMainDTO> prizes = mainService.getTop3Prizes();
+        model.addAttribute("prizes", prizes);
+
         model.addAttribute("boardListToMain", boardDtoList);
         return "index";
     }
 
+    // 최신 업데이트 애니 목록
     @ResponseBody
     @GetMapping("/api/animations")
-    public List<MainDTO> getAnimations() {
-        return mainService.getMainAnimations();
+    public List<LastedAnimationsDTO> getAnimations() {
+        return mainService.getLastedAnimations();
     }
 }
