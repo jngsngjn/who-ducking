@@ -258,6 +258,23 @@
     cursor:pointer;
 }
 
+.attendanceCheck_item_row_long {
+    display: block;
+}
+
+.attendanceCheck_item_row_long {
+    display: none;
+}
+
+.long-attendance-banner-image{
+    width:100%;
+    max-width: 94rem;
+    /*margin-top: 4rem;*/
+    height: 13rem;
+    /*margin-left: 3rem;*/
+    border-radius: 2rem;
+}
+
 /* Main Second Section ======================================= */
 .mainSecondSection {
     padding-top: 13rem;
@@ -661,6 +678,87 @@
     .mv-cnt__title {
         font-size: 3.6rem;
     }
+
+
+    /* 스트리밍 서비스 부분 */
+    .mainFirstSection{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .streamingService_lists{
+        width: 100%;
+        max-width: none;
+        height: 12rem;
+        padding: 1rem;
+        line-height: 7.5rem;
+    }
+
+    .streamingService_list {
+        display: flex;
+        flex-direction: column;
+        max-width: none;
+        width: 97%;
+        height: 9rem;
+        overflow: hidden;
+    }
+
+    .streamingService_items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .streamingService_items > :nth-child(1) {
+        display: none;
+    }
+
+
+    .streamingService_items .streamingService_item:not(:first-child) {
+        display: flex;
+    }
+
+/* 출석 배너 관련 */
+
+    .attendanceCheck_item {
+        display: none;
+    }
+
+    .attendanceCheck_item_row_long {
+        display: block;
+    }
+
+    .attendanceCheck_box_long{
+        width: 100%;
+        padding:5rem;
+    }
+
+    .long-attendance-banner-image {
+        width: 100%;
+    }
+
+/*  fourth section  */
+    .mainFourthSection_title{
+        flex-direction: column;
+        margin: 0;
+        position:relative;
+        gap:60.5rem;
+    }
+
+    .mainFourthSection_luckydraw_box{
+        position:absolute;
+        top:13%;
+        width: 570px;
+        height:527px;
+        margin-right:15%;
+    }
+
+    .mainFourthSection_freeboard_box{
+        transform: none;
+        width: 570px;
+        height:527px;
+    }
+
 }
 
 @media screen and (max-width: 768px) {

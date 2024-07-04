@@ -147,7 +147,7 @@
 }
 
 .go-to-request{
-  background-color: var(--mainColor);;
+  background-color: var(--mainColor);
   color: white;
   font-weight: bold;
   padding:1rem;
@@ -168,21 +168,6 @@
 
 }
 
-.ani-info-container {
-  width: 17.4rem;
-  height: 28.063rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  box-sizing: border-box;
-  margin: 0;
-  position:relative;
-  overflow: hidden;
-  border: 2px solid transparent;
-  border-radius: 2.1rem;
-}
-
 .ani-list-title-container{
   background-color: #FFFFFF;
   width:100%;
@@ -193,6 +178,7 @@
   bottom: -5rem;
   line-height: 4rem;
   transition: bottom 0.3s ease;
+  padding:0 1rem;
 }
 
 .ani-info-container:hover .ani-list-title-container {
@@ -206,14 +192,32 @@
   justify-content: space-between;
 }
 
+@keyframes blink {
+  40% {
+    opacity: 0.7;
+    border-color: var(--mainColor);
+  }
+  80% {
+    opacity: 1;
+    border-color: transparent;
+  }
+}
+
 .ani-info-container {
   width: 18.75rem;
   height: 29.063rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  box-sizing: border-box;
+  margin: 0;
+  position:relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 2.1rem;
 }
+
+.ani-info-container:hover{
+  animation: blink 2s infinite;
+}
+
 
 .img-container {
   border-radius: 1.1rem;

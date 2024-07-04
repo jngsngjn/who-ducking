@@ -1,11 +1,7 @@
-/*@keyframes fadeInOut {*/
-/*    0% {*/
-/*        opacity: 0;*/
-/*    }*/
-/*    100% {*/
-/*        opacity: 1;*/
-/*    }*/
-/*}*/
+.short-content{
+    width: 95%;
+    word-break: break-all;
+}
 
 .review-body {
     width: 87.5rem; /* 1400px */
