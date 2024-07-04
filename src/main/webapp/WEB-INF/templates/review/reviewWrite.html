@@ -44,7 +44,9 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div id="modalContainer"></div>
 <div class="review-body">
-  <h1 class="page-title">리뷰 게시판</h1>
+    <h1 class="page-title">
+        <a href="/animations"class="page-title" >리뷰 게시판</a>
+    </h1>
   <div class="ani-container">
     <img th:src="@{/image/ani/{imageName}(imageName=${aniDetailInfo.imageName})}" alt="애니 포스터" class="ani-img" />
     <input type="hidden" id="animation-id" th:value="${aniDetailInfo.id}"/>
