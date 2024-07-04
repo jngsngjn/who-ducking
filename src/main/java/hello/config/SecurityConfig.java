@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .requestMatchers("/", "/oauth2/**", "/login", "/register/**").permitAll()
                 .requestMatchers("/announcement", "/faq").permitAll()
                 .requestMatchers("/popup-store", "/api/popup-stores").permitAll()
-                .requestMatchers("/playground").permitAll()
+                .requestMatchers("/playground", "/playground/lucky-draw").permitAll()
                 .requestMatchers("/animations", "/animations/*").permitAll()
                 .requestMatchers("/update-header", "/update-alarm").permitAll()
                 .requestMatchers("/check-levelUp-session").permitAll()

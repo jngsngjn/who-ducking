@@ -51,7 +51,7 @@
             <!-- LuckyDraw Title -->
             <div class="playground_luckyDraw_title_box">
                 <h3 class="playground_luckyDraw_title">WHO's DUCK 럭키 드로우</h3>
-                <a href="/playground/lucky-draw" class="playground_luckyDraw_more_btn" th:if="${isAuthenticated}">
+                <a href="/playground/lucky-draw" class="playground_luckyDraw_more_btn">
                     더보기
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -170,16 +170,6 @@
                     return false;
                 }
                  return true;
-            });
-        });
-
-        // 응모하기 버튼 클릭 이벤트
-        document.querySelectorAll('.entry-link').forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                if (!isAuthenticated) {
-                    event.preventDefault();
-                    swal('로그인 후 이용해 주세요.');
-                }
             });
         });
     });

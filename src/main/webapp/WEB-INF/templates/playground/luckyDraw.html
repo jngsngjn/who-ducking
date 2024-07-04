@@ -245,5 +245,25 @@
 
     <!-- Footer -->
     <div th:insert="~{fragments/footer :: footer}"></div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAuthenticated = /*[[${isAuthenticated}]]*/ false;
+
+            // 배너 링크 클릭 이벤트
+            document.querySelectorAll('.luckyDraw_item_btn').forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    if (!isAuthenticated) {
+                        event.preventDefault();
+                        swal('로그인 후 이용해 주세요.');
+                        return false;
+                    }
+                    return true;
+                });
+            });
+        });
+        /*]]>*/
+    </script>
 </body>
 </html>
