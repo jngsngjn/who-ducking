@@ -741,6 +741,7 @@
         flex-direction: column;
         margin: 0;
         position:relative;
+        gap:60.5rem;
     }
 
     .mainFourthSection_luckydraw_box{
