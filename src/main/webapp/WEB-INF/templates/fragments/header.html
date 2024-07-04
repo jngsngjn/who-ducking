@@ -226,10 +226,7 @@
                                 <li>
                                     <a href="/playground">놀이터</a>
                                 </li>
-                            </ul>
-                            <!-- Before Login Menu -->
-                            <ul class="h-mobile_sign" sec:authorize="!isAuthenticated()">
-                                <li>
+                                <li sec:authorize="!isAuthenticated()">
                                     <a class="nav-link" href="/login">로그인</a>
                                 </li>
                             </ul>
