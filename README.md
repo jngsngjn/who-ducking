@@ -12,6 +12,9 @@
 - HTML
 - CSS
 - JavaScript
+- Figma
+- jQuery
+- AJAX
 
 ### ✅ Back-end
 - Java
