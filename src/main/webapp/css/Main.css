@@ -700,6 +700,7 @@
         max-width: none;
         width: 97%;
         height: 9rem;
+        overflow: hidden;
     }
 
     .streamingService_items {
