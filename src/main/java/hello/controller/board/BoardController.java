@@ -103,7 +103,7 @@ public class BoardController {
     @GetMapping("/new")
     public String showCreateBoard(Model model) {
         model.addAttribute("board", new BoardDTO());
-        return "board/create";
+        return "/board/writeFreeBoard";
     }
 
     //작성된 폼을 가지고 새로운 게시글 작성
@@ -171,7 +171,7 @@ public class BoardController {
             return "redirect:/board";
         }
         model.addAttribute("board", board);
-        return "board/edit";
+        return "/board/editFreeBoard";
     }
 
     //게시글 수정 동작

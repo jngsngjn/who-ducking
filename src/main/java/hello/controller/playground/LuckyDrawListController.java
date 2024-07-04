@@ -1,8 +1,10 @@
 package hello.controller.playground;
 
 import hello.dto.playground.prize.PrizeBasicDTO;
+import hello.dto.user.CustomOAuth2User;
 import hello.service.playground.PrizeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,8 @@ public class LuckyDrawListController {
 
     @GetMapping("/playground/lucky-draw")
     public String luckyDraw(Model model,
-                            @RequestParam(name = "page", defaultValue = "0") int page,
-                            @RequestParam(name = "type", defaultValue = "UR") String type) {
+                            @RequestParam(name = "type", defaultValue = "UR") String type,
+                            @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
 
         List<PrizeBasicDTO> ur = prizeService.getPrizePage(UR);
         List<PrizeBasicDTO> sr = prizeService.getPrizePage(SR);
@@ -33,6 +35,7 @@ public class LuckyDrawListController {
         model.addAttribute("r", r);
         model.addAttribute("n", n);
         model.addAttribute("currentType", type);
+        model.addAttribute("isAuthenticated", oAuth2User != null);
 
         return "playground/luckyDraw";
     }

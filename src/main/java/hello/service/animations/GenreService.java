@@ -2,22 +2,18 @@ package hello.service.animations;
 
 import hello.entity.genre.Genre;
 import hello.repository.db.GenreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GenreService {
 
     private final GenreRepository genreRepository;
 
-    @Autowired
-    public GenreService(GenreRepository genreRepository) {
-        this.genreRepository = genreRepository;
-    }
-
     public List<Genre> getAllGenres() {
-        return genreRepository.findAll();
+        return genreRepository.findAllByOrderById();
     }
 }

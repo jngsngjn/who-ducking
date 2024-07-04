@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/board/editFreeBoard.js"></script>
+    <!--swal-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <<!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="editFreeBoard_title_box">
+                    <h2 class="subTitle">게시판 수정</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="editFreeBoard_box">
+                    <form th:action="@{/board/{boardId}/edit(boardId=${board.id})}" th:object="${board}"
+                          method="post" enctype="multipart/form-data" onsubmit="return formValidate()">
+                        <!-- Using Image -->
+                        <input type="hidden" id="useExistingImage" name="useExistingImage" value="true" />
+
+                        <!-- 1. Image Box -->
+                        <div class="editFreeBoard_img_box">
+                            <h3 class="editFreeBoard_img_title">사진 첨부</h3>
+                            <div class="editFreeBoard_img_container">
+                                <img id="edit-imagePreview" class="editFreeBoard_img"
+                                     th:src="${board.imageName != null ? '/image/board/' + board.imageName : ''}"
+                                     style="display:none;">
+                                <button type="button" class="editFreeBoard_img_delete_btn"
+                                        style="display: none;" onclick="editRemoveImage()">삭제</button>
+                            </div>
+                            <input type="file" id="edit-file" name="file" accept="image/*"
+                                   class="editFreeBoard_img_input" />
+                            <button type="button" class="editFreeBoard_img_input_btn"
+                                    onclick="document.getElementById('edit-file').click()">사진 추가</button>
+                        </div>
+
+                        <!-- 2. Input Box -->
+                        <div class="editFreeBoard_form_cnt">
+                            <!-- Title -->
+                            <div class="editFreeBoard_input_box">
+                                <label for="edit-title">제목</label>
+                                <input type="text" id="edit-title" class="editFreeBoard_title_input_box"
+                                       name="title" th:field="*{title}" placeholder="제목을 입력하세요"
+                                       maxlength="30">
+                            </div>
+                            <span id="title_count" class="editFreeBoard_title_count">0 / 30</span>
+
+                            <!-- Content -->
+                            <div class="editFreeBoard_input_box">
+                                <label for="edit-content">내용</label>
+                                <textarea id="edit-content" class="editFreeBoard_content_input_box"
+                                          name="content" th:field="*{content}" placeholder="내용을 입력하세요"
+                                          maxlength="500"></textarea>
+                            </div>
+                            <span id="textarea_count" class="editFreeBoard_textarea_count">0 / 500</span>
+                        </div>
+
+                        <!-- 3. Button Box -->
+                        <div class="editFreeBoard_button_box">
+                            <button type="submit" class="editFreeBoard_edit_btn">수정</button>
+                            <button type="button" class="editFreeBoard_cancel_btn"
+                                    onclick="window.history.back()">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -19,7 +19,6 @@ Promise.all([
     loadScript("/js/basic/registerGenre.js"),
     loadScript("/js/board/freeBoard.js"),   /* index.html, recentFreeBoard.html, viewCountFreeBoard.html */
 
-    loadScript("/js/board/boardWritePage.js"),
     loadScript("/js/board/showPage.js"),
 
 ])

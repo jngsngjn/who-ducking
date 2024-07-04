@@ -49,56 +49,94 @@
         <section class="luckyDraw">
             <div class="inner_box" data-aos="fade-up">
 
-                <!-- 1. Main Carousel -->
-                <div class="mv-cnt__luckyDraw swiper">
+                <!-- 2. Main Carousel -->
+                <div class="mv-cnt swiper">
                     <ul class="mv-cnt__items swiper-wrapper">
                         <li class="swiper-slide">
                             <div class="mv-cnt__img-box">
-                                                    <span class="mv-cnt__img"
-                                                          style="background-image: url(/images/MainCarousel/MainVisual.png);"></span>
+                                          <span class="mv-cnt__img"
+                                                style="background-image: url(/images/banner/banner_1.png);"></span>
                             </div>
                             <div class="mv-cnt__text">
+
                                 <p class="mv-cnt__desc">
-                                    리뷰와 럭키드로우를 한번에?!
+                                    전 시즌 완결 심장을 바쳐라!
                                 </p>
                                 <h2 class="mv-cnt__title">
                                     진격의 거인
                                 </h2>
-                                <a href="#none" class="mv-cnt__link">
+                                <a href="/animations" class="mv-cnt__link">
+                                    바로가기
+                                </a>
+
+                            </div>
+                        </li>
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                          <span class="mv-cnt__img"
+                                                style="background-image: url(/images/banner/banner_2.png);"></span>
+                            </div>
+                            <div class="mv-cnt__text">
+
+                                <p class="mv-cnt__desc">
+                                    주 합동 강화 훈련 개시
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    귀멸의 칼날
+                                </h2>
+                                <a href="/animations" class="mv-cnt__link">
+                                    바로가기
+                                </a>
+
+                            </div>
+                        </li>
+                        <li class="swiper-slide">
+                            <div class="mv-cnt__img-box">
+                                          <span class="mv-cnt__img"
+                                                style="background-image: url(/images/banner/banner_3.png);"></span>
+                            </div>
+                            <div class="mv-cnt__text">
+                                <p class="mv-cnt__desc">
+                                    후덕쿤 심심하다면?
+                                </p>
+                                <h2 class="mv-cnt__title">
+                                    놀이터
+                                </h2>
+                                <a href="/playground" class="mv-cnt__link">
                                     바로가기
                                 </a>
                             </div>
                         </li>
                         <li class="swiper-slide">
                             <div class="mv-cnt__img-box">
-                                                    <span class="mv-cnt__img"
-                                                          style="background-image: url(/images/MainCarousel/MainVisual2.png);"></span>
+                                          <span class="mv-cnt__img"
+                                                style="background-image: url(/images/banner/banner_4.png);"></span>
                             </div>
                             <div class="mv-cnt__text">
                                 <p class="mv-cnt__desc">
-                                    머구와 함께하는 지구 지키기 프로젝트
+                                    6/27-7/3 더 현대 서울
                                 </p>
                                 <h2 class="mv-cnt__title">
-                                    머구를 통해 환경을 지켜봐요!
+                                    주술회전 팝업스토어
                                 </h2>
-                                <a href="#none" class="mv-cnt__link">
+                                <a href="/popup-store" class="mv-cnt__link">
                                     바로가기
                                 </a>
                             </div>
                         </li>
                         <li class="swiper-slide">
                             <div class="mv-cnt__img-box">
-                                                    <span class="mv-cnt__img"
-                                                          style="background-image: url(/images/MainCarousel/MainVisual3.png);"></span>
+                                          <span class="mv-cnt__img"
+                                                style="background-image: url(/images/banner/banner_5.png);"></span>
                             </div>
                             <div class="mv-cnt__text">
                                 <p class="mv-cnt__desc">
-                                    머구와 함께하는 지구 지키기 프로젝트
+                                    진격의 거인 완결기념
                                 </p>
                                 <h2 class="mv-cnt__title">
-                                    머구를 통해 환경을 지켜봐요!
+                                    UR 럭키드로우 진행중
                                 </h2>
-                                <a href="#none" class="mv-cnt__link">
+                                <a href="/playground/lucky-draw" class="mv-cnt__link">
                                     바로가기
                                 </a>
                             </div>
@@ -108,8 +146,8 @@
                     <div class="swiper-pagination"></div>
 
                     <!-- Navigation -->
-                    <div class="swiper-button-next swiper-next_btn"></div>
-                    <div class="swiper-button-prev swiper-prev_btn"></div>
+                    <div class="swiper-button-next mainFirstSection_swiper-next_btn"></div>
+                    <div class="swiper-button-prev mainFirstSection_swiper-prev_btn"></div>
                 </div>
 
                 <!-- 2. Lucky Draw Tab -->
@@ -245,5 +283,25 @@
 
     <!-- Footer -->
     <div th:insert="~{fragments/footer :: footer}"></div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAuthenticated = /*[[${isAuthenticated}]]*/ false;
+
+            // 배너 링크 클릭 이벤트
+            document.querySelectorAll('.luckyDraw_item_btn').forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    if (!isAuthenticated) {
+                        event.preventDefault();
+                        swal('로그인 후 이용해 주세요.');
+                        return false;
+                    }
+                    return true;
+                });
+            });
+        });
+        /*]]>*/
+    </script>
 </body>
 </html>

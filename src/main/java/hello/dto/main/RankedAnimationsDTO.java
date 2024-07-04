@@ -1,15 +1,15 @@
-package hello.dto.animation;
+package hello.dto.main;
 
 import lombok.Data;
 
 @Data
-public class AnimationMainDTO {
+public class RankedAnimationsDTO {
 
     private Long id;
     private String imageName;
     private double score;
 
-    public AnimationMainDTO(Long id, String imageName) {
+    public RankedAnimationsDTO(Long id, String imageName) {
         this.id = id;
         this.imageName = imageName;
     }
