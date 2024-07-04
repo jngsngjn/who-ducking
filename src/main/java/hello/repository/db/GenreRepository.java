@@ -8,4 +8,6 @@ import java.util.List;
 public interface GenreRepository extends JpaRepository<Genre, Long> {
 
     List<Genre> findByNameIn(List<String> names);
+
+    List<Genre> findAllByOrderById();
 }
