@@ -10,15 +10,15 @@
   <img src="src/main/webapp/images/readme/read_me_duck.png" alt="logo">
 </div>
 
-#### ✅ 기간 : 2024-06-03 ~ 2024-07-05
+#### ✅ Duration : 2024-06-03 ~ 2024-07-05
 
-##### ✅ 프론트엔드
+##### ✅ Front-end
 - HTML
 - CSS
 - JavaScript
 
 
-##### ✅ 백엔드
+##### ✅ Back-end
 - Java
 - Spring MVC
 - Thymeleaf
@@ -26,39 +26,33 @@
 - MySQL
 - Spring Security
 
-##### ✅ 기술 환경
+##### ✅ Development Environment
 - IDE : IntelliJ IDEA Ultimate, Visual Studio Code
 - Build : Gradle
 - WAS : Tomcat
 
-##### ✅ 팀원 소개
+##### ✅ Team Introduction
 
-**[팀원1](https://github.com/team-member-1)**
-- 역할: 프론트엔드 개발자
-- 소개: HTML, CSS, JavaScript 전문가
-- 연락처: team1@example.com
+**[정성진](https://github.com/jngsngjn)**
+- 역할: 팀장, 버전 관리, Back-end 총괄
+- 소개: 젤다의 전설과 하스스톤, 그리고 GLOCK 19를 좋아합니다.
 
-**[팀원2](https://github.com/team-member-2)**
-- 역할: 백엔드 개발자
-- 소개: Java와 Spring Framework에 능숙
-- 연락처: team2@example.com
+**[노승빈](https://github.com/SeungBeenNoh)**
+- 역할: Front-end 총괄
+- 소개: 
 
-**[팀원3](https://github.com/team-member-3)**
-- 역할: 데이터베이스 관리자
-- 소개: MySQL 및 데이터 모델링 전문가
-- 연락처: team3@example.com
+**[김수정](https://github.com/Kimsu10)**
+- 역할: Back-end + Front-end 보조
+- 소개: 
 
-**[팀원4](https://github.com/team-member-4)**
-- 역할: DevOps 엔지니어
-- 소개: CI/CD 및 서버 관리
-- 연락처: team4@example.com
+**[김승민](https://github.com/Booreung)**
+- 역할: Back-end + Front-end 보조
+- 소개: 
 
-**[팀원5](https://github.com/team-member-5)**
-- 역할: UI/UX 디자이너
-- 소개: 사용자 경험 디자인 및 인터페이스 설계
-- 연락처: team5@example.com
+**[서준명](https://github.com/astroboy5)**
+- 역할: Front-end
+- 소개: 
 
-**[팀원6](https://github.com/team-member-6)**
-- 역할: 프로젝트 매니저
-- 소개: 프로젝트 계획 및 일정 관리
-- 연락처: team6@example.com
+**[안성민](https://github.com/Anseongmin5739)**
+- 역할: Front-end
+- 소개: 
