@@ -91,8 +91,7 @@
                             <div class="showFreeBoard_top_writerInfo_date_box">
                                 <i class="fa-solid fa-calendar-days"></i>
                                 <span class="showFreeBoard_top_writerInfo_date"
-                                      th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd HH:mm')}">2024-07-10
-                                                          09:24</span>
+                                      th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd HH:mm')}"></span>
                             </div>
                             <!-- View Count -->
                             <div class="showFreeBoard_top_writerInfo_view_box">
@@ -153,7 +152,7 @@
                             <div class="showFreeBoard_comment_userNickname_box">
                                 <i class="fa-solid fa-user"></i>
                                 <span class="showFreeBoard_comment_userNickname"
-                                      th:text="${nickname}">유뎡공듀</span>
+                                      th:text="${nickname}"></span>
                             </div>
                             <!-- 2-2. Comment Textarea -->
                             <div class="showFreeBoard_comment_textarea_box">
@@ -189,7 +188,7 @@
                                              alt="Level Image" />
                                         <!-- User Nickname -->
                                         <span class="showFreeBoard_comment_list_item_top_nickname"
-                                              th:text="${comment.user.nickname}">유뎡공듀</span>
+                                              th:text="${comment.user.nickname}"></span>
                                     </div>
                                     <div class="showFreeBoard_comment_list_item_top_box_right">
                                         <!-- Toggle Button -->
