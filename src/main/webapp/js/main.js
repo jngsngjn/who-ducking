@@ -3,7 +3,7 @@ $(document).ready(function () {
         document.documentElement.style.setProperty("--slide-duration", `${duration}s`);
     }
 
-    setSlideDuration(100); // 100초 설정
+    setSlideDuration(600); // 100초 설정
 
     function cloneImages() {
         const container = $(".mainThirdSection_update_slider_container");
