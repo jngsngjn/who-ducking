@@ -4,6 +4,8 @@
   <img src="src/main/webapp/images/readme/read_me_duck.PNG" alt="logo">
 </div>
 
+---
+
 ### ✅ Duration : 2024-06-03 ~ 2024-07-05
 
 ### ✅ Front-end
