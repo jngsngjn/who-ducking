@@ -1,7 +1,7 @@
 <div style="text-align: center">
   <h1>Who's Ducking</h1>
   <h3>✨일본 애니메이션을 좋아하는 사람들을 위한 웹 커뮤니티 사이트✨</h3>
-  <img src="src/main/webapp/images/readme/read_me_duck.png" alt="logo">
+  <img src="src/main/webapp/images/readme/read_me_duck.PNG" alt="logo">
 </div>
 
 #### ✅ Duration : 2024-06-03 ~ 2024-07-05
