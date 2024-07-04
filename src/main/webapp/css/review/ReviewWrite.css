@@ -580,19 +580,20 @@ hr {
     background-position: center;
     background-attachment: fixed;
 }
+/*체크박스*/
 .genre-list {
   opacity: 0;
   position: absolute;
 }
 
 .genre-list,
-.register_terms_check_label {
+.genre_terms_check_label {
   display: inline-block;
   cursor: pointer;
   font-size: 1.6rem;
 }
 
-.genre-list + .register_terms_check_label:before {
+.genre-list + .genre_terms_check_label:before {
   content: "";
   background: #fff;
   border-radius: 0.5rem;
@@ -606,7 +607,7 @@ hr {
   text-align: center;
 }
 
-.genre-list:checked + .register_terms_check_label:before {
+.genre-list:checked + .genre_terms_check_label:before {
   content: "";
   display: inline-block;
   width: 1px;
@@ -618,6 +619,9 @@ hr {
   -ms-transform: rotate(45deg);
   border-radius: 0px;
   margin: 0px 1rem 0.7rem 0.5rem;
+}
+.genre-list:checked + .genre_terms_check_label {
+  color: var(--mainColor);
 }
 /********************* 반응형 ************************/
 /* 반응형 레이아웃 */

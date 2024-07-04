@@ -78,7 +78,7 @@
                 <div class="genre-list-container">
                     <label th:each="genre: ${genreLists}" class="genre-title-list">
                         <input type="checkbox" class="genre-list register_terms_check_box" th:id="'genre-' + ${genre.id}" onclick="checkGenre(this)"/>
-                        <span class="register_terms_check_label" th:text="${genre.name}"></span>
+                        <span class="genre_terms_check_label" th:text="${genre.name}"></span>
                     </label>
                 </div>
               </div>
