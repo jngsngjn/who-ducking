@@ -7,6 +7,11 @@
 /*    }*/
 /*}*/
 
+.short-content{
+    width: 95%;
+    word-break: break-all;
+}
+
 .review-body {
     width: 87.5rem; /* 1400px */
     margin: 0 auto;
