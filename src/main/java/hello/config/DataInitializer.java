@@ -24,7 +24,6 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
     private final LevelRepository levelRepository;
     private final GenreRepository genreRepository;
-    private final UserRepository userRepository;
     private final EmailCodeRepository emailCodeRepository;
     private final PrizeRepository prizeRepository;
 
