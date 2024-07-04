@@ -11,7 +11,6 @@
 - CSS
 - JavaScript
 
-
 ##### ✅ Back-end
 - Java
 - Spring MVC
