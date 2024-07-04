@@ -524,9 +524,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const hideReview = reviewComment.querySelector('.toggle-read-off');
         const fullContent = shortReview.getAttribute('data-full-content');
 
-        if (fullContent.length > 100) {
-            shortReview.innerText = fullContent.substring(0, 100) + '...';
-            hiddenReview.innerText = fullContent.substring(100);
+        if (fullContent.length > 150) {
+            shortReview.innerText = fullContent.substring(0, 150) + '...';
+            hiddenReview.innerText = fullContent.substring(150);
         } else {
             showMoreReview.style.display = 'none';
         }
@@ -541,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         hideReview.addEventListener('click', function() {
             reviewComment.classList.remove('expanded');
-            shortReview.innerText = fullContent.substring(0, 100) + '...';
+            shortReview.innerText = fullContent.substring(0, 150) + '...';
             hiddenReview.style.display = 'none';
             showMoreReview.style.display = 'inline';
             hideReview.style.display = 'none';
