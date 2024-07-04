@@ -152,7 +152,7 @@ public class BoardController {
 
         model.addAttribute("board", board);
         model.addAttribute("comments", comments);
-        return "board/show";
+        return "/board/showFreeBoard";
     }
 
     //조회수 증가

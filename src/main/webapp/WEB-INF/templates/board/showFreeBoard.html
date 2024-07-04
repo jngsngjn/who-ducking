@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Who's DucKing</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/10duck.ico">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="/vendor/swiper/swiper-bundle.min.css">
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css">
+    <!-- Animate -->
+    <link rel="stylesheet" href="/vendor/animate/animate.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/Common.css" />
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery-3.7.1.min.js"></script>
+    <!-- swiper -->
+    <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/2f3ee9d12e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/board/showFreeBoard.js"></script>
+    <!--swal-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <!-- Container -->
+    <main id="container">
+        <!-- Sub Component : Title -->
+        <section class="subCommon">
+            <div class="inner_box" data-aos="fade-up">
+                <div class="showFreeBoard_title_box">
+                    <h2 class="subTitle">자유 게시판</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sub Component : Contents -->
+        <section class="subContents">
+            <div class="inner_box" data-aos="fade-up">
+
+                <!-- Board Top Contents -->
+                <div class="showFreeBoard_top_box">
+                    <hr class="showFreeBoard_top_hr">
+                    <!-- 1. First Row -->
+                    <div class="showFreeBoard_top_firstRow">
+                        <!-- 1-1. Board Title -->
+                        <div class="showFreeBoard_top_title">
+                                              <span class="showFreeBoard_top_title_text"
+                                                    th:text="${board.title != null && !board.title.isEmpty() ? board.title : '제목없음'}">제목</span>
+                        </div>
+                        <!-- 1-2. More Button -->
+                        <span id="board-menu-toggle" class="showFreeBoard_top_toggleIcon"
+                              th:if="${isAuthenticated && (board.user.id == loginUserId)}">
+                                              <i class="fa-solid fa-ellipsis-vertical"></i></span>
+                        <!-- 1-3. More Menu -->
+                        <div id="board-menu" class="showFreeBoard_top_menu">
+                            <a th:href="@{/board/{boardId}/edit(boardId=${board.id})}"
+                               class="showFreeBoard_top_menu_modify_btn">수정</a>
+                            <form th:action="@{/board/{boardId}/delete(boardId=${board.id})}"
+                                  method="post" style="display: inline;">
+                                <button type="submit" class="showFreeBoard_top_menu_delete_btn"
+                                        th:data-board-id="${board.id}">삭제</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 2. Second Row -->
+                    <div class="showFreeBoard_top_secondRow">
+                        <!-- 2-1. Writer Info -->
+                        <div class="showFreeBoard_top_writerInfo">
+                            <!-- Nickname -->
+                            <div class="showFreeBoard_top_writerInfo_nickcname_box">
+                                <i class="fa-solid fa-user"></i>
+                                <span class="showFreeBoard_top_writerInfo_nickname"
+                                      th:text="${board.user.nickname}"></span>
+                            </div>
+                            <!-- Write Date -->
+                            <div class="showFreeBoard_top_writerInfo_date_box">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span class="showFreeBoard_top_writerInfo_date"
+                                      th:text="${#temporals.format(board.writeDate, 'yyyy-MM-dd HH:mm')}">2024-07-10
+                                                          09:24</span>
+                            </div>
+                            <!-- View Count -->
+                            <div class="showFreeBoard_top_writerInfo_view_box">
+                                <i class="fa-solid fa-eye"></i>
+                                <span class="showFreeBoard_top_writerInfo_view"
+                                      th:text="${board.viewCount}">30</span>
+                            </div>
+                        </div>
+                        <!-- 2-2. Report Button -->
+                        <a href="#" class="showFreeBoard_top_menu_report_btn" th:if="${isAuthenticated}">
+                            <span class="showFreeBoard_top_menu_report_text">신고</span>
+                            <i class="fas fa-exclamation-circle"></i>
+                        </a>
+                    </div>
+
+                    <!-- 3. Third Row -->
+                    <div class="showFreeBoard_top_thirdRow">
+                        <!-- Text -->
+                        <div class="showFreeBoard_top_text_box">
+                            <span class="showFreeBoard_top_text" th:text="${board.content}">내용</span>
+                        </div>
+                        <!-- Image -->
+                        <div class="showFreeBoard_top_img_box" th:if="${board.imageName != null}">
+                            <img class="showFreeBoard_top_img" id="boardImagePreview"
+                                 th:src=" @{'/image/board/' + ${board.imageName}}" />
+                        </div>
+                    </div>
+
+                    <!-- 4. Fourth Row -->
+                    <div class="showFreeBoard_top_fourthRow">
+                        <!-- Buttons -->
+                        <a th:href="@{/board}" class="showFreeBoard_top_list_btn"><i
+                                class="fa-solid fa-bars"></i>목록</a>
+                        <button id="board-bookmark-button" class="showFreeBoard_top_bookmark_btn"
+                                th:data-board-id="${board.id}" th:if="${isAuthenticated}">
+                            <i class="fa-regular fa-bookmark"></i>북마크
+                        </button>
+                    </div>
+
+                    <hr class="showFreeBoard_top_hr">
+                </div>
+
+                <!-- Board Bottom Contents -->
+                <div class="showFreeBoard_bottom_box">
+                    <!-- 1. First Row -->
+                    <div class="showFreeBoard_comment_count_box">
+                        <i class="fa-solid fa-comment"></i>
+                        <span th:text="${comments.size()}" class="showFreeBoard_comment_count">0</span>
+                    </div>
+
+                    <!-- 2. Second Row -->
+                    <div class="showFreeBoard_comment_box">
+
+                        <!-- Comment Form -->
+                        <form action="#" th:action="@{/board/{boardId}/comment(boardId=${board.id})}"
+                              method="post" class="showFreeBoard_comment_form" th:if="${isAuthenticated}">
+                            <!-- 2-1. User Nickname -->
+                            <div class="showFreeBoard_comment_userNickname_box">
+                                <i class="fa-solid fa-user"></i>
+                                <span class="showFreeBoard_comment_userNickname"
+                                      th:text="${nickname}">유뎡공듀</span>
+                            </div>
+                            <!-- 2-2. Comment Textarea -->
+                            <div class="showFreeBoard_comment_textarea_box">
+                                <!-- 수정된 부분: textarea의 내용을 제거 -->
+                                <textarea class="showFreeBoard_comment_input" id="comment-input"
+                                          name="contentWrite"
+                                          placeholder="문제의 소지가 있을 댓글은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다."
+                                          maxlength="500"></textarea>
+                            </div>
+                            <!-- 2-3. Comment Submit Button -->
+                            <div class="showFreeBoard_comment_submit_btn_box">
+                                                    <span id="char-counter" class="showFreeBoard_comment_textCount">0 /
+                                                          500</span>
+                                <button type="submit"
+                                        class="showFreeBoard_comment_submit_btn">등록</button>
+                            </div>
+                        </form>
+
+                        <ul class="showFreeBoard_comment_list">
+                            <li class="showFreeBoard_comment_list_item" th:each="comment : ${comments}">
+                                <!-- Top Comment List -->
+                                <div class="showFreeBoard_comment_list_item_top_box">
+                                    <div class="showFreeBoard_comment_list_item_top_box_left">
+                                        <!-- User Profile Image -->
+                                        <img class="showFreeBoard_comment_list_item_top_img"
+                                             th:if="${comment.user.profileImage != null}"
+                                             th:src="@{'/image/profile/' + ${comment.user.profileImage.storeImageName}}"
+                                             alt="Profile Image" />
+                                        <!-- Basic Profile Image -->
+                                        <img class="showFreeBoard_comment_list_item_top_img"
+                                             th:unless="${comment.user.profileImage != null}"
+                                             th:src="@{'/image/level/' + ${comment.user.level.imageName}}"
+                                             alt="Level Image" />
+                                        <!-- User Nickname -->
+                                        <span class="showFreeBoard_comment_list_item_top_nickname"
+                                              th:text="${comment.user.nickname}">유뎡공듀</span>
+                                    </div>
+                                    <div class="showFreeBoard_comment_list_item_top_box_right">
+                                        <!-- Toggle Button -->
+                                        <span class="showFreeBoard_comment_list_item_top_toggleBtn"
+                                              th:if="${comment.user != null && loginUserId != null && comment.user.id == loginUserId}">
+                                              <i class="fa-solid fa-ellipsis-vertical"
+                                                 onclick="toggleCommentMenu(this)"></i>
+                                        </span>
+                                    </div>
+
+                                    <!-- Toggle Menu Bar -->
+                                    <div class="showFreeBoard_comment_list_item_menu_box">
+                                        <div>
+                                            <button type="button"
+                                                    class="showFreeBoard_comment_list_item_editBtn">수정</button>
+                                            <form th:action="@{/board/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}"
+                                                  method="post">
+                                                <button type="submit"
+                                                        class="showFreeBoard_comment_list_item_deleteBtn">삭제</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Middle Comment Text -->
+                                <div class="showFreeBoard_comment_list_item_middle_box">
+                                    <!-- Comment -->
+                                    <span class="showFreeBoard_comment_list_item_middle_result"
+                                          th:text="${comment.content}"></span>
+                                    <!-- Edit Comment Area -->
+                                    <textarea
+                                            class="showFreeBoard_comment_list_item_middle_edit" style="display:none;"></textarea>
+                                    <!-- Edit Comment Button -->
+                                    <div class="showFreeBoard_comment_list_item_middle_btn">
+                                        <button
+                                                class="showFreeBoard_comment_list_item_middle_editBtn" style="display:none;">수정</button>
+                                        <button
+                                                class="showFreeBoard_comment_list_item_middle_cancelBtn" style="display:none;">취소</button>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom Comment Date & Like / Dislike -->
+                                <div class="showFreeBoard_comment_list_item_bottom_box">
+                                    <!-- Comment Date -->
+                                    <div class="showFreeBoard_comment_list_item_bottom_date_box">
+                                        <span class="showFreeBoard_comment_list_item_bottom_date"
+                                              th:text="${#temporals.format(comment.writeDate, 'yyyy.MM.dd HH:mm')}"></span>
+                                    </div>
+
+                                    <!-- Like / Dislike -->
+                                    <div class="showFreeBoard_comment_list_item_bottom_btn_box"
+                                         th:data-comment-id="${comment.id}"
+                                         th:if="${isAuthenticated}">
+                                        <!-- Like Button -->
+                                        <button
+                                                class="showFreeBoard_comment_list_item_bottom_likeBtn"
+                                                onclick="toggleLike(this)">
+                                            <i class="fa-regular fa-thumbs-up"></i>
+                                        </button>
+
+                                        <!-- Dislike Button -->
+                                        <button
+                                                class="showFreeBoard_comment_list_item_bottom_dislikeBtn"
+                                                onclick="toggleDislike(this)">
+                                            <i class="fa-regular fa-thumbs-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Report Modal -->
+                <div class="showFreeBoard_modal_box" id="reportModalOverlay" style="display:none;">
+                    <div class="showFreeBoard_modal">
+                        <span class="showFreeBoard_modal_title">신고하기</span>
+                        <!-- Report List -->
+                        <div class="showFreeBoard_modal_list">
+                            <label class="showFreeBoard_modal_list_item">
+                                <span class="showFreeBoard_modal_list_item_circle"></span>
+                                <span class="showFreeBoard_modal_list_item_text">부적절한 게시글</span>
+                            </label>
+                            <label class="showFreeBoard_modal_list_item">
+                                <span class="showFreeBoard_modal_list_item_circle"></span>
+                                <span class="showFreeBoard_modal_list_item_text">중복 게시글 도배</span>
+                            </label>
+                            <label class="showFreeBoard_modal_list_item">
+                                <span class="showFreeBoard_modal_list_item_circle"></span>
+                                <span class="showFreeBoard_modal_list_item_text">욕설</span>
+                            </label>
+                            <label class="showFreeBoard_modal_list_item_etc">
+                                <span class="showFreeBoard_modal_list_item_circle"></span>
+                                <span class="showFreeBoard_modal_list_item_text">기타</span>
+                            </label>
+                        </div>
+                        <!-- Report Etc Textarea -->
+                        <textarea id="otherReasonInput" class="showFreeBoard_modal_list_item_etc_input"
+                                  placeholder="기타 입력"></textarea>
+                        <!-- Report Button -->
+                        <div class="showFreeBoard_modal_btn_box">
+                            <button class="showFreeBoard_modal_submit_btn" type="button"
+                                    th:onclick="'incrementReportCountAndRedirect(' + ${board.id} + '); return false;'">신고</button>
+                            <button class="showFreeBoard_modal_cancel_btn" type="button">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
