@@ -76,10 +76,10 @@
               <div class="genre-container">
                 <h3 class="genre-title">장르</h3>
                 <div class="genre-list-container">
-                  <label th:each="genre: ${genreLists}" class="genre-title-list" >
-                    <input type="checkbox" class="genre-list" th:id="'genre-' + ${genre.id}" onclick="checkGenre(this)"/>
-                      <span th:text="${genre.name}"></span>
-                  </label>
+                    <label th:each="genre: ${genreLists}" class="genre-title-list">
+                        <input type="checkbox" class="genre-list register_terms_check_box" th:id="'genre-' + ${genre.id}" onclick="checkGenre(this)"/>
+                        <span class="register_terms_check_label" th:text="${genre.name}"></span>
+                    </label>
                 </div>
               </div>
           <div class="empty-container" id="empty-container">

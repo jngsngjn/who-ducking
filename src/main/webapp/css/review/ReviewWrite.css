@@ -580,7 +580,45 @@ hr {
     background-position: center;
     background-attachment: fixed;
 }
+.genre-list {
+  opacity: 0;
+  position: absolute;
+}
 
+.genre-list,
+.register_terms_check_label {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.genre-list + .register_terms_check_label:before {
+  content: "";
+  background: #fff;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d1d1;
+  display: inline-block;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  padding: 0.2rem;
+  margin: 0 0.8rem 0.2rem 0;
+  text-align: center;
+}
+
+.genre-list:checked + .register_terms_check_label:before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 5px;
+  border: solid var(--mainColor);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  border-radius: 0px;
+  margin: 0px 1rem 0.7rem 0.5rem;
+}
 /********************* 반응형 ************************/
 /* 반응형 레이아웃 */
 @media (max-width: 1280px) {
