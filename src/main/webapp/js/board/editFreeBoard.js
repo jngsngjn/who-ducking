@@ -99,8 +99,8 @@ function editRemoveImage() {
 }
 
 function formValidate() {
-    const title = document.getElementById("edit-title").value;
-    const content = document.getElementById("edit-content").value;
+    const title = document.getElementById("edit-title").value.trim();
+    const content = document.getElementById("edit-content").value.trim();
 
     if (!title) {
         swal({

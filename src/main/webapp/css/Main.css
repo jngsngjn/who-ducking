@@ -375,7 +375,7 @@
 
 .mainThirdSection_update_animation_box {
     width: 100%;
-    margin: 7rem 0;
+    padding-top: 4rem;
     overflow: hidden;
     border-left: none;
     border-right: none;
@@ -383,7 +383,7 @@
 
 .mainThirdSection_update_slider_container {
     display: flex;
-    animation: slide 200s linear infinite;
+    animation: slide 250s linear infinite;
     margin: 30px auto;
 }
 
@@ -391,8 +391,9 @@
     width: 300px;
     height: 420px;
     object-fit: cover;
-    margin-right: 2rem;
-    border-radius: 1rem;
+    margin-right: 4rem;
+    border-radius: 3rem;
+    border: 1px solid #d9d9d9;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
