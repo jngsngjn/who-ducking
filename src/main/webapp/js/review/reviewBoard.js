@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 체크박스 리스트 클릭시 체크박스 활성화
 function checkGenre(element) {
-    console.log(element)
+
     const genreCheckbox = element.querySelector('input[type="checkbox"]');
     genreCheckbox.checked = !genreCheckbox.checked;
 

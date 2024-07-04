@@ -330,7 +330,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // 리뷰의 모달창 수정버튼 클릭시 id 찾는 함수
     function clickUpdateBtn(e) {
         let reviewId = e.target.dataset.reviewId;
-        console.log("수정 버튼을 눌렀을때의 리뷰 id = " + reviewId)
         reviewUpdate(reviewId);
     }
 
@@ -575,7 +574,7 @@ document.addEventListener("DOMContentLoaded", function() {
         reviewLists.forEach(review => {
             const reviewContainer = review.id; // review-id-${review.id}
             let reviewId = reviewContainer.replace('review-id-','');
-            console.log( "리뷰 아이디는 " + reviewId)
+
             let likeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-like');
             let dislikeBtn = document.querySelector('#review-id-' + reviewId + ' #recommend-dislike');
 
@@ -602,15 +601,11 @@ document.addEventListener("DOMContentLoaded", function() {
         likeReviewLists.forEach(likeReview => {
             let likeReviewContainer = likeReview.id; // 'like-review-id-{review.id}'
             let likeReviewId = likeReviewContainer.replace('like-review-id-','');
-            console.log("like 리뷰 아이디는 " + likeReviewId);
 
             let likeReviewLikeBtn = document.querySelector('#like-review-id-' + likeReviewId + ' .like-btn');
             let likeReviewDislikeBtn = document.querySelector('#like-review-id-' + likeReviewId + ' .dislike-btn');
 
-            console.log(likeReviewLikeBtn);
-            console.log(likeReviewDislikeBtn);
-
-            if (likeReviewLikeBtn && likeReviewDislikeBtn) { // 요소가 존재하는지 확인
+            if (likeReviewLikeBtn && likeReviewDislikeBtn) {
                 if (likedUserId === loginUserId && writeReviewId === likeReviewId) {
                     if (isLike === "true") {
                         likeReviewLikeBtn.style.backgroundColor = 'orange';
@@ -625,7 +620,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
             } else {
-                console.log("버튼을 찾을 수 없습니다.");
+                console.log("추천 버튼을 찾을 수 없습니다.");
             }
         });
 
