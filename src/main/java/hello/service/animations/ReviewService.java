@@ -6,6 +6,7 @@ import hello.entity.animation.Animation;
 import hello.entity.review.Review;
 import hello.entity.review.ReviewLike;
 import hello.entity.user.User;
+import hello.exception.ReviewLimitExceedException;
 import hello.repository.db.AnimationRepository;
 import hello.repository.db.ReviewLikeRepository;
 import hello.repository.db.ReviewRepository;
@@ -54,7 +55,7 @@ public class ReviewService {
         int currentReviewCount = user.getReviewCount();
 
         if (reviewCountToday >= 3 || currentReviewCount >= 3) {
-//            throw new ReviewLimitExceedException("리뷰는 하루에 세 번만 작성 할 수 있습니다.");
+            throw new ReviewLimitExceedException("리뷰는 하루에 세 번만 작성 할 수 있습니다.");
         }
 
         Animation animation = animationOpt.get();
@@ -76,7 +77,7 @@ public class ReviewService {
         // 특정 애니의 첫 리뷰 + 계정 첫 리뷰
         if (!existReview && !hasReview) {
             System.out.println("특정 애니의 첫 리뷰 + 계정 첫 리뷰");
-            pointService.increasePoint(user, 30);
+            pointService.increasePoint(user, 25); // 시연을 위해 30 포인트에서 25 포인트로 변경
             expService.increaseExp(user, 25, session);
             animation.setExistReview(true);
             user.setHasReview(true);

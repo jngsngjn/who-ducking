@@ -23,8 +23,10 @@ public class RequestController {
 
     @GetMapping("/requests")
     public String requestListOrDetail(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                                      @RequestParam(name = "requestId", required = false) Long requestId) {
-        Page<MyRequestDTO> requestPage = requestService.getMyRequest(page, 5);
+                                      @RequestParam(name = "requestId", required = false) Long requestId,
+                                      @AuthenticationPrincipal CustomOAuth2User oAuth2User) {
+        User loginUser = userService.getLoginUserDetail(oAuth2User);
+        Page<MyRequestDTO> requestPage = requestService.getMyRequest(loginUser, page, 5);
         model.addAttribute("requestPage", requestPage);
         return "mypage/myRequest";
     }
