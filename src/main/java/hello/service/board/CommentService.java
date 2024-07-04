@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,11 +19,7 @@ public class CommentService {
     private final AlarmService alarmService;
 
     public List<Comment> getCommentsByBoardId(Long boardId) {
-        return commentRepository.findByBoardId(boardId);
-    }
-
-    public Optional<Comment> getCommentById(Long id) {
-        return commentRepository.findById(id);
+        return commentRepository.findByBoardIdOrderByIdDesc(boardId);
     }
 
     public void createComment(Comment comment, Board board) {
