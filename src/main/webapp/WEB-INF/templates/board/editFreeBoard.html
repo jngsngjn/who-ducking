@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Who's DucKing</title>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Favicon -->
     <link rel="icon" href="/images/10duck.ico">
     <!-- Swiper -->
@@ -53,7 +52,7 @@
             <div class="inner_box" data-aos="fade-up">
                 <div class="editFreeBoard_box">
                     <form th:action="@{/board/{boardId}/edit(boardId=${board.id})}" th:object="${board}"
-                          method="post" enctype="multipart/form-data">
+                          method="post" enctype="multipart/form-data" onsubmit="return formValidate()">
                         <!-- Using Image -->
                         <input type="hidden" id="useExistingImage" name="useExistingImage" value="true" />
 
@@ -98,7 +97,7 @@
                         <div class="editFreeBoard_button_box">
                             <button type="submit" class="editFreeBoard_edit_btn">수정</button>
                             <button type="button" class="editFreeBoard_cancel_btn"
-                                    onclick="goBack();">취소</button>
+                                    onclick="window.history.back()">취소</button>
                         </div>
                     </form>
                 </div>
