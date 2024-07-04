@@ -34,20 +34,20 @@
 
 ### **[노승빈](https://github.com/SeungBeenNoh)**
 - 역할: Front-end 총괄
-- 소개: 
+- 소개: "class 이름은 항상 길게.."
 
 ### **[김수정](https://github.com/Kimsu10)**
 - 역할: Back-end + Front-end 보조
-- 소개: 
+- 소개: 반복이 싫은 개발자입니다.
 
 ### **[김승민](https://github.com/Booreung)**
 - 역할: Back-end + Front-end 보조
-- 소개: 
+- 소개: "우리가 안 한 게 뭐가 있지? ... 맞담? 맞아 종답!"
 
 ### **[서준명](https://github.com/astroboy5)**
 - 역할: Front-end
-- 소개: 
+- 소개: 축구 없이는 못 사는 남자
 
 ### **[안성민](https://github.com/Anseongmin5739)**
 - 역할: Front-end
-- 소개: 
+- 소개: 어디 출신? 비트캠프 프론트는? 승빈이형~
