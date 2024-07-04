@@ -292,13 +292,16 @@
     padding: 2rem;
 }
 
+.showFreeBoard_comment_list_item {
+    border-bottom: 1px solid #d9d9d9;
+}
+
 .showFreeBoard_comment_list_item_top_box {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
     padding: 2rem;
-    border-bottom: 1px solid #d9d9d9;
 }
 
 .showFreeBoard_comment_list_item_top_box_left {
@@ -368,6 +371,7 @@
 }
 
 .showFreeBoard_comment_list_item_middle_result {
+    font-family: "Nanum Gothic", sans-serif;
     font-size: 2.4rem;
     font-weight: 500;
 }
