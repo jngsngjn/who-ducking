@@ -1,4 +1,3 @@
-//좋아요
 $(document).ready(function () {
     localStorage.removeItem("searchInput");
     loadLikesDislikes();
@@ -15,8 +14,6 @@ $(document).ready(function () {
             success: function (response) {
                 var isBookmarked = response.bookmarked;
                 button.toggleClass("bookmarked", isBookmarked);
-
-                // 로컬 스토리지에 북마크 상태 저장
                 saveBookmarkState(boardId, isBookmarked);
             },
             error: function (xhr, status, error) {
@@ -31,7 +28,6 @@ $(document).ready(function () {
         });
     });
 
-    // 댓글 수정
     $(".comment-edit-form").each(function () {
         const editForm = $(this);
         const originalContent = editForm
@@ -42,7 +38,6 @@ $(document).ready(function () {
         editForm.find('input[name="contentUpdate"]').val(originalContent);
     });
 
-    // 신고 라디오 버튼
     document.querySelectorAll(".showFreeBoard_modal_list_item, .showFreeBoard_modal_list_item_etc").forEach((label) => {
         label.addEventListener("click", function () {
             document
@@ -60,6 +55,26 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(".showFreeBoard_top_menu_delete_btn").click(function () {
+        let boardId = $(this).data("board-id");
+        removeLikeDislikeState();
+        removeBookmarkState(boardId);
+        $(this).closest("form").submit();
+    });
+
+    // 댓글 등록 폼 제출 이벤트 리스너
+    $('.showFreeBoard_comment_form').submit(function(e) {
+        const commentInput = $(this).find('.showFreeBoard_comment_input');
+        if (!commentInput.val().trim()) {
+            e.preventDefault();
+            swal({
+                text: "내용을 입력해 주세요.",
+                icon: "warning",
+                button: "확인",
+            });
+        }
+    });
 });
 
 function toggleCommentMenu(icon) {
@@ -69,7 +84,6 @@ function toggleCommentMenu(icon) {
     commentMenu.style.display = commentMenu.style.display === "block" ? "none" : "block";
 }
 
-// 좋아요 토글
 function toggleLike(button) {
     let commentId = button.closest(".showFreeBoard_comment_list_item_bottom_btn_box").dataset.commentId;
 
@@ -86,7 +100,6 @@ function toggleLike(button) {
     saveLikeDislikeState(commentId, "dislike", false);
 }
 
-// 싫어요 토글
 function toggleDislike(button) {
     let commentId = button.closest(".showFreeBoard_comment_list_item_bottom_btn_box").dataset.commentId;
 
@@ -100,10 +113,9 @@ function toggleDislike(button) {
         }
     }
     saveLikeDislikeState(commentId, "dislike", button.classList.contains("disliked"));
-    saveLikeDislikeState(commentId, "like", false); // Ensure like is removed
+    saveLikeDislikeState(commentId, "like", false);
 }
 
-// 좋아요/싫어요 상태 저장
 function saveLikeDislikeState(commentId, type, state) {
     let stateData = JSON.parse(localStorage.getItem("likeDislikeState")) || {};
     if (!stateData[commentId]) {
@@ -124,7 +136,6 @@ function removeLikeDislikeState() {
     }
 }
 
-// 좋아요/싫어요 상태 로드
 function loadLikesDislikes() {
     let stateData = JSON.parse(localStorage.getItem("likeDislikeState")) || {};
     document.querySelectorAll(".showFreeBoard_comment_list_item_bottom_btn_box").forEach((meta) => {
@@ -142,40 +153,6 @@ function loadLikesDislikes() {
     });
 }
 
-$(document).ready(function () {
-    localStorage.removeItem("searchInput");
-    // 북마크 상태를 로드
-    loadBookmarkState();
-    loadLikesDislikes();
-
-    $(".showFreeBoard_top_menu_delete_btn").click(function () {
-        let boardId = $(this).data("board-id");
-
-        // 삭제 전 모든 댓글의 좋아요 및 싫어요 상태와 북마크 상태를 삭제
-        removeLikeDislikeState();
-        removeBookmarkState(boardId);
-
-        // 게시글 삭제 폼 제출
-        $(this).closest("form").submit();
-    });
-
-    $("#board-bookmark-button").click(function () {
-        var boardId = $(this).data("board-id");
-        var button = $(this);
-
-        $.ajax({
-            url: "/board/" + boardId + "/bookmark",
-            type: "POST",
-            dataType: "json",
-            success: function (response) {
-                var isBookmarked = response.bookmarked;
-                button.toggleClass("bookmarked", isBookmarked);
-            },
-        });
-    });
-});
-
-// 북마크 상태 저장
 function saveBookmarkState(boardId, isBookmarked) {
     let bookmarkState = JSON.parse(localStorage.getItem("bookmarkState")) || {};
     bookmarkState[boardId] = isBookmarked;
@@ -190,7 +167,6 @@ function removeBookmarkState(boardId) {
     }
 }
 
-// 북마크 상태 로드
 function loadBookmarkState() {
     var boardId = $("#board-bookmark-button").data("board-id");
 
@@ -208,7 +184,6 @@ function loadBookmarkState() {
     });
 }
 
-// 신고 후 리디렉션
 function incrementReportCountAndRedirect(boardId) {
     $.post("/board/" + boardId + "/report", function () {
         swal({
@@ -226,7 +201,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const commentInput = document.getElementById("comment-input");
     const charCounter = document.getElementById("char-counter");
     const boardImagePreview = document.getElementById("boardImagePreview");
-    // 0/500 내용 카운트
     if (commentInput && charCounter) {
         commentInput.addEventListener("input", function () {
             const maxLength = commentInput.getAttribute("maxlength");
@@ -235,9 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     loadLikesDislikes();
-});
 
-document.addEventListener("DOMContentLoaded", function () {
     const toggleButtons = document.querySelectorAll(".showFreeBoard_top_toggleIcon");
     toggleButtons.forEach((button) => {
         button.addEventListener("click", function () {
@@ -261,7 +233,15 @@ document.addEventListener("DOMContentLoaded", function () {
             cancelButton.style.display = "inline-block";
 
             saveButton.addEventListener("click", function () {
-                const newText = editTextarea.value;
+                const newText = editTextarea.value.trim();
+                if (!newText) {
+                    swal({
+                        text: "내용을 입력해 주세요.",
+                        icon: "warning",
+                        button: "확인",
+                    });
+                    return;
+                }
                 commentText.textContent = newText;
                 commentText.style.display = "block";
                 editTextarea.style.display = "none";
@@ -294,14 +274,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeModalBtn = document.querySelector(".showFreeBoard_modal_cancel_btn");
     const modal = document.getElementById("reportModalOverlay");
 
-    openModalBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        modal.style.display = "block";
-    });
+    if(openModalBtn) {
+        openModalBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            modal.style.display = "block";
+        });
+    }
 
-    closeModalBtn.addEventListener("click", function () {
-        modal.style.display = "none";
-    });
+    if(closeModalBtn) {
+        closeModalBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+    }
 
     window.addEventListener("click", function (e) {
         if (e.target === modal) {
@@ -317,13 +301,6 @@ document.addEventListener("DOMContentLoaded", function () {
             this.classList.add("selected");
         });
     });
-});
-
-document.getElementById("delete-board-button").addEventListener("click", function () {
-    const boardId = this.getAttribute("data-board-id");
-    localStorage.removeItem(`board_like_${boardId}`);
-    localStorage.removeItem(`board_bookmark_${boardId}`);
-    this.closest("form").submit();
 });
 
 function toggleBoardMenu(icon) {
