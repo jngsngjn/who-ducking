@@ -10,7 +10,6 @@ import hello.repository.db.GenreRepository;
 import hello.repository.db.LevelRepository;
 import hello.repository.db.UserRepository;
 import hello.service.basic.PointService;
-import hello.service.basic.SmsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +27,6 @@ public class RegisterService {
     private final GenreRepository genreRepository;
     private final LevelRepository levelRepository;
 
-    private final SmsService smsService;
     private final PointService pointService;
 
     public void registerProcess(OAuth2Response oauth2Response, RegisterBasicDTO registerBasicDTO, List<String> genres) {
@@ -39,7 +37,6 @@ public class RegisterService {
         user.setUsername(oauth2Response.getProvider() + " " + oauth2Response.getProviderId());
         user.setNickname(registerBasicDTO.getNickname());
         user.setGender(registerBasicDTO.getGender());
-        smsService.sendCode(registerBasicDTO.getPhone());
         user.setPhone(registerBasicDTO.getPhone());
         user.setEmail(oauth2Response.getEmail());
         user.setEmailConsent(registerBasicDTO.isEmailConsent());

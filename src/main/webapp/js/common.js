@@ -19,8 +19,7 @@ Promise.all([
     loadScript("/js/basic/registerGenre.js"),
     loadScript("/js/board/freeBoard.js"),   /* index.html, recentFreeBoard.html, viewCountFreeBoard.html */
 
-    loadScript("/js/board/showPage.js"),
-
+    // loadScript("/js/board/showPage.js"),
 ])
     .then(() => {
         console.log("All scripts loaded.");
