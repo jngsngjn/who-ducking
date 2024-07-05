@@ -26,7 +26,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private final GenreRepository genreRepository;
     private final EmailCodeRepository emailCodeRepository;
     private final PrizeRepository prizeRepository;
-
+//
     private boolean initialized = false;
 
     @Value("${level1}")
