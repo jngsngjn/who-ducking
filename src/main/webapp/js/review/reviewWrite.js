@@ -186,8 +186,12 @@ function likeReview(reviewId, reviewUserId) {
     let reviewUserIdInt = parseInt(reviewUserId, 10);
 
     if(userIdNum === reviewUserIdInt){
-        alert("자신의 댓글에는 '좋아요'를 할 수 없습니다.");
-    } else {
+           swal({
+               text: "자신의 댓글에는 '좋아요'를 할 수 없습니다.",
+               icon: "warning",
+               button: "확인"
+           });
+    }else {
         fetch(url, {
             method: 'PATCH',
             headers: {
@@ -222,8 +226,12 @@ function dislikeReview(reviewId, reviewUserId) {
     let userIdNum = parseInt(userId, 10);
     let reviewUserIdInt = parseInt(reviewUserId, 10);
     if(userIdNum === reviewUserIdInt){
-        alert("자신의 댓글에는 '싫어요'를 할 수 없습니다.");
-    } else {
+       swal({
+           text: "자신의 댓글에는 '싫어요'를 할 수 없습니다.",
+           icon: "warning",
+           button: "확인"
+       });
+    }else {
         fetch(url, {
             method: 'PATCH',
             headers: {

@@ -326,16 +326,21 @@ $(document).ready(function () {
     });
 
     $('input[name="genres"]').change(function () {
-        let selectedCount = $('input[name="genres"]:checked').length; // 체크된 체크박스 개수 확인
+        let selectedCount = $('input[name="genres"]:checked').length;
         if (selectedCount > 5) {
-            swal("경고", "최대 5개의 장르만 선택할 수 있습니다.", "warning");
-            $(this).prop("checked", false); // 체크 해제
-
-            // 체크 해제 시 클래스 변경
-            const label = $('label[for="' + $(this).attr("id") + '"]');
-            label
-                .removeClass("userInfoEdit_genreModal_check_label_click")
-                .addClass("userInfoEdit_genreModal_check_label");
+            swal({
+                title: "경고",
+                text: "최대 5개의 장르만 선택할 수 있습니다.",
+                icon: "warning",
+                button: "확인"
+            }).then(() => {
+                $(this).prop("checked", false);
+                // 체크 해제 시 클래스 변경
+                const label = $('label[for="' + $(this).attr("id") + '"]');
+                label
+                    .removeClass("userInfoEdit_genreModal_check_label_click")
+                    .addClass("userInfoEdit_genreModal_check_label");
+            });
         } else {
             // 체크 시 클래스 변경
             const label = $('label[for="' + $(this).attr("id") + '"]');
@@ -532,4 +537,3 @@ function validateForm() {
 
     return true; // 폼 제출을 허용
 }
-

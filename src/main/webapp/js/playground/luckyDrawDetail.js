@@ -37,7 +37,7 @@ $(document).ready(function () {
                 } else if (response.addressEmpty) {
                     swal({
                         title: "알림",
-                        text: "경품에 응모하기 전, 마이페이지에서 주소를 입력해 주세요.\n마이페이지로 이동합니다.",
+                        text: "경품에 응모하기 전\n 마이페이지에서 주소를 입력해 주세요.",
                         icon: "info",
                         buttons: "확인"
                     }).then((value) => {
@@ -47,9 +47,12 @@ $(document).ready(function () {
                     swal({
                         title: "확인",
                         text: "해당 경품에 응모하시겠습니까? (30P 차감)\n응모는 하루에 한 번만 가능합니다.",
-                        icon: "question",
-                        buttons: true,
-                        dangerMode: true,
+                        icon: "info",
+                        buttons: {
+                            confirm: "응모",
+                            cancel: "취소"
+                        },
+                        dangerMode: true
                     })
                     .then((willEntry) => {
                         if (willEntry) {
