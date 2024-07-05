@@ -15,15 +15,6 @@ public class GetAniListDTO {
     private Long genreId1;
     private Long genreId2;
 
-    public GetAniListDTO(long animationId, String imageName, Double score, long reviewCount, String name) {
-        this.animationId = animationId;
-        this.imageName = imageName;
-        this.score = score;
-        this.reviewCount = reviewCount;
-        this.name = name;
-    }
-
-
     public GetAniListDTO(Long animationId, String imageName, double score, long reviewCount, String name, Long genreId1, Long genreId2) {
         this.animationId = animationId;
         this.imageName = imageName;

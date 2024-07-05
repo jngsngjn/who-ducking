@@ -17,7 +17,6 @@ public class MyPageController {
 
     private final UserService userService;
 
-    // 내 정보 페이지 보여주기
     @GetMapping
     public String myPage(@AuthenticationPrincipal CustomOAuth2User user, Model model) {
         User loginUser = userService.getLoginUserDetail(user);

@@ -43,19 +43,14 @@ public class QuizController {
 
         switch (correctCount) {
             case 1 : pointService.increasePoint(loginUser, 3);
-                System.out.println("3포인트 지급");
                 break;
             case 2 : pointService.increasePoint(loginUser, 6);
-                System.out.println("6포인트 지급");
                 break;
             case 3 : pointService.increasePoint(loginUser, 9);
-                System.out.println("9포인트 지급");
                 break;
             case 4 : pointService.increasePoint(loginUser, 12);
-                System.out.println("12포인트 지급");
                 break;
             default: pointService.increasePoint(loginUser, 15);
-                System.out.println("15포인트 지급");
         }
     }
 }

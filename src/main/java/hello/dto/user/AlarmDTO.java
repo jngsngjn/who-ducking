@@ -16,9 +16,6 @@ public class AlarmDTO {
         private String message;
         private String link;
 
-        public AlarmResponse() {
-        }
-
         public AlarmResponse(Long id, String message, String link) {
             this.id = id;
             this.message = message;

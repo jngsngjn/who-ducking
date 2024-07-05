@@ -50,8 +50,6 @@ public class BoardController {
         Page<Board> boardList;
         boardList = boardService.getBoardsSortedByLatest(page, 10);
 
-        //boardList = boardService.getBoardsSortedByViewCount(page, 10);
-
         model.addAttribute("boardList", boardList);
         model.addAttribute("sort", "writeDate");
         model.addAttribute("currentPage", page);
