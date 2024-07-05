@@ -23,7 +23,4 @@ public class UserInfoDTO {
         this.level = level;
         this.joinDate = joinDate;
     }
-
-    public UserInfoDTO() {
-    }
 }

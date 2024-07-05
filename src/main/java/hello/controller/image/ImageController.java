@@ -30,7 +30,6 @@ public class ImageController {
     @Value("${popupPath}")
     private String popupPath;
 
-    // URL : /aa/bb/cc
     @GetMapping("/image/{type}/{imageName}")
     public Resource renderImage(@PathVariable("type") String type, @PathVariable("imageName") String imageName) throws MalformedURLException {
         String basePath = null;
@@ -52,7 +51,6 @@ public class ImageController {
         return new UrlResource("file:" + basePath + imageName);
     }
 
-    // 수정 금지~!
     @GetMapping("/image/{imageName}")
     public Resource renderImageHeader(@PathVariable("imageName") String imageName) throws MalformedURLException {
         if (imageName.contains("level")) {

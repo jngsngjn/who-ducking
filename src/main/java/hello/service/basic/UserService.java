@@ -107,6 +107,4 @@ public class UserService {
         Long level = user.getLevel().getId();
         return level.equals(1L);
     }
-
-
 }
