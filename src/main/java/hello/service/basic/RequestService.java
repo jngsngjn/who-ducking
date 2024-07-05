@@ -27,9 +27,9 @@ public class RequestService {
         requestRepository.save(request);
     }
 
-    public Page<MyRequestDTO> getMyRequest(int page, int size) {
+    public Page<MyRequestDTO> getMyRequest(User user, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return requestRepository.findMyRequest(pageable);
+        return requestRepository.findMyRequest(user, pageable);
     }
 
     public void deleteRequest(Long requestId) {

@@ -1,3 +1,7 @@
+#freeBoardH2 {
+    cursor: pointer;
+}
+
 .showFreeBoard_title_box {
     display: flex;
     justify-content: space-between;

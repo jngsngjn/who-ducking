@@ -130,6 +130,7 @@
 .announcement_list_item_detail_content {
     font-size: 2.4rem;
     color: var(--descColor);
+    white-space: pre-line;
 }
 
 /* Pagination */

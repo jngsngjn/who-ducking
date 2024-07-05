@@ -47,7 +47,7 @@ public class BoardService {
         // 첫 글일 때만!
         boolean hasPosted = loginUser.isHasPosted();
         if (!hasPosted) {
-            pointService.increasePoint(loginUser, 10);
+            pointService.increasePoint(loginUser, 3); // 시연을 위해 10 포인트에서 3 포인트로 변경
             expService.increaseExp(loginUser, 10, session);
             loginUser.setHasPosted(true);
             userRepository.save(loginUser);

@@ -182,10 +182,10 @@
                                             <span th:text="${session.point} + 'P'" id="mobile-point"></span>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div th:if="${session.level != 10}">
                                         <span class="h-mobile_profile_exp_point" th:text="${session.currentExp} + ' / ' + ${session.maxExp} + 'EXP'"></span>
                                     </div>
-                                    <div class="h-mobile_profile_exp_track">
+                                    <div class="h-mobile_profile_exp_track" th:if="${session.level != 10}">
                                         <div class="h-mobile_profile_exp_thumb" th:style="'width:' + (${session.currentExp} > 0 ? (${session.currentExp} / ${session.maxExp} * 100) : 0) + '%;'"></div>
                                     </div>
                                 </div>

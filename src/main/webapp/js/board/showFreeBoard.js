@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $('#freeBoardH2').click(function () {
+        window.location.href = "/board";
+    });
+
     localStorage.removeItem("searchInput");
     loadLikesDislikes();
     loadBookmarkState();

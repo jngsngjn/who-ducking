@@ -76,7 +76,6 @@ public class PrizeService {
         return detailedAddress == null || detailedAddress.isEmpty();
     }
 
-    // 개선 필요 (추후 예정)
     public void entryPrize(Long prizeId, User user) {
         LocalDate today = LocalDate.now();
         user.setLastDrawDate(today);
@@ -87,10 +86,12 @@ public class PrizeService {
 
         // 처음 응모한 경우
         if (findEntry.isEmpty()) {
+            System.out.println("처음 응모");
             Entry entry = new Entry(user, prize);
             entryRepository.save(entry);
         } else {
             // 한 번 이상 응모한 경우
+            System.out.println("한 번 이상 응모");
             findEntry.get().setEntryCount(findEntry.get().getEntryCount() + 1);
             entryRepository.save(findEntry.get());
         }

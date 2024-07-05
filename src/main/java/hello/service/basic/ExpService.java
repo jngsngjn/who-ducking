@@ -49,7 +49,7 @@ public class ExpService {
             user.setLevel(nextLevelEntity);
 
             // 레벨업 시 20포인트 지급
-            pointService.increasePoint(user, 20);
+//            pointService.increasePoint(user, 20); // 시연을 위해 잠시 주석 처리
 
             userRepository.save(user);
             if (session != null) {
