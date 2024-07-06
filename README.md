@@ -1,7 +1,11 @@
 <div align="center">
   <h1>Who's Ducking</h1>
   <h3>✨일본 애니메이션을 좋아하는 사람들을 위한 웹 커뮤니티 사이트✨</h3>
-  <img src="src/main/webapp/images/readme/read_me_duck.PNG" alt="logo">
+  <img src="src/main/webapp/images/readme/read_me_duck.PNG" alt="logo"> <br>
+  <img src="src/main/webapp/images/readme/main_page.png" alt="main">
+  <img src="src/main/webapp/images/readme/animations.png" alt="animations">
+  <img src="src/main/webapp/images/readme/popup_store.png" alt="popup_store">
+  <img src="src/main/webapp/images/readme/lucky_draw.png" alt="lucky_draw">
 </div>
 
 ---
